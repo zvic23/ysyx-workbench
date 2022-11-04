@@ -1,4 +1,6 @@
-top=light
+top=top
 
 #Line comment inside nxdc
-led (LD15, LD14, LD13, LD12, LD11, LD10, LD9, LD8, LD7, LD6, LD5, LD4, LD3, LD2, LD1, LD0)
+a SW14  #两个输入分别接到开关14和开关15
+b SW15
+f LD15  #输出接到led灯15
