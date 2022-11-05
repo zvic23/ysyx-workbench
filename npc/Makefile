@@ -2,7 +2,8 @@ all:
 	@echo "Write this Makefile by your self."
 
 sim:
-	$(call git_commit, "Dual-control switch completed") # DO NOT REMOVE THIS LINE!!!
+	verilator -Wall vsrc/top.v  csrc/main.cpp --cc --trace --exe --build  -Ivsrc/  
+	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
 
 include ../Makefile
