@@ -4,33 +4,33 @@
 // Internal details; most calling programs do not need this header,
 // unless using verilator public meta comments.
 
-#ifndef VERILATED_VTOP__SYMS_H_
-#define VERILATED_VTOP__SYMS_H_  // guard
+#ifndef VERILATED_VDECODE24__SYMS_H_
+#define VERILATED_VDECODE24__SYMS_H_  // guard
 
 #include "verilated_heavy.h"
 
 // INCLUDE MODEL CLASS
 
-#include "Vtop.h"
+#include "Vdecode24.h"
 
 // INCLUDE MODULE CLASSES
-#include "Vtop___024root.h"
+#include "Vdecode24___024root.h"
 
 // SYMS CLASS (contains all model state)
-class Vtop__Syms final : public VerilatedSyms {
+class Vdecode24__Syms final : public VerilatedSyms {
   public:
     // INTERNAL STATE
-    Vtop* const __Vm_modelp;
+    Vdecode24* const __Vm_modelp;
     bool __Vm_activity = false;  ///< Used by trace routines to determine change occurred
     uint32_t __Vm_baseCode = 0;  ///< Used by trace routines when tracing multiple models
     bool __Vm_didInit = false;
 
     // MODULE INSTANCE STATE
-    Vtop___024root                 TOP;
+    Vdecode24___024root            TOP;
 
     // CONSTRUCTORS
-    Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* modelp);
-    ~Vtop__Syms();
+    Vdecode24__Syms(VerilatedContext* contextp, const char* namep, Vdecode24* modelp);
+    ~Vdecode24__Syms();
 
     // METHODS
     const char* name() { return TOP.name(); }

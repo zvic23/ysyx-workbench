@@ -2,7 +2,7 @@ all:
 	@echo "Write this Makefile by your self."
 
 sim:
-	verilator --cc --exe --build -Wall vsrc/top.v  csrc/main.cpp --trace -Ivsrc/  
+	verilator --cc --exe --build -Wall vsrc/decode24.v  csrc/main.cpp --trace -Ivsrc/  
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
 
