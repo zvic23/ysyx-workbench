@@ -1,16 +1,16 @@
 // Verilated -*- C++ -*-
 // DESCRIPTION: Verilator output: Symbol table implementation internals
 
-#include "Vbcd7seg__Syms.h"
-#include "Vbcd7seg.h"
-#include "Vbcd7seg___024root.h"
+#include "Vpriencode83__Syms.h"
+#include "Vpriencode83.h"
+#include "Vpriencode83___024root.h"
 
 // FUNCTIONS
-Vbcd7seg__Syms::~Vbcd7seg__Syms()
+Vpriencode83__Syms::~Vpriencode83__Syms()
 {
 }
 
-Vbcd7seg__Syms::Vbcd7seg__Syms(VerilatedContext* contextp, const char* namep,Vbcd7seg* modelp)
+Vpriencode83__Syms::Vpriencode83__Syms(VerilatedContext* contextp, const char* namep,Vpriencode83* modelp)
     : VerilatedSyms{contextp}
     // Setup internal state of the Syms class
     , __Vm_modelp(modelp)

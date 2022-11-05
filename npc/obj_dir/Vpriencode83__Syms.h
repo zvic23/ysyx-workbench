@@ -4,33 +4,33 @@
 // Internal details; most calling programs do not need this header,
 // unless using verilator public meta comments.
 
-#ifndef VERILATED_VENCODE42__SYMS_H_
-#define VERILATED_VENCODE42__SYMS_H_  // guard
+#ifndef VERILATED_VPRIENCODE83__SYMS_H_
+#define VERILATED_VPRIENCODE83__SYMS_H_  // guard
 
 #include "verilated_heavy.h"
 
 // INCLUDE MODEL CLASS
 
-#include "Vencode42.h"
+#include "Vpriencode83.h"
 
 // INCLUDE MODULE CLASSES
-#include "Vencode42___024root.h"
+#include "Vpriencode83___024root.h"
 
 // SYMS CLASS (contains all model state)
-class Vencode42__Syms final : public VerilatedSyms {
+class Vpriencode83__Syms final : public VerilatedSyms {
   public:
     // INTERNAL STATE
-    Vencode42* const __Vm_modelp;
+    Vpriencode83* const __Vm_modelp;
     bool __Vm_activity = false;  ///< Used by trace routines to determine change occurred
     uint32_t __Vm_baseCode = 0;  ///< Used by trace routines when tracing multiple models
     bool __Vm_didInit = false;
 
     // MODULE INSTANCE STATE
-    Vencode42___024root            TOP;
+    Vpriencode83___024root         TOP;
 
     // CONSTRUCTORS
-    Vencode42__Syms(VerilatedContext* contextp, const char* namep, Vencode42* modelp);
-    ~Vencode42__Syms();
+    Vpriencode83__Syms(VerilatedContext* contextp, const char* namep, Vpriencode83* modelp);
+    ~Vpriencode83__Syms();
 
     // METHODS
     const char* name() { return TOP.name(); }

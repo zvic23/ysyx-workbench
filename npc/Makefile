@@ -2,14 +2,14 @@ all:
 	@echo "Write this Makefile by your self."
 
 sim:
-	verilator --cc --exe --build -Wall vsrc/bcd7seg.v  csrc/main.cpp --trace -Ivsrc/  
+	verilator --cc --exe --build -Wall vsrc/priencode83.v  csrc/main.cpp --trace -Ivsrc/  
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
 
 include ../Makefile
 
 exe:
-	obj_dir/Vbcd7seg
+	obj_dir/Vpriencode83
 
 
 
