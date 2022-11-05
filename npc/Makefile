@@ -2,11 +2,17 @@ all:
 	@echo "Write this Makefile by your self."
 
 sim:
-	verilator -Wall vsrc/top.v  csrc/main.cpp --cc --trace --exe --build  -Ivsrc/  
+	verilator --cc --exe --build -Wall vsrc/top.v  csrc/main.cpp --trace -Ivsrc/  
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
 
 include ../Makefile
+
+exe:
+	obj_dir/Vtop
+
+
+
 
 
 TOPNAME = top
