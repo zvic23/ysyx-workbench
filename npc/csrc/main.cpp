@@ -38,13 +38,13 @@ int main() {
                top->x =0b00100000; step_and_dump_wave();
                top->x =0b01000000; step_and_dump_wave();
                top->x =0b10000000; step_and_dump_wave();
-  top->en=0b1; top->x =0b00000000; step_and_dump_wave();
-               top->x =0b00000001; step_and_dump_wave();
-               top->x =0b00000010; step_and_dump_wave();
-               top->x =0b00000100; step_and_dump_wave();
-               top->x =0b00001000; step_and_dump_wave();
-               top->x =0b00010000; step_and_dump_wave();
-               top->x =0b00100000; step_and_dump_wave();
+  top->en=0b1; top->x =0b10000000; step_and_dump_wave();
+               top->x =0b10000001; step_and_dump_wave();
+               top->x =0b10000010; step_and_dump_wave();
+               top->x =0b10000100; step_and_dump_wave();
+               top->x =0b10001000; step_and_dump_wave();
+               top->x =0b10010000; step_and_dump_wave();
+               top->x =0b10100000; step_and_dump_wave();
                top->x =0b01000000; step_and_dump_wave();
                top->x =0b10000000; step_and_dump_wave();
 
