@@ -7,9 +7,9 @@
 
 //==========
 
-extern const VlUnpacked<CData/*1:0*/, 32> Vencode42__ConstPool__TABLE_865ffb6b_0;
+extern const VlUnpacked<CData/*1:0*/, 32> Vencode42__ConstPool__TABLE_eaaa96bb_0;
 extern const VlUnpacked<CData/*1:0*/, 32> Vencode42__ConstPool__TABLE_e3e536ad_0;
-extern const VlUnpacked<IData/*31:0*/, 32> Vencode42__ConstPool__TABLE_1cbc8a47_0;
+extern const VlUnpacked<IData/*31:0*/, 32> Vencode42__ConstPool__TABLE_a48fca24_0;
 
 VL_INLINE_OPT void Vencode42___024root___combo__TOP__1(Vencode42___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -19,11 +19,11 @@ VL_INLINE_OPT void Vencode42___024root___combo__TOP__1(Vencode42___024root* vlSe
     CData/*4:0*/ __Vtableidx1;
     // Body
     __Vtableidx1 = (((IData)(vlSelf->x) << 1U) | (IData)(vlSelf->en));
-    vlSelf->y = Vencode42__ConstPool__TABLE_865ffb6b_0
+    vlSelf->y = Vencode42__ConstPool__TABLE_eaaa96bb_0
         [__Vtableidx1];
     if ((2U & Vencode42__ConstPool__TABLE_e3e536ad_0
          [__Vtableidx1])) {
-        vlSelf->encode42__DOT__i = Vencode42__ConstPool__TABLE_1cbc8a47_0
+        vlSelf->encode42__DOT__i = Vencode42__ConstPool__TABLE_a48fca24_0
             [__Vtableidx1];
     }
 }

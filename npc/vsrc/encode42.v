@@ -6,7 +6,7 @@ module encode42(x,en,y);
   always @(x or en) begin
     if (en) begin
       y = 0;
-      for( i = 0; i <= 3; i = i+1)
+      for( i = 3; i >= 0; i = i-1)
           if(x[i] == 1)  y = i[1:0];
     end
     else  y = 0;
