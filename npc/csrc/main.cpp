@@ -28,16 +28,13 @@ void sim_exit(){
 
 int main() {
   sim_init();
-
-  top->en=0b0; top->x =0b0000; step_and_dump_wave();
-               top->x =0b0001; step_and_dump_wave();
-               top->x =0b0010; step_and_dump_wave();
-               top->x =0b0100; step_and_dump_wave();
-               top->x =0b1000; step_and_dump_wave();
-  top->en=0b1; top->x =0b0000; step_and_dump_wave();
-               top->x =0b0001; step_and_dump_wave();
-               top->x =0b0010; step_and_dump_wave();
-               top->x =0b0100; step_and_dump_wave();
-               top->x =0b1000; step_and_dump_wave();
+  top->en = 0b0;  top->x = 0b00;  step_and_dump_wave();
+                  top->x = 0b01;  step_and_dump_wave();
+                  top->x = 0b10;  step_and_dump_wave();
+                  top->x = 0b11;  step_and_dump_wave();
+  top->en = 0b1;  top->x = 0b00;  step_and_dump_wave();
+                  top->x = 0b01;  step_and_dump_wave();
+                  top->x = 0b10;  step_and_dump_wave();
+                  top->x = 0b11;  step_and_dump_wave();
   sim_exit();
 }

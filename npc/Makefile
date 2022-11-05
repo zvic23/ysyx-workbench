@@ -9,7 +9,7 @@ sim:
 include ../Makefile
 
 exe:
-	obj_dir/Vtop
+	obj_dir/Vdecode24
 
 
 
