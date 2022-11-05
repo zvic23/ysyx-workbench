@@ -1,11 +1,11 @@
 #include "verilated.h"
 #include "verilated_vcd_c.h"
-#include "Vdecode24.h"
+#include "Vencode42.h"
 
 VerilatedContext* contextp = NULL;
 VerilatedVcdC* tfp = NULL;
 
-static Vdecode24* top;
+static Vencode42* top;
 
 void step_and_dump_wave(){
   top->eval();
@@ -15,7 +15,7 @@ void step_and_dump_wave(){
 void sim_init(){
   contextp = new VerilatedContext;
   tfp = new VerilatedVcdC;
-  top = new Vdecode24;
+  top = new Vencode42;
   contextp->traceEverOn(true);
   top->trace(tfp, 0);
   tfp->open("dump.vcd");
@@ -28,13 +28,16 @@ void sim_exit(){
 
 int main() {
   sim_init();
-  top->en = 0b0;  top->x = 0b00;  step_and_dump_wave();
-                  top->x = 0b01;  step_and_dump_wave();
-                  top->x = 0b10;  step_and_dump_wave();
-                  top->x = 0b11;  step_and_dump_wave();
-  top->en = 0b1;  top->x = 0b00;  step_and_dump_wave();
-                  top->x = 0b01;  step_and_dump_wave();
-                  top->x = 0b10;  step_and_dump_wave();
-                  top->x = 0b11;  step_and_dump_wave();
+
+  top->en=0b0; top->x =0b0000; step_and_dump_wave();
+               top->x =0b0001; step_and_dump_wave();
+               top->x =0b0010; step_and_dump_wave();
+               top->x =0b0100; step_and_dump_wave();
+               top->x =0b1000; step_and_dump_wave();
+  top->en=0b1; top->x =0b0000; step_and_dump_wave();
+               top->x =0b0001; step_and_dump_wave();
+               top->x =0b0010; step_and_dump_wave();
+               top->x =0b0100; step_and_dump_wave();
+               top->x =0b1000; step_and_dump_wave();
   sim_exit();
 }
