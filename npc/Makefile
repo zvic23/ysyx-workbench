@@ -15,7 +15,7 @@ exe:
 
 
 
-TOPNAME = top
+TOPNAME = priencode83
 NXDC_FILES = constr/pinset.nxdc
 INC_PATH ?=
 

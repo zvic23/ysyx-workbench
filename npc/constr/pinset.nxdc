@@ -1,10 +1,9 @@
-top=top
+top=priencode83
 
 #Line comment inside nxdc
 
-Y (SW1,SW0)
-X0 (SW3,SW2)
-X1 (SW5,SW4)
-X2 (SW7,SW6)
-X3 (SW9,SW8)
-F (LD1,LD0)
+x (SW7,SW6,SW5,SW4,SW3,SW2,SW1,SW0)
+en SW8
+hex0 (SEG0A, SEG0B, SEG0C, SEG0D, SEG0E, SEG0F, SEG0G )
+z LD4
+y (LD2,LD1,LD0)
