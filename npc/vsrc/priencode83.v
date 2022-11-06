@@ -1,6 +1,7 @@
-module priencode83(x,en,z,y);
+module priencode83(x,en,hex0,z,y);
   input  [7:0] x;
   input  en;
+  output [6:0]hex0;
   output reg z;
   output reg [2:0]y;
   integer i;
@@ -16,4 +17,8 @@ module priencode83(x,en,z,y);
     end
     else  begin y = 0; z = 0; end
   end
+
+  bcd7seg s0({1'b0,y},hex0);
+  
+
 endmodule

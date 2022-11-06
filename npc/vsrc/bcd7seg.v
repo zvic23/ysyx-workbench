@@ -3,7 +3,7 @@ module bcd7seg(
   output reg [6:0] h
 );
 
-always@(b)
+always@(b)begin
   case(b)
      4'd0 : h =7'b1111110;
      4'd1 : h =7'b0110000;
@@ -23,6 +23,8 @@ always@(b)
      4'd15: h =7'b1000111;
      default: h =7'b0;
      endcase
+     h=~h;
+end
 endmodule
 
 
