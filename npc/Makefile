@@ -11,7 +11,8 @@ include ../Makefile
 exe:
 	obj_dir/Vtop
 
-
+clear:
+	rm build/ -r  rm obj_dir  rm dump.vcd
 
 
 
