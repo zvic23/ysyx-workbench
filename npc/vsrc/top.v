@@ -1,51 +1,22 @@
-module top(mode , A ,B ,z ,ovfl ,c ,out, hex );
-   input  [2:0]mode;
-   input  [3:0]A,B;
-   output reg [3:0]out;
-   output reg ovfl,z,c;
-   output [6:0]hex;
+module top(clk,clr,hex0,hex1);
+   input  clk, clr;
+   output [6:0]hex0;
+   output [6:0]hex1;
 
-   reg [3:0]D;
+   reg [7:0]x=8'b1;
+   reg c=1; 
 
-   always @(mode or A or B  ) begin
-      ovfl = 0; z =0; c =0; out =0; D = 0;     
-      if(mode == 3'b0) begin
-      {c,out} = A+B;
-      z   = (out==0);      
-      ovfl= (A[3]==B[3])&&(out[3]!=A[3]);
-      end
-      
-      else if(mode == 3'b1) begin
-      D = B;
-      D = ~D+4'b1;
-      {c,out} = A+D;
-      z   = (out==0);
-      ovfl= (A[3]==B[3])&&(out[3]!=A[3]);
-      end
-     
-      else if(mode == 3'b10) 
-      out = ~A;
-
-      else if(mode == 3'b11) 
-      out = A&B;
-
-      else if(mode == 3'b100)
-      out = A|B;
-
-      else if(mode == 3'b101)
-      out = A^B;
-
-      else if(mode == 3'b110)begin
-        if(A[3]!=B[3]) out[0] = (A[3]==1);
-        else  out[0] = (A[2:0]<B[2:0]);	
-      end
-
-      else if(mode == 3'b111)
-      out[0] = (A==B);
-
+   always @(posedge clk or posedge clr) begin
+   if(clr ==1 ) begin x<=8'b00000001; c<=1; end
+   else begin
+	    x<={c,x[7:1]};
+   end
+   
+	    c<=x[4]^x[3]^x[2]^x[0];
 end
 
-bcd7seg s0(out , hex);
+bcd7seg s0(x[3:0] , hex0);
+bcd7seg s1(x[7:4] , hex1);
 
 endmodule
 

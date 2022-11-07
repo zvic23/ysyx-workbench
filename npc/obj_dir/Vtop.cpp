@@ -10,14 +10,10 @@
 
 Vtop::Vtop(VerilatedContext* _vcontextp__, const char* _vcname__)
     : vlSymsp{new Vtop__Syms(_vcontextp__, _vcname__, this)}
-    , mode{vlSymsp->TOP.mode}
-    , A{vlSymsp->TOP.A}
-    , B{vlSymsp->TOP.B}
-    , out{vlSymsp->TOP.out}
-    , ovfl{vlSymsp->TOP.ovfl}
-    , z{vlSymsp->TOP.z}
-    , c{vlSymsp->TOP.c}
-    , hex{vlSymsp->TOP.hex}
+    , clk{vlSymsp->TOP.clk}
+    , clr{vlSymsp->TOP.clr}
+    , hex0{vlSymsp->TOP.hex0}
+    , hex1{vlSymsp->TOP.hex1}
     , rootp{&(vlSymsp->TOP)}
 {
 }
