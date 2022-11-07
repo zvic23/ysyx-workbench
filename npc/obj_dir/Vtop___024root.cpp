@@ -24,9 +24,9 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
         __Vdly__x = (((IData)(vlSelf->top__DOT__c) 
                       << 7U) | (0x7fU & ((IData)(vlSelf->x) 
                                          >> 1U)));
+        __Vdly__top__DOT__c = (1U & VL_REDXOR_32((0x1dU 
+                                                  & (IData)(vlSelf->x))));
     }
-    __Vdly__top__DOT__c = (1U & VL_REDXOR_32((0x1dU 
-                                              & (IData)(vlSelf->x))));
     vlSelf->top__DOT__c = __Vdly__top__DOT__c;
     vlSelf->x = __Vdly__x;
     vlSelf->hex0 = ((8U & (IData)(vlSelf->x)) ? ((4U 

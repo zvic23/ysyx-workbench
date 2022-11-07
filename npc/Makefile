@@ -11,6 +11,9 @@ include ../Makefile
 exe:
 	obj_dir/Vtop
 
+wave:   
+	gtkwave dump.vcd
+
 clear:
 	rm build/ -r  obj_dir/ -r  dump.vcd
 
