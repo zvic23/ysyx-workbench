@@ -1,19 +1,63 @@
-#include <nvboard.h>
-#include <Vtop.h>
+#include "verilated.h"
+#include "verilated_vcd_c.h"
+#include "Vtop.h"
 
-static TOP_NAME dut;
+VerilatedContext* contextp = NULL;
+VerilatedVcdC* tfp = NULL;
 
-void nvboard_bind_all_pins(Vtop* top);
+static Vtop* top;
 
+void step_and_dump_wave(){
+  top->eval();
+  contextp->timeInc(1);
+  tfp->dump(contextp->time());
+}
+void sim_init(){
+  contextp = new VerilatedContext;
+  tfp = new VerilatedVcdC;
+  top = new Vtop;
+  contextp->traceEverOn(true);
+  top->trace(tfp, 0);
+  tfp->open("dump.vcd");
+}
+
+void sim_exit(){
+  step_and_dump_wave();
+  tfp->close();
+}
 
 int main() {
-  nvboard_bind_all_pins(&dut);
-  nvboard_init();
+  sim_init();
+         top->clk=0;  top->clr=0;  step_and_dump_wave();
+                      top->clr=1;  step_and_dump_wave();
+                      top->clr=0;  step_and_dump_wave();
+
+                      top->clk=1;  step_and_dump_wave();
+                      top->clk=0;  step_and_dump_wave();
+                      top->clk=1;  step_and_dump_wave();
+                      top->clk=0;  step_and_dump_wave();
+                      top->clk=1;  step_and_dump_wave();
+                      top->clk=0;  step_and_dump_wave();
+                      top->clk=1;  step_and_dump_wave();
+                      top->clk=0;  step_and_dump_wave();
+                      top->clk=1;  step_and_dump_wave();
+                      top->clk=0;  step_and_dump_wave();
+                      top->clk=1;  step_and_dump_wave();
+                      top->clk=0;  step_and_dump_wave();
+                      top->clk=1;  step_and_dump_wave();
+                      top->clk=0;  step_and_dump_wave();
+                      top->clk=1;  step_and_dump_wave();
+                      top->clk=0;  step_and_dump_wave();
+                      top->clk=1;  step_and_dump_wave();
+                      top->clk=0;  step_and_dump_wave();
+                      top->clk=1;  step_and_dump_wave();
+                      top->clk=0;  step_and_dump_wave();
+                      top->clk=1;  step_and_dump_wave();
+                      top->clk=0;  step_and_dump_wave();
+                      top->clk=1;  step_and_dump_wave();
+                      top->clk=0;  step_and_dump_wave();
 
 
-  while(1) {
-    nvboard_update();
-    dut.eval();
-  }
-nvboard_quit();
+
+  sim_exit();
 }
