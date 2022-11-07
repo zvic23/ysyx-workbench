@@ -14,6 +14,7 @@ Vtop::Vtop(VerilatedContext* _vcontextp__, const char* _vcname__)
     , clr{vlSymsp->TOP.clr}
     , hex0{vlSymsp->TOP.hex0}
     , hex1{vlSymsp->TOP.hex1}
+    , x{vlSymsp->TOP.x}
     , rootp{&(vlSymsp->TOP)}
 {
 }

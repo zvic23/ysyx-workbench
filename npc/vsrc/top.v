@@ -1,8 +1,8 @@
-module top(clk,clr,hex0,hex1);
+module top(clk,clr,hex0,hex1,x);
    input  clk, clr;
    output [6:0]hex0;
    output [6:0]hex1;
-
+   output [7:0]x;
    reg [7:0]x=8'b1;
    reg c=1; 
 

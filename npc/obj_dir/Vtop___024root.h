@@ -23,15 +23,14 @@ VL_MODULE(Vtop___024root) {
     VL_IN8(clr,0,0);
     VL_OUT8(hex0,6,0);
     VL_OUT8(hex1,6,0);
+    VL_OUT8(x,7,0);
 
     // LOCAL SIGNALS
-    CData/*7:0*/ top__DOT__x;
     CData/*0:0*/ top__DOT__c;
 
     // LOCAL VARIABLES
     CData/*0:0*/ __Vclklast__TOP__clk;
     CData/*0:0*/ __Vclklast__TOP__clr;
-    VlUnpacked<CData/*31:0*/, 2> __Vm_traceActivity;
 
     // INTERNAL VARIABLES
     Vtop__Syms* vlSymsp;  // Symbol table
