@@ -2,12 +2,7 @@ top=top
 
 #Line comment inside nxdc
 
-hex (SEG0A, SEG0B, SEG0C, SEG0D, SEG0E, SEG0F, SEG0G )
-
-mode (SW15,SW14,SW13)
-A (SW7,SW6,SW5,SW4)
-B (SW3,SW2,SW1,SW0)
-out (LD3,LD2,LD1,LD0)
-c LD5
-z LD6
-ovfl LD7
+hex0 (SEG0A, SEG0B, SEG0C, SEG0D, SEG0E, SEG0F, SEG0G )
+hex1 (SEG1A, SEG1B, SEG1C, SEG1D, SEG1E, SEG1F, SEG1G )
+clk BTNL
+clr BTNR
