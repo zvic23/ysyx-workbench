@@ -7,28 +7,35 @@
 
 //==========
 
-VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
+VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___sequent__TOP__1\n"); );
-    // Variables
-    CData/*7:0*/ __Vdly__x;
-    CData/*0:0*/ __Vdly__top__DOT__c;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___sequent__TOP__2\n"); );
     // Body
-    __Vdly__top__DOT__c = vlSelf->top__DOT__c;
-    __Vdly__x = vlSelf->x;
-    if (vlSelf->clr) {
-        __Vdly__x = 1U;
-        __Vdly__top__DOT__c = 1U;
-    } else {
-        __Vdly__x = (((IData)(vlSelf->top__DOT__c) 
-                      << 7U) | (0x7fU & ((IData)(vlSelf->x) 
-                                         >> 1U)));
-        __Vdly__top__DOT__c = (1U & VL_REDXOR_32((0x1dU 
-                                                  & (IData)(vlSelf->x))));
-    }
-    vlSelf->top__DOT__c = __Vdly__top__DOT__c;
-    vlSelf->x = __Vdly__x;
+    vlSelf->__Vdly__x = vlSelf->x;
+    vlSelf->__Vdly__x = ((IData)(vlSelf->clr) ? 1U : 
+                         (((IData)(vlSelf->top__DOT__c) 
+                           << 7U) | (0x7fU & ((IData)(vlSelf->x) 
+                                              >> 1U))));
+}
+
+VL_INLINE_OPT void Vtop___024root___sequent__TOP__4(Vtop___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___sequent__TOP__4\n"); );
+    // Body
+    vlSelf->top__DOT__c = (1U & ((IData)(vlSelf->clr) 
+                                 | (1U & VL_REDXOR_32(
+                                                      (0x1dU 
+                                                       & (IData)(vlSelf->x))))));
+}
+
+VL_INLINE_OPT void Vtop___024root___sequent__TOP__6(Vtop___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___sequent__TOP__6\n"); );
+    // Body
+    vlSelf->x = vlSelf->__Vdly__x;
     vlSelf->hex0 = ((8U & (IData)(vlSelf->x)) ? ((4U 
                                                   & (IData)(vlSelf->x))
                                                   ? 
@@ -112,7 +119,15 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
     // Body
     if ((((IData)(vlSelf->clk) & (~ (IData)(vlSelf->__Vclklast__TOP__clk))) 
          | ((IData)(vlSelf->clr) & (~ (IData)(vlSelf->__Vclklast__TOP__clr))))) {
-        Vtop___024root___sequent__TOP__1(vlSelf);
+        Vtop___024root___sequent__TOP__2(vlSelf);
+    }
+    if ((((~ (IData)(vlSelf->clk)) & (IData)(vlSelf->__Vclklast__TOP__clk)) 
+         | ((IData)(vlSelf->clr) & (~ (IData)(vlSelf->__Vclklast__TOP__clr))))) {
+        Vtop___024root___sequent__TOP__4(vlSelf);
+    }
+    if ((((IData)(vlSelf->clk) & (~ (IData)(vlSelf->__Vclklast__TOP__clk))) 
+         | ((IData)(vlSelf->clr) & (~ (IData)(vlSelf->__Vclklast__TOP__clr))))) {
+        Vtop___024root___sequent__TOP__6(vlSelf);
     }
     // Final
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;

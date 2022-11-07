@@ -29,6 +29,7 @@ VL_MODULE(Vtop___024root) {
     CData/*0:0*/ top__DOT__c;
 
     // LOCAL VARIABLES
+    CData/*7:0*/ __Vdly__x;
     CData/*0:0*/ __Vclklast__TOP__clk;
     CData/*0:0*/ __Vclklast__TOP__clr;
 
