@@ -11,9 +11,9 @@ static void single_cycle() {
 }
 
 static void reset(int n) {
-  dut.clr = 0;
-  while (n -- > 0) single_cycle();
   dut.clr = 1;
+  while (n -- > 0) single_cycle();
+  dut.clr = 0;
 }
 
 int main() {
