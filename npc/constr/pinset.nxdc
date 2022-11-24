@@ -1,13 +1,15 @@
 top=top
 
 #Line comment inside nxdc
+clr BTNC
+hsync VGA_HSYNC
+vsync VGA_VSYNC
+vga_blank VGA_BLANK_N
+vga_r (VGA_R7, VGA_R6, VGA_R5, VGA_R4, VGA_R3, VGA_R2, VGA_R1, VGA_R0)
+vga_g (VGA_G7, VGA_G6, VGA_G5, VGA_G4, VGA_G3, VGA_G2, VGA_G1, VGA_G0)
+vga_b (VGA_B7, VGA_B6, VGA_B5, VGA_B4, VGA_B3, VGA_B2, VGA_B1, VGA_B0)
 
-hex (SEG0A, SEG0B, SEG0C, SEG0D, SEG0E, SEG0F, SEG0G )
+ps2_clk PS2_CLK
+ps2_data PS2_DAT
 
-mode (SW15,SW14,SW13)
-A (SW7,SW6,SW5,SW4)
-B (SW3,SW2,SW1,SW0)
-out (LD3,LD2,LD1,LD0)
-c LD5
-z LD6
-ovfl LD7
+capital LD0
