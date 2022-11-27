@@ -29,7 +29,7 @@ void isa_reg_display() {
 
 	}
 
-		printf("/n");
+		printf("\n");
 
 }
 
