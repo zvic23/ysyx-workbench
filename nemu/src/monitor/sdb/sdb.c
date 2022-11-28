@@ -90,9 +90,10 @@ static int cmd_x(char *args){
     char *position = strtok(pst, " ");
     printf("%d and %d\n",atoi(n),atoi(position));
 
-    long sum=0;
     long  a = atol(position);
-   for (int i=0;i<7;i++){
+    long sum=a;
+    a = a/10;
+   for (int i=1;i<7;i++){
      sum = sum+a*16;
      a = a/10;
    } 
