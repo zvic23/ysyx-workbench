@@ -92,7 +92,7 @@ static int cmd_x(char *args){
 
     int sum=0;
     int  a = atol(position);
-   for (int i=0;i<8;i++){
+   for (int i=0;i<9;i++){
      sum = sum+a*16;
      a = a/10;
    } 
