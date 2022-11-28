@@ -97,7 +97,7 @@ static int cmd_x(char *args){
      sum = sum+(a%10)*pow(16,i);
      a = a/10;
    } 
-   printf("%lx%lx\n",sum,a);
+   printf("%lx\n",sum);
    // paddr_t address=  host_to_guest(position);
     printf("%lx\n",paddr_read( sum,atoi(n))); 
 //    printf("%lx\n",paddr_read(atoi(position),atoi(n))); 
