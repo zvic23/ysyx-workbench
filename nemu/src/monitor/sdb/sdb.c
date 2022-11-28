@@ -20,6 +20,7 @@
 #include "sdb.h"
 
 #include <memory/paddr.h>
+#include <math.h>
 
 static int is_batch_mode = false;
 
@@ -91,10 +92,10 @@ static int cmd_x(char *args){
     printf("%d and %d\n",atoi(n),atoi(position));
 
     long  a = atol(position);
-    long sum=a;
+    long sum=a%10;
     a = a/10;
    for (int i=1;i<8;i++){
-     sum = sum+a*16;
+     sum = sum+(a%10)*16;
      a = a/10;
    } 
    printf("%lx%lx\n",sum,a);
