@@ -95,7 +95,7 @@ static int cmd_x(char *args){
     long sum=a%10;
     a = a/10;
    for (int i=1;i<8;i++){
-     sum = sum+(a%10)*16;
+     sum = sum+(a%10)*pow(16,i);
      a = a/10;
    } 
    printf("%lx%lx\n",sum,a);
