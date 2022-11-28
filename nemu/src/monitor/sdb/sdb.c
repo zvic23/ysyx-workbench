@@ -90,14 +90,14 @@ static int cmd_x(char *args){
     char *position = strtok(pst, " ");
     printf("%d and %d\n",atoi(n),atoi(position));
 
-    int sum;
+    int sum=0;
     int  a = atol(pst);
    for (int i=0;i<8;i++){
      sum = sum+a*16;
      a = a/10;
    } 
    // paddr_t address=  host_to_guest(position);
-    printf("%lx\n",paddr_read( atol(pst),atoi(n))); 
+    printf("%lx\n",paddr_read( sum,atoi(n))); 
 //    printf("%lx\n",paddr_read(atoi(position),atoi(n))); 
 
 return 0;
