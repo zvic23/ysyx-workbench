@@ -19,6 +19,8 @@
 #include <readline/history.h>
 #include "sdb.h"
 
+#include <memory/paddr.h>
+
 static int is_batch_mode = false;
 
 void init_regex();
@@ -87,6 +89,11 @@ static int cmd_x(char *args){
     char *pst = n + strlen(n) + 1;
     char *position = strtok(pst, " ");
     printf("%d and %d\n",atoi(n),atoi(position));
+    
+   // paddr_t address=  host_to_guest(position);
+    printf("%lx\n",paddr_read(atoi(position),atoi(n))); 
+
+
 return 0;
 }
 
