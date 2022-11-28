@@ -86,7 +86,7 @@ static int cmd_x(char *args){
      */
     char *pst = n + strlen(n) + 1;
     char *position = strtok(pst, " ");
-    printf(n,position);
+    printf("%d and %s\n",atoi(n),position);
 return 0;
 }
 
