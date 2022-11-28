@@ -92,9 +92,8 @@ static int cmd_x(char *args){
     printf("%d and %d\n",atoi(n),atoi(position));
 
     long  a = atol(position);
-    long sum=a%10;
-    a = a/10;
-   for (int i=1;i<8;i++){
+    long sum=0;
+   for (int i=0;i<8;i++){
      sum = sum+(a%10)*pow(16,i);
      a = a/10;
    } 
