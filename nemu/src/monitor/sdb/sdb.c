@@ -99,7 +99,10 @@ static int cmd_x(char *args){
    } 
    printf("%lx\n",sum);
    // paddr_t address=  host_to_guest(position);
-    printf("%lx\n",paddr_read( sum,atoi(n))); 
+   for(int i=atoi(n);i>0;i--){
+    printf("%lx  ",paddr_read( (sum+i),1)); 
+   }
+   printf("\n");
 //    printf("%lx\n",paddr_read(atoi(position),atoi(n))); 
 
 return 0;
