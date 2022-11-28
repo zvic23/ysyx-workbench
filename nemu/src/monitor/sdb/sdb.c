@@ -91,7 +91,7 @@ static int cmd_x(char *args){
     printf("%d and %d\n",atoi(n),atoi(position));
     
    // paddr_t address=  host_to_guest(position);
-    printf("%lx\n",paddr_read(atoi(pst),atoi(n))); 
+    printf("%lx\n",paddr_read( atol(pst),atoi(n))); 
 //    printf("%lx\n",paddr_read(atoi(position),atoi(n))); 
 
 return 0;
