@@ -91,7 +91,7 @@ static int cmd_x(char *args){
     printf("%d and %d\n",atoi(n),atoi(position));
 
     int sum=0;
-    int  a = atol(pst);
+    int  a = atol(position);
    for (int i=0;i<8;i++){
      sum = sum+a*16;
      a = a/10;
