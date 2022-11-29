@@ -107,14 +107,15 @@ static bool make_token(char *e) {
 			 for(int k=0;k<substr_len;k++){
 			 tokens[j].str[k]=e[position-substr_len+k];
 			 }
+			 break;
 			 assert(tokens[j].type!=41);
 		}
-	        case '+': tokens[j].type='+';
-          case '-': tokens[j].type='-';
-case '*': tokens[j].type='*';
-case '/': tokens[j].type='/';
-case '(': tokens[j].type='(';
-case ')': tokens[j].type=')';
+	        case '+': {tokens[j].type='+';break;}
+          case '-': {tokens[j].type='-';break;}
+case '*': {tokens[j].type='*';break;}
+case '/': {tokens[j].type='/';break;}
+case '(': {tokens[j].type='(';break;}
+case ')': {tokens[j].type=')';break;}
          // default: TODO();
         }
         j++;
