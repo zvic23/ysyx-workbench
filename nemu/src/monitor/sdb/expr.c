@@ -21,7 +21,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_NUMBER=268
+  TK_NOTYPE = 256, TK_EQ,TK_NUMBER
 
   /* TODO: Add more token types */
 
@@ -108,7 +108,7 @@ static bool make_token(char *e) {
 			 tokens[j].str[k]=e[position-substr_len+k];
 			 }
 		}
-	        case '+': tokens[j].type='+';
+	        case '+': tokens[j].type=1;
           case '-': tokens[j].type='-';
 case '*': tokens[j].type='*';
 case '/': tokens[j].type='/';
