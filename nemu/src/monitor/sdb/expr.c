@@ -43,8 +43,8 @@ static struct rule {
   {"\\-", '-'},         // subtract
   {"\\*", '*'},         // times
   {"/",   '/'},         // division
-  {"(",  '('},         // left bracket
-  {")",  ')'},         // right bracket
+  {"\\(",  '('},         // left bracket
+  {"\\)",  ')'},         // right bracket
   {"[0-9]+", TK_NUMBER},// number
 };
 
