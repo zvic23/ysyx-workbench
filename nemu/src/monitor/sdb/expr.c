@@ -115,7 +115,7 @@ case '/': tokens[j].type='/';
 case '(': tokens[j].type='(';
 case ')': tokens[j].type=')';
 
-          default: TODO();
+         // default: TODO();
         }
         j++;
         break;
