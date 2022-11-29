@@ -142,7 +142,7 @@ word_t expr(char *e, bool *success) {
   //TODO();
   for(int j=31;j>=0;j--){
   printf("%d ",tokens[j].type);
-  printf("%s\n",tokens[j].str);
+  printf("%s",tokens[j].str);
   }
 
 
