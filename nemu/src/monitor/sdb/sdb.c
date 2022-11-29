@@ -108,6 +108,16 @@ static int cmd_x(char *args){
 return 0;
 }
 
+
+static int cmd_f(char *args){
+  char *arg = strtok(NULL, " ");
+  expr(arg,NULL); 
+
+  return 0;
+}
+
+
+
 static struct {
   const char *name;
   const char *description;
@@ -121,6 +131,9 @@ static struct {
   { "si", "Simple step execution", cmd_si },
   { "info", "Print program status", cmd_info },
   { "x", "Scan memory", cmd_x },
+
+  { "f", "test", cmd_f},
+
 };
 
 #define NR_CMD ARRLEN(cmd_table)

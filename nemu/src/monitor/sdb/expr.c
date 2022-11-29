@@ -81,7 +81,7 @@ static bool make_token(char *e) {
   int position = 0;
   int i;
   regmatch_t pmatch;
-
+  int j=0;     //zsl:tokens position
   nr_token = 0;
 
   while (e[position] != '\0') {
@@ -102,10 +102,22 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
+		case TK_NUMBER:{
+		         tokens[j].type=TK_NUMBER; 
+			 for(int k=0;k<substr_len;k++){
+			 tokens[j].str[k]=e[position-substr_len+k];
+			 }
+		}
+	        case '+': tokens[j].type='+';
+          case '-': tokens[j].type='-';
+case '*': tokens[j].type='*';
+case '/': tokens[j].type='/';
+case '(': tokens[j].type='(';
+case ')': tokens[j].type=')';
 
           default: TODO();
         }
-
+        j++;
         break;
       }
     }
@@ -128,6 +140,10 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
+  printf("%d\n",tokens->type);
+  printf("%s\n",tokens->str);
+
+
 
   return 0;
 }
