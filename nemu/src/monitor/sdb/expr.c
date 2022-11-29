@@ -140,8 +140,12 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
-  printf("%d\n",tokens->type);
-  printf("%s\n",tokens->str);
+  for(int j=31;j>=0;j++){
+  printf("%d ",tokens[j].type);
+  printf("\n");
+  printf("%s\n",tokens[j].str);
+printf("\n");
+  }
 
 
 
