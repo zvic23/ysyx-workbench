@@ -115,12 +115,13 @@ case '*': tokens[j].type='*';
 case '/': tokens[j].type='/';
 case '(': tokens[j].type='(';
 case ')': tokens[j].type=')';
-default: NULL;
          // default: TODO();
         }
         j++;
         break;
       }
+		 assert(tokens[j].type!=41);
+
     }
 
     if (i == NR_REGEX) {
