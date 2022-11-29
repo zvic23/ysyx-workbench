@@ -144,7 +144,6 @@ word_t expr(char *e, bool *success) {
   printf("%d ",tokens[j].type);
   printf("\n");
   printf("%s\n",tokens[j].str);
-printf("\n");
   }
 
 
