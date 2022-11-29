@@ -142,6 +142,7 @@ word_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
   for(int j=31;j>=0;j--){
+assert(tokens[j].type!=41);
   printf("%d:",tokens[j].type);
   printf("%s  ",tokens[j].str);
   }
