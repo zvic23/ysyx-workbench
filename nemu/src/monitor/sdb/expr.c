@@ -21,7 +21,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_NUMBER
+  TK_NOTYPE = 256, TK_EQ,TK_NUMBER=268
 
   /* TODO: Add more token types */
 
@@ -144,7 +144,7 @@ word_t expr(char *e, bool *success) {
   printf("%d:",tokens[j].type);
   printf("%s  ",tokens[j].str);
   }
-
+  printf("\n");
 
 
   return 0;
