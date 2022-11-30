@@ -107,6 +107,7 @@ static bool make_token(char *e) {
 			 for(int k=0;k<substr_len;k++){
 			 tokens[j].str[k]=e[position-substr_len+k];
 			 }
+			 j++;nr_token++;
 			 break;
 		}
 	        case '+': {tokens[j].type='+';j++;nr_token++;break;}
