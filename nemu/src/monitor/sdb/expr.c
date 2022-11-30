@@ -109,16 +109,15 @@ static bool make_token(char *e) {
 			 }
 			 break;
 		}
-	        case '+': {tokens[j].type='+';break;}
-                case '-': {tokens[j].type='-';break;}
-                case '*': {tokens[j].type='*';break;}
-                case '/': {tokens[j].type='/';break;}
-                case '(': {tokens[j].type='(';break;}
-                case ')': {tokens[j].type=')';break;}
+	        case '+': {tokens[j].type='+';j++;nr_token++;break;}
+                case '-': {tokens[j].type='-';j++;nr_token++;break;}
+                case '*': {tokens[j].type='*';j++;nr_token++;break;}
+                case '/': {tokens[j].type='/';j++;nr_token++;break;}
+                case '(': {tokens[j].type='(';j++;nr_token++;break;}
+                case ')': {tokens[j].type=')';j++;nr_token++;break;}
          // default: TODO();
         }
-        j++;
-	nr_token++;
+        //j++;nr_token++;
         break;
       }
 
