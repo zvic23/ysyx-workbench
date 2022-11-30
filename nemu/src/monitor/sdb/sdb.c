@@ -110,8 +110,8 @@ return 0;
 
 
 static int cmd_f(char *args){
-  char *arg = strtok(NULL, " ");
-  expr(arg,NULL); 
+  //char *arg = strtok(NULL, " ");
+  expr(args,NULL); 
 
   return 0;
 }
