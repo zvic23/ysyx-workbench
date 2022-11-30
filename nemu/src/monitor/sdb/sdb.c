@@ -117,8 +117,8 @@ static int cmd_f(char *args){
 }
 
 static int cmd_p(char *args){
-  char *arg = strtok(NULL, " ");
-  evaluation(arg); 
+  //char *arg = strtok(NULL, " ");
+  evaluation(args); 
 
   return 0;
 }
