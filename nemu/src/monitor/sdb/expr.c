@@ -190,7 +190,10 @@ bool check_parentheses(int p, int q){
 	if((tokens[p].type != '(')||(tokens[q].type != ')')){
 		printf("check_parentheses fail!!!\n");
 	//	assert(0);
-        for(int j=p+1;j<q;j++){
+	        return false;
+	}
+	else{ 
+		for(int j=p+1;j<q;j++){
 	       if(tokens[j].type == '('){
 		       match++;
 	       }
@@ -203,8 +206,8 @@ bool check_parentheses(int p, int q){
 		       return false;
 	       }
 	}
-	}
         return true;
+	}
 }
 
 int eval(int p, int q){
