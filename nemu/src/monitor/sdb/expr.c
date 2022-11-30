@@ -118,7 +118,6 @@ static bool make_token(char *e) {
                 case ')': {tokens[j].type=')';j++;nr_token++;break;}
          // default: TODO();
         }
-        //j++;nr_token++;
         break;
       }
 
