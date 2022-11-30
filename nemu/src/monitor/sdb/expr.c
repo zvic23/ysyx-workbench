@@ -163,7 +163,7 @@ int main_operator(int p, int q){
 	for(int j=p;j<=q;j++){
 		if(meetpare == 0){
 			if(tokens[j].type == '('){
-				meetpare = 1;
+				meetpare++;
 			}
 			else if((tokens[j].type == '+')||(tokens[j].type == '-')){
 				addorsub = 1;
@@ -176,7 +176,7 @@ int main_operator(int p, int q){
 		}
 		else{
 			if(tokens[j].type == ')'){
-				meetpare = 0;
+				meetpare--;
 			}
 		}
 	}
