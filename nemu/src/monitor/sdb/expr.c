@@ -160,7 +160,7 @@ int main_operator(int p, int q){
 	int addorsub = 0;
 	int mainoperator = 0;
 
-	for(int j=p;j<q;j++){
+	for(int j=p;j<=q;j++){
 		if(meetpare == 0){
 			if(tokens[j].type == '('){
 				meetpare = 1;
@@ -188,25 +188,24 @@ bool check_parentheses(int p, int q){
 	int match = 0; 
 
 	if((tokens[p].type != '(')||(tokens[q].type != ')')){
-		printf("check_parentheses fail!!!\n");
-	//	assert(0);
+		//printf("check_parentheses fail!!!\n");
 	        return false;
 	}
 	else{ 
 		for(int j=p+1;j<q;j++){
-	       if(tokens[j].type == '('){
-		       match++;
-	       }
-	       else if(tokens[j].type == ')'){
-		       match--;
-	       }
-	       if(match < 0){
-		       printf("check_paretheses fail on the two side not match\n");
-		       assert(0);
-		       return false;
-	       }
-	}
-        return true;
+	               if(tokens[j].type == '('){
+		             match++;
+	               }
+	               else if(tokens[j].type == ')'){
+		             match--;
+	               }
+	               if(match < 0){
+		             printf("check_paretheses fail on the two side not match\n");
+		             assert(0);
+		             return false;
+	               }
+	        }
+                return true;
 	}
 }
 
