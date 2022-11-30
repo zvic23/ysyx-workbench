@@ -161,22 +161,22 @@ int main_operator(int p, int q){
 	int mainoperator = 0;
 
 	for(int j=p;j<=q;j++){
-		if(meetpare == 0){
-			if(tokens[j].type == '('){
-				meetpare++;
+		if(tokens[j].type == '('){
+			meetpare++;
+		}
+	        else if(tokens[j].type == ')'){
+			if(meetpare == 0){
+				printf("main_operator(169):paretheses not match\n");
 			}
-			else if((tokens[j].type == '+')||(tokens[j].type == '-')){
+			meetpare--;
+		}
+		else if(meetpare == 0){
+			if((tokens[j].type == '+')||(tokens[j].type == '-')){
 				addorsub = 1;
 				mainoperator = j;
 			}
 			else if((addorsub == 0)&&((tokens[j].type == '*')||(tokens[j].type == '/'))){
                             	mainoperator = j;
-
-			}
-		}
-		else{
-			if(tokens[j].type == ')'){
-				meetpare--;
 			}
 		}
 	}
