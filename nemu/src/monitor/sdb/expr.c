@@ -108,20 +108,19 @@ static bool make_token(char *e) {
 			 tokens[j].str[k]=e[position-substr_len+k];
 			 }
 			 break;
-			 assert(tokens[j].type!=41);
 		}
 	        case '+': {tokens[j].type='+';break;}
-          case '-': {tokens[j].type='-';break;}
-case '*': {tokens[j].type='*';break;}
-case '/': {tokens[j].type='/';break;}
-case '(': {tokens[j].type='(';break;}
-case ')': {tokens[j].type=')';break;}
+                case '-': {tokens[j].type='-';break;}
+                case '*': {tokens[j].type='*';break;}
+                case '/': {tokens[j].type='/';break;}
+                case '(': {tokens[j].type='(';break;}
+                case ')': {tokens[j].type=')';break;}
          // default: TODO();
         }
         j++;
+	nr_token++;
         break;
       }
-		 assert(tokens[j].type!=41);
 
     }
 
@@ -143,7 +142,7 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
-  for(int j=31;j>=0;j--){
+  for(int j=nr_token-1;j>=0;j--){
   printf("%d:",tokens[j].type);
   printf("%s  ",tokens[j].str);
   }
