@@ -116,6 +116,13 @@ static int cmd_f(char *args){
   return 0;
 }
 
+static int cmd_p(char *args){
+  char *arg = strtok(NULL, " ");
+  evaluation(arg); 
+
+  return 0;
+}
+
 
 
 static struct {
@@ -133,7 +140,7 @@ static struct {
   { "x", "Scan memory", cmd_x },
 
   { "f", "test", cmd_f},
-
+  { "p", "expression evaluation", cmd_p },
 };
 
 #define NR_CMD ARRLEN(cmd_table)

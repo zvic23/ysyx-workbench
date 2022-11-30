@@ -43,8 +43,8 @@ static struct rule {
   {"\\-", '-'},         // subtract
   {"\\*", '*'},         // times
   {"/",   '/'},         // division
-  {"\\(",  '('},         // left bracket
-  {"\\)",  ')'},         // right bracket
+  {"\\(",  '('},        // left bracket
+  {"\\)",  ')'},        // right bracket
   {"[0-9]+", TK_NUMBER},// number
 };
 
@@ -150,4 +150,97 @@ word_t expr(char *e, bool *success) {
 
 
   return 0;
+}
+
+
+
+
+int main_operator(int p, int q){
+	int meetpare = 0;
+	int addorsub = 0;
+	int mainoperator = 0;
+
+	for(int j=p;j<q;j++){
+		if(meetpare == 0){
+			if(tokens[j].type == '('){
+				meetpare = 1;
+			}
+			else if((tokens[j].type == '+')||(tokens[j].type == '-')){
+				addorsub = 1;
+				mainoperator = j;
+			}
+			else if((addorsub == 0)&&((tokens[j].type == '*')||(tokens[j].type == '/'))){
+                            	mainoperator = j;
+
+			}
+		}
+		else{
+			if(tokens[j].type == ')'){
+				meetpare = 0;
+			}
+		}
+	}
+
+	return mainoperator;
+}
+
+bool check_parentheses(int p, int q){
+	int match = 0; 
+
+	if((tokens[p].type != '(')||(tokens[q].type != ')')){
+		printf("check_parentheses fail!!!\n");
+		assert(0);
+	}
+        for(int j=p;j<=q;j++){
+	       if(tokens[j].type == '('){
+		       match++;
+	       }
+	       else if(tokens[j].type == ')'){
+		       match--;
+	       }
+	       if(match < 1){
+		       printf("check_paretheses fail on the two side not match\n");
+		       assert(0);
+		       return false;
+	       }
+	}
+        return true;
+}
+
+int eval(int p, int q){
+	if(p>q){
+		printf("bad expression");
+		assert(0);
+	}
+	else if(p == q){
+		return atoi(tokens[p].str);
+
+	}
+        else if(check_parentheses(p,q) == true){
+		return eval(p+1,q-1);
+
+
+	}
+        else {
+		int op = main_operator(p,q);
+		int val1 = eval(p, op-1);
+		int val2 = eval(op+1, q);
+
+		switch (tokens[op].type){
+			case'+':  return val1 + val2;
+                        case'-':  return val1 - val2;
+	                case'*':  return val1 * val2;
+                        case'/':  return val1 / val2;
+			default:  assert(0);
+		}
+	}
+
+}
+
+
+void evaluation(char *e){
+	int result = 0;
+	expr(e,NULL);
+	result = eval(0,nr_token-1);
+	printf("the result is %d\n",result);
 }
