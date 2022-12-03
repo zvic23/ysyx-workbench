@@ -85,8 +85,10 @@ static bool make_token(char *e) {
   int position = 0;
   int i;
   regmatch_t pmatch;
-  int j=0;     //zsl:tokens position
   nr_token = 0;
+  
+  int j=0;     //zsl:tokens position
+  memset(tokens, 0 ,sizeof tokens);
 
   while (e[position] != '\0') {
     /* Try all rules one by one. */
@@ -145,6 +147,8 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
+
+  /* zsl:printf the expression the program got. */
 //  for(int j=0;j<=nr_token-1;j++){
 //  printf("%d:",tokens[j].type);
 //  printf("%s  ",tokens[j].str);
