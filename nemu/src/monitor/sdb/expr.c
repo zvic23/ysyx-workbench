@@ -47,7 +47,7 @@ static struct rule {
   {"\\)",  ')'},        // right bracket
   {"0x[[:digit:][:lower:]]+", TK_HEXNUMBER},   // hex-number
   {"[0-9]+", TK_NUMBER},// number
-  {"$..",  TK_REG},     // value of register
+  {"\\$..",  TK_REG},     // value of register
 			
   {"\\\n", TK_NEXTLINE},// next line
 };
