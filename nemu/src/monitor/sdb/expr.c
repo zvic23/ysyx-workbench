@@ -21,7 +21,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_NUMBER, TK_NEXTLINE
+  TK_NOTYPE = 256, TK_EQ,TK_NUMBER, TK_NEXTLINE, TK_HEXNUMBER
 
   /* TODO: Add more token types */
 
@@ -46,8 +46,9 @@ static struct rule {
   {"\\(",  '('},        // left bracket
   {"\\)",  ')'},        // right bracket
   {"[0-9]+", TK_NUMBER},// number
+  {"0[xX][0-9a-f]+", TK_HEXNUMBER},   // hex-number
 			
-  {"\\\n", TK_NEXTLINE},
+  {"\\\n", TK_NEXTLINE},// next line
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -94,11 +95,11 @@ static bool make_token(char *e) {
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
-        //char *substr_start = e + position;
+        char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-        //Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
-        //    i, rules[i].regex, position, substr_len, substr_len, substr_start);
+        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
+            i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
 
@@ -111,7 +112,16 @@ static bool make_token(char *e) {
 		case TK_NUMBER:{
 		         tokens[j].type=TK_NUMBER; 
 			 for(int k=0;k<substr_len;k++){
-			 tokens[j].str[k]=e[position-substr_len+k];
+			 	tokens[j].str[k]=e[position-substr_len+k];
+			 }
+			 j++;nr_token++;
+			 break;
+		}
+		case TK_HEXNUMBER:{
+			 tokens[j].type=TK_HEXNUMBER;
+			 tokens[j].str[0]='0';tokens[j].str[1]='x';
+			 for(int k=2;k<substr_len;k++){
+				 tokens[j].str[k]=e[position-substr_len+k];
 			 }
 			 j++;nr_token++;
 			 break;
@@ -149,11 +159,11 @@ word_t expr(char *e, bool *success) {
   //TODO();
 
   /* zsl:printf the expression the program got. */
-//  for(int j=0;j<=nr_token-1;j++){
-//  printf("%d:",tokens[j].type);
-//  printf("%s  ",tokens[j].str);
-//  }
-//  printf("\n");
+  for(int j=0;j<=nr_token-1;j++){
+ 	 printf("%d:",tokens[j].type);
+ 	 printf("%s  ",tokens[j].str);
+  }
+  printf("\n");
 
 
   return 0;
