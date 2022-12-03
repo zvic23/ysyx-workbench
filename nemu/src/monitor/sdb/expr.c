@@ -248,7 +248,7 @@ unsigned int eval(int p, int q){
 
 
 int evaluation(char *e){
-	int result = 0;
+	unsigned int result = 0;
 	expr(e,NULL);
 	result = eval(0,nr_token-1);
 	printf("The result is %d\n",result);
