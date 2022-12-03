@@ -145,10 +145,10 @@ static int cmd_t(char *args){
   }
 
   if (correct == false){
-	  printf("the result don't match !!!");
+	  printf("\nthe result don't match !!!\n");
   }
   else {
-	  printf("the result match");
+	  printf("the result match\n");
   }
 
 
