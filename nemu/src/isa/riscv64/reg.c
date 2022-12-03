@@ -38,6 +38,8 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	//char *reg_name = strtok(NULL,"//");
 	int j =0;
 	int i;
+
+	printf("s is %s\n",s);
 	for(j=0;j<32;j++){
 		if((i = strcmp(s,regs[j]))==0){
 			*success = true;
@@ -48,7 +50,6 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 			break;
 		}else {printf("ddd %d",i);}
 	}
-	printf("s is %s\n",s);
 	printf("j is %d\n",j);
 	return value;
   //return 0;
