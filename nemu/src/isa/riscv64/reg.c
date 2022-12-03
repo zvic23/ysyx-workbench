@@ -41,11 +41,10 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 
 	printf("reg is %s\n",reg_name);
 	for(j=0;j<32;j++){
-		if((i = strcmp(reg_name+1 ,regs[j]))==0){
+		if((i = strcmp(reg_name ,regs[j]))==0){
 			*success = true;
 			value = cpu.gpr[j];
 	printf("j is %d\n",j);
-	assert(0);
 
 			break;
 		}else {printf("ddd %d   ",i);}
