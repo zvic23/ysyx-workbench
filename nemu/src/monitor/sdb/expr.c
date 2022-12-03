@@ -134,7 +134,7 @@ static bool make_token(char *e) {
 				reg_name[j] = e[position-substr_len+j];
 			}
 			uint64_t value = isa_reg_str2val(reg_name,NULL);
-			char val[5];
+			char val[8];
 			if(regmatch == false){
 				printf("This reg name do not exist!!");
 				assert(0);
