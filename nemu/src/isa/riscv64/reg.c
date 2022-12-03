@@ -34,5 +34,14 @@ void isa_reg_display() {
 }
 
 word_t isa_reg_str2val(const char *s, bool *success) {
-  return 0;
+	uint64_t value = 0;
+	for(int j=0;j<32;j++){
+		if(s == regs[j]){
+			*success = true;
+			value = cpu.gpr[j];
+			break;
+		}
+	}
+	return value;
+  //return 0;
 }

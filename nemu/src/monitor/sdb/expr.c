@@ -21,7 +21,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_NUMBER, TK_NEXTLINE, TK_HEXNUMBER
+  TK_NOTYPE = 256, TK_EQ,TK_NUMBER, TK_NEXTLINE, TK_HEXNUMBER, TK_REG
 
   /* TODO: Add more token types */
 
@@ -47,6 +47,7 @@ static struct rule {
   {"\\)",  ')'},        // right bracket
   {"0x[[:digit:][:lower:]]+", TK_HEXNUMBER},   // hex-number
   {"[0-9]+", TK_NUMBER},// number
+  {"$..",  TK_REG},     // value of register
 			
   {"\\\n", TK_NEXTLINE},// next line
 };
@@ -124,6 +125,26 @@ static bool make_token(char *e) {
 			 }
 			 j++;nr_token++;
 			 break;
+		}
+		case TK_REG:{
+			tokens[j].type=TK_REG;
+			bool regmatch = true;
+			char reg_name[2];
+			for(int j=0;j<2;j++){
+				reg_name[j] = e[position-substr_len+j];
+			}
+			uint64_t value = isa_reg_str2val(reg_name,NULL);
+			char val[5];
+			if(regmatch == false){
+				printf("This reg name do not exist!!");
+				assert(0);
+			}
+			sprintf(val,"%ld",value);
+			printf("val = %s \n",val);
+
+
+			j++;nr_token++;
+			break;
 		}
 	        case '+': {tokens[j].type='+';j++;nr_token++;break;}
                 case '-': {tokens[j].type='-';j++;nr_token++;break;}
