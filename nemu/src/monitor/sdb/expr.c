@@ -160,7 +160,12 @@ word_t expr(char *e, bool *success) {
 }
 
 
-
+//** zsl: evaluating the expression **//
+//
+//
+//
+//
+//
 
 int main_operator(int p, int q){
 	int meetpare = 0;
@@ -216,13 +221,14 @@ bool check_parentheses(int p, int q){
 	}
 }
 
-unsigned int eval(int p, int q){
+uint32_t eval(int p, int q){
 	if(p>q){
 		printf("bad expression");
 		assert(0);
 	}
 	else if(p == q){
-		return atoi(tokens[p].str);
+		uint32_t num = atoi(tokens[p].str);
+		return num;
 
 	}
         else if(check_parentheses(p,q) == true){
@@ -232,23 +238,24 @@ unsigned int eval(int p, int q){
 	}
         else {
 		int op = main_operator(p,q);
-		unsigned int val1 = eval(p, op-1);
-		unsigned int val2 = eval(op+1, q);
+		uint32_t val1 = eval(p, op-1);
+		uint32_t val2 = eval(op+1, q);
+		uint32_t result = 0;
 
 		switch (tokens[op].type){
-			case'+':  return val1 + val2;
-                        case'-':  return val1 - val2;
-	                case'*':  return val1 * val2;
-                        case'/':  return val1 / val2;
+			case'+':  result = val1 + val2;
+                        case'-':  result = val1 - val2;
+	                case'*':  result = val1 * val2;
+                        case'/':  result = val1 / val2;
 			default:  assert(0);
 		}
+		return result;
 	}
-
 }
 
 
 int evaluation(char *e){
-	unsigned int result = 0;
+	int result = 0;
 	expr(e,NULL);
 	result = eval(0,nr_token-1);
 	printf("The result is %d\n",result);
