@@ -124,7 +124,9 @@ static int cmd_p(char *args){
 
 
 static int cmd_t(char *args){
-  FILE *fp = fopen("../../../tools/gen-expr/input", "r");
+  FILE *fp = fopen("~/ysyx-workbench/nemu/tools/gen-expr/input", "r");
+//  FILE *fp = fopen("../../../tools/gen-expr/input", "r");
+
   assert(fp != NULL);
   char test_expr_line[600];
   if (fgets(test_expr_line,600,fp) == NULL){printf("read input fail");}
