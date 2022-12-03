@@ -203,7 +203,7 @@ bool check_parentheses(int p, int q){
 		             match--;
 	               }
 	               if(match < 0){
-		             printf("check_paretheses fail on the two side not match\n");
+		             //printf("check_paretheses fail on the two side not match\n");
 		             //assert(0);
 		             return false;
 	               }
