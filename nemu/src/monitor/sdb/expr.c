@@ -232,8 +232,8 @@ int eval(int p, int q){
 	}
         else {
 		int op = main_operator(p,q);
-		int val1 = eval(p, op-1);
-		int val2 = eval(op+1, q);
+		unsigned int val1 = eval(p, op-1);
+		unsigned int val2 = eval(op+1, q);
 
 		switch (tokens[op].type){
 			case'+':  return val1 + val2;
