@@ -216,7 +216,7 @@ bool check_parentheses(int p, int q){
 	}
 }
 
-int eval(int p, int q){
+unsigned int eval(int p, int q){
 	if(p>q){
 		printf("bad expression");
 		assert(0);
