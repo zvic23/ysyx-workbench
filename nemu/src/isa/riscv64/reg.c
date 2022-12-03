@@ -44,7 +44,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 			break;
 		}
 	}
-	printf("reg is %d\n",j);
+	printf("j is %s\n",s);
 	return value;
   //return 0;
 }
