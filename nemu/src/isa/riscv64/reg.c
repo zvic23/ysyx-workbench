@@ -35,15 +35,15 @@ void isa_reg_display() {
 
 word_t isa_reg_str2val(const char *s, bool *success) {
 	uint64_t value = 0;
-	char reg_name[3];
+	char reg_name[4];
 	sprintf(reg_name ,"%s",s);
-	//char *reg_name = strtok(s,"\\");
+	char *name = strtok(reg_name ,"\\");
 	int j =0;
 	int i;
 
-	printf("reg is %s\n",reg_name);
+	printf("reg is %s\n",name);
 	for(j=0;j<32;j++){
-		if((i = strcmp(reg_name ,regs[j]))==0){
+		if((i = strcmp(name ,regs[j]))==0){
 			*success = true;
 			value = cpu.gpr[j];
 	printf("j is %d\n",j);
