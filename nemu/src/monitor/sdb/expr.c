@@ -47,7 +47,7 @@ static struct rule {
   {"\\)",  ')'},        // right bracket
   {"[0-9]+", TK_NUMBER},// number
 			
-  {"\\n", TK_NEXTLINE},
+  {"\\\n", TK_NEXTLINE},
 };
 
 #define NR_REGEX ARRLEN(rules)
