@@ -88,7 +88,7 @@ static bool make_token(char *e) {
   nr_token = 0;
   
   int j=0;     //zsl:tokens position
-  memset(tokens, 0 ,sizeof tokens);
+  memset(tokens, 0 ,sizeof tokens);    //zsl:In case of getting expr continuously, tokens should be cleared everytime.
 
   while (e[position] != '\0') {
     /* Try all rules one by one. */
