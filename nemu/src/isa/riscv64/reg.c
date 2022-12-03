@@ -43,6 +43,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 			break;
 		}
 	}
+	printf("reg is %ld\n",value);
 	return value;
   //return 0;
 }
