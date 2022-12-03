@@ -147,6 +147,9 @@ static int cmd_t(char *args){
   if (correct == false){
 	  printf("the result don't match !!!");
   }
+  else {
+	  printf("the result match");
+  }
 
 
 
