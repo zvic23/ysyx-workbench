@@ -39,7 +39,6 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	sprintf(reg_name ,"%s",s);
 	char name[2];
 	name[0]=reg_name[0];
-	name[1]=reg_name[1];
 	int j =0;
 	int i;
 
