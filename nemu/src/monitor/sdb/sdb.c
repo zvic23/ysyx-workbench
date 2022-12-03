@@ -129,13 +129,26 @@ static int cmd_t(char *args){
 
   assert(fp != NULL);
   char test_expr_line[600];
+  bool correct = true;
+
   for (int j=0;j<10;j++){
-  if (fgets(test_expr_line,600,fp) == NULL){printf("read input fail");}
-  char *test_result = strtok(test_expr_line," ");
-  char *test_expr = test_result + strlen(test_result) + 1;
-  evaluation(test_expr);
-  printf("Test result is %s\n",test_result); 
+	  if (fgets(test_expr_line,600,fp) == NULL){
+		  printf("read input fail");
+	  }
+	  char *test_result = strtok(test_expr_line," ");
+	  char *test_expr = test_result + strlen(test_result) + 1;
+	  int nemu_result = evaluation(test_expr);
+	  printf("Test result is %s\n",test_result);
+	  if(nemu_result != atoi(test_result)){
+		 correct = false;
+	  } 
   }
+
+  if (correct == false){
+	  printf("the result don't match !!!");
+  }
+
+
 
   return 0;
 }

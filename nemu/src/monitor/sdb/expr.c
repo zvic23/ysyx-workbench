@@ -87,7 +87,7 @@ static bool make_token(char *e) {
   regmatch_t pmatch;
   nr_token = 0;
   
-  int j=0;     //zsl:tokens position
+  int j=0;                             //zsl:tokens position
   memset(tokens, 0 ,sizeof tokens);    //zsl:In case of getting expr continuously, tokens should be cleared everytime.
 
   while (e[position] != '\0') {
@@ -247,9 +247,11 @@ int eval(int p, int q){
 }
 
 
-void evaluation(char *e){
+int evaluation(char *e){
 	int result = 0;
 	expr(e,NULL);
 	result = eval(0,nr_token-1);
 	printf("The result is %d\n",result);
+
+	return result;
 }
