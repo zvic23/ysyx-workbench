@@ -42,6 +42,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 			*success = true;
 			value = cpu.gpr[j];
 	printf("j is %d\n",j);
+	assert(0);
 
 			break;
 		}
