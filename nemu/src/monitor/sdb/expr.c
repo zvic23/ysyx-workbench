@@ -258,7 +258,7 @@ int evaluation(char *e){
 	uint32_t result = 0;
 	expr(e,NULL);
 	result = eval(0,nr_token-1);
-	printf("The result is %d\n",result);
+	printf("The result is %u\n",result);
 
 	return result;
 }
