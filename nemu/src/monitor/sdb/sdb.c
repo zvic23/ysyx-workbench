@@ -129,11 +129,13 @@ static int cmd_t(char *args){
 
   assert(fp != NULL);
   char test_expr_line[600];
+  for (int j=0;j<5;j++){
   if (fgets(test_expr_line,600,fp) == NULL){printf("read input fail");}
   char *test_result = strtok(test_expr_line," ");
   char *test_expr = test_result + strlen(test_result) + 1;
   evaluation(test_expr);
   printf("Test result is %s\n",test_result); 
+  }
 
   return 0;
 }
