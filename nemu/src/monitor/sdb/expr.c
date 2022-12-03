@@ -243,10 +243,10 @@ uint32_t eval(int p, int q){
 		uint32_t result = 0;
 
 		switch (tokens[op].type){
-			case'+':  result = val1 + val2;
-                        case'-':  result = val1 - val2;
-	                case'*':  result = val1 * val2;
-                        case'/':  result = val1 / val2;
+			case'+':{  result = val1 + val2; break;}  
+                        case'-':{  result = val1 - val2; break;}
+	                case'*':{  result = val1 * val2; break;}
+                        case'/':{  result = val1 / val2; break;}
 			default:  assert(0);
 		}
 		return result;
