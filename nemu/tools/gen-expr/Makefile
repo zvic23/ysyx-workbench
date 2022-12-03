@@ -16,3 +16,20 @@
 NAME = gen-expr
 SRCS = gen-expr.c
 include $(NEMU_HOME)/scripts/build.mk
+
+
+
+
+
+
+gen-expr:gen-expr.o
+	gcc gen-expr.o -o gen-expr
+run:gen-expr.c
+	gcc -g -c gen-expr.c  
+	gcc gen-expr.o -o gen-expr
+clean:
+	rm -rf gen-expr.o gen-expr
+
+
+
+.PHONY: clean  

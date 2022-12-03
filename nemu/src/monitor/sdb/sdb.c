@@ -115,7 +115,6 @@ static int cmd_f(char *args){
 
   return 0;
 }
-
 static int cmd_p(char *args){
   //char *arg = strtok(NULL, " ");
   evaluation(args); 
@@ -124,6 +123,18 @@ static int cmd_p(char *args){
 }
 
 
+static int cmd_t(char *args){
+  FILE *fp = fopen("../../../tools/gen-expr/input", "r");
+  assert(fp != NULL);
+  char test_expr_line[600];
+  if (fgets(test_expr_line,600,fp) == NULL){printf("read input fail");}
+  char *test_result = strtok(test_expr_line," ");
+  char *test_expr = test_result + strlen(test_result) + 1;
+  evaluation(test_expr);
+  printf("Test result is %s\n",test_result); 
+
+  return 0;
+}
 
 static struct {
   const char *name;
@@ -139,8 +150,9 @@ static struct {
   { "info", "Print program status", cmd_info },
   { "x", "Scan memory", cmd_x },
 
-  { "f", "test", cmd_f},
+  { "f", "test expression gain", cmd_f},
   { "p", "expression evaluation", cmd_p },
+  { "t", "test exprsstion evaluation", cmd_t },
 };
 
 #define NR_CMD ARRLEN(cmd_table)
