@@ -35,10 +35,10 @@ void isa_reg_display() {
 
 word_t isa_reg_str2val(const char *s, bool *success) {
 	uint64_t value = 0;
-	char *reg_name = strtok(NULL,"//");
+	//char *reg_name = strtok(NULL,"//");
 	int j =0;
 	for(j=0;j<32;j++){
-		if(strcmp(reg_name,regs[j])==0){
+		if(strcmp(s,regs[j])==0){
 			*success = true;
 			value = cpu.gpr[j];
 			break;
