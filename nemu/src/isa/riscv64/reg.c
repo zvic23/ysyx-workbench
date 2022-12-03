@@ -37,15 +37,16 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	uint64_t value = 0;
 	//char *reg_name = strtok(NULL,"//");
 	int j =0;
+	int i;
 	for(j=0;j<32;j++){
-		if(strcmp(s,regs[j])==0){
+		if((i = strcmp(s,regs[j]))==0){
 			*success = true;
 			value = cpu.gpr[j];
 	printf("j is %d\n",j);
 	assert(0);
 
 			break;
-		}
+		}else {printf("ddd %d",i);}
 	}
 	printf("s is %s\n",s);
 	printf("j is %d\n",j);
