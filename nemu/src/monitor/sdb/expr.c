@@ -119,8 +119,7 @@ static bool make_token(char *e) {
 		}
 		case TK_HEXNUMBER:{
 			 tokens[j].type=TK_HEXNUMBER;
-			 tokens[j].str[0]='0';tokens[j].str[1]='x';
-			 for(int k=2;k<substr_len;k++){
+			 for(int k=0;k<substr_len;k++){
 				 tokens[j].str[k]=e[position-substr_len+k];
 			 }
 			 j++;nr_token++;
