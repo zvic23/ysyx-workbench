@@ -131,7 +131,7 @@ static bool make_token(char *e) {
 			bool regmatch = true;
 			char reg_name[2];
 			for(int j=0;j<2;j++){
-				reg_name[j] = e[position-substr_len+j];
+				reg_name[j] = e[position-substr_len+j+1];
 			}
 			uint64_t value = isa_reg_str2val(reg_name,NULL);
 			char val[8];
