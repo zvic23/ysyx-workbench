@@ -124,7 +124,7 @@ static int cmd_p(char *args){
 
 
 static int cmd_t(char *args){
-  FILE *fp = fopen("~/ysyx-workbench/nemu/tools/gen-expr/input", "r");
+  FILE *fp = fopen("/tools/gen-expr/input", "r");
 //  FILE *fp = fopen("../../../tools/gen-expr/input", "r");
 
   assert(fp != NULL);
