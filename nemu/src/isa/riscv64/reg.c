@@ -40,7 +40,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	//char *name = "00";
 	char name[2];
 	//sprintf(name[0], "%s",reg_name);
-	name[0]=reg_name[0];
+	name[0]=reg_name[1];
 	//name[1]=reg_name[1];
 	
         //name = "t0";
