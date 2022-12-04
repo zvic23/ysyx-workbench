@@ -43,14 +43,14 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	//name[0]=reg_name[1];
 	//name[1]=reg_name[1];
 	
-        char name [4];
+        char *name=NULL;
 	strcpy(name,s);
 	int j =0;
 	//int i;
 
-	printf("reg is %s\n",name);
+	//printf("reg is %s\n",name);
 	for(j=0;j<32;j++){
-		if(strcmp(name ,regs[j])==0){
+		if(s == regs[j]){
 			//*success = true;
 			value = cpu.gpr[j];
 	printf("j is %d\n",j);
