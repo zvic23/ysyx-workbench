@@ -50,7 +50,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 
 	//printf("reg is %s\n",name);
 	for(j=0;j<32;j++){
-		if(s[0] == regs[j][0]){
+		if((s[0] == regs[j][0])&&(s[1] == regs[j][1])){
 			//*success = true;
 			value = cpu.gpr[j];
 	printf("j is %d\n",j);
