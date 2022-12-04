@@ -35,7 +35,7 @@ void isa_reg_display() {
 
 word_t isa_reg_str2val(const char *s, bool *success) {
 	uint64_t value = 0;
-	char reg_name[4];
+	char *reg_name = "00";
 	sprintf(reg_name ,"%s",s);
 	//char *name = "00";
 	char name[2];
