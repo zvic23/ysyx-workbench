@@ -43,7 +43,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	int j =0;
 	int i;
 
-	printf("reg is %s\n",name);
+	printf("reg is %s\n",reg_name);
 	for(j=0;j<32;j++){
 		if((i = strcmp(name ,regs[j]))==0){
 			*success = true;
