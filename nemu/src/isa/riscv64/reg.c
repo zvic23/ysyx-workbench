@@ -37,9 +37,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	uint64_t value = 0;
 	char reg_name[4];
 	sprintf(reg_name ,"%s",s);
-	char name[2];
-	name[0]=s[0];
-	name[1]=s[1];
+	char *name = strtok(reg_name , "\\");
 	int j =0;
 	int i;
 
