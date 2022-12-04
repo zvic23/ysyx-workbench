@@ -139,7 +139,7 @@ static bool make_token(char *e) {
 				printf("This reg name do not exist!!");
 				assert(0);
 			}
-			sprintf(val,"%ld",value);
+			sprintf(val,"%lx",value);
 			printf("val = %s \n",val);
 
 
