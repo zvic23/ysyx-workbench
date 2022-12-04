@@ -37,21 +37,22 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	uint64_t value = 0;
 	char reg_name[4];
 	sprintf(reg_name ,"%s",s);
-	char name[2];
-	name[0]=reg_name[0];
-	name[1]=reg_name[1];
+	char *name;
+//	name[0]=reg_name[0];
+//	name[1]=reg_name[1];
+        name = "t0";
 	int j =0;
-	int i;
+	//int i;
 
 	printf("reg is %s\n",name);
 	for(j=0;j<32;j++){
-		if((i = strcmp(name ,regs[j]))==0){
+		if(strcmp(name ,regs[j])==0){
 			*success = true;
 			value = cpu.gpr[j];
 	printf("j is %d\n",j);
 
 			break;
-		}else {printf("ddd %d   ",i);}
+		}
 	}
 	printf("j is %d\n",j);
 	return value;
