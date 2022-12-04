@@ -38,9 +38,9 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	char reg_name[4];
 	sprintf(reg_name ,"%s",s);
 	//char *name = "00";
-	char name[2];
+	char name[1];
 	name[0]=reg_name[0];
-	name[1]=reg_name[1];
+	//name[1]=reg_name[1];
 	
         //name = "t0";
 	int j =0;
