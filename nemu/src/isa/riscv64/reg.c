@@ -43,7 +43,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	//name[0]=reg_name[1];
 	//name[1]=reg_name[1];
 	
-        char name [2];
+        char name [4];
 	strcpy(name,s);
 	int j =0;
 	//int i;
