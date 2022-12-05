@@ -303,7 +303,7 @@ uint32_t eval(int p, int q){
 						bit=atoi(&s);
 						printf("ccc %d\n",bit);break;}
 				}
-				num = num + bit*pow(16,(length-j)); 
+				num = num + bit*pow(16,(length-j-1)); 
 			}
 			//uint64_t num = atoi(tokens[p].str);
 			printf("ddd %ld\n",num);
