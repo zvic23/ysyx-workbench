@@ -352,7 +352,7 @@ int evaluation(char *e){
 	     resulthex = resulthex+(result%10)*pow(16,i);
 	     result = result/10;
 	} 
-	printf("evalresult is %lu   (hexdecimal:%lu\n",resultdecimal,resulthex);
+	printf("evalresult is %lu   (hexdecimal:%lx)\n",resultdecimal,resultdecimal);
 
 	return result;
 }
