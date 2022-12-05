@@ -24,7 +24,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_NUMBER, TK_NEXTLINE, TK_HEXNUMBER, TK_REG, DEREF, TK_NOTEQ
+  TK_NOTYPE = 256, TK_EQ,TK_NUMBER, TK_NEXTLINE, TK_HEXNUMBER, TK_REG, DEREF, TK_NOTEQ, TK_AND
 
   /* TODO: Add more token types */
 
@@ -42,16 +42,17 @@ static struct rule {
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
   {"==", TK_EQ},        // equal
-  {"!=", TK_NOTEQ},     // not equal
 
   {"\\-", '-'},         // subtract
   {"\\*", '*'},         // times
   {"/",   '/'},         // division
   {"\\(",  '('},        // left bracket
   {"\\)",  ')'},        // right bracket
-  {"0x[[:digit:][:lower:]]+", TK_HEXNUMBER},   // hex-number
+  {"0x[[:digit:][a-f]+", TK_HEXNUMBER},   // hex-number
   {"[0-9]+", TK_NUMBER},// number
-  {"\\$..",  TK_REG},     // value of register
+  {"\\$..",  TK_REG},   // value of register
+  {"!=", TK_NOTEQ},     // not equal
+  {"&&", TK_AND},       // logical and
 			
   {"\\\n", TK_NEXTLINE},// next line
 };
@@ -157,6 +158,7 @@ static bool make_token(char *e) {
 		}
 		case TK_EQ:{tokens[j].type=TK_EQ;j++;nr_token++;break;}
 		case TK_NOTEQ:{tokens[j].type=TK_NOTEQ;j++;nr_token++;break;}
+		case TK_AND:{tokens[j].type=TK_AND;j++;nr_token++;break;}
 	        case '+': {tokens[j].type='+';j++;nr_token++;break;}
                 case '-': {tokens[j].type='-';j++;nr_token++;break;}
                 case '*': {tokens[j].type='*';j++;nr_token++;break;}
@@ -230,7 +232,7 @@ word_t expr(char *e, bool *success) {
 
 int main_operator(int p, int q){
 	int meetpare = 0;
-	int priority = 0;                //zsl:  2(== != &&,such logical sign)  1(+  -)  0(*  /)
+	int priority = 0;                //zsl: 3(&&)  2(== !=,such logical sign)   1(+  -)  0(*  /)   high priority sign have low value "priority"
 	int mainoperator = 0;
 
 	for(int j=p;j<=q;j++){
@@ -244,7 +246,11 @@ int main_operator(int p, int q){
 			meetpare--;
 		}
 		else if(meetpare == 0){
-			if(tokens[j].type == TK_EQ || tokens[j].type == TK_NOTEQ){
+			if(tokens[j].type == TK_AND){
+				priority = 3;
+				mainoperator = j;
+			}
+			else if((priority <=2)&&(tokens[j].type == TK_EQ || tokens[j].type == TK_NOTEQ)){
 				priority = 2;
 				mainoperator = j;
 			}
@@ -344,6 +350,7 @@ uint32_t eval(int p, int q){
                         case'/':{  result = val1 / val2; break;}
                         case TK_EQ   :{  result = val1 == val2; break;}
                         case TK_NOTEQ:{  result = val1 != val2; break;}
+		    	case TK_AND  :{  result = val1 && val2; break;}
 			default:  assert(0);
 		}
 		return result;
