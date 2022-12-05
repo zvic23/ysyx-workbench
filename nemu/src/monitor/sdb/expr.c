@@ -142,13 +142,13 @@ static bool make_token(char *e) {
 				//assert(0);
 			}
 			char val[128];
-			sprintf(val,"%lx",value);
+			sprintf(val,"%lx",value);               //zsl:transform the int(decimal) to char(hexadecimal)
 			//printf("val = %s \n",val);
 			int length = strlen(val);
 			//printf("%d\n",length);
 			tokens[j].str[0]='0'; tokens[j].str[1]='x';
-			for(int k=2;k<length+2;k++){
-				tokens[j].str[k]=val[k-2];
+			for(int k=0;k<length;k++){
+				tokens[j].str[k]=val[k];
 			}
 
 			j++;nr_token++;
@@ -311,20 +311,6 @@ uint32_t eval(int p, int q){
 		return num;
 	}
 	else if((tokens[p].type==DEREF)&&((p+1==q)||(check_parentheses(p+1,q)))){
-	//	if(check_parentheses(p+1,q) == true){
-	//		int right_pare=find_pare(p+1);
-	//		eval(p+1,right_pare);
-
-
-
-	//	}
-	//	else if(tokens[p+1].type=='('){
-	//	}
-	//	else if(p+1 == q){
-	//	}
-	//        else 	
-
-
 		uint64_t addr = eval(p+1,q);
 	        uint64_t addrhex=0;
 	       	for (int i=0;i<64;i++){
@@ -332,13 +318,11 @@ uint32_t eval(int p, int q){
 	       	  	addr = addr/10;
 	       	}
 		uint64_t value = paddr_read(addrhex,1);
-		printf("aaa %lx\n", value);
+		//printf("aaa %lx\n", value);
 		return value;
 	}
         else if(check_parentheses(p,q) == true){
 		return eval(p+1,q-1);
-
-
 	}
         else {
 		int op = main_operator(p,q);
