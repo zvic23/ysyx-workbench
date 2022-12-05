@@ -15,7 +15,8 @@
 
 #include <isa.h>
 
-#include <memory/paddr.h>     //zsl : add this for geting value from dereference function
+#include <math.h>
+#include <memory/paddr.h>     //zsl : add these two lines for geting value from dereference function
 
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
@@ -297,7 +298,13 @@ uint32_t eval(int p, int q){
 	else if(check_deref(p,q)==true){
 		uint64_t addr = eval(p+1,q);
 		//printf("position = %lx\n",addr);
-		uint64_t value = paddr_read(addr,1);
+
+	        uint64_t addrhex=0;
+	       	for (int i=0;i<64;i++){
+	       	  addrhex = addrhex+(addr%10)*pow(16,i);
+	       	  addr = addr/10;
+	       	}
+		uint64_t value = paddr_read(addrhex,1);
 		printf("aaa %lx\n", value);
 		return value;
 
