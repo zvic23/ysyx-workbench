@@ -293,9 +293,8 @@ uint32_t eval(int p, int q){
 	else if(p == q){
 		uint64_t num = 0;
 		if(tokens[p].type == TK_HEXNUMBER){
-			//uint64_t num = atoi(tokens[p].str);
-			//printf("ddd %ld\n",num);
-			return 0;
+			uint64_t num = atoi(tokens[p].str);
+			printf("ddd %ld\n",num);
 		}
 		else if(tokens[p].type == TK_NUMBER){
 			num = atoi(tokens[p].str);
