@@ -35,19 +35,7 @@ void isa_reg_display() {
 
 word_t isa_reg_str2val(const char *s, bool *success) {
 	uint64_t value = 0;
-	//char reg_name[4];
-	//sprintf(reg_name ,"%s",s);
-	//char *name = "00";
-	//char name[1];
-	//sprintf(name[0], "%s",reg_name);
-	//name[0]=reg_name[1];
-	//name[1]=reg_name[1];
-	
-        //char *name=NULL;
-	//strcpy(name,s);
 	int j =0;
-
-	//printf("reg is %s\n",name);
 	for(j=0;j<32;j++){
 		if((s[0] == regs[j][0])&&(s[1] == regs[j][1])){
 			*success = true;
@@ -55,7 +43,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 			break;
 		}
 	}
-	printf("j is %d\n",j);
+	//printf("j is %d\n",j);
 	if(j == 32){*success = false;}
 	return value;
   //return 0;

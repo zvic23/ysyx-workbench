@@ -21,7 +21,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_NUMBER, TK_NEXTLINE, TK_HEXNUMBER, TK_REG
+  TK_NOTYPE = 256, TK_EQ,TK_NUMBER, TK_NEXTLINE, TK_HEXNUMBER, TK_REG, DEREF
 
   /* TODO: Add more token types */
 
@@ -140,7 +140,7 @@ static bool make_token(char *e) {
 			}
 			char val[128];
 			sprintf(val,"%lx",value);
-			printf("val = %s \n",val);
+			//printf("val = %s \n",val);
 			int length = strlen(val);
 			//printf("%d\n",length);
 			tokens[j].str[0]='0'; tokens[j].str[1]='x';
@@ -182,6 +182,20 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
+
+
+  /* zsl:add dereference process.       */
+
+#define deref_certain_type ('('||'+'||'-'||'*'||'/')
+
+  for (int i = 0; i < nr_token; i ++) {
+  	if (tokens[i].type == '*' && (i == 0 || tokens[i - 1].type == deref_certain_type) ) {
+    	tokens[i].type = DEREF;
+  	}
+  }
+
+
+
 
   /* zsl:printf the expression the program got. */
   for(int j=0;j<=nr_token-1;j++){
