@@ -301,7 +301,7 @@ uint32_t eval(int p, int q){
 		}
 		return num;
 	}
-	else if(check_deref(p,q)==true){
+	else if(tokens[p].type==DEREF){
 		uint64_t addr = eval(p+1,q);
 	        uint64_t addrhex=0;
 	       	for (int i=0;i<64;i++){
