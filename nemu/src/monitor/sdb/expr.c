@@ -383,7 +383,7 @@ struct figure eval(int p, int q){
 			default:  assert(0);
 		}
 		struct figure result;
-		result.sign = 0;
+		result.sign = 1;
 		result.value=value;
 		return result;
 	}
