@@ -291,9 +291,16 @@ uint32_t eval(int p, int q){
 		assert(0);
 	}
 	else if(p == q){
-		uint32_t num = atoi(tokens[p].str);
+		uint64_t num = 0;
+		if(tokens[p].type == TK_HEXNUMBER){
+			//uint64_t num = atoi(tokens[p].str);
+			//printf("ddd %ld\n",num);
+			return 0;
+		}
+		else if(tokens[p].type == TK_NUMBER){
+			num = atoi(tokens[p].str);
+		}
 		return num;
-
 	}
 	else if(check_deref(p,q)==true){
 		uint64_t addr = eval(p+1,q);
