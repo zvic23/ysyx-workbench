@@ -189,7 +189,7 @@ word_t expr(char *e, bool *success) {
 #define deref_certain_type ('('||'+'||'-'||'*'||'/')
 
   for (int i = 0; i < nr_token; i ++) {
-  	if (tokens[i].type == '*' && (i == 0 || tokens[i - 1].type ==  ('('||'+'||'-'||'*'||'/')) ) {
+  	if (tokens[i].type == '*' && (i == 0 || tokens[i - 1].type == '+') ) {
     	tokens[i].type = DEREF;
   	}
   }
