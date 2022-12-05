@@ -288,7 +288,7 @@ uint32_t eval(int p, int q){
 	else if(p == q){
 		uint64_t num = 0;
 		if(tokens[p].type == TK_HEXNUMBER){
-			char *str_hexnum = tokens[p].str;
+			char *str_hexnum = tokens[p].str;              //zsl:transforming the string(hexadecimal number)  to  int(decimal number)
 			int length = strlen(str_hexnum);
 			for(int j=0;j<length;j++){
 				int bit =0;
@@ -310,7 +310,21 @@ uint32_t eval(int p, int q){
 		}
 		return num;
 	}
-	else if(tokens[p].type==DEREF){
+	else if((tokens[p].type==DEREF)&&((p+1==q)||(check_parentheses(p+1,q)))){
+	//	if(check_parentheses(p+1,q) == true){
+	//		int right_pare=find_pare(p+1);
+	//		eval(p+1,right_pare);
+
+
+
+	//	}
+	//	else if(tokens[p+1].type=='('){
+	//	}
+	//	else if(p+1 == q){
+	//	}
+	//        else 	
+
+
 		uint64_t addr = eval(p+1,q);
 	        uint64_t addrhex=0;
 	       	for (int i=0;i<64;i++){
@@ -348,7 +362,7 @@ int evaluation(char *e){
 	uint32_t result = 0;
 	expr(e,NULL);
 	result = eval(0,nr_token-1);
-	printf("eval-result is %u\n",result);
+	printf("evalresult is %u\n",result);
 
 	return result;
 }
