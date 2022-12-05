@@ -396,7 +396,7 @@ struct figure evaluation(char *e){
 	char *sign = "0";
 	if(result.sign == 1){sign = "-";}
 	else{sign=" ";}
-	printf("evaluated result is %s%lu   (hexdecimal:0x%lx)\n",sign,result.value,result.value);
+	printf("evaluated result is %s%lu   (hexdecimal:%s0x%lx)\n",sign,result.value,sign,result.value);
 
 	return result;
 }
