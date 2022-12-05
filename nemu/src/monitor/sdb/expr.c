@@ -343,16 +343,10 @@ uint32_t eval(int p, int q){
 
 
 int evaluation(char *e){
-	uint32_t result = 0;
+	uint64_t result = 0;
 	expr(e,NULL);
 	result = eval(0,nr_token-1);
-	uint64_t resulthex=0;
-	uint64_t resultdecimal = result;
-	for (int i=0;i<64;i++){
-	     resulthex = resulthex+(result%10)*pow(16,i);
-	     result = result/10;
-	} 
-	printf("evalresult is %lu   (hexdecimal:%lx)\n",resultdecimal,resultdecimal);
+	printf("evalresult is %lu   (hexdecimal:%lx)\n",result,result);
 
 	return result;
 }
