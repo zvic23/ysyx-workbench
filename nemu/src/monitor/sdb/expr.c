@@ -392,9 +392,11 @@ struct figure eval(int p, int q){
 
 struct figure evaluation(char *e){
 	expr(e,NULL);
-
 	struct figure result = eval(0,nr_token-1);
-	printf("evaluated result is %lu   (hexdecimal:0x%lx)\n",result.value,result.value);
+	char *sign = "0";
+	if(result.sign == 1){sign = "-";}
+	else{sign=" ";}
+	printf("evaluated result is %s%lu   (hexdecimal:0x%lx)\n",sign,result.value,result.value);
 
 	return result;
 }
