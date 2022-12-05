@@ -24,7 +24,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_NUMBER, TK_NEXTLINE, TK_HEXNUMBER, TK_REG, DEREF, TK_NOTEQ, TK_AND
+  TK_NOTYPE = 256, TK_EQ,TK_NUMBER, TK_NEXTLINE, TK_HEXNUMBER, TK_REG, DEREF, TK_NOTEQ, TK_AND,  MINUS
 
   /* TODO: Add more token types */
 
@@ -191,11 +191,7 @@ word_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
 
-
-  /* zsl:add dereference process.       */
-
-#define deref_certain_type ('('||'+'||'-'||'*'||'/')
-
+  /* zsl:add dereference sign.       */
   for (int i = 0; i < nr_token; i ++) {
   	if (tokens[i].type == '*'){
 		if(i==0){tokens[i].type = DEREF;}
@@ -207,6 +203,21 @@ word_t expr(char *e, bool *success) {
 		}
   	}
   }
+
+  /* zsl:add minus number sign.      */
+   for (int i = 0; i < nr_token; i ++) {
+  	if (tokens[i].type == '-'){
+		if(i==0){tokens[i].type = MINUS;}
+		else {
+			switch (tokens[i-1].type){
+				case'(':  case'+':  case'-':  case'*':  case'/': 
+				case TK_EQ: case TK_NOTEQ: case TK_AND: {tokens[i].type = MINUS;}
+			}
+		}
+  	}
+  }
+
+ 
 
 
 
@@ -293,7 +304,15 @@ bool check_parentheses(int p, int q){
 }
 
 
-uint64_t eval(int p, int q){
+
+struct figure{
+	int sign;
+	uint64_t value;
+};
+
+
+
+struct figure eval(int p, int q){
 	if(p>q){
 		printf("bad expression");
 		assert(0);
@@ -321,10 +340,14 @@ uint64_t eval(int p, int q){
 		else if(tokens[p].type == TK_NUMBER){
 			num = atoi(tokens[p].str);
 		}
-		return num;
+		struct figure number;
+		number.sign = 0;
+		number.value = num;
+		return number;
 	}
-	else if((tokens[p].type==DEREF)&&((p+1==q)||(check_parentheses(p+1,q)))){
-		uint64_t addr = eval(p+1,q);
+	else if((tokens[p].type==DEREF)&&((p+1==q)||(check_parentheses(p+1,q)))){   //zsl:dereference gets the value of an address
+		struct figure address = eval(p+1,q);
+		uint64_t addr = address.value;
 	        uint64_t addrhex=0;
 	       	for (int i=0;i<64;i++){
 	       	  	addrhex = addrhex+(addr%10)*pow(16,i);
@@ -332,37 +355,46 @@ uint64_t eval(int p, int q){
 	       	}
 		uint64_t value = paddr_read(addrhex,1);
 		//printf("aaa %lx\n", value);
-		return value;
+		struct figure number;
+	        number.sign=0;
+	        number.value=value;	
+		return number;
 	}
+	//else if(tokens[p].type==minus){
+	//}
         else if(check_parentheses(p,q) == true){
 		return eval(p+1,q-1);
 	}
         else {
 		int op = main_operator(p,q);
-		uint64_t val1 = eval(p, op-1);
-		uint64_t val2 = eval(op+1, q);
-		uint64_t result = 0;
-
+		struct figure number1 = eval(p, op-1);
+		uint64_t val1 = number1.value;
+		struct figure number2 = eval(op+1, q);
+		uint64_t val2 = number2.value;
+		uint64_t value = 0;
 		switch (tokens[op].type){
-			case'+':{  result = val1 + val2; break;}  
-                        case'-':{  result = val1 - val2; break;}
-	                case'*':{  result = val1 * val2; break;}
-                        case'/':{  result = val1 / val2; break;}
-                        case TK_EQ   :{  result = val1 == val2; break;}
-                        case TK_NOTEQ:{  result = val1 != val2; break;}
-		    	case TK_AND  :{  result = val1 && val2; break;}
+			case'+':{  value  = val1 + val2; break;}  
+                        case'-':{  value  = val1 - val2; break;}
+	                case'*':{  value  = val1 * val2; break;}
+                        case'/':{  value  = val1 / val2; break;}
+                        case TK_EQ   :{  value = val1 == val2; break;}
+                        case TK_NOTEQ:{  value = val1 != val2; break;}
+		    	case TK_AND  :{  value = val1 && val2; break;}
 			default:  assert(0);
 		}
+		struct figure result;
+		result.sign = 0;
+		result.value=value;
 		return result;
 	}
 }
 
 
-int evaluation(char *e){
-	uint64_t result = 0;
+struct figure evaluation(char *e){
 	expr(e,NULL);
-	result = eval(0,nr_token-1);
-	printf("evaluated result is %lu   (hexdecimal:0x%lx)\n",result,result);
+
+	struct figure result = eval(0,nr_token-1);
+	printf("evaluated result is %lu   (hexdecimal:0x%lx)\n",result.value,result.value);
 
 	return result;
 }
