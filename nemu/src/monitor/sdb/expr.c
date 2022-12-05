@@ -155,6 +155,8 @@ static bool make_token(char *e) {
 			j++;nr_token++;
 			break;
 		}
+		case TK_EQ:{tokens[j].type=TK_EQ;j++;nr_token++;break;}
+		case TK_NOTEQ:{tokens[j].type=TK_NOTEQ;j++;nr_token++;break;}
 	        case '+': {tokens[j].type='+';j++;nr_token++;break;}
                 case '-': {tokens[j].type='-';j++;nr_token++;break;}
                 case '*': {tokens[j].type='*';j++;nr_token++;break;}
