@@ -279,11 +279,6 @@ bool check_parentheses(int p, int q){
 	}
 }
 
-bool check_deref(int p, int q){
-
-	if(tokens[p].type==DEREF){ return true;}
-	else {return false;} 
-}
 
 uint32_t eval(int p, int q){
 	if(p>q){
@@ -293,8 +288,10 @@ uint32_t eval(int p, int q){
 	else if(p == q){
 		uint64_t num = 0;
 		if(tokens[p].type == TK_HEXNUMBER){
-			uint64_t num = atoi(tokens[p].str);
-			printf("ddd %ld\n",num);
+			char *str_hexnum = tokens[p].str;
+			int length = strlen(str_hexnum);
+			//uint64_t num = atoi(tokens[p].str);
+			printf("ddd %d\n",length);
 		}
 		else if(tokens[p].type == TK_NUMBER){
 			num = atoi(tokens[p].str);
@@ -305,8 +302,8 @@ uint32_t eval(int p, int q){
 		uint64_t addr = eval(p+1,q);
 	        uint64_t addrhex=0;
 	       	for (int i=0;i<64;i++){
-	       	  addrhex = addrhex+(addr%10)*pow(16,i);
-	       	  addr = addr/10;
+	       	  	addrhex = addrhex+(addr%10)*pow(16,i);
+	       	  	addr = addr/10;
 	       	}
 		uint64_t value = paddr_read(addrhex,1);
 		printf("aaa %lx\n", value);
