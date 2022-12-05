@@ -24,7 +24,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_NUMBER, TK_NEXTLINE, TK_HEXNUMBER, TK_REG, DEREF
+  TK_NOTYPE = 256, TK_EQ,TK_NUMBER, TK_NEXTLINE, TK_HEXNUMBER, TK_REG, DEREF, TK_NOTEQ
 
   /* TODO: Add more token types */
 
@@ -42,6 +42,7 @@ static struct rule {
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
   {"==", TK_EQ},        // equal
+  {"!=", TK_NOTEQ},     // not equal
 
   {"\\-", '-'},         // subtract
   {"\\*", '*'},         // times
@@ -227,7 +228,7 @@ word_t expr(char *e, bool *success) {
 
 int main_operator(int p, int q){
 	int meetpare = 0;
-	int addorsub = 0;
+	int priority = 0;                //zsl:  2(== != &&,such logical sign)  1(+  -)  0(*  /)
 	int mainoperator = 0;
 
 	for(int j=p;j<=q;j++){
@@ -236,16 +237,20 @@ int main_operator(int p, int q){
 		}
 	        else if(tokens[j].type == ')'){
 			if(meetpare == 0){
-				printf("main_operator(169):paretheses not match\n");
+				printf("main_operator:paretheses not match\n");
 			}
 			meetpare--;
 		}
 		else if(meetpare == 0){
-			if((tokens[j].type == '+')||(tokens[j].type == '-')){
-				addorsub = 1;
+			if(tokens[j].type == TK_EQ || tokens[j].type == TK_NOTEQ){
+				priority = 2;
 				mainoperator = j;
 			}
-			else if((addorsub == 0)&&((tokens[j].type == '*')||(tokens[j].type == '/'))){
+			else if((priority <= 1)&&(tokens[j].type == '+'||tokens[j].type == '-')){
+				priority = 1;
+				mainoperator = j;
+			}
+			else if((priority == 0)&&((tokens[j].type == '*')||(tokens[j].type == '/'))){
                             	mainoperator = j;
 			}
 		}
@@ -335,6 +340,8 @@ uint32_t eval(int p, int q){
                         case'-':{  result = val1 - val2; break;}
 	                case'*':{  result = val1 * val2; break;}
                         case'/':{  result = val1 / val2; break;}
+                        case TK_EQ   :{  result = val1 == val2; break;}
+                        case TK_NOTEQ:{  result = val1 != val2; break;}
 			default:  assert(0);
 		}
 		return result;
