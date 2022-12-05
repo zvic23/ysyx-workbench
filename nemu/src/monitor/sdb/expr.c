@@ -300,13 +300,10 @@ uint32_t eval(int p, int q){
 					case'e':{bit=14;break;}
 					case'f':{bit=15;break;}
 					default:{char s = '0';s= tokens[p].str[j];
-						bit=atoi(&s);
-						printf("ccc %d\n",bit);break;}
+						bit=atoi(&s);break;}
 				}
 				num = num + bit*pow(16,(length-j-1)); 
 			}
-			//uint64_t num = atoi(tokens[p].str);
-			printf("ddd %ld\n",num);
 		}
 		else if(tokens[p].type == TK_NUMBER){
 			num = atoi(tokens[p].str);
@@ -351,7 +348,7 @@ int evaluation(char *e){
 	uint32_t result = 0;
 	expr(e,NULL);
 	result = eval(0,nr_token-1);
-	printf("The result is %u\n",result);
+	printf("eval-result is %u\n",result);
 
 	return result;
 }
