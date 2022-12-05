@@ -297,8 +297,6 @@ uint32_t eval(int p, int q){
 	}
 	else if(check_deref(p,q)==true){
 		uint64_t addr = eval(p+1,q);
-		//printf("position = %lx\n",addr);
-
 	        uint64_t addrhex=0;
 	       	for (int i=0;i<64;i++){
 	       	  addrhex = addrhex+(addr%10)*pow(16,i);
@@ -307,8 +305,6 @@ uint32_t eval(int p, int q){
 		uint64_t value = paddr_read(addrhex,1);
 		printf("aaa %lx\n", value);
 		return value;
-
-
 	}
         else if(check_parentheses(p,q) == true){
 		return eval(p+1,q-1);
