@@ -276,6 +276,12 @@ bool check_parentheses(int p, int q){
 	}
 }
 
+bool check_deref(int p, int q){
+
+	if(tokens[p].type==DEREF){ return true;}
+	else {return false;} 
+}
+
 uint32_t eval(int p, int q){
 	if(p>q){
 		printf("bad expression");
@@ -284,6 +290,13 @@ uint32_t eval(int p, int q){
 	else if(p == q){
 		uint32_t num = atoi(tokens[p].str);
 		return num;
+
+	}
+	else if(check_deref(p,q)==true){
+		uint64_t num = eval(p+1,q);
+		printf("position = %lx\n",num);
+		return 0;
+
 
 	}
         else if(check_parentheses(p,q) == true){
