@@ -123,8 +123,8 @@ static bool make_token(char *e) {
 		}
 		case TK_HEXNUMBER:{
 			 tokens[j].type=TK_HEXNUMBER;
-			 for(int k=0;k<substr_len;k++){
-				 tokens[j].str[k]=e[position-substr_len+k];
+			 for(int k=0;k<substr_len-2;k++){
+				 tokens[j].str[k]=e[position-substr_len+k+2];
 			 }
 			 j++;nr_token++;
 			 break;
