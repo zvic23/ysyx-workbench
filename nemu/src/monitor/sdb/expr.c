@@ -293,7 +293,7 @@ bool check_parentheses(int p, int q){
 }
 
 
-uint32_t eval(int p, int q){
+uint64_t eval(int p, int q){
 	if(p>q){
 		printf("bad expression");
 		assert(0);
@@ -339,9 +339,9 @@ uint32_t eval(int p, int q){
 	}
         else {
 		int op = main_operator(p,q);
-		uint32_t val1 = eval(p, op-1);
-		uint32_t val2 = eval(op+1, q);
-		uint32_t result = 0;
+		uint64_t val1 = eval(p, op-1);
+		uint64_t val2 = eval(op+1, q);
+		uint64_t result = 0;
 
 		switch (tokens[op].type){
 			case'+':{  result = val1 + val2; break;}  
