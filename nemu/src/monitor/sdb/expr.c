@@ -290,8 +290,21 @@ uint32_t eval(int p, int q){
 		if(tokens[p].type == TK_HEXNUMBER){
 			char *str_hexnum = tokens[p].str;
 			int length = strlen(str_hexnum);
+			for(int j=0;j<length;j++){
+				int bit =0;
+				switch(tokens[p].str[j]){
+					case'a':{bit=10;break;}
+					case'b':{bit=11;break;}
+					case'c':{bit=12;break;}
+					case'd':{bit=13;break;}
+					case'e':{bit=14;break;}
+					case'f':{bit=15;break;}
+					default:{bit=atoi(&tokens[p].str[j]);break;}
+				}
+				num = num + bit*pow(16,j); 
+			}
 			//uint64_t num = atoi(tokens[p].str);
-			printf("ddd %d\n",length);
+			printf("ddd %ld\n",num);
 		}
 		else if(tokens[p].type == TK_NUMBER){
 			num = atoi(tokens[p].str);
