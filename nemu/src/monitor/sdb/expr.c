@@ -201,8 +201,8 @@ word_t expr(char *e, bool *success) {
 		if(i==0){tokens[i].type = DEREF;}
 		else {
 			switch (tokens[i-1].type){
-				case'(':  case'+':  case'-':
-				case'*':  case'/': {tokens[i].type = DEREF;}
+				case'(':  case'+':  case'-':  case'*':  case'/': 
+				case TK_EQ: case TK_NOTEQ: case TK_AND: {tokens[i].type = DEREF;}
 			}
 		}
   	}
