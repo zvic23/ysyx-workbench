@@ -299,7 +299,8 @@ uint32_t eval(int p, int q){
 					case'd':{bit=13;break;}
 					case'e':{bit=14;break;}
 					case'f':{bit=15;break;}
-					default:{bit=atoi(&tokens[p].str[j]);break;}
+					default:{bit=atoi(&tokens[p].str[j]);
+							printf("ccc %d\n",bit);break;}
 				}
 				num = num + bit*pow(16,j); 
 			}
