@@ -346,7 +346,7 @@ int evaluation(char *e){
 	uint64_t result = 0;
 	expr(e,NULL);
 	result = eval(0,nr_token-1);
-	printf("evalresult is %lu   (hexdecimal:%lx)\n",result,result);
+	printf("evaluated result is %lu   (hexdecimal:0x%lx)\n",result,result);
 
 	return result;
 }
