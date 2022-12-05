@@ -287,7 +287,7 @@ uint32_t eval(int p, int q){
 	}
 	else if(p == q){
 		uint64_t num = 0;
-		if(tokens[p].type == TK_HEXNUMBER){
+		if(tokens[p].type == TK_HEXNUMBER||tokens[p].type == TK_REG){
 			char *str_hexnum = tokens[p].str;              //zsl:transforming the string(hexadecimal number)  to  int(decimal number)
 			int length = strlen(str_hexnum);
 			for(int j=0;j<length;j++){
