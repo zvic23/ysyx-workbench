@@ -85,3 +85,13 @@ void setwp(char *expression){
 	return;
 }
 
+
+
+void check_wpchange(){
+	WP *c = head;
+	for(c=head; c; c=c->next){
+		uint64_t result = evaluation(c->expression);
+		printf("wp:result=%ld\n",result);
+	}
+}
+
