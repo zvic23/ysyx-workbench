@@ -97,6 +97,8 @@ void check_wpchange(){
 		struct figure result =evaluation(c->expression);
 		if(result.sign != c->lastresult.sign || result.value != c->lastresult.value){
 			printf("something change!\n");
+			c->lastresult.sign = result.sign; 
+			c->lastresult.value = result.value; 
 		}
 		//printf("wp:result=%s\n",c->expression);
 	}
