@@ -210,7 +210,7 @@ word_t expr(char *e, bool *success) {
 		if(i==0){tokens[i].type = MINUS;}
 		else {
 			switch (tokens[i-1].type){
-				case'(':  case'+':  case'-':  case'*':  case'/': 
+				case'(':  case'+':  case'-':  case'*':  case'/':  case MINUS:
 				case TK_EQ: case TK_NOTEQ: case TK_AND: {tokens[i].type = MINUS;}
 			}
 		}
