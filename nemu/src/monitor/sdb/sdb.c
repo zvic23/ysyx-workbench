@@ -19,7 +19,7 @@
 #include <readline/history.h>
 #include "sdb.h"
 
-#include <memory/paddr.h>
+#include <memory/paddr.h>       //zsl: I add these
 #include <math.h>
 
 static int is_batch_mode = false;
@@ -150,11 +150,19 @@ static int cmd_t(char *args){
   else {
 	  printf("\nthe result match\n");
   }
-
-
-
   return 0;
 }
+
+static int cmd_w(char *args){
+	setwp(args);
+	return 0;
+}
+
+
+
+
+
+
 
 static struct {
   const char *name;
@@ -170,9 +178,10 @@ static struct {
   { "info", "Print program status", cmd_info },
   { "x", "Scan memory", cmd_x },
 
-  { "f", "test expression gain", cmd_f},
+  { "f", "test expression gain", cmd_f },
   { "p", "expression evaluation", cmd_p },
   { "t", "test exprsstion evaluation", cmd_t },
+  { "w", "watch point", cmd_w },
 };
 
 #define NR_CMD ARRLEN(cmd_table)

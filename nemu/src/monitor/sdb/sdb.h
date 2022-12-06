@@ -23,4 +23,9 @@ word_t expr(char *e, bool *success);
 
 int evaluation(char *e);
 
+
+void setwp(char *expression);
+
+
+
 #endif
