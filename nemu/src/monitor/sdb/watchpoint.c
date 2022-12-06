@@ -20,7 +20,7 @@
 typedef struct watchpoint {
   int NO;
   struct watchpoint *next;
-  char *expression ;
+  char expression[64] ;
 
   /* TODO: Add more members if necessary */
 
@@ -77,15 +77,13 @@ void free_wp(WP *wp){
 }
 
 
-	char ex[64];
 
 void setwp(char *expression){
 	WP *wp = new_wp();
 	int length = strlen(expression);
 	for(int i=0;i<length;i++){
-		ex[i]=expression[i];
+		wp->expression[i]=expression[i];
 	}
-	wp->expression = ex;
 	printf("wp:%s\n",wp->expression);
 	return;
 }
