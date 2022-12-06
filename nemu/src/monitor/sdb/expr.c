@@ -363,7 +363,7 @@ struct figure eval(int p, int q){
 	else if(tokens[p].type==MINUS){
 		struct figure inclusion;
 		int t = p;                      //zsl: t saves the last one of a sequence of "minus"
-		for(int j=0;j>0;j++){
+		for(int j=1;j>0;j++){
 			if(tokens[t+1].type!=MINUS){break;}
 			t++;
 		}
