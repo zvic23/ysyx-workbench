@@ -360,8 +360,23 @@ struct figure eval(int p, int q){
 	        number.value=value;	
 		return number;
 	}
-	//else if(tokens[p].type==minus){
-	//}
+	else if(tokens[p].type==MINUS){
+		struct figure inclusion;
+		int t = p;                      //zsl: t saves the last one of a sequence of "minus"
+		for(int j=0;j>0;j++){
+			if(tokens[t+1].type!=MINUS){break;}
+			t++;
+		}
+		if((t+1==q)||(check_parentheses(t+1,q))){
+			inclusion = eval(t+1,q);
+		}
+		struct figure number;
+		number.sign=1-(t-p)%2;
+		if(inclusion.sign==1){number.sign=1-number.sign;}
+		number.value=inclusion.value;
+		return number;
+
+	}
         else if(check_parentheses(p,q) == true){
 		return eval(p+1,q-1);
 	}
