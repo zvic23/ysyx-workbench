@@ -20,9 +20,10 @@
 typedef struct watchpoint {
   int NO;
   struct watchpoint *next;
-  char expression[640] ;
 
   /* TODO: Add more members if necessary */
+  char expression[640] ;
+  struct figure lastresult;
 
 } WP;
 
@@ -93,9 +94,11 @@ void setwp(char *expression){
 void check_wpchange(){
 	WP *c = head;
 	for(c=head; c; c=c->next){
-
-		//struct figure number =evaluation(c->expression);
-		printf("wp:result=%s\n",c->expression);
+		struct figure result =evaluation(c->expression);
+		if(result.sign != c->lastresult.sign || result.value != c->lastresult.value){
+			printf("something change!\n");
+		}
+		//printf("wp:result=%s\n",c->expression);
 	}
 }
 

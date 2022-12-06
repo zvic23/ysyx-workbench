@@ -137,7 +137,8 @@ static int cmd_t(char *args){
 	  }
 	  char *test_result = strtok(test_expr_line," ");
 	  char *test_expr = test_result + strlen(test_result) + 1;
-	  int nemu_result = evaluation(test_expr);
+	  struct figure result = evaluation(test_expr);
+	  int nemu_result = result.value;
 	  printf("Test result is %s\n",test_result);
 	  if(nemu_result != atoi(test_result)){
 		 correct = false;

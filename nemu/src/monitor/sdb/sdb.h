@@ -21,7 +21,15 @@
 word_t expr(char *e, bool *success);
 
 
-int evaluation(char *e);
+
+
+/*zsl: i add these*/
+struct figure{
+	int sign;
+	uint64_t value;
+};
+
+struct figure evaluation(char *e);
 
 
 void setwp(char *expression);
