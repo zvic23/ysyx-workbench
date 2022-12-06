@@ -77,15 +77,15 @@ void free_wp(WP *wp){
 }
 
 
+	char ex[64];
 
 void setwp(char *expression){
 	WP *wp = new_wp();
 	int length = strlen(expression);
-	static char expr[64];
 	for(int i=0;i<length;i++){
-		expr[i]=expression[i];
+		ex[i]=expression[i];
 	}
-	wp->expression = expr;
+	wp->expression = ex;
 	printf("wp:%s\n",wp->expression);
 	return;
 }
