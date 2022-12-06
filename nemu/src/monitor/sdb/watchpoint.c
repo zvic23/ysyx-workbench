@@ -58,6 +58,22 @@ WP* new_wp(){
 
 
 
-
-
-void free_wp(WP *wp);
+void free_wp(WP *wp){
+	WP *p = head;
+	//WP *q = free_;
+	if(p == wp){
+		head = p->next;
+		p->next = free_;
+		free_ = p;
+	}
+	else{
+		for(p = head; p ; p=p->next){
+			if(p->next == wp){
+				p->next = wp->next;
+				break;
+			}
+		}
+		wp->next = free_;
+		free_ = wp;
+	}
+}
