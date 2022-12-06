@@ -94,8 +94,8 @@ void check_wpchange(){
 	WP *c = head;
 	for(c=head; c; c=c->next){
 
-		evaluation(c->expression);
-		//printf("wp:result=%ld\n",number.value);
+		struct figure number =evaluation(c->expression);
+		printf("wp:result=%ld\n",number.value);
 	}
 }
 

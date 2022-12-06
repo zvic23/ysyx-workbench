@@ -15,6 +15,7 @@
 
 #include <isa.h>
 
+#include <../src/monitor/sdb/sdb.h>
 #include <math.h>
 #include <memory/paddr.h>     //zsl : add these two lines for geting value from dereference function
 
@@ -318,10 +319,7 @@ bool check_minus(int p, int q){
 }
 
 
-struct figure{
-	int sign;
-	uint64_t value;
-};
+
 
 
 

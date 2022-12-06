@@ -20,8 +20,11 @@
 
 word_t expr(char *e, bool *success);
 
-
-int evaluation(char *e);
+struct figure{
+	int sign;
+	uint64_t value;
+};
+struct figure evaluation(char *e);
 
 
 void setwp(char *expression);
