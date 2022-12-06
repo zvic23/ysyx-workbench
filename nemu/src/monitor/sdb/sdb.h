@@ -25,7 +25,7 @@ int evaluation(char *e);
 
 
 void setwp(char *expression);
-
+void check_wpchange();
 
 
 #endif
