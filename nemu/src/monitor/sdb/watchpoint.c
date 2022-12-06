@@ -81,6 +81,7 @@ void free_wp(WP *wp){
 void setwp(char *expression){
 	WP *wp = new_wp();
 	wp->expression = expression;
+	printf("wp:%s\n",wp->expression);
 	return;
 }
 
