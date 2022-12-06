@@ -81,7 +81,7 @@ void free_wp(WP *wp){
 void setwp(char *expression){
 	WP *wp = new_wp();
 	int length = strlen(expression);
-	char expr[64];
+	static char expr[64];
 	for(int i=0;i<length;i++){
 		expr[i]=expression[i];
 	}
