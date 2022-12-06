@@ -384,21 +384,82 @@ struct figure eval(int p, int q){
 		int op = main_operator(p,q);
 		struct figure number1 = eval(p, op-1);
 		uint64_t val1 = number1.value;
+		int sign1 = number1.sign;
 		struct figure number2 = eval(op+1, q);
 		uint64_t val2 = number2.value;
+		int sign2 = number2.sign;
 		uint64_t value = 0;
+		int sign = 0;
 		switch (tokens[op].type){
-			case'+':{  value  = val1 + val2; break;}  
-                        case'-':{  value  = val1 - val2; break;}
-	                case'*':{  value  = val1 * val2; break;}
-                        case'/':{  value  = val1 / val2; break;}
-                        case TK_EQ   :{  value = val1 == val2; break;}
-                        case TK_NOTEQ:{  value = val1 != val2; break;}
-		    	case TK_AND  :{  value = val1 && val2; break;}
+			case'+':{
+					if(sign1 == sign2){
+						value  = val1 + val2;
+						sign = sign1;
+					}
+					else if(val1 > val2){
+						value = val1 - val2;
+						sign = sign1;
+					}
+					else if(val1 < val2){
+						value = val2 - val1;
+						sign = sign2;
+					}
+					else{value = 0;sign = 0;}
+				       	break;
+				}  
+                        case'-':{  
+					sign2 = 1-sign2;
+					if(sign1 == sign2){
+						value  = val1 + val2;
+						sign = sign1;
+					}
+					else if(val1 > val2){
+						value = val1 - val2;
+						sign = sign1;
+					}
+					else if(val1 < val2){
+						value = val2 - val1;
+						sign = sign2;
+					}
+					else{value = 0;sign = 0;}
+				       	break;
+				}  
+	                case'*':{  
+					value  = val1 * val2;
+					if(value == 0){sign = 0;}
+					else if(sign1 != sign2){sign = 1;}
+					else{sign = 0;}
+				       	break;
+				}
+                        case'/':{  
+					value  = val1 / val2; 
+					if(value == 0){sign = 0;}
+					else if(sign1 != sign2){sign = 1;}
+					else{sign = 0;}
+					break;
+				}
+                        case TK_EQ   :{  
+				        if(sign1 == sign2){value = val1 == val2;}
+				        else{value =0;}
+					sign = 0;
+					break;
+				      }
+                        case TK_NOTEQ:{  
+					if(sign1 == sign2){value = val1 != val2;}
+				        else{value =0;}
+					sign = 0;
+					break;
+				      }
+		    	case TK_AND  :{ 
+					if(sign1 == sign2){value = val1 && val2;}
+				        else{value =0;}
+					sign = 0;
+					break;
+				      }
 			default:  assert(0);
 		}
 		struct figure result;
-		result.sign = 0;
+		result.sign =sign;
 		result.value=value;
 		return result;
 	}
