@@ -96,7 +96,7 @@ void check_wpchange(){
 	WP *c = head;
 	for(c=head; c; c=c->next){
 		//evaluation(c->expression);
-		printf("wp:result=%d\n",c->NO);
+		printf("wp:result=%s\n",c->expression);
 	}
 }
 
