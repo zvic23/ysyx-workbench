@@ -90,8 +90,8 @@ void setwp(char *expression){
 void check_wpchange(){
 	WP *c = head;
 	for(c=head; c; c=c->next){
-		evaluation(c->expression);
-		//printf("wp:result=%ld\n",result.value);
+		//evaluation(c->expression);
+		printf("wp:result=%s\n",c->expression);
 	}
 }
 
