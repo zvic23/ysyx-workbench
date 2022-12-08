@@ -60,7 +60,8 @@ WP* new_wp(){
 void free_wp(WP *wp){
 	WP *p = head;
 	//WP *q = free_;
-		memset(wp->expression,0,sizeof(wp->expression));
+	memset(wp->expression,0,sizeof(wp->expression));
+	wp->lastresult.sign = 0;wp->lastresult.value = 0;
 	if(p == wp){
 		head = p->next;
 		p->next = free_;
