@@ -85,7 +85,7 @@ void setwp(char *expression){
 	for(int i=0;i<length;i++){
 		wp->expression[i]=expression[i];
 	}
-	printf("watchpoint NO.%d:  %s\n",wp->NO,wp->expression);
+	printf("Watchpoint %d: %s\n",wp->NO,wp->expression);
 	return;
 }
 
@@ -106,4 +106,15 @@ int check_wpchange(){
 	}
 	return stop_exec;
 }
+
+
+void wp_display(){
+	WP *c = head;
+	printf("NUM        what\n");
+	for(c=head; c; c=c->next){
+		printf("%d          %s\n",c->NO,c->expression);
+	}	
+}
+
+
 
