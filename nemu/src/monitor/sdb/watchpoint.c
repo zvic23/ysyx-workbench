@@ -73,6 +73,7 @@ void free_wp(WP *wp){
 			}
 		}
 		wp->next = free_;
+		memset(wp->expression,0,sizeof wp->expression);
 		free_ = wp;
 	}
 }
