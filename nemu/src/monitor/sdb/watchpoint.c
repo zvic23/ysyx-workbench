@@ -91,16 +91,19 @@ void setwp(char *expression){
 
 
 
-void check_wpchange(){
+int check_wpchange(){
 	WP *c = head;
+	int stop_exec = 0;
 	for(c=head; c; c=c->next){
 		struct figure result =evaluation(c->expression);
 		if(result.sign != c->lastresult.sign || result.value != c->lastresult.value){
 			printf("something change!\n");
 			c->lastresult.sign = result.sign; 
 			c->lastresult.value = result.value; 
+			stop_exec = 1;
 		}
 		//printf("wp:result=%s\n",c->expression);
 	}
+	return stop_exec;
 }
 

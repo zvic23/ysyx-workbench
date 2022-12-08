@@ -33,7 +33,7 @@ struct figure evaluation(char *e);
 
 
 void setwp(char *expression);
-void check_wpchange();
+int check_wpchange();
 
 
 #endif
