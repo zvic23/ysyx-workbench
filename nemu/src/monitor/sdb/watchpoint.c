@@ -97,7 +97,7 @@ int check_wpchange(){
 	for(c=head; c; c=c->next){
 		struct figure result =evaluation(c->expression);
 		if(result.sign != c->lastresult.sign || result.value != c->lastresult.value){
-			printf("something change!\n");
+			printf("watchpoint NO.%d : %ld -> %ld\n",c->NO,c->lastresult.value,result.value);
 			c->lastresult.sign = result.sign; 
 			c->lastresult.value = result.value; 
 			stop_exec = 1;
