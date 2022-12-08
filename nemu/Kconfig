@@ -161,7 +161,7 @@ config DIFFTEST
 
 
 
-config ENABLE_WP                        #zsl: I add these,  enable watchpoint function
+config WATCHPOINT                        #zsl: I add these,  enable watchpoint function
   bool "Enable watchpoint(zsl)"
   default y
 

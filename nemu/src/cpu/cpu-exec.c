@@ -45,7 +45,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 
 
 
-#ifdef CONFIG_ENABLE_WP      //zsl:through make menuconfig it can be control to switch the watchpoint function
+#ifdef CONFIG_WATCHPOINT      //zsl:through make menuconfig it can be control to switch the watchpoint function
   int stop_exec = check_wpchange();    //zsl:check if the watchpoints change
   if(stop_exec == 1){
 	  nemu_state.state = NEMU_STOP;
