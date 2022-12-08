@@ -480,10 +480,9 @@ struct figure eval(int p, int q){
 struct figure evaluation(char *e){
 	expr(e,NULL);
 	struct figure result = eval(0,nr_token-1);
-	char *sign = "0";
-	if(result.sign == 1){sign = "-";}
-	else{sign=" ";}
-	printf("evaluated result is %s%lu   (hexdecimal:%s0x%lx)\n",sign,result.value,sign,result.value);
-
+	//char *sign = "0";                                //zsl:printf the evaluation result
+	//if(result.sign == 1){sign = "-";}
+	//else{sign=" ";}
+	//printf("evaluated result is %s%lu   (hexdecimal:%s0x%lx)\n",sign,result.value,sign,result.value);
 	return result;
 }

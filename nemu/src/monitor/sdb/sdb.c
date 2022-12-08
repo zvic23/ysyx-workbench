@@ -121,7 +121,11 @@ static int cmd_f(char *args){
 }
 static int cmd_p(char *args){
   //char *arg = strtok(NULL, " ");
-  evaluation(args); 
+  struct figure result = evaluation(args); 
+  char *sign = "0";
+  if(result.sign == 1){sign = "-";}
+  else{sign=" ";}
+  printf("evaluated result is %s%lu   (hexdecimal:%s0x%lx)\n",sign,result.value,sign,result.value);
 
   return 0;
 }
