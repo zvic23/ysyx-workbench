@@ -35,6 +35,7 @@ struct figure evaluation(char *e);
 void setwp(char *expression);
 int check_wpchange();
 void wp_display();
+void delwp(char *NO);
 
 
 #endif

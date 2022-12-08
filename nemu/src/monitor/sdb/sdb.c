@@ -163,6 +163,11 @@ static int cmd_w(char *args){
 	return 0;
 }
 
+static int cmd_d(char *args){
+	delwp(args);
+	return 0;
+}
+
 
 
 
@@ -186,7 +191,8 @@ static struct {
   { "f", "test expression gain", cmd_f },
   { "p", "expression evaluation", cmd_p },
   { "t", "test exprsstion evaluation", cmd_t },
-  { "w", "watch point", cmd_w },
+  { "w", "set watchpoint", cmd_w },
+  { "d", "delete watchpoint", cmd_d },
 };
 
 #define NR_CMD ARRLEN(cmd_table)

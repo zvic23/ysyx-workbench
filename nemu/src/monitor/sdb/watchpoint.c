@@ -90,6 +90,19 @@ void setwp(char *expression){
 }
 
 
+void delwp(char *NO){
+	WP *c = head;
+	WP *d = NULL;
+	for(c=head; c ;c=c->next){
+		if(c->NO == atoi(NO)){
+			d = c;
+			break;
+		}
+	}
+	free_wp(d);
+}
+
+
 
 int check_wpchange(){
 	WP *c = head;
@@ -110,7 +123,7 @@ int check_wpchange(){
 
 void wp_display(){
 	WP *c = head;
-	printf("NUM        what\n");
+	printf("NUM        What\n");
 	for(c=head; c; c=c->next){
 		printf("%d          %s\n",c->NO,c->expression);
 	}	
