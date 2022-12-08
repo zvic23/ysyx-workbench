@@ -14,7 +14,6 @@
 ***************************************************************************************/
 
 #include "sdb.h"
-#include <string.h>
 
 #define NR_WP 32
 
@@ -61,6 +60,7 @@ WP* new_wp(){
 void free_wp(WP *wp){
 	WP *p = head;
 	//WP *q = free_;
+		memset(wp->expression,0,sizeof(wp->expression));
 	if(p == wp){
 		head = p->next;
 		p->next = free_;
@@ -74,7 +74,6 @@ void free_wp(WP *wp){
 			}
 		}
 		wp->next = free_;
-		memset(wp->expression,0,sizeof(wp->expression));
 		free_ = wp;
 	}
 }
