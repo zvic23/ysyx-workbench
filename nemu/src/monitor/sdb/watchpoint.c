@@ -85,7 +85,7 @@ void setwp(char *expression){
 	for(int i=0;i<length;i++){
 		wp->expression[i]=expression[i];
 	}
-	printf("watchpoint NO.%d:%s\n",wp->NO,wp->expression);
+	printf("watchpoint NO.%d:  %s\n",wp->NO,wp->expression);
 	return;
 }
 
