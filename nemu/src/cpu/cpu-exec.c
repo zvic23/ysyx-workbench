@@ -49,8 +49,6 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   int stop_exec = check_wpchange();    //zsl:check if the watchpoints change
   if(stop_exec == 1){
 	  nemu_state.state = NEMU_STOP;
-	  printf("watchpoint trigger\n");
-
   }
 #endif
 }
