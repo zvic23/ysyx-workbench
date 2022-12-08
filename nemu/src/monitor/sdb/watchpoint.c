@@ -112,7 +112,7 @@ int check_wpchange(){
 	for(c=head; c; c=c->next){
 		struct figure result =evaluation(c->expression);
 		if(result.sign != c->lastresult.sign || result.value != c->lastresult.value){
-			printf("watchpoint NO.%d (%s): %ld -> %ld    hex: 0x%lx -> 0x%lx\n",c->NO,c->expression,c->lastresult.value,result.value,c->lastresult.value,result.value);
+			printf("Watchpoint %d ( %s ): %ld -> %ld    hex: 0x%lx -> 0x%lx\n",c->NO,c->expression,c->lastresult.value,result.value,c->lastresult.value,result.value);
 			c->lastresult.sign = result.sign; 
 			c->lastresult.value = result.value; 
 			stop_exec = 1;
