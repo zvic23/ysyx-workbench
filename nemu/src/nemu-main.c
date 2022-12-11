@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 
 
 char a[2] = "6";
-printf("%s\n",a);
+printf("%s\n",a+1);
 
 
 
