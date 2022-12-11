@@ -28,14 +28,6 @@ int main(int argc, char *argv[]) {
   init_monitor(argc, argv);
 #endif
 
-
-char a[3] = {'6','6','6'};
-for(int i=0;i<=7;i++){
-printf("%s\n",a+i);
-}
-
-
-
   /* Start engine. */
   engine_start();
 
