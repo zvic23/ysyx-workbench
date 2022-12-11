@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 
 
 char a[3] = {'6','6','6'};
-for(int i=0;i<=3;i++){
+for(int i=0;i<=7;i++){
 printf("%s\n",a+i);
 }
 
