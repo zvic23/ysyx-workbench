@@ -28,9 +28,8 @@ int main(int argc, char *argv[]) {
   init_monitor(argc, argv);
 #endif
 
-  int a = 666;
-  int b = 1 + a;
-  printf("%d\n",b);
+  int a = 6;
+  printf("%d\n",a);
 
 
 
