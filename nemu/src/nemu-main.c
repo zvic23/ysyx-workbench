@@ -29,8 +29,10 @@ int main(int argc, char *argv[]) {
 #endif
 
 
-char a[2] = "6";
-printf("%s\n",a+1);
+char a[3] = "6";
+for(int i=0;i<=3;i++){
+printf("%s\n",a+i);
+}
 
 
 
