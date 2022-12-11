@@ -219,11 +219,6 @@ word_t expr(char *e, bool *success) {
   	}
   }
 
- 
-
-
-
-
   /* zsl:printf the expression tokens the program got. */
 //  for(int j=0;j<=nr_token-1;j++){
 // 	 printf("%d:",tokens[j].type);
