@@ -59,3 +59,15 @@ else
 # Include rules to build NEMU
 include $(NEMU_HOME)/scripts/native.mk
 endif
+
+
+
+          
+
+count:
+	@find . -name '*.[ch]'| xargs grep -v '^$$'> ./not_empty_lines_in_ch_file
+	@wc -l  not_empty_lines_in_ch_file
+	@rm not_empty_lines_in_ch_file
+
+
+.PHONY:count

@@ -20,4 +20,22 @@
 
 word_t expr(char *e, bool *success);
 
+
+
+
+/*zsl: i add these*/
+struct figure{
+	int sign;
+	uint64_t value;
+};
+
+struct figure evaluation(char *e);
+
+
+void setwp(char *expression);
+int check_wpchange();
+void wp_display();
+void delwp(char *NO);
+
+
 #endif

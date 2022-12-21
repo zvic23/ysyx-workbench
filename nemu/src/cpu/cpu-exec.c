@@ -18,6 +18,10 @@
 #include <cpu/difftest.h>
 #include <locale.h>
 
+
+#include <../src/monitor/sdb/sdb.h>
+
+
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
  * This is useful when you use the `si' command.
@@ -38,6 +42,15 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+
+
+
+#ifdef CONFIG_WATCHPOINT      //zsl:through make menuconfig it can be control to switch the watchpoint function
+  int stop_exec = check_wpchange();    //zsl:check if the watchpoints change
+  if(stop_exec == 1){
+	  nemu_state.state = NEMU_STOP;
+  }
+#endif
 }
 
 static void exec_once(Decode *s, vaddr_t pc) {

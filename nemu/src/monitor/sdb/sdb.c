@@ -19,6 +19,9 @@
 #include <readline/history.h>
 #include "sdb.h"
 
+#include <memory/paddr.h>       //zsl: I add these
+#include <math.h>
+
 static int is_batch_mode = false;
 
 void init_regex();
@@ -54,6 +57,127 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+
+static int cmd_si(char *args) {
+  char *arg = strtok(NULL, " ");
+  int i = atoi(arg);
+  cpu_exec(i);
+  return 0;
+}
+
+
+static int cmd_info(char *args){
+  char *arg = strtok(NULL, " ");
+  if(strcmp(arg,"r") == 0){
+	  isa_reg_display();
+  }
+  else if(strcmp(arg,"w") == 0){
+	  wp_display();
+  }
+
+  return 0;
+}
+
+
+static int cmd_x(char *args){
+  char *arg = strtok(NULL, " ");
+
+
+    //char *str_end_x = arg + strlen(arg);
+
+    /* extract the first token as the command */
+    char *n = strtok(arg, " ");
+
+    /* treat the remaining string as the arguments,
+     * which may need further parsing
+     */
+    char *pst = n + strlen(n) + 1;
+    char *position = strtok(pst, " ");
+    printf("%d and %d\n",atoi(n),atoi(position));
+
+    long  a = atol(pst);
+    long sum=0;
+   for (int i=0;i<8;i++){
+     sum = sum+(a%10)*pow(16,i);
+     a = a/10;
+   } 
+   printf("%lx\n",sum);
+   // paddr_t address=  host_to_guest(position);
+   for(int i=atoi(n)-1;i>=0;i--){
+    printf("%lx  ",paddr_read( (sum+i),1)); 
+   }
+   printf("\n");
+//    printf("%lx\n",paddr_read(atoi(position),atoi(n))); 
+
+return 0;
+}
+
+
+static int cmd_f(char *args){
+  //char *arg = strtok(NULL, " ");
+  expr(args,NULL); 
+
+  return 0;
+}
+static int cmd_p(char *args){
+  //char *arg = strtok(NULL, " ");
+  struct figure result = evaluation(args); 
+  char *sign = "0";
+  if(result.sign == 1){sign = "-";}
+  else{sign=" ";}
+  printf("evaluated result is %s%lu   (hexdecimal:%s0x%lx)\n",sign,result.value,sign,result.value);
+
+  return 0;
+}
+
+
+static int cmd_t(char *args){
+  FILE *fp = fopen("tools/gen-expr/input", "r");
+//  FILE *fp = fopen("../../../tools/gen-expr/input", "r");
+
+  assert(fp != NULL);
+  char test_expr_line[600];
+  bool correct = true;
+
+  for (int j=0;j<10;j++){
+	  if (fgets(test_expr_line,600,fp) == NULL){
+		  printf("read input fail");
+	  }
+	  char *test_result = strtok(test_expr_line," ");
+	  char *test_expr = test_result + strlen(test_result) + 1;
+	  struct figure result = evaluation(test_expr);
+	  int nemu_result = result.value;
+	  printf("Test result is %s\n",test_result);
+	  if(nemu_result != atoi(test_result)){
+		 correct = false;
+	  } 
+  }
+
+  if (correct == false){
+	  printf("\nthe result don't match !!!\n");
+  }
+  else {
+	  printf("\nthe result match\n");
+  }
+  return 0;
+}
+
+static int cmd_w(char *args){
+	setwp(args);
+	return 0;
+}
+
+static int cmd_d(char *args){
+	delwp(args);
+	return 0;
+}
+
+
+
+
+
+
+
 static struct {
   const char *name;
   const char *description;
@@ -64,7 +188,15 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
+  { "si", "Simple step execution", cmd_si },
+  { "info", "Print program status", cmd_info },
+  { "x", "Scan memory", cmd_x },
 
+  { "f", "test expression gain", cmd_f },
+  { "p", "expression evaluation", cmd_p },
+  { "t", "test exprsstion evaluation", cmd_t },
+  { "w", "set watchpoint", cmd_w },
+  { "d", "delete watchpoint", cmd_d },
 };
 
 #define NR_CMD ARRLEN(cmd_table)
