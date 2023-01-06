@@ -331,6 +331,7 @@ struct figure eval(int p, int q){
 		if(tokens[p].type == TK_HEXNUMBER||tokens[p].type == TK_REG){
 			char *str_hexnum = tokens[p].str;              //zsl:transforming the string(hexadecimal number)  to  int(decimal number)
 			int length = strlen(str_hexnum);
+			printf("str=%s\n",str_hexnum);
 			for(int j=0;j<length;j++){
 				int bit =0;
 				switch(tokens[p].str[j]){
@@ -352,7 +353,7 @@ struct figure eval(int p, int q){
 		struct figure number;
 		number.sign = 0;
 		number.value = num;
-		printf("num = %lx\n",num);
+		//printf("num = %lx\n",num);
 		return number;
 	}
 	else if((tokens[p].type==DEREF)&&((p+1==q)||(check_parentheses(p+1,q)))){   //zsl:dereference gets the value of an address
