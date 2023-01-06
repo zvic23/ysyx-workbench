@@ -352,7 +352,7 @@ struct figure eval(int p, int q){
 		struct figure number;
 		number.sign = 0;
 		number.value = num;
-		printf("num = %lx",num);
+		printf("num = %lx\n",num);
 		return number;
 	}
 	else if((tokens[p].type==DEREF)&&((p+1==q)||(check_parentheses(p+1,q)))){   //zsl:dereference gets the value of an address
