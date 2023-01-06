@@ -150,7 +150,8 @@ static bool make_token(char *e) {
 			//printf("val = %s \n",val);
 			int length = strlen(val);
 			//printf("%d\n",length);
-			tokens[j].str[0]='0'; tokens[j].str[1]='x';
+
+			//tokens[j].str[0]='0'; tokens[j].str[1]='x';
 			for(int k=0;k<length;k++){
 				tokens[j].str[k]=val[k];
 			}
