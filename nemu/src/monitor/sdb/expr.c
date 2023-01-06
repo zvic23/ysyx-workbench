@@ -147,7 +147,7 @@ static bool make_token(char *e) {
 			}
 			char val[128];
 			sprintf(val,"%lx",value);               //zsl:transform the int(decimal) to char(hexadecimal)
-			//printf("val = %s \n",val);
+			printf("val = %s \n",val);
 			int length = strlen(val);
 			//printf("%d\n",length);
 			tokens[j].str[0]='0'; tokens[j].str[1]='x';
