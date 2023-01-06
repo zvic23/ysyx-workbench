@@ -332,6 +332,7 @@ struct figure eval(int p, int q){
 			char *str_hexnum = tokens[p].str;              //zsl:transforming the string(hexadecimal number)  to  int(decimal number)
 			int length = strlen(str_hexnum);
 			printf("str=%s\n",str_hexnum);
+			printf("len=%d\n",length);
 			for(int j=0;j<length;j++){
 				int bit =0;
 				switch(tokens[p].str[j]){
