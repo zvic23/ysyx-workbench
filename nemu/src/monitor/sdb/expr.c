@@ -147,7 +147,7 @@ static bool make_token(char *e) {
 			}
 			char val[128];
 			sprintf(val,"%lx",value);               //zsl:transform the int(decimal) to char(hexadecimal)
-			printf("val = %s \n",val);
+			//printf("val = %s \n",val);
 			int length = strlen(val);
 			//printf("%d\n",length);
 			tokens[j].str[0]='0'; tokens[j].str[1]='x';
@@ -352,6 +352,7 @@ struct figure eval(int p, int q){
 		struct figure number;
 		number.sign = 0;
 		number.value = num;
+		printf("num = %ld",num);
 		return number;
 	}
 	else if((tokens[p].type==DEREF)&&((p+1==q)||(check_parentheses(p+1,q)))){   //zsl:dereference gets the value of an address
