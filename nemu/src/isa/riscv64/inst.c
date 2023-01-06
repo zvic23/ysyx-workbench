@@ -25,7 +25,7 @@
 enum {
   TYPE_I, TYPE_U, TYPE_S,
   TYPE_N, // none
-  TYPE_J, TYPE_R,
+  TYPE_J, TYPE_R, TYPE_B,
 };
 
 #define src1R() do { *src1 = R(rs1); } while (0)
@@ -49,6 +49,7 @@ static void decode_operand(Decode *s, int *dest, word_t *src1, word_t *src2, wor
     case TYPE_S: src1R(); src2R(); immS(); break;
     case TYPE_J:                   immJ(); break;
     case TYPE_R: src1R(); src2R();         break;
+    case TYPE_B: src1R(); src2R(); immB(); break;
   }
 }
 
@@ -72,7 +73,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000000 ????? ????? 000 ????? 01110 11", addw   , R, R(dest) = SEXT(BITS((src1 + src2),31,0), 32));
   INSTPAT("0100000 ????? ????? 000 ????? 01100 11", sub    , R, R(dest) = src1 - src2);
   INSTPAT("??????? ????? ????? 011 ????? 00100 11", sltiu  , I, R(dest) = (src1<imm)?1:0);//if(src1<imm)R(dest)=0x1;else R(dest)=0);
-
+  //INSTPAT("??????? ????? ????? 000 ????? 11000 11", beq    , B, 
 
 
   INSTPAT("??????? ????? ????? ??? ????? 00101 11", auipc  , U, R(dest) = s->pc + imm);
