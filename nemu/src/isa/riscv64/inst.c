@@ -92,8 +92,8 @@ static int decode_exec(Decode *s) {
   INSTPAT("000000? ????? ????? 101 ????? 00100 11", srli   , I, R(dest) = src1 >> BITS(imm, 5, 0));
   INSTPAT("??????? ????? ????? 101 ????? 11000 11", bge    , B, src1=0x1000000000000000;src2=0x0000000000000001;word_t match=0;
 if(BITS(src1,63,63)==BITS(src2,63,63)&&BITS(src1,63,63)==0)match=(src1>=src2)?1:0;
-else if(BITS(src1,63,63)==BITS(src2,63,63)&&BITS(src1,63,63)==1)match=(src1<=src2)?1:0;
-else if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==0)?1:0;
+if(BITS(src1,63,63)==BITS(src2,63,63)&&BITS(src1,63,63)==1)match=(src1<=src2)?1:0;
+if(BITS(src1,63,63)!=BITS(src2,63,63))match=0;//(BITS(src1,63,63)==0)?1:0;
 s->dnpc = (match)?(s->pc+imm):s->dnpc);     //!!!!!todo
   INSTPAT("??????? ????? ????? 010 ????? 01000 11", sw     , S, Mw(src1 + imm, 4, src2));
 
