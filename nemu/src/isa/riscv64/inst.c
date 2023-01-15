@@ -93,11 +93,17 @@ static int decode_exec(Decode *s) {
   INSTPAT("??????? ????? ????? 101 ????? 11000 11", bge    , B, word_t match=0;//src1=0x0000000000000000;src2=0x8000000000000001;	
 	if(BITS(src1,63,63)==BITS(src2,63,63))match=(src1>=src2)?1:0;
 	if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==0)?1:0;
-	s->dnpc = (match)?(s->pc+imm):s->dnpc);     //!!!!!have doubt and optimized
+	s->dnpc = (match)?(s->pc+imm):s->dnpc);     //!!!!!have doubt and to be optimized
   INSTPAT("??????? ????? ????? 010 ????? 01000 11", sw     , S, Mw(src1 + imm, 4, src2));
 
   INSTPAT("0000001 ????? ????? 000 ????? 01110 11", mulw   , R, R(dest) = SEXT(BITS(BITS(src1,31,0)*BITS(src2,31,0),31,0),32));
-
+  INSTPAT("0000001 ????? ????? 100 ????? 01110 11", divw   , R, word_t src1_32=BITS(src1,31,0);word_t src2_32=BITS(src2,31,0);word_t quotient=0;word_t src1_32_cpl=(src1_32^0xffffffff)+1; word_t src2_32_cpl=(src2_32^0xffffffff)+1; 
+	if(BITS(src1,31,31)==BITS(src2,31,31)&&BITS(src1,31,31)==0)quotient=src1_32/src2_32;
+	if(BITS(src1,31,31)==BITS(src2,31,31)&&BITS(src1,31,31)==1)quotient=src1_32_cpl/src2_32_cpl;
+	if(BITS(src1,31,31)!=BITS(src2,31,31)&&BITS(src1,31,31)==0)quotient=src1_32/src2_32_cpl;
+	if(BITS(src1,31,31)!=BITS(src2,31,31)&&BITS(src1,31,31)==1)quotient=src1_32_cpl/src2_32;
+	if(BITS(src1,31,31)!=BITS(src2,31,31))quotient=quotient|0x80000000;
+	R(dest) = SEXT(quotient,32));
 
 
 
