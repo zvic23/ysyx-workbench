@@ -102,7 +102,7 @@ static int decode_exec(Decode *s) {
 	if(BITS(src1,31,31)==BITS(src2,31,31)&&BITS(src1,31,31)==1)quotient=src1_32_cpl/src2_32_cpl;
 	if(BITS(src1,31,31)!=BITS(src2,31,31)&&BITS(src1,31,31)==0)quotient=src1_32/src2_32_cpl;
 	if(BITS(src1,31,31)!=BITS(src2,31,31)&&BITS(src1,31,31)==1)quotient=src1_32_cpl/src2_32;
-	if(BITS(src1,31,31)!=BITS(src2,31,31))quotient=quotient|0x80000000;
+	if(BITS(src1,31,31)!=BITS(src2,31,31))quotient=(quotient^0xffffffff)+1;//|0x80000000;
 	R(dest) = SEXT(quotient,32));               //!!!!!have doubt and to be optimizied   no check
 
 
