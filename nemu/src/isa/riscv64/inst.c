@@ -113,10 +113,14 @@ static int decode_exec(Decode *s) {
 	if(BITS(src1,31,31)!=BITS(src2,31,31))remainder=(remainder^0xffffffff)+1;//|0x80000000;
 	R(dest) = SEXT(remainder,32));               //!!!!!have doubt and to be optimizied    this inst is copy-paste
 						     
-  INSTPAT("??????? ????? ????? 100 ????? 11000 11", blt    , B, word_t match=0;//src1=0x0000000000000000;src2=0x8000000000000001;	
+  INSTPAT("??????? ????? ????? 100 ????? 11000 11", blt    , B, word_t match=0;
 	if(BITS(src1,63,63)==BITS(src2,63,63))match=(src1<src2)?1:0;
 	if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==1)?1:0;
 	s->dnpc = (match)?(s->pc+imm):s->dnpc);     //!!!!!have doubt and to be optimized
+  INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, word_t match=0;
+	if(BITS(src1,63,63)==BITS(src2,63,63))match=(src1<src2)?1:0;
+	if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==1)?1:0;
+	R(dest) = (match)?1:0);     //!!!!!have doubt and to be optimized
 
 
 
