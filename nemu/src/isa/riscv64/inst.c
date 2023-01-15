@@ -120,7 +120,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, word_t match=0;
 	if(BITS(src1,63,63)==BITS(src2,63,63))match=(src1<src2)?1:0;
 	if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==1)?1:0;
-	R(dest) = (match)?1:0);     //!!!!!have doubt and to be optimized
+	R(dest) = (match)?1:0);     //!!!!!to be optimized
 
 
 
