@@ -139,7 +139,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("0100000 ????? ????? 101 ????? 01110 11", sraw   , R, word_t shamt=BITS(src2,4,0);word_t src1_s=BITS(src1,31,0)>>shamt;
 	R(dest)=(BITS(src1,31,31)==1)?((BITS(0xffffffff,shamt-1,0)<<(32-shamt))|src1_s):src1_s;
 	R(dest)=SEXT(R(dest),32));  //!!!!!!!have doubt 
-
+  INSTPAT("0000000 ????? ????? 101 ????? 01110 11", srlw   , R, R(dest) = BITS(src1, 31, 0) >> BITS(src2,4, 0));
 
 
 
