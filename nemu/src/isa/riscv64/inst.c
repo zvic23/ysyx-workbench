@@ -140,6 +140,7 @@ static int decode_exec(Decode *s) {
 	R(dest)=(BITS(src1,31,31)==1)?((BITS(0xffffffff,shamt-1,0)<<(32-shamt))|src1_s):src1_s;
 	R(dest)=SEXT(R(dest),32));  //!!!!!!!have doubt 
   INSTPAT("0000000 ????? ????? 101 ????? 01110 11", srlw   , R, R(dest) = BITS(src1, 31, 0) >> BITS(src2,4, 0));
+  INSTPAT("??????? ????? ????? 110 ????? 11000 11", bltu   , B, s->dnpc = (src1 < src2)?(s->pc+imm):s->dnpc);
 
 
 
