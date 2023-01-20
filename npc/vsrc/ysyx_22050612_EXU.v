@@ -36,7 +36,8 @@ ysyx_22050612_MuxKey #(1, 10, 64) i1 (wdata, opcode, {
     10'b1, sum0
   });
   always @(posedge clk) begin
-    $display("%d,%d,%d",rd,rs1,imm_I);
+    //$display("%d,%d,%d",rd,rs1,imm_I);
+    $display("%d,%d,%d",wdata,wen,sum0);
   end
 
 endmodule
