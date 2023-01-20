@@ -23,7 +23,6 @@ module ysyx_22050612_MuxKeyInternal #(NR_KEY = 2, KEY_LEN = 1, DATA_LEN = 1, HAS
   reg hit;
   integer i;
   always @(*) begin
-	$display("%b",key);  
     lut_out = 0;
     hit = 0;
     for (i = 0; i < NR_KEY; i = i + 1) begin
