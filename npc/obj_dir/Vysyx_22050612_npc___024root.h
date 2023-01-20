@@ -32,8 +32,8 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__snpc;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__wdata;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__i1__DOT__i0__DOT__lut_out;
-    VlUnpacked<SData/*9:0*/, 1> ysyx_22050612_npc__DOT__idu__DOT__a3__DOT__i0__DOT__pair_list;
-    VlUnpacked<CData/*6:0*/, 1> ysyx_22050612_npc__DOT__idu__DOT__a3__DOT__i0__DOT__key_list;
+    VlUnpacked<CData/*5:0*/, 1> ysyx_22050612_npc__DOT__idu__DOT__a3__DOT__i0__DOT__pair_list;
+    VlUnpacked<CData/*2:0*/, 1> ysyx_22050612_npc__DOT__idu__DOT__a3__DOT__i0__DOT__key_list;
     VlUnpacked<CData/*2:0*/, 1> ysyx_22050612_npc__DOT__idu__DOT__a3__DOT__i0__DOT__data_list;
     VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf;
     VlUnpacked<CData/*3:0*/, 1> ysyx_22050612_npc__DOT__exu__DOT__i0__DOT__i0__DOT__pair_list;
