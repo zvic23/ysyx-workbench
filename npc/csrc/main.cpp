@@ -49,7 +49,7 @@ int main() {
   top->clk=0;top->rst=1;top->eval();//step_and_dump_wave();
   top->clk=1;top->rst=1;top->eval();//step_and_dump_wave();
   top->clk=0;top->rst=0;top->eval();//step_and_dump_wave();
-  int i=9;
+  int i=5;
   while(i){
 
 
