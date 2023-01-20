@@ -4,7 +4,7 @@ input [63:0]imm_I,
 input [ 4:0]rd,
 input [ 4:0]rs1,
 input [ 4:0]rs2,
-input [2:0]opcode,
+input opcode,
 
 input [63:0]pc,
 
@@ -29,11 +29,11 @@ wire [63:0]sum0;
 ysyx_22050612_Adder #(64) add0 (imm_I,src1,sum0);
 
 
-ysyx_22050612_MuxKey #(1, 3, 1) i0 (wen, opcode, {
-    3'b1, 1'b1
+ysyx_22050612_MuxKey #(1, 1, 1) i0 (wen, opcode, {
+    1'b1, 1'b1
   });
-ysyx_22050612_MuxKey #(1, 3, 64) i1 (wdata, opcode, {
-    3'b1, sum0
+ysyx_22050612_MuxKey #(1, 1, 64) i1 (wdata, opcode, {
+    1'b1, sum0
   });
   always @(posedge clk) begin
     //$display("%d,%d,%d",rd,rs1,imm_I);

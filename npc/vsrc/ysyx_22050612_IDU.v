@@ -9,7 +9,7 @@ output [63:0]imm_I,
 output [ 4:0]rd,
 output [ 4:0]rs1,
 output [ 4:0]rs2,
-output [ 2:0]opcode
+output opcode
 
 
 );
@@ -22,7 +22,7 @@ assign imm_I= (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]}
 //ysyx_22050612_MuxKey #(1, 7, 3) i5 (opcode, inst[6:0], {
 //    7'b0010011, 3'b1
 //  });
-assign opcode[0]=inst[0];
+assign opcode=inst[0];
 
   always @(posedge clk) begin
     $display("%x,%d,%d",inst,opcode,rd);
