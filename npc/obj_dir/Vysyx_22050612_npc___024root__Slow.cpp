@@ -32,6 +32,7 @@ void Vysyx_22050612_npc___024root___settle__TOP__1(Vysyx_22050612_npc___024root*
     // Body
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__i0__DOT__i0__DOT__pair_list[0U] = 3U;
     vlSelf->ysyx_22050612_npc__DOT__idu__DOT__i5__DOT__i0__DOT__pair_list[0U] = 0x99U;
+    VL_WRITEF("%b\n",7,(0x7fU & vlSelf->inst));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__snpc 
         = (4ULL + vlSelf->pc);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__i1__DOT__i0__DOT__pair_list[0U][0U] 
@@ -91,6 +92,8 @@ void Vysyx_22050612_npc___024root___settle__TOP__1(Vysyx_22050612_npc___024root*
                        [0U]))) & vlSelf->ysyx_22050612_npc__DOT__idu__DOT__i5__DOT__i0__DOT__data_list
            [0U]);
     vlSelf->ysyx_22050612_npc__DOT__opcode = vlSelf->ysyx_22050612_npc__DOT__idu__DOT__i5__DOT__i0__DOT__lut_out;
+    VL_WRITEF("%b\n%b\n",3,vlSelf->ysyx_22050612_npc__DOT__opcode,
+              3,(IData)(vlSelf->ysyx_22050612_npc__DOT__opcode));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__i0__DOT__i0__DOT__lut_out 
         = (((IData)(vlSelf->ysyx_22050612_npc__DOT__opcode) 
             == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__i0__DOT__i0__DOT__key_list

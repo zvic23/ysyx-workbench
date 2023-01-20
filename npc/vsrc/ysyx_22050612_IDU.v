@@ -23,7 +23,7 @@ ysyx_22050612_MuxKey #(1, 7, 3) i5 (opcode, inst[6:0], {
     7'b0010011, 3'b1
   });
   always @(posedge clk) begin
-    $display("%x,%d",inst,opcode);
+    //$display("%x,%d",inst,opcode);
   end
 
 
