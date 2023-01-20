@@ -25,22 +25,13 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     VL_OUT64(pc,63,0);
 
     // LOCAL SIGNALS
-    CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__wen;
-    CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__i0__DOT__i0__DOT__lut_out;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__snpc;
-    QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__wdata;
-    QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__i1__DOT__i0__DOT__lut_out;
+    QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__src1;
     VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf;
-    VlUnpacked<CData/*1:0*/, 1> ysyx_22050612_npc__DOT__exu__DOT__i0__DOT__i0__DOT__pair_list;
-    VlUnpacked<CData/*0:0*/, 1> ysyx_22050612_npc__DOT__exu__DOT__i0__DOT__i0__DOT__key_list;
-    VlUnpacked<CData/*0:0*/, 1> ysyx_22050612_npc__DOT__exu__DOT__i0__DOT__i0__DOT__data_list;
-    VlUnpacked<VlWide<3>/*64:0*/, 1> ysyx_22050612_npc__DOT__exu__DOT__i1__DOT__i0__DOT__pair_list;
-    VlUnpacked<CData/*0:0*/, 1> ysyx_22050612_npc__DOT__exu__DOT__i1__DOT__i0__DOT__key_list;
-    VlUnpacked<QData/*63:0*/, 1> ysyx_22050612_npc__DOT__exu__DOT__i1__DOT__i0__DOT__data_list;
 
     // LOCAL VARIABLES
     CData/*0:0*/ __Vclklast__TOP__clk;
-    VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
+    VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
 
     // INTERNAL VARIABLES
     Vysyx_22050612_npc__Syms* vlSymsp;  // Symbol table
