@@ -22,7 +22,9 @@ wire [ 4:0]rs1;
 wire [ 4:0]rs2;
 wire [ 9:0]opcode;
 
-
+  always @(posedge clk) begin
+    $display("%d",inst);
+  end
 ysyx_22050612_IFU ifu (clk, rst, dnpc, pc);
 ysyx_22050612_IDU idu (inst, imm_I, rd, rs1, rs2, opcode);
 ysyx_22050612_EXU exu (clk,imm_I,rd,rs1,rs2,opcode,pc,dnpc);
