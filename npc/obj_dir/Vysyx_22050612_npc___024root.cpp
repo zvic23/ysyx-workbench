@@ -40,11 +40,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___combo__TOP__3(Vysyx_22050612_n
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___combo__TOP__3\n"); );
     // Body
-    vlSelf->ysyx_22050612_npc__DOT__idu__DOT__a3__DOT__i0__DOT__lut_out 
-        = ((- (IData)(((7U & vlSelf->inst) == vlSelf->ysyx_22050612_npc__DOT__idu__DOT__a3__DOT__i0__DOT__key_list
-                       [0U]))) & vlSelf->ysyx_22050612_npc__DOT__idu__DOT__a3__DOT__i0__DOT__data_list
+    vlSelf->ysyx_22050612_npc__DOT__idu__DOT__i2__DOT__i0__DOT__lut_out 
+        = ((- (IData)(((0x7fU & vlSelf->inst) == vlSelf->ysyx_22050612_npc__DOT__idu__DOT__i2__DOT__i0__DOT__key_list
+                       [0U]))) & vlSelf->ysyx_22050612_npc__DOT__idu__DOT__i2__DOT__i0__DOT__data_list
            [0U]);
-    vlSelf->ysyx_22050612_npc__DOT__opcode = vlSelf->ysyx_22050612_npc__DOT__idu__DOT__a3__DOT__i0__DOT__lut_out;
+    vlSelf->ysyx_22050612_npc__DOT__opcode = vlSelf->ysyx_22050612_npc__DOT__idu__DOT__i2__DOT__i0__DOT__lut_out;
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__i1__DOT__i0__DOT__pair_list[0U][0U] 
         = (IData)((((vlSelf->inst >> 0x1fU) ? (0xfffffffffffff000ULL 
                                                | (QData)((IData)(
