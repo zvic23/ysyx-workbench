@@ -9,7 +9,7 @@ sim:
 include ../Makefile
 
 exe:
-	obj_dir/Vkeyboard_sim
+	obj_dir/Vysyx_22050612_npc
 
 wave:   
 	gtkwave dump.vcd
