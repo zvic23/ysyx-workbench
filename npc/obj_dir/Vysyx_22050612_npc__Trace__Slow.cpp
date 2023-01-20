@@ -47,6 +47,7 @@ void Vysyx_22050612_npc___024root__traceInitSub0(Vysyx_22050612_npc___024root* v
         tracep->declQuad(c+92,"ysyx_22050612_npc ifu pc_rg din", false,-1, 63,0);
         tracep->declQuad(c+90,"ysyx_22050612_npc ifu pc_rg dout", false,-1, 63,0);
         tracep->declBit(c+113,"ysyx_22050612_npc ifu pc_rg wen", false,-1);
+        tracep->declBit(c+87,"ysyx_22050612_npc idu clk", false,-1);
         tracep->declBus(c+89,"ysyx_22050612_npc idu inst", false,-1, 31,0);
         tracep->declQuad(c+94,"ysyx_22050612_npc idu imm_I", false,-1, 63,0);
         tracep->declBus(c+96,"ysyx_22050612_npc idu rd", false,-1, 4,0);
