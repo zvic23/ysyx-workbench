@@ -14,8 +14,10 @@ module ysyx_22050612_RegisterFile #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
   assign src1 = rf[rs1];
   assign src2 = rf[rs2];
 
-  always @(negedge clk) begin
+  always @(posedge clk) begin
     if (wen) rf[waddr] <= wdata;
+  end
+  always @(negedge clk) begin
     $display("%d,%d,%d",rf[0],rf[1],rf[2]);
   end
 endmodule
