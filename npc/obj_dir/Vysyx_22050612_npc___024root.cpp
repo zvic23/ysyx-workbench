@@ -16,21 +16,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     CData/*0:0*/ __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0;
     QData/*63:0*/ __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0;
     // Body
-    VL_WRITEF("%20#,%20#,%1#,%1#\n",64,(((vlSelf->inst 
-                                          >> 0x1fU)
-                                          ? (0xfffffffffffff000ULL 
-                                             | (QData)((IData)(
-                                                               (vlSelf->inst 
-                                                                >> 0x14U))))
-                                          : (QData)((IData)(
-                                                            (vlSelf->inst 
-                                                             >> 0x14U)))) 
-                                        + vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
-                                        [(0x1fU & (vlSelf->inst 
-                                                   >> 0xfU))]),
-              64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata,
-              1,(IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wen),
-              3,vlSelf->ysyx_22050612_npc__DOT__opcode);
+    VL_WRITEF("%x,%1#\n",32,vlSelf->inst,3,(IData)(vlSelf->ysyx_22050612_npc__DOT__opcode));
     __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0 = 0U;
     vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000ULL
                    : vlSelf->ysyx_22050612_npc__DOT__exu__DOT__snpc);

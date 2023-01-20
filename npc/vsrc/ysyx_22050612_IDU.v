@@ -26,7 +26,7 @@ assign opcode[0]=inst[0];
 
 
   always @(posedge clk) begin
-    //$display("%x,%d",inst,opcode);
+    $display("%x,%d",inst,opcode);
   end
 
 
