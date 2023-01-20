@@ -9,9 +9,8 @@ static Vysyx_22050612_npc* top;
 
 static uint8_t pmem[0x100000000];
 
-uint32_t pmem_read(uint64_t addr){
-  uint32_t a = pmem[addr];
-  return a;
+uint32_t pmem_read(uint32_t addr){
+  return *(uint32_t*)addr;
 }
 
 
