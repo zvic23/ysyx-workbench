@@ -25,7 +25,7 @@ ysyx_22050612_MuxKey #(1, 7, 3) a3 (opcode, inst[6:0], {
   });
 
   always @(posedge clk) begin
-    //$display("%x,%d",inst,opcode);
+    $display("%x,%d",inst,opcode);
   end
 
 
