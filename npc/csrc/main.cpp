@@ -43,7 +43,7 @@ void sim_exit(){
 int main() {
   //pmem[0x00000000] = 0x93;  pmem[0x00000001] = 0x00;  pmem[0x00000002] = 0x30;  pmem[0x00000003] = 0x00;
   *(uint32_t*)&pmem[0x00000000]=0x00200093;
-  *(uint32_t*)&pmem[0x00000004]=0x00301113;
+  *(uint32_t*)&pmem[0x00000004]=0x00308113;
   *(uint32_t*)&pmem[0x00000008]=0x00410193;
 
   sim_init();
