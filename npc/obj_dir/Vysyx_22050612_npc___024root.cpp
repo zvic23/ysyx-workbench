@@ -17,14 +17,18 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     QData/*63:0*/ __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0;
     // Body
     __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0 = 0U;
-    VL_WRITEF("%20#,%20#,%20#\n",64,((vlSelf->inst 
-                                      >> 0x1fU) ? (0xfffffffffffff000ULL 
-                                                   | (QData)((IData)(
-                                                                     (vlSelf->inst 
-                                                                      >> 0x14U))))
-                                      : (QData)((IData)(
-                                                        (vlSelf->inst 
-                                                         >> 0x14U)))),
+    VL_WRITEF("%20#,%20#,%20#\n",64,(((vlSelf->inst 
+                                       >> 0x1fU) ? 
+                                      (0xfffffffffffff000ULL 
+                                       | (QData)((IData)(
+                                                         (vlSelf->inst 
+                                                          >> 0x14U))))
+                                       : (QData)((IData)(
+                                                         (vlSelf->inst 
+                                                          >> 0x14U)))) 
+                                     + vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
+                                     [(0x1fU & (vlSelf->inst 
+                                                >> 0xfU))]),
               64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
               [(0x1fU & (vlSelf->inst >> 0xfU))],64,
               ((vlSelf->inst >> 0x1fU) ? (0xfffffffffffff000ULL 
