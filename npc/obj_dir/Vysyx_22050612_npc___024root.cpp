@@ -12,23 +12,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___sequent__TOP__1\n"); );
     // Body
-    VL_WRITEF("%20#,%2#,%1#\n",64,((1U & vlSelf->inst)
-                                    ? (((vlSelf->inst 
-                                         >> 0x1fU) ? 
-                                        (0xfffffffffffff000ULL 
-                                         | (QData)((IData)(
-                                                           (vlSelf->inst 
-                                                            >> 0x14U))))
-                                         : (QData)((IData)(
-                                                           (vlSelf->inst 
-                                                            >> 0x14U)))) 
-                                       + vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
-                                       [(0x1fU & (vlSelf->inst 
-                                                  >> 0xfU))])
-                                    : 0ULL),5,(0x1fU 
-                                               & (vlSelf->inst 
-                                                  >> 7U)),
-              1,(1U & vlSelf->inst));
+    VL_WRITEF("%20#,%20#,%20#,%20#\n\n",64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
+              [0U],64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
+              [1U],64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
+              [2U],64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
+              [3U]);
 }
 
 VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612_npc___024root* vlSelf) {
