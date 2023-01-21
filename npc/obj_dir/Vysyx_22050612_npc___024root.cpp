@@ -12,10 +12,12 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___sequent__TOP__1\n"); );
     // Body
-    VL_WRITEF("%20#,%20#,%20#\n",64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
+    VL_WRITEF("%20#,%20#,%20#,%20#,%20#\n",64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
               [0U],64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
               [1U],64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
-              [2U]);
+              [2U],64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
+              [3U],64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
+              [4U]);
 }
 
 VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612_npc___024root* vlSelf) {
