@@ -18,7 +18,7 @@ module ysyx_22050612_RegisterFile #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
 
     //$display("%d,%d,%d",wdata,waddr,wen);
 	  if (wen) begin rf[waddr] <= wdata;
-    //$display("%d,%d,%d",wdata,waddr,wen);
+    $display("%d,%d,%d,%d",wdata,waddr,wen,rf[waddr]);
   end
   end
 
