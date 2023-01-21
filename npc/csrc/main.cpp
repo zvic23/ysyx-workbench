@@ -49,9 +49,9 @@ int main() {
 
   sim_init();
 
-  //top->clk=0;top->rst=1;step_and_dump_wave();
-  //top->clk=1;top->rst=1;step_and_dump_wave();
-  //top->clk=0;top->rst=0;step_and_dump_wave();
+  top->clk=0;top->rst=1;step_and_dump_wave();
+  top->clk=1;top->rst=1;step_and_dump_wave();
+  top->clk=0;top->rst=0;step_and_dump_wave();
   int i=5;
   while(i--){
 
