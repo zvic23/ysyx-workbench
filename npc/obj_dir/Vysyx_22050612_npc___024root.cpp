@@ -20,10 +20,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000ULL
                    : vlSelf->ysyx_22050612_npc__DOT__exu__DOT__snpc);
     if (VL_UNLIKELY((1U & vlSelf->inst))) {
-        VL_WRITEF("%20#,%2#,%1#,%20#\n",64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata,
+        VL_WRITEF("%20#,%2#,%1#\n",64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata,
                   5,(0x1fU & (vlSelf->inst >> 7U)),
-                  1,(1U & vlSelf->inst),64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
-                  [(0x1fU & (vlSelf->inst >> 7U))]);
+                  1,(1U & vlSelf->inst));
         __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0 
             = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata;
         __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0 = 1U;
