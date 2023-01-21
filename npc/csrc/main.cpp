@@ -48,9 +48,9 @@ int main() {
 
   sim_init();
 
-  top->clk=0;top->rst=1;top->eval();//step_and_dump_wave();
-  top->clk=1;top->rst=1;top->eval();//step_and_dump_wave();
-  top->clk=0;top->rst=0;top->eval();//step_and_dump_wave();
+  top->clk=0;top->rst=1;step_and_dump_wave();
+  top->clk=1;top->rst=1;step_and_dump_wave();
+  top->clk=0;top->rst=0;step_and_dump_wave();
   int i=3;
   while(i--){
 
@@ -58,10 +58,12 @@ int main() {
   top->clk = 1;
   //top->Mr_val = pmem_read(top->Mr_addr);
   top->inst = pmem_read(top->pc);
-  top->eval();
+  //top->eval();
+step_and_dump_wave();
 
   top->clk = 0;
-  top->eval();
+step_and_dump_wave();
+  //top->eval();
 
   }
 
