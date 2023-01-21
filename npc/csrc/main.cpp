@@ -7,11 +7,11 @@ VerilatedVcdC* tfp = NULL;
 
 static Vysyx_22050612_npc* top;
 
-static uint8_t pmem[0x10000];
+static uint8_t pmem[0x50000];
 
 uint32_t pmem_read(uint64_t addr){
   
-  return *(uint32_t*)&pmem[addr-0x80000000];
+  return *(uint32_t*)&pmem[addr-0x80000000+0x100];
 }
 
 
@@ -41,8 +41,8 @@ void sim_exit(){
 }
 
 int main() {
-  pmem[0x00000000] = 0x93;  pmem[0x00000001] = 0x00;  pmem[0x00000002] = 0x30;  pmem[0x00000003] = 0x00;
-  pmem[0x00000004] = 0x13;  pmem[0x00000005] = 0x81;  pmem[0x00000006] = 0x50;  pmem[0x00000007] = 0x00;
+  pmem[0x00000100] = 0x93;  pmem[0x00000101] = 0x00;  pmem[0x00000102] = 0x30;  pmem[0x00000103] = 0x00;
+  pmem[0x00000104] = 0x13;  pmem[0x00000105] = 0x81;  pmem[0x00000106] = 0x50;  pmem[0x00000107] = 0x00;
 
   sim_init();
 
