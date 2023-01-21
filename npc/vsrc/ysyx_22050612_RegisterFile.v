@@ -16,11 +16,11 @@ module ysyx_22050612_RegisterFile #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
 
   always @(posedge clk) begin
 	  if (wen) begin rf[waddr] <= wdata;
-    $display("%d,%d,%d",wdata,waddr,wen);
+    //$display("%d,%d,%d",wdata,waddr,wen);
   end
   end
   always @(posedge clk) begin
-    //$display("%d,%d,%d",wdata,waddr,wen);
+    $display("%d,%d,%d",wdata,waddr,wen);
   end
   always @(negedge clk) begin
     //$display("%d,%d,%d,%d\n",rf[0],rf[1],rf[2],rf[3]);

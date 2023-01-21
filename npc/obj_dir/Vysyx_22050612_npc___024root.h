@@ -26,7 +26,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
 
     // LOCAL SIGNALS
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__snpc;
-    QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__wdata;
+    QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__src1;
     VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf;
 
     // LOCAL VARIABLES
