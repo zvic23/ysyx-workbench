@@ -45,13 +45,14 @@ int main() {
   *(uint32_t*)&pmem[0x00000000]=0x00200093;
   *(uint32_t*)&pmem[0x00000004]=0x00308113;
   *(uint32_t*)&pmem[0x00000008]=0x00510193;
+  *(uint32_t*)&pmem[0x00000008]=0x00618213;
 
   sim_init();
 
   top->clk=0;top->rst=1;step_and_dump_wave();
   top->clk=1;top->rst=1;step_and_dump_wave();
   top->clk=0;top->rst=0;step_and_dump_wave();
-  int i=4;
+  int i=5;
   while(i--){
 
 
