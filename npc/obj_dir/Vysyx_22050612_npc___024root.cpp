@@ -11,18 +11,28 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___sequent__TOP__1\n"); );
+    // Variables
+    CData/*4:0*/ __Vdlyvdim0__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0;
+    CData/*0:0*/ __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0;
+    QData/*63:0*/ __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0;
     // Body
+    __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0 = 0U;
+    vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000ULL
+                   : vlSelf->ysyx_22050612_npc__DOT__exu__DOT__snpc);
     if (VL_UNLIKELY((1U & vlSelf->inst))) {
-        vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf[(0x1fU 
-                                                                & (vlSelf->inst 
-                                                                   >> 7U))] 
-            = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata;
         VL_WRITEF("%20#,%2#,%1#\n",64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata,
                   5,(0x1fU & (vlSelf->inst >> 7U)),
                   1,(1U & vlSelf->inst));
+        __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0 
+            = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata;
+        __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0 = 1U;
+        __Vdlyvdim0__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0 
+            = (0x1fU & (vlSelf->inst >> 7U));
     }
-    vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000ULL
-                   : vlSelf->ysyx_22050612_npc__DOT__exu__DOT__snpc);
+    if (__Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0) {
+        vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf[__Vdlyvdim0__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0] 
+            = __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf__v0;
+    }
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__snpc 
         = (4ULL + vlSelf->pc);
 }

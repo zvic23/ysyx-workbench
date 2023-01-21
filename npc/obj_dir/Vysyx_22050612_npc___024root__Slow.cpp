@@ -30,6 +30,8 @@ void Vysyx_22050612_npc___024root___settle__TOP__2(Vysyx_22050612_npc___024root*
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___settle__TOP__2\n"); );
     // Body
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__snpc 
+        = (4ULL + vlSelf->pc);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata 
         = ((1U & vlSelf->inst) ? (((vlSelf->inst >> 0x1fU)
                                     ? (0xfffffffffffff000ULL 
@@ -43,8 +45,6 @@ void Vysyx_22050612_npc___024root___settle__TOP__2(Vysyx_22050612_npc___024root*
                                   [(0x1fU & (vlSelf->inst 
                                              >> 0xfU))])
             : 0ULL);
-    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__snpc 
-        = (4ULL + vlSelf->pc);
 }
 
 void Vysyx_22050612_npc___024root___eval_initial(Vysyx_22050612_npc___024root* vlSelf) {
