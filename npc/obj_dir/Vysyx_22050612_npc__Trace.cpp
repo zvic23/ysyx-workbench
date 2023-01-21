@@ -83,20 +83,7 @@ void Vysyx_22050612_npc___024root__traceChgSub0(Vysyx_22050612_npc___024root* vl
         tracep->chgQData(oldp+79,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
                                   [(0x1fU & (vlSelf->inst 
                                              >> 0x14U))]),64);
-        tracep->chgQData(oldp+81,(((1U & vlSelf->inst)
-                                    ? (((vlSelf->inst 
-                                         >> 0x1fU) ? 
-                                        (0xfffffffffffff000ULL 
-                                         | (QData)((IData)(
-                                                           (vlSelf->inst 
-                                                            >> 0x14U))))
-                                         : (QData)((IData)(
-                                                           (vlSelf->inst 
-                                                            >> 0x14U)))) 
-                                       + vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf
-                                       [(0x1fU & (vlSelf->inst 
-                                                  >> 0xfU))])
-                                    : 0ULL)),64);
+        tracep->chgQData(oldp+81,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata),64);
         tracep->chgQData(oldp+83,((((vlSelf->inst >> 0x1fU)
                                      ? (0xfffffffffffff000ULL 
                                         | (QData)((IData)(
