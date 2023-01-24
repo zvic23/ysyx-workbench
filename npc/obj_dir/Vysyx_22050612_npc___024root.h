@@ -26,11 +26,11 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
 
     // LOCAL SIGNALS
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__snpc;
-    QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__src1;
-    VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT__gpr__DOT__rf;
+    VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT__gpr_gp;
 
     // LOCAL VARIABLES
     CData/*0:0*/ __Vclklast__TOP__clk;
+    VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr____pinNumber5;
     VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
 
     // INTERNAL VARIABLES

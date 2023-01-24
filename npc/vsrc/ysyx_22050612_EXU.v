@@ -22,7 +22,11 @@ wire [63:0]src2;
 
 wire [63:0]wdata;
 wire wen;
-ysyx_22050612_RegisterFile #(5,64) gpr (clk, wdata, rd, wen, rs1, rs2, src1, src2);
+wire [63:0] gpr_gp[31:0];
+assign src1=gpr_gp[rs1];
+assign src2=gpr_gp[rs2];
+
+ysyx_22050612_RegisterFile #(5,64) gpr (clk, wdata, rd, wen, gpr_gp);
 
 wire [63:0]sum0;
 
