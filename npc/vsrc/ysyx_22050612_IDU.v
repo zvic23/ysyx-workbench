@@ -24,9 +24,9 @@ assign imm_I= (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]}
 //  });
 assign opcode=inst[0];
 
-  always @(posedge clk) begin
-    //$display("%x,%d,%d",inst,opcode,rd);
-  end
+//  always @(posedge clk) begin
+//    $display("%x,%d,%d",inst,opcode,rd);
+//  end
 
 
 

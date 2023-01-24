@@ -37,10 +37,10 @@ assign wdata = (opcode)? sum0:64'b0;
 //    1'b1, sum0
 //  });
 
-  always @(posedge clk) begin
-    //$display("%d,%d,%d",rd,rs1,imm_I);
-    //$display("%d,%d,%d,%d",sum0,wdata,wen,opcode);
-    //$display("%d,%d,%d",sum0,src1,imm_I);
-  end
+//  always @(posedge clk) begin
+//    $display("%d,%d,%d",rd,rs1,imm_I);
+//    $display("%d,%d,%d,%d",sum0,wdata,wen,opcode);
+//    $display("%d,%d,%d",sum0,src1,imm_I);
+//  end
 
 endmodule
