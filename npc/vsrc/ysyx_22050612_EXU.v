@@ -22,11 +22,11 @@ wire [63:0]src2;
 
 wire [63:0]wdata;
 wire wen;
-wire [63:0] gpr_gp[31:0];
-assign src1=gpr_gp[rs1];
-assign src2=gpr_gp[rs2];
+wire [63:0] gpr[31:0];
+assign src1=gpr[rs1];
+assign src2=gpr[rs2];
 
-ysyx_22050612_RegisterFile #(5,64) gpr (clk, wdata, rd, wen, gpr_gp);
+ysyx_22050612_RegisterFile #(5,64) gpr_group (clk, wdata, rd, wen, gpr);
 
 wire [63:0]sum0;
 
@@ -34,12 +34,16 @@ ysyx_22050612_Adder #(64) add0 (imm_I,src1,sum0);
 
 assign wen = (opcode)? 1'b1:1'b0;
 assign wdata = (opcode)? sum0:64'b0;
+
+
 //ysyx_22050612_MuxKey #(1, 1, 1) i0 (wen, opcode, {
 //    1'b1, 1'b1
 //  });
 //ysyx_22050612_MuxKey #(1, 1, 64) i1 (wdata, opcode, {
 //    1'b1, sum0
 //  });
+
+
 
 //  always @(posedge clk) begin
 //    $display("%d,%d,%d",rd,rs1,imm_I);
