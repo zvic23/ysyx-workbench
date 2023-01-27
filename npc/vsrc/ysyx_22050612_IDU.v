@@ -1,3 +1,5 @@
+import "DPI-C" function void ebreak ();
+
 module ysyx_22050612_IDU(
 input clk,
 input [31:0]inst,
