@@ -20,7 +20,6 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     CData/*0:0*/ __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0;
     QData/*63:0*/ __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0;
     // Body
-    VL_WRITEF("%x\n",32,vlSelf->inst);
     if ((0x100073U == vlSelf->inst)) {
         Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024unit();
     }
