@@ -41,7 +41,7 @@ void sim_exit(){
 int i=1;
 int ebreak(){
   i = 0; 
-	sim_exit();
+	//sim_exit();
 	return 0;
 }
 int main() {
