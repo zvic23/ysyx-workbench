@@ -37,7 +37,7 @@ void Vysyx_22050612_npc___024root___initial__TOP__1(Vysyx_22050612_npc___024root
     IData/*31:0*/ __Vfunc_add__0__Vfuncout;
     // Body
     Vysyx_22050612_npc___024unit____Vdpiimwrap_add_TOP____024unit(1U, 2U, __Vfunc_add__0__Vfuncout);
-    VL_WRITEF("00000001 + 00000002 = %x\n",32,__Vfunc_add__0__Vfuncout);
+    VL_WRITEF("00000003 + 00000002 = %x\n",32,__Vfunc_add__0__Vfuncout);
 }
 
 void Vysyx_22050612_npc___024root___settle__TOP__3(Vysyx_22050612_npc___024root* vlSelf) {

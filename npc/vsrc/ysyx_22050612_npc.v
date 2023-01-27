@@ -33,7 +33,7 @@ ysyx_22050612_EXU exu (clk,imm_I,rd,rs1,rs2,opcode,pc,dnpc);
 
 
 initial begin
-   $display("%x + %x = %x", 1, 2, add(1,2));
+   $display("%x + %x = %x", 3, 2, add(1,2));
 end
 
 
