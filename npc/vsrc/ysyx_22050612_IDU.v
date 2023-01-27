@@ -1,5 +1,3 @@
-
-import "DPI-C" function void sim_exit ();
 module ysyx_22050612_IDU(
 input clk,
 input [31:0]inst,
@@ -24,9 +22,9 @@ assign imm_I= (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]}
 //    7'b0010011, 3'b1
 //  });
 assign opcode=inst[0];
-always @(posedge clk) begin
-	if(inst==32'h00100073) sim_exit();
-end
+//always @(posedge clk) begin
+//	if(inst==32'h00100073) sim_exit();
+//end
 
 //  always @(posedge clk) begin
 //    $display("%x,%d,%d",inst,opcode,rd);

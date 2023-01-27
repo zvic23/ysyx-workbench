@@ -1,3 +1,4 @@
+import "DPI-C" function void sim_exit ();
 
 `define ysyx_22050612_rgsize 64
 
@@ -24,12 +25,14 @@ wire [ 4:0]rs1;
 wire [ 4:0]rs2;
 wire opcode;
 
-//  always @(posedge clk) begin
-//    $display("%x",inst);
-//  end
+always @(posedge clk) begin
+  $display("%x",inst);
+end
 ysyx_22050612_IFU ifu (clk, rst, dnpc, pc);
 ysyx_22050612_IDU idu (clk,inst, imm_I, rd, rs1, rs2, opcode);
 ysyx_22050612_EXU exu (clk,imm_I,rd,rs1,rs2,opcode,pc,dnpc);
 
-
+always @(posedge clk) begin
+	if(inst==32'h00100073) sim_exit();
+end
 endmodule
