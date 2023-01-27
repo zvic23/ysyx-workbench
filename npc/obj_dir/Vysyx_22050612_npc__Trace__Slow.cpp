@@ -201,14 +201,16 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
                                               >> 0xfU))),5);
         tracep->fullCData(oldp+140,((0x1fU & (vlSelf->inst 
                                               >> 0x14U))),5);
-        tracep->fullBit(oldp+141,((1U & vlSelf->inst)));
+        tracep->fullBit(oldp+141,((0x13U == (0x7fU 
+                                             & vlSelf->inst))));
         tracep->fullQData(oldp+142,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
                                     [(0x1fU & (vlSelf->inst 
                                                >> 0xfU))]),64);
         tracep->fullQData(oldp+144,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
                                     [(0x1fU & (vlSelf->inst 
                                                >> 0x14U))]),64);
-        tracep->fullQData(oldp+146,(((1U & vlSelf->inst)
+        tracep->fullQData(oldp+146,(((0x13U == (0x7fU 
+                                                & vlSelf->inst))
                                       ? (((vlSelf->inst 
                                            >> 0x1fU)
                                            ? (0xfffffffffffff000ULL 

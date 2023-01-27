@@ -26,20 +26,16 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0 = 0U;
     vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000ULL
                    : vlSelf->ysyx_22050612_npc__DOT__exu__DOT__snpc);
-    if ((1U & vlSelf->inst)) {
+    if ((0x13U == (0x7fU & vlSelf->inst))) {
         __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0 
-            = ((1U & vlSelf->inst) ? (((vlSelf->inst 
-                                        >> 0x1fU) ? 
-                                       (0xfffffffffffff000ULL 
-                                        | (QData)((IData)(
-                                                          (vlSelf->inst 
-                                                           >> 0x14U))))
-                                        : (QData)((IData)(
-                                                          (vlSelf->inst 
-                                                           >> 0x14U)))) 
-                                      + vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
-                                      [(0x1fU & (vlSelf->inst 
-                                                 >> 0xfU))])
+            = ((0x13U == (0x7fU & vlSelf->inst)) ? 
+               (((vlSelf->inst >> 0x1fU) ? (0xfffffffffffff000ULL 
+                                            | (QData)((IData)(
+                                                              (vlSelf->inst 
+                                                               >> 0x14U))))
+                  : (QData)((IData)((vlSelf->inst >> 0x14U)))) 
+                + vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
+                [(0x1fU & (vlSelf->inst >> 0xfU))])
                 : 0ULL);
         __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0 = 1U;
         __Vdlyvdim0__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0 
