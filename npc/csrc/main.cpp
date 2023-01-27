@@ -3,7 +3,7 @@
 #include "Vysyx_22050612_npc.h"
 
 #include "svdpi.h"
-#include "Vysyx_22050612_npc__Dpi.h"
+#include "Vysyx_22050612_npc__Dpi.h"  //zsl:ebreak support (DPI-C)
 
 VerilatedContext* contextp = NULL;
 VerilatedVcdC* tfp = NULL;
@@ -16,7 +16,6 @@ uint32_t pmem_read(uint64_t addr){
   
   return *(uint32_t*)&pmem[addr-0x80000000];
 }
-
 
 
 void step_and_dump_wave(){
@@ -38,11 +37,11 @@ void sim_exit(){
   tfp->close();
 }
 
-int i=1;
+int i = 1;
 void ebreak(){
   i = 0; 
-	//sim_exit();
 }
+
 int main() {
 
   *(uint32_t*)&pmem[0x00000000]=0x00100093;
@@ -50,7 +49,7 @@ int main() {
   *(uint32_t*)&pmem[0x00000008]=0x00310193;
   *(uint32_t*)&pmem[0x0000000c]=0x00418213;
 
-  *(uint32_t*)&pmem[0x00000010]=0x00100073;
+  *(uint32_t*)&pmem[0x00000010]=0x00100073; //ebreak
 
   sim_init();
 
@@ -66,7 +65,7 @@ int main() {
   step_and_dump_wave();//top->eval();
 
   top->clk = 0;
-  step_and_dump_wave(); //top->eval();
+  step_and_dump_wave();//top->eval();
 
   }
   sim_exit();
