@@ -25,12 +25,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     VL_OUT64(pc,63,0);
 
     // LOCAL SIGNALS
-    CData/*0:0*/ ysyx_22050612_npc__DOT__opcode;
-    CData/*0:0*/ ysyx_22050612_npc__DOT__idu__DOT__i5__DOT__i0__DOT__lut_out;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__snpc;
-    VlUnpacked<CData/*7:0*/, 1> ysyx_22050612_npc__DOT__idu__DOT__i5__DOT__i0__DOT__pair_list;
-    VlUnpacked<CData/*6:0*/, 1> ysyx_22050612_npc__DOT__idu__DOT__i5__DOT__i0__DOT__key_list;
-    VlUnpacked<CData/*0:0*/, 1> ysyx_22050612_npc__DOT__idu__DOT__i5__DOT__i0__DOT__data_list;
     VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT__gpr;
 
     // LOCAL VARIABLES
