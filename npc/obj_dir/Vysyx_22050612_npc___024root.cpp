@@ -5,12 +5,14 @@
 #include "Vysyx_22050612_npc___024root.h"
 #include "Vysyx_22050612_npc__Syms.h"
 
+#include "verilated_dpi.h"
+
 //==========
 
-VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612_npc___024root* vlSelf) {
+VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612_npc___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___sequent__TOP__1\n"); );
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___sequent__TOP__2\n"); );
     // Variables
     CData/*4:0*/ __Vdlyvdim0__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0;
     CData/*0:0*/ __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0;
@@ -148,7 +150,7 @@ void Vysyx_22050612_npc___024root___eval(Vysyx_22050612_npc___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___eval\n"); );
     // Body
     if (((IData)(vlSelf->clk) & (~ (IData)(vlSelf->__Vclklast__TOP__clk)))) {
-        Vysyx_22050612_npc___024root___sequent__TOP__1(vlSelf);
+        Vysyx_22050612_npc___024root___sequent__TOP__2(vlSelf);
         vlSelf->__Vm_traceActivity[1U] = 1U;
     }
     // Final

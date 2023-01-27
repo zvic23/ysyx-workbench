@@ -2,6 +2,9 @@
 #include "verilated_vcd_c.h"
 #include "Vysyx_22050612_npc.h"
 
+#include "svdpi.h"
+#include "Vysyx_22050612_npc__Dpi.h"
+
 VerilatedContext* contextp = NULL;
 VerilatedVcdC* tfp = NULL;
 
@@ -13,6 +16,8 @@ uint32_t pmem_read(uint64_t addr){
   
   return *(uint32_t*)&pmem[addr-0x80000000];
 }
+
+int add(int a, int b) { return a+b; }
 
 
 

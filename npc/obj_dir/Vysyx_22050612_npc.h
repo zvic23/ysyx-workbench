@@ -9,11 +9,13 @@
 #define VERILATED_VYSYX_22050612_NPC_H_  // guard
 
 #include "verilated_heavy.h"
+#include "svdpi.h"
 
 class Vysyx_22050612_npc__Syms;
 class Vysyx_22050612_npc___024root;
 class VerilatedVcdC;
 class Vysyx_22050612_npc_VerilatedVcd;
+class Vysyx_22050612_npc___024unit;
 
 
 // This class is the main interface to the Verilated model
@@ -35,6 +37,7 @@ class Vysyx_22050612_npc VL_NOT_FINAL {
     // CELLS
     // Public to allow access to /* verilator public */ items.
     // Otherwise the application code can consider these internals.
+    Vysyx_22050612_npc___024unit* const __PVT____024unit;
 
     // Root instance pointer to allow access to model internals,
     // including inlined /* verilator public_flat_* */ items.

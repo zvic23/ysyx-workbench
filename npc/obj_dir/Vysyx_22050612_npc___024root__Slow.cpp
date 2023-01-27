@@ -5,6 +5,8 @@
 #include "Vysyx_22050612_npc___024root.h"
 #include "Vysyx_22050612_npc__Syms.h"
 
+#include "verilated_dpi.h"
+
 //==========
 
 
@@ -25,10 +27,23 @@ void Vysyx_22050612_npc___024root::__Vconfigure(Vysyx_22050612_npc__Syms* _vlSym
 Vysyx_22050612_npc___024root::~Vysyx_22050612_npc___024root() {
 }
 
-void Vysyx_22050612_npc___024root___settle__TOP__2(Vysyx_22050612_npc___024root* vlSelf) {
+void Vysyx_22050612_npc___024unit____Vdpiimwrap_add_TOP____024unit(IData/*31:0*/ a, IData/*31:0*/ b, IData/*31:0*/ &add__Vfuncrtn);
+
+void Vysyx_22050612_npc___024root___initial__TOP__1(Vysyx_22050612_npc___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___settle__TOP__2\n"); );
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___initial__TOP__1\n"); );
+    // Variables
+    IData/*31:0*/ __Vfunc_add__0__Vfuncout;
+    // Body
+    Vysyx_22050612_npc___024unit____Vdpiimwrap_add_TOP____024unit(1U, 2U, __Vfunc_add__0__Vfuncout);
+    VL_WRITEF("00000001 + 00000002 = %x\n",32,__Vfunc_add__0__Vfuncout);
+}
+
+void Vysyx_22050612_npc___024root___settle__TOP__3(Vysyx_22050612_npc___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___settle__TOP__3\n"); );
     // Body
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__snpc 
         = (4ULL + vlSelf->pc);
@@ -135,6 +150,7 @@ void Vysyx_22050612_npc___024root___eval_initial(Vysyx_22050612_npc___024root* v
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___eval_initial\n"); );
     // Body
+    Vysyx_22050612_npc___024root___initial__TOP__1(vlSelf);
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
 }
 
@@ -143,7 +159,7 @@ void Vysyx_22050612_npc___024root___eval_settle(Vysyx_22050612_npc___024root* vl
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___eval_settle\n"); );
     // Body
-    Vysyx_22050612_npc___024root___settle__TOP__2(vlSelf);
+    Vysyx_22050612_npc___024root___settle__TOP__3(vlSelf);
     vlSelf->__Vm_traceActivity[1U] = 1U;
     vlSelf->__Vm_traceActivity[0U] = 1U;
 }
