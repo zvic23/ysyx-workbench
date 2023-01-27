@@ -32,7 +32,7 @@ ysyx_22050612_IFU ifu (clk, rst, dnpc, pc);
 ysyx_22050612_IDU idu (clk,inst, imm_I, rd, rs1, rs2, opcode);
 ysyx_22050612_EXU exu (clk,imm_I,rd,rs1,rs2,opcode,pc,dnpc);
 
-always @(posedge clk) begin
-	if(inst==32'h00100073) sim_exit();
-end
+//always @(posedge clk) begin
+//	if(inst==32'h00100073) sim_exit();
+//end
 endmodule
