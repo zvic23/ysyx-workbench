@@ -37,7 +37,10 @@ void sim_exit(){
   step_and_dump_wave();
   tfp->close();
 }
+
+int i=1;
 int ebreak(){
+  i = 0; 
   tfp->close();
 	//sim_exit();
 	return 0;
@@ -57,8 +60,7 @@ int main() {
   top->clk=1;top->rst=1;step_and_dump_wave();
   top->clk=0;top->rst=0;step_and_dump_wave();
 
-  int i=9;
-  while(i--){
+  while(i){
 
   top->clk = 1;
   //top->Mr_val = pmem_read(top->Mr_addr);
