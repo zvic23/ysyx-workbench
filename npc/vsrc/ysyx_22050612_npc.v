@@ -1,6 +1,7 @@
+import "DPI-C" function void sim_exit ();
+
 `define ysyx_22050612_rgsize 64
 
-import "DPI-C" function int add (input int a, input int b);
 
 module ysyx_22050612_npc(
 input clk,
@@ -30,12 +31,6 @@ wire opcode;
 ysyx_22050612_IFU ifu (clk, rst, dnpc, pc);
 ysyx_22050612_IDU idu (clk,inst, imm_I, rd, rs1, rs2, opcode);
 ysyx_22050612_EXU exu (clk,imm_I,rd,rs1,rs2,opcode,pc,dnpc);
-
-
-initial begin
-   $display("%x + %x = %x", 3, 2, add(3,2));
-end
-
 
 
 endmodule
