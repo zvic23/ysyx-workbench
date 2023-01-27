@@ -16,11 +16,6 @@ uint32_t pmem_read(uint64_t addr){
 
 
 
-
-
-
-
-
 void step_and_dump_wave(){
   top->eval();
   contextp->timeInc(1);

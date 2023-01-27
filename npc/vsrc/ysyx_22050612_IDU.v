@@ -3,8 +3,6 @@ input clk,
 input [31:0]inst,
 
 
-
-
 output [63:0]imm_I,
 output [ 4:0]rd,
 output [ 4:0]rs1,
