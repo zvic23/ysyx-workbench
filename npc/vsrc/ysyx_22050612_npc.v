@@ -1,4 +1,3 @@
-import "DPI-C" function void sim_exit ();
 
 `define ysyx_22050612_rgsize 64
 

@@ -13,7 +13,7 @@ extern "C" {
 
 
     // DPI IMPORTS
-    // DPI import at vsrc/ysyx_22050612_npc.v:1:30
+    // DPI import at vsrc//ysyx_22050612_IDU.v:2:30
     extern void sim_exit();
 
 #ifdef __cplusplus
