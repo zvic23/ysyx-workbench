@@ -38,7 +38,8 @@ void sim_exit(){
   tfp->close();
 }
 int ebreak(){
-	sim_exit();
+  tfp->close();
+	//sim_exit();
 	return 0;
 }
 int main() {
