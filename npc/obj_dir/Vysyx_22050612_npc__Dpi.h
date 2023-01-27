@@ -13,8 +13,8 @@ extern "C" {
 
 
     // DPI IMPORTS
-    // DPI import at vsrc/ysyx_22050612_npc.v:1:29
-    extern int ebreak();
+    // DPI import at vsrc/ysyx_22050612_npc.v:1:30
+    extern void ebreak();
 
 #ifdef __cplusplus
 }

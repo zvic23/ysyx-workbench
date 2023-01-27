@@ -9,7 +9,7 @@
 
 //==========
 
-void Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024unit(IData/*31:0*/ &ebreak__Vfuncrtn);
+void Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024unit();
 
 VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612_npc___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -18,13 +18,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     // Variables
     CData/*4:0*/ __Vdlyvdim0__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0;
     CData/*0:0*/ __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0;
-    IData/*31:0*/ __Vfunc_ebreak__0__Vfuncout;
     QData/*63:0*/ __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0;
     // Body
     VL_WRITEF("%x\n",32,vlSelf->inst);
-    if (VL_UNLIKELY((0x100073U == vlSelf->inst))) {
-        Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024unit(__Vfunc_ebreak__0__Vfuncout);
-        VL_WRITEF("%11d\n",32,__Vfunc_ebreak__0__Vfuncout);
+    if ((0x100073U == vlSelf->inst)) {
+        Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024unit();
     }
     __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0 = 0U;
     vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000ULL

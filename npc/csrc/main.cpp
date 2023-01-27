@@ -39,10 +39,9 @@ void sim_exit(){
 }
 
 int i=1;
-int ebreak(){
+void ebreak(){
   i = 0; 
 	//sim_exit();
-	return 0;
 }
 int main() {
 
