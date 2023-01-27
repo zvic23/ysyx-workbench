@@ -37,7 +37,10 @@ void sim_exit(){
   step_and_dump_wave();
   tfp->close();
 }
-
+int ebreak(){
+	sim_exit();
+	return 0;
+}
 int main() {
 
   *(uint32_t*)&pmem[0x00000000]=0x00100093;
