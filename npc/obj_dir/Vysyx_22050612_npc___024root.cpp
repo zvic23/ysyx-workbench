@@ -9,6 +9,8 @@
 
 //==========
 
+void Vysyx_22050612_npc___024unit____Vdpiimwrap_sim_exit_TOP____024unit();
+
 VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612_npc___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -19,6 +21,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     QData/*63:0*/ __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0;
     // Body
     VL_WRITEF("%x\n",32,vlSelf->inst);
+    if ((0x100073U == vlSelf->inst)) {
+        Vysyx_22050612_npc___024unit____Vdpiimwrap_sim_exit_TOP____024unit();
+    }
     __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__gpr_group____pinNumber5__v0 = 0U;
     vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000ULL
                    : vlSelf->ysyx_22050612_npc__DOT__exu__DOT__snpc);
