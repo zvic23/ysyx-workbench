@@ -20,7 +20,7 @@ assign imm_I= (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]}
 ysyx_22050612_MuxKey #(1, 7, 1) i5 (opcode, inst[6:0], {
     7'b0010011, 1'b1
   });
-assign opcode=(inst[6:0]==7'h13)? 1'b1:1'b0;
+//assign opcode=(inst[6:0]==7'h13)? 1'b1:1'b0;
 
 
 always @(posedge clk) begin
