@@ -32,9 +32,10 @@ wire [63:0]sum0;
 
 ysyx_22050612_Adder #(64) add0 (imm_I,src1,sum0);
 
+
+
 //assign wen = (opcode)? 1'b1:1'b0;
 //assign wdata = (opcode)? sum0:64'b0;
-
 
 ysyx_22050612_MuxKey #(1, 1, 1) i0 (wen, opcode, {
     1'b1, 1'b1
