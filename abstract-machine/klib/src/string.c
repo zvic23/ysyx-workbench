@@ -63,7 +63,7 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 }
 
 void *memset(void *s, int c, size_t n) {
-  char *a = s;
+  int *a = s;
   for(int i=0; i<n; n++){
 	  a[i]=c;
   }
@@ -85,8 +85,8 @@ int memcmp(const void *s1, const void *s2, size_t n) {
 	  return 0;
   }
   else {
-	  const char *a1=s1;
-	  const char *a2=s2;
+	  const unsigned char *a1=s1;
+	  const unsigned char *a2=s2;
 	  for(i = 0; i < n; i++){
 		  int result = a1[i] - a2[i];
 		  if(result != 0){
