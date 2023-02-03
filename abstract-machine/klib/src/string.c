@@ -47,7 +47,7 @@ int strcmp(const char *s1, const char *s2) {
   int i=0;
   while(1){
 	  if(s1[i]==s2[i]&&s1[i]=='\0'){
-		  return 0;
+		  return 1;
 	  }
 	  if(s1[i]!=s2[i]){
 		  int result = s1[i]-s2[i];
@@ -63,7 +63,12 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 }
 
 void *memset(void *s, int c, size_t n) {
-panic("Not implemented");
+  char *a = s;
+  for(int i=0; i<n; n++){
+	  a[i]=c;
+  }
+  return s;
+  //panic("Not implemented");
 }
 
 void *memmove(void *dst, const void *src, size_t n) {
@@ -75,7 +80,23 @@ void *memcpy(void *out, const void *in, size_t n) {
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
-panic("Not implemented");
+  int i=0;
+  if(n == 0){
+	  return 0;
+  }
+  else {
+	  const unsigned char *a1=s1;
+	  const unsigned char *a2=s2;
+	  for(i = 0; i < n; i++){
+		  int result = a1[i] - a2[i];
+		  if(result != 0){
+			  return result;
+		  }
+	  }
+	  return 0;
+  }
+
+  //panic("Not implemented");
 }
 
 #endif
