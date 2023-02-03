@@ -23,7 +23,7 @@ char *strcat(char *dst, const char *src) {
 int strcmp(const char *s1, const char *s2) {
   int i=0;
   while(1){
-	  if(s1[i]==s2[i]||s1[i]==' '){
+	  if(s1[i]==s2[i]||s1[i]=='\0'){
 		  return 0;
 	  }
 	  if(s1[i]!=s2[i]){
