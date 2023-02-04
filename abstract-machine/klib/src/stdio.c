@@ -30,7 +30,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
 		  int d = va_arg(ap, int);
-		  char s0[10];
+		  char s0[10]="1111111111";
 		  char *s = convert(d , s0 , 10);
 		  int length = strlen(s);
 		  for(int k=0;k<length;k++){
