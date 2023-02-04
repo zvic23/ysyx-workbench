@@ -12,7 +12,7 @@ int printf(const char *fmt, ...) {
 int vsprintf(char *out, const char *fmt, va_list ap) {
   panic("Not implemented");
 }
-
+const char digits[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 int sprintf(char *out, const char *fmt, ...) {     //to be completed
   int i = 0;
   int j = 0;
@@ -30,11 +30,22 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
 		  int d = va_arg(ap, int);
-		  char s0[20]="11111111112222222222";
-		  char *s = convert(d , s0 , 10);
-		  int length = strlen(s);
+		  //char s0[20]="11111111112222222222";
+		  //char *s = convert(d , s0 , 10);
+		  int number = d;int base = 10;
+		  char aa[20];
+		  char *buff=aa;
+         do
+        {
+            *buff = digits[number % base];
+            number /= base;
+	    buff++;
+        } while (number);
+        //if (!*result) *buff++ = '0';
+        *buff = 0;
+		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
-			  out[j] = s[k];
+			  out[j] = buff[length-1-k];
 			  j++;
 		  }
 		  i=i+2;
@@ -57,50 +68,5 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
   panic("Not implemented");
 }
-
-
-
-char *reverse(char *str){
-	int length = strlen(str);
-        char s[20]="11111111112222222222";
-	for(int i =0; i<length; i++){
-		s[i]=str[length-1-i];
-	}
-	for(int j =0; j<length; j++){
-		str[j]=s[j];
-	}
-	str[length]=0;
-	return str;
-}
-
-
-const char digits[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-char *convert(int number, char *buff, int base)
-{
-    char *result = (buff == NULL || base > strlen(digits) || base < 2) ? NULL : buff;
-    char sign = 0;
-
-
-    if (number < 0)
-    {
-         sign = '-';
-
-    }
-    if (result != NULL)
-    {
-        do
-        {
-            *buff++ = digits[abs(number % (base ))];
-            number /= base;
-        } while (number);
-        if(sign) *buff++ = sign;
-        if (!*result) *buff++ = '0';
-        *buff = 0;
-        reverse(result);
-    }
-    return result;
-}
-
 
 #endif
