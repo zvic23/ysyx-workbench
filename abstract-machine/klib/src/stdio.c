@@ -45,7 +45,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
         *buff = 0;
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
-			  out[j] = buff[length-1-k];
+			  out[j] = aa[k];
 			  j++;
 		  }
 		  i=i+2;
