@@ -18,7 +18,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
   int j = 0;
   va_list ap;
   va_start(ap, fmt);
-  while(fmt[i]!='\0'){
+  while(fmt[i]){
 	  if(fmt[i]=='%' && fmt[i+1]=='s'){
 		  char *s = va_arg(ap, char *);
 		  int length = strlen(s);
