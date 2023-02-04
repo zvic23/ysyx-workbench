@@ -36,12 +36,12 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
 		  char aa[20]="11111111112222222222";
 		  char *buff=aa;
 	         do
-        {
-            *buff++ = digits[number % base];
-            number /= base;
-        } while (number);
-        //if (!*result) *buff++ = '0';
-        *buff = '\0';
+                 {
+                       *buff++ = digits[number % base];
+                       number /= base;
+                 } while (number);
+                 //if (!*result) *buff++ = '0';
+                  *buff = '\0';
 		  int length = strlen(aa);
 		  for(int k=0;k<length;k++){
 			  out[j] = aa[length-1-k];
