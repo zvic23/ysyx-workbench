@@ -12,8 +12,9 @@ int printf(const char *fmt, ...) {
 int vsprintf(char *out, const char *fmt, va_list ap) {
   panic("Not implemented");
 }
+
 const char digits[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-int sprintf(char *out, const char *fmt, ...) {     //to be completed
+int sprintf(char *out, const char *fmt, ...) {     //to be completed    the integer of %d is nagetive haven't been concerned.   the value of return is nagetive when meet wrong 
   int i = 0;
   int j = 0;
   va_list ap;
@@ -33,18 +34,18 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
 		  //char s0[20]="11111111112222222222";
 		  //char *s = convert(d , s0 , 10);
 		  int number = d;int base = 10;
-		  char aa[20]="11111111112222222222";
-		  char *buff=aa;
-	         do
-                 {
-                       *buff++ = digits[number % base];
-                       number /= base;
-                 } while (number);
-                 //if (!*result) *buff++ = '0';
-                  *buff = '\0';
-		  int length = strlen(aa);
+		  char buff[20]="11111111112222222222";
+		  char *a=buff;
+	          do
+                  {
+                          *a++ = digits[number % base];
+                          number /= base;
+                  } while (number);
+                  //if (!*result) *buff++ = '0';
+                  *a = '\0';
+		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
-			  out[j] = aa[length-1-k];
+			  out[j] = buff[length-1-k];
 			  j++;
 		  }
 		  i=i+2;
