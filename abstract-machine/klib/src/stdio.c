@@ -90,7 +90,7 @@ char *convert(int number, char *buff, int base)
     {
         do
         {
-            *buff++ = digits[abs(number % (base ))];
+            *buff++ = digits[number % (base )];
             number /= base;
         } while (number);
         if(sign) *buff++ = sign;
