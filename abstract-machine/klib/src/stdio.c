@@ -33,7 +33,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
 		  //char s0[20]="11111111112222222222";
 		  //char *s = convert(d , s0 , 10);
 		  int number = d;int base = 10;
-		  char aa[20];
+		  char aa[20]="11111111112222222222";
 		  char *buff=aa;
 	         do
         {
