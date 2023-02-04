@@ -30,10 +30,8 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
-		  int d = va_arg(ap, int);
-		  //char s0[20]="11111111112222222222";
-		  //char *s = convert(d , s0 , 10);
-		  int number = d;int base = 10;
+		  int number = va_arg(ap, int);
+		  int base = 10;
 		  char buff[20];
 		  char *a=buff;
 	          do
