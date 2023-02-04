@@ -37,7 +37,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
 		  char *buff=aa;
 	         do
         {
-            *buff++ = digits[abs(number % base)];
+            *buff++ = digits[number % base];
             number /= base;
         } while (number);
         //if (!*result) *buff++ = '0';
