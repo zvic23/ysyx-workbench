@@ -30,7 +30,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
 		  int d = va_arg(ap, int);
-		  char s0[10]="1111111111";
+		  char s0[20]="11111111112222222222";
 		  char *s = convert(d , s0 , 10);
 		  int length = strlen(s);
 		  for(int k=0;k<length;k++){
@@ -90,12 +90,12 @@ char *convert(int number, char *buff, int base)
     {
         do
         {
-            *buff++ = digits[number % base ];
+            *buff++ = digits[abs(number % (base ))];
             number /= base;
         } while (number);
         if(sign) *buff++ = sign;
-        //if (!*result) *buff++ = '0';
-        *buff = '\0';
+        if (!*result) *buff++ = '0';
+        *buff = 0;
         reverse(result);
     }
     return result;
