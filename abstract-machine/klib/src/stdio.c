@@ -40,7 +40,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
                           number /= base;
                   } while (number);
                   //if (!*result) *buff++ = '0';
-                  *a = '\0';
+                  *a = 0;
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
 			  out[j] = buff[length-1-k];
