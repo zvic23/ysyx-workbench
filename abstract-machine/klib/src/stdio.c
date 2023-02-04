@@ -44,7 +44,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
         *buff = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
-			  out[j] = aa[k];
+			  out[j] = aa[length-1-k];
 			  j++;
 		  }
 		  i=i+2;
@@ -56,7 +56,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
 	  }
   }
   va_end(ap);
-  return 0; 
+  return j; 
   //panic("Not implemented");
 }
 
