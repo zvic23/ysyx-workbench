@@ -54,7 +54,6 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
 		  j++;
 	  }
   }
-  out[j]='\0';
   va_end(ap);
   return j; 
   //panic("Not implemented");
