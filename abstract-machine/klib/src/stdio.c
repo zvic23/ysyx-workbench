@@ -30,7 +30,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
 		  int d = va_arg(ap, int);
-		  char *s = d + "";
+		  char *s = toString(d) ;
 		  int length = strlen(s);
 		  for(int k=0;k<length;k++){
 			  out[j] = s[k];
@@ -56,5 +56,50 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
   panic("Not implemented");
 }
+
+
+
+
+char* toString(int iVal)
+{
+    char str[1024] = {'\0',};
+    char *pos = NULL;
+    int sign = 0;   //正数 或者是 0
+
+    int abs = iVal;
+
+    pos = str + 1023; //移动指针,指向堆栈底部
+    *pos-- = '\0';  //end
+
+    if(iVal < 0)
+    {
+        sign = 1;
+        abs = -abs;
+    }
+    
+    int dit = 0;
+    while(abs > 0)
+    {
+        dit = abs % 10;
+        abs = abs / 10;
+
+        *pos-- = (char)('0' + dit); 
+    }
+
+    if(sign)
+        *pos-- = '-';
+
+    char *ret = (char*)malloc(1024 - (pos - str));
+
+    if(iVal == 0)               //0的一个处理
+        strcpy(ret, "0");
+    else                        //iVal非0的拷贝
+        strcpy(ret, pos+1);
+
+    return(ret);    
+}
+
+
+
 
 #endif
