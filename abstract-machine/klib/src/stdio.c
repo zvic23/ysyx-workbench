@@ -30,7 +30,8 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
 		  int d = va_arg(ap, int);
-		  char *s = d + "";
+		  char s0[10];
+		  char *s = convert(d , s0 , 10);
 		  int length = strlen(s);
 		  for(int k=0;k<length;k++){
 			  out[j] = s[k];
@@ -59,7 +60,19 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
 
 
 
-char *reverse(char *str);
+char *reverse(char *str){
+	int length = strlen(str);
+	char s[10];
+	for(int i =0; i<length; i++){
+		s[0]=str[length-i];
+	}
+	for(int j =0; j<length; j++){
+		str[j]=s[j];
+	}
+	return str;
+}
+
+
 const char digits[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 char *convert(int number, char *buff, int base)
