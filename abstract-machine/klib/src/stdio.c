@@ -64,7 +64,7 @@ char *reverse(char *str){
 	int length = strlen(str);
 	char s[10];
 	for(int i =0; i<length; i++){
-		s[i]=str[length-i];
+		s[i]=str[length-1-i];
 	}
 	for(int j =0; j<length; j++){
 		str[j]=s[j];
