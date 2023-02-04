@@ -35,11 +35,10 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
 		  int number = d;int base = 10;
 		  char aa[20];
 		  char *buff=aa;
-         do
+	         do
         {
-            *buff = digits[number % base];
+            *buff++ = digits[number % base];
             number /= base;
-	    buff++;
         } while (number);
         //if (!*result) *buff++ = '0';
         *buff = 0;
