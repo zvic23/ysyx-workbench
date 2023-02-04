@@ -62,13 +62,14 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
 
 char *reverse(char *str){
 	int length = strlen(str);
-	char s[10];
+        char s[20]="11111111112222222222";
 	for(int i =0; i<length; i++){
 		s[i]=str[length-1-i];
 	}
 	for(int j =0; j<length; j++){
 		str[j]=s[j];
 	}
+	str[length]=0;
 	return str;
 }
 
