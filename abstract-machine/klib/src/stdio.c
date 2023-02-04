@@ -94,7 +94,7 @@ char *convert(int number, char *buff, int base)
             number /= base;
         } while (number);
         if(sign) *buff++ = sign;
-        if (!*result) *buff++ = '0';
+        //if (!*result) *buff++ = '0';
         *buff = '\0';
         reverse(result);
     }
