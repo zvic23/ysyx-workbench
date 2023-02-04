@@ -18,7 +18,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
   int j = 0;
   va_list ap;
   va_start(ap, fmt);
-  while(fmt[i]!=0){
+  while(fmt[i]!='\0'){
 	  if(fmt[i]=='%' && fmt[i+1]=='s'){
 		  char *s = va_arg(ap, char *);
 		  int length = strlen(s);
@@ -41,7 +41,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed
             number /= base;
         } while (number);
         //if (!*result) *buff++ = '0';
-        *buff = 0;
+        *buff = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
 			  out[j] = aa[k];
