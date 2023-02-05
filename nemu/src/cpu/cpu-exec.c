@@ -155,13 +155,17 @@ void cpu_exec(uint64_t n) {
            (nemu_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :
             ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))),
           nemu_state.halt_pc);
-
-      for(int i=0;i<QUEUE_SIZE;i++){
-	      printf("%s\n",Queue[(QueueOut+1)%QUEUE_SIZE]);
-      }
-
-
       // fall through
     case NEMU_QUIT: statistic();
   }
+
+
+
+
+  if(nemu_state.state == NEMU_ABORT){
+      for(int i=0;i<QUEUE_SIZE;i++){
+	      printf("%s\n",Queue[(QueueOut+1)%QUEUE_SIZE]);
+      }
+  }
+
 }
