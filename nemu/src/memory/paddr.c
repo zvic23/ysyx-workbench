@@ -82,7 +82,7 @@ word_t paddr_read(paddr_t addr, int len) {
 
 void paddr_write(paddr_t addr, int len, word_t data) {
   if (likely(in_pmem(addr))) { 
-	  if(addr >= 0x80000100 && addr <= 0x80000110){
+	  if(addr >= 0 ){
 	  	printf("mtrace:memory write   addr:%x length:%d data:%lx\n",\
 		addr,len,data);
 	  }  
