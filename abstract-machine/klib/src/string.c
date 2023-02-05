@@ -67,7 +67,7 @@ void *memset(void *s, int c, size_t n) {
   for(size_t i=0; i<n; i++){
 	  a[i]=c;
   }
-  return s;
+  return 0;
   //panic("Not implemented");
 }
 
