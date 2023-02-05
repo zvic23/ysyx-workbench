@@ -92,7 +92,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
 			  return result;
 		  }
 	  }
-	  return 1;
+	  return 0;
   }
   //panic("Not implemented");
 }
