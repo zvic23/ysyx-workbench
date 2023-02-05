@@ -173,12 +173,12 @@ config MTRACE                            #zsl: I add these,  enable memery trace
 
 config MTRACE_START                         
   depends on MTRACE 
-  string "The start of the adress range to be mtrace"
+  hex "The start of the adress range to be mtrace"
   default 0x80000000
 
 config MTRACE_END                         
   depends on MTRACE 
-  string "The end of the adress range to be mtrace"
+  hex "The end of the adress range to be mtrace"
   default 0x80000010
 
 
