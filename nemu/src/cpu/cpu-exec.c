@@ -161,7 +161,7 @@ void cpu_exec(uint64_t n) {
 
 
 //zsl:iringbuf implement*************
-  if(nemu_state.state == NEMU_END || nemu_state.state == NEMU_ABORT ){
+  if((nemu_state.state == NEMU_END && nemu_state.state == 1) || nemu_state.state == NEMU_ABORT ){
       for(int i=0;i<QUEUE_SIZE;i++){
 	      printf("%s\n",Queue[(QueueOut+i)%QUEUE_SIZE]);
       }
