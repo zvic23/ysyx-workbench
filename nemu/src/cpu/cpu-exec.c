@@ -161,11 +161,12 @@ void cpu_exec(uint64_t n) {
 
 
 //zsl:iringbuf implement*************
+#ifdef CONFIG_ITRACE
   if((nemu_state.state == NEMU_END && nemu_state.halt_ret == 1) || nemu_state.state == NEMU_ABORT ){
       printf("itrace :\n");
       for(int i=0;i<QUEUE_SIZE;i++){
 	      printf("%s\n",Queue[(QueueOut+i)%QUEUE_SIZE]);
       }
   }
-
+#endif
 }
