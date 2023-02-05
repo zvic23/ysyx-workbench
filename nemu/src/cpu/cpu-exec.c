@@ -162,7 +162,7 @@ void cpu_exec(uint64_t n) {
 
 
 
-  if(nemu_state.state == NEMU_ABORT){
+  if(nemu_state.state == NEMU_END){
       for(int i=0;i<QUEUE_SIZE;i++){
 	      printf("%s\n",Queue[(QueueOut+1)%QUEUE_SIZE]);
       }
