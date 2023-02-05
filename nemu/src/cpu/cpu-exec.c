@@ -88,7 +88,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, ilen);
 
 //zsl:iringbuf implement*************
-    if(QueueIn == (( QueueOut - 1 + QUEUE_SIZE) % QUEUE_SIZE)){
+    if(QueueIn == (( QueueOut + QUEUE_SIZE) % QUEUE_SIZE)){
 	    for(int i=0;i<128;i++){
             	Queue[QueueIn][i] = s->logbuf[i];
 	    }
@@ -160,9 +160,8 @@ void cpu_exec(uint64_t n) {
   }
 
 
-
-
-  if(nemu_state.state == NEMU_END){
+//zsl:iringbuf implement*************
+  if(nemu_state.state == NEMU_END || nemu_state.state == NEMU_ABORT ){
       for(int i=0;i<QUEUE_SIZE;i++){
 	      printf("%s\n",Queue[(QueueOut+i)%QUEUE_SIZE]);
       }
