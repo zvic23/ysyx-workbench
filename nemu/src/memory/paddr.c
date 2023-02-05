@@ -70,7 +70,8 @@ void init_mem() {
 word_t paddr_read(paddr_t addr, int len) {
   if (likely(in_pmem(addr))) {
 	  if(addr >= 0x80000100 && addr <= 0x80000110){
-	  	printf("mtrace:memory read addr:%x length:%d result:%lx\n",addr,len,pmem_read(addr,len));
+	  	printf("mtrace:memory read addr:%x length:%d result:%lx\n",\
+				addr,len,pmem_read(addr,len));
 	  }
 	  return pmem_read(addr, len);
 	  }
