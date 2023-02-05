@@ -67,7 +67,7 @@ void *memset(void *s, int c, size_t n) {
   for(size_t i=0; i<n; i++){
 	  a[i]=c;
   }
-  return 0;
+  return s;
   //panic("Not implemented");
 }
 
@@ -92,7 +92,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
 			  return result;
 		  }
 	  }
-	  return 0;
+	  return 1;
   }
   //panic("Not implemented");
 }
