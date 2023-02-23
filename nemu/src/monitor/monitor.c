@@ -68,10 +68,11 @@ static long load_img() {
   return size;
 }
 
-//static char *ftrace_elf = NULL;
-void  __attribute__((optimize("O2")))   ftrace_elf_analysis(char *elf){
+//zsl:ftrace 
+void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   FILE *fp_ftrace = fopen(elf, "rb");
   Assert(fp_ftrace, "ftrace:Can not open '%s'", elf);
+
   fseek(fp_ftrace, 40, SEEK_SET);
   uint64_t shoff;
   int a= fread(&shoff, 8, 1, fp_ftrace);
