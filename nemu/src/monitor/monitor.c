@@ -72,7 +72,7 @@ static long load_img() {
 void  __attribute__((optimize("O2")))   ftrace_elf_analysis(char *elf){
   FILE *fp_ftrace = fopen(elf, "rb");
   Assert(fp_ftrace, "ftrace:Can not open '%s'", elf);
-  fseek(fp_ftrace, 1, SEEK_SET);
+  fseek(fp_ftrace, 0, SEEK_SET);
   uint64_t shoff;
   int a= fread(&shoff, 1, 1, fp_ftrace);
   assert(a == 1);
