@@ -72,6 +72,10 @@ static long load_img() {
 void ftrace_elf_analysis(char *elf){
   FILE *fp_ftrace = fopen(elf, "rb");
   Assert(fp_ftrace, "ftrace:Can not open '%s'", elf);
+
+
+
+
 //	if(elf != NULL)
 //		printf("ftrace:got the elf file,it's %s\n",elf);
 //	else 
