@@ -71,9 +71,9 @@ static long load_img() {
 //static char *ftrace_elf = NULL;
 void ftrace_elf_analysis(char *elf){
 	if(elf != NULL)
-		printf("get the elf file\n");
+		printf("ftrace:got the elf file,it's %s\n",elf);
 	else 
-		printf("did not get the elf file\n");
+		printf("ftrace:did not get the elf file\n");
 }
 
 
