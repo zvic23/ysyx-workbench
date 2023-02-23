@@ -70,10 +70,12 @@ static long load_img() {
 
 //static char *ftrace_elf = NULL;
 void ftrace_elf_analysis(char *elf){
-	if(elf != NULL)
-		printf("ftrace:got the elf file,it's %s\n",elf);
-	else 
-		printf("ftrace:did not get the elf file\n");
+  FILE *fp_ftrace = fopen(elf, "rb");
+  Assert(fp_ftrace, "ftrace:Can not open '%s'", elf);
+//	if(elf != NULL)
+//		printf("ftrace:got the elf file,it's %s\n",elf);
+//	else 
+//		printf("ftrace:did not get the elf file\n");
 }
 
 

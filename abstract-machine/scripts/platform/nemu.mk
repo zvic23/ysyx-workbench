@@ -30,8 +30,7 @@ gdb: image
 
 
 
-
-.PHONY: run-ftrace
 FTRACEFLAGS = -f$(IMAGE).elf
+.PHONY: run-ftrace
 run-ftrace: image
 	$(MAKE) -C $(NEMU_HOME) ISA=$(ISA) run ARGS="-b $(NEMUFLAGS) $(FTRACEFLAGS)" IMG=$(IMAGE).bin
