@@ -68,6 +68,15 @@ static long load_img() {
   return size;
 }
 
+//static char *ftrace_elf = NULL;
+void ftrace_elf_analysis(char *elf){
+	if(elf != NULL)
+		printf("get the elf file\n");
+	else 
+		printf("did not get the elf file\n");
+}
+
+
 static int parse_args(int argc, char *argv[]) {
   const struct option table[] = {
     {"batch"    , no_argument      , NULL, 'b'},
@@ -76,6 +85,8 @@ static int parse_args(int argc, char *argv[]) {
     {"port"     , required_argument, NULL, 'p'},
     {"help"     , no_argument      , NULL, 'h'},
     {0          , 0                , NULL,  0 },
+
+    {"ftrace"   , required_argument, NULL, 'f'},
   };
   int o;
   while ( (o = getopt_long(argc, argv, "-bhl:d:p:", table, NULL)) != -1) {
@@ -84,6 +95,9 @@ static int parse_args(int argc, char *argv[]) {
       case 'p': sscanf(optarg, "%d", &difftest_port); break;
       case 'l': log_file = optarg; break;
       case 'd': diff_so_file = optarg; break;
+
+      case 'f': ftrace_elf_analysis(optarg);  break;
+
       case 1: img_file = optarg; return 0;
       default:
         printf("Usage: %s [OPTION...] IMAGE [args]\n\n", argv[0]);
