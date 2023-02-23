@@ -27,3 +27,8 @@ run: image
 
 gdb: image
 	$(MAKE) -C $(NEMU_HOME) ISA=$(ISA) gdb ARGS="$(NEMUFLAGS)" IMG=$(IMAGE).bin
+
+
+FTRACEFLAGS = -f ./$(IMAGE).elf
+runft: image
+	$(MAKE) -C $(NEMU_HOME) ISA=$(ISA) run ARGS="-b $(NEMUFLAGS) $(FTRACEFLAGS)" IMG=$(IMAGE).bin
