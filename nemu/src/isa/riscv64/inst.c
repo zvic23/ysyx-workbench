@@ -75,24 +75,24 @@ void ftrace_check(uint64_t pc,uint64_t dnpc,uint64_t dest_register,uint64_t src_
 		}
 	}
 	if(dest_register == 0 && imm == 0 && src_register == 1){
+		printf("0x%lx:ret [%s]\n",pc,dest_func);
 	}
 
-
-	for(int i=0;i<500;i++){
-		if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
-			src_func = functab[i].name;
-			//printf("now at %s\n",functab[i].name);
-			break;
+		for(int i=0;i<500;i++){
+			if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
+				src_func = functab[i].name;
+				//printf("now at %s\n",functab[i].name);
+				break;
+			}
+			if(i==499){
+				return;
+			}
 		}
-		if(i==499){
-			return;
+	
+		int i = strcmp(src_func,dest_func);
+		if(i){
+			printf("0x%lx:call [%s@%lx]\n",pc,dest_func,dnpc);
 		}
-	}
-
-	int i = strcmp(src_func,dest_func);
-	if(i){
-		printf("0x%lx:call [%s@%lx]\n",pc,dest_func,dnpc);
-	}
 }
 
 static int decode_exec(Decode *s) {
