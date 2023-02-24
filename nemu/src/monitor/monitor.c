@@ -89,7 +89,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   uint16_t shnum;
   a= fread(&shnum, 2, 1, fp_ftrace);
   assert(a == 1);
-  printf("shnum=%d\n",shnum);
+  printf("shnum=%d\n",shnum);                       //get the offset,entsize and num of section header from elf header
 
   fseek(fp_ftrace, shoff+(shnum-2)*shentsize, SEEK_SET);
   fseek(fp_ftrace, 24 , SEEK_CUR);
@@ -103,7 +103,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   uint64_t strtab_size;
   a= fread(&strtab_size, 8, 1, fp_ftrace);
   assert(a == 1);
-  printf("strtab_size=%lx\n",strtab_size);
+  printf("strtab_size=%lx\n",strtab_size);          //get the offset and size of string table from section header
 
   fseek(fp_ftrace, strtab_offset, SEEK_SET);
   char str[strtab_size];
@@ -114,8 +114,21 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   	printf("str=%s    ",&str[po]);
 	po+=strlen(&str[po])+1;
   }
+  printf("\n");                                      //get the string table
 
+  fseek(fp_ftrace, shoff+(shnum-3)*shentsize, SEEK_SET);
+  fseek(fp_ftrace, 24 , SEEK_CUR);
+  uint64_t symtab_offset;
+  a= fread(&symtab_offset, 8, 1, fp_ftrace);
+  assert(a == 1);
+  printf("symtab_offset=%lx\n",symtab_offset);
 
+  fseek(fp_ftrace, shoff+(shnum-3)*shentsize, SEEK_SET);
+  fseek(fp_ftrace, 32 , SEEK_CUR);
+  uint64_t symtab_size;
+  a= fread(&symtab_size, 8, 1, fp_ftrace);
+  assert(a == 1);
+  printf("symtab_size=%lx\n",symtab_size);          //get the offset and size of symbol table from section header
 
 
 //	if(elf != NULL)
