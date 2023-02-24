@@ -78,6 +78,7 @@ void ftrace_check(uint64_t pc,uint64_t dnpc,uint64_t dest_register,uint64_t src_
 		printf("0x%lx:",pc);
 		for(int i=0;i<blanknum;i++)printf(" ");
 		printf("ret [%s]\n",dest_func);
+		blanknum--;
 	}
 	else{
 		for(int i=0;i<500;i++){
@@ -95,6 +96,7 @@ void ftrace_check(uint64_t pc,uint64_t dnpc,uint64_t dest_register,uint64_t src_
 			printf("0x%lx:",pc);
 			for(int i=0;i<blanknum;i++)printf(" ");
 			printf("call [%s@%lx]\n",dest_func,dnpc);
+			blanknum++;
 		}
 	}
 }
