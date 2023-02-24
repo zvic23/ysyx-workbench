@@ -27,6 +27,12 @@ typedef concat(__GUEST_ISA__, _ISADecodeInfo) ISADecodeInfo;
 // monitor
 extern char isa_logo[];
 void init_isa();
+//**zsl:ftrace
+struct func{
+char* name;
+uint64_t addr_start;
+uint64_t addr_end;
+};
 
 // reg
 extern CPU_state cpu;

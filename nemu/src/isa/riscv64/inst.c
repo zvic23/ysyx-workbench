@@ -22,6 +22,8 @@
 #define Mr vaddr_read
 #define Mw vaddr_write
 
+#include <isa.h>
+
 enum {
   TYPE_I, TYPE_U, TYPE_S,
   TYPE_N, // none
@@ -54,11 +56,11 @@ static void decode_operand(Decode *s, int *dest, word_t *src1, word_t *src2, wor
 }
 
 //zsl:ftrace
-struct func{
-char* name;
-uint64_t addr_start;
-uint64_t addr_end;
-};
+//struct func{
+//char* name;
+//uint64_t addr_start;
+//uint64_t addr_end;
+//};
 extern struct func functab[500];
 
 static int p=1;

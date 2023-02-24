@@ -69,11 +69,7 @@ static long load_img() {
 }
 
 //zsl:ftrace 
-struct func{
-char* name;
-uint64_t addr_start;
-uint64_t addr_end;
-};
+
 struct func functab[500];
 
 void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
