@@ -79,17 +79,27 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   assert(a == 1);
   printf("shoff=%ld\n",shoff);
  
+  fseek(fp_ftrace, 58, SEEK_SET);
+  uint16_t shentsize;
+  a= fread(&shentsize, 2, 1, fp_ftrace);
+  assert(a == 1);
+  printf("shentsize=%d\n",shentsize);
+
   fseek(fp_ftrace, 60, SEEK_SET);
   uint16_t shnum;
   a= fread(&shnum, 2, 1, fp_ftrace);
   assert(a == 1);
   printf("shnum=%d\n",shnum);
 
-  fseek(fp_ftrace, 58, SEEK_SET);
-  uint16_t shentsize;
-  a= fread(&shentsize, 2, 1, fp_ftrace);
-  assert(a == 1);
-  printf("shentsize=%d\n",shentsize);
+  fseek(fp_ftrace, shoff+4, SEEK_SET);
+  uint32_t sh_type;
+  int i=0;
+  for(i=0;i<shnum;i++){
+  	a= fread(&sh_type, 4, 1, fp_ftrace);
+  	assert(a == 1);
+	if(sh_type==3)break;
+  }
+  printf("i=%d\n",i);
 
 
 
