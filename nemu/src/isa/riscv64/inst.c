@@ -75,10 +75,10 @@ void ftrace_check(uint64_t pc,uint64_t dnpc,uint64_t dest_register,uint64_t src_
 		}
 	}
 	if(dest_register == 0 && imm == 0 && src_register == 1){
+		blanknum--;
 		printf("0x%lx:",pc);
 		for(int i=0;i<blanknum;i++)printf(" ");
 		printf("ret [%s]\n",dest_func);
-		blanknum--;
 	}
 	else{
 		for(int i=0;i<500;i++){
