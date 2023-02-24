@@ -70,7 +70,7 @@ static long load_img() {
 
 //zsl:ftrace 
 struct func{
-char name[10];
+char name[20];
 uint64_t addr_start;
 uint64_t addr_end;
 };
