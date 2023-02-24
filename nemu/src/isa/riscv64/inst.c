@@ -61,12 +61,12 @@ uint64_t addr_end;
 };
 extern struct func functab[500];
 
-static int i=1;
+static int p=1;
 
 void ftrace_check(uint64_t pc,uint64_t dnpc){
-	if(i==1){
-			printf("now at %s\n",functab[i].name);
-			i=0;
+	if(p==1){
+			printf("now at %s\n",functab[1].name);
+			p=0;
 	}
 	for(int i=0;i<500;i++){
 		if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
@@ -74,7 +74,7 @@ void ftrace_check(uint64_t pc,uint64_t dnpc){
 			break;
 		}
 	}
-	printf("jal\n");
+	//printf("jal\n");
 }
 
 static int decode_exec(Decode *s) {
