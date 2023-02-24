@@ -109,7 +109,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   char str[0xc1];
   a= fread(&str, 0xc1/8, 1, fp_ftrace);
   assert(a == 1);
-  printf("str=%s\n",(char *)&str[11]);
+  printf("str=%s\n",(char *)&str[12]);
 
 
 
