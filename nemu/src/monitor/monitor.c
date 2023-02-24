@@ -141,7 +141,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   fseek(fp_ftrace, symtab_offset, SEEK_SET);
   int sym_type=0;
   int j=0;
-  uint8_t k=0;
+  uint64_t k=0;
   for(i=0;i<symtab_size/24;i++){
         fseek(fp_ftrace, symtab_offset, SEEK_SET);
   	fseek(fp_ftrace, i*24+4, SEEK_CUR);
@@ -151,7 +151,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
 	if(sym_type == 18){
 	        fseek(fp_ftrace, symtab_offset, SEEK_SET);
   		fseek(fp_ftrace, i*24, SEEK_CUR);
-	  	a= fread(&k, 1, 1, fp_ftrace);
+	  	a= fread(&k, 4, 1, fp_ftrace);
   		assert(a == 1);
 		functab[j].name = &str[k];
 		//fseek(fp_ftrace, symtab_offset+i*24, SEEK_SET);
