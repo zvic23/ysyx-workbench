@@ -91,16 +91,13 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   assert(a == 1);
   printf("shnum=%d\n",shnum);
 
-  fseek(fp_ftrace, shoff, SEEK_SET);
-  uint32_t sh_type;
-  int i=0;
-  for(i=0;i<shnum;i++){
-  	a= fread(&sh_type, 4, 1, fp_ftrace);
-	printf("shtype : %d\n",sh_type);
-  	assert(a == 1);
-	//if(sh_type==3)break;
-  	fseek(fp_ftrace, shentsize, SEEK_CUR);
-  }
+  fseek(fp_ftrace, shoff+(shnum-2)*shentsize, SEEK_SET);
+  fseek(fp_ftrace, 24 , SEEK_CUR);
+  uint64_t strtab_offset;
+  a= fread(&strtab_offset, 8, 1, fp_ftrace);
+  assert(a == 1);
+  printf("strtab_offset=%ld\n",strtab_offset);
+
   //printf("i=%d\n",i);
 
 
