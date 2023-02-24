@@ -60,7 +60,7 @@ uint64_t addr_start;
 uint64_t addr_end;
 };
 extern struct func functab[500];
-int blanknum=0;
+int blanknum=1;
 void ftrace_check(uint64_t pc,uint64_t dnpc,uint64_t dest_register,uint64_t src_register,uint64_t imm){
 	char *src_func = "0";
 	char *dest_func = "0";
