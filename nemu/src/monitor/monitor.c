@@ -92,7 +92,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   printf("shnum=%d\n",shnum);
 
   fseek(fp_ftrace, shoff+(shnum-2)*shentsize, SEEK_SET);
-  fseek(fp_ftrace, 23 , SEEK_CUR);
+  fseek(fp_ftrace, 25 , SEEK_CUR);
   uint64_t strtab_offset;
   a= fread(&strtab_offset, 8, 1, fp_ftrace);
   assert(a == 1);
