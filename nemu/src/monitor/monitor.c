@@ -137,11 +137,12 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   fseek(fp_ftrace, symtab_offset, SEEK_SET);
   int sym_type=0;
   for(i=0;i<symtab_size/24;i++){
-  	fseek(fp_ftrace, 4, SEEK_CUR);
+        fseek(fp_ftrace, symtab_offset, SEEK_SET);
+  	fseek(fp_ftrace, i*24+4, SEEK_CUR);
   	a= fread(&sym_type, 1, 1, fp_ftrace);
   	assert(a == 1);
 	printf("info  = %d\n",sym_type);
-  	fseek(fp_ftrace, 20, SEEK_CUR);
+  //	fseek(fp_ftrace, 20, SEEK_CUR);
   }
 
 
