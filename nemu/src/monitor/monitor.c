@@ -69,6 +69,13 @@ static long load_img() {
 }
 
 //zsl:ftrace 
+struct func{
+char* name;
+uint64_t addr_start;
+uint64_t addr_end;
+};
+struct func functab[500];
+
 void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   FILE *fp_ftrace = fopen(elf, "rb");
   Assert(fp_ftrace, "ftrace:Can not open '%s'", elf);
@@ -109,13 +116,13 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   char str[strtab_size];
   a= fread(&str, strtab_size, 1, fp_ftrace);
   assert(a == 1);
-//  char *strindex[500];
+  char *strindex[500];
   int i=0;
   int po=1;
   while(po<=strtab_size-1){
   	printf("str=%s    ",&str[po]);
-//	strindex[i]=&str[po];
-//	i++;
+	strindex[i]=&str[po];
+	i++;
 	po+=strlen(&str[po])+1;
   }
   printf("\n");                                      //get the string table
@@ -136,13 +143,22 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
 
   fseek(fp_ftrace, symtab_offset, SEEK_SET);
   int sym_type=0;
+  int j=0;
+  uint8_t k=0;
   for(i=0;i<symtab_size/24;i++){
         fseek(fp_ftrace, symtab_offset, SEEK_SET);
   	fseek(fp_ftrace, i*24+4, SEEK_CUR);
   	a= fread(&sym_type, 1, 1, fp_ftrace);
   	assert(a == 1);
-	printf("info  = %d\n",sym_type);
-  //	fseek(fp_ftrace, 20, SEEK_CUR);
+	//printf("info  = %d  ",sym_type);
+	if(sym_type == 18){
+	        fseek(fp_ftrace, symtab_offset, SEEK_SET);
+  		fseek(fp_ftrace, i*24, SEEK_CUR);
+	  	a= fread(&k, 1, 1, fp_ftrace);
+  		assert(a == 1);
+		functab[j].name = strindex[k];
+	}
+
   }
 
 
