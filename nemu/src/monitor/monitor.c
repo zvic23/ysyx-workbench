@@ -160,7 +160,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
 		functab[k].addr_start=l;
   		assert(a == 1);
 
-		printf("functab.name=%s   .addrstart=%lx   .addrend=%lx\n",functab->name,l,functab->addr_start);
+		printf("functab.name=%s   .addrstart=%lx   .addrend=%lx\n",functab[k].name,l,functab[k].addr_start);
 
 		k++;
 	}
