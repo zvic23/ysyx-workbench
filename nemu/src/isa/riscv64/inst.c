@@ -53,16 +53,24 @@ static void decode_operand(Decode *s, int *dest, word_t *src1, word_t *src2, wor
   }
 }
 
+//zsl:ftrace
 struct func{
 char* name;
 uint64_t addr_start;
 uint64_t addr_end;
 };
 extern struct func functab[500];
+
+static int i=1;
+
 void ftrace_check(uint64_t pc,uint64_t dnpc){
+	if(i==1){
+			printf("now at %s\n",functab[i].name);
+			i=0;
+	}
 	for(int i=0;i<500;i++){
 		if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
-			printf("now at %s\n",functab[i].name);
+			//printf("now at %s\n",functab[i].name);
 			break;
 		}
 	}
