@@ -61,19 +61,9 @@ uint64_t addr_end;
 };
 extern struct func functab[500];
 
-void ftrace_check(uint64_t pc,uint64_t dnpc){
+void ftrace_check(uint64_t pc,uint64_t dnpc,uint64_t dest_register,uint64_t src_register,uint64_t imm){
 	char *src_func = "0";
 	char *dest_func = "0";
-	for(int i=0;i<500;i++){
-		if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
-			src_func = functab[i].name;
-			//printf("now at %s\n",functab[i].name);
-			break;
-		}
-		if(i==499){
-			return;
-		}
-	}
 	for(int i=0;i<500;i++){
 		if(functab[i].addr_start<=dnpc && dnpc<=functab[i].addr_end){
 			dest_func = functab[i].name;
@@ -84,6 +74,21 @@ void ftrace_check(uint64_t pc,uint64_t dnpc){
 			return;
 		}
 	}
+	if(dest_register == 0 && imm == 0 && src_register == 1){
+	}
+
+
+	for(int i=0;i<500;i++){
+		if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
+			src_func = functab[i].name;
+			//printf("now at %s\n",functab[i].name);
+			break;
+		}
+		if(i==499){
+			return;
+		}
+	}
+
 	int i = strcmp(src_func,dest_func);
 	if(i){
 		printf("0x%lx:call [%s@%lx]\n",pc,dest_func,dnpc);
@@ -103,8 +108,8 @@ static int decode_exec(Decode *s) {
 
   INSTPAT_START();
   INSTPAT("??????? ????? ????? 000 ????? 00100 11", addi   , I, R(dest) = src1 + imm);
-  INSTPAT("??????? ????? ????? ??? ????? 11011 11", jal    , J, R(dest) = s->pc + 4;s->dnpc = s->pc + imm;ftrace_check(s->pc,s->dnpc));
-  INSTPAT("??????? ????? ????? 000 ????? 11001 11", jalr   , I, R(dest) = s->pc + 4;s->dnpc = (src1 + imm) & 0xfffffffffffffffe);
+  INSTPAT("??????? ????? ????? ??? ????? 11011 11", jal    , J, R(dest) = s->pc + 4;s->dnpc = s->pc + imm;ftrace_check(s->pc,s->dnpc,1,0,1));
+  INSTPAT("??????? ????? ????? 000 ????? 11001 11", jalr   , I, R(dest) = s->pc + 4;s->dnpc = (src1 + imm) & 0xfffffffffffffffe;ftrace_check(s->pc,s->dnpc,dest,BITS(s->isa.inst.val, 19, 15),imm));
   INSTPAT("??????? ????? ????? 010 ????? 00000 11", lw     , I, R(dest) = SEXT(Mr(src1 + imm, 4),32));
   INSTPAT("0000000 ????? ????? 000 ????? 01110 11", addw   , R, R(dest) = SEXT(BITS(src1 + src2,31,0), 32));
   INSTPAT("0100000 ????? ????? 000 ????? 01100 11", sub    , R, R(dest) = src1 - src2);
