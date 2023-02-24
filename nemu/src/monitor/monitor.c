@@ -78,6 +78,15 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   int a= fread(&shoff, 8, 1, fp_ftrace);
   assert(a == 1);
   printf("shoff=%ld\n",shoff);
+ 
+  fseek(fp_ftrace, 60, SEEK_SET);
+  uint16_t shnum;
+  a= fread(&shnum, 2, 1, fp_ftrace);
+  assert(a == 1);
+  printf("shnum=%d\n",shnum);
+
+
+
 
 
 //	if(elf != NULL)
