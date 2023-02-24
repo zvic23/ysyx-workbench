@@ -171,7 +171,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
  		printf("functab.name=%s   .addrstart=%lx   .addrend=%lx\n",
 				functab[i].name,functab[i].addr_start,functab[i].addr_end);
 
-  }                       //display the function table
+  }                               //display the function table
   fclose(fp_ftrace);
 }
 
