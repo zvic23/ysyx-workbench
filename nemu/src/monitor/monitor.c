@@ -85,7 +85,11 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   assert(a == 1);
   printf("shnum=%d\n",shnum);
 
-
+  fseek(fp_ftrace, 58, SEEK_SET);
+  uint16_t shentsize;
+  a= fread(&shentsize, 2, 1, fp_ftrace);
+  assert(a == 1);
+  printf("shentsize=%d\n",shentsize);
 
 
 
