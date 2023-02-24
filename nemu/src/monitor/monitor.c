@@ -109,9 +109,13 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   char str[strtab_size];
   a= fread(&str, strtab_size, 1, fp_ftrace);
   assert(a == 1);
+//  char *strindex[500];
+  int i=0;
   int po=1;
   while(po<=strtab_size-1){
   	printf("str=%s    ",&str[po]);
+//	strindex[i]=&str[po];
+//	i++;
 	po+=strlen(&str[po])+1;
   }
   printf("\n");                                      //get the string table
@@ -130,11 +134,20 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   assert(a == 1);
   printf("symtab_size=%lx\n",symtab_size);          //get the offset and size of symbol table from section header
 
+  fseek(fp_ftrace, symtab_offset, SEEK_SET);
+  int sym_type=0;
+  for(i=0;i<symtab_size/24;i++){
+  	fseek(fp_ftrace, 4, SEEK_CUR);
+  	a= fread(&sym_type, 1, 1, fp_ftrace);
+  	assert(a == 1);
+	printf("info  = %d\n",sym_type);
+  	fseek(fp_ftrace, 20, SEEK_CUR);
+  }
 
-//	if(elf != NULL)
-//		printf("ftrace:got the elf file,it's %s\n",elf);
-//	else 
-//		printf("ftrace:did not get the elf file\n");
+
+
+
+
   fclose(fp_ftrace);
 }
 
