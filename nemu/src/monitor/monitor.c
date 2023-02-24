@@ -157,7 +157,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
 	  	a= fread(&k, 1, 1, fp_ftrace);
   		assert(a == 1);
 		functab[j].name = strindex[k];
-		printf("functab.name=%d\n",k);
+		printf("functab.name=%s\n",(char*)&str[k]);
 	}
 
   }
