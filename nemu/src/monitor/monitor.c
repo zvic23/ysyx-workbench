@@ -160,7 +160,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
 		functab[j].addr_start = k;
 	  	a= fread(&k, 8, 1, fp_ftrace);
 		assert(a == 1);
-		functab[j].addr_end = functab[j].addr_start + k;
+		functab[j].addr_end = functab[j].addr_start + k -1;
 		j++;
 	}
 
