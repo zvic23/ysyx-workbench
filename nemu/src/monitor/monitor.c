@@ -96,7 +96,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   uint64_t strtab_offset;
   a= fread(&strtab_offset, 8, 1, fp_ftrace);
   assert(a == 1);
-  printf("strtab_offset=%ld\n",strtab_offset);
+  printf("strtab_offset=%lx\n",strtab_offset);
 
   //printf("i=%d\n",i);
 
