@@ -160,16 +160,16 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
 		functab[j].addr_start=l;
   		assert(a == 1);
 
-		printf("functab.name=%s   .addrstart=%lx   .addrend=%lx\n",functab[j].name,k,functab[j].addr_start);
+	//	printf("functab.name=%s   .addrstart=%lx   .addrend=%lx\n",functab[j].name,j,functab[j].addr_start);
 
-		k++;
+		j++;
 	}
 
   }
 
   for(i=0;i<j;i++){
- 	//	printf("functab.name=%s   .addrstart=%lx   .addrend=%lx\n",
-	//			functab[i].name,functab[i].addr_start,functab[i].addr_end);
+ 		printf("functab.name=%s   .addrstart=%lx   .addrend=%lx\n",
+				functab[i].name,functab[i].addr_start,functab[i].addr_end);
 
   }
 
