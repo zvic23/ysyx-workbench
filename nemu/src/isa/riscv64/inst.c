@@ -55,7 +55,7 @@ static void decode_operand(Decode *s, int *dest, word_t *src1, word_t *src2, wor
 
 //zsl:ftrace
 struct func{
-char* name;
+char name[20];
 uint64_t addr_start;
 uint64_t addr_end;
 };
