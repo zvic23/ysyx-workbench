@@ -157,17 +157,17 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   		fseek(fp_ftrace, 4, SEEK_CUR);
 		uint64_t l=0;
 	  	a= fread(&l, 8, 1, fp_ftrace);
-		functab[k].addr_start=l;
+		functab[j].addr_start=l;
   		assert(a == 1);
 
-		printf("functab.name=%s   .addrstart=%lx   .addrend=%lx\n",functab[k].name,k,functab[k].addr_start);
+		printf("functab.name=%s   .addrstart=%lx   .addrend=%lx\n",functab[j].name,k,functab[j].addr_start);
 
 		k++;
 	}
 
   }
 
-  for(i=0;i<k;i++){
+  for(i=0;i<j;i++){
  	//	printf("functab.name=%s   .addrstart=%lx   .addrend=%lx\n",
 	//			functab[i].name,functab[i].addr_start,functab[i].addr_end);
 
