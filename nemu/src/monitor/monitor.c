@@ -169,7 +169,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
 
   for(i=0;i<k;i++){
  		printf("functab.name=%s   .addrstart=%lx   .addrend=%lx\n",\
-				functab[k].name,functab[k].addr_start,functab[k].addr_end);
+				functab[i].name,functab[i].addr_start,functab[i].addr_end);
 
   }
 
