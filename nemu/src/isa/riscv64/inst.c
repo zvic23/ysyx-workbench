@@ -62,7 +62,7 @@ uint64_t addr_end;
 extern struct func functab[500];
 
 void ftrace_check(uint64_t pc,uint64_t dnpc){
-	char *src_func = functab[0].name;
+	char *src_func = "0";
 	char *dest_func = "0";
 	for(int i=0;i<500;i++){
 		if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
@@ -85,7 +85,7 @@ void ftrace_check(uint64_t pc,uint64_t dnpc){
 		}
 	}
 	int i = strcmp(src_func,dest_func);
-	if(i==0){
+	if(i!=0){
 		printf("jump to %s\n",dest_func);
 	}
 }
