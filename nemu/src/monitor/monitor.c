@@ -109,8 +109,12 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   char str[strtab_size];
   a= fread(&str, strtab_size/8, 1, fp_ftrace);
   assert(a == 1);
-  printf("str=%s\n",(char *)&str[12]);
-
+  int po=1;
+  while(1){
+  	printf("str=%s\n",(char *)&str[po]);
+	po+=str[po];
+	if(po>=0xc1)break;
+  }
 
 
 
