@@ -91,7 +91,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   assert(a == 1);
   printf("shnum=%d\n",shnum);
 
-  fseek(fp_ftrace, shoff+4, SEEK_SET);
+  fseek(fp_ftrace, shoff, SEEK_SET);
   uint32_t sh_type;
   int i=0;
   for(i=0;i<shnum;i++){
