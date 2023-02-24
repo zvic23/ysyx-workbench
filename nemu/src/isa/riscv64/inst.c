@@ -61,16 +61,17 @@ uint64_t addr_end;
 };
 extern struct func functab[500];
 
-static int p=1;
-
 void ftrace_check(uint64_t pc,uint64_t dnpc){
-	if(p==1){
-			printf("now at %s\n",functab[4].name);
-			p=0;
-	}
+
 	for(int i=0;i<500;i++){
 		if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
-			//printf("now at %s\n",functab[i].name);
+			printf("now at %s\n",functab[i].name);
+			break;
+		}
+	}
+	for(int i=0;i<500;i++){
+		if(functab[i].addr_start<=dnpc && dnpc<=functab[i].addr_end){
+			printf("now at %s\n",functab[i].name);
 			break;
 		}
 	}
