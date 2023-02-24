@@ -85,8 +85,8 @@ void ftrace_check(uint64_t pc,uint64_t dnpc){
 		}
 	}
 	int i = strcmp(src_func,dest_func);
-	if(i!=0){
-		printf("jump to %s\n",dest_func);
+	if(i){
+		printf("0x%lx:call [%s@%lx]\n",pc,dest_func,dnpc);
 	}
 }
 
