@@ -85,7 +85,7 @@ void ftrace_check(uint64_t pc,uint64_t dnpc,uint64_t dest_register,uint64_t src_
 				//printf("now at %s\n",functab[i].name);
 				break;
 			}
-			if(i==499)return;
+			if(i==499 && strcmp(dest_func,"_trm_init"))return;
 		}
 		int i = strcmp(src_func,dest_func);
 		if(i){
