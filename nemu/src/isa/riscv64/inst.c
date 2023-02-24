@@ -65,7 +65,7 @@ static int p=1;
 
 void ftrace_check(uint64_t pc,uint64_t dnpc){
 	if(p==1){
-			printf("now at %s\n",functab[3].name);
+			printf("now at %s\n",functab[1].name);
 			p=0;
 	}
 	for(int i=0;i<500;i++){
