@@ -154,7 +154,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
 	  	a= fread(&k, 1, 1, fp_ftrace);
   		assert(a == 1);
 		functab[j].name = &str[k];
-  		fseek(fp_ftrace, 4, SEEK_CUR);
+  		fseek(fp_ftrace, 6, SEEK_CUR);
 		uint64_t l=0;
 	  	a= fread(&l, 8, 1, fp_ftrace);
 		functab[k].addr_start=l;
