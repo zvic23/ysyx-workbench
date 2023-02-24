@@ -107,7 +107,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
 
   fseek(fp_ftrace, strtab_offset, SEEK_SET);
   char str[0xc1];
-  a= fread(&str, 10, 1, fp_ftrace);
+  a= fread(&str, 0xc1/8, 1, fp_ftrace);
   assert(a == 1);
   printf("str=%s\n",(char *)&str[1]);
 
