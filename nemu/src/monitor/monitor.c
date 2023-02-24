@@ -116,12 +116,12 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   	printf("str=%s    ",&str[po]);
 	po+=strlen(&str[po])+1;
 	printf("po=%d",po);
-//  while(po<=0xc1){
-//  	printf("str=%s    ",&str[po]);
-//	po+=strlen(&str[po]);
-//	if(po>=0xc1)break;
-//  }
-//
+  while(1){
+  	printf("str=%s    ",&str[po]);
+	po+=strlen(&str[po])+1;
+	if(po>=0xc1)break;
+  }
+
 
 
 
