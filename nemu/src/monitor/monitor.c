@@ -111,8 +111,8 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   assert(a == 1);
   int po=1;
   while(1){
-  	printf("str=%s\n",(char *)&str[po]);
-	po+=str[po];
+  	printf("str=%s\n",&str[po]);
+	po+=strlen(&str[po]);
 	if(po>=0xc1)break;
   }
 
