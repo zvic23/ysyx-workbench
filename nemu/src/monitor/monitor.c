@@ -116,13 +116,10 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   char str[strtab_size];
   a= fread(&str, strtab_size, 1, fp_ftrace);
   assert(a == 1);
-  char *strindex[500];
   int i=0;
   int po=1;
   while(po<=strtab_size-1){
   	printf("str=%s    ",&str[po]);
-	strindex[i]=&str[po];
-	i++;
 	po+=strlen(&str[po])+1;
   }
   printf("\n");                                      //get the string table
@@ -156,7 +153,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   		fseek(fp_ftrace, i*24, SEEK_CUR);
 	  	a= fread(&k, 1, 1, fp_ftrace);
   		assert(a == 1);
-		functab[j].name = strindex[k];
+		functab[j].name = &str[k];
 		printf("functab.name=%s\n",(char*)&str[k]);
 	}
 
