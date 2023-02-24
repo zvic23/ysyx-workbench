@@ -96,9 +96,10 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   int i=0;
   for(i=0;i<shnum;i++){
   	a= fread(&sh_type, 4, 1, fp_ftrace);
-	printf("shtype : %d/n",sh_type);
+	printf("shtype : %d\n",sh_type);
   	assert(a == 1);
 	if(sh_type==3)break;
+  	fseek(fp_ftrace, shentsize, SEEK_CUR);
   }
   //printf("i=%d\n",i);
 
