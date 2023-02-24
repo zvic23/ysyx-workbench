@@ -71,7 +71,7 @@ void ftrace_check(uint64_t pc,uint64_t dnpc){
 			break;
 		}
 		if(i==499){
-			assert(0);
+			return;
 		}
 	}
 	for(int i=0;i<500;i++){
@@ -81,7 +81,7 @@ void ftrace_check(uint64_t pc,uint64_t dnpc){
 			break;
 		}
 		if(i==499){
-			assert(0);
+			return;
 		}
 	}
 	int i = strcmp(src_func,dest_func);
