@@ -12,7 +12,7 @@ size_t strlen(const char *s) {
 	  }
 	  i++;
   } 
-  return 0;
+  return i;
   //panic("Not implemented");
 }
 
