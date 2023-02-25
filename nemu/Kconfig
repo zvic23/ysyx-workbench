@@ -166,14 +166,30 @@ config WATCHPOINT                        #zsl: I add these,  enable watchpoint f
   default y
 
 
+config MTRACE                            #zsl: I add these,  enable memery trace
+  depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER
+  bool "Enable memory trace(mtrace)"
+  default n
+
+config MTRACE_START                         
+  depends on MTRACE 
+  hex "The start of the adress range to be mtrace"
+  default 0x80000000
+
+config MTRACE_END                         
+  depends on MTRACE 
+  hex "The end of the adress range to be mtrace"
+  default 0x80000010
+
+
+config FTRACE                            #zsl: I add these,  enable function trace
+  depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER
+  bool "Enable function trace(ftrace)"
+  default n
 
 
 
-
-
-
-
-
+ 
 
 
 

@@ -18,6 +18,17 @@
 #include <device/mmio.h>
 #include <isa.h>
 
+
+/* zsl:mtrace Queue structure */
+//#ifdef CONFIG_MTRACE
+//#define MTRACE_QUEUE_ELEMENTS 15
+//#define MTRACE_QUEUE_SIZE (MTRACE_QUEUE_ELEMENTS + 1)
+//char MTQueue[MTRACE_QUEUE_SIZE][128];
+//static int MTQueueIn=0;
+//static int MTQueueOut=0;
+//#endif
+
+
 #if   defined(CONFIG_PMEM_MALLOC)
 static uint8_t *pmem = NULL;
 #else // CONFIG_PMEM_GARRAY
@@ -57,14 +68,30 @@ void init_mem() {
 }
 
 word_t paddr_read(paddr_t addr, int len) {
-  if (likely(in_pmem(addr))) return pmem_read(addr, len);
+  if (likely(in_pmem(addr))) {
+#ifdef CONFIG_MTRACE
+	  if(addr >= CONFIG_MTRACE_START && addr <= CONFIG_MTRACE_END){
+	  	printf("mtrace:memory read   addr:0x%x  length:%dbyte  data:0x%lx\n",\
+				addr,len,pmem_read(addr,len));
+	  }
+#endif
+	  return pmem_read(addr, len);
+  }
   IFDEF(CONFIG_DEVICE, return mmio_read(addr, len));
   out_of_bound(addr);
   return 0;
 }
 
 void paddr_write(paddr_t addr, int len, word_t data) {
-  if (likely(in_pmem(addr))) { pmem_write(addr, len, data); return; }
+  if (likely(in_pmem(addr))) { 
+#ifdef CONFIG_MTRACE
+	  if(addr >= CONFIG_MTRACE_START && addr <= CONFIG_MTRACE_END){
+	  	printf("mtrace:memory write   addr:0x%x  length:%dbyte  data:0x%lx\n",\
+		addr,len,data);
+	  } 
+#endif
+	  pmem_write(addr, len, data); return; 
+  }
   IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
   out_of_bound(addr);
 }

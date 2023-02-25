@@ -34,6 +34,17 @@ uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 
+
+/* zsl:iringbuf Queue structure */
+#ifdef CONFIG_ITRACE
+#define QUEUE_ELEMENTS 15
+#define QUEUE_SIZE (QUEUE_ELEMENTS + 1)
+char Queue[QUEUE_SIZE][128];
+static int QueueIn=0;
+static int QueueOut=0;
+#endif
+
+
 void device_update();
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
@@ -42,8 +53,6 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
-
-
 
 #ifdef CONFIG_WATCHPOINT      //zsl:through make menuconfig it can be control to switch the watchpoint function
   int stop_exec = check_wpchange();    //zsl:check if the watchpoints change
@@ -77,6 +86,21 @@ static void exec_once(Decode *s, vaddr_t pc) {
   void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
   disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, ilen);
+
+//zsl:iringbuf implement*************
+    if(QueueIn == (( QueueOut + QUEUE_SIZE) % QUEUE_SIZE)){
+	    for(int i=0;i<128;i++){
+            	Queue[QueueIn][i] = s->logbuf[i];
+	    }
+            QueueOut = (QueueOut + 1) % QUEUE_SIZE;
+            QueueIn = (QueueIn + 1) % QUEUE_SIZE;
+    }
+    else {
+	    for(int i=0;i<128;i++){
+            	Queue[QueueIn][i] = s->logbuf[i];
+	    }
+            QueueIn = (QueueIn + 1) % QUEUE_SIZE;
+    }
 #endif
 }
 
@@ -134,4 +158,15 @@ void cpu_exec(uint64_t n) {
       // fall through
     case NEMU_QUIT: statistic();
   }
+
+
+//zsl:iringbuf implement*************
+#ifdef CONFIG_ITRACE
+  if((nemu_state.state == NEMU_END && nemu_state.halt_ret == 1) || nemu_state.state == NEMU_ABORT ){
+      printf("itrace :\n");
+      for(int i=0;i<QUEUE_SIZE;i++){
+	      printf("%s\n",Queue[(QueueOut+i)%QUEUE_SIZE]);
+      }
+  }
+#endif
 }
