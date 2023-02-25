@@ -182,8 +182,14 @@ config MTRACE_END
   default 0x80000010
 
 
+config FTRACE                            #zsl: I add these,  enable function trace
+  depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER
+  bool "Enable function trace(ftrace)"
+  default n
 
 
+
+ 
 
 
 

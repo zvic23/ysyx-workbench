@@ -69,6 +69,7 @@ static long load_img() {
 }
 
 //zsl:ftrace 
+#ifdef CONFIG_FTRACE
 struct func{
 char name[20];
 uint64_t addr_start;
@@ -174,6 +175,11 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(char *elf){
   }                               //display the function table
   fclose(fp_ftrace);
 }
+#else
+void  ftrace_elf_analysis(char *elf){
+	printf("ftrace is off,please turn on in make menuconfig\n");
+}
+#endif
 
 
 static int parse_args(int argc, char *argv[]) {

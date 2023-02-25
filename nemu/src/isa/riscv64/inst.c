@@ -54,6 +54,7 @@ static void decode_operand(Decode *s, int *dest, word_t *src1, word_t *src2, wor
 }
 
 //zsl:ftrace
+#ifdef CONFIG_FTRACE
 struct func{
 char name[20];
 uint64_t addr_start;
@@ -96,6 +97,12 @@ void ftrace_check(uint64_t pc,uint64_t dnpc,uint64_t dest_register,uint64_t src_
 		}
 	}
 }
+#else
+void ftrace_check(uint64_t pc,uint64_t dnpc,uint64_t dest_register,uint64_t src_register,uint64_t imm){
+}
+#endif
+
+
 
 static int decode_exec(Decode *s) {
   int dest = 0;
