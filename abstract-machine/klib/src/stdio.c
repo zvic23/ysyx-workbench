@@ -32,16 +32,15 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
-		  int number = va_arg(ap, int);
+		  uint64_t number = va_arg(ap, int);
 		  int base = 10;
-		  char buff[20];
+		  char buff[30];
 		  char *a=buff;
-		  if(number > INT_MAX/2){
-			  number = INT_MAX - number;
+		  if(number > INT_MAX){        //zsl: deal with nagetive, use the complement theory
+			  number = UINT_MAX + 1 - number;
 			  out[j] = '-';
 			  j++;
 		  }
-
 	          do
                   {
                           *a++ = digits[number % base];
