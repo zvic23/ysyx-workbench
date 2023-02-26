@@ -3,6 +3,8 @@
 #include <klib-macros.h>
 #include <stdarg.h>
 
+#include <limits.h>
+
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 int printf(const char *fmt, ...) {
@@ -34,6 +36,12 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
 		  int base = 10;
 		  char buff[20];
 		  char *a=buff;
+		  if(number > INT_MAX/2){
+			  number = INT_MAX - number;
+			  out[j] = '-';
+			  j++;
+		  }
+
 	          do
                   {
                           *a++ = digits[number % base];
