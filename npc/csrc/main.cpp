@@ -63,7 +63,7 @@ void test01() {
   ifstream ifs;
  
   //3、打开文件并且判断是否打开成功
-  ifs.open("./srcs/obj.bin",ios::in) ;
+  ifs.open("./csrc/obj.bin",ios::in) ;
   if (!ifs.is_open()) {
     cout << "文件打开失败" << endl;
   }
