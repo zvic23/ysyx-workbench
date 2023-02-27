@@ -17,7 +17,7 @@ VerilatedVcdC* tfp = NULL;
 
 static Vysyx_22050612_npc* top;
 
-static char pmem[0x50000]={0};
+static uint8_t pmem[0x50000];
 
 uint32_t pmem_read(uint64_t addr){
   
@@ -58,7 +58,7 @@ void load_img() {
   ifs.open("./csrc/obj.bin",ios::in) ;
   if (!ifs.is_open()) cout << "文件打开失败" << endl;
   else cout<< "打开bin文件" <<endl;
-  ifs.read(pmem , 100);
+  //ifs.read(pmem , 100);
   //cout << hex << pmem[2] <<endl;
 }
 
@@ -68,10 +68,12 @@ void load1(){
 
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);
-
   cout << size <<endl;
 
-  //Log("The image is %s, size = %ld", img_file, size);
+  fseek(fp, 0, SEEK_SET);
+  //for(int i=0;i<size;i++){
+	  int a = fread((unsigned char*)pmem,1,size,fp);
+
 
   fseek(fp, 0, SEEK_SET);
   //int ret = fread(guest_to_host(RESET_VECTOR), size, 1, fp);
