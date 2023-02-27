@@ -18,7 +18,7 @@ clear:
 	rm build/ -r  obj_dir/ -r  dump.vcd
 
 
-
+#zsl: about nvboard
 TOPNAME = top
 NXDC_FILES = constr/pinset.nxdc
 INC_PATH ?=
