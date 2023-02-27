@@ -64,25 +64,16 @@ void load_img() {
 
 void load1(){
   FILE *fp = fopen("./csrc/obj.bin", "rb");
-  //assert(fp, "Can not open");
 
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);
-  cout << size <<endl;
-
-  fseek(fp, 0, SEEK_SET);
-  //for(int i=0;i<size;i++){
-	  //int a = fread(pmem,1,1,fp);
-	  //cout << pmem[0] <<endl;
-
+  //cout << size <<endl;
 
   fseek(fp, 0, SEEK_SET);
   int ret = fread(pmem, size, 1, fp);
-  for(int i=0;i<size;i++)cout << hex <<(unsigned int) (unsigned char)pmem[i] <<endl;
-  //assert(ret == 1);
+  for(int i=0;i<size;i++)cout << hex <<(unsigned int) (unsigned char)pmem[i]    ;
 
   fclose(fp);
-  //return size;
 }
  
  
