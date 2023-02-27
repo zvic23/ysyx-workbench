@@ -57,6 +57,7 @@ void load_img() {
   if (!ifs.is_open()) cout << "文件打开失败" << endl;
   else cout<< "打开bin文件" <<endl;
   ifs >> pmem;
+  cout << pmem << endl;
 }
  
  
