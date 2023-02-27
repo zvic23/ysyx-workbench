@@ -53,7 +53,7 @@ void built_in_program(){
   *(uint32_t*)&pmem[0x00000010]=0x00100073; //ebreak
 }
 
-void load_img() {
+void load_1() {
   ifstream ifs;
   ifs.open("./csrc/obj.bin",ios::in) ;
   if (!ifs.is_open()) cout << "文件打开失败" << endl;
@@ -62,7 +62,7 @@ void load_img() {
   //cout << hex << pmem[2] <<endl;
 }
 
-void load1(){
+void load_img(){
   FILE *fp = fopen("./csrc/obj.bin", "rb");
 
   fseek(fp, 0, SEEK_END);
@@ -71,7 +71,7 @@ void load1(){
 
   fseek(fp, 0, SEEK_SET);
   int ret = fread(pmem, size, 1, fp);
-  for(int i=0;i<size;i++)cout << hex <<(unsigned int) (unsigned char)pmem[i]    ;
+  for(int i=0;i<size;i++)cout << hex <<(unsigned int) (unsigned char)pmem[i] <<endl;
 
   fclose(fp);
 }
@@ -86,7 +86,7 @@ void ebreak(){
 int main() {
   
   //built_in_program();
-  load1();
+  load_img();
 
   sim_init();
 
