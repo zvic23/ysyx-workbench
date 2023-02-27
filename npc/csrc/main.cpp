@@ -94,7 +94,7 @@ int main() {
   top->clk=1;top->rst=1;step_and_dump_wave();
   top->clk=0;top->rst=0;step_and_dump_wave();
 
-  while(0){
+  while(1){
 
   top->clk = 1;
   //top->Mr_val = pmem_read(top->Mr_addr);

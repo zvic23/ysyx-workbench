@@ -22,6 +22,8 @@ image: $(IMAGE).elf
 	@$(OBJCOPY) -S --set-section-flags .bss=alloc,contents -O binary $(IMAGE).elf $(IMAGE).bin
 
 #zsl:add the "run" rule
+NPC_HOME = ~/ysyx-workbench/npc
 
-
-
+run: image
+	cp -f $(IMAGE).bin $(NPC_HOME)/csrc/obj.bin
+	$(MAKE) -C $(NPC_HOME) exe
