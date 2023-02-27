@@ -78,7 +78,7 @@ void load1(){
 
   fseek(fp, 0, SEEK_SET);
   int ret = fread(pmem, size, 1, fp);
-  for(int i=0;i<size;i++)cout << hex <<pmem[i] <<endl;
+  for(int i=0;i<size;i++)cout << hex <<(unsigned int) (unsigned char)pmem[i] <<endl;
   //assert(ret == 1);
 
   fclose(fp);
