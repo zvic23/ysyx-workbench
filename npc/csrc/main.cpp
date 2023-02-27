@@ -53,7 +53,7 @@ void ebreak(){
 
 int main() {
   
-  built_in_program();
+  //built_in_program();
 
   sim_init();
 
