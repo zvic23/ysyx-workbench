@@ -14,7 +14,6 @@ static Vysyx_22050612_npc* top;
 static uint8_t pmem[0x50000];
 
 uint32_t pmem_read(uint64_t addr){
-  
   return *(uint32_t*)&pmem[addr-0x80000000];
 }
 
@@ -79,7 +78,7 @@ int main() {
   top->clk=1;top->rst=1;step_and_dump_wave();
   top->clk=0;top->rst=0;step_and_dump_wave();
 
-  while(1){
+  while(0){
 
   top->clk = 1;
   //top->Mr_val = pmem_read(top->Mr_addr);
