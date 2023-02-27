@@ -5,12 +5,6 @@
 #include "svdpi.h"
 #include "Vysyx_22050612_npc__Dpi.h"  //zsl:ebreak support (DPI-C)
 				    
-#include <fstream>
-#include<iostream>
-using namespace std;		
-
-#include <cassert>
-				    
 
 VerilatedContext* contextp = NULL;
 VerilatedVcdC* tfp = NULL;
@@ -53,14 +47,6 @@ void built_in_program(){
   *(uint32_t*)&pmem[0x00000010]=0x00100073; //ebreak
 }
 
-void load_1() {
-  ifstream ifs;
-  ifs.open("./csrc/obj.bin",ios::in) ;
-  if (!ifs.is_open()) cout << "文件打开失败" << endl;
-  else cout<< "打开bin文件" <<endl;
-  //ifs.read(pmem , 100);
-  //cout << hex << pmem[2] <<endl;
-}
 
 void load_img(){
   FILE *fp = fopen("./csrc/obj.bin", "rb");
