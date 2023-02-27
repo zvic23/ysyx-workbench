@@ -15,7 +15,7 @@ VerilatedVcdC* tfp = NULL;
 
 static Vysyx_22050612_npc* top;
 
-static uint8_t pmem[0x50000];
+static char pmem[0x50000];
 
 uint32_t pmem_read(uint64_t addr){
   
@@ -56,8 +56,10 @@ void load_img() {
   ifs.open("./csrc/obj.bin",ios::in) ;
   if (!ifs.is_open()) cout << "文件打开失败" << endl;
   else cout<< "打开bin文件" <<endl;
-  while (ifs >> pmem)
-  cout << pmem << endl;
+  //while (ifs >> pmem)
+  //cout << pmem << endl;
+  while(ifs>>pmem)
+	cout<<pmem<<endl;
 }
  
  
