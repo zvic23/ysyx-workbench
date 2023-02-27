@@ -72,7 +72,7 @@ void load1(){
 
   fseek(fp, 0, SEEK_SET);
   //for(int i=0;i<size;i++){
-	  int a = fread((unsigned char*)pmem,1,size,fp);
+	  int a = fread(pmem,1,size,fp);
 
 
   fseek(fp, 0, SEEK_SET);
