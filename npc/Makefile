@@ -8,10 +8,10 @@ sim:
 
 include ../Makefile
 
-exe:    sim
+exe:    
 	obj_dir/Vysyx_22050612_npc
 
-wave:  exe 
+wave:  sim exe 
 	gtkwave dump.vcd
 
 clear:
