@@ -51,23 +51,11 @@ void built_in_program(){
   *(uint32_t*)&pmem[0x00000010]=0x00100073; //ebreak
 }
 
-void load_img(){
-  //FILE *fp = fopen(./obj.bin)
-   //Assert(fp, "ftrace:Can not open");
-}
-
-void test01() {
-  //1、包含头文件
- 
-  //2、创建流对象
+void load_img() {
   ifstream ifs;
- 
-  //3、打开文件并且判断是否打开成功
   ifs.open("./csrc/obj.bin",ios::in) ;
-  if (!ifs.is_open()) {
-    cout << "文件打开失败" << endl;
-  }
-  else cout<< "ok" <<endl;
+  if (!ifs.is_open()) cout << "文件打开失败" << endl;
+  else cout<< "打开bin文件" <<endl;
 }
  
  
@@ -80,8 +68,7 @@ void ebreak(){
 int main() {
   
   //built_in_program();
-  //load_img();
-  test01(); 
+  load_img();
 
   sim_init();
 
