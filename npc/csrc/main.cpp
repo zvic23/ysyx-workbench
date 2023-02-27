@@ -71,7 +71,7 @@ void load_img(){
 
   fseek(fp, 0, SEEK_SET);
   int ret = fread(pmem, size, 1, fp);
-  for(int i=0;i<size;i++)cout << hex <<(unsigned int) (unsigned char)pmem[i] <<endl;
+  //for(int i=0;i<size;i++)cout << hex <<(unsigned int) (unsigned char)pmem[i] <<endl;
 
   fclose(fp);
 }
@@ -84,9 +84,8 @@ void ebreak(){
 }
 
 int main() {
-  
-  //built_in_program();
-  load_img();
+  if(0) load_img();
+  else built_in_program();
 
   sim_init();
 
