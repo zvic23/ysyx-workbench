@@ -80,9 +80,10 @@ int main() {
 
   while(i){
 
-  top->clk = 1;
   //top->Mr_val = pmem_read(top->Mr_addr);
   top->inst = pmem_read(top->pc);
+  step_and_dump_wave();//top->eval();
+  top->clk = 1;
   step_and_dump_wave();//top->eval();
 
   top->clk = 0;
