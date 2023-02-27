@@ -73,7 +73,7 @@ void load1(){
   fseek(fp, 0, SEEK_SET);
   //for(int i=0;i<size;i++){
 	  int a = fread(pmem,1,size,fp);
-	  cout << pmem[0] <<endl;
+	  cout << pmem[1] <<endl;
 
 
   fseek(fp, 0, SEEK_SET);
