@@ -72,12 +72,13 @@ void load1(){
 
   fseek(fp, 0, SEEK_SET);
   //for(int i=0;i<size;i++){
-	  int a = fread(pmem,1,1,fp);
-	  cout << pmem[0] <<endl;
+	  //int a = fread(pmem,1,1,fp);
+	  //cout << pmem[0] <<endl;
 
 
   fseek(fp, 0, SEEK_SET);
-  //int ret = fread(guest_to_host(RESET_VECTOR), size, 1, fp);
+  int ret = fread(pmem, size, 1, fp);
+  for(int i=0;i<size;i++)cout << hex <<pmem[i] <<endl;
   //assert(ret == 1);
 
   fclose(fp);
