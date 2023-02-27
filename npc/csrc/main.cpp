@@ -7,7 +7,9 @@
 				    
 #include <fstream>
 #include<iostream>
-using namespace std;			    
+using namespace std;		
+
+#include <cassert>
 				    
 
 VerilatedContext* contextp = NULL;
@@ -59,6 +61,25 @@ void load_img() {
   ifs.read(pmem , 100);
   //cout << hex << pmem[2] <<endl;
 }
+
+void load1(){
+  FILE *fp = fopen("./csrc/obj.bin", "rb");
+  //assert(fp, "Can not open");
+
+  fseek(fp, 0, SEEK_END);
+  long size = ftell(fp);
+
+  cout << size <<endl;
+
+  //Log("The image is %s, size = %ld", img_file, size);
+
+  fseek(fp, 0, SEEK_SET);
+  //int ret = fread(guest_to_host(RESET_VECTOR), size, 1, fp);
+  //assert(ret == 1);
+
+  fclose(fp);
+  //return size;
+}
  
  
 
@@ -70,7 +91,7 @@ void ebreak(){
 int main() {
   
   //built_in_program();
-  load_img();
+  load1();
 
   sim_init();
 
