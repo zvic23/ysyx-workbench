@@ -56,10 +56,8 @@ void load_img() {
   ifs.open("./csrc/obj.bin",ios::in) ;
   if (!ifs.is_open()) cout << "文件打开失败" << endl;
   else cout<< "打开bin文件" <<endl;
-  //while (ifs >> pmem)
-  //cout << pmem << endl;
-  while(ifs>>pmem)
-	cout<<pmem<<endl;
+  ifs.read(pmem , 10);
+  cout << pmem <<endl;
 }
  
  
