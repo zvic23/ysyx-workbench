@@ -15,7 +15,7 @@ VerilatedVcdC* tfp = NULL;
 
 static Vysyx_22050612_npc* top;
 
-static char pmem[0x50000];
+static char pmem[0x50000]={0};
 
 uint32_t pmem_read(uint64_t addr){
   
