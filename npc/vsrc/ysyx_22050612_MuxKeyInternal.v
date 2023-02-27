@@ -32,4 +32,5 @@ module ysyx_22050612_MuxKeyInternal #(NR_KEY = 2, KEY_LEN = 1, DATA_LEN = 1, HAS
     if (!HAS_DEFAULT) out = lut_out;
     else out = (hit ? lut_out : default_out);
   end
+
 endmodule
