@@ -2,6 +2,7 @@ module ysyx_22050612_EXU(
 input clk,
 input [63:0]imm_I,
 input [63:0]imm_U,
+input [63:0]imm_J,
 input [ 4:0]rd,
 input [ 4:0]rs1,
 input [ 4:0]rs2,
@@ -14,9 +15,6 @@ input [63:0]pc,
 output [63:0]dnpc
 
 );
-wire [63:0] snpc;
-assign snpc = pc + 64'd4;
-assign dnpc = snpc;
 
 wire [63:0]src1;
 wire [63:0]src2;
@@ -28,19 +26,28 @@ assign src1=gpr[rs1];
 assign src2=gpr[rs2];
 
 //general register
-ysyx_22050612_RegisterFile #(5,64) gpr_group (clk, wdata, rd, wen, gpr);
+ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata, rd, wen, gpr);
 
 //assign wen = (opcode)? 1'b1:1'b0;
 //assign wdata = (opcode)? sum0:64'b0;
-ysyx_22050612_MuxKey #(3, 10, 1) decode0 (wen, opcode, {
+ysyx_22050612_MuxKey #(4, 10, 1) decode0 (wen, opcode, {
     10'd1 , 1'b1,
     10'd2 , 1'b1,
+    10'd3 , 1'b1,
     10'd19, 1'b1
   });
-ysyx_22050612_MuxKey #(3, 10, 64) decode1 (wdata, opcode, {
+ysyx_22050612_MuxKey #(4, 10, 64) decode1 (wdata, opcode, {
     10'd1 , imm_U,
     10'd2 , sum_add0,
+    10'd3 , pc + 64'd4,
     10'd19, sum_add0
+  });
+
+//pc
+wire [63:0] snpc;
+assign snpc = pc + 64'd4;
+ysyx_22050612_MuxKeyWithDefault #(1, 10, 64) cpu_pc (dnpc, opcode, snpc, {
+    10'd3 , sum_add0
   });
 
 
@@ -48,12 +55,14 @@ ysyx_22050612_MuxKey #(3, 10, 64) decode1 (wdata, opcode, {
 wire [63:0]addend_a;
 wire [63:0]addend_b;
 wire [63:0]sum_add0;
-ysyx_22050612_MuxKey #(2, 10, 64) addend0 (addend_a, opcode, {
+ysyx_22050612_MuxKey #(3, 10, 64) addend0 (addend_a, opcode, {
     10'd2 , imm_U,
+    10'd3 , imm_J,
     10'd19, imm_I
   });
-ysyx_22050612_MuxKey #(2, 10, 64) addend1 (addend_b, opcode, {
+ysyx_22050612_MuxKey #(3, 10, 64) addend1 (addend_b, opcode, {
     10'd2 , pc,
+    10'd3 , pc,
     10'd19, src1
   });
 ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
