@@ -35,6 +35,40 @@ static int cmd_info(char *args){
 }
 
 
+static int cmd_x(char *args){
+  char *arg = strtok(NULL, " ");
+
+    //char *str_end_x = arg + strlen(arg);
+
+    /* extract the first token as the command */
+    char *n = strtok(arg, " ");
+
+    /* treat the remaining string as the arguments,
+     * which may need further parsing
+     */
+    char *pst = n + strlen(n) + 1;
+    char *position = strtok(pst, " ");
+    printf("%d and %d\n",atoi(n),atoi(position));
+
+    long  a = atol(pst);
+    long sum=0;
+   for (int i=0;i<8;i++){
+     sum = sum+(a%10)*pow(16,i);
+     a = a/10;
+   } 
+   printf("%lx\n",sum);
+   for(int i=atoi(n)-1;i>=0;i--){
+    //printf("%lx  ",paddr_read( (sum+i),1)); 
+   }
+   printf("\n");
+
+return 0;
+}
+
+
+
+
+
 static struct {
   const char *name;
   const char *description;
@@ -44,9 +78,10 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Simple step execution", cmd_si },
   { "info", "Print program status", cmd_info },
+  { "x", "Scan memory", cmd_x },
 };
 
-#define NR_CMD 4
+#define NR_CMD 5
 
 char buf[1024] = {0};
 
