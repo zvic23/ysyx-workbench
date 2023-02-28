@@ -44,6 +44,7 @@ static struct {
 void sdb_mainloop() {
     printf("sdb:");
   for (char *str; (str = fgets(buf, sizeof(buf) - 1, stdin)) != NULL; ) {
+    str[strlen(str) - 1] = ' ';
     char *str_end = str + strlen(str);
 printf("buf : %s\n", buf);
     /* extract the first token as the command */
