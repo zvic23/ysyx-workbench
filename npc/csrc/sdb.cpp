@@ -18,9 +18,7 @@ static struct {
   const char *description;
   int (*handler) (char *);
 } cmd_table [] = {
-
   { "c", "Continue the execution of the program", cmd_c },
-
 };
 
 
