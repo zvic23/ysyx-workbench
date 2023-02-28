@@ -44,14 +44,16 @@ static struct {
 void sdb_mainloop() {
     printf("sdb:");
   for (char *str; (str = fgets(buf, sizeof(buf) - 1, stdin)) != NULL; ) {
-    str[strlen(str) - 1] = ' ';
+    str[strlen(str) - 1] = ' ';  //zsl:because fgets will add the "enter" to the end of the string, so here I changed it to "space" to satisfied the need of next code.
+
     char *str_end = str + strlen(str);
-printf("buf : %s\n", buf);
+    //printf("buf : %s\n", buf);
+
     /* extract the first token as the command */
     char *cmd = strtok(str, " ");
     if (cmd == NULL) { continue; }
+    //printf("cmd : %s   ", cmd);
 
-printf("cmd : %s   ", cmd);
     /* treat the remaining string as the arguments,
      * which may need further parsing
      */
@@ -59,7 +61,9 @@ printf("cmd : %s   ", cmd);
     if (args >= str_end) {
       args = NULL;
     }
-printf("args : %s\n", args);
+    //printf("args : %s\n", args);
+    
+    
     int i;
     for (i = 0; i < NR_CMD; i ++) {
       if (strcmp(cmd, cmd_table[i].name) == 0) {
