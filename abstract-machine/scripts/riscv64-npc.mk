@@ -25,5 +25,8 @@ image: $(IMAGE).elf
 NPC_HOME = ~/ysyx-workbench/npc
 
 run: image
+	@echo "1"
 	cp -f $(IMAGE).bin $(NPC_HOME)/csrc/obj.bin
+	@echo "2"
 	$(MAKE) -C $(NPC_HOME) exe
+	@echo "3"
