@@ -141,7 +141,7 @@ int main() {
   top->clk=0;top->rst=0;step_and_dump_wave();
 
   while(i){
-
+  sdb_mainloop();
 
 
 
