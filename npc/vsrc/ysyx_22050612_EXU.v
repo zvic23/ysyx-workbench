@@ -30,13 +30,13 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata, rd, wen, gpr);
 
 //assign wen = (opcode)? 1'b1:1'b0;
 //assign wdata = (opcode)? sum0:64'b0;
-ysyx_22050612_MuxKey #(4, 10, 1) decode0 (wen, opcode, {
+ysyx_22050612_MuxKey #(4, 10, 1) gpr_write_enable (wen, opcode, {
     10'd1 , 1'b1,
     10'd2 , 1'b1,
     10'd3 , 1'b1,
     10'd19, 1'b1
   });
-ysyx_22050612_MuxKey #(4, 10, 64) decode1 (wdata, opcode, {
+ysyx_22050612_MuxKey #(4, 10, 64) gpr_write_data (wdata, opcode, {
     10'd1 , imm_U,
     10'd2 , sum_add0,
     10'd3 , pc + 64'd4,
