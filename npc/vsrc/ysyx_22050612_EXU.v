@@ -26,6 +26,7 @@ wire [63:0] gpr[31:0];
 assign src1=gpr[rs1];
 assign src2=gpr[rs2];
 
+//general register
 ysyx_22050612_RegisterFile #(5,64) gpr_group (clk, wdata, rd, wen, gpr);
 
 //assign wen = (opcode)? 1'b1:1'b0;
