@@ -43,14 +43,6 @@ ysyx_22050612_MuxKey #(1, 1, 1) decode0 (wen, opcode, {
 ysyx_22050612_MuxKey #(1, 1, 64) decode1 (wdata, opcode, {
     1'b1, sum0
   });
-//ysyx_22050612_MuxKeyWithDefault #(1, 1, 1) decode0 (wen, opcode, 1'b0, {
-//    1'b1, 1'b1
-//  });
-//ysyx_22050612_MuxKeyWithDefault #(1, 1, 64) decode1 (wdata, opcode, 64'b0,{
-//    1'b1, sum0
-//  });
-
-
 
 
 //  always @(posedge clk) begin
