@@ -1,18 +1,24 @@
 #include "sdb.h"
 #include <cstdio>
 #include <cstring>
+#include <math.h>
 
 
-
-#define NR_CMD 2
 
 static int cmd_c(char *args){
-	execute2end();
+	execute(-1);
 	return 0;
 }
 
 static int cmd_q(char *args) {
   return -1;
+}
+
+static int cmd_si(char *args) {
+  char *arg = strtok(NULL, " ");
+  int i = atoi(arg);
+  execute(i);
+  return 0;
 }
 
 static struct {
@@ -22,9 +28,10 @@ static struct {
 } cmd_table [] = {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
+  { "si", "Simple step execution", cmd_si },
 };
 
+#define NR_CMD 3
 
     char buf[1024] = {0};
 //    printf("请输入数据：");

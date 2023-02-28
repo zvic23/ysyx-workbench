@@ -2,7 +2,7 @@
 #define __SDB_H__
 
 void one_cycle();
-void execute2end();
+void execute(int n);
 
 void sdb_mainloop();
 

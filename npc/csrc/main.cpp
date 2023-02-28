@@ -74,11 +74,11 @@ void load_img(){
  
 
 
-int i = 1;
+int end = 0;
 void ebreak(int r){
 	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);
 	else printf(RED "HIT BAD TRAP\n" NONE);
-	i = 0;
+	end = 1;
 }
 
 void one_cycle(){
@@ -96,8 +96,12 @@ void one_cycle(){
   //step_and_dump_wave();//top->eval();
 }
 
-void execute2end(){
-  while(i){
+void execute(int n){
+  for(int i=0;i<n;i++){
+	  if(end == 1){
+		  printf("execute has finished, please open npc again!\n");
+		  return;
+	  }
 	  one_cycle();
   }
 }
@@ -116,7 +120,7 @@ int main() {
   top->clk=0;top->rst=0;step_and_dump_wave();
 
   sdb_mainloop();
-  while(i){
+  while(0){
 
 
   }
