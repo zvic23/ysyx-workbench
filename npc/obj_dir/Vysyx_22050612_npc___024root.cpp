@@ -17,9 +17,6 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___combo__TOP__2(Vysyx_22050612_n
     VlWide<7>/*223:0*/ __Vtemp147;
     VlWide<9>/*287:0*/ __Vtemp149;
     // Body
-    vlSelf->ysyx_22050612_npc__DOT__idu__DOT____Vcellinp__decode1____pinNumber2 
-        = ((0x380U & (vlSelf->inst >> 5U)) | (0x7fU 
-                                              & vlSelf->inst));
     if ((vlSelf->inst >> 0x1fU)) {
         vlSelf->ysyx_22050612_npc__DOT__imm_I = (0xfffffffffffff000ULL 
                                                  | (QData)((IData)(
@@ -75,12 +72,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___combo__TOP__2(Vysyx_22050612_n
                           vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode0__DOT__i0__DOT__key_list
                           [3U]))) & vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode0__DOT__i0__DOT__data_list
               [3U]));
-    vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode1__DOT__i0__DOT__lut_out 
-        = ((- (IData)(((IData)(vlSelf->ysyx_22050612_npc__DOT__idu__DOT____Vcellinp__decode1____pinNumber2) 
-                       == vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode1__DOT__i0__DOT__key_list
-                       [0U]))) & vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode1__DOT__i0__DOT__data_list
-           [0U]);
-    vlSelf->ysyx_22050612_npc__DOT__opcode = vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode1__DOT__i0__DOT__lut_out;
+    vlSelf->ysyx_22050612_npc__DOT__opcode = vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode0__DOT__i0__DOT__lut_out;
     __Vtemp147[4U] = (0x1000U | (((IData)(((vlSelf->inst 
                                             >> 0x1fU)
                                             ? (0xffffffffffe00000ULL 
