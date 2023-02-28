@@ -103,7 +103,7 @@ void ebreak(int r){
 void sdb_mainloop() {
   for (char *str; (str = fgets(buf, sizeof(buf) - 1, stdin)) != NULL; ) {
     char *str_end = str + strlen(str);
-
+printf("buf : %s\n", buf);
     /* extract the first token as the command */
     char *cmd = strtok(str, " ");
     if (cmd == NULL) { continue; }
