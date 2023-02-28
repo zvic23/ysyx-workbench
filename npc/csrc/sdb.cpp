@@ -11,7 +11,9 @@ static int cmd_c(char *args){
 	return 0;
 }
 
-
+static int cmd_q(char *args) {
+  return -1;
+}
 
 static struct {
   const char *name;
@@ -19,6 +21,8 @@ static struct {
   int (*handler) (char *);
 } cmd_table [] = {
   { "c", "Continue the execution of the program", cmd_c },
+  { "q", "Exit NEMU", cmd_q },
+
 };
 
 
@@ -31,6 +35,7 @@ static struct {
 
 
 void sdb_mainloop() {
+    printf("sdb:");
   for (char *str; (str = fgets(buf, sizeof(buf) - 1, stdin)) != NULL; ) {
     char *str_end = str + strlen(str);
 printf("buf : %s\n", buf);
