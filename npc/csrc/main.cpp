@@ -72,6 +72,15 @@ void load_img(){
   fclose(fp);
 }
  
+
+
+int i = 1;
+void ebreak(int r){
+	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);
+	else printf(RED "HIT BAD TRAP\n" NONE);
+	i = 0;
+}
+
 void one_cycle(){
   //top->Mr_val = pmem_read(top->Mr_addr);
   
@@ -85,16 +94,13 @@ void one_cycle(){
   step_and_dump_wave(); 
   
   //step_and_dump_wave();//top->eval();
-}	
-
-int i = 1;
-void ebreak(int r){
-	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);
-	else printf(RED "HIT BAD TRAP\n" NONE);
-	i = 0;
 }
 
-
+void execute2end(){
+  while(i){
+	  one_cycle();
+  }
+}
 
 
 

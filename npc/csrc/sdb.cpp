@@ -7,7 +7,7 @@
 #define NR_CMD 2
 
 static int cmd_c(char *args){
-	one_cycle();
+	execute2end();
 	return 0;
 }
 
