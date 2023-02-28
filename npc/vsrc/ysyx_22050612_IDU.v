@@ -23,7 +23,7 @@ assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[3
 
 
 ysyx_22050612_MuxKey #(2, 10, 8) decode0 (opcode[7:0], {inst[14:12],inst[6:0]}, {
-    10'b000_011_0111, 8'd4 ,        //jalr
+    10'b000_110_0111, 8'd4 ,        //jalr
     10'b000_001_0011, 8'd19         //addi
   });
 ysyx_22050612_MuxKey #(3, 7, 2) decode1 (opcode[9:8], inst[6:0], {

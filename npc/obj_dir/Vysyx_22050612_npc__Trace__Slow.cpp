@@ -513,7 +513,7 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
         tracep->fullIData(oldp+344,(2U),32);
         tracep->fullIData(oldp+345,(0xaU),32);
         tracep->fullIData(oldp+346,(8U),32);
-        tracep->fullQData(oldp+347,(0xdc101313ULL),36);
+        tracep->fullQData(oldp+347,(0x19c101313ULL),36);
         tracep->fullIData(oldp+349,(0U),32);
         tracep->fullCData(oldp+350,(0U),8);
         tracep->fullIData(oldp+351,(0x12U),32);
