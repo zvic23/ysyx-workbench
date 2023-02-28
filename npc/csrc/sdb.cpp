@@ -43,9 +43,10 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Simple step execution", cmd_si },
+  { "info", "Print program status", cmd_info },
 };
 
-#define NR_CMD 3
+#define NR_CMD 4
 
 char buf[1024] = {0};
 
