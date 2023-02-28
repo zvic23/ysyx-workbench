@@ -59,7 +59,7 @@ static int cmd_x(char *args){
    printf("%lx\n",sum);
    for(int i=0;i<atoi(n);i++){
       uint32_t mem = pmem_read(sum+i*4);
-      printf("%08x  ",mem); 
+      printf("0x%lx: %08x  ",sum+i*4,mem); 
    }
    printf("\n");
 
