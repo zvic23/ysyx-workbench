@@ -97,7 +97,6 @@ void one_cycle(){
 }
 
 void execute(int n){
-	printf("n=%d\n",n);
   for(uint64_t i=0;i<n;i++){
 	  if(end == 1){
 		  printf("execute has finished, please open npc again!\n");
@@ -118,9 +117,10 @@ int main() {
 
   top->clk=0;top->rst=1;step_and_dump_wave();
   top->clk=1;top->rst=1;step_and_dump_wave();
-  top->clk=0;top->rst=0;step_and_dump_wave();
+  top->clk=0;top->rst=0;step_and_dump_wave();    //init the npc
 
   sdb_mainloop();
+
   while(0){
 
 
