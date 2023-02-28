@@ -3,7 +3,8 @@
 #include <cstring>
 #include <math.h>
 
-
+#define YELLOW "\33[1;33m"
+#define NONE  "\33[0m"    
 
 static int cmd_c(char *args){
 	execute(-1);
@@ -38,8 +39,6 @@ static int cmd_info(char *args){
 static int cmd_x(char *args){
   char *arg = strtok(NULL, " ");
 
-    //char *str_end_x = arg + strlen(arg);
-
     /* extract the first token as the command */
     char *n = strtok(arg, " ");
 
@@ -48,7 +47,7 @@ static int cmd_x(char *args){
      */
     char *pst = n + strlen(n) + 1;
     char *position = strtok(pst, " ");
-    printf("%d and %d\n",atoi(n),atoi(position));
+    //printf("%d and %d\n",atoi(n),atoi(position));
 
     long  a = atol(pst);
     long sum=0;
@@ -56,10 +55,10 @@ static int cmd_x(char *args){
      sum = sum+(a%10)*pow(16,i);
      a = a/10;
    } 
-   printf("%lx\n",sum);
+   //printf("%lx\n",sum);
    for(int i=0;i<atoi(n);i++){
       uint32_t mem = pmem_read(sum+i*4);
-      printf("0x%lx: %08x  ",sum+i*4,mem); 
+      printf(YELLOW "0x%lx: " NONE "%08x  ",sum+i*4,mem); 
    }
    printf("\n");
 
