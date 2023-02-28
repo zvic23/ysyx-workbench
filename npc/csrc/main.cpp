@@ -67,8 +67,8 @@ void load_img(){
 #define NONE  "\33[0m"
 int i = 1;
 void ebreak(int r){
-	if(r==0) printf(GREEN "hit good trap\n" NONE);
-	else printf(RED "hit bad trap\n" NONE);
+	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);
+	else printf(RED "HIT BAD TRAP\n" NONE);
 	i = 0;
 }
 
