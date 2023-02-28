@@ -5,18 +5,19 @@
 #include "svdpi.h"
 #include "Vysyx_22050612_npc__Dpi.h"  //zsl:ebreak support (DPI-C)
 				    
+#define GREEN "\33[1;32m"
+#define RED   "\33[1;31m"
+#define NONE  "\33[0m"                //zsl:offer color for printf
+
+#include <readline/readline.h>
+#include <readline/history.h>
+
+
 
 VerilatedContext* contextp = NULL;
 VerilatedVcdC* tfp = NULL;
 
 static Vysyx_22050612_npc* top;
-
-static uint8_t pmem[0x50000];
-
-uint32_t pmem_read(uint64_t addr){
-  return *(uint32_t*)&pmem[addr-0x80000000];
-}
-
 
 void step_and_dump_wave(){
   top->eval();
@@ -35,6 +36,15 @@ void sim_init(){
 void sim_exit(){
   step_and_dump_wave();
   tfp->close();
+}
+
+
+
+
+static uint8_t pmem[0x50000];
+
+uint32_t pmem_read(uint64_t addr){
+  return *(uint32_t*)&pmem[addr-0x80000000];
 }
 
 void built_in_program(){
@@ -61,16 +71,75 @@ void load_img(){
   fclose(fp);
 }
  
- 
-#define GREEN "\33[1;32m"
-#define RED   "\33[1;31m"
-#define NONE  "\33[0m"
+void one_cycle(){
+  //top->Mr_val = pmem_read(top->Mr_addr);
+  
+  
+  top->inst = pmem_read(top->pc);
+  step_and_dump_wave();
+  top->clk = 1;
+  step_and_dump_wave();
+
+  top->clk = 0;
+  step_and_dump_wave(); 
+  
+  //step_and_dump_wave();//top->eval();
+}	
+
 int i = 1;
 void ebreak(int r){
 	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);
 	else printf(RED "HIT BAD TRAP\n" NONE);
 	i = 0;
 }
+
+
+static char* rl_gets() {
+  static char *line_read = NULL;
+
+  if (line_read) {
+    free(line_read);
+    line_read = NULL;
+  }
+
+  line_read = readline("(nemu) ");
+
+  if (line_read && *line_read) {
+    add_history(line_read);
+  }
+
+  return line_read;
+}
+
+void sdb_mainloop() {
+  for (char *str; (str = rl_gets()) != NULL; ) {
+    char *str_end = str + strlen(str);
+
+    /* extract the first token as the command */
+    char *cmd = strtok(str, " ");
+    if (cmd == NULL) { continue; }
+
+    /* treat the remaining string as the arguments,
+     * which may need further parsing
+     */
+    char *args = cmd + strlen(cmd) + 1;
+    if (args >= str_end) {
+      args = NULL;
+    }
+//    int i;
+//    for (i = 0; i < NR_CMD; i ++) {
+//      if (strcmp(cmd, cmd_table[i].name) == 0) {
+//        if (cmd_table[i].handler(args) < 0) { return; }
+//        break;
+//      }
+//    }
+//
+//    if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
+  }
+}
+  
+
+
 
 int main() {
   if(1) load_img();
@@ -84,20 +153,7 @@ int main() {
 
   while(i){
 
-  //top->Mr_val = pmem_read(top->Mr_addr);
-  
-  
-  top->inst = pmem_read(top->pc);
-  step_and_dump_wave();
-  top->clk = 1;
-  step_and_dump_wave();
 
-  top->clk = 0;
-  step_and_dump_wave(); 
-		       
-  
-  
-  //step_and_dump_wave();//top->eval();
 
   }
   sim_exit();
