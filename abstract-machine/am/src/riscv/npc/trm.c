@@ -18,16 +18,10 @@ void putch(char ch) {
 }
 
 void halt(int code) {
-	if(code == 0){
-		printf("hit good trap\n");
-  		asm volatile("ebreak");
-	}
-	else {
-		printf("hit bad  trap\n");
-  		asm volatile("ebreak");
-	}
+  asm volatile("mv a0, %0; ebreak" : :"r"(code));
+  //asm volatile("ebreak");
 
-  //asm volatile("mv a0, %0; ebreak" : :"r"(code))
+  //should not be here
   while (1);
 }
 
