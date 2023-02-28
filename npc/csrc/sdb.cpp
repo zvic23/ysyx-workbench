@@ -4,7 +4,7 @@
 
 
 
-#define NR_CMD 1
+#define NR_CMD 2
 
 static int cmd_c(char *args){
 	one_cycle();
