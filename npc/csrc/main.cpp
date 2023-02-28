@@ -65,7 +65,7 @@ void load_img(){
 
 int i = 1;
 void ebreak(int r){
-	if(r==0) printf("\33[1;32m""hit good trap\n");
+	if(r==0) printf("\33[1;32m""hit good trap\n""\33[0m");
 	else printf("hit bad trap\n");
 	i = 0;
 }
