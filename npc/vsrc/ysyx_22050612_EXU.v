@@ -1,4 +1,7 @@
 import "DPI-C" function void ebreak (int r);
+import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
+
+
 
 module ysyx_22050612_EXU(
 input clk,
@@ -74,6 +77,9 @@ ysyx_22050612_MuxKey #(4, 10, 64) addend1 (addend_b, opcode, {
   });
 ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
 
+
+
+initial set_gpr_ptr(gpr);  
 
 always @(posedge clk) begin
 	if (opcode[7]==1'b1 && gpr[10]==64'b0) ebreak(0);

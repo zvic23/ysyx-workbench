@@ -3,6 +3,7 @@
 
 void one_cycle();
 void execute(int n);
+void dump_gpr();
 
 void sdb_mainloop();
 

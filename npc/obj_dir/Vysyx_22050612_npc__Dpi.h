@@ -15,6 +15,8 @@ extern "C" {
     // DPI IMPORTS
     // DPI import at vsrc//ysyx_22050612_EXU.v:1:30
     extern void ebreak(int r);
+    // DPI import at vsrc//ysyx_22050612_EXU.v:2:30
+    extern void set_gpr_ptr(const svOpenArrayHandle a);
 
 #ifdef __cplusplus
 }

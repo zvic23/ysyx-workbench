@@ -21,6 +21,20 @@ static int cmd_si(char *args) {
   return 0;
 }
 
+static int cmd_info(char *args){
+  char *arg = strtok(NULL, " ");
+  if(strcmp(arg,"r") == 0){
+	  //printf("pc = %lx\n",cpu.pc);
+	  //isa_reg_display();
+	  dump_gpr();
+  }
+  else if(strcmp(arg,"w") == 0){
+	  //wp_display();
+  }
+  return 0;
+}
+
+
 static struct {
   const char *name;
   const char *description;
@@ -33,18 +47,12 @@ static struct {
 
 #define NR_CMD 3
 
-    char buf[1024] = {0};
-//    printf("请输入数据：");
-//    char *str = fgets(buf, sizeof(buf) - 1, stdin); // fgets() is block
-//    printf("buf : %s\n", buf);
-//    printf("str : %s\n", str);
-//    printf("len : %ld\n", strlen(buf));
-
+char buf[1024] = {0};
 
 void sdb_mainloop() {
     printf("sdb:");
   for (char *str; (str = fgets(buf, sizeof(buf) - 1, stdin)) != NULL; ) {
-    str[strlen(str) - 1] = ' ';  //zsl:because fgets will add the "enter" to the end of the string, so here I changed it to "space" to satisfied the need of next code.
+    str[strlen(str) - 1] = ' ';  //zsl:because fgets() will add the "enter" to the end of the string, so here I changed it to "space" to satisfied the need of next code.
 
     char *str_end = str + strlen(str);
     //printf("buf : %s\n", buf);
