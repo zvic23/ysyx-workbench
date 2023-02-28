@@ -14,7 +14,7 @@ extern "C" {
 
     // DPI IMPORTS
     // DPI import at vsrc//ysyx_22050612_IDU.v:1:30
-    extern void ebreak();
+    extern void ebreak(int r);
 
 #ifdef __cplusplus
 }

@@ -9,10 +9,12 @@
 
 //==========
 
-extern "C" void ebreak();
+extern "C" void ebreak(int r);
 
-VL_INLINE_OPT void Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024unit() {
+VL_INLINE_OPT void Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024unit(IData/*31:0*/ r) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024unit\n"); );
     // Body
-    ebreak();
+    int r__Vcvt;
+    for (size_t r__Vidx = 0; r__Vidx < 1; ++r__Vidx) r__Vcvt = r;
+    ebreak(r__Vcvt);
 }

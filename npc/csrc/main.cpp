@@ -64,8 +64,11 @@ void load_img(){
  
 
 int i = 1;
-void ebreak(){
-  i = 0; 
+void ebreak(int r){
+	if(r){
+  		i = 0;
+		printf("hit good trap\n");
+	}
 }
 
 int main() {

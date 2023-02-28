@@ -1,4 +1,4 @@
-import "DPI-C" function void ebreak ();
+import "DPI-C" function void ebreak (int r);
 
 module ysyx_22050612_IDU(
 input clk,
@@ -35,7 +35,7 @@ ysyx_22050612_MuxKey #(3, 7, 2) decode1 (opcode[9:8], inst[6:0], {
 
 
 always @(posedge clk) begin
-	if(inst==32'h00100073) ebreak();
+	if(inst==32'h00100073) ebreak(1);
 end
 
 //  always @(posedge clk) begin
