@@ -1,3 +1,5 @@
+import "DPI-C" function void ebreak (int r);
+
 module ysyx_22050612_EXU(
 input clk,
 input [63:0]imm_I,
@@ -73,7 +75,10 @@ ysyx_22050612_MuxKey #(4, 10, 64) addend1 (addend_b, opcode, {
 ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
 
 
-
+always @(posedge clk) begin
+	if (opcode[7]==1'b1 && gpr[10]==64'b0) ebreak(0);
+	else if (opcode[7]==1'b1 && gpr[10]!=64'b0) ebreak(1);
+end
 
 //  always @(posedge clk) begin
 //    $display("%d,%d,%d",rd,rs1,imm_I);

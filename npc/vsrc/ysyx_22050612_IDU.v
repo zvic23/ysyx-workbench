@@ -1,4 +1,4 @@
-import "DPI-C" function void ebreak (int r);
+//import "DPI-C" function void ebreak (int r);
 
 module ysyx_22050612_IDU(
 input clk,
@@ -22,9 +22,9 @@ assign imm_U = (inst[31]==1'b1)?{{32{1'b1}},inst[31:12],{12{1'b0}}}:{{32{1'b0}},
 assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
 
 
-ysyx_22050612_MuxKey #(2, 10, 8) decode0 (opcode[7:0], {inst[14:12],inst[6:0]}, {
-    10'b000_110_0111, 8'd4 ,        //jalr
-    10'b000_001_0011, 8'd19         //addi
+ysyx_22050612_MuxKey #(2, 10, 7) decode0 (opcode[6:0], {inst[14:12],inst[6:0]}, {
+    10'b000_110_0111, 7'd4 ,        //jalr
+    10'b000_001_0011, 7'd19         //addi
   });
 ysyx_22050612_MuxKey #(3, 7, 2) decode1 (opcode[9:8], inst[6:0], {
     7'b011_0111, 2'd1,        //lui
@@ -33,10 +33,10 @@ ysyx_22050612_MuxKey #(3, 7, 2) decode1 (opcode[9:8], inst[6:0], {
   });
 
 
-
-always @(posedge clk) begin
-	if(inst==32'h00100073) ebreak(1);
-end
+assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
+//always @(posedge clk) begin
+//	if(inst==32'h00100073) ebreak(1);
+//end
 
 //  always @(posedge clk) begin
 //    $display("%x,%d,%d",inst,opcode,rd);

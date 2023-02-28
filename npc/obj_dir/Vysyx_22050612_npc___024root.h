@@ -28,7 +28,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     VL_OUT64(pc,63,0);
 
     // LOCAL SIGNALS
-    CData/*7:0*/ ysyx_22050612_npc__DOT__idu__DOT__decode0__DOT__i0__DOT__lut_out;
+    CData/*6:0*/ ysyx_22050612_npc__DOT__idu__DOT__decode0__DOT__i0__DOT__lut_out;
     CData/*0:0*/ ysyx_22050612_npc__DOT__idu__DOT__decode0__DOT__i0__DOT__hit;
     CData/*1:0*/ ysyx_22050612_npc__DOT__idu__DOT__decode1__DOT__i0__DOT__lut_out;
     CData/*0:0*/ ysyx_22050612_npc__DOT__idu__DOT__decode1__DOT__i0__DOT__hit;
@@ -52,9 +52,9 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__cpu_pc__DOT__i0__DOT__lut_out;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__addend0__DOT__i0__DOT__lut_out;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__addend1__DOT__i0__DOT__lut_out;
-    VlUnpacked<IData/*17:0*/, 2> ysyx_22050612_npc__DOT__idu__DOT__decode0__DOT__i0__DOT__pair_list;
+    VlUnpacked<IData/*16:0*/, 2> ysyx_22050612_npc__DOT__idu__DOT__decode0__DOT__i0__DOT__pair_list;
     VlUnpacked<SData/*9:0*/, 2> ysyx_22050612_npc__DOT__idu__DOT__decode0__DOT__i0__DOT__key_list;
-    VlUnpacked<CData/*7:0*/, 2> ysyx_22050612_npc__DOT__idu__DOT__decode0__DOT__i0__DOT__data_list;
+    VlUnpacked<CData/*6:0*/, 2> ysyx_22050612_npc__DOT__idu__DOT__decode0__DOT__i0__DOT__data_list;
     VlUnpacked<SData/*8:0*/, 3> ysyx_22050612_npc__DOT__idu__DOT__decode1__DOT__i0__DOT__pair_list;
     VlUnpacked<CData/*6:0*/, 3> ysyx_22050612_npc__DOT__idu__DOT__decode1__DOT__i0__DOT__key_list;
     VlUnpacked<CData/*1:0*/, 3> ysyx_22050612_npc__DOT__idu__DOT__decode1__DOT__i0__DOT__data_list;
@@ -76,7 +76,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     VlUnpacked<QData/*63:0*/, 4> ysyx_22050612_npc__DOT__exu__DOT__addend1__DOT__i0__DOT__data_list;
 
     // LOCAL VARIABLES
-    CData/*7:0*/ ysyx_22050612_npc__DOT__idu__DOT____Vcellout__decode0____pinNumber1;
+    CData/*6:0*/ ysyx_22050612_npc__DOT__idu__DOT____Vcellout__decode0____pinNumber1;
     CData/*1:0*/ ysyx_22050612_npc__DOT__idu__DOT____Vcellout__decode1____pinNumber1;
     CData/*0:0*/ __Vclklast__TOP__clk;
     SData/*9:0*/ ysyx_22050612_npc__DOT__idu__DOT____Vcellinp__decode0____pinNumber2;
