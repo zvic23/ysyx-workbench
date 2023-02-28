@@ -29,7 +29,7 @@ ysyx_22050612_MuxKey #(4, 7, 10) decode0 (opcode, inst[6:0], {
     7'b001_0011, 10'd19        //addi
   });
 ysyx_22050612_MuxKey #(1, 10, 10) decode1 (opcode, {inst[14:12],inst[6:0]}, {
-    10'b000_011_0111, 10'd4        //lui
+    10'b000_011_0111, 10'd4        //jalr
   });
 
 always @(posedge clk) begin
