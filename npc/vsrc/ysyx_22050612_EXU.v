@@ -4,7 +4,7 @@ input [63:0]imm_I,
 input [ 4:0]rd,
 input [ 4:0]rs1,
 input [ 4:0]rs2,
-input opcode,
+input [9:0]opcode,
 
 input [63:0]pc,
 
@@ -28,21 +28,29 @@ assign src2=gpr[rs2];
 
 ysyx_22050612_RegisterFile #(5,64) gpr_group (clk, wdata, rd, wen, gpr);
 
-wire [63:0]sum0;
-
-ysyx_22050612_Adder #(64) add0 (imm_I,src1,sum0);
-
-
-
 //assign wen = (opcode)? 1'b1:1'b0;
 //assign wdata = (opcode)? sum0:64'b0;
+ysyx_22050612_MuxKey #(1, 10, 1) decode0 (wen, opcode, {
+    10'd19, 1'b1
+  });
+ysyx_22050612_MuxKey #(1, 10, 64) decode1 (wdata, opcode, {
+    10'd19, sum_add0
+  });
 
-ysyx_22050612_MuxKey #(1, 1, 1) decode0 (wen, opcode, {
-    1'b1, 1'b1
+
+//adder
+wire [63:0]addend_a;
+wire [63:0]addend_b;
+wire [63:0]sum_add0;
+ysyx_22050612_MuxKey #(1, 10, 64) addend0 (addend_a, opcode, {
+    10'd19, imm_I
   });
-ysyx_22050612_MuxKey #(1, 1, 64) decode1 (wdata, opcode, {
-    1'b1, sum0
+ysyx_22050612_MuxKey #(1, 10, 64) addend1 (addend_b, opcode, {
+    10'd19, src1
   });
+ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
+
+
 
 
 //  always @(posedge clk) begin
