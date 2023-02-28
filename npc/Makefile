@@ -8,7 +8,7 @@ sim:
 
 include ../Makefile
 
-exe:    
+exe:    sim
 	obj_dir/Vysyx_22050612_npc
 
 wave:  sim exe 
