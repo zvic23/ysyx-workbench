@@ -62,11 +62,13 @@ void load_img(){
 }
  
  
-
+#define GREEN "\33[1;32m"
+#define RED   "\33[1;31m"
+#define NONE  "\33[0m"
 int i = 1;
 void ebreak(int r){
-	if(r==0) printf("\33[1;32m""hit good trap\n""\33[0m");
-	else printf("hit bad trap\n");
+	if(r==0) printf(GREEN"hit good trap\n"NONE);
+	else printf(RED"hit bad trap\n"NONE);
 	i = 0;
 }
 
