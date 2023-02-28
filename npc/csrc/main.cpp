@@ -98,7 +98,7 @@ void one_cycle(){
 
 void execute(int n){
 	printf("n=%d\n",n);
-  for(int i=0;i<n;i++){
+  for(uint64_t i=0;i<n;i++){
 	  if(end == 1){
 		  printf("execute has finished, please open npc again!\n");
 		  return;
