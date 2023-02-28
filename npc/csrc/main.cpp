@@ -124,6 +124,7 @@ printf("buf : %s\n", buf);
 //    }
 //
 //    if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
+    printf("sdb:\n");
   }
 }
   
