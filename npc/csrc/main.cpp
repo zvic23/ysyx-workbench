@@ -5,9 +5,9 @@
 #include "svdpi.h"
 #include "Vysyx_22050612_npc__Dpi.h"  //zsl:ebreak support (DPI-C)
 
-#include "sdb.h"                      //zsl:include sdb
+#include "include/sdb.h"                      //zsl:include sdb
 
-#include "trace.h"
+#include "include/trace.h"
 
 #define GREEN "\33[1;32m"
 #define RED   "\33[1;31m"
