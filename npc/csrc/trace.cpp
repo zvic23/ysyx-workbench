@@ -12,7 +12,6 @@ static int QueueOut=0;
 
 
 void itrace(uint64_t pc , uint32_t inst_val){
-	printf("pc=%lx , inst=%x \n",pc ,inst_val);
   char logbuf[128];
   char *p = logbuf;
   p += snprintf(p, sizeof(logbuf), FMT_WORD ":", pc);
@@ -29,6 +28,7 @@ void itrace(uint64_t pc , uint32_t inst_val){
   memset(p, ' ', space_len);
   p += space_len;
 
+	printf("pc=%lx , inst=%x \n",pc ,inst_val);
   void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, (uint8_t *)inst_val, ilen);
