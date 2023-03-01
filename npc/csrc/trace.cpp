@@ -21,13 +21,14 @@ void itrace(uint64_t pc , uint32_t inst_val){
   for (i = ilen - 1; i >= 0; i --) {
     p += snprintf(p, 4, " %02x", inst[i]);
   }
+printf("p=%s\n",p);
   int ilen_max = 4 ;
   int space_len = ilen_max - ilen;
   if (space_len < 0) space_len = 0;
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
   p += space_len;
-printf("p=%s\n",p);
+
   void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, (uint8_t *)inst_val, ilen);
