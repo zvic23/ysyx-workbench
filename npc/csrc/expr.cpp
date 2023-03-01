@@ -117,6 +117,8 @@ static bool make_token(char *e) {
   memset(tokens, 0 ,sizeof tokens);    //zsl:In case of getting expr continuously, tokens should be cleared everytime.
 
   while (e[position] != '\0') {
+
+	  printf("444\n");
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
@@ -210,7 +212,6 @@ uint64_t expr(char *e, bool *success) {
     return 0;
   }
 
-	  printf("444\n");
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
 
