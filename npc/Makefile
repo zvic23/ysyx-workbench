@@ -1,3 +1,12 @@
+CXXSRC = csrc/utils/disasm.cc
+CXXFLAGS += $(shell llvm-config --cxxflags) -fPIE
+LIBS += $(shell llvm-config --libs)
+
+
+lk:
+	g++ $(CXXSRC) $(CXXFLAGS) $(LIBS)
+
+
 all:
 	@echo "Write this Makefile by your self."
 
@@ -19,7 +28,7 @@ clear:
 	rm build/ -r  obj_dir/ -r  dump.vcd
 
 
-#zsl: about nvboard
+#************zsl: about nvboard
 TOPNAME = top
 NXDC_FILES = constr/pinset.nxdc
 INC_PATH ?=
