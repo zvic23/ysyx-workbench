@@ -1,9 +1,46 @@
-#include <sdb.h>
+#include "sdb.h"  //zsl:connect the expr and watchpoint
+#include <math.h>
+#include <cstring>
+#include <cstdio>
+#include <cassert>
 
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <regex.h>
+
+
+const char *regs[] = {
+  "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
+  "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
+  "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7",
+  "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
+};
+
+uint64_t isa_reg_str2val(const char *s, bool *success) {
+	extern uint64_t *cpu_gpr;
+	uint64_t value = 0;
+	int j =0;
+	//if((s[0] == 'p') && (s[1] == 'c')){
+	//	*success = true;
+	//	value = cpu.pc;
+	//	return value;
+	//}
+	for(j=0;j<32;j++){
+		if((s[0] == regs[j][0])&&(s[1] == regs[j][1])){
+			*success = true;
+			value = cpu_gpr[j];
+			break;
+		}
+	}
+	//printf("j is %d\n",j);
+	if(j == 32){*success = false;}
+	return value;
+  //return 0;
+}
+
+
+
 
 enum {
   TK_NOTYPE = 256, TK_EQ,TK_NUMBER, TK_NEXTLINE, TK_HEXNUMBER, TK_REG, DEREF, TK_NOTEQ, TK_AND,  MINUS
@@ -39,7 +76,7 @@ static struct rule {
   {"\\\n", TK_NEXTLINE},// next line
 };
 
-#define NR_REGEX ARRLEN(rules)
+#define NR_REGEX 13
 
 static regex_t re[NR_REGEX] = {};
 
@@ -55,7 +92,7 @@ void init_regex() {
     ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
     if (ret != 0) {
       regerror(ret, &re[i], error_msg, 128);
-      panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
+      //panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
     }
   }
 }
@@ -166,7 +203,7 @@ static bool make_token(char *e) {
 }
 
 
-word_t expr(char *e, bool *success) {
+uint64_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
@@ -347,7 +384,7 @@ struct figure eval(int p, int q){
 	       	  	addrhex = addrhex+(addr%10)*pow(16,i);
 	       	  	addr = addr/10;
 	       	}
-		uint64_t value = paddr_read(addrhex,1);
+		uint8_t value = pmem_read(addrhex);
 		//printf("aaa %lx\n", value);
 		struct figure number;
 	        number.sign=0;

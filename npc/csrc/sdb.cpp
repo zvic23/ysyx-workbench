@@ -65,7 +65,16 @@ static int cmd_x(char *args){
 return 0;
 }
 
+static int cmd_p(char *args){
+  //char *arg = strtok(NULL, " ");
+  struct figure result = evaluation(args); 
+  char sign = '0';
+  if(result.sign == 1){sign = '-';}
+  else{sign=' ';}
+  printf("evaluated result is %s%lu   (hexdecimal:%s0x%lx)\n",&sign,result.value,&sign,result.value);
 
+  return 0;
+}
 
 
 
@@ -79,9 +88,10 @@ static struct {
   { "si", "Simple step execution", cmd_si },
   { "info", "Print program status", cmd_info },
   { "x", "Scan memory", cmd_x },
+  { "p", "expression evaluation", cmd_p },
 };
 
-#define NR_CMD 5
+#define NR_CMD 6
 
 char buf[1024] = {0};
 

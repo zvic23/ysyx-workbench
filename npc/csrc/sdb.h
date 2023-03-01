@@ -11,4 +11,13 @@ uint32_t pmem_read(uint64_t addr);
 
 void sdb_mainloop();
 
+
+struct figure{
+	int sign;
+	uint64_t value;
+};
+
+struct figure evaluation(char *e);
+
+
 #endif
