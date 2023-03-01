@@ -30,7 +30,7 @@ static int cmd_info(char *args){
 	  dump_gpr();
   }
   else if(strcmp(arg,"w") == 0){
-	  //wp_display();
+	  wp_display();
   }
   return 0;
 }
