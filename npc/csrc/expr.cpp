@@ -499,6 +499,7 @@ struct figure evaluation(char *e){
 
 	printf("111\n");
 	expr(e,NULL);
+	printf("222\n");
 	struct figure result = eval(0,nr_token-1);
 	//char *sign = "0";                                //zsl:printf the evaluation result
 	//if(result.sign == 1){sign = "-";}
