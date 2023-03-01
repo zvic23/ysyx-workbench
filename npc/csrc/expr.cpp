@@ -499,7 +499,7 @@ struct figure eval(int p, int q){
 
 
 struct figure evaluation(char *e){
-
+     init_regex();
 	printf("111\n");
 	expr(e,NULL);
 	printf("222\n");
