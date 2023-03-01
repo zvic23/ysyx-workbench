@@ -3,8 +3,6 @@ CXXFLAGS += $(shell llvm-config --cxxflags) -fPIE
 LIBS += $(shell llvm-config --libs)
 
 
-CXXSRC += $(shell find . -name '*.cpp')
-
 
 all:
 	@echo "Write this Makefile by your self."
