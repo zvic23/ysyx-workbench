@@ -109,8 +109,8 @@ void one_cycle(){
   step_and_dump_wave(); 
   
   //step_and_dump_wave();//top->eval();
-  
-  itrace(top->pc, top->inst);
+ uint32_t inst = 0x413; 
+  itrace(top->pc, inst);
   
   
 }
