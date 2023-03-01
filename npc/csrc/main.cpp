@@ -138,7 +138,7 @@ int main() {
 
   sim_init();
 
-  init_disasm("riscv64-pc-linux-gnu");
+  init_disasm("riscv64" "-pc-linux-gnu");
 
   top->clk=0;top->rst=1;step_and_dump_wave();
   top->clk=1;top->rst=1;step_and_dump_wave();
