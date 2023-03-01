@@ -93,10 +93,10 @@ extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int
   uint64_t dummy_size = 0;
   gDisassembler->getInstruction(inst, dummy_size, arr, pc, llvm::nulls());
 
+	printf("pc=%lx , inst=%x \n",pc ,code);
   std::string s;
   raw_string_ostream os(s);
   gIP->printInst(&inst, pc, "", *gSTI, os);
-	printf("pc=%lx , inst=%x \n",pc ,code);
   int skip = s.find_first_not_of('\t');
   const char *p = s.c_str() + skip;
   assert((int)s.length() - skip < size);
