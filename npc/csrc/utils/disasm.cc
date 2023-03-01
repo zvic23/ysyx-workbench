@@ -87,11 +87,12 @@ extern "C" void init_disasm(const char *triple) {
   gIP->setPrintBranchImmAsAddress(true);
 }
 
-extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte) {
+extern "C" void disassemble(char *str, int size, uint64_t pc, uint32_t code, int nbyte) {
 
 	printf("pc=%lx , inst=%x \n",pc ,code);
+	uint8_t *code_addr = (uint8_t *)&code;
   MCInst inst;
-  llvm::ArrayRef<uint8_t> arr(code, nbyte);
+  llvm::ArrayRef<uint8_t> arr(code_addr, nbyte);
   uint64_t dummy_size = 0;
 
 	printf("pc=%lx , inst=%x \n",pc ,inst);
