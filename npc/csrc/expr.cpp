@@ -122,7 +122,6 @@ static bool make_token(char *e) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         int substr_len = pmatch.rm_eo;
 
-	  printf("444\n");
 /*zsl:these three lines prinft information everytime the program found a matching-rule tokens*/
         //char *substr_start = e + position;
         //Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
@@ -499,9 +498,7 @@ struct figure eval(int p, int q){
 
 struct figure evaluation(char *e){
      init_regex();
-	printf("111\n");
 	expr(e,NULL);
-	printf("222\n");
 	struct figure result = eval(0,nr_token-1);
 	//char *sign = "0";                                //zsl:printf the evaluation result
 	//if(result.sign == 1){sign = "-";}
