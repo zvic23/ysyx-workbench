@@ -117,14 +117,13 @@ static bool make_token(char *e) {
   memset(tokens, 0 ,sizeof tokens);    //zsl:In case of getting expr continuously, tokens should be cleared everytime.
 
   while (e[position] != '\0') {
-
-	  printf("444\n");
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
+	    printf("i=%d\n",i);
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         int substr_len = pmatch.rm_eo;
 
-/*zsl:these thress lines prinft information everytime the program found a matching-rule tokens*/
+/*zsl:these three lines prinft information everytime the program found a matching-rule tokens*/
         //char *substr_start = e + position;
         //Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
         //    i, rules[i].regex, position, substr_len, substr_len, substr_start);
