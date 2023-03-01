@@ -12,6 +12,7 @@ static int QueueOut=0;
 
 
 void itrace(uint64_t pc , uint32_t inst_val){
+	printf("pc=%lx , inst=%x \n",pc ,inst_val);
   char logbuf[128];
   char *p = logbuf;
   p += snprintf(p, sizeof(logbuf), FMT_WORD ":", pc);
