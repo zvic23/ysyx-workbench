@@ -3,15 +3,12 @@ CXXFLAGS += $(shell llvm-config --cxxflags) -fPIE
 LIBS += $(shell llvm-config --libs)
 
 
-lk:
-	g++ $(CXXSRC) $(CXXFLAGS) $(LIBS)
-
 
 all:
 	@echo "Write this Makefile by your self."
 
 sim:
-	verilator --cc --exe --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp csrc/sdb.cpp csrc/expr.cpp csrc/watchpoint.cpp --trace -Ivsrc/ #add -Wall later 
+	verilator --cc --exe --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp csrc/sdb.cpp csrc/expr.cpp csrc/watchpoint.cpp  $(CXXSRC) -CFLAGS "$(CXXFLAGS)" -LDFLAGS "$(LIBS)"  --trace -Ivsrc/ #add -Wall later 
 	#verilator --cc --exe --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp --trace -Ivsrc/ #add -Wall later 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
