@@ -27,7 +27,7 @@ void itrace(uint64_t pc , uint32_t inst_val){
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
   p += space_len;
-
+printf("p=%s\n",p);
   void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, (uint8_t *)inst_val, ilen);
