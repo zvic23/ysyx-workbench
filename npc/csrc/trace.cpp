@@ -33,7 +33,6 @@ void itrace(uint64_t pc , uint32_t inst_val){
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, inst_val, ilen);
 
-	//printf("pc=%lx , inst=%x \n",pc ,inst_val);
 	printf("logbug=%s\n",logbuf);
 //zsl:iringbuf implement*************
     if(QueueIn == (( QueueOut + QUEUE_SIZE) % QUEUE_SIZE)){
@@ -53,11 +52,9 @@ void itrace(uint64_t pc , uint32_t inst_val){
 
 
 
-//void itace_print(){
-//  if((nemu_state.state == NEMU_END && nemu_state.halt_ret == 1) || nemu_state.state == NEMU_ABORT ){
-//      printf("itrace :\n");
-//      for(int i=0;i<QUEUE_SIZE;i++){
-//	      printf("%s\n",Queue[(QueueOut+i)%QUEUE_SIZE]);
-//      }
-//  }
-//}
+void iringbuf_output(){
+      printf("itrace :\n");
+      for(int i=0;i<QUEUE_SIZE;i++){
+	      printf("%s\n",Queue[(QueueOut+i)%QUEUE_SIZE]);
+      }
+}
