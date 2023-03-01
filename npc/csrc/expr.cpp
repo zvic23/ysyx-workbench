@@ -210,6 +210,7 @@ uint64_t expr(char *e, bool *success) {
     return 0;
   }
 
+	  printf("444\n");
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
 
