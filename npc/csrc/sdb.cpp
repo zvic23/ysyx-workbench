@@ -76,6 +76,18 @@ static int cmd_p(char *args){
   return 0;
 }
 
+static int cmd_w(char *args){
+	setwp(args);
+	return 0;
+}
+
+static int cmd_d(char *args){
+	delwp(args);
+	return 0;
+}
+
+
+
 
 
 static struct {
@@ -89,9 +101,12 @@ static struct {
   { "info", "Print program status", cmd_info },
   { "x", "Scan memory", cmd_x },
   { "p", "expression evaluation", cmd_p },
+  { "w", "set watchpoint", cmd_w },
+  { "d", "delete watchpoint", cmd_d },
+
 };
 
-#define NR_CMD 6
+#define NR_CMD 8
 
 char buf[1024] = {0};
 

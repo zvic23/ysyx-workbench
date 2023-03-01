@@ -1,4 +1,10 @@
 #include "sdb.h"
+#include <cstddef>
+#include <cstring>
+#include <cstdio>
+#include <cassert>
+#include <math.h>
+
 
 #define NR_WP 32
 
