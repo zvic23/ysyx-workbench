@@ -67,7 +67,8 @@ return 0;
 
 static int cmd_p(char *args){
   //char *arg = strtok(NULL, " ");
-  struct figure result = evaluation(args); 
+  struct figure result = evaluation(args);
+ printf("111\n"); 
   char sign = '0';
   if(result.sign == 1){sign = '-';}
   else{sign=' ';}
