@@ -123,6 +123,7 @@ static bool make_token(char *e) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         int substr_len = pmatch.rm_eo;
 
+	  printf("444\n");
 /*zsl:these three lines prinft information everytime the program found a matching-rule tokens*/
         //char *substr_start = e + position;
         //Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
