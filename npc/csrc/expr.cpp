@@ -496,8 +496,9 @@ struct figure eval(int p, int q){
 
 
 struct figure evaluation(char *e){
-	expr(e,NULL);
+
 	printf("111\n");
+	expr(e,NULL);
 	struct figure result = eval(0,nr_token-1);
 	//char *sign = "0";                                //zsl:printf the evaluation result
 	//if(result.sign == 1){sign = "-";}
