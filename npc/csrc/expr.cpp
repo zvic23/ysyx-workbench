@@ -205,6 +205,7 @@ static bool make_token(char *e) {
 
 uint64_t expr(char *e, bool *success) {
   if (!make_token(e)) {
+	  printf("333\n");
     *success = false;
     return 0;
   }
