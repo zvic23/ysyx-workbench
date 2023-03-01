@@ -34,6 +34,7 @@ void itrace(uint64_t pc , uint32_t inst_val){
       pc, (uint8_t *)inst_val, ilen);
 
 	//printf("pc=%lx , inst=%x \n",pc ,inst_val);
+	printf("logbug=%s\n",logbuf);
 //zsl:iringbuf implement*************
     if(QueueIn == (( QueueOut + QUEUE_SIZE) % QUEUE_SIZE)){
 	    for(int i=0;i<128;i++){
