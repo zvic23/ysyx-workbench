@@ -16,7 +16,6 @@ void itrace(uint64_t pc , uint32_t inst_val){
   char *p = logbuf;
   p += snprintf(p, sizeof(logbuf), FMT_WORD ":", pc);
 
-printf("p=%s\n",p-4);
   int ilen = 4;  //s->snpc - s->pc
   int i;
   uint8_t *inst = (uint8_t *)&inst_val;
