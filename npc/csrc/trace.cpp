@@ -28,7 +28,7 @@ void itrace(uint64_t pc , uint32_t inst_val){
   memset(p, ' ', space_len);
   p += space_len;
 
-  //void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
+  void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, (uint8_t *)inst_val, ilen);
 
@@ -49,3 +49,13 @@ void itrace(uint64_t pc , uint32_t inst_val){
     }
 }
 
+
+
+//void itace_print(){
+//  if((nemu_state.state == NEMU_END && nemu_state.halt_ret == 1) || nemu_state.state == NEMU_ABORT ){
+//      printf("itrace :\n");
+//      for(int i=0;i<QUEUE_SIZE;i++){
+//	      printf("%s\n",Queue[(QueueOut+i)%QUEUE_SIZE]);
+//      }
+//  }
+//}
