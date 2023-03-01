@@ -110,7 +110,7 @@ void one_cycle(){
   
   //step_and_dump_wave();//top->eval();
   
-  //itrace(top->pc, top->inst);
+  itrace(top->pc, top->inst);
   
   
 }
