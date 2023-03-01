@@ -72,8 +72,9 @@ void free_wp(WP *wp){
 
 
 static int is_wp_init = 0;
+
 void setwp(char *expression){
-	if(is_wp_init == 0){
+	if(is_wp_init == 0){              //init the wp once
 		init_wp_pool();
 		is_wp_init = 1;
 	}
