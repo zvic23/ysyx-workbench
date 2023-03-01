@@ -1,6 +1,5 @@
 #include "include/trace.h"
 
-
 #define FMT_WORD "0x%016" PRIx64
 
 
@@ -33,7 +32,7 @@ void itrace(uint64_t pc , uint32_t inst_val){
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, inst_val, ilen);
 
-	printf("logbug=%s\n",logbuf);
+	//printf("logbug=%s\n",logbuf);
 //zsl:iringbuf implement*************
     if(QueueIn == (( QueueOut + QUEUE_SIZE) % QUEUE_SIZE)){
 	    for(int i=0;i<128;i++){
