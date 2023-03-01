@@ -6,7 +6,9 @@
 #include "Vysyx_22050612_npc__Dpi.h"  //zsl:ebreak support (DPI-C)
 
 #include "sdb.h"                      //zsl:include sdb
-				    
+
+#include "trace.h"
+
 #define GREEN "\33[1;32m"
 #define RED   "\33[1;31m"
 #define NONE  "\33[0m"                //zsl:offer color for printf
@@ -131,6 +133,8 @@ int main() {
   else built_in_program();
 
   sim_init();
+
+  init_disasm("riscv64-pc-linux-gnu");
 
   top->clk=0;top->rst=1;step_and_dump_wave();
   top->clk=1;top->rst=1;step_and_dump_wave();
