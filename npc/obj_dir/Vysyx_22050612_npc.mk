@@ -39,7 +39,7 @@ VM_USER_CFLAGS = \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
-	-lLLVM-14 -L../nemu/build/  -lriscv64-nemu-interpreter \
+	-lLLVM-14 -L./csrc/riscv64-nemu-interpreter-so \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
