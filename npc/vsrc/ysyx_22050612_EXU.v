@@ -87,7 +87,7 @@ always @(posedge clk) begin
 	else if (opcode[7]==1'b1 && gpr[10]!=64'b0) ebreak(1);
 end
 
-always @(*) begin
+always @(pc) begin
 	if (opcode[9:8]==2'd3) ftrace_check(pc[63:32],pc[31:0],dnpc[63:32],dnpc[31:0], 1, 0,0,1);
 	else if (opcode[6:0]==7'd4) ftrace_check(pc[63:32],pc[31:0],dnpc[63:32],dnpc[31:0], {{27{1'b0}},rd}, {{27{1'b0}},rs1}, imm_I[63:32],imm_I[31:0]);
 end
