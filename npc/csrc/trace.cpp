@@ -211,11 +211,12 @@ void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,
 		int i = strcmp(src_func,dest_func);
 		if(i){
 			printf("0x%lx:",pc);
+
+	printf("checking...%d,%d,%ld\n",dest_register,src_register,imm);
 			for(int i=0;i<blanknum;i++)printf(" ");
 			printf("call [%s@%lx]\n",dest_func,dnpc);
 			blanknum++;
 
-	printf("checking...%d,%d,%ld\n",dest_register,src_register,imm);
 		}
 	}
 }
