@@ -91,7 +91,7 @@ void dump_gpr() {
 
 int end = 0;
 void ebreak(int r){
-	if(r==1) printf(GREEN "HIT GOOD TRAP\n" NONE);
+	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);
 	else {
 		iringbuf_output();
 		printf(RED "HIT BAD TRAP\n" NONE);
