@@ -87,6 +87,7 @@ void dump_gpr() {
   for (i = 0; i < 32; i++) {
     printf("gpr[%d] = 0x%lx\n", i, cpu_gpr[i]);
   }
+  printf("pc  = 0x%lx\n" , top->pc);  //zsl:I add this line to output pc
 }
 
 int end = 0;
@@ -111,11 +112,9 @@ void one_cycle(){
 
   top->clk = 0;
   step_and_dump_wave(); 
-  
-  //step_and_dump_wave();//top->eval();
+ 
 
-  
-  
+  //step_and_dump_wave();//top->eval();
 }
 
 void execute(int n){
