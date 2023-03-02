@@ -163,8 +163,8 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){
   }                                               //get the function table
 
   for(i=0;i<j;i++){
- 		printf("functab.name=%s   .addrstart=%lx   .addrend=%lx\n",
-				functab[i].name,functab[i].addr_start,functab[i].addr_end);
+ 		//printf("functab.name=%s   .addrstart=%lx   .addrend=%lx\n",
+				//functab[i].name,functab[i].addr_start,functab[i].addr_end);
 
   }                               //display the function table
   fclose(fp_ftrace);
