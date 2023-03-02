@@ -208,10 +208,10 @@ void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,
 			if(i==499 && strcmp(dest_func,"_trm_init"))return;
 		}
 
+	printf("checking...%d,%d,%ld\n",dest_register,src_register,imm);
 	printf("checking...%s,%s\n",dest_func,src_func);
 		int i = strcmp(src_func,dest_func);
 
-	printf("checking...%d,%d,%ld\n",dest_register,src_register,imm);
 		if(i){
 			printf("0x%lx:",pc);
 
