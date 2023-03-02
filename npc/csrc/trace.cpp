@@ -114,7 +114,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){
   int i=0;
   int po=1;
   while(po<=strtab_size-1){
-  	printf("str=%s    ",&str[po]);
+  	//printf("str=%s    ",&str[po]);
 	po+=strlen(&str[po])+1;
   }
   //printf("\n");                                      //get the string table
