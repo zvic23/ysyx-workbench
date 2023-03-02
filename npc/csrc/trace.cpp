@@ -176,7 +176,7 @@ void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,
 	char *src_func;
 	char *dest_func;
 	uint64_t pc = pc_up ;
-	pc = (pc <<32) +pc_lo;
+	pc = (pc <<32) ;
 	uint64_t dnpc = dnpc_up ;
         dnpc = (dnpc <<32) +dnpc_lo;
 	uint64_t imm = imm_up ;
