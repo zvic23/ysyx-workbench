@@ -49,22 +49,22 @@ void Vysyx_22050612_npc___024root___settle__TOP__1(Vysyx_22050612_npc___024root*
         = ((0x380U & (vlSelf->inst >> 5U)) | (0x7fU 
                                               & vlSelf->inst));
     if ((vlSelf->inst >> 0x1fU)) {
-        vlSelf->ysyx_22050612_npc__DOT__imm_I = (0xfffffffffffff000ULL 
-                                                 | (QData)((IData)(
-                                                                   (vlSelf->inst 
-                                                                    >> 0x14U))));
         vlSelf->ysyx_22050612_npc__DOT__imm_U = (0xffffffff00000000ULL 
                                                  | (QData)((IData)(
                                                                    (0xfffff000U 
                                                                     & vlSelf->inst))));
+        vlSelf->ysyx_22050612_npc__DOT__imm_I = (0xfffffffffffff000ULL 
+                                                 | (QData)((IData)(
+                                                                   (vlSelf->inst 
+                                                                    >> 0x14U))));
     } else {
-        vlSelf->ysyx_22050612_npc__DOT__imm_I = (QData)((IData)(
-                                                                (vlSelf->inst 
-                                                                 >> 0x14U)));
         vlSelf->ysyx_22050612_npc__DOT__imm_U = ((QData)((IData)(
                                                                  (vlSelf->inst 
                                                                   >> 0xcU))) 
                                                  << 0xcU);
+        vlSelf->ysyx_22050612_npc__DOT__imm_I = (QData)((IData)(
+                                                                (vlSelf->inst 
+                                                                 >> 0x14U)));
     }
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr[0x1fU] 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5

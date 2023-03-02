@@ -133,14 +133,15 @@ void execute(int n){
 
 
 
-
 int main() {
   if(1) load_img();
   else built_in_program();
 
   sim_init();
 
-  init_disasm("riscv64" "-pc-linux-gnu");
+  init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
+  ftrace_elf_analysis();                      //about ftrace, init the function table 
+					      
 
   top->clk=0;top->rst=1;step_and_dump_wave();
   top->clk=1;top->rst=1;step_and_dump_wave();
