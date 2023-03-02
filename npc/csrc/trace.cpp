@@ -192,6 +192,7 @@ void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,
 	}
 
 	printf("checking.....pc=%lx,pc_up=%x,pc_lo=%x\n",pc,pc_up,pc_lo);
+	printf("checking...%d,%d,%ld\n",dest_register,src_register,imm);
 	if(dest_register == 0 && imm == 0 && src_register == 1){
 		blanknum--;
 		printf("0x%lx:",pc);
