@@ -182,7 +182,7 @@ void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,
 	uint64_t imm = imm_up ;
 	imm = imm <<32 +imm_lo;
 
-	printf("checking.....pc=%lx,dnpc=%lx\n",pc,dnpc);
+	printf("checking.....pc=%x,dnpc=%x\n",pc_up,dnpc_lo);
 	for(int i=0;i<500;i++){
 		if(functab[i].addr_start<=dnpc && dnpc<=functab[i].addr_end){
 			dest_func = functab[i].name;
