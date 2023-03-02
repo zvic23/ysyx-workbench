@@ -139,6 +139,8 @@ int main() {
 
   sim_init();
 
+  //difftest_init(1);
+
   init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
   ftrace_elf_analysis();                      //about ftrace, init the function table 
 					      
