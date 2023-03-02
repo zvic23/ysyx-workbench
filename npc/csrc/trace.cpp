@@ -186,12 +186,11 @@ void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,
 		if(functab[i].addr_start<=dnpc && dnpc<=functab[i].addr_end){
 			//dest_func = functab[i].name;
 			strcpy(dest_func,functab[i].name);
-			printf("now at %s\n",functab[i].name);
+			//printf("now at %s\n",functab[i].name);
 			break;
 		}
 		if(i==499)return;
 	}
-
 	printf("checking.....pc=%lx,pc_up=%x,pc_lo=%x\n",pc,pc_up,pc_lo);
 	if(dest_register == 0 && imm == 0 && src_register == 1){
 		blanknum--;
@@ -203,31 +202,20 @@ void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,
 		for(int i=0;i<500;i++){
 			if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
 			//	src_func = functab[i].name;
-			strcpy(src_func,functab[i].name);
+				strcpy(src_func,functab[i].name);
 				//printf("now at %s\n",functab[i].name);
 				break;
 			}
 			if(i==499 && strcmp(dest_func,"_trm_init"))return;
 		}
-
-	printf("checking...%d,%d,%ld\n",dest_register,src_register,imm);
-	printf("checking...%s,%s\n",dest_func,src_func);
 		int i = strcmp(src_func,dest_func);
-
 		if(i){
 			printf("0x%lx:",pc);
-
 			for(int i=0;i<blanknum;i++)printf(" ");
 			printf("call [%s@%lx]\n",dest_func,dnpc);
 			blanknum++;
-
 		}
 	}
 }
 
-//void ftrace_check_jal(uint64_t pc, uint64_t dnpc){
-//	ftrace_check(pc,dnpc,1,0,1);
-//}
-//void ftrace_check_jalr(uint64_t pc, uint64_t dnpc){
-//	ftrace_check(pc,dnpc,0,1,0);
-//}
+
