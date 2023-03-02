@@ -38,6 +38,9 @@ assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
 //	if(inst==32'h00100073) ebreak(1);
 //end
 
+
+
+
 //  always @(posedge clk) begin
 //    $display("%x,%d,%d",inst,opcode,rd);
 //  end
