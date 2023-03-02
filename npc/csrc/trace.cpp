@@ -173,6 +173,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){
 
 int blanknum=1;
 void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,int src_register,int imm_up, int imm_lo){
+	printf("checking\n");
 	char *src_func;
 	char *dest_func;
 	uint64_t pc = pc_up ;
