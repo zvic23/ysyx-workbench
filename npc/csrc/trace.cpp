@@ -173,7 +173,6 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){
 
 int blanknum=1;
 void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,int src_register,int imm_up, int imm_lo){
-	printf("checking\n");
 	char *src_func;
 	char *dest_func;
 	uint64_t pc = pc_up ;
@@ -182,6 +181,8 @@ void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,
         dnpc = dnpc <<32 +dnpc_lo;
 	uint64_t imm = imm_up ;
 	imm = imm <<32 +imm_lo;
+
+	printf("checking.....pc=%lx,dnpc=%lx\n",pc,dnpc);
 	for(int i=0;i<500;i++){
 		if(functab[i].addr_start<=dnpc && dnpc<=functab[i].addr_end){
 			dest_func = functab[i].name;
