@@ -173,8 +173,8 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){
 
 int blanknum=1;
 void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,int src_register,int imm_up, int imm_lo){
-	char *src_func;
-	char *dest_func;
+	char src_func[20];
+	char dest_func[20];
 	uint64_t pc = pc_up ;
 	pc = (pc <<32) +(uint32_t)pc_lo;
 	uint64_t dnpc = dnpc_up ;
@@ -184,7 +184,8 @@ void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,
 
 	for(int i=0;i<500;i++){
 		if(functab[i].addr_start<=dnpc && dnpc<=functab[i].addr_end){
-			dest_func = functab[i].name;
+			//dest_func = functab[i].name;
+			strcpy(dest_func,functab[i].name);
 			printf("now at %s\n",functab[i].name);
 			break;
 		}
@@ -201,7 +202,8 @@ void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,
 	else{
 		for(int i=0;i<500;i++){
 			if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
-				src_func = functab[i].name;
+			//	src_func = functab[i].name;
+			strcpy(src_func,functab[i].name);
 				//printf("now at %s\n",functab[i].name);
 				break;
 			}
