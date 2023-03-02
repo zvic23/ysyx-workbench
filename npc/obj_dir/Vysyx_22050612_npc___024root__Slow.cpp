@@ -27,8 +27,6 @@ void Vysyx_22050612_npc___024root::__Vconfigure(Vysyx_22050612_npc__Syms* _vlSym
 Vysyx_22050612_npc___024root::~Vysyx_22050612_npc___024root() {
 }
 
-void Vysyx_22050612_npc___024unit____Vdpiimwrap_ftrace_check_TOP____024unit(IData/*31:0*/ pc_up, IData/*31:0*/ pc_lo, IData/*31:0*/ dnpc_up, IData/*31:0*/ dnpc_lo, IData/*31:0*/ dest_register, IData/*31:0*/ src_register, IData/*31:0*/ imm_up, IData/*31:0*/ imm_lo);
-
 void Vysyx_22050612_npc___024root___settle__TOP__1(Vysyx_22050612_npc___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -51,22 +49,22 @@ void Vysyx_22050612_npc___024root___settle__TOP__1(Vysyx_22050612_npc___024root*
         = ((0x380U & (vlSelf->inst >> 5U)) | (0x7fU 
                                               & vlSelf->inst));
     if ((vlSelf->inst >> 0x1fU)) {
-        vlSelf->ysyx_22050612_npc__DOT__imm_I = (0xfffffffffffff000ULL 
-                                                 | (QData)((IData)(
-                                                                   (vlSelf->inst 
-                                                                    >> 0x14U))));
         vlSelf->ysyx_22050612_npc__DOT__imm_U = (0xffffffff00000000ULL 
                                                  | (QData)((IData)(
                                                                    (0xfffff000U 
                                                                     & vlSelf->inst))));
+        vlSelf->ysyx_22050612_npc__DOT__imm_I = (0xfffffffffffff000ULL 
+                                                 | (QData)((IData)(
+                                                                   (vlSelf->inst 
+                                                                    >> 0x14U))));
     } else {
-        vlSelf->ysyx_22050612_npc__DOT__imm_I = (QData)((IData)(
-                                                                (vlSelf->inst 
-                                                                 >> 0x14U)));
         vlSelf->ysyx_22050612_npc__DOT__imm_U = ((QData)((IData)(
                                                                  (vlSelf->inst 
                                                                   >> 0xcU))) 
                                                  << 0xcU);
+        vlSelf->ysyx_22050612_npc__DOT__imm_I = (QData)((IData)(
+                                                                (vlSelf->inst 
+                                                                 >> 0x14U)));
     }
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr[0x1fU] 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5
@@ -1075,28 +1073,6 @@ void Vysyx_22050612_npc___024root___settle__TOP__1(Vysyx_22050612_npc___024root*
               [4U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__lut_out;
-    if ((3U == (3U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__opcode) 
-                      >> 8U)))) {
-        Vysyx_22050612_npc___024unit____Vdpiimwrap_ftrace_check_TOP____024unit((IData)(
-                                                                                (vlSelf->pc 
-                                                                                >> 0x20U)), (IData)(vlSelf->pc), (IData)(
-                                                                                (vlSelf->ysyx_22050612_npc__DOT__dnpc 
-                                                                                >> 0x20U)), (IData)(vlSelf->ysyx_22050612_npc__DOT__dnpc), 1U, 0U, 0U, 1U);
-    } else if ((4U == (0x7fU & (IData)(vlSelf->ysyx_22050612_npc__DOT__opcode)))) {
-        Vysyx_22050612_npc___024unit____Vdpiimwrap_ftrace_check_TOP____024unit((IData)(
-                                                                                (vlSelf->pc 
-                                                                                >> 0x20U)), (IData)(vlSelf->pc), (IData)(
-                                                                                (vlSelf->ysyx_22050612_npc__DOT__dnpc 
-                                                                                >> 0x20U)), (IData)(vlSelf->ysyx_22050612_npc__DOT__dnpc), 
-                                                                               (0x1fU 
-                                                                                & (vlSelf->inst 
-                                                                                >> 7U)), 
-                                                                               (0x1fU 
-                                                                                & (vlSelf->inst 
-                                                                                >> 0xfU)), (IData)(
-                                                                                (vlSelf->ysyx_22050612_npc__DOT__imm_I 
-                                                                                >> 0x20U)), (IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I));
-    }
 }
 
 void Vysyx_22050612_npc___024unit____Vdpiimwrap_set_gpr_ptr__Vdpioc2_TOP____024unit(const VlUnpacked<QData/*63:0*/, 32> &a);
