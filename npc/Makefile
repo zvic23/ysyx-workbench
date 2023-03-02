@@ -1,7 +1,8 @@
 CXXSRC = csrc/utils/disasm.cc
 CXXFLAGS += $(shell llvm-config --cxxflags) -fPIE
 LIBS += $(shell llvm-config --libs)
-LIBS +=  -L./csrc/riscv64-nemu-interpreter-so
+#LIBS +=  -L./csrc/riscv64-nemu-interpreter-so
+LIBS +=  -Icsrc/riscv64-nemu-interpreter-so
 
 
 
