@@ -64,9 +64,9 @@ void init_difftest(long img_size, int port) {
   ref_difftest_regcpy = (void(*)(void*,bool))dlsym(handle, "difftest_regcpy");
   assert(ref_difftest_regcpy);
 
-//  ref_difftest_exec = dlsym(handle, "difftest_exec");
-//  assert(ref_difftest_exec);
-//
+  ref_difftest_exec = (void(*)(uint64_t))dlsym(handle, "difftest_exec");
+  assert(ref_difftest_exec);
+
 //  ref_difftest_raise_intr = dlsym(handle, "difftest_raise_intr");
 //  assert(ref_difftest_raise_intr);
 
@@ -77,12 +77,7 @@ printf("difftest is on , so_file is %s\n",ref_so_file);
 
   ref_difftest_init(port);
 
-printf("difftest is on , so_file is %s\n",ref_so_file);
   ref_difftest_memcpy(0x80000000,  pmem, img_size, DIFFTEST_TO_REF );
-
-
-printf("difftest is on , so_file is %s\n",ref_so_file);
-
 
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
 
