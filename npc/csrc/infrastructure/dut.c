@@ -75,7 +75,7 @@ void init_difftest(long img_size, int port) {
 
 printf("difftest is on , so_file is %s\n",ref_so_file);
 
-  ref_difftest_init(port);
+  //ref_difftest_init(port);
 
 printf("difftest is on , so_file is %s\n",ref_so_file);
   ref_difftest_memcpy(0x80000000,  pmem, img_size, 1);

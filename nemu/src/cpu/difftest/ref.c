@@ -75,7 +75,6 @@ void difftest_raise_intr(word_t NO) {
 }
 
 void difftest_init(int port) {
-	printf("111\n");
   /* Perform ISA dependent initialization. */
   init_isa();
 }
