@@ -31,13 +31,13 @@
 
 #if   defined(CONFIG_PMEM_MALLOC)
 static uint8_t *pmem = NULL;                         
-//zsl:about difftest of npc. This CONFIG_PMEM_MALLOC means what?   and I can copy the content of "else" to exchange the "NULL" line so that I can fix the bug I met in the difftest of npc    (init_mem function has two lines annotated, I add the "//".
+//(the old idea)zsl:about difftest of npc. This CONFIG_PMEM_MALLOC means what?   and I can copy the content of "else" to exchange the "NULL" line so that I can fix the bug I met in the difftest of npc    (init_mem function has two lines annotated, I add the "//".)
 #else // CONFIG_PMEM_GARRAY
 static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 #endif
 
 uint8_t* guest_to_host(paddr_t paddr) { 
-	for(int i=0;i<16;i++){printf("pmem[%d]: %x\n",i,pmem[i]);}
+	//for(int i=0;i<16;i++){printf("pmem[%d]: %x\n",i,pmem[i]);}
 	 return pmem + paddr - CONFIG_MBASE; }
 paddr_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
 
