@@ -30,7 +30,7 @@ void set_regs(void *diff_context){
   struct diff_context_t* ctx = (struct diff_context_t*)diff_context;
   for (int i = 0; i < 32; i++) {
     cpu.gpr[i] = ctx->gpr[i];
-    printf("nemu.gpr=%lx,   npc.gpr=%lx",cpu.gpr[i],ctx->gpr[i]);
+    printf("nemu.gpr=%lx,   npc.gpr=%lx\n",cpu.gpr[i],ctx->gpr[i]);
   }
   cpu.pc = ctx->pc;
 }
