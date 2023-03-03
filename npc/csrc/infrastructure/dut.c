@@ -67,14 +67,14 @@ void init_difftest(long img_size, int port) {
 //
 //  ref_difftest_raise_intr = dlsym(handle, "difftest_raise_intr");
 //  assert(ref_difftest_raise_intr);
-//
-//  void (*ref_difftest_init)(int) = dlsym(handle, "difftest_init");
-//  assert(ref_difftest_init);
+
+  void (*ref_difftest_init)(int) = (void(*)(int))dlsym(handle, "difftest_init");
+  assert(ref_difftest_init);
 
 printf("difftest is on , so_file is %s\n",ref_so_file);
 void *c = 0;
-  //ref_difftest_init(port);
-  //ref_difftest_memcpy(0x80000000,  c, img_size, 1);
+  ref_difftest_init(port);
+  ref_difftest_memcpy(0x80000000,  c, img_size, 1);
 
 
 

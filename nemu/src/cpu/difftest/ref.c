@@ -29,20 +29,19 @@ void set_regs(void *diff_context){
   struct diff_context_t* ctx = (struct diff_context_t*)diff_context;
   for (int i = 0; i < 32; i++) {
     cpu.gpr[i] = ctx->gpr[i];
-    printf("nemu.gpr=%lx,   npc.gpr=%lx\n",cpu.gpr[i],ctx->gpr[i]);
+    //printf("nemu.gpr=%lx,   npc.gpr=%lx\n",cpu.gpr[i],ctx->gpr[i]);
   }
   cpu.pc = ctx->pc;
-    printf("nemu.pc=%lx,   npc.pc=%lx\n",cpu.pc,ctx->pc);
+    //printf("nemu.pc=%lx,   npc.pc=%lx\n",cpu.pc,ctx->pc);
 }
 void get_regs(void* diff_context) {
   struct diff_context_t* ctx = (struct diff_context_t*)diff_context;
   for (int i = 0; i < 32; i++) {
     ctx->gpr[i] = cpu.gpr[i];
-
-    printf("nemu.gpr=%lx,   npc.gpr=%lx\n",cpu.gpr[i],ctx->gpr[i]);
+    //printf("nemu.gpr=%lx,   npc.gpr=%lx\n",cpu.gpr[i],ctx->gpr[i]);
   }
   ctx->pc = cpu.pc;
-    printf("nemu.pc=%lx,   npc.pc=%lx\n",cpu.pc,ctx->pc);
+    //printf("nemu.pc=%lx,   npc.pc=%lx\n",cpu.pc,ctx->pc);
 }
 
 
@@ -63,10 +62,6 @@ void difftest_regcpy(void *dut, bool direction) {
   } else {
     get_regs(dut);
   }
-  for (int i = 0; i < 32; i++) {
-    //printf("nemu.gpr[%d]=%lx  ",i,cpu.gpr[i]);
-  }
-  printf("\n");
   //assert(0);
 }
 
