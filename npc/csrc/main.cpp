@@ -44,20 +44,20 @@ void sim_exit(){
 
 
 
-uint8_t pmem[0x50000];
+uint8_t mem_p[0x50000];
 long img_size;
 
 uint32_t pmem_read(uint64_t addr){
-  return *(uint32_t*)&pmem[addr-0x80000000];
+  return *(uint32_t*)&mem_p[addr-0x80000000];
 }
 
 void built_in_program(){
-  *(uint32_t*)&pmem[0x00000000]=0x00100093;
-  *(uint32_t*)&pmem[0x00000004]=0x00208113;
-  *(uint32_t*)&pmem[0x00000008]=0x00310193;
-  *(uint32_t*)&pmem[0x0000000c]=0x00418213;
+  //*(uint32_t*)&pmem[0x00000000]=0x00100093;
+  //*(uint32_t*)&pmem[0x00000004]=0x00208113;
+  //*(uint32_t*)&pmem[0x00000008]=0x00310193;
+  //*(uint32_t*)&pmem[0x0000000c]=0x00418213;
 
-  *(uint32_t*)&pmem[0x00000010]=0x00100073; //ebreak
+  //*(uint32_t*)&pmem[0x00000010]=0x00100073; //ebreak
 }
 
 
@@ -69,7 +69,7 @@ void load_img(){
   //cout << size <<endl;
 
   fseek(fp, 0, SEEK_SET);
-  int ret = fread(pmem, img_size, 1, fp);
+  int ret = fread(mem_p, img_size, 1, fp);
   //for(int i=0;i<size;i++)cout << hex <<(unsigned int) (unsigned char)pmem[i] <<endl;
 
   fclose(fp);
