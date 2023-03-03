@@ -98,7 +98,8 @@ void ebreak(int r){
 		printf(RED "HIT BAD TRAP\n" NONE);
 	}
 	end = 1;
-	cmpreg();
+	cmpreg_0();
+	printf("111\n");
 }
 uint64_t cpu_gpr_set[32];
 void one_cycle(){
