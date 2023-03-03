@@ -32,7 +32,7 @@
 #if   defined(CONFIG_PMEM_MALLOC)
 static uint8_t *pmem = NULL;
 #else // CONFIG_PMEM_GARRAY
-static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
+static uint8_t pmem[CONFIG_MSIZE] = {};
 #endif
 
 uint8_t* guest_to_host(paddr_t paddr) { printf("66: %x  %d \n",paddr,CONFIG_MBASE); return pmem + paddr - CONFIG_MBASE; }
