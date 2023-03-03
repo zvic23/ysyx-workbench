@@ -30,9 +30,8 @@
 
 
 #if   defined(CONFIG_PMEM_MALLOC)
-//static uint8_t *pmem = NULL;                         
+static uint8_t *pmem = NULL;                         
 ////zsl:about difftest of npc. This CONFIG_PMEM_MALLOC means what?   and I have to copy the content of "else" to exchange the "NULL" line so that I can fix the bug I met in the difftest of npc    (init_mem function has two lines annotated, I add the "//".
-static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 #else // CONFIG_PMEM_GARRAY
 static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 #endif
@@ -58,8 +57,8 @@ static void out_of_bound(paddr_t addr) {
 
 void init_mem() {
 #if   defined(CONFIG_PMEM_MALLOC)
-//  pmem = malloc(CONFIG_MSIZE);
-//  assert(pmem);
+  pmem = malloc(CONFIG_MSIZE);
+  assert(pmem);
 #endif
 #ifdef CONFIG_MEM_RANDOM
   uint32_t *p = (uint32_t *)pmem;
