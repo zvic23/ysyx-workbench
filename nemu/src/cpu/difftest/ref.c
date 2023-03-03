@@ -17,7 +17,7 @@
 #include <cpu/cpu.h>
 #include <difftest-def.h>
 #include <memory/paddr.h>
-#include <difftesting.h>
+//#include <difftesting.h>
 
 struct diff_context_t {
   word_t gpr[32];

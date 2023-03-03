@@ -2,7 +2,7 @@ CXXSRC = csrc/utils/disasm.cc
 CXXFLAGS += $(shell llvm-config --cxxflags) -fPIE
 LIBS += $(shell llvm-config --libs)
 LIBS +=   -lnemu
-#LIBS +=  -L/home/zsl/ysyx-workbench/nemu/build  -lnemu
+#LIBS +=  -L/home/zsl/ysyx-workbench/nemu/build  -lmymath
 #LIBS +=  -L.  riscv64-nemu-interpreter-so 
 
 
