@@ -36,7 +36,9 @@ static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 #endif
 
-uint8_t* guest_to_host(paddr_t paddr) { printf("65:   %d \n",CONFIG_PMEM_MALLOC);printf("66:%hhn \n",pmem); printf("67: %x  %d \n",paddr,CONFIG_MBASE); return pmem + paddr - CONFIG_MBASE; }
+uint8_t* guest_to_host(paddr_t paddr) { 
+	for(int i=0;i<16;i++){printf("pmem[%d]: %x\n",i,pmem[i]);}
+	printf("65:   %d \n",CONFIG_PMEM_MALLOC);printf("66:%hhn \n",pmem); printf("67: %x  %d \n",paddr,CONFIG_MBASE); return pmem + paddr - CONFIG_MBASE; }
 paddr_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
 
 static word_t pmem_read(paddr_t addr, int len) {
