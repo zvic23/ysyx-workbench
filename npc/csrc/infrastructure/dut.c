@@ -16,6 +16,8 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
+extern uint64_t cpu_gpr;
+
 static bool is_skip_ref = false;
 static int skip_dut_nr_inst = 0;
 
@@ -57,9 +59,9 @@ void init_difftest(long img_size, int port) {
   ref_difftest_memcpy = (void(*)(uint64_t,void*,size_t,bool))dlsym(handle, "difftest_memcpy");
   assert(ref_difftest_memcpy);
 
-//  ref_difftest_regcpy = dlsym(handle, "difftest_regcpy");
-//  assert(ref_difftest_regcpy);
-//
+  ref_difftest_regcpy = (void(*)(void*,bool))dlsym(handle, "difftest_regcpy");
+  assert(ref_difftest_regcpy);
+
 //  ref_difftest_exec = dlsym(handle, "difftest_exec");
 //  assert(ref_difftest_exec);
 //
@@ -72,9 +74,17 @@ void init_difftest(long img_size, int port) {
 printf("difftest is on , so_file is %s\n",ref_so_file);
 void *c = 0;
   //ref_difftest_init(port);
-  ref_difftest_memcpy(0x80000000,  c, img_size, 1);
-  //ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
+  //ref_difftest_memcpy(0x80000000,  c, img_size, 1);
+  ref_difftest_regcpy(&cpu_gpr, DIFFTEST_TO_REF);
 }
+
+
+
+void cmpreg(){
+
+  ref_difftest_regcpy(&cpu_gpr, DIFFTEST_TO_REF);
+}
+
 
 //static void checkregs(CPU_state *ref, vaddr_t pc) {
 //  if (!isa_difftest_checkregs(ref, pc)) {

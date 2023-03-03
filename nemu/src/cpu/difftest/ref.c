@@ -23,6 +23,9 @@ struct diff_context_t {
   word_t gpr[32];
   word_t pc;
 };
+
+//extern CPU_state cpu; 
+
 void set_regs(void *diff_context){
   struct diff_context_t* ctx = (struct diff_context_t*)diff_context;
   for (int i = 0; i < 32; i++) {
@@ -55,6 +58,9 @@ void difftest_regcpy(void *dut, bool direction) {
     set_regs(dut);
   } else {
     get_regs(dut);
+  }
+  for (int i = 0; i < 32; i++) {
+    printf("gpr[%d]=%lx  ",i,cpu.gpr[i]);
   }
   //assert(0);
 }

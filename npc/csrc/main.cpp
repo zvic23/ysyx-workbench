@@ -99,6 +99,7 @@ void ebreak(int r){
 		printf(RED "HIT BAD TRAP\n" NONE);
 	}
 	end = 1;
+	cmpreg();
 }
 
 void one_cycle(){
