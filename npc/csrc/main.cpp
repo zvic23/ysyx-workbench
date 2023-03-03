@@ -100,6 +100,9 @@ void ebreak(int r){
 	end = 1;
 	cmpreg();
 }
+
+
+
 uint64_t cpu_gpr_set[33];
 void one_cycle(){
   //top->Mr_val = pmem_read(top->Mr_addr);
@@ -118,7 +121,7 @@ void one_cycle(){
 
 
 
-  for (int i = 0; i < 32; i++) {
+  for (int i = 0; i < 32; i++) {          //save the gpr and pc in a safe value
 	  cpu_gpr_set[i]=cpu_gpr[i];
   }
           cpu_gpr_set[32]=top->pc;
