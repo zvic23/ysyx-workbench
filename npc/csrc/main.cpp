@@ -44,11 +44,11 @@ void sim_exit(){
 
 
 
-uint8_t mem_p[0x50000];
+uint8_t pmem[0x50000];
 long img_size;
 
 uint32_t pmem_read(uint64_t addr){
-  return *(uint32_t*)&mem_p[addr-0x80000000];
+  return *(uint32_t*)&pmem[addr-0x80000000];
 }
 
 void built_in_program(){
@@ -69,7 +69,7 @@ void load_img(){
   //cout << size <<endl;
 
   fseek(fp, 0, SEEK_SET);
-  int ret = fread(mem_p, img_size, 1, fp);
+  int ret = fread(pmem, img_size, 1, fp);
   //for(int i=0;i<size;i++)cout << hex <<(unsigned int) (unsigned char)pmem[i] <<endl;
 
   fclose(fp);

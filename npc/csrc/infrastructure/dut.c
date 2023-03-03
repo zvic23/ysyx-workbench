@@ -18,7 +18,7 @@ void (*ref_difftest_init)(int port) = NULL;
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
 extern uint64_t cpu_gpr_set[32];
-extern uint8_t mem_p[0x50000];
+extern uint8_t pmem[0x50000];
 
 static bool is_skip_ref = false;
 static int skip_dut_nr_inst = 0;
@@ -78,7 +78,7 @@ printf("difftest is on , so_file is %s\n",ref_so_file);
   ref_difftest_init(port);
 
 printf("difftest is on , so_file is %s\n",ref_so_file);
-  ref_difftest_memcpy(0x80000000,  mem_p, img_size, DIFFTEST_TO_REF );
+  ref_difftest_memcpy(0x80000000,  pmem, img_size, DIFFTEST_TO_REF );
 
 
 printf("difftest is on , so_file is %s\n",ref_so_file);
