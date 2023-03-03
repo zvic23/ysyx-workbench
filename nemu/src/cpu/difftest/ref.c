@@ -59,6 +59,7 @@ void difftest_regcpy(void *dut, bool direction) {
   } else {
     get_regs(dut);
   }
+  assert(0);
   for (int i = 0; i < 32; i++) {
     printf("gpr[%d]=%lx  ",i,cpu.gpr[i]);
   }
