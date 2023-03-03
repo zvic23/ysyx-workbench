@@ -152,12 +152,12 @@ init_difftest(a,b);
   top->clk=0;top->rst=1;step_and_dump_wave();
   top->clk=1;top->rst=1;step_and_dump_wave();
   top->clk=0;top->rst=0;step_and_dump_wave();    //init the npc
-
-  sdb_mainloop();
   int i;
   for (i = 0; i < 32; i++) {
     printf("gpr[%d] = 0x%lx\n", i, cpu_gpr[i]);
   }
+  sdb_mainloop();
+
   while(0){
 
 
