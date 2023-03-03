@@ -98,8 +98,7 @@ void ebreak(int r){
 		printf(RED "HIT BAD TRAP\n" NONE);
 	}
 	end = 1;
-	cmpreg_0();
-	printf("111=%d\n",end);
+	//cmpreg_0();
 }
 uint64_t cpu_gpr_set[33];
 void one_cycle(){
@@ -122,6 +121,7 @@ void one_cycle(){
   for (int i = 0; i < 32; i++) {
 	  cpu_gpr_set[i]=cpu_gpr[i];
   }
+          cpu_gpr_set[32]=top->pc;
 
 }
 
