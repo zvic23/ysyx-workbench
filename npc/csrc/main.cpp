@@ -8,6 +8,7 @@
 #include "include/sdb.h"                      //zsl:include sdb
 
 #include "include/trace.h"
+//#include "include/difftest.h"
 
 #define GREEN "\33[1;32m"
 #define RED   "\33[1;31m"
