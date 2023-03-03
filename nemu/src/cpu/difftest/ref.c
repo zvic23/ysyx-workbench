@@ -50,7 +50,7 @@ void get_regs(void* diff_context) {
 void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
   if (direction == DIFFTEST_TO_REF) {
 	  uint64_t *aa= (uint64_t*)buf;
-	  printf("111:%x   buf:%ln\n",addr,*aa);
+	  printf("111:%x   buf:%lx\n",addr,*aa);
     memcpy(guest_to_host(addr), buf, n);
   } else {
     assert(0);
