@@ -60,8 +60,9 @@ void difftest_regcpy(void *dut, bool direction) {
     get_regs(dut);
   }
   for (int i = 0; i < 32; i++) {
-    printf("gpr[%d]=%lx  ",i,cpu.gpr[i]);
+    printf("nemu.gpr[%d]=%lx  ",i,cpu.gpr[i]);
   }
+  printf("\n");
   //assert(0);
 }
 
