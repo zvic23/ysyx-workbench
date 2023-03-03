@@ -38,6 +38,8 @@ void get_regs(void* diff_context) {
   struct diff_context_t* ctx = (struct diff_context_t*)diff_context;
   for (int i = 0; i < 32; i++) {
     ctx->gpr[i] = cpu.gpr[i];
+
+    printf("nemu.gpr=%lx,   npc.gpr=%lx\n",cpu.gpr[i],ctx->gpr[i]);
   }
   ctx->pc = cpu.pc;
 }
