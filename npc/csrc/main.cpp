@@ -90,7 +90,7 @@ void dump_gpr() {
   printf("pc  = 0x%lx\n" , top->pc);  //zsl:I add this line to output pc
 }
 
-static int end = 0;
+int end = 0;
 void ebreak(int r){
 	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);
 	else {
