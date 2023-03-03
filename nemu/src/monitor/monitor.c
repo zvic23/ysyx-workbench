@@ -183,7 +183,6 @@ void  ftrace_elf_analysis(char *elf){
 
 
 static int parse_args(int argc, char *argv[]) {
-	printf("args=%s\n",*argv);
   const struct option table[] = {
     {"batch"    , no_argument      , NULL, 'b'},
     {"log"      , required_argument, NULL, 'l'},
