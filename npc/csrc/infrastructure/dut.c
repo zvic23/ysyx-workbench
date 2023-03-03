@@ -78,8 +78,7 @@ void *c = 0;
 
 
 
-  void *gpr = &cpu_gpr_set;
-  ref_difftest_regcpy(gpr, DIFFTEST_TO_REF);
+  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
 
 }
 
@@ -87,7 +86,6 @@ void *c = 0;
 
 void cmpreg(){
   printf("in\n");
-
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
   printf("out\n");
 }
