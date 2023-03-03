@@ -2,5 +2,5 @@
 #define __DIFFTESTING_H__
 
 
-void init_difftest(char *ref_so_file, long img_size, int port) ;
+void init_difftest(long img_size, int port);
 #endif

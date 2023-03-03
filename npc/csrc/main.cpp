@@ -132,15 +132,17 @@ void execute(int n){
   }
 }
 
-
+void init_difftest(long img_size, int port);
 
 int main() {
   if(1) load_img();
   else built_in_program();
 
   sim_init();
-//void difftest_init(int port);
-//  difftest_init(1);
+
+  long a =0;
+  int b =1;
+init_difftest(a,b);
 
   init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
   ftrace_elf_analysis();                      //about ftrace, init the function table 
