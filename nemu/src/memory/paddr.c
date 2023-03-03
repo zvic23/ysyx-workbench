@@ -29,11 +29,9 @@
 //#endif
 
 
-#if   defined(CONFIG_PMEM_MALLOC)
-static uint8_t *pmem = NULL;
-#else // CONFIG_PMEM_GARRAY
+
 static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
-#endif
+
 
 uint8_t* guest_to_host(paddr_t paddr) { printf("65:   %d \n",CONFIG_PMEM_MALLOC);printf("66:%x \n",*pmem); printf("67: %x  %d \n",paddr,CONFIG_MBASE); return pmem + paddr - CONFIG_MBASE; }
 paddr_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
@@ -54,8 +52,7 @@ static void out_of_bound(paddr_t addr) {
 
 void init_mem() {
 #if   defined(CONFIG_PMEM_MALLOC)
-  pmem = malloc(CONFIG_MSIZE);
-  assert(pmem);
+
 #endif
 #ifdef CONFIG_MEM_RANDOM
   uint32_t *p = (uint32_t *)pmem;
