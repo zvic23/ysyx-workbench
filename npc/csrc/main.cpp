@@ -142,7 +142,6 @@ void execute(int n){
   }
 }
 
-void init_difftest(long img_size, int port);
 
 int main() {
   if(1) load_img();
