@@ -91,6 +91,12 @@ void cmpreg(){
 }
 
 
+void cmpreg_0(){
+  printf("in\n");
+  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_DUT);
+  printf("out\n");
+}
+
 //static void checkregs(CPU_state *ref, vaddr_t pc) {
 //  if (!isa_difftest_checkregs(ref, pc)) {
 //    nemu_state.state = NEMU_ABORT;

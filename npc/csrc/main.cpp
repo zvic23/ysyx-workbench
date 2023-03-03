@@ -6,7 +6,6 @@
 #include "Vysyx_22050612_npc__Dpi.h"  //zsl:ebreak support (DPI-C)
 
 #include "include/sdb.h"                      //zsl:include sdb
-
 #include "include/trace.h"
 #include "include/difftesting.h"
 
@@ -99,7 +98,7 @@ void ebreak(int r){
 		printf(RED "HIT BAD TRAP\n" NONE);
 	}
 	end = 1;
-	cmpreg();
+	cmpreg_0();
 }
 uint64_t cpu_gpr_set[32];
 void one_cycle(){
