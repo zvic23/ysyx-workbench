@@ -54,9 +54,9 @@ void init_difftest(long img_size, int port) {
   handle = dlopen(ref_so_file, RTLD_LAZY);
   assert(handle);
 
-//  ref_difftest_memcpy = dlsym(handle, "difftest_memcpy");
-//  assert(ref_difftest_memcpy);
-//
+  ref_difftest_memcpy = (void(*)(uint64_t,void*,size_t,bool))dlsym(handle, "difftest_memcpy");
+  assert(ref_difftest_memcpy);
+
 //  ref_difftest_regcpy = dlsym(handle, "difftest_regcpy");
 //  assert(ref_difftest_regcpy);
 //
