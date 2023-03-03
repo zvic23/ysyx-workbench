@@ -73,12 +73,13 @@ void init_difftest(long img_size, int port) {
   assert(ref_difftest_init);
 
 printf("difftest is on , so_file is %s\n",ref_so_file);
-void *c = 0;
+
   ref_difftest_init(port);
+
+printf("difftest is on , so_file is %s\n",ref_so_file);
   ref_difftest_memcpy(0x80000000,  pmem, img_size, 1);
 
 
-printf("difftest is on , so_file is %s\n",ref_so_file);
 
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
 
