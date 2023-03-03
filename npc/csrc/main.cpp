@@ -99,7 +99,7 @@ void ebreak(int r){
 	}
 	end = 1;
 	cmpreg_0();
-	printf("111\n");
+	printf("111=%d\n",end);
 }
 uint64_t cpu_gpr_set[32];
 void one_cycle(){
