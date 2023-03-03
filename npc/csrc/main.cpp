@@ -138,8 +138,8 @@ int main() {
   else built_in_program();
 
   sim_init();
-//void difftest_init(int port);
-//  difftest_init(1);
+void difftest_init(int port);
+  difftest_init(1);
 
   init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
   ftrace_elf_analysis();                      //about ftrace, init the function table 
