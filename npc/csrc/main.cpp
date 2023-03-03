@@ -100,12 +100,8 @@ void ebreak(int r){
 	}
 	end = 1;
 	cmpreg();
-  int i;
-  for (i = 0; i < 32; i++) {
-    printf("gpr[%d] = 0x%lx\n", i, cpu_gpr[i]);
-  }
 }
-
+uint64_t cpu_gpr_set[32];
 void one_cycle(){
   //top->Mr_val = pmem_read(top->Mr_addr);
   
@@ -119,8 +115,14 @@ void one_cycle(){
   top->clk = 0;
   step_and_dump_wave(); 
  
-
   //step_and_dump_wave();//top->eval();
+
+
+
+  for (int i = 0; i < 32; i++) {
+	  cpu_gpr_set[i]=cpu_gpr[i];
+  }
+
 }
 
 void execute(int n){
