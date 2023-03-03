@@ -75,6 +75,9 @@ printf("difftest is on , so_file is %s\n",ref_so_file);
 void *c = 0;
   //ref_difftest_init(port);
   //ref_difftest_memcpy(0x80000000,  c, img_size, 1);
+  void *gpr = (void*)cpu_gpr;
+  ref_difftest_regcpy(gpr, DIFFTEST_TO_REF);
+
 }
 
 
