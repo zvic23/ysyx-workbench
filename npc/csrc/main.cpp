@@ -101,7 +101,7 @@ void ebreak(int r){
 	cmpreg_0();
 	printf("111=%d\n",end);
 }
-uint64_t cpu_gpr_set[32];
+uint64_t cpu_gpr_set[33];
 void one_cycle(){
   //top->Mr_val = pmem_read(top->Mr_addr);
   
