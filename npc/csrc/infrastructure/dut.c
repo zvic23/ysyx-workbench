@@ -13,6 +13,7 @@ void (*ref_difftest_memcpy)(uint64_t addr, void *buf, size_t n, bool direction) 
 void (*ref_difftest_regcpy)(void *dut, bool direction) = NULL;
 void (*ref_difftest_exec)(uint64_t n) = NULL;
 void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
+void (*ref_difftest_init)(int port) = NULL;
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
@@ -69,7 +70,7 @@ void init_difftest(long img_size, int port) {
 //  ref_difftest_raise_intr = dlsym(handle, "difftest_raise_intr");
 //  assert(ref_difftest_raise_intr);
 
-  void (*ref_difftest_init)(int) = (void(*)(int))dlsym(handle, "difftest_init");
+  ref_difftest_init= (void(*)(int))dlsym(handle, "difftest_init");
   assert(ref_difftest_init);
 
 printf("difftest is on , so_file is %s\n",ref_so_file);
