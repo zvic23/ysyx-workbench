@@ -44,7 +44,8 @@ void sim_exit(){
 
 
 
-static uint8_t pmem[0x50000];
+uint8_t pmem[0x50000];
+long img_size;
 
 uint32_t pmem_read(uint64_t addr){
   return *(uint32_t*)&pmem[addr-0x80000000];
@@ -64,11 +65,11 @@ void load_img(){
   FILE *fp = fopen("./csrc/obj.bin", "rb");
 
   fseek(fp, 0, SEEK_END);
-  long size = ftell(fp);
+  img_size = ftell(fp);
   //cout << size <<endl;
 
   fseek(fp, 0, SEEK_SET);
-  int ret = fread(pmem, size, 1, fp);
+  int ret = fread(pmem, img_size, 1, fp);
   //for(int i=0;i<size;i++)cout << hex <<(unsigned int) (unsigned char)pmem[i] <<endl;
 
   fclose(fp);
@@ -149,9 +150,8 @@ int main() {
 
   sim_init();
 
-  long a =0;
   int b =1;
-init_difftest(a,b);
+init_difftest(img_size ,b);
 
   init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
   ftrace_elf_analysis();                      //about ftrace, init the function table 
