@@ -16,7 +16,7 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
-extern uint64_t *cpu_gpr;
+extern uint64_t cpu_gpr_set[32];
 
 static bool is_skip_ref = false;
 static int skip_dut_nr_inst = 0;
@@ -80,10 +80,10 @@ void *c = 0;
 
   //void *gpr = cpu_gpr;
   //ref_difftest_regcpy(gpr, DIFFTEST_TO_REF);
-//  int i;
-//  for (i = 0; i < 32; i++) {
-//    printf("gpr[%d] = 0x%lx\n", i, cpu_gpr[i]);
-//  }
+  int i;
+  for (i = 0; i < 32; i++) {
+    printf("gpr[%d] = 0x%lx\n", i, cpu_gpr_set[i]);
+  }
 }
 
 
@@ -91,7 +91,7 @@ void *c = 0;
 void cmpreg(){
   printf("in\n");
 
-  ref_difftest_regcpy(&cpu_gpr, DIFFTEST_TO_REF);
+  //ref_difftest_regcpy(&cpu_gpr, DIFFTEST_TO_REF);
   printf("out\n");
 }
 
