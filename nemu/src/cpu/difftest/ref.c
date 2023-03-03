@@ -49,11 +49,9 @@ void get_regs(void* diff_context) {
 
 void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
   if (direction == DIFFTEST_TO_REF) {
-	  printf("111\n");
+	  printf("111:%x\n",addr);
     memcpy(guest_to_host(addr), buf, n);
   } else {
-
-	  printf("222\n");
     assert(0);
   }
   //assert(0);
