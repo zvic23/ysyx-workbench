@@ -81,7 +81,7 @@ void *c = 0;
 
 
 void cmpreg(){
-
+  printf("in\n");
   ref_difftest_regcpy(&cpu_gpr, DIFFTEST_TO_REF);
 }
 
