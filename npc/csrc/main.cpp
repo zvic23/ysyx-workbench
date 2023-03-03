@@ -98,7 +98,7 @@ void ebreak(int r){
 		printf(RED "HIT BAD TRAP\n" NONE);
 	}
 	end = 1;
-	cmpreg_0();
+	cmpreg();
 }
 uint64_t cpu_gpr_set[32];
 void one_cycle(){
