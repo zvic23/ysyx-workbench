@@ -85,18 +85,7 @@ printf("difftest is on , so_file is %s\n",ref_so_file);
 
 
 
-void cmpreg(){
-  printf("in\n");
-  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
-  printf("out\n");
-}
 
-
-void cmpreg_0(){
-  printf("in\n");
-  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_DUT);
-  printf("out\n");
-}
 
 //static void checkregs(CPU_state *ref, vaddr_t pc) {
 //  if (!isa_difftest_checkregs(ref, pc)) {
@@ -135,3 +124,17 @@ void cmpreg_0(){
 //  checkregs(&ref_r, pc);
 //}
 
+
+
+void cmpreg(){
+  printf("in\n");
+  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
+  printf("out\n");
+}
+
+
+void cmpreg_0(){
+  printf("in\n");
+  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_DUT);
+  printf("out\n");
+}
