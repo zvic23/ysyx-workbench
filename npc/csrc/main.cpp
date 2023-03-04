@@ -91,6 +91,14 @@ void dump_gpr() {
   printf("pc  = 0x%lx\n" , top->pc);  //zsl:I add this line to output pc
 }
 
+uint64_t cpu_gpr_set[33];
+void updata_gpr_pc(
+  for (int i = 0; i < 32; i++) {          //save the gpr and pc in a safe value
+	  cpu_gpr_set[i]=cpu_gpr[i];
+  }
+          cpu_gpr_set[32]=top->pc;
+}
+
 static int end = 0;
 void ebreak(int r){
 	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);
@@ -105,7 +113,6 @@ void ebreak(int r){
 
 
 
-uint64_t cpu_gpr_set[33];
 void one_cycle(){
   //top->Mr_val = pmem_read(top->Mr_addr);
   
@@ -118,15 +125,11 @@ void one_cycle(){
 
   top->clk = 0;
   step_and_dump_wave(); 
- 
+
+
+  updata_gpr_pc();
+
   //step_and_dump_wave();//top->eval();
-
-
-
-  for (int i = 0; i < 32; i++) {          //save the gpr and pc in a safe value
-	  cpu_gpr_set[i]=cpu_gpr[i];
-  }
-          cpu_gpr_set[32]=top->pc;
 
 }
 
@@ -162,6 +165,8 @@ init_difftest(img_size ,b);
   top->clk=0;top->rst=1;step_and_dump_wave();
   top->clk=1;top->rst=1;step_and_dump_wave();
   top->clk=0;top->rst=0;step_and_dump_wave();    //init the npc
+
+  update_gpr_pc();
 
   sdb_mainloop();
 
