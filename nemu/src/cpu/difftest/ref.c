@@ -80,5 +80,5 @@ void difftest_init(int port) {
 
   /* Perform ISA dependent initialization. */
   init_isa();
-  printf("cpu.pc=%lx   \n",cpu.pc);
+  //printf("cpu.pc=%lx   \n",cpu.pc);
 }
