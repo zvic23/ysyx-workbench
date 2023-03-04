@@ -128,6 +128,8 @@ void one_cycle(){
 
 
   update_gpr_pc();
+  difftest_step();
+
 
   //step_and_dump_wave();//top->eval();
 
