@@ -838,18 +838,18 @@ void Vysyx_22050612_npc___024root___settle__TOP__1(Vysyx_22050612_npc___024root*
            | ((IData)(((4ULL + vlSelf->pc) >> 0x20U)) 
               << 0xaU));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3[4U] 
-        = (0x1000U | (((IData)((5ULL + vlSelf->pc)) 
+        = (0x1000U | (((IData)((4ULL + vlSelf->pc)) 
                        << 0x14U) | ((IData)(((4ULL 
                                               + vlSelf->pc) 
                                              >> 0x20U)) 
                                     >> 0x16U)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3[5U] 
-        = (((IData)((5ULL + vlSelf->pc)) >> 0xcU) | 
-           ((IData)(((5ULL + vlSelf->pc) >> 0x20U)) 
+        = (((IData)((4ULL + vlSelf->pc)) >> 0xcU) | 
+           ((IData)(((4ULL + vlSelf->pc) >> 0x20U)) 
             << 0x14U));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3[6U] 
         = (0x30000000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__sum_add0) 
-                           << 0x1eU) | ((IData)(((5ULL 
+                           << 0x1eU) | ((IData)(((4ULL 
                                                   + vlSelf->pc) 
                                                  >> 0x20U)) 
                                         >> 0xcU)));
