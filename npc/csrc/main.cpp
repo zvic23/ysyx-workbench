@@ -107,8 +107,7 @@ void ebreak(int r){
 		printf(RED "HIT BAD TRAP\n" NONE);
 	}
 	end = 1;
-	dump_gpr();
-	cmpreg_0();
+
 }
 
 
@@ -146,6 +145,8 @@ void execute(int n){
 		  if(wp_stop)break;
 	  }
   }
+	dump_gpr();
+	cmpreg_0();
 }
 
 
