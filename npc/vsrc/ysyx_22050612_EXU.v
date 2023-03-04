@@ -27,12 +27,15 @@ wire [63:0]src2;
 
 wire [63:0]wdata;
 wire wen;
+wire wen_fix;
 wire [63:0] gpr[31:0];
 assign src1=gpr[rs1];
 assign src2=gpr[rs2];
 
 //general register
-ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata, rd, wen, gpr);
+ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata, rd, wen_fix, gpr);
+
+assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 //assign wen = (opcode)? 1'b1:1'b0;
 //assign wdata = (opcode)? sum0:64'b0;

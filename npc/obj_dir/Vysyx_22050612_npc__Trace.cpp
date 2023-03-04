@@ -240,7 +240,10 @@ void Vysyx_22050612_npc___024root__traceChgSub0(Vysyx_22050612_npc___024root* vl
         tracep->chgQData(oldp+335,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
                                    [(0x1fU & (vlSelf->inst 
                                               >> 0x14U))]),64);
-        tracep->chgQData(oldp+337,((4ULL + vlSelf->pc)),64);
+        tracep->chgBit(oldp+337,(((0U != (0x1fU & (vlSelf->inst 
+                                                   >> 7U))) 
+                                  & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wen))));
+        tracep->chgQData(oldp+338,((4ULL + vlSelf->pc)),64);
     }
 }
 

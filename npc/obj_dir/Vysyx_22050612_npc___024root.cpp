@@ -124,7 +124,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
         Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024unit(1U);
     }
     __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0 = 0U;
-    if (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wen) {
+    if (((0U != (0x1fU & (vlSelf->inst >> 7U))) & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wen))) {
         __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0 
             = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata;
         __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0 = 1U;

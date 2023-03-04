@@ -42,13 +42,13 @@ void Vysyx_22050612_npc___024root__traceInitSub0(Vysyx_22050612_npc___024root* v
         tracep->declBit(c+326,"ysyx_22050612_npc ifu rst", false,-1);
         tracep->declQuad(c+31,"ysyx_22050612_npc ifu dnpc", false,-1, 63,0);
         tracep->declQuad(c+328,"ysyx_22050612_npc ifu pc", false,-1, 63,0);
-        tracep->declBus(c+340,"ysyx_22050612_npc ifu pc_rg WIDTH", false,-1, 31,0);
-        tracep->declQuad(c+341,"ysyx_22050612_npc ifu pc_rg RESET_VAL", false,-1, 63,0);
+        tracep->declBus(c+341,"ysyx_22050612_npc ifu pc_rg WIDTH", false,-1, 31,0);
+        tracep->declQuad(c+342,"ysyx_22050612_npc ifu pc_rg RESET_VAL", false,-1, 63,0);
         tracep->declBit(c+325,"ysyx_22050612_npc ifu pc_rg clk", false,-1);
         tracep->declBit(c+326,"ysyx_22050612_npc ifu pc_rg rst", false,-1);
         tracep->declQuad(c+31,"ysyx_22050612_npc ifu pc_rg din", false,-1, 63,0);
         tracep->declQuad(c+328,"ysyx_22050612_npc ifu pc_rg dout", false,-1, 63,0);
-        tracep->declBit(c+343,"ysyx_22050612_npc ifu pc_rg wen", false,-1);
+        tracep->declBit(c+344,"ysyx_22050612_npc ifu pc_rg wen", false,-1);
         tracep->declBit(c+325,"ysyx_22050612_npc idu clk", false,-1);
         tracep->declBus(c+327,"ysyx_22050612_npc idu inst", false,-1, 31,0);
         tracep->declQuad(c+33,"ysyx_22050612_npc idu imm_I", false,-1, 63,0);
@@ -58,21 +58,21 @@ void Vysyx_22050612_npc___024root__traceInitSub0(Vysyx_22050612_npc___024root* v
         tracep->declBus(c+333,"ysyx_22050612_npc idu rs1", false,-1, 4,0);
         tracep->declBus(c+334,"ysyx_22050612_npc idu rs2", false,-1, 4,0);
         tracep->declBus(c+37,"ysyx_22050612_npc idu opcode", false,-1, 9,0);
-        tracep->declBus(c+344,"ysyx_22050612_npc idu decode0 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+345,"ysyx_22050612_npc idu decode0 KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+346,"ysyx_22050612_npc idu decode0 DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+345,"ysyx_22050612_npc idu decode0 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+346,"ysyx_22050612_npc idu decode0 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+347,"ysyx_22050612_npc idu decode0 DATA_LEN", false,-1, 31,0);
         tracep->declBus(c+38,"ysyx_22050612_npc idu decode0 out", false,-1, 6,0);
         tracep->declBus(c+39,"ysyx_22050612_npc idu decode0 key", false,-1, 9,0);
-        tracep->declQuad(c+347,"ysyx_22050612_npc idu decode0 lut", false,-1, 33,0);
-        tracep->declBus(c+344,"ysyx_22050612_npc idu decode0 i0 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+345,"ysyx_22050612_npc idu decode0 i0 KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+346,"ysyx_22050612_npc idu decode0 i0 DATA_LEN", false,-1, 31,0);
-        tracep->declBus(c+349,"ysyx_22050612_npc idu decode0 i0 HAS_DEFAULT", false,-1, 31,0);
+        tracep->declQuad(c+348,"ysyx_22050612_npc idu decode0 lut", false,-1, 33,0);
+        tracep->declBus(c+345,"ysyx_22050612_npc idu decode0 i0 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+346,"ysyx_22050612_npc idu decode0 i0 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+347,"ysyx_22050612_npc idu decode0 i0 DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+350,"ysyx_22050612_npc idu decode0 i0 HAS_DEFAULT", false,-1, 31,0);
         tracep->declBus(c+38,"ysyx_22050612_npc idu decode0 i0 out", false,-1, 6,0);
         tracep->declBus(c+39,"ysyx_22050612_npc idu decode0 i0 key", false,-1, 9,0);
-        tracep->declBus(c+350,"ysyx_22050612_npc idu decode0 i0 default_out", false,-1, 6,0);
-        tracep->declQuad(c+347,"ysyx_22050612_npc idu decode0 i0 lut", false,-1, 33,0);
-        tracep->declBus(c+351,"ysyx_22050612_npc idu decode0 i0 PAIR_LEN", false,-1, 31,0);
+        tracep->declBus(c+351,"ysyx_22050612_npc idu decode0 i0 default_out", false,-1, 6,0);
+        tracep->declQuad(c+348,"ysyx_22050612_npc idu decode0 i0 lut", false,-1, 33,0);
+        tracep->declBus(c+352,"ysyx_22050612_npc idu decode0 i0 PAIR_LEN", false,-1, 31,0);
         {int i; for (i=0; i<2; i++) {
                 tracep->declBus(c+1+i*1,"ysyx_22050612_npc idu decode0 i0 pair_list", true,(i+0), 16,0);}}
         {int i; for (i=0; i<2; i++) {
@@ -81,22 +81,22 @@ void Vysyx_22050612_npc___024root__traceInitSub0(Vysyx_22050612_npc___024root* v
                 tracep->declBus(c+5+i*1,"ysyx_22050612_npc idu decode0 i0 data_list", true,(i+0), 6,0);}}
         tracep->declBus(c+40,"ysyx_22050612_npc idu decode0 i0 lut_out", false,-1, 6,0);
         tracep->declBit(c+41,"ysyx_22050612_npc idu decode0 i0 hit", false,-1);
-        tracep->declBus(c+352,"ysyx_22050612_npc idu decode0 i0 i", false,-1, 31,0);
-        tracep->declBus(c+353,"ysyx_22050612_npc idu decode1 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+346,"ysyx_22050612_npc idu decode1 KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+344,"ysyx_22050612_npc idu decode1 DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+353,"ysyx_22050612_npc idu decode0 i0 i", false,-1, 31,0);
+        tracep->declBus(c+354,"ysyx_22050612_npc idu decode1 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+347,"ysyx_22050612_npc idu decode1 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+345,"ysyx_22050612_npc idu decode1 DATA_LEN", false,-1, 31,0);
         tracep->declBus(c+42,"ysyx_22050612_npc idu decode1 out", false,-1, 1,0);
         tracep->declBus(c+335,"ysyx_22050612_npc idu decode1 key", false,-1, 6,0);
-        tracep->declBus(c+354,"ysyx_22050612_npc idu decode1 lut", false,-1, 26,0);
-        tracep->declBus(c+353,"ysyx_22050612_npc idu decode1 i0 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+346,"ysyx_22050612_npc idu decode1 i0 KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+344,"ysyx_22050612_npc idu decode1 i0 DATA_LEN", false,-1, 31,0);
-        tracep->declBus(c+349,"ysyx_22050612_npc idu decode1 i0 HAS_DEFAULT", false,-1, 31,0);
+        tracep->declBus(c+355,"ysyx_22050612_npc idu decode1 lut", false,-1, 26,0);
+        tracep->declBus(c+354,"ysyx_22050612_npc idu decode1 i0 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+347,"ysyx_22050612_npc idu decode1 i0 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+345,"ysyx_22050612_npc idu decode1 i0 DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+350,"ysyx_22050612_npc idu decode1 i0 HAS_DEFAULT", false,-1, 31,0);
         tracep->declBus(c+42,"ysyx_22050612_npc idu decode1 i0 out", false,-1, 1,0);
         tracep->declBus(c+335,"ysyx_22050612_npc idu decode1 i0 key", false,-1, 6,0);
-        tracep->declBus(c+355,"ysyx_22050612_npc idu decode1 i0 default_out", false,-1, 1,0);
-        tracep->declBus(c+354,"ysyx_22050612_npc idu decode1 i0 lut", false,-1, 26,0);
-        tracep->declBus(c+356,"ysyx_22050612_npc idu decode1 i0 PAIR_LEN", false,-1, 31,0);
+        tracep->declBus(c+356,"ysyx_22050612_npc idu decode1 i0 default_out", false,-1, 1,0);
+        tracep->declBus(c+355,"ysyx_22050612_npc idu decode1 i0 lut", false,-1, 26,0);
+        tracep->declBus(c+357,"ysyx_22050612_npc idu decode1 i0 PAIR_LEN", false,-1, 31,0);
         {int i; for (i=0; i<3; i++) {
                 tracep->declBus(c+7+i*1,"ysyx_22050612_npc idu decode1 i0 pair_list", true,(i+0), 8,0);}}
         {int i; for (i=0; i<3; i++) {
@@ -105,7 +105,7 @@ void Vysyx_22050612_npc___024root__traceInitSub0(Vysyx_22050612_npc___024root* v
                 tracep->declBus(c+13+i*1,"ysyx_22050612_npc idu decode1 i0 data_list", true,(i+0), 1,0);}}
         tracep->declBus(c+43,"ysyx_22050612_npc idu decode1 i0 lut_out", false,-1, 1,0);
         tracep->declBit(c+44,"ysyx_22050612_npc idu decode1 i0 hit", false,-1);
-        tracep->declBus(c+357,"ysyx_22050612_npc idu decode1 i0 i", false,-1, 31,0);
+        tracep->declBus(c+358,"ysyx_22050612_npc idu decode1 i0 i", false,-1, 31,0);
         tracep->declBit(c+325,"ysyx_22050612_npc exu clk", false,-1);
         tracep->declQuad(c+33,"ysyx_22050612_npc exu imm_I", false,-1, 63,0);
         tracep->declQuad(c+35,"ysyx_22050612_npc exu imm_U", false,-1, 63,0);
@@ -120,35 +120,36 @@ void Vysyx_22050612_npc___024root__traceInitSub0(Vysyx_22050612_npc___024root* v
         tracep->declQuad(c+336,"ysyx_22050612_npc exu src2", false,-1, 63,0);
         tracep->declQuad(c+47,"ysyx_22050612_npc exu wdata", false,-1, 63,0);
         tracep->declBit(c+49,"ysyx_22050612_npc exu wen", false,-1);
+        tracep->declBit(c+338,"ysyx_22050612_npc exu wen_fix", false,-1);
         {int i; for (i=0; i<32; i++) {
                 tracep->declQuad(c+197+i*2,"ysyx_22050612_npc exu gpr", true,(i+0), 63,0);}}
-        tracep->declQuad(c+338,"ysyx_22050612_npc exu snpc", false,-1, 63,0);
+        tracep->declQuad(c+339,"ysyx_22050612_npc exu snpc", false,-1, 63,0);
         tracep->declQuad(c+50,"ysyx_22050612_npc exu addend_a", false,-1, 63,0);
         tracep->declQuad(c+52,"ysyx_22050612_npc exu addend_b", false,-1, 63,0);
         tracep->declQuad(c+54,"ysyx_22050612_npc exu sum_add0", false,-1, 63,0);
-        tracep->declBus(c+358,"ysyx_22050612_npc exu cpu_gpr_group ADDR_WIDTH", false,-1, 31,0);
-        tracep->declBus(c+340,"ysyx_22050612_npc exu cpu_gpr_group DATA_WIDTH", false,-1, 31,0);
+        tracep->declBus(c+359,"ysyx_22050612_npc exu cpu_gpr_group ADDR_WIDTH", false,-1, 31,0);
+        tracep->declBus(c+341,"ysyx_22050612_npc exu cpu_gpr_group DATA_WIDTH", false,-1, 31,0);
         tracep->declBit(c+325,"ysyx_22050612_npc exu cpu_gpr_group clk", false,-1);
         tracep->declQuad(c+47,"ysyx_22050612_npc exu cpu_gpr_group wdata", false,-1, 63,0);
         tracep->declBus(c+332,"ysyx_22050612_npc exu cpu_gpr_group waddr", false,-1, 4,0);
-        tracep->declBit(c+49,"ysyx_22050612_npc exu cpu_gpr_group wen", false,-1);
+        tracep->declBit(c+338,"ysyx_22050612_npc exu cpu_gpr_group wen", false,-1);
         {int i; for (i=0; i<32; i++) {
                 tracep->declQuad(c+261+i*2,"ysyx_22050612_npc exu cpu_gpr_group rf", true,(i+0), 63,0);}}
-        tracep->declBus(c+358,"ysyx_22050612_npc exu gpr_write_enable NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+345,"ysyx_22050612_npc exu gpr_write_enable KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+359,"ysyx_22050612_npc exu gpr_write_enable DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+359,"ysyx_22050612_npc exu gpr_write_enable NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+346,"ysyx_22050612_npc exu gpr_write_enable KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+360,"ysyx_22050612_npc exu gpr_write_enable DATA_LEN", false,-1, 31,0);
         tracep->declBus(c+49,"ysyx_22050612_npc exu gpr_write_enable out", false,-1, 0,0);
         tracep->declBus(c+37,"ysyx_22050612_npc exu gpr_write_enable key", false,-1, 9,0);
-        tracep->declQuad(c+360,"ysyx_22050612_npc exu gpr_write_enable lut", false,-1, 54,0);
-        tracep->declBus(c+358,"ysyx_22050612_npc exu gpr_write_enable i0 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+345,"ysyx_22050612_npc exu gpr_write_enable i0 KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+359,"ysyx_22050612_npc exu gpr_write_enable i0 DATA_LEN", false,-1, 31,0);
-        tracep->declBus(c+349,"ysyx_22050612_npc exu gpr_write_enable i0 HAS_DEFAULT", false,-1, 31,0);
+        tracep->declQuad(c+361,"ysyx_22050612_npc exu gpr_write_enable lut", false,-1, 54,0);
+        tracep->declBus(c+359,"ysyx_22050612_npc exu gpr_write_enable i0 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+346,"ysyx_22050612_npc exu gpr_write_enable i0 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+360,"ysyx_22050612_npc exu gpr_write_enable i0 DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+350,"ysyx_22050612_npc exu gpr_write_enable i0 HAS_DEFAULT", false,-1, 31,0);
         tracep->declBus(c+49,"ysyx_22050612_npc exu gpr_write_enable i0 out", false,-1, 0,0);
         tracep->declBus(c+37,"ysyx_22050612_npc exu gpr_write_enable i0 key", false,-1, 9,0);
-        tracep->declBus(c+362,"ysyx_22050612_npc exu gpr_write_enable i0 default_out", false,-1, 0,0);
-        tracep->declQuad(c+360,"ysyx_22050612_npc exu gpr_write_enable i0 lut", false,-1, 54,0);
-        tracep->declBus(c+363,"ysyx_22050612_npc exu gpr_write_enable i0 PAIR_LEN", false,-1, 31,0);
+        tracep->declBus(c+363,"ysyx_22050612_npc exu gpr_write_enable i0 default_out", false,-1, 0,0);
+        tracep->declQuad(c+361,"ysyx_22050612_npc exu gpr_write_enable i0 lut", false,-1, 54,0);
+        tracep->declBus(c+364,"ysyx_22050612_npc exu gpr_write_enable i0 PAIR_LEN", false,-1, 31,0);
         {int i; for (i=0; i<5; i++) {
                 tracep->declBus(c+16+i*1,"ysyx_22050612_npc exu gpr_write_enable i0 pair_list", true,(i+0), 10,0);}}
         {int i; for (i=0; i<5; i++) {
@@ -157,22 +158,22 @@ void Vysyx_22050612_npc___024root__traceInitSub0(Vysyx_22050612_npc___024root* v
                 tracep->declBus(c+26+i*1,"ysyx_22050612_npc exu gpr_write_enable i0 data_list", true,(i+0), 0,0);}}
         tracep->declBus(c+56,"ysyx_22050612_npc exu gpr_write_enable i0 lut_out", false,-1, 0,0);
         tracep->declBit(c+57,"ysyx_22050612_npc exu gpr_write_enable i0 hit", false,-1);
-        tracep->declBus(c+364,"ysyx_22050612_npc exu gpr_write_enable i0 i", false,-1, 31,0);
-        tracep->declBus(c+358,"ysyx_22050612_npc exu gpr_write_data NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+345,"ysyx_22050612_npc exu gpr_write_data KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+340,"ysyx_22050612_npc exu gpr_write_data DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+365,"ysyx_22050612_npc exu gpr_write_enable i0 i", false,-1, 31,0);
+        tracep->declBus(c+359,"ysyx_22050612_npc exu gpr_write_data NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+346,"ysyx_22050612_npc exu gpr_write_data KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+341,"ysyx_22050612_npc exu gpr_write_data DATA_LEN", false,-1, 31,0);
         tracep->declQuad(c+47,"ysyx_22050612_npc exu gpr_write_data out", false,-1, 63,0);
         tracep->declBus(c+37,"ysyx_22050612_npc exu gpr_write_data key", false,-1, 9,0);
         tracep->declArray(c+58,"ysyx_22050612_npc exu gpr_write_data lut", false,-1, 369,0);
-        tracep->declBus(c+358,"ysyx_22050612_npc exu gpr_write_data i0 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+345,"ysyx_22050612_npc exu gpr_write_data i0 KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+340,"ysyx_22050612_npc exu gpr_write_data i0 DATA_LEN", false,-1, 31,0);
-        tracep->declBus(c+349,"ysyx_22050612_npc exu gpr_write_data i0 HAS_DEFAULT", false,-1, 31,0);
+        tracep->declBus(c+359,"ysyx_22050612_npc exu gpr_write_data i0 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+346,"ysyx_22050612_npc exu gpr_write_data i0 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+341,"ysyx_22050612_npc exu gpr_write_data i0 DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+350,"ysyx_22050612_npc exu gpr_write_data i0 HAS_DEFAULT", false,-1, 31,0);
         tracep->declQuad(c+47,"ysyx_22050612_npc exu gpr_write_data i0 out", false,-1, 63,0);
         tracep->declBus(c+37,"ysyx_22050612_npc exu gpr_write_data i0 key", false,-1, 9,0);
-        tracep->declQuad(c+365,"ysyx_22050612_npc exu gpr_write_data i0 default_out", false,-1, 63,0);
+        tracep->declQuad(c+366,"ysyx_22050612_npc exu gpr_write_data i0 default_out", false,-1, 63,0);
         tracep->declArray(c+58,"ysyx_22050612_npc exu gpr_write_data i0 lut", false,-1, 369,0);
-        tracep->declBus(c+367,"ysyx_22050612_npc exu gpr_write_data i0 PAIR_LEN", false,-1, 31,0);
+        tracep->declBus(c+368,"ysyx_22050612_npc exu gpr_write_data i0 PAIR_LEN", false,-1, 31,0);
         {int i; for (i=0; i<5; i++) {
                 tracep->declArray(c+70+i*3,"ysyx_22050612_npc exu gpr_write_data i0 pair_list", true,(i+0), 73,0);}}
         {int i; for (i=0; i<5; i++) {
@@ -181,23 +182,23 @@ void Vysyx_22050612_npc___024root__traceInitSub0(Vysyx_22050612_npc___024root* v
                 tracep->declQuad(c+90+i*2,"ysyx_22050612_npc exu gpr_write_data i0 data_list", true,(i+0), 63,0);}}
         tracep->declQuad(c+100,"ysyx_22050612_npc exu gpr_write_data i0 lut_out", false,-1, 63,0);
         tracep->declBit(c+102,"ysyx_22050612_npc exu gpr_write_data i0 hit", false,-1);
-        tracep->declBus(c+364,"ysyx_22050612_npc exu gpr_write_data i0 i", false,-1, 31,0);
-        tracep->declBus(c+344,"ysyx_22050612_npc exu cpu_pc NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+345,"ysyx_22050612_npc exu cpu_pc KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+340,"ysyx_22050612_npc exu cpu_pc DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+365,"ysyx_22050612_npc exu gpr_write_data i0 i", false,-1, 31,0);
+        tracep->declBus(c+345,"ysyx_22050612_npc exu cpu_pc NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+346,"ysyx_22050612_npc exu cpu_pc KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+341,"ysyx_22050612_npc exu cpu_pc DATA_LEN", false,-1, 31,0);
         tracep->declQuad(c+31,"ysyx_22050612_npc exu cpu_pc out", false,-1, 63,0);
         tracep->declBus(c+37,"ysyx_22050612_npc exu cpu_pc key", false,-1, 9,0);
-        tracep->declQuad(c+338,"ysyx_22050612_npc exu cpu_pc default_out", false,-1, 63,0);
+        tracep->declQuad(c+339,"ysyx_22050612_npc exu cpu_pc default_out", false,-1, 63,0);
         tracep->declArray(c+103,"ysyx_22050612_npc exu cpu_pc lut", false,-1, 147,0);
-        tracep->declBus(c+344,"ysyx_22050612_npc exu cpu_pc i0 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+345,"ysyx_22050612_npc exu cpu_pc i0 KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+340,"ysyx_22050612_npc exu cpu_pc i0 DATA_LEN", false,-1, 31,0);
-        tracep->declBus(c+359,"ysyx_22050612_npc exu cpu_pc i0 HAS_DEFAULT", false,-1, 31,0);
+        tracep->declBus(c+345,"ysyx_22050612_npc exu cpu_pc i0 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+346,"ysyx_22050612_npc exu cpu_pc i0 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+341,"ysyx_22050612_npc exu cpu_pc i0 DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+360,"ysyx_22050612_npc exu cpu_pc i0 HAS_DEFAULT", false,-1, 31,0);
         tracep->declQuad(c+31,"ysyx_22050612_npc exu cpu_pc i0 out", false,-1, 63,0);
         tracep->declBus(c+37,"ysyx_22050612_npc exu cpu_pc i0 key", false,-1, 9,0);
-        tracep->declQuad(c+338,"ysyx_22050612_npc exu cpu_pc i0 default_out", false,-1, 63,0);
+        tracep->declQuad(c+339,"ysyx_22050612_npc exu cpu_pc i0 default_out", false,-1, 63,0);
         tracep->declArray(c+103,"ysyx_22050612_npc exu cpu_pc i0 lut", false,-1, 147,0);
-        tracep->declBus(c+367,"ysyx_22050612_npc exu cpu_pc i0 PAIR_LEN", false,-1, 31,0);
+        tracep->declBus(c+368,"ysyx_22050612_npc exu cpu_pc i0 PAIR_LEN", false,-1, 31,0);
         {int i; for (i=0; i<2; i++) {
                 tracep->declArray(c+108+i*3,"ysyx_22050612_npc exu cpu_pc i0 pair_list", true,(i+0), 73,0);}}
         {int i; for (i=0; i<2; i++) {
@@ -206,22 +207,22 @@ void Vysyx_22050612_npc___024root__traceInitSub0(Vysyx_22050612_npc___024root* v
                 tracep->declQuad(c+116+i*2,"ysyx_22050612_npc exu cpu_pc i0 data_list", true,(i+0), 63,0);}}
         tracep->declQuad(c+120,"ysyx_22050612_npc exu cpu_pc i0 lut_out", false,-1, 63,0);
         tracep->declBit(c+122,"ysyx_22050612_npc exu cpu_pc i0 hit", false,-1);
-        tracep->declBus(c+352,"ysyx_22050612_npc exu cpu_pc i0 i", false,-1, 31,0);
-        tracep->declBus(c+368,"ysyx_22050612_npc exu addend0 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+345,"ysyx_22050612_npc exu addend0 KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+340,"ysyx_22050612_npc exu addend0 DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+353,"ysyx_22050612_npc exu cpu_pc i0 i", false,-1, 31,0);
+        tracep->declBus(c+369,"ysyx_22050612_npc exu addend0 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+346,"ysyx_22050612_npc exu addend0 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+341,"ysyx_22050612_npc exu addend0 DATA_LEN", false,-1, 31,0);
         tracep->declQuad(c+50,"ysyx_22050612_npc exu addend0 out", false,-1, 63,0);
         tracep->declBus(c+37,"ysyx_22050612_npc exu addend0 key", false,-1, 9,0);
         tracep->declArray(c+123,"ysyx_22050612_npc exu addend0 lut", false,-1, 295,0);
-        tracep->declBus(c+368,"ysyx_22050612_npc exu addend0 i0 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+345,"ysyx_22050612_npc exu addend0 i0 KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+340,"ysyx_22050612_npc exu addend0 i0 DATA_LEN", false,-1, 31,0);
-        tracep->declBus(c+349,"ysyx_22050612_npc exu addend0 i0 HAS_DEFAULT", false,-1, 31,0);
+        tracep->declBus(c+369,"ysyx_22050612_npc exu addend0 i0 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+346,"ysyx_22050612_npc exu addend0 i0 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+341,"ysyx_22050612_npc exu addend0 i0 DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+350,"ysyx_22050612_npc exu addend0 i0 HAS_DEFAULT", false,-1, 31,0);
         tracep->declQuad(c+50,"ysyx_22050612_npc exu addend0 i0 out", false,-1, 63,0);
         tracep->declBus(c+37,"ysyx_22050612_npc exu addend0 i0 key", false,-1, 9,0);
-        tracep->declQuad(c+365,"ysyx_22050612_npc exu addend0 i0 default_out", false,-1, 63,0);
+        tracep->declQuad(c+366,"ysyx_22050612_npc exu addend0 i0 default_out", false,-1, 63,0);
         tracep->declArray(c+123,"ysyx_22050612_npc exu addend0 i0 lut", false,-1, 295,0);
-        tracep->declBus(c+367,"ysyx_22050612_npc exu addend0 i0 PAIR_LEN", false,-1, 31,0);
+        tracep->declBus(c+368,"ysyx_22050612_npc exu addend0 i0 PAIR_LEN", false,-1, 31,0);
         {int i; for (i=0; i<4; i++) {
                 tracep->declArray(c+133+i*3,"ysyx_22050612_npc exu addend0 i0 pair_list", true,(i+0), 73,0);}}
         {int i; for (i=0; i<4; i++) {
@@ -230,22 +231,22 @@ void Vysyx_22050612_npc___024root__traceInitSub0(Vysyx_22050612_npc___024root* v
                 tracep->declQuad(c+149+i*2,"ysyx_22050612_npc exu addend0 i0 data_list", true,(i+0), 63,0);}}
         tracep->declQuad(c+157,"ysyx_22050612_npc exu addend0 i0 lut_out", false,-1, 63,0);
         tracep->declBit(c+159,"ysyx_22050612_npc exu addend0 i0 hit", false,-1);
-        tracep->declBus(c+369,"ysyx_22050612_npc exu addend0 i0 i", false,-1, 31,0);
-        tracep->declBus(c+368,"ysyx_22050612_npc exu addend1 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+345,"ysyx_22050612_npc exu addend1 KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+340,"ysyx_22050612_npc exu addend1 DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+370,"ysyx_22050612_npc exu addend0 i0 i", false,-1, 31,0);
+        tracep->declBus(c+369,"ysyx_22050612_npc exu addend1 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+346,"ysyx_22050612_npc exu addend1 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+341,"ysyx_22050612_npc exu addend1 DATA_LEN", false,-1, 31,0);
         tracep->declQuad(c+52,"ysyx_22050612_npc exu addend1 out", false,-1, 63,0);
         tracep->declBus(c+37,"ysyx_22050612_npc exu addend1 key", false,-1, 9,0);
         tracep->declArray(c+160,"ysyx_22050612_npc exu addend1 lut", false,-1, 295,0);
-        tracep->declBus(c+368,"ysyx_22050612_npc exu addend1 i0 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+345,"ysyx_22050612_npc exu addend1 i0 KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+340,"ysyx_22050612_npc exu addend1 i0 DATA_LEN", false,-1, 31,0);
-        tracep->declBus(c+349,"ysyx_22050612_npc exu addend1 i0 HAS_DEFAULT", false,-1, 31,0);
+        tracep->declBus(c+369,"ysyx_22050612_npc exu addend1 i0 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+346,"ysyx_22050612_npc exu addend1 i0 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+341,"ysyx_22050612_npc exu addend1 i0 DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+350,"ysyx_22050612_npc exu addend1 i0 HAS_DEFAULT", false,-1, 31,0);
         tracep->declQuad(c+52,"ysyx_22050612_npc exu addend1 i0 out", false,-1, 63,0);
         tracep->declBus(c+37,"ysyx_22050612_npc exu addend1 i0 key", false,-1, 9,0);
-        tracep->declQuad(c+365,"ysyx_22050612_npc exu addend1 i0 default_out", false,-1, 63,0);
+        tracep->declQuad(c+366,"ysyx_22050612_npc exu addend1 i0 default_out", false,-1, 63,0);
         tracep->declArray(c+160,"ysyx_22050612_npc exu addend1 i0 lut", false,-1, 295,0);
-        tracep->declBus(c+367,"ysyx_22050612_npc exu addend1 i0 PAIR_LEN", false,-1, 31,0);
+        tracep->declBus(c+368,"ysyx_22050612_npc exu addend1 i0 PAIR_LEN", false,-1, 31,0);
         {int i; for (i=0; i<4; i++) {
                 tracep->declArray(c+170+i*3,"ysyx_22050612_npc exu addend1 i0 pair_list", true,(i+0), 73,0);}}
         {int i; for (i=0; i<4; i++) {
@@ -254,8 +255,8 @@ void Vysyx_22050612_npc___024root__traceInitSub0(Vysyx_22050612_npc___024root* v
                 tracep->declQuad(c+186+i*2,"ysyx_22050612_npc exu addend1 i0 data_list", true,(i+0), 63,0);}}
         tracep->declQuad(c+194,"ysyx_22050612_npc exu addend1 i0 lut_out", false,-1, 63,0);
         tracep->declBit(c+196,"ysyx_22050612_npc exu addend1 i0 hit", false,-1);
-        tracep->declBus(c+369,"ysyx_22050612_npc exu addend1 i0 i", false,-1, 31,0);
-        tracep->declBus(c+340,"ysyx_22050612_npc exu add0 WIDTH", false,-1, 31,0);
+        tracep->declBus(c+370,"ysyx_22050612_npc exu addend1 i0 i", false,-1, 31,0);
+        tracep->declBus(c+341,"ysyx_22050612_npc exu add0 WIDTH", false,-1, 31,0);
         tracep->declQuad(c+50,"ysyx_22050612_npc exu add0 x", false,-1, 63,0);
         tracep->declQuad(c+52,"ysyx_22050612_npc exu add0 y", false,-1, 63,0);
         tracep->declQuad(c+54,"ysyx_22050612_npc exu add0 z", false,-1, 63,0);
@@ -506,32 +507,36 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
         tracep->fullQData(oldp+336,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
                                     [(0x1fU & (vlSelf->inst 
                                                >> 0x14U))]),64);
-        tracep->fullQData(oldp+338,((4ULL + vlSelf->pc)),64);
-        tracep->fullIData(oldp+340,(0x40U),32);
-        tracep->fullQData(oldp+341,(0x80000000ULL),64);
-        tracep->fullBit(oldp+343,(1U));
-        tracep->fullIData(oldp+344,(2U),32);
-        tracep->fullIData(oldp+345,(0xaU),32);
-        tracep->fullIData(oldp+346,(7U),32);
-        tracep->fullQData(oldp+347,(0x67080993ULL),34);
-        tracep->fullIData(oldp+349,(0U),32);
-        tracep->fullCData(oldp+350,(0U),7);
-        tracep->fullIData(oldp+351,(0x11U),32);
-        tracep->fullIData(oldp+352,(2U),32);
-        tracep->fullIData(oldp+353,(3U),32);
-        tracep->fullIData(oldp+354,(0x374bdbfU),27);
-        tracep->fullCData(oldp+355,(0U),2);
-        tracep->fullIData(oldp+356,(9U),32);
-        tracep->fullIData(oldp+357,(3U),32);
-        tracep->fullIData(oldp+358,(5U),32);
-        tracep->fullIData(oldp+359,(1U),32);
-        tracep->fullQData(oldp+360,(0x20180380404827ULL),55);
-        tracep->fullBit(oldp+362,(0U));
-        tracep->fullIData(oldp+363,(0xbU),32);
-        tracep->fullIData(oldp+364,(5U),32);
-        tracep->fullQData(oldp+365,(0ULL),64);
-        tracep->fullIData(oldp+367,(0x4aU),32);
-        tracep->fullIData(oldp+368,(4U),32);
+        tracep->fullBit(oldp+338,(((0U != (0x1fU & 
+                                           (vlSelf->inst 
+                                            >> 7U))) 
+                                   & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wen))));
+        tracep->fullQData(oldp+339,((4ULL + vlSelf->pc)),64);
+        tracep->fullIData(oldp+341,(0x40U),32);
+        tracep->fullQData(oldp+342,(0x80000000ULL),64);
+        tracep->fullBit(oldp+344,(1U));
+        tracep->fullIData(oldp+345,(2U),32);
+        tracep->fullIData(oldp+346,(0xaU),32);
+        tracep->fullIData(oldp+347,(7U),32);
+        tracep->fullQData(oldp+348,(0x67080993ULL),34);
+        tracep->fullIData(oldp+350,(0U),32);
+        tracep->fullCData(oldp+351,(0U),7);
+        tracep->fullIData(oldp+352,(0x11U),32);
+        tracep->fullIData(oldp+353,(2U),32);
+        tracep->fullIData(oldp+354,(3U),32);
+        tracep->fullIData(oldp+355,(0x374bdbfU),27);
+        tracep->fullCData(oldp+356,(0U),2);
+        tracep->fullIData(oldp+357,(9U),32);
+        tracep->fullIData(oldp+358,(3U),32);
+        tracep->fullIData(oldp+359,(5U),32);
+        tracep->fullIData(oldp+360,(1U),32);
+        tracep->fullQData(oldp+361,(0x20180380404827ULL),55);
+        tracep->fullBit(oldp+363,(0U));
+        tracep->fullIData(oldp+364,(0xbU),32);
+        tracep->fullIData(oldp+365,(5U),32);
+        tracep->fullQData(oldp+366,(0ULL),64);
+        tracep->fullIData(oldp+368,(0x4aU),32);
         tracep->fullIData(oldp+369,(4U),32);
+        tracep->fullIData(oldp+370,(4U),32);
     }
 }
