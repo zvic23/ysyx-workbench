@@ -99,9 +99,10 @@ void update_gpr_pc(){
           cpu_gpr_set[32]=top->pc;
 }
 
-static int end = 0;
+int end = 0;
 void ebreak(int r){
 	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);
+
 	else {
 		iringbuf_output();
 		printf(RED "HIT BAD TRAP\n" NONE);
@@ -136,8 +137,12 @@ void execute(int n){
   for(uint64_t i=0;i<n;i++){
 	  if(end == 1){
 		  printf("execute has finished, please open npc again!\n");
-		  break;
+		  return;
 	  }
+  	  else if(end == 2){
+		iringbuf_output();
+		printf(RED "ABORT\n" NONE);
+          }
 	  one_cycle();
 	  ref_diff_exec(1); 
 	  if(1){             //zsl: the switch of watchpoint
