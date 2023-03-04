@@ -100,7 +100,7 @@ void ebreak(int r){
 	}
 	end = 1;
 	dump_gpr();
-	//cmpreg();
+	cmpreg_0();
 }
 
 
