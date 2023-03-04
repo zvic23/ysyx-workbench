@@ -67,6 +67,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   s->snpc = pc;
   isa_exec_once(s);
   cpu.pc = s->dnpc;
+  printf("11\n");
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
   p += snprintf(p, sizeof(s->logbuf), FMT_WORD ":", s->pc);
@@ -87,7 +88,6 @@ static void exec_once(Decode *s, vaddr_t pc) {
   disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, ilen);
 
-  printf("11\n");
 //zsl:iringbuf implement*************
     if(QueueIn == (( QueueOut + QUEUE_SIZE) % QUEUE_SIZE)){
 	    for(int i=0;i<128;i++){
