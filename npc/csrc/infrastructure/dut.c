@@ -17,7 +17,7 @@ void (*ref_difftest_init)(int port) = NULL;
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
-extern uint64_t cpu_gpr_set[32];
+extern uint64_t cpu_gpr_set[33];
 extern uint8_t pmem[0x50000];
 
 static bool is_skip_ref = false;
@@ -124,7 +124,7 @@ printf("difftest is on , so_file is %s\n",ref_so_file);
 //  checkregs(&ref_r, pc);
 //}
 
-
+uint64_t cpu_gpr_ref[33];
 
 void cmpreg(){
   printf("in\n");
@@ -135,6 +135,11 @@ void cmpreg(){
 
 void cmpreg_0(){
   printf("in\n");
-  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_DUT);
+  ref_difftest_regcpy(&cpu_gpr_ref, DIFFTEST_TO_DUT);
+  for (int i = 0; i < 32; i++) {
+    printf("nemu.gpr=%lx\n" ,cpu_gpr_ref[i]);
+  }
+
+    printf("nemu.pc=%lx\n" ,cpu_gpr_ref[32]);
   printf("out\n");
 }
