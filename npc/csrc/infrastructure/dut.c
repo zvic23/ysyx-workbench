@@ -143,3 +143,7 @@ void cmpreg_0(){
     printf("nemu.pc=%lx\n" ,cpu_gpr_ref[32]);
   printf("out\n");
 }
+
+void ref_diff_exec(uint64_t n){
+ ref_difftest_exec(n);
+} 
