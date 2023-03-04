@@ -40,4 +40,5 @@ void init_isa() {
 
   /* Initialize this virtual computer system. */
   restart();
+  printf("cpu.pc=%lx   vector=%x\n",cpu.pc,RESET_VECTOR);
 }
