@@ -43,6 +43,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     QData/*63:0*/ ysyx_22050612_npc__DOT__dnpc;
     QData/*63:0*/ ysyx_22050612_npc__DOT__imm_I;
     QData/*63:0*/ ysyx_22050612_npc__DOT__imm_U;
+    QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__src1;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__wdata;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__addend_a;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__addend_b;

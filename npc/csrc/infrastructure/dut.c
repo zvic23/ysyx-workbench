@@ -79,7 +79,7 @@ void difftest_step() {
   //checkregs(&ref_r);
   for(int i=0;i<33;i++){
 	  if(ref_r[i] != cpu_gpr_set[i]){
-		  printf("npc.gpr[%d]:%lx   //  nemu.gpr[%d]:%lx\n",i,cpu_gpr_set[i],i,ref_r[i]);
+		  printf("npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",i,cpu_gpr_set[i],i,ref_r[i]);
 		  end = 2;
 		  return;
 	  }

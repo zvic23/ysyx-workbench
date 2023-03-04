@@ -49,7 +49,7 @@ ysyx_22050612_MuxKey #(5, 10, 1) gpr_write_enable (wen, opcode, {
 ysyx_22050612_MuxKey #(5, 10, 64) gpr_write_data (wdata, opcode, {
     10'h100 , imm_U,
     10'h200 , sum_add0,
-    10'h300 , pc + 64'd4,
+    10'h300 , pc + 64'd5,
     10'd4   , pc + 64'd4,
     10'd19  , sum_add0
   });
@@ -76,7 +76,7 @@ ysyx_22050612_MuxKey #(4, 10, 64) addend0 (addend_a, opcode, {
 ysyx_22050612_MuxKey #(4, 10, 64) addend1 (addend_b, opcode, {
     10'h200 , pc,
     10'h300 , pc,
-    10'd4   , src2,
+    10'd4   , src1,
     10'd19  , src1
   });
 ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
