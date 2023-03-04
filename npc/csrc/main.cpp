@@ -144,6 +144,7 @@ void execute(int n){
   	  else if(end == 2){
 		iringbuf_output();
 		printf(RED "ABORT\n" NONE);
+		return;
           }
 	  one_cycle();
 	  ref_diff_exec(1); 
