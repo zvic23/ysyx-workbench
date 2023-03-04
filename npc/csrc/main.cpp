@@ -136,7 +136,7 @@ void execute(int n){
   for(uint64_t i=0;i<n;i++){
 	  if(end == 1){
 		  printf("execute has finished, please open npc again!\n");
-		  return;
+		  break;
 	  }
 	  one_cycle();
 	  ref_diff_exec(1); 
