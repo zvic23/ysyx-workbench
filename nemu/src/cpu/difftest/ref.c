@@ -76,7 +76,7 @@ void difftest_raise_intr(word_t NO) {
 
 void difftest_init(int port) {
 	init_mem();   //zsl: at <memory/paddr.h>, I add the function's declare.
-
+	restart();
 
   /* Perform ISA dependent initialization. */
   init_isa();
