@@ -92,7 +92,7 @@ void dump_gpr() {
 }
 
 uint64_t cpu_gpr_set[33];
-void updata_gpr_pc(
+void update_gpr_pc(){
   for (int i = 0; i < 32; i++) {          //save the gpr and pc in a safe value
 	  cpu_gpr_set[i]=cpu_gpr[i];
   }
@@ -127,7 +127,7 @@ void one_cycle(){
   step_and_dump_wave(); 
 
 
-  updata_gpr_pc();
+  update_gpr_pc();
 
   //step_and_dump_wave();//top->eval();
 
