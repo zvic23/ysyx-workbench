@@ -147,7 +147,6 @@ void execute(int n){
 		return;
           }
 	  one_cycle();
-	  ref_diff_exec(1); 
 	  if(1){             //zsl: the switch of watchpoint
 		  int wp_stop = check_wpchange();
 		  if(wp_stop)break;
