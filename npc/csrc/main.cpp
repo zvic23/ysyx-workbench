@@ -137,7 +137,9 @@ void execute(int n){
 		  return;
 	  }
 	  one_cycle();
+		  printf("execute has finished, please open npc again!\n");
 	  ref_diff_exec(1); 
+		  printf("execute has finished, please open npc again!\n");
 	  if(1){             //zsl: the switch of watchpoint
 		  int wp_stop = check_wpchange();
 		  if(wp_stop)break;
