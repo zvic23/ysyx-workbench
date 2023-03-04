@@ -77,7 +77,7 @@ ysyx_22050612_MuxKey #(4, 10, 64) addend1 (addend_b, opcode, {
     10'h200 , pc,
     10'h300 , pc,
     10'd4   , src1,
-    10'd19  , src1
+    10'd19  , src2
   });
 ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
 
