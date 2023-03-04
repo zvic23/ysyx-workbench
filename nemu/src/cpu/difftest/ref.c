@@ -31,7 +31,7 @@ void set_regs(void *diff_context){
     cpu.gpr[i] = ctx->gpr[i];
     //printf("nemu.gpr=%lx,   npc.gpr=%lx\n",cpu.gpr[i],ctx->gpr[i]);
   }
-  cpu.pc = ctx->pc;
+  //cpu.pc = ctx->pc;
     printf("nemu.pc=%lx,   npc.pc=%lx\n",cpu.pc,ctx->pc);
 }
 void get_regs(void* diff_context) {
