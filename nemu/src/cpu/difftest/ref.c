@@ -76,7 +76,12 @@ void difftest_raise_intr(word_t NO) {
 
 void difftest_init(int port) {
 	init_mem();   //zsl: at <memory/paddr.h>, I add the function's declare.
-	restart();
+  /* Set the initial program counter. */
+  //cpu.pc = RESET_VECTOR;
+  cpu.pc=0x80000000;
+
+  /* The zero register is always 0. */
+  cpu.gpr[0] = 0;
 
   /* Perform ISA dependent initialization. */
   init_isa();
