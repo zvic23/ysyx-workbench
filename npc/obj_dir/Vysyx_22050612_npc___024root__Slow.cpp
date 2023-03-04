@@ -432,28 +432,28 @@ void Vysyx_22050612_npc___024root___settle__TOP__1(Vysyx_22050612_npc___024root*
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__addend0____pinNumber3[9U] = 0x80U;
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__addend1____pinNumber3[0U] 
         = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
-                  [(0x1fU & (vlSelf->inst >> 0x14U))]);
+                  [(0x1fU & (vlSelf->inst >> 0xfU))]);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__addend1____pinNumber3[1U] 
         = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
-                   [(0x1fU & (vlSelf->inst >> 0x14U))] 
+                   [(0x1fU & (vlSelf->inst >> 0xfU))] 
                    >> 0x20U));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__addend1____pinNumber3[2U] 
         = (0x13U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
                             [(0x1fU & (vlSelf->inst 
-                                       >> 0xfU))]) 
+                                       >> 0x14U))]) 
                     << 0xaU));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__addend1____pinNumber3[3U] 
         = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
-                    [(0x1fU & (vlSelf->inst >> 0xfU))]) 
+                    [(0x1fU & (vlSelf->inst >> 0x14U))]) 
             >> 0x16U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
                                   [(0x1fU & (vlSelf->inst 
-                                             >> 0xfU))] 
+                                             >> 0x14U))] 
                                   >> 0x20U)) << 0xaU));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__addend1____pinNumber3[4U] 
         = (0x1000U | (((IData)(vlSelf->pc) << 0x14U) 
                       | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
                                   [(0x1fU & (vlSelf->inst 
-                                             >> 0xfU))] 
+                                             >> 0x14U))] 
                                   >> 0x20U)) >> 0x16U)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__addend1____pinNumber3[5U] 
         = (((IData)(vlSelf->pc) >> 0xcU) | ((IData)(
