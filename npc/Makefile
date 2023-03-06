@@ -11,7 +11,7 @@ all:
 	@echo "Write this Makefile by your self."
 
 sim:
-	verilator --cc --exe --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp csrc/sdb/sdb.cpp csrc/sdb/expr.cpp csrc/sdb/watchpoint.cpp csrc/trace.cpp csrc/infrastructure/dut.c  $(CXXSRC) -CFLAGS "$(CXXFLAGS)" -LDFLAGS "$(LIBS)"  --trace -Ivsrc/ #add -Wall later 
+	verilator --cc --exe --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp csrc/sdb/sdb.cpp csrc/sdb/expr.cpp csrc/sdb/watchpoint.cpp csrc/infrastructure/trace.cpp csrc/infrastructure/dut.c  $(CXXSRC) -CFLAGS "$(CXXFLAGS)" -LDFLAGS "$(LIBS)"  --trace -Ivsrc/ #add -Wall later 
 	
 	#verilator --cc --exe --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp --trace -Ivsrc/ #add -Wall later 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
