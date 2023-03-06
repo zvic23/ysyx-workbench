@@ -20,3 +20,12 @@ image: $(IMAGE).elf
 	@$(OBJDUMP) -d $(IMAGE).elf > $(IMAGE).txt
 	@echo + OBJCOPY "->" $(IMAGE_REL).bin
 	@$(OBJCOPY) -S --set-section-flags .bss=alloc,contents -O binary $(IMAGE).elf $(IMAGE).bin
+
+#zsl:add the "run" rule
+NPC_HOME = ~/ysyx-workbench/npc
+
+run: image
+	#@echo "1"
+	cp -f $(IMAGE).bin $(NPC_HOME)/csrc/obj.bin
+	cp -f $(IMAGE).elf $(NPC_HOME)/csrc/obj.elf
+	$(MAKE) -C $(NPC_HOME) exe
