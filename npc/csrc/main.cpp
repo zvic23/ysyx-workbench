@@ -58,7 +58,9 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
   	long long raddr_set = raddr & ~0x7ull;
-  	rdata = (long long*)&pmem[raddr_set-0x80000000];
+	long long data;
+	memset(&data, pmem[raddr_set-0x80000000], 8);
+  	rdata = &data;
 
 #ifdef CONFIG_MTRACE
 	printf("mtrace: read  addr:%llx,  data:%llx\n",raddr_set,rdata);
