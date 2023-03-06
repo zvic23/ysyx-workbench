@@ -61,7 +61,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   	rdata = (long long*)&pmem[raddr_set-0x80000000];
 
 #ifdef CONFIG_MTRACE
-	printf("mtrace: read  addr:%llx,  data:%llx\n",raddr,rdata);
+	printf("mtrace: read  addr:%llx,  data:%llx\n",raddr_set,rdata);
 #endif
   }
 }
