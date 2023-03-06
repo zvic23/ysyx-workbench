@@ -24,6 +24,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     // PORTS
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
+    VL_OUT(inst,31,0);
     VL_OUT64(pc,63,0);
 
     // LOCAL SIGNALS
@@ -39,7 +40,6 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__addend0__DOT__i0__DOT__hit;
     CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__addend1__DOT__i0__DOT__hit;
     SData/*9:0*/ ysyx_22050612_npc__DOT__opcode;
-    IData/*31:0*/ ysyx_22050612_npc__DOT__inst;
     QData/*63:0*/ ysyx_22050612_npc__DOT__dnpc;
     QData/*63:0*/ ysyx_22050612_npc__DOT__imm_I;
     QData/*63:0*/ ysyx_22050612_npc__DOT__imm_U;

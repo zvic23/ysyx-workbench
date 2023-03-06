@@ -8,11 +8,12 @@ input rst,
 //input Mr_val,
 
 //output Mr_addr,
+output [31:0]inst,
 output [63:0]pc
 
 );
 
-wire [31:0]inst;
+//wire [31:0]inst;
 wire [63:0]dnpc;
 
 wire [63:0]imm_I;

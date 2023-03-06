@@ -13,6 +13,7 @@ Vysyx_22050612_npc::Vysyx_22050612_npc(VerilatedContext* _vcontextp__, const cha
     : vlSymsp{new Vysyx_22050612_npc__Syms(_vcontextp__, _vcname__, this)}
     , clk{vlSymsp->TOP.clk}
     , rst{vlSymsp->TOP.rst}
+    , inst{vlSymsp->TOP.inst}
     , pc{vlSymsp->TOP.pc}
     , __PVT____024unit{vlSymsp->TOP.__PVT____024unit}
     , rootp{&(vlSymsp->TOP)}
