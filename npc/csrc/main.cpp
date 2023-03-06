@@ -61,7 +61,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   	rdata = (long long*)&pmem[raddr_set-0x80000000];
 
 #ifdef CONFIG_MTRACE
-	printf("mtrace: read  addr:%llx,  data:%llx\n",raddr,rdata);
+	printf("mtrace: read  addr:%llx,  data:%lln\n",raddr,rdata);
 #endif
   }
 }
@@ -77,7 +77,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   	}
 
 #ifdef CONFIG_MTRACE
-	printf("mtrace: write  addr:%llx,  data:%llx,  mask:%x\n",waddr,rdata,wmask);
+	printf("mtrace: write  addr:%llx,  data:%lln,  mask:%x\n",waddr,wdata,wmask);
 #endif
   }
 }
@@ -154,7 +154,7 @@ void one_cycle(){
   
   //top->inst = pmem_read(top->pc);
 #ifdef CONFIG_ITRACE
-  //itrace(top->pc, top->inst);
+  itrace(top->pc, top->inst);
 #endif
   step_and_dump_wave();
 
