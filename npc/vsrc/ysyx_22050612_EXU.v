@@ -1,7 +1,10 @@
 import "DPI-C" function void ebreak (int r);
 import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
 import "DPI-C" function void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,int src_register,int imm_up,int imm_lo);
-
+import "DPI-C" function void pmem_read(
+  input longint raddr, output longint rdata);
+import "DPI-C" function void pmem_write(
+  input longint waddr, input longint wdata, input byte wmask);
 
 
 module ysyx_22050612_EXU(
@@ -93,6 +96,14 @@ always @(posedge clk) begin
 	if (opcode[7]==1'b1 && gpr[10]==64'b0) ebreak(0);
 	else if (opcode[7]==1'b1 && gpr[10]!=64'b0) ebreak(1);
 end
+
+
+//wire [63:0] rdata;
+//always @(*) begin
+//  pmem_read(raddr, rdata);
+//  pmem_write(waddr, wdata, wmask);
+//end
+
 
 //  always @(posedge clk) begin
 //    $display("%d,%d,%d",rd,rs1,imm_I);

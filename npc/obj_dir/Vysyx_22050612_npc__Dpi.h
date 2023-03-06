@@ -17,6 +17,10 @@ extern "C" {
     extern void ebreak(int r);
     // DPI import at vsrc//ysyx_22050612_EXU.v:3:30
     extern void ftrace_check(int pc_up, int pc_lo, int dnpc_up, int dnpc_lo, int dest_register, int src_register, int imm_up, int imm_lo);
+    // DPI import at vsrc//ysyx_22050612_EXU.v:4:30
+    extern void pmem_read(long long raddr, long long* rdata);
+    // DPI import at vsrc//ysyx_22050612_EXU.v:6:30
+    extern void pmem_write(long long waddr, long long wdata, char wmask);
     // DPI import at vsrc//ysyx_22050612_EXU.v:2:30
     extern void set_gpr_ptr(const svOpenArrayHandle a);
 

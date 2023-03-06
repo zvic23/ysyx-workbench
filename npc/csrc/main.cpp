@@ -53,6 +53,37 @@ uint32_t pmem_read(uint64_t addr){
   return *(uint32_t*)&pmem[addr-0x80000000];
 }
 
+
+extern "C" void pmem_read(long long raddr, long long *rdata) {
+  // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
+  if(raddr>=0x80000000){
+  	long long raddr_set = raddr & ~0x7ull;
+  	rdata = (long long*)&pmem[raddr_set-0x80000000];
+
+#ifdef CONFIG_MTRACE
+	printf("mtrace: read  addr:%llx,  data:%llx\n",raddr,rdata);
+#endif
+  }
+}
+extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
+  // 总是往地址为`waddr & ~0x7ull`的8字节按写掩码`wmask`写入`wdata`
+  // `wmask`中每比特表示`wdata`中1个字节的掩码,
+  // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
+  if(waddr>=0x80000000){
+  	long long waddr_set = waddr & ~0x7ull;
+  	for(int i=0;i<8;i++){
+  	        if(wmask/(2*i)&0x1 == 1)
+  	      		pmem[waddr_set-0x80000000+(i*8)]=(uint8_t)wdata>>(i*8);
+  	}
+
+#ifdef CONFIG_MTRACE
+	printf("mtrace: write  addr:%llx,  data:%llx,  mask:%x\n",waddr,rdata,wmask);
+#endif
+  }
+}
+
+
+
 void built_in_program(){
   *(uint32_t*)&pmem[0x00000000]=0x00100093;
   *(uint32_t*)&pmem[0x00000004]=0x00208113;
