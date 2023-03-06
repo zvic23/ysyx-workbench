@@ -151,7 +151,9 @@ void execute(int n){
 		  return;
 	  }
   	  else if(end == 2){
+#ifdef CONFIG_ITRACE
 		iringbuf_output();
+#endif
 		printf(RED "ABORT\n" NONE);
 		return;
           }
@@ -161,8 +163,8 @@ void execute(int n){
 		  if(wp_stop)break;
 	  }
   }
-	dump_gpr();
-	cmpreg_0();
+	//dump_gpr();
+	//cmpreg_0();
 }
 
 
@@ -176,9 +178,12 @@ int main() {
   int b =1;
   init_difftest(img_size ,b);
 #endif
-
+#ifdef CONFIG_ITRACE
   init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
+#endif
+#ifdef CONFIG_FTRACE
   ftrace_elf_analysis();                      //about ftrace, init the function table 
+#endif
 					      
 
   top->clk=0;top->rst=1;step_and_dump_wave();
