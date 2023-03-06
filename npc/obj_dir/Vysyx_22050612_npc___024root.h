@@ -24,7 +24,6 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     // PORTS
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
-    VL_IN(inst,31,0);
     VL_OUT64(pc,63,0);
 
     // LOCAL SIGNALS
@@ -40,9 +39,11 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__addend0__DOT__i0__DOT__hit;
     CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__addend1__DOT__i0__DOT__hit;
     SData/*9:0*/ ysyx_22050612_npc__DOT__opcode;
+    IData/*31:0*/ ysyx_22050612_npc__DOT__inst;
     QData/*63:0*/ ysyx_22050612_npc__DOT__dnpc;
     QData/*63:0*/ ysyx_22050612_npc__DOT__imm_I;
     QData/*63:0*/ ysyx_22050612_npc__DOT__imm_U;
+    QData/*63:0*/ ysyx_22050612_npc__DOT__ifu__DOT__inst_mix;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__src1;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__wdata;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__addend_a;
@@ -84,8 +85,9 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     VlWide<5>/*147:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__cpu_pc____pinNumber4;
     VlWide<10>/*295:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__addend0____pinNumber3;
     VlWide<10>/*295:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__addend1____pinNumber3;
+    QData/*63:0*/ __Vtask_pmem_read__0__rdata;
     VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5;
-    VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
+    VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
 
     // INTERNAL VARIABLES
     Vysyx_22050612_npc__Syms* vlSymsp;  // Symbol table

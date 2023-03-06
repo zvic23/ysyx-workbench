@@ -152,9 +152,9 @@ void one_cycle(){
   //top->Mr_val = pmem_read(top->Mr_addr);
   
   
-  top->inst = pmem_read(top->pc);
+  //top->inst = pmem_read(top->pc);
 #ifdef CONFIG_ITRACE
-  itrace(top->pc, top->inst);
+  //itrace(top->pc, top->inst);
 #endif
   step_and_dump_wave();
 
