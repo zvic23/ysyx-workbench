@@ -59,10 +59,6 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   if(raddr>=0x80000000){
   	long long raddr_set = raddr & ~0x7ull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
-
-#ifdef CONFIG_MTRACE
-	printf("mtrace: read  addr:%llx,  data:%lln\n",raddr_set,rdata);
-#endif
   }
 }
 extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
@@ -75,10 +71,6 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   	        if(wmask/(2*i)&0x1 == 1)
   	      		pmem[waddr_set-0x80000000+(i*8)]=(uint8_t)wdata>>(i*8);
   	}
-
-#ifdef CONFIG_MTRACE
-	printf("mtrace: write  addr:%llx,  data:%llx,  mask:%x\n",waddr,wdata,wmask);
-#endif
   }
 }
 
