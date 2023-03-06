@@ -59,7 +59,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   if(raddr>=0x80000000){
   	long long raddr_set = raddr & ~0x7ull;
   	//rdata = (long long*)&pmem[raddr-0x80000000];
-	memset(rdata, pmem[raddr_set-0x80000000], 8);
+	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
 
 #ifdef CONFIG_MTRACE
 	printf("mtrace: read  addr:%llx,  data:%lln\n",raddr_set,rdata);
