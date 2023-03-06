@@ -29,7 +29,6 @@ clear:
 	rm build/ -r  obj_dir/ -r  dump.vcd
 
 
-include ./csrc/config.mk
 
 
 
