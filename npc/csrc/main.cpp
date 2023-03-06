@@ -106,7 +106,9 @@ void ebreak(int r){
 	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);
 
 	else {
+#ifdef CONFIG_ITRACE
 		iringbuf_output();
+#endif
 		printf(RED "HIT BAD TRAP\n" NONE);
 	}
 	end = 1;
@@ -170,8 +172,10 @@ int main() {
 
   sim_init();
 
+#ifdef CONFIG_DIFFTEST
   int b =1;
-init_difftest(img_size ,b);
+  init_difftest(img_size ,b);
+#endif
 
   init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
   ftrace_elf_analysis();                      //about ftrace, init the function table 

@@ -170,7 +170,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){
   fclose(fp_ftrace);
 }
 
-
+#ifdef CONFIG_FTRACE
 int blanknum=1;
 void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,int src_register,int imm_up, int imm_lo){
 	char src_func[20];
@@ -217,5 +217,8 @@ void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,
 		}
 	}
 }
+#else
+void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,int src_register,int imm_up, int imm_lo){}
+#endif
 
 
