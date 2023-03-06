@@ -5,6 +5,7 @@
 #include "Vysyx_22050612_npc__Dpi.h"  //zsl:ebreak support (DPI-C)
 #define FMT_WORD "0x%016" PRIx64
 
+#include "include/generated/autoconf.h"
 
 #define QUEUE_ELEMENTS 15
 #define QUEUE_SIZE (QUEUE_ELEMENTS + 1)
