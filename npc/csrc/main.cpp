@@ -120,17 +120,22 @@ void one_cycle(){
   
   
   top->inst = pmem_read(top->pc);
+#ifdef CONFIG_ITRACE
   itrace(top->pc, top->inst);
+#endif
   step_and_dump_wave();
+
   top->clk = 1;
   step_and_dump_wave();
 
   top->clk = 0;
   step_and_dump_wave(); 
 
-
   update_gpr_pc();
+
+#ifdef CONFIG_DIFFTEST
   difftest_step();
+#endif
 
 
   //step_and_dump_wave();//top->eval();
