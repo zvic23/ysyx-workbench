@@ -77,7 +77,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   	}
 
 #ifdef CONFIG_MTRACE
-	printf("mtrace: write  addr:%llx,  data:%lln,  mask:%x\n",waddr,wdata,wmask);
+	printf("mtrace: write  addr:%llx,  data:%llx,  mask:%x\n",waddr,wdata,wmask);
 #endif
   }
 }
