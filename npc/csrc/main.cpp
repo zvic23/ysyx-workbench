@@ -158,10 +158,10 @@ void execute(int n){
 		return;
           }
 	  one_cycle();
-	  if(1){             //zsl: the switch of watchpoint
+#ifdef CONFIG_WATCHPOINT            //zsl: the switch of watchpoint
 		  int wp_stop = check_wpchange();
 		  if(wp_stop)break;
-	  }
+#endif
   }
 	//dump_gpr();
 	//cmpreg_0();

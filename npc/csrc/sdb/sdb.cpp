@@ -3,6 +3,8 @@
 #include <cstring>
 #include <math.h>
 
+#include "../include/generated/autoconf.h"
+
 #define YELLOW "\33[1;33m"
 #define NONE  "\33[0m"    
 
@@ -77,7 +79,11 @@ static int cmd_p(char *args){
 }
 
 static int cmd_w(char *args){
+#ifndef CONFIG_WATCHPOINT
+	printf("please turn on the watchpoint at make menuconfig\n");
+#else
 	setwp(args);
+#endif
 	return 0;
 }
 
