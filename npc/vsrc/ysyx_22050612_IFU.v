@@ -27,7 +27,9 @@ end
 
 assign inst = pc[2]?inst_mix[63:32] : inst_mix[31:0];
 
-initial read_inst(inst);
+always @(*) begin
+read_inst(inst);
 
+end
 endmodule
 
