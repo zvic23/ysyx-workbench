@@ -148,12 +148,10 @@ void sdb_mainloop() {
   for (char *str; (str = rl_gets()) != NULL; ) {
 
     char *str_end = str + strlen(str);
-    //printf("buf : %s\n", buf);
 
     /* extract the first token as the command */
     char *cmd = strtok(str, " ");
     if (cmd == NULL) { continue; }
-    //printf("cmd : %s   ", cmd);
 
     /* treat the remaining string as the arguments,
      * which may need further parsing
@@ -162,8 +160,6 @@ void sdb_mainloop() {
     if (args >= str_end) {
       args = NULL;
     }
-    //printf("args : %s\n", args);
-    
     
     int i;
     for (i = 0; i < NR_CMD; i ++) {
@@ -174,6 +170,5 @@ void sdb_mainloop() {
     }
 
     if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
-    //printf("sdb:");
   }
 }
