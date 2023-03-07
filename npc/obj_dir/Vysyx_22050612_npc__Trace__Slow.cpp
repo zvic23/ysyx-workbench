@@ -687,25 +687,9 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
         tracep->fullQData(oldp+498,(((0x1000U & vlSelf->inst)
                                       ? (0xffffffffffffe000ULL 
                                          | (QData)((IData)(
-                                                           (1U 
-                                                            | ((0x1000U 
-                                                                & (vlSelf->inst 
-                                                                   >> 0x13U)) 
-                                                               | ((0x800U 
-                                                                   & (vlSelf->inst 
-                                                                      << 4U)) 
-                                                                  | ((0x7e0U 
-                                                                      & (vlSelf->inst 
-                                                                         >> 0x14U)) 
-                                                                     | (0x1eU 
-                                                                        & (vlSelf->inst 
-                                                                           >> 7U)))))))))
-                                      : (((QData)((IData)(
-                                                          (vlSelf->inst 
-                                                           >> 0x1fU))) 
-                                          << 0xcU) 
-                                         | (QData)((IData)(
-                                                           (1U 
+                                                           ((0x1000U 
+                                                             & (vlSelf->inst 
+                                                                >> 0x13U)) 
                                                             | ((0x800U 
                                                                 & (vlSelf->inst 
                                                                    << 4U)) 
@@ -714,7 +698,21 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
                                                                       >> 0x14U)) 
                                                                   | (0x1eU 
                                                                      & (vlSelf->inst 
-                                                                        >> 7U)))))))))),64);
+                                                                        >> 7U))))))))
+                                      : (((QData)((IData)(
+                                                          (vlSelf->inst 
+                                                           >> 0x1fU))) 
+                                          << 0xcU) 
+                                         | (QData)((IData)(
+                                                           ((0x800U 
+                                                             & (vlSelf->inst 
+                                                                << 4U)) 
+                                                            | ((0x7e0U 
+                                                                & (vlSelf->inst 
+                                                                   >> 0x14U)) 
+                                                               | (0x1eU 
+                                                                  & (vlSelf->inst 
+                                                                     >> 7U))))))))),64);
         tracep->fullCData(oldp+500,((0x1fU & (vlSelf->inst 
                                               >> 7U))),5);
         tracep->fullCData(oldp+501,((0x1fU & (vlSelf->inst 

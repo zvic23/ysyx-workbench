@@ -1207,70 +1207,63 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
               [2U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__sum0 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__lut_out;
-    __Vtemp450[0U] = (IData)((((0x1000U & vlSelf->inst)
-                                ? (0xffffffffffffe000ULL 
-                                   | (QData)((IData)(
-                                                     (1U 
-                                                      | ((0x1000U 
-                                                          & (vlSelf->inst 
-                                                             >> 0x13U)) 
-                                                         | ((0x800U 
-                                                             & (vlSelf->inst 
-                                                                << 4U)) 
-                                                            | ((0x7e0U 
-                                                                & (vlSelf->inst 
-                                                                   >> 0x14U)) 
-                                                               | (0x1eU 
-                                                                  & (vlSelf->inst 
-                                                                     >> 7U)))))))))
-                                : (((QData)((IData)(
-                                                    (vlSelf->inst 
-                                                     >> 0x1fU))) 
-                                    << 0xcU) | (QData)((IData)(
-                                                               (1U 
-                                                                | ((0x800U 
-                                                                    & (vlSelf->inst 
-                                                                       << 4U)) 
-                                                                   | ((0x7e0U 
-                                                                       & (vlSelf->inst 
-                                                                          >> 0x14U)) 
-                                                                      | (0x1eU 
-                                                                         & (vlSelf->inst 
-                                                                            >> 7U))))))))) 
-                              + vlSelf->pc));
     __Vtemp450[1U] = (IData)(((((0x1000U & vlSelf->inst)
                                  ? (0xffffffffffffe000ULL 
                                     | (QData)((IData)(
-                                                      (1U 
-                                                       | ((0x1000U 
+                                                      ((0x1000U 
+                                                        & (vlSelf->inst 
+                                                           >> 0x13U)) 
+                                                       | ((0x800U 
                                                            & (vlSelf->inst 
-                                                              >> 0x13U)) 
-                                                          | ((0x800U 
+                                                              << 4U)) 
+                                                          | ((0x7e0U 
                                                               & (vlSelf->inst 
-                                                                 << 4U)) 
-                                                             | ((0x7e0U 
-                                                                 & (vlSelf->inst 
-                                                                    >> 0x14U)) 
-                                                                | (0x1eU 
-                                                                   & (vlSelf->inst 
-                                                                      >> 7U)))))))))
+                                                                 >> 0x14U)) 
+                                                             | (0x1eU 
+                                                                & (vlSelf->inst 
+                                                                   >> 7U))))))))
                                  : (((QData)((IData)(
                                                      (vlSelf->inst 
                                                       >> 0x1fU))) 
                                      << 0xcU) | (QData)((IData)(
-                                                                (1U 
-                                                                 | ((0x800U 
+                                                                ((0x800U 
+                                                                  & (vlSelf->inst 
+                                                                     << 4U)) 
+                                                                 | ((0x7e0U 
                                                                      & (vlSelf->inst 
-                                                                        << 4U)) 
-                                                                    | ((0x7e0U 
-                                                                        & (vlSelf->inst 
-                                                                           >> 0x14U)) 
-                                                                       | (0x1eU 
-                                                                          & (vlSelf->inst 
-                                                                             >> 7U))))))))) 
+                                                                        >> 0x14U)) 
+                                                                    | (0x1eU 
+                                                                       & (vlSelf->inst 
+                                                                          >> 7U)))))))) 
                                + vlSelf->pc) >> 0x20U));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__cpu_pc____pinNumber4[0U] 
-        = __Vtemp450[0U];
+        = (IData)((((0x1000U & vlSelf->inst) ? (0xffffffffffffe000ULL 
+                                                | (QData)((IData)(
+                                                                  ((0x1000U 
+                                                                    & (vlSelf->inst 
+                                                                       >> 0x13U)) 
+                                                                   | ((0x800U 
+                                                                       & (vlSelf->inst 
+                                                                          << 4U)) 
+                                                                      | ((0x7e0U 
+                                                                          & (vlSelf->inst 
+                                                                             >> 0x14U)) 
+                                                                         | (0x1eU 
+                                                                            & (vlSelf->inst 
+                                                                               >> 7U))))))))
+                     : (((QData)((IData)((vlSelf->inst 
+                                          >> 0x1fU))) 
+                         << 0xcU) | (QData)((IData)(
+                                                    ((0x800U 
+                                                      & (vlSelf->inst 
+                                                         << 4U)) 
+                                                     | ((0x7e0U 
+                                                         & (vlSelf->inst 
+                                                            >> 0x14U)) 
+                                                        | (0x1eU 
+                                                           & (vlSelf->inst 
+                                                              >> 7U)))))))) 
+                   + vlSelf->pc));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__cpu_pc____pinNumber4[1U] 
         = __Vtemp450[1U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__cpu_pc____pinNumber4[2U] 
