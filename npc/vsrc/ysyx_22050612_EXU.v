@@ -118,7 +118,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
     20'h5000 , src2 ,
     20'h200  , imm_U,
     20'h300  , imm_J,
-    20'hc00  , imm_I,
+    20'hc00  , {{58{1'b0}},shamt},
     20'd4    , imm_I,
     20'd6    , src2 ,
     20'd13   , imm_I,
