@@ -2,7 +2,7 @@ module ysyx_22050612_ALU (
 	input [7:0]mode,
 	input [63:0]A,
 	input [63:0]B,
-	output reg [63:0]Z
+	output[63:0]Z
 );
 
 
