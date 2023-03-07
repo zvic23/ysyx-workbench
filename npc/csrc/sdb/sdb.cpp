@@ -78,10 +78,11 @@ static int cmd_x(char *args){
 
     long  a = atol(pst);
     long sum=0;
-   for (int i=0;i<8;i++){
-     sum = sum+(a%10)*pow(16,i);
-     a = a/10;
-   } 
+   //for (int i=0;i<8;i++){
+   //  sum = sum+(a%10)*pow(16,i);
+   //  a = a/10;
+   //} 
+   struct figure result = evaluation(pst);
    printf("%lx\n",sum);
    for(int i=0;i<atoi(n);i++){
       uint32_t mem = pmem_read(sum+i*4);
