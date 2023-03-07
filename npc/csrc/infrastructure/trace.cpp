@@ -7,15 +7,15 @@
 
 #include "../include/generated/autoconf.h"
 
+
+#ifdef CONFIG_ITRACE
 #define QUEUE_ELEMENTS 15
 #define QUEUE_SIZE (QUEUE_ELEMENTS + 1)
 char Queue[QUEUE_SIZE][128];
 static int QueueIn=0;
 static int QueueOut=0;
 
-
 char logbuf_once[128];
-
 
 void itrace(uint64_t pc , uint32_t inst_val){
   char logbuf[128];
@@ -69,8 +69,11 @@ void iringbuf_output(){
 void itrace_printf_once(){
 	printf("%s\n",logbuf_once);
 }
-
-
+#else
+void itrace(uint64_t pc , uint32_t inst_val){}
+void iringbuf_output(){}
+void itrace_printf_once(){}
+#endif
 
 //************   ftrace     ***************//
 struct func{
