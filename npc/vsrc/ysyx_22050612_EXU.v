@@ -150,7 +150,10 @@ ysyx_22050612_MuxKey #(2, 20, 64) raddr_select (raddr, opcode, {
     20'd42  , result_alu0
   });
 ysyx_22050612_MuxKey #(1, 20, 64) waddr_select (waddr, opcode, {
-    20'd43  , 64'hffffffff
+    20'd43  , result_alu0
+  });
+ysyx_22050612_MuxKey #(1, 20, 64) wdata_select (wdata, opcode, {
+    20'd43  , src2
   });
 ysyx_22050612_MuxKey #(1, 20, 8 ) wmask_select (wmask, opcode, {
     20'd43  , 8'hff
