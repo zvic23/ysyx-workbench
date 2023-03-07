@@ -11,7 +11,7 @@ output [63:0]imm_B,
 output [ 4:0]rd,
 output [ 4:0]rs1,
 output [ 4:0]rs2,
-output [9:0]opcode
+output [15:0]opcode
 );
 
 assign rd = inst[11: 7];
@@ -25,17 +25,26 @@ assign imm_B = (inst[12]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11
 
 
 ysyx_22050612_MuxKey #(5, 10, 7) decode0 (opcode[6:0], {inst[14:12],inst[6:0]}, {
-    10'b000_110_0111, 7'd4 ,        //jalr
-    10'b001_110_0011, 7'd6 ,        //bne
-    10'b010_000_0011, 7'd13,        //lw
-    10'b000_001_0011, 7'd19,        //addi
-    10'b011_001_0011, 7'd21         //sltiu
+    10'b000_1100111, 7'd4 ,        //jalr
+    10'b001_1100011, 7'd6 ,        //bne
+    10'b010_0000011, 7'd13,        //lw
+    10'b000_0010011, 7'd19,        //addi
+    10'b011_0010011, 7'd21         //sltiu
   });
 ysyx_22050612_MuxKey #(3, 7, 2) decode1 (opcode[9:8], inst[6:0], {
-    7'b011_0111, 2'd1,        //lui
-    7'b001_0111, 2'd2,        //auipc
-    7'b110_1111, 2'd3         //jal
+    7'b0110111, 2'd1,        //lui
+    7'b0010111, 2'd2,        //auipc
+    7'b1101111, 2'd3         //jal
   });
+ysyx_22050612_MuxKey #(1, 17, 6) decode2 (opcode[15:10], {inst[31:25],inst[14:12],inst[6:0]}, {
+    17'b0100000_000_0110011, 6'd5        //sub
+  });
+
+
+
+
+
+
 
 
 assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak

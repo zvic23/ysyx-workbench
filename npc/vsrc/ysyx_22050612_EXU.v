@@ -17,7 +17,7 @@ input [63:0]imm_B,
 input [ 4:0]rd,
 input [ 4:0]rs1,
 input [ 4:0]rs2,
-input [9:0]opcode,
+input [15:0]opcode,
 
 input [63:0]pc,
 
@@ -43,23 +43,23 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata, rd, wen_fix, gpr);
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
-ysyx_22050612_MuxKey #(7, 10, 1) gpr_write_enable (wen, opcode, {
-    10'h100 , 1'b1,
-    10'h200 , 1'b1,
-    10'h300 , 1'b1,
-    10'd4   , 1'b1,
-    10'd13  , 1'b1,
-    10'd19  , 1'b1,
-    10'd21  , 1'b1
+ysyx_22050612_MuxKey #(7, 16, 1) gpr_write_enable (wen, opcode, {
+    16'h100 , 1'b1,
+    16'h200 , 1'b1,
+    16'h300 , 1'b1,
+    16'd4   , 1'b1,
+    16'd13  , 1'b1,
+    16'd19  , 1'b1,
+    16'd21  , 1'b1
   });
-ysyx_22050612_MuxKey #(7, 10, 64) gpr_write_data (wdata, opcode, {
-    10'h100 , imm_U,
-    10'h200 , sum0,
-    10'h300 , pc + 64'd4,
-    10'd4   , pc + 64'd4,
-    10'd13  , (raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]})),
-    10'd19  , sum0,
-    10'd21  , sum0
+ysyx_22050612_MuxKey #(7, 16, 64) gpr_write_data (wdata, opcode, {
+    16'h100 , imm_U,
+    16'h200 , sum0,
+    16'h300 , pc + 64'd4,
+    16'd4   , pc + 64'd4,
+    16'd13  , (raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]})),
+    16'd19  , sum0,
+    16'd21  , sum0
   });
 
 
@@ -67,10 +67,10 @@ ysyx_22050612_MuxKey #(7, 10, 64) gpr_write_data (wdata, opcode, {
 //pc
 wire [63:0] snpc;
 assign snpc = pc + 64'd4;
-ysyx_22050612_MuxKeyWithDefault #(3, 10, 64) cpu_pc (dnpc, opcode, snpc, {
-    10'h300 , sum0,
-    10'd4   , {sum0[63:1],1'b0},
-    10'd6   , (imm_B+pc)
+ysyx_22050612_MuxKeyWithDefault #(3, 16, 64) cpu_pc (dnpc, opcode, snpc, {
+    16'h300 , sum0,
+    16'd4   , {sum0[63:1],1'b0},
+    16'd6   , (imm_B+pc)
   });
 
 
@@ -80,32 +80,32 @@ wire [63:0]operator_a;
 wire [63:0]operator_b;
 wire [63:0]sum0;
 
-ysyx_22050612_MuxKey #(7, 10, 64) operator0 (operator_a, opcode, {
-    10'h200 , pc,
-    10'h300 , pc,
-    10'd4   , src1,
-    10'd6   , src1,
-    10'd13  , src1,
-    10'd19  , src1,
-    10'd21  , src1
+ysyx_22050612_MuxKey #(7, 16, 64) operator0 (operator_a, opcode, {
+    16'h200 , pc,
+    16'h300 , pc,
+    16'd4   , src1,
+    16'd6   , src1,
+    16'd13  , src1,
+    16'd19  , src1,
+    16'd21  , src1
   });
-ysyx_22050612_MuxKey #(7, 10, 64) operator1 (operator_b, opcode, {
-    10'h200 , imm_U,
-    10'h300 , imm_J,
-    10'd4   , imm_I,
-    10'd6   , src2 ,
-    10'd13  , imm_I,
-    10'd19  , imm_I,
-    10'd21  , imm_I
+ysyx_22050612_MuxKey #(7, 16, 64) operator1 (operator_b, opcode, {
+    16'h200 , imm_U,
+    16'h300 , imm_J,
+    16'd4   , imm_I,
+    16'd6   , src2 ,
+    16'd13  , imm_I,
+    16'd19  , imm_I,
+    16'd21  , imm_I
   });
-ysyx_22050612_MuxKey #(7, 10, 8) alumode (mode, opcode, {
-    10'h200 , 8'd0, 
-    10'h300 , 8'd0, 
-    10'd4   , 8'd0, 
-    10'd6   , 8'd1, 
-    10'd13  , 8'd0,
-    10'd19  , 8'd0,
-    10'd21  , 8'd3
+ysyx_22050612_MuxKey #(7, 16, 8) alumode (mode, opcode, {
+    16'h200 , 8'd0, 
+    16'h300 , 8'd0, 
+    16'd4   , 8'd0, 
+    16'd6   , 8'd1, 
+    16'd13  , 8'd0,
+    16'd19  , 8'd0,
+    16'd21  , 8'd3
   });
 //ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
 ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,sum0);
@@ -117,8 +117,8 @@ ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,sum0);
 
 
 
-ysyx_22050612_MuxKey #(1, 10, 64) raddr_select (raddr, opcode, {
-    10'd13  , sum0
+ysyx_22050612_MuxKey #(1, 16, 64) raddr_select (raddr, opcode, {
+    16'd13  , sum0
   });
 
 
