@@ -41,7 +41,8 @@ ysyx_22050612_MuxKey #(3, 7, 2) decode1 (opcode[9:8], inst[6:0], {
     7'b0010111, 2'd2,        //auipc
     7'b1101111, 2'd3         //jal
   });
-ysyx_22050612_MuxKey #(2, 17, 8) decode2 (opcode[19:12], {inst[31:25],inst[14:12],inst[6:0]}, {
+ysyx_22050612_MuxKey #(3, 17, 8) decode2 (opcode[19:12], {inst[31:25],inst[14:12],inst[6:0]}, {
+    17'b0000000_000_0110011, 8'h4,       //add
     17'b0100000_000_0110011, 8'h5,       //sub
     17'b0000000_000_0111011, 8'h11       //addw
   });

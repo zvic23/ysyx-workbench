@@ -8,6 +8,7 @@ import "DPI-C" function void pmem_write(
   input longint waddr, input longint wdata, input byte wmask);
 
 
+`define regwrite_inst_count 12
 module ysyx_22050612_EXU(
 input clk,
 input [63:0]imm_I,
@@ -40,12 +41,12 @@ assign src2=gpr[rs2];
 
 //general register
 ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, gpr);
-
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
-ysyx_22050612_MuxKey #(11, 20, 1) gpr_write_enable (wen, opcode, {
+ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcode, {
     20'h11000, 1'b1,
+    20'h4000 , 1'b1,
     20'h5000 , 1'b1,
     20'h100  , 1'b1,
     20'h200  , 1'b1,
@@ -57,8 +58,9 @@ ysyx_22050612_MuxKey #(11, 20, 1) gpr_write_enable (wen, opcode, {
     20'd42   , 1'b1,
     20'd47   , 1'b1
   });
-ysyx_22050612_MuxKey #(11, 20, 64) gpr_write_data (wdata_reg, opcode, {
+ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 64) gpr_write_data (wdata_reg, opcode, {
     20'h11000, (result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]})),
+    20'h4000 , result_alu0,
     20'h5000 , result_alu0,
     20'h100  , imm_U,
     20'h200  , result_alu0,
@@ -89,8 +91,11 @@ wire [63:0]operator_a;
 wire [63:0]operator_b;
 wire [63:0]result_alu0;
 
-ysyx_22050612_MuxKey #(12, 20, 64) operator0 (operator_a, opcode, {
+`define alu_inst_count 13
+
+ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'h11000, src1,
+    20'h4000 , src1,
     20'h5000 , src1,
     20'h200  , pc,
     20'h300  , pc,
@@ -103,8 +108,9 @@ ysyx_22050612_MuxKey #(12, 20, 64) operator0 (operator_a, opcode, {
     20'd43   , src1,
     20'd47   , src1
   });
-ysyx_22050612_MuxKey #(12, 20, 64) operator1 (operator_b, opcode, {
+ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
     20'h11000, src2 ,
+    20'h4000 , src2 ,
     20'h5000 , src2 ,
     20'h200  , imm_U,
     20'h300  , imm_J,
@@ -117,8 +123,9 @@ ysyx_22050612_MuxKey #(12, 20, 64) operator1 (operator_b, opcode, {
     20'd43   , imm_S,
     20'd47   , imm_I
   });
-ysyx_22050612_MuxKey #(12, 20, 8) alumode (mode, opcode, {
+ysyx_22050612_MuxKey #(`alu_inst_count, 20, 8) alumode (mode, opcode, {
     20'h11000, 8'd0, 
+    20'h4000 , 8'd0, 
     20'h5000 , 8'd1, 
     20'h200  , 8'd0, 
     20'h300  , 8'd0, 
@@ -149,6 +156,7 @@ ysyx_22050612_MuxKey #(2, 20, 64) raddr_select (raddr, opcode, {
     20'd13  , result_alu0,
     20'd42  , result_alu0
   });
+
 ysyx_22050612_MuxKey #(1, 20, 64) waddr_select (waddr, opcode, {
     20'd43  , result_alu0
   });
