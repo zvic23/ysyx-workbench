@@ -72,8 +72,8 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   if(waddr>=0x80000000){
   	long long waddr_set = waddr & ~0x7ull;
   	for(int i=0;i<8;i++){
-  	        if(wmask/(2*i)&0x1 == 1)
-  	      		pmem[waddr_set-0x80000000+(i*8)]=(uint8_t)(wdata>>(i*8));
+  	        if( (wmask>>i)&1 == 1)
+  	      		pmem[waddr_set-0x80000000+i]=(uint8_t)(wdata>>(i*8));
   	}
   }
 }
