@@ -15,7 +15,7 @@ wire [63:0]C;
 assign C= (mode==8'd1)?(~B+64'b1):B;
 assign add_sub_result = A + C;
 assign slt_result = (A < B)? 64'b1:64'b0;
-assign sra_result = (A >>> B);
+assign sra_result = (A >>> 4);
 
 
 ysyx_22050612_MuxKey #(4, 8, 64) alu_result_select (Z , mode,{
