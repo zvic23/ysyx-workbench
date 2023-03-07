@@ -44,7 +44,7 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, g
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
-`define regwrite_inst_count 12
+`define regwrite_inst_count 13
 ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcode, {
     20'h11000, 1'b1,
     20'h4000 , 1'b1,
@@ -52,6 +52,7 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcod
     20'h100  , 1'b1,
     20'h200  , 1'b1,
     20'h300  , 1'b1,
+    20'hc00  , 1'b1,
     20'd4    , 1'b1,
     20'd13   , 1'b1,
     20'd19   , 1'b1,
@@ -66,6 +67,7 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 64) gpr_write_data (wdata_reg, 
     20'h100  , imm_U,
     20'h200  , result_alu0,
     20'h300  , pc + 64'd4,
+    20'hc00  , result_alu0,
     20'd4    , pc + 64'd4,
     20'd13   , (raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]})),
     20'd19   , result_alu0,
@@ -92,7 +94,7 @@ wire [63:0]operator_a;
 wire [63:0]operator_b;
 wire [63:0]result_alu0;
 
-`define alu_inst_count 13
+`define alu_inst_count 14
 
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'h11000, src1,
@@ -100,6 +102,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'h5000 , src1,
     20'h200  , pc,
     20'h300  , pc,
+    20'hc00  , src1,
     20'd4    , src1,
     20'd6    , src1,
     20'd13   , src1,
@@ -115,6 +118,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
     20'h5000 , src2 ,
     20'h200  , imm_U,
     20'h300  , imm_J,
+    20'hc00  , imm_I,
     20'd4    , imm_I,
     20'd6    , src2 ,
     20'd13   , imm_I,
@@ -125,18 +129,19 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
     20'd47   , imm_I
   });
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 8) alumode (mode, opcode, {
-    20'h11000, 8'd0, 
-    20'h4000 , 8'd0, 
-    20'h5000 , 8'd1, 
-    20'h200  , 8'd0, 
-    20'h300  , 8'd0, 
-    20'd4    , 8'd0, 
-    20'd6    , 8'd1, 
-    20'd13   , 8'd0,
-    20'd19   , 8'd0,
-    20'd21   , 8'd3,
-    20'd42   , 8'd0,
-    20'd43   , 8'd0,
+    20'h11000, 8'd0 , 
+    20'h4000 , 8'd0 , 
+    20'h5000 , 8'd1 , 
+    20'h200  , 8'd0 , 
+    20'h300  , 8'd0 , 
+    20'hc00  , 8'd10,
+    20'd4    , 8'd0 , 
+    20'd6    , 8'd1 , 
+    20'd13   , 8'd0 ,
+    20'd19   , 8'd0 ,
+    20'd21   , 8'd3 ,
+    20'd42   , 8'd0 ,
+    20'd43   , 8'd0 ,
     20'd47   , 8'd0
   });
 //ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
