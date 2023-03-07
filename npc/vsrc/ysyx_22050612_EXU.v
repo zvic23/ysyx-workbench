@@ -158,7 +158,7 @@ ysyx_22050612_MuxKey #(1, 20, 8 ) wmask_select (wmask, opcode, {
 
 always @(*) begin
   pmem_read(raddr, rdata);
-  pmem_write(waddr, wdata, wmask);
+  //pmem_write(waddr, wdata, wmask);
 end
 
 
