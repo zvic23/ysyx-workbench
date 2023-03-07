@@ -44,7 +44,7 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, g
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
-`define regwrite_inst_count 12
+`define regwrite_inst_count 13
 ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcode, {
     20'h11000, 1'b1,
     20'h4000 , 1'b1,
@@ -52,6 +52,7 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcod
     20'h100  , 1'b1,
     20'h200  , 1'b1,
     20'h300  , 1'b1,
+    20'hc00  , 1'b1,
     20'd4    , 1'b1,
     20'd13   , 1'b1,
     20'd19   , 1'b1,
@@ -66,6 +67,7 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 64) gpr_write_data (wdata_reg, 
     20'h100  , imm_U,
     20'h200  , result_alu0,
     20'h300  , pc + 64'd4,
+    20'hc00  , result_alu0,
     20'd4    , pc + 64'd4,
     20'd13   , (raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]})),
     20'd19   , result_alu0,
