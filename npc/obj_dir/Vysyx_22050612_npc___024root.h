@@ -88,14 +88,14 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
         VlUnpacked<SData/*15:0*/, 1> ysyx_22050612_npc__DOT__idu__DOT__decode3__DOT__i0__DOT__key_list;
         VlUnpacked<CData/*1:0*/, 1> ysyx_22050612_npc__DOT__idu__DOT__decode3__DOT__i0__DOT__data_list;
         VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT__gpr;
-        VlUnpacked<IData/*20:0*/, 13> ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__pair_list;
-        VlUnpacked<IData/*19:0*/, 13> ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__key_list;
-        VlUnpacked<CData/*0:0*/, 13> ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__data_list;
-        VlUnpacked<VlWide<3>/*83:0*/, 13> ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list;
-        VlUnpacked<IData/*19:0*/, 13> ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__key_list;
+        VlUnpacked<IData/*20:0*/, 12> ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__pair_list;
+        VlUnpacked<IData/*19:0*/, 12> ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__key_list;
+        VlUnpacked<CData/*0:0*/, 12> ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__data_list;
+        VlUnpacked<VlWide<3>/*83:0*/, 12> ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list;
+        VlUnpacked<IData/*19:0*/, 12> ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__key_list;
     };
     struct {
-        VlUnpacked<QData/*63:0*/, 13> ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__data_list;
+        VlUnpacked<QData/*63:0*/, 12> ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__data_list;
         VlUnpacked<VlWide<3>/*83:0*/, 3> ysyx_22050612_npc__DOT__exu__DOT__cpu_pc__DOT__i0__DOT__pair_list;
         VlUnpacked<IData/*19:0*/, 3> ysyx_22050612_npc__DOT__exu__DOT__cpu_pc__DOT__i0__DOT__key_list;
         VlUnpacked<QData/*63:0*/, 3> ysyx_22050612_npc__DOT__exu__DOT__cpu_pc__DOT__i0__DOT__data_list;
@@ -134,7 +134,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     SData/*9:0*/ ysyx_22050612_npc__DOT__idu__DOT____Vcellinp__decode0____pinNumber2;
     SData/*15:0*/ ysyx_22050612_npc__DOT__idu__DOT____Vcellinp__decode3____pinNumber2;
     IData/*16:0*/ ysyx_22050612_npc__DOT__idu__DOT____Vcellinp__decode2____pinNumber2;
-    VlWide<35>/*1091:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3;
+    VlWide<32>/*1007:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3;
     VlWide<8>/*251:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__cpu_pc____pinNumber4;
     VlWide<37>/*1175:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator0____pinNumber3;
     VlWide<37>/*1175:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator1____pinNumber3;
