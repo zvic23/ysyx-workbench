@@ -128,9 +128,7 @@ void ebreak(int r){
 	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);
 
 	else {
-#ifdef CONFIG_ITRACE
 		iringbuf_output();
-#endif
 		printf(RED "HIT BAD TRAP\n" NONE);
 	}
 	end = 1;
@@ -145,9 +143,7 @@ void read_inst(int npc_inst){
 
 
 void one_cycle(){
-#ifdef CONFIG_ITRACE
   itrace(top->pc, inst);
-#endif
   step_and_dump_wave();
 
   top->clk = 1;
