@@ -9,6 +9,7 @@ output [63:0]imm_U,
 output [63:0]imm_J,
 output [63:0]imm_B,
 output [63:0]imm_S,
+output [ 5:0]shamt,
 output [ 4:0]rd,
 output [ 4:0]rs1,
 output [ 4:0]rs2,
@@ -18,6 +19,8 @@ output [19:0]opcode
 assign rd = inst[11: 7];
 assign rs1= inst[19:15];
 assign rs2= inst[24:20];
+
+assign shamt= inst[25:20];
 
 assign imm_I = (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]};
 assign imm_U = (inst[31]==1'b1)?{{32{1'b1}},inst[31:12],{12{1'b0}}}:{{32{1'b0}},inst[31:12],{12{1'b0}}};
@@ -46,7 +49,9 @@ ysyx_22050612_MuxKey #(3, 17, 8) decode2 (opcode[19:12], {inst[31:25],inst[14:12
     17'b0100000_000_0110011, 8'h5,       //sub
     17'b0000000_000_0111011, 8'h11       //addw
   });
-
+ysyx_22050612_MuxKey #(1, 16, 2) decode3 (opcode[11:10], {inst[31:26],inst[14:12],inst[6:0]}, {
+    16'b010000_000_0110011, 2'h3        //srai
+  });
 
 
 
