@@ -8,12 +8,15 @@ module ysyx_22050612_ALU (
 
 
 wire [63:0]add_sub_result;
+wire [63:0]slt_result;
 
 assign add_sub_result = A + B;
+assign slt_result = (A < B)? 64'b1:64'b0;
 
 
-ysyx_22050612_MuxKey #(1, 8, 64) alu_result_select (Z , mode,{
-	8'd1 , add_sub_result
+ysyx_22050612_MuxKey #(2, 8, 64) alu_result_select (Z , mode,{
+	8'd1 , add_sub_result,
+	8'd3 , slt_result
       });
 
 
