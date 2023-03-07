@@ -139,6 +139,7 @@ void ebreak(int r){
 
 uint32_t inst;
 void read_inst(int npc_inst){
+	printf("inst=%lx\n",npc_inst);
 	inst = npc_inst;
 }
 
@@ -146,7 +147,7 @@ void read_inst(int npc_inst){
 
 void one_cycle(){
 #ifdef CONFIG_ITRACE
-  itrace(top->pc, inst);
+  //itrace(top->pc, inst);
 #endif
   step_and_dump_wave();
 
