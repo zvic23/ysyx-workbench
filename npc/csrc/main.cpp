@@ -139,7 +139,6 @@ void ebreak(int r){
 
 uint32_t inst;
 void read_inst(int npc_inst){
-	printf("inst=%x\n",npc_inst);
 	inst = npc_inst;
 }
 
