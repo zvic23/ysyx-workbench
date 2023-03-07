@@ -11,7 +11,7 @@ output [63:0]imm_B,
 output [ 4:0]rd,
 output [ 4:0]rs1,
 output [ 4:0]rs2,
-output [15:0]opcode
+output [19:0]opcode
 );
 
 assign rd = inst[11: 7];
@@ -37,8 +37,9 @@ ysyx_22050612_MuxKey #(3, 7, 2) decode1 (opcode[9:8], inst[6:0], {
     7'b0010111, 2'd2,        //auipc
     7'b1101111, 2'd3         //jal
   });
-ysyx_22050612_MuxKey #(1, 17, 4) decode2 (opcode[15:12], {inst[31:25],inst[14:12],inst[6:0]}, {
-    17'b0100000_000_0110011, 4'd5        //sub
+ysyx_22050612_MuxKey #(2, 17, 8) decode2 (opcode[19:12], {inst[31:25],inst[14:12],inst[6:0]}, {
+    17'b0100000_000_0110011, 8'h5,       //sub
+    17'b0000000_000_0111011, 8'h11       //sub
   });
 
 

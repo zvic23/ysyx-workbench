@@ -31,6 +31,7 @@ VM_CLASSES_FAST += \
 
 # Generated module classes, non-fast-path, compile with low/medium optimization
 VM_CLASSES_SLOW += \
+	Vysyx_22050612_npc__ConstPool_0 \
 	Vysyx_22050612_npc___024root__Slow \
 	Vysyx_22050612_npc___024unit__Slow \
 

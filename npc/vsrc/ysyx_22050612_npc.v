@@ -21,7 +21,7 @@ wire [63:0]imm_B;
 wire [ 4:0]rd;
 wire [ 4:0]rs1;
 wire [ 4:0]rs2;
-wire [15:0]opcode;
+wire [19:0]opcode;
 
 //always @(posedge clk) begin
 //  $display("%x",inst);
