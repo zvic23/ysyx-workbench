@@ -1559,7 +1559,7 @@ void Vysyx_22050612_npc___024root___settle__TOP__1(Vysyx_22050612_npc___024root*
               [2U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__sum0 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__lut_out;
-    __Vtemp206[0U] = (IData)(((0ULL == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__sum0)
+    __Vtemp206[0U] = (IData)(((0ULL != vlSelf->ysyx_22050612_npc__DOT__exu__DOT__sum0)
                                ? (((0x1000U & vlSelf->inst)
                                     ? (0xffffffffffffe000ULL 
                                        | (QData)((IData)(
@@ -1590,7 +1590,7 @@ void Vysyx_22050612_npc___024root___settle__TOP__1(Vysyx_22050612_npc___024root*
                                                                              >> 7U)))))))) 
                                   + vlSelf->pc) : (4ULL 
                                                    + vlSelf->pc)));
-    __Vtemp206[1U] = (IData)((((0ULL == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__sum0)
+    __Vtemp206[1U] = (IData)((((0ULL != vlSelf->ysyx_22050612_npc__DOT__exu__DOT__sum0)
                                 ? (((0x1000U & vlSelf->inst)
                                      ? (0xffffffffffffe000ULL 
                                         | (QData)((IData)(
