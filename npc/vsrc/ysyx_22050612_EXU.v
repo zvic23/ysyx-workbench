@@ -188,11 +188,21 @@ end
 wire [63:0] rdata_fix;
 ysyx_22050612_MuxKey #(3, 20, 64) rdata_fixing (rdata_fix, opcode, {
     20'd13  , (raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]})),
-    20'd14  , ( rdata[raddr[2:0]*8+7]? 64'b1: 64'b0  )  ,
+    20'd14  , {{56{1'b0}},rdata_1byte},
     20'd42  , rdata
   });
 
-
+wire [7:0] rdata_1byte;
+ysyx_22050612_MuxKey #(8, 3, 8) rdata_1byte_fix (rdata_1byte, raddr[2:0], {
+    3'd0  , rdata[ 7: 0], 
+    3'd1  , rdata[15: 8],
+    3'd2  , rdata[23:16],
+    3'd3  , rdata[31:24],
+    3'd4  , rdata[39:32],
+    3'd5  , rdata[47:40],
+    3'd6  , rdata[55:48],
+    3'd7  , rdata[63:56]
+  });
 
 
 initial set_gpr_ptr(gpr);  
