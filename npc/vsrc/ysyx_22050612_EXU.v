@@ -41,22 +41,26 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata, rd, wen_fix, gpr);
 
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
-//assign wen = (opcode)? 1'b1:1'b0;
-//assign wdata = (opcode)? sum0:64'b0;
-ysyx_22050612_MuxKey #(5, 10, 1) gpr_write_enable (wen, opcode, {
+
+ysyx_22050612_MuxKey #(6, 10, 1) gpr_write_enable (wen, opcode, {
     10'h100 , 1'b1,
     10'h200 , 1'b1,
     10'h300 , 1'b1,
     10'd4   , 1'b1,
+    10'd13  , 1'b1,
     10'd19  , 1'b1
   });
-ysyx_22050612_MuxKey #(5, 10, 64) gpr_write_data (wdata, opcode, {
+ysyx_22050612_MuxKey #(6, 10, 64) gpr_write_data (wdata, opcode, {
     10'h100 , imm_U,
     10'h200 , sum0,
     10'h300 , pc + 64'd4,
     10'd4   , pc + 64'd4,
+    10'd13  , (raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]})),
     10'd19  , sum0
   });
+
+wire [63:0]rdata_1;
+assign rdata_1 =(raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]}));
 
 //pc
 wire [63:0] snpc;
@@ -72,22 +76,25 @@ wire [7:0] mode;
 wire [63:0]operator_a;
 wire [63:0]operator_b;
 wire [63:0]sum0;
-ysyx_22050612_MuxKey #(4, 10, 64) operator0 (operator_a, opcode, {
+ysyx_22050612_MuxKey #(5, 10, 64) operator0 (operator_a, opcode, {
     10'h200 , imm_U,
     10'h300 , imm_J,
     10'd4   , imm_I,
+    10'd13  , imm_I,
     10'd19  , imm_I
   });
-ysyx_22050612_MuxKey #(4, 10, 64) operator1 (operator_b, opcode, {
+ysyx_22050612_MuxKey #(5, 10, 64) operator1 (operator_b, opcode, {
     10'h200 , pc,
     10'h300 , pc,
     10'd4   , src1,
+    10'd13  , src1,
     10'd19  , src1
   });
-ysyx_22050612_MuxKey #(4, 10, 8) alumode (mode, opcode, {
+ysyx_22050612_MuxKey #(5, 10, 8) alumode (mode, opcode, {
     10'h200 , 8'd1, 
     10'h300 , 8'd1, 
     10'd4   , 8'd1, 
+    10'd13  , 8'd1,
     10'd19  , 8'd1
   });
 //ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
@@ -95,12 +102,31 @@ ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,sum0);
 
 
 
+
+
+
+
+
+ysyx_22050612_MuxKey #(1, 10, 64) raddr_select (raddr, opcode, {
+    10'd13  , sum0
+  });
+
+
+wire [63:0] raddr;
+wire [63:0] rdata;
+always @(*) begin
+  pmem_read(raddr, rdata);
+  //pmem_write(waddr, wdata, wmask);
+end
+
+
+
+
+
+
 initial set_gpr_ptr(gpr);  
 
 always @(posedge clk) begin
-	//if (opcode[9:8]==2'd3) ftrace_check(pc[63:32],pc[31:0],dnpc[63:32],dnpc[31:0], 1, 0,0,1);
-	//else if (opcode[6:0]==7'd4) ftrace_check(pc[63:32],pc[31:0],dnpc[63:32],dnpc[31:0], {{27{1'b0}},rd}, {{27{1'b0}},rs1}, imm_I[63:32],imm_I[31:0]);
-
 	if (opcode[9:8]==2'd3) ftrace_check(pc[63:0],dnpc[63:0], 1, 0, 1);
 	else if (opcode[6:0]==7'd4) ftrace_check(pc[63:0],dnpc[63:0], {{27{1'b0}},rd}, {{27{1'b0}},rs1}, imm_I[63:0]);
 
@@ -109,11 +135,19 @@ always @(posedge clk) begin
 end
 
 
-//wire [63:0] rdata;
-//always @(*) begin
-//  pmem_read(raddr, rdata);
-//  pmem_write(waddr, wdata, wmask);
-//end
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //  always @(posedge clk) begin
