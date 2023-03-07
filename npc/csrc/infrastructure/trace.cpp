@@ -174,6 +174,8 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){
 #ifdef CONFIG_FTRACE
 int blanknum=1;
 void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register,long long imm){
+	char src_func[20];
+	char dest_func[20];
 
 	for(int i=0;i<500;i++){
 		if(functab[i].addr_start<=dnpc && dnpc<=functab[i].addr_end){
