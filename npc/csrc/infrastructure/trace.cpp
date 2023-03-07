@@ -7,7 +7,7 @@
 
 #include "../include/generated/autoconf.h"
 
-
+//*************  itrace  *************//
 #ifdef CONFIG_ITRACE
 #define QUEUE_ELEMENTS 15
 #define QUEUE_SIZE (QUEUE_ELEMENTS + 1)
@@ -75,7 +75,9 @@ void iringbuf_output(){}
 void itrace_printf_once(){}
 #endif
 
+
 //************   ftrace     ***************//
+#ifdef CONFIG_FTRACE
 struct func{
 char name[20];
 uint64_t addr_start;
@@ -182,7 +184,6 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){
   fclose(fp_ftrace);
 }
 
-#ifdef CONFIG_FTRACE
 int blanknum=1;
 void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register,long long imm){
 	char src_func[20];
@@ -224,6 +225,7 @@ void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register
 	}
 }
 #else
+void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){}
 void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register,long long imm){}
 #endif
 

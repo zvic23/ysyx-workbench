@@ -197,9 +197,7 @@ int main() {
   init_difftest(img_size ,0);
 #endif
   init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
-#ifdef CONFIG_FTRACE
   ftrace_elf_analysis();                      //about ftrace, init the function table 
-#endif
 					      
 
   top->clk=0;top->rst=1;step_and_dump_wave();
