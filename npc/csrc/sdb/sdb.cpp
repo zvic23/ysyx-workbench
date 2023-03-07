@@ -41,10 +41,13 @@ static int cmd_q(char *args) {
   return -1;
 }
 
+extern int itrace_si;
 static int cmd_si(char *args) {
   char *arg = strtok(NULL, " ");
   int i = atoi(arg);
+  itrace_si = 1;
   execute(i);
+  itrace_si = 0;
   return 0;
 }
 

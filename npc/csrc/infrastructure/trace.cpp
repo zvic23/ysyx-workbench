@@ -14,6 +14,9 @@ static int QueueIn=0;
 static int QueueOut=0;
 
 
+char logbuf_once[128];
+
+
 void itrace(uint64_t pc , uint32_t inst_val){
   char logbuf[128];
   char *p = logbuf;
@@ -36,6 +39,7 @@ void itrace(uint64_t pc , uint32_t inst_val){
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, inst_val, ilen);
 
+  strcpy(logbuf_once,logbuf);
 	//printf("logbug=%s\n",logbuf);
 //zsl:iringbuf implement*************
     if(QueueIn == (( QueueOut + QUEUE_SIZE) % QUEUE_SIZE)){
@@ -55,16 +59,20 @@ void itrace(uint64_t pc , uint32_t inst_val){
 
 
 void iringbuf_output(){
-      printf("itrace :\n");
+      printf("iringbuf :\n");
       for(int i=0;i<QUEUE_SIZE;i++){
 	      printf("%s\n",Queue[(QueueOut+i)%QUEUE_SIZE]);
       }
 }
 
 
+void itrace_printf_once(){
+	printf("%s\n",logbuf_once);
+}
 
 
 
+//************   ftrace     ***************//
 struct func{
 char name[20];
 uint64_t addr_start;

@@ -165,6 +165,7 @@ void one_cycle(){
 
 }
 
+int itrace_si = 0;
 void execute(int n){
   for(uint64_t i=0;i<n;i++){
 	  if(end == 1){
@@ -179,13 +180,12 @@ void execute(int n){
 		return;
           }
 	  one_cycle();
+	  if(itrace_si) itrace_printf_once();
 #ifdef CONFIG_WATCHPOINT            //zsl: the switch of watchpoint
 		  int wp_stop = check_wpchange();
 		  if(wp_stop)break;
 #endif
   }
-	//dump_gpr();
-	//cmpreg_0();
 }
 
 
@@ -216,7 +216,6 @@ int main() {
   sdb_mainloop();
 
   while(0){
-
 
   }
   sim_exit();
