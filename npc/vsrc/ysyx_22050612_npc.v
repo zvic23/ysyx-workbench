@@ -18,6 +18,7 @@ wire [63:0]imm_I;
 wire [63:0]imm_U;
 wire [63:0]imm_J;
 wire [63:0]imm_B;
+wire [63:0]imm_S;
 wire [ 4:0]rd;
 wire [ 4:0]rs1;
 wire [ 4:0]rs2;
@@ -27,7 +28,7 @@ wire [19:0]opcode;
 //  $display("%x",inst);
 //end
 ysyx_22050612_IFU ifu (clk, rst, dnpc, pc, inst);
-ysyx_22050612_IDU idu (clk,inst, imm_I,imm_U,imm_J,imm_B, rd, rs1, rs2, opcode);
-ysyx_22050612_EXU exu (clk,imm_I,imm_U,imm_J,imm_B,rd,rs1,rs2,opcode,pc,dnpc);
+ysyx_22050612_IDU idu (clk,inst, imm_I,imm_U,imm_J,imm_B,imm_S, rd, rs1, rs2, opcode);
+ysyx_22050612_EXU exu (clk,imm_I,imm_U,imm_J,imm_B,imm_S,rd,rs1,rs2,opcode,pc,dnpc);
 
 endmodule

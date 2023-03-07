@@ -14,6 +14,7 @@ input [63:0]imm_I,
 input [63:0]imm_U,
 input [63:0]imm_J,
 input [63:0]imm_B,
+input [63:0]imm_S,
 input [ 4:0]rd,
 input [ 4:0]rs1,
 input [ 4:0]rs2,
@@ -30,7 +31,7 @@ output [63:0]dnpc
 wire [63:0]src1;
 wire [63:0]src2;
 
-wire [63:0]wdata;
+wire [63:0]wdata_reg;
 wire wen;
 wire wen_fix;
 wire [63:0] gpr[31:0];
@@ -38,7 +39,7 @@ assign src1=gpr[rs1];
 assign src2=gpr[rs2];
 
 //general register
-ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata, rd, wen_fix, gpr);
+ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, gpr);
 
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
@@ -56,7 +57,7 @@ ysyx_22050612_MuxKey #(11, 20, 1) gpr_write_enable (wen, opcode, {
     20'd42   , 1'b1,
     20'd47   , 1'b1
   });
-ysyx_22050612_MuxKey #(11, 20, 64) gpr_write_data (wdata, opcode, {
+ysyx_22050612_MuxKey #(11, 20, 64) gpr_write_data (wdata_reg, opcode, {
     20'h11000, (result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]})),
     20'h5000 , result_alu0,
     20'h100  , imm_U,
@@ -88,7 +89,7 @@ wire [63:0]operator_a;
 wire [63:0]operator_b;
 wire [63:0]result_alu0;
 
-ysyx_22050612_MuxKey #(11, 20, 64) operator0 (operator_a, opcode, {
+ysyx_22050612_MuxKey #(12, 20, 64) operator0 (operator_a, opcode, {
     20'h11000, src1,
     20'h5000 , src1,
     20'h200  , pc,
@@ -99,9 +100,10 @@ ysyx_22050612_MuxKey #(11, 20, 64) operator0 (operator_a, opcode, {
     20'd19   , src1,
     20'd21   , src1,
     20'd42   , src1,
+    20'd43   , src1,
     20'd47   , src1
   });
-ysyx_22050612_MuxKey #(11, 20, 64) operator1 (operator_b, opcode, {
+ysyx_22050612_MuxKey #(12, 20, 64) operator1 (operator_b, opcode, {
     20'h11000, src2 ,
     20'h5000 , src2 ,
     20'h200  , imm_U,
@@ -112,9 +114,10 @@ ysyx_22050612_MuxKey #(11, 20, 64) operator1 (operator_b, opcode, {
     20'd19   , imm_I,
     20'd21   , imm_I,
     20'd42   , imm_I,
+    20'd43   , imm_S,
     20'd47   , imm_I
   });
-ysyx_22050612_MuxKey #(11, 20, 8) alumode (mode, opcode, {
+ysyx_22050612_MuxKey #(12, 20, 8) alumode (mode, opcode, {
     20'h11000, 8'd0, 
     20'h5000 , 8'd1, 
     20'h200  , 8'd0, 
@@ -125,6 +128,7 @@ ysyx_22050612_MuxKey #(11, 20, 8) alumode (mode, opcode, {
     20'd19   , 8'd0,
     20'd21   , 8'd3,
     20'd42   , 8'd0,
+    20'd43   , 8'd0,
     20'd47   , 8'd0
   });
 //ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
@@ -135,19 +139,26 @@ ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
 
 
 
-
+wire [63:0] raddr;
+wire [63:0] rdata;
+wire [63:0] waddr;
+wire [63:0] wdata;
+wire [ 7:0] wmask;
 
 ysyx_22050612_MuxKey #(2, 20, 64) raddr_select (raddr, opcode, {
     20'd13  , result_alu0,
     20'd42  , result_alu0
   });
+ysyx_22050612_MuxKey #(1, 20, 64) waddr_select (waddr, opcode, {
+    20'd43  , result_alu0
+  });
+ysyx_22050612_MuxKey #(1, 20, 8 ) wmask_select (wmask, opcode, {
+    20'd43  , 8'hff
+  });
 
-
-wire [63:0] raddr;
-wire [63:0] rdata;
 always @(*) begin
   pmem_read(raddr, rdata);
-  //pmem_write(waddr, wdata, wmask);
+  pmem_write(waddr, wdata, wmask);
 end
 
 
@@ -183,7 +194,7 @@ end
 
 //  always @(posedge clk) begin
 //    $display("%d,%d,%d",rd,rs1,imm_I);
-//    $display("%d,%d,%d,%d",result_alu0,wdata,wen,opcode);
+//    $display("%d,%d,%d,%d",result_alu0,wdata_reg,wen,opcode);
 //    $display("%d,%d,%d",result_alu0,src1,imm_I);
 //  end
 
