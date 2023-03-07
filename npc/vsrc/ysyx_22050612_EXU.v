@@ -44,11 +44,12 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, g
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
-`define regwrite_inst_count 14
+`define regwrite_inst_count 15
 ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcode, {
-    20'h11000, 1'b1,
     20'h4000 , 1'b1,
     20'h5000 , 1'b1,
+    20'h11000, 1'b1,
+    20'h13000, 1'b1,
     20'h100  , 1'b1,
     20'h200  , 1'b1,
     20'h300  , 1'b1,
@@ -62,9 +63,10 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcod
     20'd47   , 1'b1
   });
 ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 64) gpr_write_data (wdata_reg, opcode, {
-    20'h11000, (result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]})),
     20'h4000 , result_alu0,
     20'h5000 , result_alu0,
+    20'h11000, (result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]})),
+    20'h13000, (result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]})),
     20'h100  , imm_U,
     20'h200  , result_alu0,
     20'h300  , pc + 64'd4,
@@ -96,12 +98,13 @@ wire [63:0]operator_a;
 wire [63:0]operator_b;
 wire [63:0]result_alu0;
 
-`define alu_inst_count 16
+`define alu_inst_count 17
 
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
-    20'h11000, src1,
     20'h4000 , src1,
     20'h5000 , src1,
+    20'h11000, src1,
+    20'h13000, src1,
     20'h200  , pc,
     20'h300  , pc,
     20'hc00  , src1,
@@ -117,9 +120,10 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'd47   , src1
   });
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
-    20'h11000, src2 ,
     20'h4000 , src2 ,
     20'h5000 , src2 ,
+    20'h11000, src2 ,
+    20'h13000, {{59{1'b0}},src2[4:0]},
     20'h200  , imm_U,
     20'h300  , imm_J,
     20'hc00  , {{58{1'b0}},shamt},
@@ -135,9 +139,10 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
     20'd47   , imm_I
   });
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 8) alumode (mode, opcode, {
-    20'h11000, 8'd0 , 
     20'h4000 , 8'd0 , 
     20'h5000 , 8'd1 , 
+    20'h11000, 8'd0 , 
+    20'h13000, 8'd8 , 
     20'h200  , 8'd0 , 
     20'h300  , 8'd0 , 
     20'hc00  , 8'd10,
