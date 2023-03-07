@@ -72,7 +72,7 @@ assign snpc = pc + 64'd4;
 ysyx_22050612_MuxKeyWithDefault #(3, 16, 64) cpu_pc (dnpc, opcode, snpc, {
     16'h300 , sum0,
     16'd4   , {sum0[63:1],1'b0},
-    16'd6   , (imm_B+pc)
+    16'd6   , (sum0==0)?(imm_B+pc):snpc
   });
 
 
