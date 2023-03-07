@@ -5,8 +5,32 @@
 
 #include "../include/generated/autoconf.h"
 
+
+#include <readline/readline.h>
+#include <readline/history.h>
+
 #define YELLOW "\33[1;33m"
 #define NONE  "\33[0m"    
+
+
+/* We use the `readline' library to provide more flexibility to read from stdin. */
+static char* rl_gets() {
+  static char *line_read = NULL;
+
+  if (line_read) {
+    free(line_read);
+    line_read = NULL;
+  }
+
+  line_read = readline("(nemu) ");
+
+  if (line_read && *line_read) {
+    add_history(line_read);
+  }
+
+  return line_read;
+}
+
 
 static int cmd_c(char *args){
 	execute(-1);
@@ -117,9 +141,11 @@ static struct {
 char buf[1024] = {0};
 
 void sdb_mainloop() {
-    printf("sdb:");
-  for (char *str; (str = fgets(buf, sizeof(buf) - 1, stdin)) != NULL; ) {
-    str[strlen(str) - 1] = ' ';  //zsl:because fgets() will add the "enter" to the end of the string, so here I changed it to "space" to satisfied the need of next code.
+//    printf("sdb:");
+//  for (char *str; (str = fgets(buf, sizeof(buf) - 1, stdin)) != NULL; ) {
+//    str[strlen(str) - 1] = ' ';  //zsl:because fgets() will add the "enter" to the end of the string, so here I changed it to "space" to satisfied the need of next code.
+
+  for (char *str; (str = rl_gets()) != NULL; ) {
 
     char *str_end = str + strlen(str);
     //printf("buf : %s\n", buf);
@@ -148,6 +174,6 @@ void sdb_mainloop() {
     }
 
     if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
-    printf("sdb:");
+    //printf("sdb:");
   }
 }
