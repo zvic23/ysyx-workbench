@@ -83,7 +83,8 @@ static int cmd_x(char *args){
    //  a = a/10;
    //} 
    struct figure result = evaluation(pst);
-   printf("%lx\n",sum);
+
+   printf("%lx\n",result.value);
    for(int i=0;i<atoi(n);i++){
       uint32_t mem = pmem_read(sum+i*4);
       printf(YELLOW "0x%lx: " NONE "%08x  ",sum+i*4,mem); 
