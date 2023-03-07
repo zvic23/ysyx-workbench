@@ -9,6 +9,7 @@ module ysyx_22050612_ALU (
 
 wire [63:0]add_sub_result;
 wire [63:0]and_result;
+wire [63:0]xor_result;
 wire [63:0]slt_result;
 wire [63:0]sll_result;
 wire [63:0]sra_result;
@@ -20,13 +21,15 @@ assign slt_result = (A < B)? 64'b1:64'b0;
 assign sll_result = (A <<  B);
 assign sra_result = (A >>> B);
 assign and_result = (A & B);
+assign xor_result = (A ^ B);
 
 
-ysyx_22050612_MuxKey #(6, 8, 64) alu_result_select (Z , mode,{
+ysyx_22050612_MuxKey #(7, 8, 64) alu_result_select (Z , mode,{
 	8'd0 , add_sub_result,
 	8'd1 , add_sub_result,
 	8'd3 , slt_result,
 	8'd4 , and_result,
+	8'd7 , xor_result,
 	8'd8 , sll_result,
 	8'd10, sra_result
       });
