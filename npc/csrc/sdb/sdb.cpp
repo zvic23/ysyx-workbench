@@ -22,7 +22,7 @@ static char* rl_gets() {
     line_read = NULL;
   }
 
-  line_read = readline("(nemu) ");
+  line_read = readline("(npc) ");
 
   if (line_read && *line_read) {
     add_history(line_read);
@@ -141,10 +141,6 @@ static struct {
 char buf[1024] = {0};
 
 void sdb_mainloop() {
-//    printf("sdb:");
-//  for (char *str; (str = fgets(buf, sizeof(buf) - 1, stdin)) != NULL; ) {
-//    str[strlen(str) - 1] = ' ';  //zsl:because fgets() will add the "enter" to the end of the string, so here I changed it to "space" to satisfied the need of next code.
-
   for (char *str; (str = rl_gets()) != NULL; ) {
 
     char *str_end = str + strlen(str);
