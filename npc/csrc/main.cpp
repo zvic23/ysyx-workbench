@@ -170,7 +170,7 @@ void execute(int n){
           }
 	  one_cycle();
 	  if(itrace_si) itrace_printf_once();
-#ifdef CONFIG_WATCHPOINT            //zsl: the switch of watchpoint
+#ifdef CONFIG_WATCHPOINT            
 	  int wp_stop = check_wpchange();
 	  if(wp_stop)break;
 #endif
