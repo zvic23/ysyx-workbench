@@ -189,7 +189,7 @@ void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register
 	//printf("checking.....pc=%lx,pc_up=%x,pc_lo=%x\n",pc,pc_up,pc_lo);
 	if(dest_register == 0 && imm == 0 && src_register == 1){
 		blanknum--;
-		printf("0x%lx:",pc);
+		printf("0x%llx:",pc);
 		for(int i=0;i<blanknum;i++)printf(" ");
 		printf("ret [%s]\n",dest_func);
 	}
@@ -205,9 +205,9 @@ void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register
 		}
 		int i = strcmp(src_func,dest_func);
 		if(i){
-			printf("0x%lx:",pc);
+			printf("0x%llx:",pc);
 			for(int i=0;i<blanknum;i++)printf(" ");
-			printf("call [%s@%lx]\n",dest_func,dnpc);
+			printf("call [%s@%llx]\n",dest_func,dnpc);
 			blanknum++;
 		}
 	}
