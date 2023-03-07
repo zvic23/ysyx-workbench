@@ -86,8 +86,8 @@ static int cmd_x(char *args){
 
    printf("%lx\n",result.value);
    for(int i=0;i<atoi(n);i++){
-      uint32_t mem = pmem_read(sum+i*4);
-      printf(YELLOW "0x%lx: " NONE "%08x  ",sum+i*4,mem); 
+      uint32_t mem = pmem_read(result.value+i*4);
+      printf(YELLOW "0x%lx: " NONE "%08x  ",result.value+i*4,mem); 
    }
    printf("\n");
 
