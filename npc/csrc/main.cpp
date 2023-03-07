@@ -47,7 +47,6 @@ void sim_exit(){
 
 
 uint8_t pmem[0x50000];
-long img_size;
 
 uint32_t pmem_read(uint64_t addr){
   return *(uint32_t*)&pmem[addr-0x80000000];
@@ -69,7 +68,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   	long long waddr_set = waddr & ~0x7ull;
   	for(int i=0;i<8;i++){
   	        if(wmask/(2*i)&0x1 == 1)
-  	      		pmem[waddr_set-0x80000000+(i*8)]=(uint8_t)wdata>>(i*8);
+  	      		pmem[waddr_set-0x80000000+(i*8)]=(uint8_t)(wdata>>(i*8));
   	}
   }
 }
@@ -86,6 +85,7 @@ void built_in_program(){
 }
 
 
+long img_size;
 void load_img(){
   FILE *fp = fopen("./csrc/obj.bin", "rb");
 
@@ -141,7 +141,6 @@ void ebreak(int r){
 
 
 void one_cycle(){
-  //top->Mr_val = pmem_read(top->Mr_addr);
   
   
   //top->inst = pmem_read(top->pc);
@@ -162,8 +161,6 @@ void one_cycle(){
   difftest_step();
 #endif
 
-
-  //step_and_dump_wave();//top->eval();
 
 }
 
