@@ -8,7 +8,6 @@ import "DPI-C" function void pmem_write(
   input longint waddr, input longint wdata, input byte wmask);
 
 
-`define regwrite_inst_count 12
 module ysyx_22050612_EXU(
 input clk,
 input [63:0]imm_I,
@@ -44,6 +43,7 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, g
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
+`define regwrite_inst_count 12
 ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcode, {
     20'h11000, 1'b1,
     20'h4000 , 1'b1,
