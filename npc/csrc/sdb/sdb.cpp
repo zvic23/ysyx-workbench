@@ -54,8 +54,6 @@ static int cmd_si(char *args) {
 static int cmd_info(char *args){
   char *arg = strtok(NULL, " ");
   if(strcmp(arg,"r") == 0){
-	  //printf("pc = %lx\n",cpu.pc);
-	  //isa_reg_display();
 	  dump_gpr();
   }
   else if(strcmp(arg,"w") == 0){
