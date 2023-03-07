@@ -33,7 +33,7 @@ ysyx_22050612_MuxKey #(9, 8, 64) alu_result_select (Z , mode,{
 	8'd1 , add_sub_result,
 	8'd2 , slt_result,
 	8'd3 , sltu_result,
-	8'd4 , and_result,
+	8'd4 , or_result,
 	8'd6 , and_result,
 	8'd7 , xor_result,
 	8'd8 , sll_result,

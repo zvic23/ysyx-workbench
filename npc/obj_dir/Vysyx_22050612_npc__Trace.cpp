@@ -619,7 +619,8 @@ void Vysyx_22050612_npc___024root__traceChgSub0(Vysyx_22050612_npc___024root* vl
             tracep->chgCData(oldp+985,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__lut_out),8);
             tracep->chgBit(oldp+986,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__hit));
             tracep->chgQData(oldp+987,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__add_sub_result),64);
-            tracep->chgQData(oldp+989,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__and_result),64);
+            tracep->chgQData(oldp+989,((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_a 
+                                        & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_b)),64);
             tracep->chgQData(oldp+991,((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_a 
                                         | vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_b)),64);
             tracep->chgQData(oldp+993,((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_a 

@@ -80,7 +80,6 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__lut_out;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__lut_out;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__add_sub_result;
-        QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__and_result;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__lut_out;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__raddr_select__DOT__i0__DOT__lut_out;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__waddr_select__DOT__i0__DOT__lut_out;
@@ -93,9 +92,9 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
         VlUnpacked<CData/*6:0*/, 3> ysyx_22050612_npc__DOT__idu__DOT__decode1__DOT__i0__DOT__key_list;
         VlUnpacked<CData/*1:0*/, 3> ysyx_22050612_npc__DOT__idu__DOT__decode1__DOT__i0__DOT__data_list;
         VlUnpacked<IData/*24:0*/, 7> ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__pair_list;
+        VlUnpacked<IData/*16:0*/, 7> ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__key_list;
     };
     struct {
-        VlUnpacked<IData/*16:0*/, 7> ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__key_list;
         VlUnpacked<CData/*7:0*/, 7> ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__data_list;
         VlUnpacked<IData/*17:0*/, 1> ysyx_22050612_npc__DOT__idu__DOT__decode3__DOT__i0__DOT__pair_list;
         VlUnpacked<SData/*15:0*/, 1> ysyx_22050612_npc__DOT__idu__DOT__decode3__DOT__i0__DOT__key_list;
