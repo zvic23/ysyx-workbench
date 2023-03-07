@@ -3306,21 +3306,21 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__lut_out;
     __Vtemp1416[0U] = (IData)(((0ULL != vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)
-                                ? (((0x1000U & vlSelf->ysyx_22050612_npc__DOT__inst)
-                                     ? (0xffffffffffffe000ULL 
-                                        | (QData)((IData)(
-                                                          ((0x1000U 
-                                                            & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                               >> 0x13U)) 
-                                                           | ((0x800U 
-                                                               & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                  << 4U)) 
-                                                              | ((0x7e0U 
-                                                                  & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                     >> 0x14U)) 
-                                                                 | (0x1eU 
-                                                                    & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                       >> 7U))))))))
+                                ? (((vlSelf->ysyx_22050612_npc__DOT__inst 
+                                     >> 0x1fU) ? (0xffffffffffffe000ULL 
+                                                  | (QData)((IData)(
+                                                                    ((0x1000U 
+                                                                      & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                         >> 0x13U)) 
+                                                                     | ((0x800U 
+                                                                         & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                            << 4U)) 
+                                                                        | ((0x7e0U 
+                                                                            & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                               >> 0x14U)) 
+                                                                           | (0x1eU 
+                                                                              & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                                >> 7U))))))))
                                      : (((QData)((IData)(
                                                          (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                           >> 0x1fU))) 
@@ -3337,21 +3337,21 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
                                    + vlSelf->pc) : 
                                (4ULL + vlSelf->pc)));
     __Vtemp1416[1U] = (IData)((((0ULL != vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)
-                                 ? (((0x1000U & vlSelf->ysyx_22050612_npc__DOT__inst)
-                                      ? (0xffffffffffffe000ULL 
-                                         | (QData)((IData)(
-                                                           ((0x1000U 
-                                                             & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                >> 0x13U)) 
-                                                            | ((0x800U 
-                                                                & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                   << 4U)) 
-                                                               | ((0x7e0U 
-                                                                   & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                      >> 0x14U)) 
-                                                                  | (0x1eU 
-                                                                     & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                        >> 7U))))))))
+                                 ? (((vlSelf->ysyx_22050612_npc__DOT__inst 
+                                      >> 0x1fU) ? (0xffffffffffffe000ULL 
+                                                   | (QData)((IData)(
+                                                                     ((0x1000U 
+                                                                       & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                          >> 0x13U)) 
+                                                                      | ((0x800U 
+                                                                          & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                             << 4U)) 
+                                                                         | ((0x7e0U 
+                                                                             & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                                >> 0x14U)) 
+                                                                            | (0x1eU 
+                                                                               & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                                >> 7U))))))))
                                       : (((QData)((IData)(
                                                           (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                            >> 0x1fU))) 

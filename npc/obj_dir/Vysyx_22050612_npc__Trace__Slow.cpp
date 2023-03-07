@@ -790,21 +790,21 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
                                                                | (0x7feU 
                                                                   & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                                      >> 0x14U))))))))),64);
-        tracep->fullQData(oldp+202,(((0x1000U & vlSelf->ysyx_22050612_npc__DOT__inst)
-                                      ? (0xffffffffffffe000ULL 
-                                         | (QData)((IData)(
-                                                           ((0x1000U 
-                                                             & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                >> 0x13U)) 
-                                                            | ((0x800U 
-                                                                & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                   << 4U)) 
-                                                               | ((0x7e0U 
-                                                                   & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                      >> 0x14U)) 
-                                                                  | (0x1eU 
-                                                                     & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                        >> 7U))))))))
+        tracep->fullQData(oldp+202,(((vlSelf->ysyx_22050612_npc__DOT__inst 
+                                      >> 0x1fU) ? (0xffffffffffffe000ULL 
+                                                   | (QData)((IData)(
+                                                                     ((0x1000U 
+                                                                       & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                          >> 0x13U)) 
+                                                                      | ((0x800U 
+                                                                          & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                             << 4U)) 
+                                                                         | ((0x7e0U 
+                                                                             & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                                >> 0x14U)) 
+                                                                            | (0x1eU 
+                                                                               & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                                >> 7U))))))))
                                       : (((QData)((IData)(
                                                           (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                            >> 0x1fU))) 
