@@ -155,7 +155,7 @@ void Vysyx_22050612_npc___024root__traceInitSub0(Vysyx_22050612_npc___024root* v
         tracep->declBus(c+186,"ysyx_22050612_npc exu mode", false,-1, 7,0);
         tracep->declQuad(c+187,"ysyx_22050612_npc exu operator_a", false,-1, 63,0);
         tracep->declQuad(c+189,"ysyx_22050612_npc exu operator_b", false,-1, 63,0);
-        tracep->declQuad(c+191,"ysyx_22050612_npc exu sum0", false,-1, 63,0);
+        tracep->declQuad(c+191,"ysyx_22050612_npc exu result_alu0", false,-1, 63,0);
         tracep->declQuad(c+193,"ysyx_22050612_npc exu raddr", false,-1, 63,0);
         tracep->declQuad(c+195,"ysyx_22050612_npc exu rdata", false,-1, 63,0);
         tracep->declBus(c+613,"ysyx_22050612_npc exu cpu_gpr_group ADDR_WIDTH", false,-1, 31,0);
@@ -614,7 +614,7 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
         tracep->fullCData(oldp+186,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mode),8);
         tracep->fullQData(oldp+187,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_a),64);
         tracep->fullQData(oldp+189,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_b),64);
-        tracep->fullQData(oldp+191,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__sum0),64);
+        tracep->fullQData(oldp+191,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0),64);
         tracep->fullQData(oldp+193,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr),64);
         tracep->fullQData(oldp+195,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata),64);
         tracep->fullQData(oldp+197,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5[0]),64);
@@ -774,8 +774,8 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
         tracep->fullQData(oldp+563,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__data_list[2]),64);
         tracep->fullQData(oldp+565,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__lut_out),64);
         tracep->fullBit(oldp+567,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__hit));
-        __Vtemp663[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__sum0);
-        __Vtemp663[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__sum0 
+        __Vtemp663[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0);
+        __Vtemp663[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                   >> 0x20U));
         __Vtemp663[2U] = 0xdU;
         tracep->fullWData(oldp+568,(__Vtemp663),80);

@@ -56,7 +56,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__wdata;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__operator_a;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__operator_b;
-        QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__sum0;
+        QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__result_alu0;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__raddr;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__rdata;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__lut_out;

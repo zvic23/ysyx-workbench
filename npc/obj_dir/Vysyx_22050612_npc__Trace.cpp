@@ -237,7 +237,7 @@ void Vysyx_22050612_npc___024root__traceChgSub0(Vysyx_22050612_npc___024root* vl
             tracep->chgCData(oldp+185,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mode),8);
             tracep->chgQData(oldp+186,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_a),64);
             tracep->chgQData(oldp+188,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_b),64);
-            tracep->chgQData(oldp+190,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__sum0),64);
+            tracep->chgQData(oldp+190,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0),64);
             tracep->chgQData(oldp+192,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr),64);
             tracep->chgQData(oldp+194,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata),64);
             tracep->chgQData(oldp+196,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5[0]),64);
@@ -398,8 +398,8 @@ void Vysyx_22050612_npc___024root__traceChgSub0(Vysyx_22050612_npc___024root* vl
             tracep->chgQData(oldp+562,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__data_list[2]),64);
             tracep->chgQData(oldp+564,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__lut_out),64);
             tracep->chgBit(oldp+566,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__hit));
-            __Vtemp667[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__sum0);
-            __Vtemp667[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__sum0 
+            __Vtemp667[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0);
+            __Vtemp667[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                       >> 0x20U));
             __Vtemp667[2U] = 0xdU;
             tracep->chgWData(oldp+567,(__Vtemp667),80);

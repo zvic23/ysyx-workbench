@@ -55,15 +55,15 @@ ysyx_22050612_MuxKey #(9, 16, 1) gpr_write_enable (wen, opcode, {
     16'd47   , 1'b1
   });
 ysyx_22050612_MuxKey #(9, 16, 64) gpr_write_data (wdata, opcode, {
-    16'h5000 , sum0,
+    16'h5000 , result_alu0,
     16'h100  , imm_U,
-    16'h200  , sum0,
+    16'h200  , result_alu0,
     16'h300  , pc + 64'd4,
     16'd4    , pc + 64'd4,
     16'd13   , (raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]})),
-    16'd19   , sum0,
-    16'd21   , sum0,
-    16'd47   , (sum0[31]?({{32{1'b1}},sum0[31:0]}):({{32{1'b0}},sum0[31:0]}))
+    16'd19   , result_alu0,
+    16'd21   , result_alu0,
+    16'd47   , (result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}))
   });
 
 
@@ -72,9 +72,9 @@ ysyx_22050612_MuxKey #(9, 16, 64) gpr_write_data (wdata, opcode, {
 wire [63:0] snpc;
 assign snpc = pc + 64'd4;
 ysyx_22050612_MuxKeyWithDefault #(3, 16, 64) cpu_pc (dnpc, opcode, snpc, {
-    16'h300 , sum0,
-    16'd4   , {sum0[63:1],1'b0},
-    16'd6   , (sum0!=0)?(imm_B+pc):snpc
+    16'h300 , result_alu0,
+    16'd4   , {result_alu0[63:1],1'b0},
+    16'd6   , (result_alu0!=0)?(imm_B+pc):snpc
   });
 
 
@@ -82,7 +82,7 @@ ysyx_22050612_MuxKeyWithDefault #(3, 16, 64) cpu_pc (dnpc, opcode, snpc, {
 wire [7:0] mode;
 wire [63:0]operator_a;
 wire [63:0]operator_b;
-wire [63:0]sum0;
+wire [63:0]result_alu0;
 
 ysyx_22050612_MuxKey #(9, 16, 64) operator0 (operator_a, opcode, {
     16'h5000 , src1,
@@ -118,7 +118,7 @@ ysyx_22050612_MuxKey #(9, 16, 8) alumode (mode, opcode, {
     16'd47   , 8'd0
   });
 //ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
-ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,sum0);
+ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
 
 
 
@@ -128,7 +128,7 @@ ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,sum0);
 
 
 ysyx_22050612_MuxKey #(1, 16, 64) raddr_select (raddr, opcode, {
-    16'd13  , sum0
+    16'd13  , result_alu0
   });
 
 
@@ -172,8 +172,8 @@ end
 
 //  always @(posedge clk) begin
 //    $display("%d,%d,%d",rd,rs1,imm_I);
-//    $display("%d,%d,%d,%d",sum0,wdata,wen,opcode);
-//    $display("%d,%d,%d",sum0,src1,imm_I);
+//    $display("%d,%d,%d,%d",result_alu0,wdata,wen,opcode);
+//    $display("%d,%d,%d",result_alu0,src1,imm_I);
 //  end
 
 endmodule
