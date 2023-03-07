@@ -13,6 +13,7 @@ input clk,
 input [63:0]imm_I,
 input [63:0]imm_U,
 input [63:0]imm_J,
+input [63:0]imm_B,
 input [ 4:0]rd,
 input [ 4:0]rs1,
 input [ 4:0]rs2,
@@ -66,9 +67,10 @@ ysyx_22050612_MuxKey #(7, 10, 64) gpr_write_data (wdata, opcode, {
 //pc
 wire [63:0] snpc;
 assign snpc = pc + 64'd4;
-ysyx_22050612_MuxKeyWithDefault #(2, 10, 64) cpu_pc (dnpc, opcode, snpc, {
+ysyx_22050612_MuxKeyWithDefault #(3, 10, 64) cpu_pc (dnpc, opcode, snpc, {
     10'h300 , sum0,
-    10'd4   , {sum0[63:1],1'b0}
+    10'd4   , {sum0[63:1],1'b0},
+    10'd6   , (imm_B+pc)
   });
 
 
@@ -78,28 +80,31 @@ wire [63:0]operator_a;
 wire [63:0]operator_b;
 wire [63:0]sum0;
 
-ysyx_22050612_MuxKey #(6, 10, 64) operator0 (operator_a, opcode, {
+ysyx_22050612_MuxKey #(7, 10, 64) operator0 (operator_a, opcode, {
     10'h200 , pc,
     10'h300 , pc,
     10'd4   , src1,
+    10'd6   , src1,
     10'd13  , src1,
     10'd19  , src1,
     10'd21  , src1
   });
-ysyx_22050612_MuxKey #(6, 10, 64) operator1 (operator_b, opcode, {
+ysyx_22050612_MuxKey #(7, 10, 64) operator1 (operator_b, opcode, {
     10'h200 , imm_U,
     10'h300 , imm_J,
     10'd4   , imm_I,
+    10'd6   , src2 ,
     10'd13  , imm_I,
     10'd19  , imm_I,
     10'd21  , imm_I
   });
-ysyx_22050612_MuxKey #(6, 10, 8) alumode (mode, opcode, {
-    10'h200 , 8'd1, 
-    10'h300 , 8'd1, 
-    10'd4   , 8'd1, 
-    10'd13  , 8'd1,
-    10'd19  , 8'd1,
+ysyx_22050612_MuxKey #(7, 10, 8) alumode (mode, opcode, {
+    10'h200 , 8'd0, 
+    10'h300 , 8'd0, 
+    10'd4   , 8'd0, 
+    10'd6   , 8'd1, 
+    10'd13  , 8'd0,
+    10'd19  , 8'd0,
     10'd21  , 8'd3
   });
 //ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);

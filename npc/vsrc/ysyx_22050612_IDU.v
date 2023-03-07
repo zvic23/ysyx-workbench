@@ -7,6 +7,7 @@ input [31:0]inst,
 output [63:0]imm_I,
 output [63:0]imm_U,
 output [63:0]imm_J,
+output [63:0]imm_B,
 output [ 4:0]rd,
 output [ 4:0]rs1,
 output [ 4:0]rs2,
@@ -20,10 +21,12 @@ assign rs2= inst[24:20];
 assign imm_I = (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]};
 assign imm_U = (inst[31]==1'b1)?{{32{1'b1}},inst[31:12],{12{1'b0}}}:{{32{1'b0}},inst[31:12],{12{1'b0}}};
 assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
+assign imm_B = (inst[12]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11:8],1'b1}:{{51{1'b0}},inst[31],inst[7],inst[30:25],inst[11:8],1'b1};
 
 
-ysyx_22050612_MuxKey #(4, 10, 7) decode0 (opcode[6:0], {inst[14:12],inst[6:0]}, {
+ysyx_22050612_MuxKey #(5, 10, 7) decode0 (opcode[6:0], {inst[14:12],inst[6:0]}, {
     10'b000_110_0111, 7'd4 ,        //jalr
+    10'b001_110_0011, 7'd6 ,        //bne
     10'b010_000_0011, 7'd13,        //lw
     10'b000_001_0011, 7'd19,        //addi
     10'b011_001_0011, 7'd21         //sltiu
