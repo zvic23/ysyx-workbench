@@ -1,6 +1,7 @@
 import "DPI-C" function void ebreak (int r);
 import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
-import "DPI-C" function void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,int src_register,int imm_up,int imm_lo);
+//import "DPI-C" function void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,int src_register,int imm_up,int imm_lo);
+import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
 import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
 import "DPI-C" function void pmem_write(
@@ -89,9 +90,11 @@ ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
 initial set_gpr_ptr(gpr);  
 
 always @(posedge clk) begin
-	if (opcode[9:8]==2'd3) ftrace_check(pc[63:32],pc[31:0],dnpc[63:32],dnpc[31:0], 1, 0,0,1);
-	else if (opcode[6:0]==7'd4) ftrace_check(pc[63:32],pc[31:0],dnpc[63:32],dnpc[31:0], {{27{1'b0}},rd}, {{27{1'b0}},rs1}, imm_I[63:32],imm_I[31:0]);
+	//if (opcode[9:8]==2'd3) ftrace_check(pc[63:32],pc[31:0],dnpc[63:32],dnpc[31:0], 1, 0,0,1);
+	//else if (opcode[6:0]==7'd4) ftrace_check(pc[63:32],pc[31:0],dnpc[63:32],dnpc[31:0], {{27{1'b0}},rd}, {{27{1'b0}},rs1}, imm_I[63:32],imm_I[31:0]);
 
+	if (opcode[9:8]==2'd3) ftrace_check(pc[63:0],dnpc[63:0], 1, 0, 1);
+	else if (opcode[6:0]==7'd4) ftrace_check(pc[63:0],dnpc[63:0], {{27{1'b0}},rd}, {{27{1'b0}},rs1}, imm_I[63:0]);
 
 	if (opcode[7]==1'b1 && gpr[10]==64'b0) ebreak(0);
 	else if (opcode[7]==1'b1 && gpr[10]!=64'b0) ebreak(1);
