@@ -173,9 +173,7 @@ void execute(int n){
 		  return;
 	  }
   	  else if(end == 2){
-#ifdef CONFIG_ITRACE
 		iringbuf_output();
-#endif
 		printf(RED "ABORT\n" NONE);
 		return;
           }
