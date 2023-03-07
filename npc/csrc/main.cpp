@@ -194,12 +194,9 @@ int main() {
   sim_init();
 
 #ifdef CONFIG_DIFFTEST
-  int b =1;
-  init_difftest(img_size ,b);
+  init_difftest(img_size ,0);
 #endif
-#ifdef CONFIG_ITRACE
   init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
-#endif
 #ifdef CONFIG_FTRACE
   ftrace_elf_analysis();                      //about ftrace, init the function table 
 #endif
