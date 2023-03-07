@@ -1,4 +1,4 @@
-
+import "DPI-C" function void read_inst(int npc_inst);
 
 module ysyx_22050612_IFU (
    input clk,
@@ -26,6 +26,8 @@ always @(*) begin
 end
 
 assign inst = pc[2]?inst_mix[63:32] : inst_mix[31:0];
+
+initial read_inst(inst);
 
 endmodule
 

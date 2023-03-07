@@ -80,7 +80,6 @@ void built_in_program(){
   *(uint32_t*)&pmem[0x00000004]=0x00208113;
   *(uint32_t*)&pmem[0x00000008]=0x00310193;
   *(uint32_t*)&pmem[0x0000000c]=0x00418213;
-
   *(uint32_t*)&pmem[0x00000010]=0x00100073; //ebreak
 }
 
@@ -138,14 +137,16 @@ void ebreak(int r){
 
 }
 
+uint32_t inst;
+void read_inst(int npc_inst){
+	inst = npc_inst;
+}
+
 
 
 void one_cycle(){
-  
-  
-  //top->inst = pmem_read(top->pc);
 #ifdef CONFIG_ITRACE
-  itrace(top->pc, top->inst);
+  itrace(top->pc, inst);
 #endif
   step_and_dump_wave();
 

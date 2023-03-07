@@ -24,7 +24,6 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     // PORTS
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
-    VL_OUT(inst,31,0);
     VL_OUT64(pc,63,0);
 
     // LOCAL SIGNALS
@@ -47,6 +46,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
         CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__hit;
         CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__hit;
         SData/*15:0*/ ysyx_22050612_npc__DOT__opcode;
+        IData/*31:0*/ ysyx_22050612_npc__DOT__inst;
         QData/*63:0*/ ysyx_22050612_npc__DOT__dnpc;
         QData/*63:0*/ ysyx_22050612_npc__DOT__imm_I;
         QData/*63:0*/ ysyx_22050612_npc__DOT__imm_U;
@@ -93,9 +93,9 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
         VlUnpacked<QData/*63:0*/, 8> ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__data_list;
         VlUnpacked<IData/*23:0*/, 8> ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__pair_list;
         VlUnpacked<SData/*15:0*/, 8> ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__key_list;
-        VlUnpacked<CData/*7:0*/, 8> ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__data_list;
     };
     struct {
+        VlUnpacked<CData/*7:0*/, 8> ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__data_list;
         VlUnpacked<VlWide<3>/*71:0*/, 3> ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__pair_list;
         VlUnpacked<CData/*7:0*/, 3> ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__key_list;
         VlUnpacked<QData/*63:0*/, 3> ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__data_list;
@@ -117,7 +117,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     VlWide<20>/*639:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator1____pinNumber3;
     VlWide<7>/*215:0*/ ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT____Vcellinp__alu_result_select____pinNumber3;
     QData/*63:0*/ __Vtask_pmem_read__0__rdata;
-    QData/*63:0*/ __Vtask_pmem_read__1__rdata;
+    QData/*63:0*/ __Vtask_pmem_read__2__rdata;
     VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5;
     VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
 

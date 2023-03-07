@@ -9,6 +9,16 @@
 
 //==========
 
+extern "C" void read_inst(int npc_inst);
+
+VL_INLINE_OPT void Vysyx_22050612_npc___024unit____Vdpiimwrap_read_inst_TOP____024unit(IData/*31:0*/ npc_inst) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        Vysyx_22050612_npc___024unit____Vdpiimwrap_read_inst_TOP____024unit\n"); );
+    // Body
+    int npc_inst__Vcvt;
+    for (size_t npc_inst__Vidx = 0; npc_inst__Vidx < 1; ++npc_inst__Vidx) npc_inst__Vcvt = npc_inst;
+    read_inst(npc_inst__Vcvt);
+}
+
 extern "C" void ebreak(int r);
 
 VL_INLINE_OPT void Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024unit(IData/*31:0*/ r) {
