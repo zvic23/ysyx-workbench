@@ -1,7 +1,7 @@
 import "DPI-C" function void ebreak (int r);
 import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
-//import "DPI-C" function void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,int src_register,int imm_up,int imm_lo);
 import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
+
 import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
 import "DPI-C" function void pmem_write(
