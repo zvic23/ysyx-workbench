@@ -82,7 +82,7 @@ static int cmd_x(char *args){
      sum = sum+(a%10)*pow(16,i);
      a = a/10;
    } 
-   //printf("%lx\n",sum);
+   printf("%lx\n",sum);
    for(int i=0;i<atoi(n);i++){
       uint32_t mem = pmem_read(sum+i*4);
       printf(YELLOW "0x%lx: " NONE "%08x  ",sum+i*4,mem); 
