@@ -153,12 +153,7 @@ void one_cycle(){
   step_and_dump_wave(); 
 
   update_gpr_pc();
-
-#ifdef CONFIG_DIFFTEST
   difftest_step();
-#endif
-
-
 }
 
 int itrace_si = 0;
@@ -176,8 +171,8 @@ void execute(int n){
 	  one_cycle();
 	  if(itrace_si) itrace_printf_once();
 #ifdef CONFIG_WATCHPOINT            //zsl: the switch of watchpoint
-		  int wp_stop = check_wpchange();
-		  if(wp_stop)break;
+	  int wp_stop = check_wpchange();
+	  if(wp_stop)break;
 #endif
   }
 }
@@ -189,9 +184,7 @@ int main() {
 
   sim_init();
 
-#ifdef CONFIG_DIFFTEST
   init_difftest(img_size ,0);
-#endif
   init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
   ftrace_elf_analysis();                      //about ftrace, init the function table 
 					      
