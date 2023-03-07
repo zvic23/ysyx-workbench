@@ -56,7 +56,7 @@ ysyx_22050612_MuxKey #(10, 20, 1) gpr_write_enable (wen, opcode, {
     20'd47   , 1'b1
   });
 ysyx_22050612_MuxKey #(10, 20, 64) gpr_write_data (wdata, opcode, {
-    20'h11000, result_alu0,
+    20'h11000, (result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]})),
     20'h5000 , result_alu0,
     20'h100  , imm_U,
     20'h200  , result_alu0,
