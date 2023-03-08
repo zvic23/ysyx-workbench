@@ -810,14 +810,16 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
                                                    & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                   >> 0x20U)) >> 0xcU));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_select____pinNumber3[5U] 
-        = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+        = ((IData)((QData)((IData)((0xffU & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2))))) 
            << 8U);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_select____pinNumber3[6U] 
-        = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
-            >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
+        = (((IData)((QData)((IData)((0xffU & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2))))) 
+            >> 0x18U) | ((IData)(((QData)((IData)((0xffU 
+                                                   & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                   >> 0x20U)) << 8U));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_select____pinNumber3[7U] 
-        = (0x1000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
+        = (0x1000U | ((IData)(((QData)((IData)((0xffU 
+                                                & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                >> 0x20U)) >> 0x18U));
     __Vtemp1045[0x11U] = (((IData)(((vlSelf->ysyx_22050612_npc__DOT__inst 
                                      >> 0x1fU) ? (0xffffffffffe00000ULL 
