@@ -210,7 +210,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 8) alumode (mode, opcode, {
 ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
 
 
-
+//multipulicatin and division
 wire[63:0] result_mulw0;
 assign result_mulw0 = src1[31:0] * src2[31:0];
 
