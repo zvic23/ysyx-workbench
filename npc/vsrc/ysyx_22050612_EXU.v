@@ -44,7 +44,7 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, g
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
-`define regwrite_inst_count 33
+`define regwrite_inst_count 34
 ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcode, {
     20'h4000 , 1'b1,
     20'h5000 , 1'b1,
@@ -57,6 +57,7 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcod
     20'h17000, 1'b1,
     20'h18000, 1'b1,
     20'h19000, 1'b1,
+    20'h1d000, 1'b1,
     20'h22000, 1'b1,
     20'h24000, 1'b1,
     20'h25000, 1'b1,
@@ -92,6 +93,7 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 64) gpr_write_data (wdata_reg, 
     20'h17000, (result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]})),
     20'h18000, (result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]})),
     20'h19000, (result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]})),
+    20'h1d000, result_mul0,
     20'h22000, result_divu0,
     20'h24000, result_remu0,
     20'h25000, (result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]})),
@@ -263,6 +265,9 @@ ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
 
 
 //multipulicatin and division
+wire[63:0] result_mul0;
+assign result_mul0 = src1[63:0] * src2[63:0];
+
 wire[63:0] result_divu0;
 assign result_divu0 = src1[63:0] / src2[63:0];
 
