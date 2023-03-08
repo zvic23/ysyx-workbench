@@ -199,7 +199,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 8) alumode (mode, opcode, {
     20'h4000 , 8'd0 , 
     20'h5000 , 8'd1 , 
-    20'h7000 , 8'd3 , 
+    20'h7000 , 8'd2 , 
     20'h8000 , 8'd3 , 
     20'h12000, 8'd6 , 
     20'h13000, 8'd4 , 
