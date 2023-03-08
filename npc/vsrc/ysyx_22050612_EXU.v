@@ -227,7 +227,7 @@ ysyx_22050612_MuxKey #(3, 20, 64) raddr_select (raddr, opcode, {
   });
 
 ysyx_22050612_MuxKey #(3, 20, 64) waddr_select (waddr, opcode, {
-    20'd16  , result_alu0,
+    20'd16  , 64'h80000004,
     20'd17  , result_alu0,
     20'd43  , result_alu0
   });

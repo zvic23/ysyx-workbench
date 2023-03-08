@@ -612,10 +612,10 @@ extern const VlWide<21>/*671:0*/ Vysyx_22050612_npc__ConstPool__CONST_61ae12b2_0
 void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* vlSelf, VerilatedVcd* tracep) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VlWide<3>/*95:0*/ __Vtemp2021;
-    VlWide<7>/*223:0*/ __Vtemp2022;
-    VlWide<6>/*191:0*/ __Vtemp2023;
-    VlWide<3>/*95:0*/ __Vtemp2024;
+    VlWide<3>/*95:0*/ __Vtemp2019;
+    VlWide<7>/*223:0*/ __Vtemp2020;
+    VlWide<6>/*191:0*/ __Vtemp2021;
+    VlWide<3>/*95:0*/ __Vtemp2022;
     vluint32_t* const oldp = tracep->oldp(vlSymsp->__Vm_baseCode);
     if (false && oldp) {}  // Prevent unused
     // Body
@@ -1353,14 +1353,14 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
         tracep->fullQData(oldp+1280,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata_select__DOT__i0__DOT__data_list[2]),64);
         tracep->fullQData(oldp+1282,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata_select__DOT__i0__DOT__lut_out),64);
         tracep->fullBit(oldp+1284,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata_select__DOT__i0__DOT__hit));
-        __Vtemp2021[0U] = (IData)((0x11030002bffULL 
+        __Vtemp2019[0U] = (IData)((0x11030002bffULL 
                                    | ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wmask_1byte)) 
                                       << 0x38U)));
-        __Vtemp2021[1U] = (IData)(((0x11030002bffULL 
+        __Vtemp2019[1U] = (IData)(((0x11030002bffULL 
                                     | ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wmask_1byte)) 
                                        << 0x38U)) >> 0x20U));
-        __Vtemp2021[2U] = 0x10U;
-        tracep->fullWData(oldp+1285,(__Vtemp2021),84);
+        __Vtemp2019[2U] = 0x10U;
+        tracep->fullWData(oldp+1285,(__Vtemp2019),84);
         tracep->fullIData(oldp+1288,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wmask_select__DOT__i0__DOT__pair_list[0]),28);
         tracep->fullIData(oldp+1289,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wmask_select__DOT__i0__DOT__pair_list[1]),28);
         tracep->fullIData(oldp+1290,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wmask_select__DOT__i0__DOT__pair_list[2]),28);
@@ -1422,14 +1422,14 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
         tracep->fullIData(oldp+1368,(0xdU),32);
         tracep->fullIData(oldp+1369,(0xaU),32);
         tracep->fullIData(oldp+1370,(7U),32);
-        __Vtemp2022[0U] = 0xa3560dafU;
-        __Vtemp2022[1U] = 0x4cc306a9U;
-        __Vtemp2022[2U] = 0x32b0996eU;
-        __Vtemp2022[3U] = 0xc88264d9U;
-        __Vtemp2022[4U] = 0x1c119028U;
-        __Vtemp2022[5U] = 0x32063603U;
-        __Vtemp2022[6U] = 0x338438cU;
-        tracep->fullWData(oldp+1371,(__Vtemp2022),221);
+        __Vtemp2020[0U] = 0xa3560dafU;
+        __Vtemp2020[1U] = 0x4cc306a9U;
+        __Vtemp2020[2U] = 0x32b0996eU;
+        __Vtemp2020[3U] = 0xc88264d9U;
+        __Vtemp2020[4U] = 0x1c119028U;
+        __Vtemp2020[5U] = 0x32063603U;
+        __Vtemp2020[6U] = 0x338438cU;
+        tracep->fullWData(oldp+1371,(__Vtemp2020),221);
         tracep->fullIData(oldp+1378,(0U),32);
         tracep->fullCData(oldp+1379,(0U),7);
         tracep->fullIData(oldp+1380,(0x11U),32);
@@ -1441,13 +1441,13 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
         tracep->fullIData(oldp+1386,(9U),32);
         tracep->fullIData(oldp+1387,(3U),32);
         tracep->fullIData(oldp+1388,(8U),32);
-        __Vtemp2023[0U] = 0x2e00bb19U;
-        __Vtemp2023[1U] = 0xcc4c0076U;
-        __Vtemp2023[2U] = 0x1998900eU;
-        __Vtemp2023[3U] = 0xa01b3080U;
-        __Vtemp2023[4U] = 0xc1100660U;
-        __Vtemp2023[5U] = 0xcU;
-        tracep->fullWData(oldp+1389,(__Vtemp2023),175);
+        __Vtemp2021[0U] = 0x2e00bb19U;
+        __Vtemp2021[1U] = 0xcc4c0076U;
+        __Vtemp2021[2U] = 0x1998900eU;
+        __Vtemp2021[3U] = 0xa01b3080U;
+        __Vtemp2021[4U] = 0xc1100660U;
+        __Vtemp2021[5U] = 0xcU;
+        tracep->fullWData(oldp+1389,(__Vtemp2021),175);
         tracep->fullCData(oldp+1395,(0U),8);
         tracep->fullIData(oldp+1396,(0x19U),32);
         tracep->fullIData(oldp+1397,(7U),32);
@@ -1472,10 +1472,10 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
         tracep->fullIData(oldp+1450,(9U),32);
         tracep->fullIData(oldp+1451,(0x43U),32);
         tracep->fullIData(oldp+1452,(8U),32);
-        __Vtemp2024[0U] = 0x48320780U;
-        __Vtemp2024[1U] = 0x2308821U;
-        __Vtemp2024[2U] = 0x2409U;
-        tracep->fullWData(oldp+1453,(__Vtemp2024),88);
+        __Vtemp2022[0U] = 0x48320780U;
+        __Vtemp2022[1U] = 0x2308821U;
+        __Vtemp2022[2U] = 0x2409U;
+        tracep->fullWData(oldp+1453,(__Vtemp2022),88);
         tracep->fullIData(oldp+1456,(0xbU),32);
     }
 }
