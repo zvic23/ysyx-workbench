@@ -153,7 +153,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'h12000, src1,
     20'h13000, src1,
     20'h14000, src1,
-    20'h15000, src1,
+    20'h15000, {{32{1'b0}},src1[31:0]},
     20'h16000, src1,
     20'h17000, src1,
     20'h18000, src1,
