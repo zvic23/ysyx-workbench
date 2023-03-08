@@ -54,7 +54,7 @@ void sim_exit(){
 uint8_t pmem[0x70000000];
 
 uint32_t pmem_read(uint64_t addr){
-  return *(uint32_t*)&pmem[addr-0x80000000];
+  return *(uint32_t*)&pmem[addr-0x40000000];
 }
 
 
@@ -62,11 +62,11 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
   	long long raddr_set = raddr & ~0x7ull;
-	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
+	memcpy(rdata, &pmem[raddr_set-0x40000000], 8);
   }
   else {
   	long long raddr_set = raddr & ~0x7ull;
-	memcpy(rdata, &pmem[raddr_set+0x30000], 8);
+	memcpy(rdata, &pmem[raddr_set], 8);
   }
 }
 extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
@@ -78,7 +78,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   	long long waddr_set = waddr & ~0x7ull;
   	for(int i=0;i<8;i++){
   	        if( (wmask>>i)&1 == 1){
-  	      		pmem[waddr_set-0x80000000+i]=(uint8_t)(wdata>>(i*8));
+  	      		pmem[waddr_set-0x40000000+i]=(uint8_t)(wdata>>(i*8));
 		}
 	}	
   }
@@ -87,7 +87,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   	long long waddr_set = waddr & ~0x7ull;
   	for(int i=0;i<8;i++){
   	        if( (wmask>>i)&1 == 1){
-  	      		pmem[waddr_set+0x30000+i]=(uint8_t)(wdata>>(i*8));
+  	      		pmem[waddr_set+i]=(uint8_t)(wdata>>(i*8));
 		}
   	}
   }
