@@ -227,12 +227,12 @@ ysyx_22050612_MuxKey #(3, 20, 64) raddr_select (raddr, opcode, {
   });
 
 ysyx_22050612_MuxKey #(3, 20, 64) waddr_select (waddr, opcode, {
-    20'd16  , 64'h80002000,
-    20'd17  , 64'h80002000,
-    20'd43  , 64'h80002000
+    20'd16  , result_alu0,
+    20'd17  , result_alu0,
+    20'd43  , result_alu0
   });
 ysyx_22050612_MuxKey #(3, 20, 64) wdata_select (wdata, opcode, {
-    20'd16  , {{48{1'b0}},src2[15:0]},
+    20'd16  , 64'h80006000,
     20'd17  , {{48{1'b0}},src2[15:0]},
     20'd43  , src2
   });
