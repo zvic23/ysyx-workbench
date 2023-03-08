@@ -108,7 +108,7 @@ wire [63:0]operator_a;
 wire [63:0]operator_b;
 wire [63:0]result_alu0;
 
-`define alu_inst_count 22
+`define alu_inst_count 23
 
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'h4000 , src1,
@@ -125,6 +125,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'd6    , src1,
     20'd13   , src1,
     20'd14   , src1,
+    20'd16   , src1,
     20'd17   , src1,
     20'd19   , src1,
     20'd21   , src1,
@@ -149,6 +150,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
     20'd6    , src2 ,
     20'd13   , imm_I,
     20'd14   , imm_I,
+    20'd16   , imm_S,
     20'd17   , imm_S,
     20'd19   , imm_I,
     20'd21   , imm_I,
@@ -173,6 +175,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 8) alumode (mode, opcode, {
     20'd6    , 8'd1 , 
     20'd13   , 8'd0 ,
     20'd14   , 8'd0 ,
+    20'd16   , 8'd0 ,
     20'd17   , 8'd0 ,
     20'd19   , 8'd0 ,
     20'd21   , 8'd3 ,
@@ -202,15 +205,18 @@ ysyx_22050612_MuxKey #(3, 20, 64) raddr_select (raddr, opcode, {
     20'd42  , result_alu0
   });
 
-ysyx_22050612_MuxKey #(2, 20, 64) waddr_select (waddr, opcode, {
+ysyx_22050612_MuxKey #(3, 20, 64) waddr_select (waddr, opcode, {
+    20'd16  , result_alu0,
     20'd17  , result_alu0,
     20'd43  , result_alu0
   });
-ysyx_22050612_MuxKey #(2, 20, 64) wdata_select (wdata, opcode, {
+ysyx_22050612_MuxKey #(3, 20, 64) wdata_select (wdata, opcode, {
+    20'd16  , src2,
     20'd17  , {{48{1'b0}},src2[15:0]},
     20'd43  , src2
   });
-ysyx_22050612_MuxKey #(2, 20, 8 ) wmask_select (wmask, opcode, {
+ysyx_22050612_MuxKey #(3, 20, 8 ) wmask_select (wmask, opcode, {
+    20'd16  , 8'h1,
     20'd17  , 8'h3,
     20'd43  , 8'hff
   });

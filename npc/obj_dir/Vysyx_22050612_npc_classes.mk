@@ -10,7 +10,7 @@ VM_C11 = 1
 # Coverage output mode?  0/1 (from --coverage)
 VM_COVERAGE = 0
 # Parallel builds?  0/1 (from --output-split)
-VM_PARALLEL_BUILDS = 0
+VM_PARALLEL_BUILDS = 1
 # Threaded output mode?  0/1/N threads (from --threads)
 VM_THREADS = 0
 # Tracing output mode?  0/1 (from --trace/--trace-fst)
@@ -33,6 +33,7 @@ VM_CLASSES_FAST += \
 VM_CLASSES_SLOW += \
 	Vysyx_22050612_npc__ConstPool_0 \
 	Vysyx_22050612_npc___024root__Slow \
+	Vysyx_22050612_npc___024root__1__Slow \
 	Vysyx_22050612_npc___024unit__Slow \
 
 # Generated support classes, fast-path, compile with highest optimization
