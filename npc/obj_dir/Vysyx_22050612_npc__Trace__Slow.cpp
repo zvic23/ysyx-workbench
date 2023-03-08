@@ -662,7 +662,7 @@ void Vysyx_22050612_npc___024root__traceFullTop0(void* voidSelf, VerilatedVcd* t
 }
 
 extern const VlWide<10>/*319:0*/ Vysyx_22050612_npc__ConstPool__CONST_2eb98472_0;
-extern const VlWide<9>/*287:0*/ Vysyx_22050612_npc__ConstPool__CONST_d051eaa6_0;
+extern const VlWide<9>/*287:0*/ Vysyx_22050612_npc__ConstPool__CONST_f35536a6_0;
 extern const VlWide<18>/*575:0*/ Vysyx_22050612_npc__ConstPool__CONST_4f8a097f_0;
 extern const VlWide<26>/*831:0*/ Vysyx_22050612_npc__ConstPool__CONST_b31e0ebf_0;
 
@@ -1646,7 +1646,7 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
         tracep->fullIData(oldp+1759,(3U),32);
         tracep->fullIData(oldp+1760,(0xbU),32);
         tracep->fullIData(oldp+1761,(8U),32);
-        tracep->fullWData(oldp+1762,(Vysyx_22050612_npc__ConstPool__CONST_d051eaa6_0),275);
+        tracep->fullWData(oldp+1762,(Vysyx_22050612_npc__ConstPool__CONST_f35536a6_0),275);
         tracep->fullCData(oldp+1771,(0U),8);
         tracep->fullIData(oldp+1772,(0x19U),32);
         tracep->fullIData(oldp+1773,(0xbU),32);

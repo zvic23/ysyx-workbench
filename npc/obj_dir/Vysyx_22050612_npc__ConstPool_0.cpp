@@ -28,8 +28,8 @@ extern const VlWide<26>/*831:0*/ Vysyx_22050612_npc__ConstPool__CONST_b31e0ebf_0
     0x00000500, 0x00000040
 }};
 
-extern const VlWide<9>/*287:0*/ Vysyx_22050612_npc__ConstPool__CONST_d051eaa6_0 = {{
-    0x4c073b28, 0xec940c76, 0x3dd92010, 0xe00bb190,
+extern const VlWide<9>/*287:0*/ Vysyx_22050612_npc__ConstPool__CONST_f35536a6_0 = {{
+    0x4c073b28, 0xec940c76, 0x3d992010, 0xe00bb190,
     0xc4c00762, 0x998900ec, 0x01b30801, 0x1100660a,
     0x000000cc
 }};
