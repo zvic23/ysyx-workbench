@@ -51,7 +51,7 @@ void sim_exit(){
 
 
 
-uint8_t pmem[0x50000];
+uint8_t pmem[0x70000000];
 
 uint32_t pmem_read(uint64_t addr){
   return *(uint32_t*)&pmem[addr-0x80000000];
@@ -80,7 +80,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   	        if( (wmask>>i)&1 == 1){
   	      		pmem[waddr_set-0x80000000+i]=(uint8_t)(wdata>>(i*8));
 		}
-  	}
+	}	
   }
   else{
 			printf("write  addr:%llx,  value:%llx\n",waddr,wdata);
