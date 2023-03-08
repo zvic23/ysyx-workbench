@@ -226,7 +226,7 @@ ysyx_22050612_MuxKey #(7, 3, 64 ) wdata_twobyte (wdata_2byte, waddr[2:0], {
     3'd5  , {{ 8{1'b0}},src2[15:0],{40{1'b0}}},
     3'd6  , {           src2[15:0],{48{1'b0}}}
   });                                              //between two 64bits has not been concerned
-ysyx_22050612_MuxKey #(7, 3, 8 ) wmask_twobyte (wmask_1byte, waddr[2:0], {
+ysyx_22050612_MuxKey #(7, 3, 8 ) wmask_twobyte (wmask_2byte, waddr[2:0], {
     3'd0  , 8'h3 , 
     3'd1  , 8'h6 ,
     3'd2  , 8'hc ,
