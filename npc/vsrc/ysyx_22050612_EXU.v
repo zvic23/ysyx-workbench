@@ -190,8 +190,29 @@ ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
 
 
 
-
-
+//memory
+wire [7:0]wmask_1byte;
+wire [63:0]wdata_1byte;
+ysyx_22050612_MuxKey #(8, 3, 64 ) wdata_onebyte (wdata_1byte, waddr[2:0], {
+    3'd0  , {{56{1'b0}},src2[ 7:0]}, 
+    3'd1  , {{48{1'b0}},src2[7:0],{ 8{1'b0}}},
+    3'd2  , {{40{1'b0}},src2[7:0],{16{1'b0}}},
+    3'd3  , {{32{1'b0}},src2[7:0],{24{1'b0}}},
+    3'd4  , {{24{1'b0}},src2[7:0],{32{1'b0}}},
+    3'd5  , {{16{1'b0}},src2[7:0],{40{1'b0}}},
+    3'd6  , {{ 8{1'b0}},src2[7:0],{48{1'b0}}},
+    3'd7  , {src2[7:0],{56{1'b0}}}
+  });
+ysyx_22050612_MuxKey #(8, 3, 8 ) wmask_onebyte (wmask_1byte, waddr[2:0], {
+    3'd0  , 8'h1 , 
+    3'd1  , 8'h2 ,
+    3'd2  , 8'h4 ,
+    3'd3  , 8'h8 ,
+    3'd4  , 8'h10, 
+    3'd5  , 8'h20, 
+    3'd6  , 8'h40, 
+    3'd7  , 8'h80 
+  });
 
 wire [63:0] raddr;
 wire [63:0] rdata;
@@ -211,12 +232,12 @@ ysyx_22050612_MuxKey #(3, 20, 64) waddr_select (waddr, opcode, {
     20'd43  , result_alu0
   });
 ysyx_22050612_MuxKey #(3, 20, 64) wdata_select (wdata, opcode, {
-    20'd16  , {{56{1'b0}},src2[ 7:0]},
+    20'd16  , wdata_1byte,
     20'd17  , {{48{1'b0}},src2[15:0]},
     20'd43  , src2
   });
 ysyx_22050612_MuxKey #(3, 20, 8 ) wmask_select (wmask, opcode, {
-    20'd16  , 8'h1,
+    20'd16  , wmask_1byte,
     20'd17  , 8'h3,
     20'd43  , 8'hff
   });
