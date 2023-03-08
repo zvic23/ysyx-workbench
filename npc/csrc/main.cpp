@@ -54,7 +54,7 @@ void sim_exit(){
 uint8_t pmem[0x70000000];
 
 uint32_t pmem_read(uint64_t addr){
-  return *(uint32_t*)&pmem[addr-0x40000000];
+  return *(uint32_t*)&pmem[addr-0x80000000];
 }
 
 
