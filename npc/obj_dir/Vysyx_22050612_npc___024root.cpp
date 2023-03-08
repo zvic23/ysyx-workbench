@@ -1968,19 +1968,23 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
                                   >> 0x20U));
     __Vtemp1863[0x2cU] = (0x17000U | ((IData)((QData)((IData)(
                                                               (0x1fU 
-                                                               & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2))))) 
+                                                               & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                  >> 0x14U))))) 
                                       << 0x14U));
     __Vtemp1863[0x2dU] = (((IData)((QData)((IData)(
                                                    (0x1fU 
-                                                    & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2))))) 
+                                                    & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                       >> 0x14U))))) 
                            >> 0xcU) | ((IData)(((QData)((IData)(
                                                                 (0x1fU 
-                                                                 & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
+                                                                 & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                    >> 0x14U)))) 
                                                 >> 0x20U)) 
                                        << 0x14U));
     __Vtemp1863[0x2eU] = ((IData)(((QData)((IData)(
                                                    (0x1fU 
-                                                    & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
+                                                    & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                       >> 0x14U)))) 
                                    >> 0x20U)) >> 0xcU);
     __Vtemp1863[0x2fU] = (0x14U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                    << 8U));
