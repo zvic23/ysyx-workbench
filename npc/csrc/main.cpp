@@ -51,7 +51,7 @@ void sim_exit(){
 
 
 
-uint8_t pmem[0x70000000];
+uint8_t pmem[0x50000];
 
 uint32_t pmem_read(uint64_t addr){
   return *(uint32_t*)&pmem[addr-0x80000000];
@@ -64,17 +64,17 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   	long long raddr_set = raddr & ~0x7ull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
   }
-  else {
-  	long long raddr_set = raddr & ~0x7ull;
-	memcpy(rdata, &pmem[raddr_set+0x50000000], 8);
-  }
+//  else {
+//  	long long raddr_set = raddr & ~0x7ull;
+//	memcpy(rdata, &pmem[raddr_set+0x50000000], 8);
+//  }
 }
 extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // 总是往地址为`waddr & ~0x7ull`的8字节按写掩码`wmask`写入`wdata`
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   if(waddr>=0x80000000){
-			printf("write  addr:%llx,  value:%llx\n",waddr,wdata);
+			//printf("write  addr:%llx,  value:%llx\n",waddr,wdata);
   	long long waddr_set = waddr & ~0x7ull;
   	for(int i=0;i<8;i++){
   	        if( (wmask>>i)&1 == 1){
@@ -82,15 +82,15 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 		}
 	}	
   }
-  else{
-			printf("write  addr:%llx,  value:%llx\n",waddr,wdata);
-  	long long waddr_set = waddr & ~0x7ull;
-  	for(int i=0;i<8;i++){
-  	        if( (wmask>>i)&1 == 1){
-  	      		pmem[waddr_set+0x50000000+i]=(uint8_t)(wdata>>(i*8));
-		}
-  	}
-  }
+//  else{
+//			//printf("write  addr:%llx,  value:%llx\n",waddr,wdata);
+//  	long long waddr_set = waddr & ~0x7ull;
+//  	for(int i=0;i<8;i++){
+//  	        if( (wmask>>i)&1 == 1){
+//  	      		pmem[waddr_set+0x50000000+i]=(uint8_t)(wdata>>(i*8));
+//		}
+//  	}
+//  }
 }
 
 
