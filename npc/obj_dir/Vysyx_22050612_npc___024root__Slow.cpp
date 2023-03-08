@@ -36,8 +36,6 @@ void Vysyx_22050612_npc___024root___settle__TOP__1(Vysyx_22050612_npc___024root*
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___settle__TOP__1\n"); );
     // Variables
-    VlWide<6>/*191:0*/ __Vtemp103;
-    VlWide<8>/*255:0*/ __Vtemp104;
     VlWide<63>/*2015:0*/ __Vtemp131;
     VlWide<19>/*607:0*/ __Vtemp145;
     VlWide<82>/*2623:0*/ __Vtemp146;
@@ -2547,22 +2545,6 @@ void Vysyx_22050612_npc___024root___settle__TOP__1(Vysyx_22050612_npc___024root*
               [2U]));
     vlSelf->ysyx_22050612_npc__DOT__idu__DOT____Vcellout__decode3____pinNumber1 
         = vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode3__DOT__i0__DOT__lut_out;
-    __Vtemp103[0U] = (0x400U | ((IData)(vlSelf->pc) 
-                                << 0x14U));
-    __Vtemp103[1U] = (((IData)(vlSelf->pc) >> 0xcU) 
-                      | ((IData)((vlSelf->pc >> 0x20U)) 
-                         << 0x14U));
-    __Vtemp103[2U] = (0x30000000U | ((IData)((vlSelf->pc 
-                                              >> 0x20U)) 
-                                     >> 0xcU));
-    __Vtemp103[3U] = ((IData)(vlSelf->pc) << 8U);
-    __Vtemp103[4U] = (((IData)(vlSelf->pc) >> 0x18U) 
-                      | ((IData)((vlSelf->pc >> 0x20U)) 
-                         << 8U));
-    __Vtemp103[5U] = (0x20000U | ((IData)((vlSelf->pc 
-                                           >> 0x20U)) 
-                                  >> 0x18U));
-    VL_EXTEND_WW(252,188, __Vtemp104, __Vtemp103);
     __Vtemp131[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1);
     __Vtemp131[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                               >> 0x20U));
@@ -2631,14 +2613,23 @@ void Vysyx_22050612_npc___024root___settle__TOP__1(Vysyx_22050612_npc___024root*
     __Vtemp131[0x15U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1);
     __Vtemp131[0x16U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                  >> 0x20U));
-    __Vtemp131[0x17U] = __Vtemp104[0U];
-    __Vtemp131[0x18U] = __Vtemp104[1U];
-    __Vtemp131[0x19U] = __Vtemp104[2U];
-    __Vtemp131[0x1aU] = __Vtemp104[3U];
-    __Vtemp131[0x1bU] = __Vtemp104[4U];
-    __Vtemp131[0x1cU] = __Vtemp104[5U];
-    __Vtemp131[0x1dU] = __Vtemp104[6U];
-    __Vtemp131[0x1eU] = __Vtemp104[7U];
+    __Vtemp131[0x17U] = (0x400U | ((IData)(vlSelf->pc) 
+                                   << 0x14U));
+    __Vtemp131[0x18U] = (((IData)(vlSelf->pc) >> 0xcU) 
+                         | ((IData)((vlSelf->pc >> 0x20U)) 
+                            << 0x14U));
+    __Vtemp131[0x19U] = (0x30000000U | ((IData)((vlSelf->pc 
+                                                 >> 0x20U)) 
+                                        >> 0xcU));
+    __Vtemp131[0x1aU] = ((IData)(vlSelf->pc) << 8U);
+    __Vtemp131[0x1bU] = (((IData)(vlSelf->pc) >> 0x18U) 
+                         | ((IData)((vlSelf->pc >> 0x20U)) 
+                            << 8U));
+    __Vtemp131[0x1cU] = (0x20000U | ((IData)((vlSelf->pc 
+                                              >> 0x20U)) 
+                                     >> 0x18U));
+    __Vtemp131[0x1dU] = 0U;
+    __Vtemp131[0x1eU] = 0x1000000U;
     __Vtemp131[0x1fU] = (0x1b00U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                                     << 0x10U));
     __Vtemp131[0x20U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
