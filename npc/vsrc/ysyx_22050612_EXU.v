@@ -210,7 +210,7 @@ ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
 
 
 wire[63:0] result_mul0;
-assign result_mul0 = src1 * src2;
+assign result_mul0 = 0;
 
 
 
