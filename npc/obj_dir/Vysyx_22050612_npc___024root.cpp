@@ -8379,13 +8379,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                          >> 0x14U));
     __Vtemp3175[0x2aU] = (IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                  >> 0x1fU)))
-                                   ? (0xffffffff00000000ULL 
-                                      | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
+                                   ? (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))
                                    : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))));
     __Vtemp3175[0x2bU] = (IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                   >> 0x1fU)))
-                                    ? (0xffffffff00000000ULL 
-                                       | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
+                                    ? (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))
                                     : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))) 
                                   >> 0x20U));
     __Vtemp3175[0x2cU] = (0x15000U | ((IData)(((1U 
