@@ -19,3 +19,8 @@ extern const VlWide<14>/*447:0*/ Vysyx_22050612_npc__ConstPool__CONST_75b99efe_0
     0x40020020, 0x08b80046, 0x40011300, 0x04200022,
     0x40008280, 0x00000000
 }};
+
+extern const VlWide<8>/*255:0*/ Vysyx_22050612_npc__ConstPool__CONST_b725cb7a_0 = {{
+    0x80002000, 0x00000000, 0x0000002b, 0x00080002,
+    0x01100000, 0x00200000, 0x00000080, 0x00001000
+}};
