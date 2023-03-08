@@ -232,12 +232,12 @@ ysyx_22050612_MuxKey #(3, 20, 64) waddr_select (waddr, opcode, {
     20'd43  , result_alu0
   });
 ysyx_22050612_MuxKey #(3, 20, 64) wdata_select (wdata, opcode, {
-    20'd16  , 64'h80006000,
+    20'd16  , wdata_1byte,
     20'd17  , {{48{1'b0}},src2[15:0]},
     20'd43  , src2
   });
 ysyx_22050612_MuxKey #(3, 20, 8 ) wmask_select (wmask, opcode, {
-    20'd16  , 8'hff,
+    20'd16  , wmask_1byte,
     20'd17  , 8'h3,
     20'd43  , 8'hff
   });
