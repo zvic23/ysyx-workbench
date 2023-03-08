@@ -44,10 +44,11 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, g
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
-`define regwrite_inst_count 27
+`define regwrite_inst_count 28
 ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcode, {
     20'h4000 , 1'b1,
     20'h5000 , 1'b1,
+    20'h7000 , 1'b1,
     20'h8000 , 1'b1,
     20'h12000, 1'b1,
     20'h13000, 1'b1,
@@ -77,6 +78,7 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcod
 ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 64) gpr_write_data (wdata_reg, opcode, {
     20'h4000 , result_alu0,
     20'h5000 , result_alu0,
+    20'h7000 , result_alu0,
     20'h8000 , result_alu0,
     20'h12000, result_alu0,
     20'h13000, result_alu0,
@@ -126,11 +128,12 @@ wire [63:0]operator_a;
 wire [63:0]operator_b;
 wire [63:0]result_alu0;
 
-`define alu_inst_count 30
+`define alu_inst_count 31
 
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'h4000 , src1,
     20'h5000 , src1,
+    20'h7000 , src1,
     20'h8000 , src1,
     20'h12000, src1,
     20'h13000, src1,
@@ -163,6 +166,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
     20'h4000 , src2 ,
     20'h5000 , src2 ,
+    20'h7000 , src2 ,
     20'h8000 , src2 ,
     20'h12000, src2 ,
     20'h13000, src2 ,
@@ -195,6 +199,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 8) alumode (mode, opcode, {
     20'h4000 , 8'd0 , 
     20'h5000 , 8'd1 , 
+    20'h7000 , 8'd3 , 
     20'h8000 , 8'd3 , 
     20'h12000, 8'd6 , 
     20'h13000, 8'd4 , 
