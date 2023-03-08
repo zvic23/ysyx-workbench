@@ -232,7 +232,7 @@ ysyx_22050612_MuxKey #(3, 20, 64) waddr_select (waddr, opcode, {
     20'd43  , result_alu0
   });
 ysyx_22050612_MuxKey #(3, 20, 64) wdata_select (wdata, opcode, {
-    20'd16  , 64'h80006000,
+    20'd16  , {{48{1'b0}},src2[15:0]},
     20'd17  , {{48{1'b0}},src2[15:0]},
     20'd43  , src2
   });
@@ -283,7 +283,6 @@ always @(posedge clk) begin
 
 	if (opcode[7]==1'b1 && gpr[10]==64'b0) ebreak(0);
 	else if (opcode[7]==1'b1 && gpr[10]!=64'b0) ebreak(1);
-	else if (opcode == 20'd12) ebreak(1);
 end
 
 
