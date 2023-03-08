@@ -4587,14 +4587,16 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__lut_out;
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__cpu_pc____pinNumber4[0U] 
         = (IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
-                                  >> 0x3fU))) ? (vlSelf->ysyx_22050612_npc__DOT__imm_B 
+                                  >> 0x3fU))) ? (4ULL 
                                                  + vlSelf->pc)
-                    : (4ULL + vlSelf->pc)));
+                    : (vlSelf->ysyx_22050612_npc__DOT__imm_B 
+                       + vlSelf->pc)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__cpu_pc____pinNumber4[1U] 
         = (IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
-                                   >> 0x3fU))) ? (vlSelf->ysyx_22050612_npc__DOT__imm_B 
+                                   >> 0x3fU))) ? (4ULL 
                                                   + vlSelf->pc)
-                     : (4ULL + vlSelf->pc)) >> 0x20U));
+                     : (vlSelf->ysyx_22050612_npc__DOT__imm_B 
+                        + vlSelf->pc)) >> 0x20U));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__cpu_pc____pinNumber4[2U] 
         = (8U | ((IData)(((0ULL != vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)
                            ? (vlSelf->ysyx_22050612_npc__DOT__imm_B 
