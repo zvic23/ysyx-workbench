@@ -194,7 +194,7 @@ ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
 wire [7:0]wmask_1byte;
 wire [63:0]wdata_1byte;
 ysyx_22050612_MuxKey #(8, 3, 64 ) wdata_onebyte (wdata_1byte, waddr[2:0], {
-    3'd0  , {{56{1'b0}},src2[ 7:0]}, 
+    3'd0  , {{56{1'b0}},src2[7:0]}, 
     3'd1  , {{48{1'b0}},src2[7:0],{ 8{1'b0}}},
     3'd2  , {{40{1'b0}},src2[7:0],{16{1'b0}}},
     3'd3  , {{32{1'b0}},src2[7:0],{24{1'b0}}},
@@ -213,6 +213,30 @@ ysyx_22050612_MuxKey #(8, 3, 8 ) wmask_onebyte (wmask_1byte, waddr[2:0], {
     3'd6  , 8'h40, 
     3'd7  , 8'h80 
   });
+
+
+wire [7:0]wmask_2byte;
+wire [63:0]wdata_2byte;
+ysyx_22050612_MuxKey #(7, 3, 64 ) wdata_twobyte (wdata_2byte, waddr[2:0], {
+    3'd0  , {{48{1'b0}},src2[15:0]}, 
+    3'd1  , {{40{1'b0}},src2[15:0],{ 8{1'b0}}},
+    3'd2  , {{32{1'b0}},src2[15:0],{16{1'b0}}},
+    3'd3  , {{24{1'b0}},src2[15:0],{24{1'b0}}},
+    3'd4  , {{16{1'b0}},src2[15:0],{32{1'b0}}},
+    3'd5  , {{ 8{1'b0}},src2[15:0],{40{1'b0}}},
+    3'd6  , {           src2[15:0],{48{1'b0}}}
+  });                                              //between two 64bits has not been concerned
+ysyx_22050612_MuxKey #(7, 3, 8 ) wmask_twobyte (wmask_1byte, waddr[2:0], {
+    3'd0  , 8'h3 , 
+    3'd1  , 8'h6 ,
+    3'd2  , 8'hc ,
+    3'd3  , 8'h8 ,
+    3'd4  , 8'h11, 
+    3'd5  , 8'h30, 
+    3'd6  , 8'h60
+  });
+
+
 
 wire [63:0] raddr;
 wire [63:0] rdata;
@@ -233,12 +257,12 @@ ysyx_22050612_MuxKey #(3, 20, 64) waddr_select (waddr, opcode, {
   });
 ysyx_22050612_MuxKey #(3, 20, 64) wdata_select (wdata, opcode, {
     20'd16  , wdata_1byte,
-    20'd17  , {{48{1'b0}},src2[15:0]},
+    20'd17  , wdata_2byte,
     20'd43  , src2
   });
 ysyx_22050612_MuxKey #(3, 20, 8 ) wmask_select (wmask, opcode, {
     20'd16  , wmask_1byte,
-    20'd17  , 8'h3,
+    20'd17  , wmask_2byte,
     20'd43  , 8'hff
   });
 

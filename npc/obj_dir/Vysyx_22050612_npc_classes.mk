@@ -27,6 +27,7 @@ VM_TRACE_FST_WRITER_THREAD = 0
 VM_CLASSES_FAST += \
 	Vysyx_22050612_npc \
 	Vysyx_22050612_npc___024root \
+	Vysyx_22050612_npc___024root__1 \
 	Vysyx_22050612_npc___024unit \
 
 # Generated module classes, non-fast-path, compile with low/medium optimization
