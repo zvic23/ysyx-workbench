@@ -13,14 +13,14 @@ extern const VlWide<23>/*735:0*/ Vysyx_22050612_npc__ConstPool__CONST_51213d1f_0
     0x08000031, 0x00500001, 0x00040000
 }};
 
+extern const VlWide<8>/*255:0*/ Vysyx_22050612_npc__ConstPool__CONST_584d532c_0 = {{
+    0xa3560daf, 0x4cc306a9, 0x32b0996e, 0xc90264d9,
+    0x20519148, 0x6c063823, 0xd718840c, 0x0ce10e30
+}};
+
 extern const VlWide<15>/*479:0*/ Vysyx_22050612_npc__ConstPool__CONST_a9b050be_0 = {{
     0x0aa0005f, 0x8000c400, 0x02b00016, 0x40004e00,
     0x00d80007, 0x20000900, 0x40040300, 0x10040080,
     0x08020060, 0x08008040, 0xe0011900, 0x044c0022,
     0x80008900, 0x020a0010, 0x00000100
-}};
-
-extern const VlWide<8>/*255:0*/ Vysyx_22050612_npc__ConstPool__CONST_c5fdb82d_0 = {{
-    0xa3560daf, 0x4cc306a9, 0x32b0996e, 0xc88264d9,
-    0x1c119028, 0x42063603, 0x87186b8c, 0x00000670
 }};
