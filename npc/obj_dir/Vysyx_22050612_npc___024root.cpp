@@ -884,8 +884,8 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
     __Vtemp1884[0x1cU] = (0x20000U | ((IData)((vlSelf->pc 
                                                >> 0x20U)) 
                                       >> 0x18U));
-    __Vtemp1884[0x1dU] = 0U;
-    __Vtemp1884[0x1eU] = 0x8000000U;
+    __Vtemp1884[0x1dU] = 0xf0000000U;
+    __Vtemp1884[0x1eU] = 0xfffffffU;
     __Vtemp1884[0x1fU] = (0x1b00U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                                      << 0x10U));
     __Vtemp1884[0x20U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
