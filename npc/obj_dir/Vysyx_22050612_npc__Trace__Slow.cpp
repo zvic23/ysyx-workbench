@@ -339,7 +339,7 @@ void Vysyx_22050612_npc___024root__traceInitSub0(Vysyx_22050612_npc___024root* v
         tracep->declQuad(c+788,"ysyx_22050612_npc exu alu0 sltu_result", false,-1, 63,0);
         tracep->declQuad(c+790,"ysyx_22050612_npc exu alu0 sll_result", false,-1, 63,0);
         tracep->declQuad(c+792,"ysyx_22050612_npc exu alu0 srl_result", false,-1, 63,0);
-        tracep->declQuad(c+792,"ysyx_22050612_npc exu alu0 sra_result", false,-1, 63,0);
+        tracep->declQuad(c+790,"ysyx_22050612_npc exu alu0 sra_result", false,-1, 63,0);
         tracep->declQuad(c+794,"ysyx_22050612_npc exu alu0 C", false,-1, 63,0);
         tracep->declBus(c+1272,"ysyx_22050612_npc exu alu0 alu_result_select NR_KEY", false,-1, 31,0);
         tracep->declBus(c+1297,"ysyx_22050612_npc exu alu0 alu_result_select KEY_LEN", false,-1, 31,0);
