@@ -283,7 +283,7 @@ always @(posedge clk) begin
 
 	if (opcode[7]==1'b1 && gpr[10]==64'b0) ebreak(0);
 	else if (opcode[7]==1'b1 && gpr[10]!=64'b0) ebreak(1);
-	else if (opcode == 20'd16) ebreak(1);
+	else if (opcode == 20'd12) ebreak(1);
 end
 
 

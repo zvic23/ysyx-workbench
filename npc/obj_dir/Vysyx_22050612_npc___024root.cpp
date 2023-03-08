@@ -58,7 +58,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
                  >> 7U) & (0ULL != vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
                            [0xaU]))) {
         Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024unit(1U);
-    } else if ((0x10U == vlSelf->ysyx_22050612_npc__DOT__opcode)) {
+    } else if ((0xcU == vlSelf->ysyx_22050612_npc__DOT__opcode)) {
         Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024unit(1U);
     }
     if (((0U != (0x1fU & (vlSelf->ysyx_22050612_npc__DOT__inst 
