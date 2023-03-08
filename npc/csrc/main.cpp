@@ -64,6 +64,10 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   	long long raddr_set = raddr & ~0x7ull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
   }
+  else {
+  	long long raddr_set = raddr & ~0x7ull;
+	memcpy(rdata, &pmem[raddr_set+0x30000], 8);
+  }
 }
 extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // 总是往地址为`waddr & ~0x7ull`的8字节按写掩码`wmask`写入`wdata`
@@ -75,6 +79,15 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   	for(int i=0;i<8;i++){
   	        if( (wmask>>i)&1 == 1){
   	      		pmem[waddr_set-0x80000000+i]=(uint8_t)(wdata>>(i*8));
+		}
+  	}
+  }
+  else{
+			printf("write  addr:%llx,  value:%llx\n",waddr,wdata);
+  	long long waddr_set = waddr & ~0x7ull;
+  	for(int i=0;i<8;i++){
+  	        if( (wmask>>i)&1 == 1){
+  	      		pmem[waddr_set+0x30000+i]=(uint8_t)(wdata>>(i*8));
 		}
   	}
   }
