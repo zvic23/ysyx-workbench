@@ -22,40 +22,42 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
     // Variables
     CData/*4:0*/ __Vdlyvdim0__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0;
     CData/*0:0*/ __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0;
-    VlWide<40>/*1279:0*/ __Vtemp1867;
-    VlWide<63>/*2015:0*/ __Vtemp1884;
-    VlWide<19>/*607:0*/ __Vtemp1898;
-    VlWide<82>/*2623:0*/ __Vtemp1899;
-    VlWide<84>/*2687:0*/ __Vtemp1900;
-    VlWide<19>/*607:0*/ __Vtemp1913;
-    VlWide<103>/*3295:0*/ __Vtemp1914;
-    VlWide<3>/*95:0*/ __Vtemp1915;
-    VlWide<9>/*287:0*/ __Vtemp1922;
-    VlWide<11>/*351:0*/ __Vtemp1924;
-    VlWide<13>/*415:0*/ __Vtemp1926;
-    VlWide<3>/*95:0*/ __Vtemp1928;
-    VlWide<9>/*287:0*/ __Vtemp1935;
-    VlWide<11>/*351:0*/ __Vtemp1937;
-    VlWide<13>/*415:0*/ __Vtemp1939;
-    VlWide<15>/*479:0*/ __Vtemp1941;
-    VlWide<17>/*543:0*/ __Vtemp1942;
-    VlWide<3>/*95:0*/ __Vtemp1958;
-    VlWide<63>/*2015:0*/ __Vtemp1989;
-    VlWide<19>/*607:0*/ __Vtemp2003;
-    VlWide<82>/*2623:0*/ __Vtemp2004;
-    VlWide<84>/*2687:0*/ __Vtemp2005;
-    VlWide<19>/*607:0*/ __Vtemp2018;
-    VlWide<103>/*3295:0*/ __Vtemp2019;
-    VlWide<3>/*95:0*/ __Vtemp2783;
-    VlWide<3>/*95:0*/ __Vtemp3066;
-    VlWide<3>/*95:0*/ __Vtemp3114;
-    VlWide<10>/*319:0*/ __Vtemp3149;
-    VlWide<63>/*2015:0*/ __Vtemp3232;
-    VlWide<19>/*607:0*/ __Vtemp3246;
-    VlWide<82>/*2623:0*/ __Vtemp3247;
-    VlWide<84>/*2687:0*/ __Vtemp3248;
-    VlWide<11>/*351:0*/ __Vtemp3255;
-    VlWide<95>/*3039:0*/ __Vtemp3256;
+    VlWide<35>/*1119:0*/ __Vtemp1898;
+    VlWide<40>/*1279:0*/ __Vtemp1902;
+    VlWide<63>/*2015:0*/ __Vtemp1919;
+    VlWide<19>/*607:0*/ __Vtemp1933;
+    VlWide<82>/*2623:0*/ __Vtemp1934;
+    VlWide<84>/*2687:0*/ __Vtemp1935;
+    VlWide<19>/*607:0*/ __Vtemp1949;
+    VlWide<103>/*3295:0*/ __Vtemp1950;
+    VlWide<105>/*3359:0*/ __Vtemp1951;
+    VlWide<3>/*95:0*/ __Vtemp1952;
+    VlWide<9>/*287:0*/ __Vtemp1959;
+    VlWide<11>/*351:0*/ __Vtemp1961;
+    VlWide<13>/*415:0*/ __Vtemp1963;
+    VlWide<3>/*95:0*/ __Vtemp1965;
+    VlWide<9>/*287:0*/ __Vtemp1972;
+    VlWide<11>/*351:0*/ __Vtemp1974;
+    VlWide<13>/*415:0*/ __Vtemp1976;
+    VlWide<15>/*479:0*/ __Vtemp1978;
+    VlWide<17>/*543:0*/ __Vtemp1979;
+    VlWide<63>/*2015:0*/ __Vtemp2026;
+    VlWide<19>/*607:0*/ __Vtemp2040;
+    VlWide<82>/*2623:0*/ __Vtemp2041;
+    VlWide<84>/*2687:0*/ __Vtemp2042;
+    VlWide<19>/*607:0*/ __Vtemp2056;
+    VlWide<103>/*3295:0*/ __Vtemp2057;
+    VlWide<105>/*3359:0*/ __Vtemp2058;
+    VlWide<3>/*95:0*/ __Vtemp2840;
+    VlWide<3>/*95:0*/ __Vtemp3123;
+    VlWide<3>/*95:0*/ __Vtemp3171;
+    VlWide<10>/*319:0*/ __Vtemp3206;
+    VlWide<63>/*2015:0*/ __Vtemp3289;
+    VlWide<19>/*607:0*/ __Vtemp3303;
+    VlWide<82>/*2623:0*/ __Vtemp3304;
+    VlWide<84>/*2687:0*/ __Vtemp3305;
+    VlWide<14>/*447:0*/ __Vtemp3314;
+    VlWide<98>/*3135:0*/ __Vtemp3315;
     QData/*63:0*/ __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0;
     // Body
     __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0 = 0U;
@@ -654,6 +656,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
            | (vlSelf->ysyx_22050612_npc__DOT__idu__DOT____Vcellinp__decode2____pinNumber2 
               == vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__key_list
               [0x12U]));
+    vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__hit 
+        = ((IData)(vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__hit) 
+           | (vlSelf->ysyx_22050612_npc__DOT__idu__DOT____Vcellinp__decode2____pinNumber2 
+              == vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__key_list
+              [0x13U]));
     vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__lut_out 
         = ((- (IData)((vlSelf->ysyx_22050612_npc__DOT__idu__DOT____Vcellinp__decode2____pinNumber2 
                        == vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__key_list
@@ -767,6 +774,12 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                           == vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__key_list
                           [0x12U]))) & vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__data_list
               [0x12U]));
+    vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__lut_out 
+        = ((IData)(vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__lut_out) 
+           | ((- (IData)((vlSelf->ysyx_22050612_npc__DOT__idu__DOT____Vcellinp__decode2____pinNumber2 
+                          == vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__key_list
+                          [0x13U]))) & vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__data_list
+              [0x13U]));
     vlSelf->ysyx_22050612_npc__DOT__idu__DOT____Vcellout__decode2____pinNumber1 
         = vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode2__DOT__i0__DOT__lut_out;
     vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode3__DOT__i0__DOT__hit 
@@ -802,428 +815,564 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
               [2U]));
     vlSelf->ysyx_22050612_npc__DOT__idu__DOT____Vcellout__decode3____pinNumber1 
         = vlSelf->ysyx_22050612_npc__DOT__idu__DOT__decode3__DOT__i0__DOT__lut_out;
-    __Vtemp1867[0x15U] = (0x15000U | ((0xff00000U & 
-                                       ((IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))) 
-                                        << 0x14U)) 
-                                      | (0xf0000000U 
-                                         & ((IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))) 
-                                            << 0x14U))));
-    __Vtemp1867[0x16U] = ((((IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))) 
-                            >> 0xcU) | (0xff00000U 
-                                        & ((IData)(
+    __Vtemp1898[0x10U] = (0x150U | ((0xff000U & ((IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))) 
+                                                 << 0xcU)) 
+                                    | ((0xf00000U & 
+                                        ((IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))) 
+                                         << 0xcU)) 
+                                       | (0xff000000U 
+                                          & ((IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))) 
+                                             << 0xcU)))));
+    __Vtemp1898[0x11U] = ((((IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))) 
+                            >> 0x14U) | (0xff000U & 
+                                         ((IData)(((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                                   >> 0x20U)) 
+                                          << 0xcU))) 
+                          | ((0xf00000U & ((IData)(
                                                    ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
                                                     >> 0x20U)) 
-                                           << 0x14U))) 
-                          | (0xf0000000U & ((IData)(
-                                                    ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
-                                                     >> 0x20U)) 
-                                            << 0x14U)));
-    __Vtemp1867[0x17U] = ((IData)(((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
-                                   >> 0x20U)) >> 0xcU);
-    __Vtemp1867[0x19U] = ((((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                            >> 0x18U) | (0xfffff00U 
-                                         & ((IData)(
-                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     >> 0x20U)) 
-                                            << 8U))) 
-                          | (0xf0000000U & ((IData)(
-                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     >> 0x20U)) 
-                                            << 8U)));
-    __Vtemp1867[0x1aU] = (0x1300000U | (((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                  >> 0x20U)) 
-                                         >> 0x18U) 
-                                        | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                           << 0x1cU)));
-    __Vtemp1867[0x1bU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                           >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                              >> 0x20U)) 
-                                     << 0x1cU));
-    __Vtemp1867[0x21U] = ((((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                            >> 0x1cU) | (0xffffff0U 
-                                         & ((IData)(
-                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     >> 0x20U)) 
-                                            << 4U))) 
-                          | (0xf0000000U & ((IData)(
-                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     >> 0x20U)) 
-                                            << 4U)));
-    __Vtemp1867[0x22U] = (0x70000U | (((0xf000000U 
-                                        & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                           << 0x18U)) 
-                                       | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                   >> 0x20U)) 
-                                          >> 0x1cU)) 
-                                      | (0xf0000000U 
-                                         & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                            << 0x18U))));
-    __Vtemp1867[0x23U] = ((((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                            >> 8U) | (0xf000000U & 
-                                      ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                >> 0x20U)) 
-                                       << 0x18U))) 
-                          | (0xf0000000U & ((IData)(
-                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     >> 0x20U)) 
-                                            << 0x18U)));
-    __Vtemp1884[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1);
-    __Vtemp1884[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                               >> 0x20U));
-    __Vtemp1884[2U] = (9U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                             << 0x14U));
-    __Vtemp1884[3U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                        >> 0xcU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                             >> 0x20U)) 
-                                    << 0x14U));
-    __Vtemp1884[4U] = (0x800000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                             >> 0x20U)) 
-                                    >> 0xcU));
-    __Vtemp1884[5U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                       << 8U);
-    __Vtemp1884[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                        >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                              >> 0x20U)) 
-                                     << 8U));
-    __Vtemp1884[7U] = (0x700U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                  << 0x1cU) | ((IData)(
-                                                       (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                           << 0xcU)) 
+                             | (0xff000000U & ((IData)(
+                                                       ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
                                                         >> 0x20U)) 
-                                               >> 0x18U)));
-    __Vtemp1884[8U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                        >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                           >> 0x20U)) 
-                                  << 0x1cU));
-    __Vtemp1884[9U] = (0x60000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                               >> 0x20U)) 
-                                      >> 4U));
-    __Vtemp1884[0xaU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                         << 0x10U);
-    __Vtemp1884[0xbU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                          >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                >> 0x20U)) 
-                                       << 0x10U));
-    __Vtemp1884[0xcU] = (0x50000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                              >> 0x20U)) 
-                                     >> 0x10U));
-    __Vtemp1884[0xdU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                         << 4U);
-    __Vtemp1884[0xeU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                          >> 0x1cU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                >> 0x20U)) 
-                                       << 4U));
-    __Vtemp1884[0xfU] = (0x40U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                   << 0x18U) | ((IData)(
-                                                        (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                         >> 0x20U)) 
-                                                >> 0x1cU)));
-    __Vtemp1884[0x10U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                           >> 8U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                              >> 0x20U)) 
-                                     << 0x18U));
-    __Vtemp1884[0x11U] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                   >> 0x20U)) >> 8U);
-    __Vtemp1884[0x12U] = (0xcU | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                  << 0xcU));
-    __Vtemp1884[0x13U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                           >> 0x14U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                 >> 0x20U)) 
-                                        << 0xcU));
-    __Vtemp1884[0x14U] = (0x800000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                >> 0x20U)) 
-                                       >> 0x14U));
-    __Vtemp1884[0x15U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1);
-    __Vtemp1884[0x16U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                  >> 0x20U));
-    __Vtemp1884[0x17U] = (0x400U | ((IData)(vlSelf->pc) 
-                                    << 0x14U));
-    __Vtemp1884[0x18U] = (((IData)(vlSelf->pc) >> 0xcU) 
-                          | ((IData)((vlSelf->pc >> 0x20U)) 
-                             << 0x14U));
-    __Vtemp1884[0x19U] = (0x30000000U | ((IData)((vlSelf->pc 
+                                               << 0xcU))));
+    __Vtemp1898[0x12U] = (0x14000000U | ((IData)(((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
                                                   >> 0x20U)) 
-                                         >> 0xcU));
-    __Vtemp1884[0x1aU] = ((IData)(vlSelf->pc) << 8U);
-    __Vtemp1884[0x1bU] = (((IData)(vlSelf->pc) >> 0x18U) 
-                          | ((IData)((vlSelf->pc >> 0x20U)) 
-                             << 8U));
-    __Vtemp1884[0x1cU] = (0x20000U | (((IData)(((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
-                                                << 0x20U)) 
-                                       << 0x1cU) | 
-                                      ((IData)((vlSelf->pc 
-                                                >> 0x20U)) 
-                                       >> 0x18U)));
-    __Vtemp1884[0x1dU] = (((IData)(((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
-                                    << 0x20U)) >> 4U) 
-                          | ((IData)((((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
-                                       << 0x20U) >> 0x20U)) 
-                             << 0x1cU));
-    __Vtemp1884[0x1eU] = ((IData)((((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
-                                    << 0x20U) >> 0x20U)) 
-                          >> 4U);
-    __Vtemp1884[0x1fU] = (0x1b00U | ((0xfff0000U & 
-                                      ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                       << 0x10U)) | 
-                                     (0xf0000000U & 
-                                      ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                       << 0x10U))));
-    __Vtemp1884[0x20U] = ((((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                            >> 0x10U) | (0xfff0000U 
-                                         & ((IData)(
-                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     >> 0x20U)) 
-                                            << 0x10U))) 
-                          | (0xf0000000U & ((IData)(
-                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     >> 0x20U)) 
-                                            << 0x10U)));
-    __Vtemp1884[0x21U] = (0x90000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                  >> 0x20U)) 
-                                         >> 0x10U));
-    __Vtemp1884[0x22U] = (1U | ((0xffffff0U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                               << 4U)) 
-                                | (0xf0000000U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                                  << 4U))));
-    __Vtemp1884[0x23U] = ((((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                            >> 0x1cU) | (0xffffff0U 
-                                         & ((IData)(
-                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     >> 0x20U)) 
-                                            << 4U))) 
-                          | (0xf0000000U & ((IData)(
-                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     >> 0x20U)) 
-                                            << 4U)));
-    __Vtemp1884[0x24U] = (0x180000U | (((0xf000000U 
+                                         >> 0x14U));
+    __Vtemp1898[0x14U] = ((0xfffffU & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                               >> 0x20U))) 
+                          | ((0xf00000U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                   >> 0x20U))) 
+                             | (0xff000000U & (IData)(
+                                                      (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                       >> 0x20U)))));
+    __Vtemp1898[0x15U] = (0x13000U | ((0xf00000U & 
+                                       ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                        << 0x14U)) 
+                                      | (0xff000000U 
                                          & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                            << 0x18U)) 
-                                        | ((IData)(
+                                            << 0x14U))));
+    __Vtemp1898[0x16U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                           >> 0xcU) | ((0xf00000U & 
+                                        ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                  >> 0x20U)) 
+                                         << 0x14U)) 
+                                       | (0xff000000U 
+                                          & ((IData)(
+                                                     (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                      >> 0x20U)) 
+                                             << 0x14U))));
+    __Vtemp1898[0x1cU] = ((0xfffffU & ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                >> 0x20U)) 
+                                       >> 4U)) | ((0xf00000U 
+                                                   & ((IData)(
+                                                              (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                               >> 0x20U)) 
+                                                      >> 4U)) 
+                                                  | (0xf000000U 
+                                                     & ((IData)(
+                                                                (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                                 >> 0x20U)) 
+                                                        >> 4U))));
+    __Vtemp1898[0x1dU] = (0x700U | ((0xf0000U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                                 << 0x10U)) 
+                                    | ((0xf00000U & 
+                                        ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                         << 0x10U)) 
+                                       | (0xff000000U 
+                                          & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                             << 0x10U)))));
+    __Vtemp1898[0x1eU] = ((((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                            >> 0x10U) | (0xf0000U & 
+                                         ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                   >> 0x20U)) 
+                                          << 0x10U))) 
+                          | ((0xf00000U & ((IData)(
                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                                     >> 0x20U)) 
-                                           >> 0x1cU)) 
+                                           << 0x10U)) 
+                             | (0xff000000U & ((IData)(
+                                                       (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                        >> 0x20U)) 
+                                               << 0x10U))));
+    __Vtemp1902[0xcU] = ((((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                           >> 0x1cU) | (0xf0U & ((IData)(
+                                                         (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                          >> 0x20U)) 
+                                                 << 4U))) 
+                         | ((0xfffff00U & ((IData)(
+                                                   (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                    >> 0x20U)) 
+                                           << 4U)) 
+                            | (0xf0000000U & ((IData)(
+                                                      (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                       >> 0x20U)) 
+                                              << 4U))));
+    __Vtemp1902[0xdU] = (0x180000U | (((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                >> 0x20U)) 
+                                       >> 0x1cU) | 
+                                      ((0xf000000U 
+                                        & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                           << 0x18U)) 
                                        | (0xf0000000U 
                                           & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                             << 0x18U))));
-    __Vtemp1884[0x25U] = ((((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                            >> 8U) | (0xf000000U & 
-                                      ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                >> 0x20U)) 
-                                       << 0x18U))) 
-                          | (0xf0000000U & ((IData)(
-                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     >> 0x20U)) 
-                                            << 0x18U)));
-    __Vtemp1884[0x26U] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                   >> 0x20U)) >> 8U);
-    __Vtemp1884[0x27U] = (0x170U | ((0xffff000U & ((IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))) 
+                                             << 0x18U)))));
+    __Vtemp1902[0xeU] = ((0xffU & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                   >> 8U)) | (((0xffff00U 
+                                                & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                                   >> 8U)) 
+                                               | (0xf000000U 
+                                                  & ((IData)(
+                                                             (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                              >> 0x20U)) 
+                                                     << 0x18U))) 
+                                              | (0xf0000000U 
+                                                 & ((IData)(
+                                                            (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                             >> 0x20U)) 
+                                                    << 0x18U))));
+    __Vtemp1902[0x10U] = (0x170U | ((0xffff000U & ((IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))) 
                                                    << 0xcU)) 
                                     | (0xf0000000U 
                                        & ((IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))) 
                                           << 0xcU))));
-    __Vtemp1884[0x28U] = ((((IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))) 
-                            >> 0x14U) | (0xffff000U 
-                                         & ((IData)(
-                                                    ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
-                                                     >> 0x20U)) 
-                                            << 0xcU))) 
-                          | (0xf0000000U & ((IData)(
-                                                    ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
-                                                     >> 0x20U)) 
-                                            << 0xcU)));
-    __Vtemp1884[0x29U] = (0x16000000U | ((IData)(((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
-                                                  >> 0x20U)) 
-                                         >> 0x14U));
-    __Vtemp1884[0x2aU] = ((0xfffffffU & (IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)))) 
-                          | (0xf0000000U & (IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)))));
-    __Vtemp1884[0x2bU] = ((0xfffffffU & (IData)(((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
-                                                 >> 0x20U))) 
-                          | (0xf0000000U & (IData)(
+    __Vtemp1902[0x11U] = ((0xffU & ((IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))) 
+                                    >> 0x14U)) | ((
+                                                   (0xf00U 
+                                                    & ((IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))) 
+                                                       >> 0x14U)) 
+                                                   | (0xffff000U 
+                                                      & ((IData)(
+                                                                 ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                                                  >> 0x20U)) 
+                                                         << 0xcU))) 
+                                                  | (0xf0000000U 
+                                                     & ((IData)(
+                                                                ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                                                 >> 0x20U)) 
+                                                        << 0xcU))));
+    __Vtemp1902[0x12U] = (0x16000000U | ((0xffU & ((IData)(
+                                                           ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                                            >> 0x20U)) 
+                                                   >> 0x14U)) 
+                                         | (0xf00U 
+                                            & ((IData)(
+                                                       ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                                        >> 0x20U)) 
+                                               >> 0x14U))));
+    __Vtemp1902[0x13U] = ((0xffU & (IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)))) 
+                          | ((0xfffff00U & (IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)))) 
+                             | (0xf0000000U & (IData)((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1))))));
+    __Vtemp1902[0x14U] = ((0xffU & (IData)(((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                            >> 0x20U))) 
+                          | ((0xfffff00U & (IData)(
                                                    ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
-                                                    >> 0x20U))));
-    __Vtemp1884[0x2cU] = __Vtemp1867[0x15U];
-    __Vtemp1884[0x2dU] = __Vtemp1867[0x16U];
-    __Vtemp1884[0x2eU] = __Vtemp1867[0x17U];
-    __Vtemp1884[0x2fU] = (0x14U | ((0xfffff00U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                                  << 8U)) 
-                                   | (0xf0000000U & 
-                                      ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                       << 8U))));
-    __Vtemp1884[0x30U] = __Vtemp1867[0x19U];
-    __Vtemp1884[0x31U] = __Vtemp1867[0x1aU];
-    __Vtemp1884[0x32U] = __Vtemp1867[0x1bU];
-    __Vtemp1884[0x33U] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                   >> 0x20U)) >> 4U);
-    __Vtemp1884[0x34U] = (0x1200U | ((0xfff0000U & 
+                                                    >> 0x20U))) 
+                             | (0xf0000000U & (IData)(
+                                                      ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                                       >> 0x20U)))));
+    __Vtemp1902[0x1dU] = (0x1200U | ((0xfff0000U & 
                                       ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                                        << 0x10U)) | 
                                      (0xf0000000U & 
                                       ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                                        << 0x10U))));
-    __Vtemp1884[0x35U] = ((((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                            >> 0x10U) | (0xfff0000U 
-                                         & ((IData)(
-                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     >> 0x20U)) 
-                                            << 0x10U))) 
-                          | (0xf0000000U & ((IData)(
-                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     >> 0x20U)) 
-                                            << 0x10U)));
-    __Vtemp1884[0x36U] = (0x80000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                  >> 0x20U)) 
-                                         >> 0x10U));
-    __Vtemp1884[0x37U] = ((0xffffff0U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                         << 4U)) | 
-                          (0xf0000000U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                          << 4U)));
-    __Vtemp1884[0x38U] = __Vtemp1867[0x21U];
-    __Vtemp1884[0x39U] = __Vtemp1867[0x22U];
-    __Vtemp1884[0x3aU] = __Vtemp1867[0x23U];
-    __Vtemp1884[0x3bU] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                   >> 0x20U)) >> 8U);
-    __Vtemp1884[0x3cU] = (0x50U | ((0xffff000U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1902[0x1eU] = ((0xffU & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                    >> 0x10U)) | ((
+                                                   (0xff00U 
+                                                    & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                                       >> 0x10U)) 
+                                                   | (0xfff0000U 
+                                                      & ((IData)(
+                                                                 (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                                  >> 0x20U)) 
+                                                         << 0x10U))) 
+                                                  | (0xf0000000U 
+                                                     & ((IData)(
+                                                                (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                                 >> 0x20U)) 
+                                                        << 0x10U))));
+    __Vtemp1902[0x1fU] = (0x80000000U | ((0xffU & ((IData)(
+                                                           (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                            >> 0x20U)) 
+                                                   >> 0x10U)) 
+                                         | (0xff00U 
+                                            & ((IData)(
+                                                       (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                        >> 0x20U)) 
+                                               >> 0x10U))));
+    __Vtemp1902[0x20U] = ((0xf0U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                    << 4U)) | ((0xfffff00U 
+                                                & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                                   << 4U)) 
+                                               | (0xf0000000U 
+                                                  & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                                     << 4U))));
+    __Vtemp1902[0x25U] = (0x50U | ((0xffff000U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                                                   << 0xcU)) 
                                    | (0xf0000000U & 
                                       ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                                        << 0xcU))));
-    __Vtemp1884[0x3dU] = ((((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                            >> 0x14U) | (0xffff000U 
-                                         & ((IData)(
+    __Vtemp1902[0x26U] = ((0xffU & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                    >> 0x14U)) | ((
+                                                   (0xf00U 
+                                                    & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                                       >> 0x14U)) 
+                                                   | (0xffff000U 
+                                                      & ((IData)(
+                                                                 (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                                  >> 0x20U)) 
+                                                         << 0xcU))) 
+                                                  | (0xf0000000U 
+                                                     & ((IData)(
+                                                                (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                                 >> 0x20U)) 
+                                                        << 0xcU))));
+    __Vtemp1902[0x27U] = (0x4000000U | ((0xffU & ((IData)(
+                                                          (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                           >> 0x20U)) 
+                                                  >> 0x14U)) 
+                                        | (0xf00U & 
+                                           ((IData)(
                                                     (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                                      >> 0x20U)) 
-                                            << 0xcU))) 
-                          | (0xf0000000U & ((IData)(
-                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     >> 0x20U)) 
-                                            << 0xcU)));
-    __Vtemp1884[0x3eU] = (0x4000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                 >> 0x20U)) 
-                                        >> 0x14U));
-    __Vtemp1898[0U] = (0x12U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                << 0x14U));
-    __Vtemp1898[1U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                            >> 0x14U))));
+    __Vtemp1919[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1);
+    __Vtemp1919[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                               >> 0x20U));
+    __Vtemp1919[2U] = (8U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                             << 0x14U));
+    __Vtemp1919[3U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                         >> 0xcU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                              >> 0x20U)) 
                                     << 0x14U));
-    __Vtemp1898[2U] = (0x1100000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                              >> 0x20U)) 
-                                     >> 0xcU));
-    __Vtemp1898[3U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1919[4U] = (0x700000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                             >> 0x20U)) 
+                                    >> 0xcU));
+    __Vtemp1919[5U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                        << 8U);
-    __Vtemp1898[4U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1919[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                         >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                               >> 0x20U)) 
                                      << 8U));
-    __Vtemp1898[5U] = (0x1000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                                   << 0x1cU) | ((IData)(
-                                                        (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                         >> 0x20U)) 
-                                                >> 0x18U)));
-    __Vtemp1898[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1919[7U] = (0x600U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                  << 0x1cU) | ((IData)(
+                                                       (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                        >> 0x20U)) 
+                                               >> 0x18U)));
+    __Vtemp1919[8U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                         >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                            >> 0x20U)) 
                                   << 0x1cU));
-    __Vtemp1898[7U] = (0xf0000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+    __Vtemp1919[9U] = (0x50000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                                >> 0x20U)) 
                                       >> 4U));
-    __Vtemp1898[8U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                       << 0x10U);
-    __Vtemp1898[9U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                        >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                              >> 0x20U)) 
-                                     << 0x10U));
-    __Vtemp1898[0xaU] = (0xe0000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+    __Vtemp1919[0xaU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                         << 0x10U);
+    __Vtemp1919[0xbU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                          >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                >> 0x20U)) 
+                                       << 0x10U));
+    __Vtemp1919[0xcU] = (0x40000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                               >> 0x20U)) 
                                      >> 0x10U));
-    __Vtemp1898[0xbU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1919[0xdU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                          << 4U);
-    __Vtemp1898[0xcU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1919[0xeU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                           >> 0x1cU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                                 >> 0x20U)) 
                                        << 4U));
-    __Vtemp1898[0xdU] = (0xd0U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1919[0xfU] = (0xc000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                     << 0x18U) | ((IData)(
+                                                          (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                           >> 0x20U)) 
+                                                  >> 0x1cU)));
+    __Vtemp1919[0x10U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                           >> 8U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                              >> 0x20U)) 
+                                     << 0x18U));
+    __Vtemp1919[0x11U] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                   >> 0x20U)) >> 8U);
+    __Vtemp1919[0x12U] = (8U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                << 0xcU));
+    __Vtemp1919[0x13U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                           >> 0x14U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                 >> 0x20U)) 
+                                        << 0xcU));
+    __Vtemp1919[0x14U] = (0x400000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                >> 0x20U)) 
+                                       >> 0x14U));
+    __Vtemp1919[0x15U] = (IData)(vlSelf->pc);
+    __Vtemp1919[0x16U] = (IData)((vlSelf->pc >> 0x20U));
+    __Vtemp1919[0x17U] = (0x300U | ((IData)(vlSelf->pc) 
+                                    << 0x14U));
+    __Vtemp1919[0x18U] = (((IData)(vlSelf->pc) >> 0xcU) 
+                          | ((IData)((vlSelf->pc >> 0x20U)) 
+                             << 0x14U));
+    __Vtemp1919[0x19U] = (0x20000000U | ((IData)((vlSelf->pc 
+                                                  >> 0x20U)) 
+                                         >> 0xcU));
+    __Vtemp1919[0x1aU] = ((IData)(((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                   << 0x20U)) << 8U);
+    __Vtemp1919[0x1bU] = (((IData)(((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                    << 0x20U)) >> 0x18U) 
+                          | ((IData)((((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                       << 0x20U) >> 0x20U)) 
+                             << 8U));
+    __Vtemp1919[0x1cU] = (0x1b00000U | (((IData)(((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                                  << 0x20U)) 
+                                         << 0x1cU) 
+                                        | ((IData)(
+                                                   (((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                                     << 0x20U) 
+                                                    >> 0x20U)) 
+                                           >> 0x18U)));
+    __Vtemp1919[0x1dU] = ((0xffU & ((IData)(((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                             << 0x20U)) 
+                                    >> 4U)) | ((0xfffff00U 
+                                                & ((IData)(
+                                                           ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                                            << 0x20U)) 
+                                                   >> 4U)) 
+                                               | ((IData)(
+                                                          (((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                                            << 0x20U) 
+                                                           >> 0x20U)) 
+                                                  << 0x1cU)));
+    __Vtemp1919[0x1eU] = ((0xffU & ((IData)((((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                              << 0x20U) 
+                                             >> 0x20U)) 
+                                    >> 4U)) | (0xfffff00U 
+                                               & ((IData)(
+                                                          (((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
+                                                            << 0x20U) 
+                                                           >> 0x20U)) 
+                                                  >> 4U)));
+    __Vtemp1919[0x1fU] = (0x1a00U | ((0xfff0000U & 
+                                      ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                       << 0x10U)) | 
+                                     (0xf0000000U & 
+                                      ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                       << 0x10U))));
+    __Vtemp1919[0x20U] = ((0xffU & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                    >> 0x10U)) | ((
+                                                   (0xff00U 
+                                                    & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                                       >> 0x10U)) 
+                                                   | (0xfff0000U 
+                                                      & ((IData)(
+                                                                 (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                                  >> 0x20U)) 
+                                                         << 0x10U))) 
+                                                  | (0xf0000000U 
+                                                     & ((IData)(
+                                                                (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                                 >> 0x20U)) 
+                                                        << 0x10U))));
+    __Vtemp1919[0x21U] = (0x90000000U | ((0xffU & ((IData)(
+                                                           (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                            >> 0x20U)) 
+                                                   >> 0x10U)) 
+                                         | (0xff00U 
+                                            & ((IData)(
+                                                       (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                        >> 0x20U)) 
+                                               >> 0x10U))));
+    __Vtemp1919[0x22U] = (1U | ((0xf0U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                          << 4U)) | 
+                                ((0xfffff00U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                                << 4U)) 
+                                 | (0xf0000000U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                                   << 4U)))));
+    __Vtemp1919[0x23U] = __Vtemp1902[0xcU];
+    __Vtemp1919[0x24U] = __Vtemp1902[0xdU];
+    __Vtemp1919[0x25U] = __Vtemp1902[0xeU];
+    __Vtemp1919[0x26U] = ((0xffU & ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                             >> 0x20U)) 
+                                    >> 8U)) | (0xffff00U 
+                                               & ((IData)(
+                                                          (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                           >> 0x20U)) 
+                                                  >> 8U)));
+    __Vtemp1919[0x27U] = __Vtemp1902[0x10U];
+    __Vtemp1919[0x28U] = __Vtemp1902[0x11U];
+    __Vtemp1919[0x29U] = __Vtemp1902[0x12U];
+    __Vtemp1919[0x2aU] = __Vtemp1902[0x13U];
+    __Vtemp1919[0x2bU] = __Vtemp1902[0x14U];
+    __Vtemp1919[0x2cU] = (__Vtemp1898[0x10U] << 8U);
+    __Vtemp1919[0x2dU] = ((__Vtemp1898[0x10U] >> 0x18U) 
+                          | (__Vtemp1898[0x11U] << 8U));
+    __Vtemp1919[0x2eU] = ((__Vtemp1898[0x11U] >> 0x18U) 
+                          | (__Vtemp1898[0x12U] << 8U));
+    __Vtemp1919[0x2fU] = ((__Vtemp1898[0x12U] >> 0x18U) 
+                          | ((0xfffff00U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                            << 8U)) 
+                             | (0xf0000000U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                               << 8U))));
+    __Vtemp1919[0x30U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                           >> 0x18U) | (__Vtemp1898[0x14U] 
+                                        << 8U));
+    __Vtemp1919[0x31U] = ((__Vtemp1898[0x14U] >> 0x18U) 
+                          | (__Vtemp1898[0x15U] << 8U));
+    __Vtemp1919[0x32U] = ((__Vtemp1898[0x15U] >> 0x18U) 
+                          | (__Vtemp1898[0x16U] << 8U));
+    __Vtemp1919[0x33U] = ((__Vtemp1898[0x16U] >> 0x18U) 
+                          | (0xfffff00U & ((IData)(
+                                                   (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                    >> 0x20U)) 
+                                           >> 4U)));
+    __Vtemp1919[0x34U] = __Vtemp1902[0x1dU];
+    __Vtemp1919[0x35U] = __Vtemp1902[0x1eU];
+    __Vtemp1919[0x36U] = __Vtemp1902[0x1fU];
+    __Vtemp1919[0x37U] = __Vtemp1902[0x20U];
+    __Vtemp1919[0x38U] = ((((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                            >> 0x1cU) | (0xf0U & ((IData)(
+                                                          (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                           >> 0x20U)) 
+                                                  << 4U))) 
+                          | (__Vtemp1898[0x1cU] << 8U));
+    __Vtemp1919[0x39U] = ((__Vtemp1898[0x1cU] >> 0x18U) 
+                          | (__Vtemp1898[0x1dU] << 8U));
+    __Vtemp1919[0x3aU] = ((__Vtemp1898[0x1dU] >> 0x18U) 
+                          | (__Vtemp1898[0x1eU] << 8U));
+    __Vtemp1919[0x3bU] = ((__Vtemp1898[0x1eU] >> 0x18U) 
+                          | (0xffff00U & ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                   >> 0x20U)) 
+                                          >> 8U)));
+    __Vtemp1919[0x3cU] = __Vtemp1902[0x25U];
+    __Vtemp1919[0x3dU] = __Vtemp1902[0x26U];
+    __Vtemp1919[0x3eU] = __Vtemp1902[0x27U];
+    __Vtemp1933[0U] = (0x11U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                << 0x14U));
+    __Vtemp1933[1U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                        >> 0xcU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                             >> 0x20U)) 
+                                    << 0x14U));
+    __Vtemp1933[2U] = (0x1000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                              >> 0x20U)) 
+                                     >> 0xcU));
+    __Vtemp1933[3U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                       << 8U);
+    __Vtemp1933[4U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                        >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                              >> 0x20U)) 
+                                     << 8U));
+    __Vtemp1933[5U] = (0xf00U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                                  << 0x1cU) | ((IData)(
+                                                       (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                        >> 0x20U)) 
+                                               >> 0x18U)));
+    __Vtemp1933[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                        >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                           >> 0x20U)) 
+                                  << 0x1cU));
+    __Vtemp1933[7U] = (0xe0000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                               >> 0x20U)) 
+                                      >> 4U));
+    __Vtemp1933[8U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                       << 0x10U);
+    __Vtemp1933[9U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                        >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                              >> 0x20U)) 
+                                     << 0x10U));
+    __Vtemp1933[0xaU] = (0xd0000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                              >> 0x20U)) 
+                                     >> 0x10U));
+    __Vtemp1933[0xbU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                         << 4U);
+    __Vtemp1933[0xcU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                          >> 0x1cU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                >> 0x20U)) 
+                                       << 4U));
+    __Vtemp1933[0xdU] = (0xc0U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                                    << 0x18U) | ((IData)(
                                                         (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                                          >> 0x20U)) 
                                                 >> 0x1cU)));
-    __Vtemp1898[0xeU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1933[0xeU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                           >> 8U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                              >> 0x20U)) 
                                     << 0x18U));
-    __Vtemp1898[0xfU] = (0xc000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+    __Vtemp1933[0xfU] = (0xa000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                                 >> 0x20U)) 
                                        >> 8U));
-    __Vtemp1898[0x10U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1933[0x10U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                           << 0xcU);
-    __Vtemp1898[0x11U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1933[0x11U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                            >> 0x14U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                                  >> 0x20U)) 
                                         << 0xcU));
-    __Vtemp1898[0x12U] = (0xa000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+    __Vtemp1933[0x12U] = (0x9000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                               >> 0x20U)) 
                                      >> 0x14U));
-    VL_CONCAT_WWW(2624,2016,608, __Vtemp1899, __Vtemp1884, __Vtemp1898);
-    VL_CONCAT_WWQ(2688,2624,64, __Vtemp1900, __Vtemp1899, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1);
-    __Vtemp1913[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1);
-    __Vtemp1913[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                               >> 0x20U));
-    __Vtemp1913[2U] = (0x2fU | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    VL_CONCAT_WWW(2624,2016,608, __Vtemp1934, __Vtemp1919, __Vtemp1933);
+    VL_CONCAT_WWQ(2688,2624,64, __Vtemp1935, __Vtemp1934, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1);
+    __Vtemp1949[0U] = (0x2fU | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                                 << 0x14U));
-    __Vtemp1913[3U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1949[1U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                         >> 0xcU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                              >> 0x20U)) 
                                     << 0x14U));
-    __Vtemp1913[4U] = (0x2b00000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+    __Vtemp1949[2U] = (0x2b00000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                               >> 0x20U)) 
                                      >> 0xcU));
-    __Vtemp1913[5U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1949[3U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                        << 8U);
-    __Vtemp1913[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1949[4U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                         >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                               >> 0x20U)) 
                                      << 8U));
-    __Vtemp1913[7U] = (0x2a00U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1949[5U] = (0x2a00U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                                    << 0x1cU) | ((IData)(
                                                         (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                                          >> 0x20U)) 
                                                 >> 0x18U)));
-    __Vtemp1913[8U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1949[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                         >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                            >> 0x20U)) 
                                   << 0x1cU));
-    __Vtemp1913[9U] = (0x80000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+    __Vtemp1949[7U] = (0x80000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                                >> 0x20U)) 
                                       >> 4U));
-    __Vtemp1913[0xaU] = (1U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                               << 0x10U));
-    __Vtemp1913[0xbU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                          >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                >> 0x20U)) 
-                                       << 0x10U));
-    __Vtemp1913[0xcU] = (0x160000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+    __Vtemp1949[8U] = (1U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                             << 0x10U));
+    __Vtemp1949[9U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                        >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                              >> 0x20U)) 
+                                     << 0x10U));
+    __Vtemp1949[0xaU] = (0x160000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                                >> 0x20U)) 
                                       >> 0x10U));
-    __Vtemp1913[0xdU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1949[0xbU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                          << 4U);
-    __Vtemp1913[0xeU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1949[0xcU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                           >> 0x1cU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                                 >> 0x20U)) 
                                        << 4U));
-    __Vtemp1913[0xfU] = (0x150U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+    __Vtemp1949[0xdU] = (0x150U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
                                     << 0x18U) | ((IData)(
                                                          (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
                                                           >> 0x20U)) 
                                                  >> 0x1cU)));
-    __Vtemp1913[0x10U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
-                           >> 8U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                              >> 0x20U)) 
-                                     << 0x18U));
-    __Vtemp1913[0x11U] = (0x13000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                  >> 0x20U)) 
-                                         >> 8U));
-    __Vtemp1913[0x12U] = 0U;
-    VL_CONCAT_WWW(3276,2688,588, __Vtemp1914, __Vtemp1900, __Vtemp1913);
-    VL_ASSIGN_W(3276,vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator0____pinNumber3, __Vtemp1914);
+    __Vtemp1949[0xeU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                          >> 8U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                             >> 0x20U)) 
+                                    << 0x18U));
+    __Vtemp1949[0xfU] = (0x13000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                 >> 0x20U)) 
+                                        >> 8U));
+    __Vtemp1949[0x10U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                          << 0xcU);
+    __Vtemp1949[0x11U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1) 
+                           >> 0x14U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                 >> 0x20U)) 
+                                        << 0xcU));
+    __Vtemp1949[0x12U] = (0x12000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                               >> 0x20U)) 
+                                      >> 0x14U));
+    VL_CONCAT_WWW(3296,2688,608, __Vtemp1950, __Vtemp1935, __Vtemp1949);
+    VL_CONCAT_WWQ(3360,3296,64, __Vtemp1951, __Vtemp1950, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1);
+    VL_ASSIGN_W(3360,vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator0____pinNumber3, __Vtemp1951);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0 
         = ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1)) 
            * (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)));
@@ -1231,8 +1380,8 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
         = VL_DIVS_III(32, (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1), (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0 
         = VL_MODDIVS_III(32, (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1), (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2));
-    VL_EXTEND_WI(67,16, __Vtemp1915, (0xffffU & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)));
-    __Vtemp1922[4U] = (0x80U | ((7U & ((IData)((((QData)((IData)(
+    VL_EXTEND_WI(67,16, __Vtemp1952, (0xffffU & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)));
+    __Vtemp1959[4U] = (0x80U | ((7U & ((IData)((((QData)((IData)(
                                                                  (0xffffU 
                                                                   & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                  << 0x10U) 
@@ -1250,7 +1399,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                        << 0x10U) 
                                                       >> 0x20U)) 
                                              >> 0x1aU)))));
-    __Vtemp1922[5U] = ((7U & ((IData)(((QData)((IData)(
+    __Vtemp1959[5U] = ((7U & ((IData)(((QData)((IData)(
                                                        (0xffffU 
                                                         & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                        << 8U)) >> 0x17U)) 
@@ -1272,7 +1421,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                << 8U) 
                                                               >> 0x20U)) 
                                                      << 9U))));
-    __Vtemp1922[6U] = (0x200U | ((7U & ((IData)((((QData)((IData)(
+    __Vtemp1959[6U] = (0x200U | ((7U & ((IData)((((QData)((IData)(
                                                                   (0xffffU 
                                                                    & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                   << 8U) 
@@ -1285,7 +1434,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                         << 8U) 
                                                        >> 0x20U)) 
                                               >> 0x17U)) 
-                                    | ((__Vtemp1915[0U] 
+                                    | ((__Vtemp1952[0U] 
                                         << 0xcU) | 
                                        (0x1c0U & ((IData)(
                                                           (((QData)((IData)(
@@ -1294,27 +1443,27 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                             << 8U) 
                                                            >> 0x20U)) 
                                                   >> 0x17U))))));
-    __Vtemp1922[7U] = ((7U & (__Vtemp1915[0U] >> 0x14U)) 
-                       | ((0x38U & (__Vtemp1915[0U] 
+    __Vtemp1959[7U] = ((7U & (__Vtemp1952[0U] >> 0x14U)) 
+                       | ((0x38U & (__Vtemp1952[0U] 
                                     >> 0x14U)) | ((0x1c0U 
-                                                   & (__Vtemp1915[0U] 
+                                                   & (__Vtemp1952[0U] 
                                                       >> 0x14U)) 
                                                   | ((0xe00U 
-                                                      & (__Vtemp1915[0U] 
+                                                      & (__Vtemp1952[0U] 
                                                          >> 0x14U)) 
-                                                     | (__Vtemp1915[1U] 
+                                                     | (__Vtemp1952[1U] 
                                                         << 0xcU)))));
-    __Vtemp1922[8U] = ((7U & (__Vtemp1915[1U] >> 0x14U)) 
-                       | ((0x38U & (__Vtemp1915[1U] 
+    __Vtemp1959[8U] = ((7U & (__Vtemp1952[1U] >> 0x14U)) 
+                       | ((0x38U & (__Vtemp1952[1U] 
                                     >> 0x14U)) | ((0x1c0U 
-                                                   & (__Vtemp1915[1U] 
+                                                   & (__Vtemp1952[1U] 
                                                       >> 0x14U)) 
                                                   | ((0xe00U 
-                                                      & (__Vtemp1915[1U] 
+                                                      & (__Vtemp1952[1U] 
                                                          >> 0x14U)) 
-                                                     | (__Vtemp1915[2U] 
+                                                     | (__Vtemp1952[2U] 
                                                         << 0xcU)))));
-    __Vtemp1924[4U] = (0xc0U | ((7U & ((IData)((((QData)((IData)(
+    __Vtemp1961[4U] = (0xc0U | ((7U & ((IData)((((QData)((IData)(
                                                                  (0xffffU 
                                                                   & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                  << 0x18U) 
@@ -1332,7 +1481,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                        << 0x18U) 
                                                       >> 0x20U)) 
                                              >> 0x1aU)))));
-    __Vtemp1924[5U] = ((7U & ((IData)(((QData)((IData)(
+    __Vtemp1961[5U] = ((7U & ((IData)(((QData)((IData)(
                                                        (0xffffU 
                                                         & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                        << 0x10U)) >> 0x17U)) 
@@ -1354,7 +1503,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                << 0x10U) 
                                                               >> 0x20U)) 
                                                      << 9U))));
-    __Vtemp1926[4U] = (0x100U | ((7U & ((IData)((((QData)((IData)(
+    __Vtemp1963[4U] = (0x100U | ((7U & ((IData)((((QData)((IData)(
                                                                   (0xffffU 
                                                                    & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                   << 0x20U) 
@@ -1372,7 +1521,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                             << 0x20U) 
                                                            >> 0x20U)) 
                                                   >> 0x1aU)))));
-    __Vtemp1926[5U] = ((7U & ((IData)(((QData)((IData)(
+    __Vtemp1963[5U] = ((7U & ((IData)(((QData)((IData)(
                                                        (0xffffU 
                                                         & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                        << 0x18U)) >> 0x17U)) 
@@ -1394,9 +1543,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                << 0x18U) 
                                                               >> 0x20U)) 
                                                      << 9U))));
-    __Vtemp1926[9U] = ((7U & (__Vtemp1922[4U] >> 0x1aU)) 
-                       | ((0x38U & (__Vtemp1922[4U] 
-                                    >> 0x1aU)) | (__Vtemp1922[5U] 
+    __Vtemp1963[9U] = ((7U & (__Vtemp1959[4U] >> 0x1aU)) 
+                       | ((0x38U & (__Vtemp1959[4U] 
+                                    >> 0x1aU)) | (__Vtemp1959[5U] 
                                                   << 6U)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_twobyte____pinNumber3[0U] 
         = (IData)(((QData)((IData)((0xffffU & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
@@ -1437,49 +1586,49 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
             | ((IData)((((QData)((IData)((0xffffU & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                          << 0x20U) >> 0x20U)) << 6U)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_twobyte____pinNumber3[6U] 
-        = __Vtemp1926[4U];
+        = __Vtemp1963[4U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_twobyte____pinNumber3[7U] 
-        = __Vtemp1926[5U];
+        = __Vtemp1963[5U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_twobyte____pinNumber3[8U] 
         = ((7U & ((IData)((((QData)((IData)((0xffffU 
                                              & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                             << 0x18U) >> 0x20U)) >> 0x17U)) 
-           | (__Vtemp1924[4U] << 3U));
+           | (__Vtemp1961[4U] << 3U));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_twobyte____pinNumber3[9U] 
-        = ((__Vtemp1924[4U] >> 0x1dU) | (__Vtemp1924[5U] 
+        = ((__Vtemp1961[4U] >> 0x1dU) | (__Vtemp1961[5U] 
                                          << 3U));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_twobyte____pinNumber3[0xaU] 
-        = ((__Vtemp1924[5U] >> 0x1dU) | ((0x38U & ((IData)(
+        = ((__Vtemp1961[5U] >> 0x1dU) | ((0x38U & ((IData)(
                                                            (((QData)((IData)(
                                                                              (0xffffU 
                                                                               & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                              << 0x10U) 
                                                             >> 0x20U)) 
                                                    >> 0x14U)) 
-                                         | (__Vtemp1922[4U] 
+                                         | (__Vtemp1959[4U] 
                                             << 6U)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_twobyte____pinNumber3[0xbU] 
-        = __Vtemp1926[9U];
+        = __Vtemp1963[9U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_twobyte____pinNumber3[0xcU] 
-        = ((7U & (__Vtemp1922[5U] >> 0x1aU)) | ((0x38U 
-                                                 & (__Vtemp1922[5U] 
+        = ((7U & (__Vtemp1959[5U] >> 0x1aU)) | ((0x38U 
+                                                 & (__Vtemp1959[5U] 
                                                     >> 0x1aU)) 
-                                                | (__Vtemp1922[6U] 
+                                                | (__Vtemp1959[6U] 
                                                    << 6U)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_twobyte____pinNumber3[0xdU] 
-        = ((7U & (__Vtemp1922[6U] >> 0x1aU)) | ((0x38U 
-                                                 & (__Vtemp1922[6U] 
+        = ((7U & (__Vtemp1959[6U] >> 0x1aU)) | ((0x38U 
+                                                 & (__Vtemp1959[6U] 
                                                     >> 0x1aU)) 
-                                                | (__Vtemp1922[7U] 
+                                                | (__Vtemp1959[7U] 
                                                    << 6U)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_twobyte____pinNumber3[0xeU] 
-        = ((7U & (__Vtemp1922[7U] >> 0x1aU)) | ((0x38U 
-                                                 & (__Vtemp1922[7U] 
+        = ((7U & (__Vtemp1959[7U] >> 0x1aU)) | ((0x38U 
+                                                 & (__Vtemp1959[7U] 
                                                     >> 0x1aU)) 
-                                                | (__Vtemp1922[8U] 
+                                                | (__Vtemp1959[8U] 
                                                    << 6U)));
-    VL_EXTEND_WI(67,8, __Vtemp1928, (0xffU & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)));
-    __Vtemp1935[4U] = (0x80U | ((7U & ((IData)((((QData)((IData)(
+    VL_EXTEND_WI(67,8, __Vtemp1965, (0xffU & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)));
+    __Vtemp1972[4U] = (0x80U | ((7U & ((IData)((((QData)((IData)(
                                                                  (0xffU 
                                                                   & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                  << 0x10U) 
@@ -1497,7 +1646,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                        << 0x10U) 
                                                       >> 0x20U)) 
                                              >> 0x1aU)))));
-    __Vtemp1935[5U] = ((7U & ((IData)(((QData)((IData)(
+    __Vtemp1972[5U] = ((7U & ((IData)(((QData)((IData)(
                                                        (0xffU 
                                                         & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                        << 8U)) >> 0x17U)) 
@@ -1519,7 +1668,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                << 8U) 
                                                               >> 0x20U)) 
                                                      << 9U))));
-    __Vtemp1935[6U] = (0x200U | ((7U & ((IData)((((QData)((IData)(
+    __Vtemp1972[6U] = (0x200U | ((7U & ((IData)((((QData)((IData)(
                                                                   (0xffU 
                                                                    & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                   << 8U) 
@@ -1532,7 +1681,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                         << 8U) 
                                                        >> 0x20U)) 
                                               >> 0x17U)) 
-                                    | ((__Vtemp1928[0U] 
+                                    | ((__Vtemp1965[0U] 
                                         << 0xcU) | 
                                        (0x1c0U & ((IData)(
                                                           (((QData)((IData)(
@@ -1541,27 +1690,27 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                             << 8U) 
                                                            >> 0x20U)) 
                                                   >> 0x17U))))));
-    __Vtemp1935[7U] = ((7U & (__Vtemp1928[0U] >> 0x14U)) 
-                       | ((0x38U & (__Vtemp1928[0U] 
+    __Vtemp1972[7U] = ((7U & (__Vtemp1965[0U] >> 0x14U)) 
+                       | ((0x38U & (__Vtemp1965[0U] 
                                     >> 0x14U)) | ((0x1c0U 
-                                                   & (__Vtemp1928[0U] 
+                                                   & (__Vtemp1965[0U] 
                                                       >> 0x14U)) 
                                                   | ((0xe00U 
-                                                      & (__Vtemp1928[0U] 
+                                                      & (__Vtemp1965[0U] 
                                                          >> 0x14U)) 
-                                                     | (__Vtemp1928[1U] 
+                                                     | (__Vtemp1965[1U] 
                                                         << 0xcU)))));
-    __Vtemp1935[8U] = ((7U & (__Vtemp1928[1U] >> 0x14U)) 
-                       | ((0x38U & (__Vtemp1928[1U] 
+    __Vtemp1972[8U] = ((7U & (__Vtemp1965[1U] >> 0x14U)) 
+                       | ((0x38U & (__Vtemp1965[1U] 
                                     >> 0x14U)) | ((0x1c0U 
-                                                   & (__Vtemp1928[1U] 
+                                                   & (__Vtemp1965[1U] 
                                                       >> 0x14U)) 
                                                   | ((0xe00U 
-                                                      & (__Vtemp1928[1U] 
+                                                      & (__Vtemp1965[1U] 
                                                          >> 0x14U)) 
-                                                     | (__Vtemp1928[2U] 
+                                                     | (__Vtemp1965[2U] 
                                                         << 0xcU)))));
-    __Vtemp1937[4U] = (0xc0U | ((7U & ((IData)((((QData)((IData)(
+    __Vtemp1974[4U] = (0xc0U | ((7U & ((IData)((((QData)((IData)(
                                                                  (0xffU 
                                                                   & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                  << 0x18U) 
@@ -1579,7 +1728,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                        << 0x18U) 
                                                       >> 0x20U)) 
                                              >> 0x1aU)))));
-    __Vtemp1937[5U] = ((7U & ((IData)(((QData)((IData)(
+    __Vtemp1974[5U] = ((7U & ((IData)(((QData)((IData)(
                                                        (0xffU 
                                                         & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                        << 0x10U)) >> 0x17U)) 
@@ -1601,7 +1750,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                << 0x10U) 
                                                               >> 0x20U)) 
                                                      << 9U))));
-    __Vtemp1939[4U] = (0x100U | ((7U & ((IData)((((QData)((IData)(
+    __Vtemp1976[4U] = (0x100U | ((7U & ((IData)((((QData)((IData)(
                                                                   (0xffU 
                                                                    & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                   << 0x20U) 
@@ -1619,7 +1768,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                             << 0x20U) 
                                                            >> 0x20U)) 
                                                   >> 0x1aU)))));
-    __Vtemp1939[5U] = ((7U & ((IData)(((QData)((IData)(
+    __Vtemp1976[5U] = ((7U & ((IData)(((QData)((IData)(
                                                        (0xffU 
                                                         & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                        << 0x18U)) >> 0x17U)) 
@@ -1641,11 +1790,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                << 0x18U) 
                                                               >> 0x20U)) 
                                                      << 9U))));
-    __Vtemp1939[9U] = ((7U & (__Vtemp1935[4U] >> 0x1aU)) 
-                       | ((0x38U & (__Vtemp1935[4U] 
-                                    >> 0x1aU)) | (__Vtemp1935[5U] 
+    __Vtemp1976[9U] = ((7U & (__Vtemp1972[4U] >> 0x1aU)) 
+                       | ((0x38U & (__Vtemp1972[4U] 
+                                    >> 0x1aU)) | (__Vtemp1972[5U] 
                                                   << 6U)));
-    __Vtemp1941[4U] = (0x14000U | ((0x7ffU & ((IData)(
+    __Vtemp1978[4U] = (0x14000U | ((0x7ffU & ((IData)(
                                                       (((QData)((IData)(
                                                                         (0xffU 
                                                                          & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
@@ -1664,7 +1813,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                             << 0x28U) 
                                                            >> 0x20U)) 
                                                   >> 0x12U)))));
-    __Vtemp1941[5U] = ((0x7ffU & ((IData)(((QData)((IData)(
+    __Vtemp1978[5U] = ((0x7ffU & ((IData)(((QData)((IData)(
                                                            (0xffU 
                                                             & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                            << 0x20U)) 
@@ -1689,13 +1838,13 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                << 0x20U) 
                                                               >> 0x20U)) 
                                                      << 0x11U))));
-    __Vtemp1941[9U] = ((0x7ffU & (__Vtemp1937[4U] >> 0x12U)) 
-                       | ((0x3800U & (__Vtemp1937[4U] 
+    __Vtemp1978[9U] = ((0x7ffU & (__Vtemp1974[4U] >> 0x12U)) 
+                       | ((0x3800U & (__Vtemp1974[4U] 
                                       >> 0x12U)) | 
-                          (__Vtemp1937[5U] << 0xeU)));
-    __Vtemp1941[0xaU] = ((0x7ffU & (__Vtemp1937[5U] 
+                          (__Vtemp1974[5U] << 0xeU)));
+    __Vtemp1978[0xaU] = ((0x7ffU & (__Vtemp1974[5U] 
                                     >> 0x12U)) | ((0x3800U 
-                                                   & (__Vtemp1937[5U] 
+                                                   & (__Vtemp1974[5U] 
                                                       >> 0x12U)) 
                                                   | ((0x1c000U 
                                                       & ((IData)(
@@ -1705,12 +1854,12 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                    << 0x10U) 
                                                                   >> 0x20U)) 
                                                          >> 9U)) 
-                                                     | (__Vtemp1935[4U] 
+                                                     | (__Vtemp1972[4U] 
                                                         << 0x11U))));
-    __Vtemp1941[0xbU] = ((0x7ffU & (__Vtemp1935[4U] 
-                                    >> 0xfU)) | (__Vtemp1939[9U] 
+    __Vtemp1978[0xbU] = ((0x7ffU & (__Vtemp1972[4U] 
+                                    >> 0xfU)) | (__Vtemp1976[9U] 
                                                  << 0xbU));
-    __Vtemp1942[3U] = ((((IData)(((QData)((IData)((0xffU 
+    __Vtemp1979[3U] = ((((IData)(((QData)((IData)((0xffU 
                                                    & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                   << 0x30U)) >> 0x1dU) 
                         | (0xfffff8U & ((IData)((((QData)((IData)(
@@ -1725,7 +1874,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                  << 0x30U) 
                                                 >> 0x20U)) 
                                        << 3U)));
-    __Vtemp1942[4U] = (0x30U | (((0xffffc0U & ((IData)(
+    __Vtemp1979[4U] = (0x30U | (((0xffffc0U & ((IData)(
                                                        ((QData)((IData)(
                                                                         (0xffU 
                                                                          & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
@@ -1743,48 +1892,48 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                                & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                               << 0x28U)) 
                                                      << 6U))));
-    __Vtemp1942[8U] = (((7U & ((IData)((((QData)((IData)(
+    __Vtemp1979[8U] = (((7U & ((IData)((((QData)((IData)(
                                                          (0xffU 
                                                           & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                          << 0x20U) 
                                         >> 0x20U)) 
                                >> 0x17U)) | (0xfffff8U 
-                                             & (__Vtemp1939[4U] 
+                                             & (__Vtemp1976[4U] 
                                                 << 3U))) 
-                       | (0xff000000U & (__Vtemp1939[4U] 
+                       | (0xff000000U & (__Vtemp1976[4U] 
                                          << 3U)));
-    __Vtemp1942[9U] = (((__Vtemp1939[4U] >> 0x1dU) 
-                        | (0xfffff8U & (__Vtemp1939[5U] 
+    __Vtemp1979[9U] = (((__Vtemp1976[4U] >> 0x1dU) 
+                        | (0xfffff8U & (__Vtemp1976[5U] 
                                         << 3U))) | 
-                       (0xff000000U & (__Vtemp1939[5U] 
+                       (0xff000000U & (__Vtemp1976[5U] 
                                        << 3U)));
-    __Vtemp1942[0xaU] = (((__Vtemp1939[5U] >> 0x1dU) 
+    __Vtemp1979[0xaU] = (((__Vtemp1976[5U] >> 0x1dU) 
                           | ((0x38U & ((IData)((((QData)((IData)(
                                                                  (0xffU 
                                                                   & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                  << 0x18U) 
                                                 >> 0x20U)) 
                                        >> 0x14U)) | 
-                             (0xffffc0U & (__Vtemp1937[4U] 
+                             (0xffffc0U & (__Vtemp1974[4U] 
                                            << 6U)))) 
-                         | (__Vtemp1941[9U] << 0x18U));
-    __Vtemp1942[0xeU] = (((__Vtemp1939[9U] >> 0x1dU) 
-                          | ((0x38U & (__Vtemp1935[5U] 
+                         | (__Vtemp1978[9U] << 0x18U));
+    __Vtemp1979[0xeU] = (((__Vtemp1976[9U] >> 0x1dU) 
+                          | ((0x38U & (__Vtemp1972[5U] 
                                        >> 0x17U)) | 
-                             ((0x1c0U & (__Vtemp1935[5U] 
+                             ((0x1c0U & (__Vtemp1972[5U] 
                                          >> 0x17U)) 
-                              | (0xfffe00U & (__Vtemp1935[6U] 
+                              | (0xfffe00U & (__Vtemp1972[6U] 
                                               << 9U))))) 
-                         | (0xff000000U & (__Vtemp1935[6U] 
+                         | (0xff000000U & (__Vtemp1972[6U] 
                                            << 9U)));
-    __Vtemp1942[0xfU] = (((7U & (__Vtemp1935[6U] >> 0x17U)) 
-                          | ((0x38U & (__Vtemp1935[6U] 
+    __Vtemp1979[0xfU] = (((7U & (__Vtemp1972[6U] >> 0x17U)) 
+                          | ((0x38U & (__Vtemp1972[6U] 
                                        >> 0x17U)) | 
-                             ((0x1c0U & (__Vtemp1935[6U] 
+                             ((0x1c0U & (__Vtemp1972[6U] 
                                          >> 0x17U)) 
-                              | (0xfffe00U & (__Vtemp1935[7U] 
+                              | (0xfffe00U & (__Vtemp1972[7U] 
                                               << 9U))))) 
-                         | (0xff000000U & (__Vtemp1935[7U] 
+                         | (0xff000000U & (__Vtemp1972[7U] 
                                            << 9U)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[0U] = 0U;
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[1U] 
@@ -1803,9 +1952,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                       << 0x30U)) 
                                              << 3U))));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[3U] 
-        = __Vtemp1942[3U];
+        = __Vtemp1979[3U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[4U] 
-        = __Vtemp1942[4U];
+        = __Vtemp1979[4U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[5U] 
         = (((7U & ((IData)(((QData)((IData)((0xffU 
                                              & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
@@ -1817,13 +1966,13 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                        (0xffU 
                                                         & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                        << 0x28U) >> 0x20U)) 
-                             << 6U)))) | (__Vtemp1941[4U] 
+                             << 6U)))) | (__Vtemp1978[4U] 
                                           << 0x18U));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[6U] 
-        = ((__Vtemp1941[4U] >> 8U) | (__Vtemp1941[5U] 
+        = ((__Vtemp1978[4U] >> 8U) | (__Vtemp1978[5U] 
                                       << 0x18U));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[7U] 
-        = ((__Vtemp1941[5U] >> 8U) | (0xff000000U & 
+        = ((__Vtemp1978[5U] >> 8U) | (0xff000000U & 
                                       ((IData)((((QData)((IData)(
                                                                  (0xffU 
                                                                   & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
@@ -1831,145 +1980,99 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                 >> 0x20U)) 
                                        << 9U)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[8U] 
-        = __Vtemp1942[8U];
+        = __Vtemp1979[8U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[9U] 
-        = __Vtemp1942[9U];
+        = __Vtemp1979[9U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[0xaU] 
-        = __Vtemp1942[0xaU];
+        = __Vtemp1979[0xaU];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[0xbU] 
-        = ((__Vtemp1941[9U] >> 8U) | (__Vtemp1941[0xaU] 
+        = ((__Vtemp1978[9U] >> 8U) | (__Vtemp1978[0xaU] 
                                       << 0x18U));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[0xcU] 
-        = ((__Vtemp1941[0xaU] >> 8U) | (__Vtemp1941[0xbU] 
+        = ((__Vtemp1978[0xaU] >> 8U) | (__Vtemp1978[0xbU] 
                                         << 0x18U));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[0xdU] 
-        = ((__Vtemp1941[0xbU] >> 8U) | (0xff000000U 
-                                        & (__Vtemp1939[9U] 
+        = ((__Vtemp1978[0xbU] >> 8U) | (0xff000000U 
+                                        & (__Vtemp1976[9U] 
                                            << 3U)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[0xeU] 
-        = __Vtemp1942[0xeU];
+        = __Vtemp1979[0xeU];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[0xfU] 
-        = __Vtemp1942[0xfU];
+        = __Vtemp1979[0xfU];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3[0x10U] 
-        = ((7U & (__Vtemp1935[7U] >> 0x17U)) | ((0x38U 
-                                                 & (__Vtemp1935[7U] 
+        = ((7U & (__Vtemp1972[7U] >> 0x17U)) | ((0x38U 
+                                                 & (__Vtemp1972[7U] 
                                                     >> 0x17U)) 
                                                 | ((0x1c0U 
-                                                    & (__Vtemp1935[7U] 
+                                                    & (__Vtemp1972[7U] 
                                                        >> 0x17U)) 
                                                    | (0xfffe00U 
-                                                      & (__Vtemp1935[8U] 
+                                                      & (__Vtemp1972[8U] 
                                                          << 9U)))));
-    __Vtemp1958[1U] = (((IData)(((vlSelf->ysyx_22050612_npc__DOT__inst 
-                                  >> 0x1fU) ? (0xffffffffffe00000ULL 
-                                               | (QData)((IData)(
-                                                                 ((0x100000U 
-                                                                   & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                      >> 0xbU)) 
-                                                                  | ((0xff000U 
-                                                                      & vlSelf->ysyx_22050612_npc__DOT__inst) 
-                                                                     | ((0x800U 
-                                                                         & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                            >> 9U)) 
-                                                                        | (0x7feU 
-                                                                           & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                              >> 0x14U))))))))
-                                  : (((QData)((IData)(
-                                                      (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                       >> 0x1fU))) 
-                                      << 0x14U) | (QData)((IData)(
-                                                                  ((0xff000U 
-                                                                    & vlSelf->ysyx_22050612_npc__DOT__inst) 
-                                                                   | ((0x800U 
-                                                                       & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                          >> 9U)) 
-                                                                      | (0x7feU 
-                                                                         & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                            >> 0x14U))))))))) 
-                        >> 0xcU) | ((IData)((((vlSelf->ysyx_22050612_npc__DOT__inst 
-                                               >> 0x1fU)
-                                               ? (0xffffffffffe00000ULL 
-                                                  | (QData)((IData)(
-                                                                    ((0x100000U 
-                                                                      & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                         >> 0xbU)) 
-                                                                     | ((0xff000U 
-                                                                         & vlSelf->ysyx_22050612_npc__DOT__inst) 
-                                                                        | ((0x800U 
-                                                                            & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                               >> 9U)) 
-                                                                           | (0x7feU 
-                                                                              & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                                >> 0x14U))))))))
-                                               : (((QData)((IData)(
-                                                                   (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                    >> 0x1fU))) 
-                                                   << 0x14U) 
-                                                  | (QData)((IData)(
-                                                                    ((0xff000U 
-                                                                      & vlSelf->ysyx_22050612_npc__DOT__inst) 
-                                                                     | ((0x800U 
-                                                                         & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                            >> 9U)) 
-                                                                        | (0x7feU 
-                                                                           & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                              >> 0x14U)))))))) 
-                                             >> 0x20U)) 
-                                    << 0x14U));
-    __Vtemp1989[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2);
-    __Vtemp1989[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
+    __Vtemp2026[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2);
+    __Vtemp2026[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                >> 0x20U));
-    __Vtemp1989[2U] = (9U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[2U] = (8U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                              << 0x14U));
-    __Vtemp1989[3U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[3U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                         >> 0xcU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                              >> 0x20U)) 
                                     << 0x14U));
-    __Vtemp1989[4U] = (0x800000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
+    __Vtemp2026[4U] = (0x700000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                              >> 0x20U)) 
                                     >> 0xcU));
-    __Vtemp1989[5U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[5U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                        << 8U);
-    __Vtemp1989[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                         >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                               >> 0x20U)) 
                                      << 8U));
-    __Vtemp1989[7U] = (0x700U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[7U] = (0x600U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                   << 0x1cU) | ((IData)(
                                                        (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                         >> 0x20U)) 
                                                >> 0x18U)));
-    __Vtemp1989[8U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[8U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                         >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                            >> 0x20U)) 
                                   << 0x1cU));
-    __Vtemp1989[9U] = (0x60000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
+    __Vtemp2026[9U] = (0x50000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                >> 0x20U)) 
                                       >> 4U));
-    __Vtemp1989[0xaU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0xaU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                          << 0x10U);
-    __Vtemp1989[0xbU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
-                          >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
+    __Vtemp2026[0xbU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+                          >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                                 >> 0x20U)) 
                                        << 0x10U));
-    __Vtemp1989[0xcU] = (0x50000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
+    __Vtemp2026[0xcU] = (0x40000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                               >> 0x20U)) 
                                      >> 0x10U));
-    __Vtemp1989[0xdU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2026[0xdU] = ((IData)((QData)((IData)((0x3fU 
+                                                  & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                     >> 0x14U))))) 
                          << 4U);
-    __Vtemp1989[0xeU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
-                          >> 0x1cU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
+    __Vtemp2026[0xeU] = (((IData)((QData)((IData)((0x3fU 
+                                                   & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                      >> 0x14U))))) 
+                          >> 0x1cU) | ((IData)(((QData)((IData)(
+                                                                (0x3fU 
+                                                                 & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                    >> 0x14U)))) 
                                                 >> 0x20U)) 
                                        << 4U));
-    __Vtemp1989[0xfU] = (0x40U | (((IData)((QData)((IData)(
-                                                           (0x3fU 
-                                                            & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                               >> 0x14U))))) 
-                                   << 0x18U) | ((IData)(
-                                                        (vlSelf->ysyx_22050612_npc__DOT__imm_I 
-                                                         >> 0x20U)) 
-                                                >> 0x1cU)));
-    __Vtemp1989[0x10U] = (((IData)((QData)((IData)(
+    __Vtemp2026[0xfU] = (0xc000U | (((IData)((QData)((IData)(
+                                                             (0x3fU 
+                                                              & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                 >> 0x14U))))) 
+                                     << 0x18U) | ((IData)(
+                                                          ((QData)((IData)(
+                                                                           (0x3fU 
+                                                                            & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                               >> 0x14U)))) 
+                                                           >> 0x20U)) 
+                                                  >> 0x1cU)));
+    __Vtemp2026[0x10U] = (((IData)((QData)((IData)(
                                                    (0x3fU 
                                                     & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                        >> 0x14U))))) 
@@ -1979,17 +2082,17 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                   >> 0x14U)))) 
                                               >> 0x20U)) 
                                      << 0x18U));
-    __Vtemp1989[0x11U] = ((IData)(((QData)((IData)(
+    __Vtemp2026[0x11U] = ((IData)(((QData)((IData)(
                                                    (0x3fU 
                                                     & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                        >> 0x14U)))) 
                                    >> 0x20U)) >> 8U);
-    __Vtemp1989[0x12U] = (0xcU | ((IData)((QData)((IData)(
-                                                          (0x3fU 
-                                                           & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                              >> 0x14U))))) 
-                                  << 0xcU));
-    __Vtemp1989[0x13U] = (((IData)((QData)((IData)(
+    __Vtemp2026[0x12U] = (8U | ((IData)((QData)((IData)(
+                                                        (0x3fU 
+                                                         & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                            >> 0x14U))))) 
+                                << 0xcU));
+    __Vtemp2026[0x13U] = (((IData)((QData)((IData)(
                                                    (0x3fU 
                                                     & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                        >> 0x14U))))) 
@@ -1999,22 +2102,40 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                      >> 0x14U)))) 
                                                  >> 0x20U)) 
                                         << 0xcU));
-    __Vtemp1989[0x14U] = (0x800000U | ((IData)(((QData)((IData)(
+    __Vtemp2026[0x14U] = (0x400000U | ((IData)(((QData)((IData)(
                                                                 (0x3fU 
                                                                  & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                                     >> 0x14U)))) 
                                                 >> 0x20U)) 
                                        >> 0x14U));
-    __Vtemp1989[0x15U] = (IData)((QData)((IData)((0x3fU 
-                                                  & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                     >> 0x14U)))));
-    __Vtemp1989[0x16U] = (IData)(((QData)((IData)((0x3fU 
-                                                   & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                      >> 0x14U)))) 
-                                  >> 0x20U));
-    __Vtemp1989[0x17U] = (0x400U | ((IData)(((vlSelf->ysyx_22050612_npc__DOT__inst 
-                                              >> 0x1fU)
-                                              ? (0xffffffffffe00000ULL 
+    __Vtemp2026[0x15U] = (IData)(((vlSelf->ysyx_22050612_npc__DOT__inst 
+                                   >> 0x1fU) ? (0xffffffffffe00000ULL 
+                                                | (QData)((IData)(
+                                                                  ((0x100000U 
+                                                                    & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                       >> 0xbU)) 
+                                                                   | ((0xff000U 
+                                                                       & vlSelf->ysyx_22050612_npc__DOT__inst) 
+                                                                      | ((0x800U 
+                                                                          & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                             >> 9U)) 
+                                                                         | (0x7feU 
+                                                                            & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                               >> 0x14U))))))))
+                                   : (((QData)((IData)(
+                                                       (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                        >> 0x1fU))) 
+                                       << 0x14U) | (QData)((IData)(
+                                                                   ((0xff000U 
+                                                                     & vlSelf->ysyx_22050612_npc__DOT__inst) 
+                                                                    | ((0x800U 
+                                                                        & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                           >> 9U)) 
+                                                                       | (0x7feU 
+                                                                          & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                             >> 0x14U)))))))));
+    __Vtemp2026[0x16U] = (IData)((((vlSelf->ysyx_22050612_npc__DOT__inst 
+                                    >> 0x1fU) ? (0xffffffffffe00000ULL 
                                                  | (QData)((IData)(
                                                                    ((0x100000U 
                                                                      & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -2027,68 +2148,50 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                           | (0x7feU 
                                                                              & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                                                 >> 0x14U))))))))
-                                              : (((QData)((IData)(
-                                                                  (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                   >> 0x1fU))) 
-                                                  << 0x14U) 
-                                                 | (QData)((IData)(
-                                                                   ((0xff000U 
-                                                                     & vlSelf->ysyx_22050612_npc__DOT__inst) 
-                                                                    | ((0x800U 
-                                                                        & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                           >> 9U)) 
-                                                                       | (0x7feU 
-                                                                          & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                             >> 0x14U))))))))) 
-                                    << 0x14U));
-    __Vtemp1989[0x18U] = __Vtemp1958[1U];
-    __Vtemp1989[0x19U] = (0x30000000U | ((IData)(((
-                                                   (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                    >> 0x1fU)
-                                                    ? 
-                                                   (0xffffffffffe00000ULL 
-                                                    | (QData)((IData)(
-                                                                      ((0x100000U 
-                                                                        & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                           >> 0xbU)) 
-                                                                       | ((0xff000U 
-                                                                           & vlSelf->ysyx_22050612_npc__DOT__inst) 
-                                                                          | ((0x800U 
-                                                                              & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                                >> 9U)) 
-                                                                             | (0x7feU 
-                                                                                & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                                >> 0x14U))))))))
-                                                    : 
-                                                   (((QData)((IData)(
-                                                                     (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                      >> 0x1fU))) 
-                                                     << 0x14U) 
-                                                    | (QData)((IData)(
-                                                                      ((0xff000U 
-                                                                        & vlSelf->ysyx_22050612_npc__DOT__inst) 
-                                                                       | ((0x800U 
+                                    : (((QData)((IData)(
+                                                        (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                         >> 0x1fU))) 
+                                        << 0x14U) | (QData)((IData)(
+                                                                    ((0xff000U 
+                                                                      & vlSelf->ysyx_22050612_npc__DOT__inst) 
+                                                                     | ((0x800U 
+                                                                         & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                                            >> 9U)) 
+                                                                        | (0x7feU 
                                                                            & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                              >> 9U)) 
-                                                                          | (0x7feU 
-                                                                             & (vlSelf->ysyx_22050612_npc__DOT__inst 
-                                                                                >> 0x14U)))))))) 
+                                                                              >> 0x14U)))))))) 
+                                  >> 0x20U));
+    __Vtemp2026[0x17U] = (0x300U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_U) 
+                                    << 0x14U));
+    __Vtemp2026[0x18U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_U) 
+                           >> 0xcU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_U 
+                                                >> 0x20U)) 
+                                       << 0x14U));
+    __Vtemp2026[0x19U] = (0x20000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_U 
                                                   >> 0x20U)) 
                                          >> 0xcU));
-    __Vtemp1989[0x1aU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_U) 
+    __Vtemp2026[0x1aU] = ((IData)((QData)((IData)((0x1fU 
+                                                   & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2))))) 
                           << 8U);
-    __Vtemp1989[0x1bU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_U) 
-                           >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_U 
+    __Vtemp2026[0x1bU] = (((IData)((QData)((IData)(
+                                                   (0x1fU 
+                                                    & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2))))) 
+                           >> 0x18U) | ((IData)(((QData)((IData)(
+                                                                 (0x1fU 
+                                                                  & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                  >> 0x20U)) 
                                         << 8U));
-    __Vtemp1989[0x1cU] = (0x20000U | (((IData)((QData)((IData)(
-                                                               (0x1fU 
-                                                                & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2))))) 
-                                       << 0x1cU) | 
-                                      ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_U 
-                                                >> 0x20U)) 
-                                       >> 0x18U)));
-    __Vtemp1989[0x1dU] = (((IData)((QData)((IData)(
+    __Vtemp2026[0x1cU] = (0x1b00000U | (((IData)((QData)((IData)(
+                                                                 (0x1fU 
+                                                                  & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2))))) 
+                                         << 0x1cU) 
+                                        | ((IData)(
+                                                   ((QData)((IData)(
+                                                                    (0x1fU 
+                                                                     & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
+                                                    >> 0x20U)) 
+                                           >> 0x18U)));
+    __Vtemp2026[0x1dU] = (((IData)((QData)((IData)(
                                                    (0x1fU 
                                                     & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2))))) 
                            >> 4U) | ((IData)(((QData)((IData)(
@@ -2096,15 +2199,15 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                               >> 0x20U)) 
                                      << 0x1cU));
-    __Vtemp1989[0x1eU] = ((IData)(((QData)((IData)(
+    __Vtemp2026[0x1eU] = ((IData)(((QData)((IData)(
                                                    (0x1fU 
                                                     & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                    >> 0x20U)) >> 4U);
-    __Vtemp1989[0x1fU] = (0x1b00U | ((IData)((QData)((IData)(
+    __Vtemp2026[0x1fU] = (0x1a00U | ((IData)((QData)((IData)(
                                                              (0x1fU 
                                                               & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2))))) 
                                      << 0x10U));
-    __Vtemp1989[0x20U] = (((IData)((QData)((IData)(
+    __Vtemp2026[0x20U] = (((IData)((QData)((IData)(
                                                    (0x1fU 
                                                     & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2))))) 
                            >> 0x10U) | ((IData)(((QData)((IData)(
@@ -2112,34 +2215,34 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                   & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                  >> 0x20U)) 
                                         << 0x10U));
-    __Vtemp1989[0x21U] = (0x90000000U | ((IData)(((QData)((IData)(
+    __Vtemp2026[0x21U] = (0x90000000U | ((IData)(((QData)((IData)(
                                                                   (0x1fU 
                                                                    & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                   >> 0x20U)) 
                                          >> 0x10U));
-    __Vtemp1989[0x22U] = (1U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x22U] = (1U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                 << 4U));
-    __Vtemp1989[0x23U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x23U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                            >> 0x1cU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                  >> 0x20U)) 
                                         << 4U));
-    __Vtemp1989[0x24U] = (0x180000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x24U] = (0x180000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                         << 0x18U) | 
                                        ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                  >> 0x20U)) 
                                         >> 0x1cU)));
-    __Vtemp1989[0x25U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x25U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                            >> 8U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                               >> 0x20U)) 
                                      << 0x18U));
-    __Vtemp1989[0x26U] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
+    __Vtemp2026[0x26U] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                    >> 0x20U)) >> 8U);
-    __Vtemp1989[0x27U] = (0x170U | ((IData)((QData)((IData)(
+    __Vtemp2026[0x27U] = (0x170U | ((IData)((QData)((IData)(
                                                             (0x1fU 
                                                              & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                                 >> 0x14U))))) 
                                     << 0xcU));
-    __Vtemp1989[0x28U] = (((IData)((QData)((IData)(
+    __Vtemp2026[0x28U] = (((IData)((QData)((IData)(
                                                    (0x1fU 
                                                     & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                        >> 0x14U))))) 
@@ -2149,25 +2252,25 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                      >> 0x14U)))) 
                                                  >> 0x20U)) 
                                         << 0xcU));
-    __Vtemp1989[0x29U] = (0x16000000U | ((IData)(((QData)((IData)(
+    __Vtemp2026[0x29U] = (0x16000000U | ((IData)(((QData)((IData)(
                                                                   (0x1fU 
                                                                    & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                                       >> 0x14U)))) 
                                                   >> 0x20U)) 
                                          >> 0x14U));
-    __Vtemp1989[0x2aU] = (IData)((QData)((IData)((0x1fU 
+    __Vtemp2026[0x2aU] = (IData)((QData)((IData)((0x1fU 
                                                   & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                      >> 0x14U)))));
-    __Vtemp1989[0x2bU] = (IData)(((QData)((IData)((0x1fU 
+    __Vtemp2026[0x2bU] = (IData)(((QData)((IData)((0x1fU 
                                                    & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                       >> 0x14U)))) 
                                   >> 0x20U));
-    __Vtemp1989[0x2cU] = (0x15000U | ((IData)((QData)((IData)(
+    __Vtemp2026[0x2cU] = (0x15000U | ((IData)((QData)((IData)(
                                                               (0x1fU 
                                                                & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                                   >> 0x14U))))) 
                                       << 0x14U));
-    __Vtemp1989[0x2dU] = (((IData)((QData)((IData)(
+    __Vtemp2026[0x2dU] = (((IData)((QData)((IData)(
                                                    (0x1fU 
                                                     & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                        >> 0x14U))))) 
@@ -2177,189 +2280,195 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                     >> 0x14U)))) 
                                                 >> 0x20U)) 
                                        << 0x14U));
-    __Vtemp1989[0x2eU] = ((IData)(((QData)((IData)(
+    __Vtemp2026[0x2eU] = ((IData)(((QData)((IData)(
                                                    (0x1fU 
                                                     & (vlSelf->ysyx_22050612_npc__DOT__inst 
                                                        >> 0x14U)))) 
                                    >> 0x20U)) >> 0xcU);
-    __Vtemp1989[0x2fU] = (0x14U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x2fU] = (0x14U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                    << 8U));
-    __Vtemp1989[0x30U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x30U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                            >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                  >> 0x20U)) 
                                         << 8U));
-    __Vtemp1989[0x31U] = (0x1300000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x31U] = (0x1300000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                          << 0x1cU) 
                                         | ((IData)(
                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                     >> 0x20U)) 
                                            >> 0x18U)));
-    __Vtemp1989[0x32U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x32U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                            >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                               >> 0x20U)) 
                                      << 0x1cU));
-    __Vtemp1989[0x33U] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
+    __Vtemp2026[0x33U] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                    >> 0x20U)) >> 4U);
-    __Vtemp1989[0x34U] = (0x1200U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x34U] = (0x1200U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                      << 0x10U));
-    __Vtemp1989[0x35U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x35U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                            >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                  >> 0x20U)) 
                                         << 0x10U));
-    __Vtemp1989[0x36U] = (0x80000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
+    __Vtemp2026[0x36U] = (0x80000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                   >> 0x20U)) 
                                          >> 0x10U));
-    __Vtemp1989[0x37U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x37U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                           << 4U);
-    __Vtemp1989[0x38U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x38U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                            >> 0x1cU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                  >> 0x20U)) 
                                         << 4U));
-    __Vtemp1989[0x39U] = (0x70000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x39U] = (0x70000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                        << 0x18U) | 
                                       ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                 >> 0x20U)) 
                                        >> 0x1cU)));
-    __Vtemp1989[0x3aU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x3aU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                            >> 8U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                               >> 0x20U)) 
                                      << 0x18U));
-    __Vtemp1989[0x3bU] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
+    __Vtemp2026[0x3bU] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                    >> 0x20U)) >> 8U);
-    __Vtemp1989[0x3cU] = (0x50U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x3cU] = (0x50U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                    << 0xcU));
-    __Vtemp1989[0x3dU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2026[0x3dU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                            >> 0x14U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                  >> 0x20U)) 
                                         << 0xcU));
-    __Vtemp1989[0x3eU] = (0x4000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
+    __Vtemp2026[0x3eU] = (0x4000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                  >> 0x20U)) 
                                         >> 0x14U));
-    __Vtemp2003[0U] = (0x12U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_S) 
+    __Vtemp2040[0U] = (0x11U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_S) 
                                 << 0x14U));
-    __Vtemp2003[1U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_S) 
+    __Vtemp2040[1U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_S) 
                         >> 0xcU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_S 
                                              >> 0x20U)) 
                                     << 0x14U));
-    __Vtemp2003[2U] = (0x1100000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_S 
+    __Vtemp2040[2U] = (0x1000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_S 
                                               >> 0x20U)) 
                                      >> 0xcU));
-    __Vtemp2003[3U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_S) 
+    __Vtemp2040[3U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                        << 8U);
-    __Vtemp2003[4U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_S) 
-                        >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_S 
+    __Vtemp2040[4U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+                        >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                               >> 0x20U)) 
                                      << 8U));
-    __Vtemp2003[5U] = (0x1000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
-                                   << 0x1cU) | ((IData)(
-                                                        (vlSelf->ysyx_22050612_npc__DOT__imm_S 
-                                                         >> 0x20U)) 
-                                                >> 0x18U)));
-    __Vtemp2003[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2040[5U] = (0xf00U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+                                  << 0x1cU) | ((IData)(
+                                                       (vlSelf->ysyx_22050612_npc__DOT__imm_I 
+                                                        >> 0x20U)) 
+                                               >> 0x18U)));
+    __Vtemp2040[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                         >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                            >> 0x20U)) 
                                   << 0x1cU));
-    __Vtemp2003[7U] = (0xf0000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
+    __Vtemp2040[7U] = (0xe0000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                                >> 0x20U)) 
                                       >> 4U));
-    __Vtemp2003[8U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2040[8U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                        << 0x10U);
-    __Vtemp2003[9U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2040[9U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                         >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                               >> 0x20U)) 
                                      << 0x10U));
-    __Vtemp2003[0xaU] = (0xe0000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
+    __Vtemp2040[0xaU] = (0xd0000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                               >> 0x20U)) 
                                      >> 0x10U));
-    __Vtemp2003[0xbU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2040[0xbU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                          << 4U);
-    __Vtemp2003[0xcU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2040[0xcU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                           >> 0x1cU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                                 >> 0x20U)) 
                                        << 4U));
-    __Vtemp2003[0xdU] = (0xd0U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2040[0xdU] = (0xc0U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                    << 0x18U) | ((IData)(
                                                         (vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                                          >> 0x20U)) 
                                                 >> 0x1cU)));
-    __Vtemp2003[0xeU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
-                          >> 8U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
+    __Vtemp2040[0xeU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+                          >> 8U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                              >> 0x20U)) 
                                     << 0x18U));
-    __Vtemp2003[0xfU] = (0xc000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
+    __Vtemp2040[0xfU] = (0xa000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                 >> 0x20U)) 
                                        >> 8U));
-    __Vtemp2003[0x10U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2040[0x10U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                           << 0xcU);
-    __Vtemp2003[0x11U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp2040[0x11U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                            >> 0x14U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                  >> 0x20U)) 
                                         << 0xcU));
-    __Vtemp2003[0x12U] = (0xa000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
+    __Vtemp2040[0x12U] = (0x9000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                               >> 0x20U)) 
                                      >> 0x14U));
-    VL_CONCAT_WWW(2624,2016,608, __Vtemp2004, __Vtemp1989, __Vtemp2003);
-    VL_CONCAT_WWQ(2688,2624,64, __Vtemp2005, __Vtemp2004, vlSelf->ysyx_22050612_npc__DOT__imm_S);
-    __Vtemp2018[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I);
-    __Vtemp2018[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
-                               >> 0x20U));
-    __Vtemp2018[2U] = (0x2fU | ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_S) 
+    VL_CONCAT_WWW(2624,2016,608, __Vtemp2041, __Vtemp2026, __Vtemp2040);
+    VL_CONCAT_WWQ(2688,2624,64, __Vtemp2042, __Vtemp2041, vlSelf->ysyx_22050612_npc__DOT__imm_S);
+    __Vtemp2056[0U] = (0x2fU | ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_S) 
                                 << 0x14U));
-    __Vtemp2018[3U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_S) 
+    __Vtemp2056[1U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_S) 
                         >> 0xcU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_S 
                                              >> 0x20U)) 
                                     << 0x14U));
-    __Vtemp2018[4U] = (0x2b00000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_S 
+    __Vtemp2056[2U] = (0x2b00000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_S 
                                               >> 0x20U)) 
                                      >> 0xcU));
-    __Vtemp2018[5U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2056[3U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                        << 8U);
-    __Vtemp2018[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2056[4U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                         >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                               >> 0x20U)) 
                                      << 8U));
-    __Vtemp2018[7U] = (0x2a00U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2056[5U] = (0x2a00U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                                    << 0x1cU) | ((IData)(
                                                         (vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                                          >> 0x20U)) 
                                                 >> 0x18U)));
-    __Vtemp2018[8U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2056[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                         >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                            >> 0x20U)) 
                                   << 0x1cU));
-    __Vtemp2018[9U] = (0x80000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
+    __Vtemp2056[7U] = (0x80000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                                >> 0x20U)) 
                                       >> 4U));
-    __Vtemp2018[0xaU] = (1U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
-                               << 0x10U));
-    __Vtemp2018[0xbU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
-                          >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
-                                                >> 0x20U)) 
-                                       << 0x10U));
-    __Vtemp2018[0xcU] = (0x160000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
+    __Vtemp2056[8U] = (1U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+                             << 0x10U));
+    __Vtemp2056[9U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+                        >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
+                                              >> 0x20U)) 
+                                     << 0x10U));
+    __Vtemp2056[0xaU] = (0x160000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                                >> 0x20U)) 
                                       >> 0x10U));
-    __Vtemp2018[0xdU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2056[0xbU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                          << 4U);
-    __Vtemp2018[0xeU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2056[0xcU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                           >> 0x1cU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                                 >> 0x20U)) 
                                        << 4U));
-    __Vtemp2018[0xfU] = (0x150U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+    __Vtemp2056[0xdU] = (0x150U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
                                     << 0x18U) | ((IData)(
                                                          (vlSelf->ysyx_22050612_npc__DOT__imm_I 
                                                           >> 0x20U)) 
                                                  >> 0x1cU)));
-    __Vtemp2018[0x10U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
-                           >> 8U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
-                                              >> 0x20U)) 
-                                     << 0x18U));
-    __Vtemp2018[0x11U] = (0x13000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
-                                                  >> 0x20U)) 
-                                         >> 8U));
-    __Vtemp2018[0x12U] = 0U;
-    VL_CONCAT_WWW(3276,2688,588, __Vtemp2019, __Vtemp2005, __Vtemp2018);
-    VL_ASSIGN_W(3276,vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator1____pinNumber3, __Vtemp2019);
+    __Vtemp2056[0xeU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I) 
+                          >> 8U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
+                                             >> 0x20U)) 
+                                    << 0x18U));
+    __Vtemp2056[0xfU] = (0x13000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_I 
+                                                 >> 0x20U)) 
+                                        >> 8U));
+    __Vtemp2056[0x10U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_S) 
+                          << 0xcU);
+    __Vtemp2056[0x11U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_S) 
+                           >> 0x14U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_S 
+                                                 >> 0x20U)) 
+                                        << 0xcU));
+    __Vtemp2056[0x12U] = (0x12000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_S 
+                                               >> 0x20U)) 
+                                      >> 0x14U));
+    VL_CONCAT_WWW(3296,2688,608, __Vtemp2057, __Vtemp2042, __Vtemp2056);
+    VL_CONCAT_WWQ(3360,3296,64, __Vtemp2058, __Vtemp2057, vlSelf->ysyx_22050612_npc__DOT__imm_I);
+    VL_ASSIGN_W(3360,vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator1____pinNumber3, __Vtemp2058);
     vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xfff80U 
                                                & vlSelf->ysyx_22050612_npc__DOT__opcode) 
                                               | (IData)(vlSelf->ysyx_22050612_npc__DOT__idu__DOT____Vcellout__decode0____pinNumber1));
@@ -2793,6 +2902,17 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
         = (0xfffffU & ((vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator0____pinNumber3[0x66U] 
                         << 8U) | (vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator0____pinNumber3[0x65U] 
                                   >> 0x18U)));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__pair_list[0x27U][0U] 
+        = ((vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator0____pinNumber3[0x67U] 
+            << 0x14U) | (vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator0____pinNumber3[0x66U] 
+                         >> 0xcU));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__pair_list[0x27U][1U] 
+        = ((vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator0____pinNumber3[0x68U] 
+            << 0x14U) | (vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator0____pinNumber3[0x67U] 
+                         >> 0xcU));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__pair_list[0x27U][2U] 
+        = (vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator0____pinNumber3[0x68U] 
+           >> 0xcU);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata_twobyte__DOT__i0__DOT__pair_list[0U][0U] 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_twobyte____pinNumber3[0U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata_twobyte__DOT__i0__DOT__pair_list[0U][1U] 
@@ -3372,6 +3492,17 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
         = (0xfffffU & ((vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator1____pinNumber3[0x66U] 
                         << 8U) | (vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator1____pinNumber3[0x65U] 
                                   >> 0x18U)));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__pair_list[0x27U][0U] 
+        = ((vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator1____pinNumber3[0x67U] 
+            << 0x14U) | (vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator1____pinNumber3[0x66U] 
+                         >> 0xcU));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__pair_list[0x27U][1U] 
+        = ((vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator1____pinNumber3[0x68U] 
+            << 0x14U) | (vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator1____pinNumber3[0x67U] 
+                         >> 0xcU));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__pair_list[0x27U][2U] 
+        = (vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator1____pinNumber3[0x68U] 
+           >> 0xcU);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__hit 
         = (vlSelf->ysyx_22050612_npc__DOT__opcode == 
            vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__key_list
@@ -3551,6 +3682,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
            | (vlSelf->ysyx_22050612_npc__DOT__opcode 
               == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__key_list
               [0x23U]));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__hit 
+        = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__hit) 
+           | (vlSelf->ysyx_22050612_npc__DOT__opcode 
+              == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__key_list
+              [0x24U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__hit 
         = (vlSelf->ysyx_22050612_npc__DOT__opcode == 
            vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__key_list
@@ -3745,6 +3881,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
            | (vlSelf->ysyx_22050612_npc__DOT__opcode 
               == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__key_list
               [0x26U]));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__hit 
+        = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__hit) 
+           | (vlSelf->ysyx_22050612_npc__DOT__opcode 
+              == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__key_list
+              [0x27U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__lut_out 
         = ((vlSelf->ysyx_22050612_npc__DOT__opcode 
             == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__key_list
@@ -3960,6 +4101,12 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__key_list
                [0x23U]) & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__data_list
               [0x23U]));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__lut_out 
+        = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__lut_out) 
+           | ((vlSelf->ysyx_22050612_npc__DOT__opcode 
+               == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__key_list
+               [0x24U]) & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__data_list
+              [0x24U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wen = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__lut_out;
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__lut_out 
         = ((- (IData)((vlSelf->ysyx_22050612_npc__DOT__opcode 
@@ -4194,6 +4341,12 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                           == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__key_list
                           [0x26U]))) & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__data_list
               [0x26U]));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__lut_out 
+        = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__lut_out) 
+           | ((- (IData)((vlSelf->ysyx_22050612_npc__DOT__opcode 
+                          == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__key_list
+                          [0x27U]))) & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__data_list
+              [0x27U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mode 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alumode__DOT__i0__DOT__lut_out;
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__data_list[0U] 
@@ -4508,6 +4661,14 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__key_list[0x26U] 
         = (0xfffffU & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__pair_list
            [0x26U][2U]);
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__data_list[0x27U] 
+        = (((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__pair_list
+                            [0x27U][1U])) << 0x20U) 
+           | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__pair_list
+                             [0x27U][0U])));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__key_list[0x27U] 
+        = (0xfffffU & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__pair_list
+           [0x27U][2U]);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata_twobyte__DOT__i0__DOT__data_list[0U] 
         = (((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata_twobyte__DOT__i0__DOT__pair_list
                             [0U][1U])) << 0x20U) | (QData)((IData)(
@@ -4940,6 +5101,14 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__key_list[0x26U] 
         = (0xfffffU & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__pair_list
            [0x26U][2U]);
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__data_list[0x27U] 
+        = (((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__pair_list
+                            [0x27U][1U])) << 0x20U) 
+           | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__pair_list
+                             [0x27U][0U])));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__key_list[0x27U] 
+        = (0xfffffU & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__pair_list
+           [0x27U][2U]);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__hit 
         = (vlSelf->ysyx_22050612_npc__DOT__opcode == 
            vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__key_list
@@ -5134,6 +5303,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
            | (vlSelf->ysyx_22050612_npc__DOT__opcode 
               == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__key_list
               [0x26U]));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__hit 
+        = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__hit) 
+           | (vlSelf->ysyx_22050612_npc__DOT__opcode 
+              == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__key_list
+              [0x27U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__lut_out 
         = ((- (QData)((IData)((vlSelf->ysyx_22050612_npc__DOT__opcode 
                                == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__key_list
@@ -5367,6 +5541,12 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                   == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__key_list
                                   [0x26U])))) & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__data_list
               [0x26U]));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__lut_out 
+        = (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__lut_out 
+           | ((- (QData)((IData)((vlSelf->ysyx_22050612_npc__DOT__opcode 
+                                  == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__key_list
+                                  [0x27U])))) & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__data_list
+              [0x27U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_a 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator0__DOT__i0__DOT__lut_out;
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__hit 
@@ -5563,6 +5743,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
            | (vlSelf->ysyx_22050612_npc__DOT__opcode 
               == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__key_list
               [0x26U]));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__hit 
+        = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__hit) 
+           | (vlSelf->ysyx_22050612_npc__DOT__opcode 
+              == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__key_list
+              [0x27U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__lut_out 
         = ((- (QData)((IData)((vlSelf->ysyx_22050612_npc__DOT__opcode 
                                == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__key_list
@@ -5796,6 +5981,12 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                   == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__key_list
                                   [0x26U])))) & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__data_list
               [0x26U]));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__lut_out 
+        = (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__lut_out 
+           | ((- (QData)((IData)((vlSelf->ysyx_22050612_npc__DOT__opcode 
+                                  == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__key_list
+                                  [0x27U])))) & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__data_list
+              [0x27U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_b 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator1__DOT__i0__DOT__lut_out;
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__add_sub_result 
@@ -5803,7 +5994,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
            + ((1U == (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mode))
                ? (1ULL + (~ vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_b))
                : vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_b));
-    VL_EXTEND_WQ(72,64, __Vtemp2783, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__add_sub_result);
+    VL_EXTEND_WQ(72,64, __Vtemp2840, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__add_sub_result);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT____Vcellinp__alu_result_select____pinNumber3[0U] 
         = (IData)(VL_SHIFTRS_QQQ(64,64,64, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_a, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_b));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT____Vcellinp__alu_result_select____pinNumber3[1U] 
@@ -5942,17 +6133,17 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                         (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__add_sub_result 
                                                          >> 0x20U))));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT____Vcellinp__alu_result_select____pinNumber3[0x14U] 
-        = (1U | ((0xff00U & (__Vtemp2783[0U] << 8U)) 
-                 | (0xffff0000U & (__Vtemp2783[0U] 
+        = (1U | ((0xff00U & (__Vtemp2840[0U] << 8U)) 
+                 | (0xffff0000U & (__Vtemp2840[0U] 
                                    << 8U))));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT____Vcellinp__alu_result_select____pinNumber3[0x15U] 
-        = (((__Vtemp2783[0U] >> 0x18U) | (0xff00U & 
-                                          (__Vtemp2783[1U] 
+        = (((__Vtemp2840[0U] >> 0x18U) | (0xff00U & 
+                                          (__Vtemp2840[1U] 
                                            << 8U))) 
-           | (0xffff0000U & (__Vtemp2783[1U] << 8U)));
+           | (0xffff0000U & (__Vtemp2840[1U] << 8U)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT____Vcellinp__alu_result_select____pinNumber3[0x16U] 
-        = ((__Vtemp2783[1U] >> 0x18U) | (0xff00U & 
-                                         (__Vtemp2783[2U] 
+        = ((__Vtemp2840[1U] >> 0x18U) | (0xff00U & 
+                                         (__Vtemp2840[2U] 
                                           << 8U)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__pair_list[0U][0U] 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT____Vcellinp__alu_result_select____pinNumber3[0U];
@@ -7308,7 +7499,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
               [6U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata_2byte 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata_twobyte__DOT__i0__DOT__lut_out;
-    __Vtemp3066[1U] = (((IData)((0x11000000000ULL | 
+    __Vtemp3123[1U] = (((IData)((0x11000000000ULL | 
                                  (((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wmask_1byte)) 
                                    << 0x38U) | (((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wmask_2byte)) 
                                                  << 0x1cU) 
@@ -7351,7 +7542,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                              : 0xfU)))))))) 
                       << 0x1cU));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wmask_select____pinNumber3[1U] 
-        = __Vtemp3066[1U];
+        = __Vtemp3123[1U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wmask_select____pinNumber3[2U] 
         = ((IData)(((0x11000000000ULL | (((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wmask_1byte)) 
                                           << 0x38U) 
@@ -7678,7 +7869,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__rdata_twobyte____pinNumber3[4U] 
         = (3U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata) 
                  >> 0xeU));
-    __Vtemp3114[0U] = (IData)((0x30080140000000ULL 
+    __Vtemp3171[0U] = (IData)((0x30080140000000ULL 
                                | (((QData)((IData)(
                                                    (0xffU 
                                                     & (IData)(
@@ -7712,7 +7903,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                                & (IData)(
                                                                                 (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata 
                                                                                 >> 0x38U)))))))))))));
-    __Vtemp3114[1U] = (IData)(((0x30080140000000ULL 
+    __Vtemp3171[1U] = (IData)(((0x30080140000000ULL 
                                 | (((QData)((IData)(
                                                     (0xffU 
                                                      & (IData)(
@@ -7748,9 +7939,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                                 >> 0x38U)))))))))))) 
                                >> 0x20U));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__rdata_onebyte____pinNumber3[0U] 
-        = __Vtemp3114[0U];
+        = __Vtemp3171[0U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__rdata_onebyte____pinNumber3[1U] 
-        = __Vtemp3114[1U];
+        = __Vtemp3171[1U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__rdata_onebyte____pinNumber3[2U] 
         = (0x401U | ((0x1fe000U & ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata) 
                                    << 0xdU)) | (0x3fcU 
@@ -8062,7 +8253,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
               [7U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_1byte 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_onebyte__DOT__i0__DOT__lut_out;
-    __Vtemp3149[7U] = (0xe00U | (((IData)(((1U & (IData)(
+    __Vtemp3206[7U] = (0xe00U | (((IData)(((1U & (IData)(
                                                          (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr 
                                                           >> 2U)))
                                             ? ((1U 
@@ -8087,7 +8278,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                        ((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_1byte)) 
                                                         >> 0x20U)) 
                                                >> 0x18U)));
-    __Vtemp3149[8U] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr 
+    __Vtemp3206[8U] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr 
                                                 >> 2U)))
                                   ? ((1U & (IData)(
                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata 
@@ -8153,9 +8344,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
             >> 0x18U) | ((IData)(((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_1byte)) 
                                   >> 0x20U)) << 8U));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__rdata_fixing____pinNumber3[7U] 
-        = __Vtemp3149[7U];
+        = __Vtemp3206[7U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__rdata_fixing____pinNumber3[8U] 
-        = __Vtemp3149[8U];
+        = __Vtemp3206[8U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__rdata_fixing____pinNumber3[9U] 
         = (0xd0000000U | ((IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr 
                                                    >> 2U)))
@@ -8345,148 +8536,177 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
               [4U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fixing__DOT__i0__DOT__lut_out;
-    __Vtemp3232[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0);
-    __Vtemp3232[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0);
+    __Vtemp3289[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                >> 0x20U));
-    __Vtemp3232[2U] = (0x800U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[2U] = (0x400U | ((IData)((4ULL + vlSelf->pc)) 
                                  << 0x14U));
-    __Vtemp3232[3U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
-                        >> 0xcU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[3U] = (((IData)((4ULL + vlSelf->pc)) 
+                        >> 0xcU) | ((IData)(((4ULL 
+                                              + vlSelf->pc) 
                                              >> 0x20U)) 
                                     << 0x14U));
-    __Vtemp3232[4U] = (0x40000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[4U] = (0x30000000U | ((IData)(((4ULL 
+                                                + vlSelf->pc) 
                                                >> 0x20U)) 
                                       >> 0xcU));
-    __Vtemp3232[5U] = ((IData)((4ULL + vlSelf->pc)) 
+    __Vtemp3289[5U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                        << 8U);
-    __Vtemp3232[6U] = (((IData)((4ULL + vlSelf->pc)) 
-                        >> 0x18U) | ((IData)(((4ULL 
-                                               + vlSelf->pc) 
+    __Vtemp3289[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+                        >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                               >> 0x20U)) 
                                      << 8U));
-    __Vtemp3232[7U] = (0x30000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[7U] = (0x20000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_U) 
                                     << 0x1cU) | ((IData)(
-                                                         ((4ULL 
-                                                           + vlSelf->pc) 
+                                                         (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                           >> 0x20U)) 
                                                  >> 0x18U)));
-    __Vtemp3232[8U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
-                        >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[8U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_U) 
+                        >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_U 
                                            >> 0x20U)) 
                                   << 0x1cU));
-    __Vtemp3232[9U] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[9U] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_U 
                                 >> 0x20U)) >> 4U);
-    __Vtemp3232[0xaU] = (0x20U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_U) 
+    __Vtemp3289[0xaU] = (0x10U | ((IData)(((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0 
+                                            >> 0x1fU)
+                                            ? (0xffffffff00000000ULL 
+                                               | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0)))
+                                            : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0)))) 
                                   << 0x10U));
-    __Vtemp3232[0xbU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__imm_U) 
-                          >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_U 
-                                                >> 0x20U)) 
-                                       << 0x10U));
-    __Vtemp3232[0xcU] = (0x1000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__imm_U 
-                                                >> 0x20U)) 
-                                       >> 0x10U));
-    __Vtemp3232[0xdU] = ((IData)(((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0 
-                                   >> 0x1fU) ? (0xffffffff00000000ULL 
-                                                | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0)))
-                                   : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0)))) 
-                         << 4U);
-    __Vtemp3232[0xeU] = (((IData)(((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0 
+    __Vtemp3289[0xbU] = (((IData)(((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0 
                                     >> 0x1fU) ? (0xffffffff00000000ULL 
                                                  | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0)))
                                     : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0)))) 
-                          >> 0x1cU) | ((IData)((((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0 
+                          >> 0x10U) | ((IData)((((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0 
                                                   >> 0x1fU)
                                                   ? 
                                                  (0xffffffff00000000ULL 
                                                   | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0)))
                                                   : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0))) 
+                                                >> 0x20U)) 
+                                       << 0x10U));
+    __Vtemp3289[0xcU] = (0x80000000U | ((IData)((((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0 
+                                                   >> 0x1fU)
+                                                   ? 
+                                                  (0xffffffff00000000ULL 
+                                                   | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0)))
+                                                   : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0))) 
+                                                 >> 0x20U)) 
+                                        >> 0x10U));
+    __Vtemp3289[0xdU] = (2U | ((IData)(((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0 
+                                         >> 0x1fU) ? 
+                                        (0xffffffff00000000ULL 
+                                         | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0)))
+                                         : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0)))) 
+                               << 4U));
+    __Vtemp3289[0xeU] = (((IData)(((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0 
+                                    >> 0x1fU) ? (0xffffffff00000000ULL 
+                                                 | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0)))
+                                    : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0)))) 
+                          >> 0x1cU) | ((IData)((((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0 
+                                                  >> 0x1fU)
+                                                  ? 
+                                                 (0xffffffff00000000ULL 
+                                                  | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0)))
+                                                  : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0))) 
                                                 >> 0x20U)) 
                                        << 4U));
-    __Vtemp3232[0xfU] = (0x280000U | (((IData)(((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0 
-                                                 >> 0x1fU)
+    __Vtemp3289[0xfU] = (0x260000U | (((IData)(((1U 
+                                                 & (IData)(
+                                                           (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0 
+                                                            >> 0x1fU)))
                                                  ? 
                                                 (0xffffffff00000000ULL 
-                                                 | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0)))
-                                                 : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0)))) 
+                                                 | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0)))
+                                                 : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0)))) 
                                        << 0x18U) | 
-                                      ((IData)((((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0 
+                                      ((IData)((((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0 
                                                   >> 0x1fU)
                                                   ? 
                                                  (0xffffffff00000000ULL 
-                                                  | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0)))
-                                                  : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_remw0))) 
+                                                  | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0)))
+                                                  : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0))) 
                                                 >> 0x20U)) 
                                        >> 0x1cU)));
-    __Vtemp3232[0x10U] = (((IData)(((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0 
-                                     >> 0x1fU) ? (0xffffffff00000000ULL 
-                                                  | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0)))
-                                     : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0)))) 
-                           >> 8U) | ((IData)((((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0 
-                                                >> 0x1fU)
-                                                ? (0xffffffff00000000ULL 
-                                                   | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0)))
-                                                : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0))) 
-                                              >> 0x20U)) 
-                                     << 0x18U));
-    __Vtemp3232[0x11U] = ((IData)((((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0 
-                                     >> 0x1fU) ? (0xffffffff00000000ULL 
-                                                  | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0)))
-                                     : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_divw0))) 
-                                   >> 0x20U)) >> 8U);
-    __Vtemp3232[0x12U] = (0x260U | ((IData)(((1U & (IData)(
-                                                           (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0 
-                                                            >> 0x1fU)))
-                                              ? (0xffffffff00000000ULL 
-                                                 | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0)))
-                                              : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0)))) 
-                                    << 0xcU));
-    __Vtemp3232[0x13U] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0 
+    __Vtemp3289[0x10U] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0 
                                                    >> 0x1fU)))
                                      ? (0xffffffff00000000ULL 
                                         | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0)))
                                      : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0)))) 
-                           >> 0x14U) | ((IData)((((1U 
-                                                   & (IData)(
-                                                             (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0 
-                                                              >> 0x1fU)))
-                                                   ? 
-                                                  (0xffffffff00000000ULL 
+                           >> 8U) | ((IData)((((1U 
+                                                & (IData)(
+                                                          (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0 
+                                                           >> 0x1fU)))
+                                                ? (0xffffffff00000000ULL 
                                                    | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0)))
-                                                   : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0))) 
+                                                : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0))) 
+                                              >> 0x20U)) 
+                                     << 0x18U));
+    __Vtemp3289[0x11U] = ((IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0 
+                                                   >> 0x1fU)))
+                                     ? (0xffffffff00000000ULL 
+                                        | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0)))
+                                     : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0))) 
+                                   >> 0x20U)) >> 8U);
+    __Vtemp3289[0x12U] = (0x250U | ((IData)(VL_MODDIV_QQQ(64, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)) 
+                                    << 0xcU));
+    __Vtemp3289[0x13U] = (((IData)(VL_MODDIV_QQQ(64, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)) 
+                           >> 0x14U) | ((IData)((VL_MODDIV_QQQ(64, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                                  >> 0x20U)) 
                                         << 0xcU));
-    __Vtemp3232[0x14U] = (0x25000000U | ((IData)(((
-                                                   (1U 
-                                                    & (IData)(
-                                                              (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0 
-                                                               >> 0x1fU)))
-                                                    ? 
-                                                   (0xffffffff00000000ULL 
-                                                    | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0)))
-                                                    : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_mulw0))) 
+    __Vtemp3289[0x14U] = (0x24000000U | ((IData)((VL_MODDIV_QQQ(64, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                                   >> 0x20U)) 
                                          >> 0x14U));
-    __Vtemp3232[0x15U] = (IData)(VL_MODDIV_QQQ(64, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2));
-    __Vtemp3232[0x16U] = (IData)((VL_MODDIV_QQQ(64, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp3289[0x15U] = (IData)(VL_DIV_QQQ(64, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2));
+    __Vtemp3289[0x16U] = (IData)((VL_DIV_QQQ(64, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                   >> 0x20U));
-    __Vtemp3232[0x17U] = (0x24000U | ((IData)(VL_DIV_QQQ(64, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)) 
+    __Vtemp3289[0x17U] = (0x22000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                               * vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)) 
                                       << 0x14U));
-    __Vtemp3232[0x18U] = (((IData)(VL_DIV_QQQ(64, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)) 
-                           >> 0xcU) | ((IData)((VL_DIV_QQQ(64, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp3289[0x18U] = (((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                    * vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)) 
+                           >> 0xcU) | ((IData)(((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                 * vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                                 >> 0x20U)) 
                                        << 0x14U));
-    __Vtemp3232[0x19U] = ((IData)((VL_DIV_QQQ(64, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp3289[0x19U] = ((IData)(((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                    * vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                    >> 0x20U)) >> 0xcU);
-    __Vtemp3232[0x1aU] = (0x22U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                            * vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)) 
+    __Vtemp3289[0x1aU] = (0x1dU | ((IData)(((1U & (IData)(
+                                                          (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                                           >> 0x3fU)))
+                                             ? (0xffffffff00000000ULL 
+                                                | (QData)((IData)(
+                                                                  (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                                                   >> 0x20U))))
+                                             : (QData)((IData)(
+                                                               (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                                                >> 0x20U))))) 
                                    << 8U));
-    __Vtemp3232[0x1bU] = (((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                    * vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)) 
-                           >> 0x18U) | ((IData)(((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                  * vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+    __Vtemp3289[0x1bU] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                                   >> 0x3fU)))
+                                     ? (0xffffffff00000000ULL 
+                                        | (QData)((IData)(
+                                                          (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                                           >> 0x20U))))
+                                     : (QData)((IData)(
+                                                       (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                                        >> 0x20U))))) 
+                           >> 0x18U) | ((IData)((((1U 
+                                                   & (IData)(
+                                                             (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                                              >> 0x3fU)))
+                                                   ? 
+                                                  (0xffffffff00000000ULL 
+                                                   | (QData)((IData)(
+                                                                     (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                                                      >> 0x20U))))
+                                                   : (QData)((IData)(
+                                                                     (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                                                      >> 0x20U)))) 
                                                  >> 0x20U)) 
                                         << 8U));
-    __Vtemp3232[0x1cU] = (0x1d00000U | (((IData)(((1U 
+    __Vtemp3289[0x1cU] = (0x1b00000U | (((IData)(((1U 
                                                    & (IData)(
                                                              (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                               >> 0x3fU)))
@@ -8500,11 +8720,21 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                       >> 0x20U))))) 
                                          << 0x1cU) 
                                         | ((IData)(
-                                                   ((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
-                                                     * vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
+                                                   (((1U 
+                                                      & (IData)(
+                                                                (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                                                 >> 0x3fU)))
+                                                      ? 
+                                                     (0xffffffff00000000ULL 
+                                                      | (QData)((IData)(
+                                                                        (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                                                         >> 0x20U))))
+                                                      : (QData)((IData)(
+                                                                        (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                                                         >> 0x20U)))) 
                                                     >> 0x20U)) 
                                            >> 0x18U)));
-    __Vtemp3232[0x1dU] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x1dU] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                    >> 0x3fU)))
                                      ? (0xffffffff00000000ULL 
                                         | (QData)((IData)(
@@ -8526,7 +8756,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                                    >> 0x20U)))) 
                                               >> 0x20U)) 
                                      << 0x1cU));
-    __Vtemp3232[0x1eU] = ((IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x1eU] = ((IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                    >> 0x3fU)))
                                      ? (0xffffffff00000000ULL 
                                         | (QData)((IData)(
@@ -8536,14 +8766,14 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                        (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                         >> 0x20U)))) 
                                    >> 0x20U)) >> 4U);
-    __Vtemp3232[0x1fU] = (0x1b00U | ((IData)(((1U & (IData)(
+    __Vtemp3289[0x1fU] = (0x1a00U | ((IData)(((1U & (IData)(
                                                             (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                              >> 0x1fU)))
                                                ? (0xffffffff00000000ULL 
                                                   | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
                                                : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))) 
                                      << 0x10U));
-    __Vtemp3232[0x20U] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x20U] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                    >> 0x1fU)))
                                      ? (0xffffffff00000000ULL 
                                         | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
@@ -8558,7 +8788,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                    : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))) 
                                                  >> 0x20U)) 
                                         << 0x10U));
-    __Vtemp3232[0x21U] = (0x90000000U | ((IData)(((
+    __Vtemp3289[0x21U] = (0x90000000U | ((IData)(((
                                                    (1U 
                                                     & (IData)(
                                                               (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
@@ -8569,14 +8799,14 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                     : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))) 
                                                   >> 0x20U)) 
                                          >> 0x10U));
-    __Vtemp3232[0x22U] = (1U | ((IData)(((1U & (IData)(
+    __Vtemp3289[0x22U] = (1U | ((IData)(((1U & (IData)(
                                                        (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                         >> 0x1fU)))
                                           ? (0xffffffff00000000ULL 
                                              | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
                                           : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))) 
                                 << 4U));
-    __Vtemp3232[0x23U] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x23U] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                    >> 0x1fU)))
                                      ? (0xffffffff00000000ULL 
                                         | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
@@ -8591,7 +8821,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                    : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))) 
                                                  >> 0x20U)) 
                                         << 4U));
-    __Vtemp3232[0x24U] = (0x180000U | (((IData)(((1U 
+    __Vtemp3289[0x24U] = (0x180000U | (((IData)(((1U 
                                                   & (IData)(
                                                             (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                              >> 0x1fU)))
@@ -8610,7 +8840,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                    : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))) 
                                                  >> 0x20U)) 
                                         >> 0x1cU)));
-    __Vtemp3232[0x25U] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x25U] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                    >> 0x1fU)))
                                      ? (0xffffffff00000000ULL 
                                         | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
@@ -8624,20 +8854,20 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                 : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))) 
                                               >> 0x20U)) 
                                      << 0x18U));
-    __Vtemp3232[0x26U] = ((IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x26U] = ((IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                    >> 0x1fU)))
                                      ? (0xffffffff00000000ULL 
                                         | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
                                      : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))) 
                                    >> 0x20U)) >> 8U);
-    __Vtemp3232[0x27U] = (0x170U | ((IData)(((1U & (IData)(
+    __Vtemp3289[0x27U] = (0x170U | ((IData)(((1U & (IData)(
                                                            (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                             >> 0x1fU)))
                                               ? (0xffffffff00000000ULL 
                                                  | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
                                               : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))) 
                                     << 0xcU));
-    __Vtemp3232[0x28U] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x28U] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                    >> 0x1fU)))
                                      ? (0xffffffff00000000ULL 
                                         | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
@@ -8652,7 +8882,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                    : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))) 
                                                  >> 0x20U)) 
                                         << 0xcU));
-    __Vtemp3232[0x29U] = (0x16000000U | ((IData)(((
+    __Vtemp3289[0x29U] = (0x16000000U | ((IData)(((
                                                    (1U 
                                                     & (IData)(
                                                               (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
@@ -8663,18 +8893,18 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                     : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))) 
                                                   >> 0x20U)) 
                                          >> 0x14U));
-    __Vtemp3232[0x2aU] = (IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x2aU] = (IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                  >> 0x1fU)))
                                    ? (0xffffffff00000000ULL 
                                       | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
                                    : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))));
-    __Vtemp3232[0x2bU] = (IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x2bU] = (IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                   >> 0x1fU)))
                                     ? (0xffffffff00000000ULL 
                                        | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
                                     : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))) 
                                   >> 0x20U));
-    __Vtemp3232[0x2cU] = (0x15000U | ((IData)(((1U 
+    __Vtemp3289[0x2cU] = (0x15000U | ((IData)(((1U 
                                                 & (IData)(
                                                           (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                            >> 0x1fU)))
@@ -8682,7 +8912,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                    | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
                                                 : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))) 
                                       << 0x14U));
-    __Vtemp3232[0x2dU] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x2dU] = (((IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                    >> 0x1fU)))
                                      ? (0xffffffff00000000ULL 
                                         | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
@@ -8697,173 +8927,181 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                                   : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))) 
                                                 >> 0x20U)) 
                                        << 0x14U));
-    __Vtemp3232[0x2eU] = ((IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x2eU] = ((IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                    >> 0x1fU)))
                                      ? (0xffffffff00000000ULL 
                                         | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
                                      : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))) 
                                    >> 0x20U)) >> 0xcU);
-    __Vtemp3232[0x2fU] = (0x14U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[0x2fU] = (0x14U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                                    << 8U));
-    __Vtemp3232[0x30U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[0x30U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                            >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                  >> 0x20U)) 
                                         << 8U));
-    __Vtemp3232[0x31U] = (0x1300000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[0x31U] = (0x1300000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                                          << 0x1cU) 
                                         | ((IData)(
                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                     >> 0x20U)) 
                                            >> 0x18U)));
-    __Vtemp3232[0x32U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[0x32U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                            >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                               >> 0x20U)) 
                                      << 0x1cU));
-    __Vtemp3232[0x33U] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x33U] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                    >> 0x20U)) >> 4U);
-    __Vtemp3232[0x34U] = (0x1200U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[0x34U] = (0x1200U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                                      << 0x10U));
-    __Vtemp3232[0x35U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[0x35U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                            >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                  >> 0x20U)) 
                                         << 0x10U));
-    __Vtemp3232[0x36U] = (0x80000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x36U] = (0x80000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                   >> 0x20U)) 
                                          >> 0x10U));
-    __Vtemp3232[0x37U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[0x37U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                           << 4U);
-    __Vtemp3232[0x38U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[0x38U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                            >> 0x1cU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                  >> 0x20U)) 
                                         << 4U));
-    __Vtemp3232[0x39U] = (0x70000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[0x39U] = (0x70000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                                        << 0x18U) | 
                                       ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                 >> 0x20U)) 
                                        >> 0x1cU)));
-    __Vtemp3232[0x3aU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[0x3aU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                            >> 8U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                               >> 0x20U)) 
                                      << 0x18U));
-    __Vtemp3232[0x3bU] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x3bU] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                    >> 0x20U)) >> 8U);
-    __Vtemp3232[0x3cU] = (0x50U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[0x3cU] = (0x50U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                                    << 0xcU));
-    __Vtemp3232[0x3dU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3289[0x3dU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                            >> 0x14U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                  >> 0x20U)) 
                                         << 0xcU));
-    __Vtemp3232[0x3eU] = (0x4000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3289[0x3eU] = (0x4000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                  >> 0x20U)) 
                                         >> 0x14U));
-    __Vtemp3246[0U] = (0x15U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3303[0U] = (0x13U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
                                 << 0x14U));
-    __Vtemp3246[1U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
-                        >> 0xcU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3303[1U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
+                        >> 0xcU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
                                              >> 0x20U)) 
                                     << 0x14U));
-    __Vtemp3246[2U] = (0x1300000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
-                                              >> 0x20U)) 
-                                     >> 0xcU));
-    __Vtemp3246[3U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
+    __Vtemp3303[2U] = (0xf00000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
+                                             >> 0x20U)) 
+                                    >> 0xcU));
+    __Vtemp3303[3U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
                        << 8U);
-    __Vtemp3246[4U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
+    __Vtemp3303[4U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
                         >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
                                               >> 0x20U)) 
                                      << 8U));
-    __Vtemp3246[5U] = (0xf00U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
+    __Vtemp3303[5U] = (0xe00U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
                                   << 0x1cU) | ((IData)(
                                                        (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
                                                         >> 0x20U)) 
                                                >> 0x18U)));
-    __Vtemp3246[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
+    __Vtemp3303[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
                         >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
                                            >> 0x20U)) 
                                   << 0x1cU));
-    __Vtemp3246[7U] = (0xe0000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
+    __Vtemp3303[7U] = (0xd0000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
                                                >> 0x20U)) 
                                       >> 4U));
-    __Vtemp3246[8U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
+    __Vtemp3303[8U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
                        << 0x10U);
-    __Vtemp3246[9U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
+    __Vtemp3303[9U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
                         >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
                                               >> 0x20U)) 
                                      << 0x10U));
-    __Vtemp3246[0xaU] = (0xd0000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
+    __Vtemp3303[0xaU] = (0xc0000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
                                               >> 0x20U)) 
                                      >> 0x10U));
-    __Vtemp3246[0xbU] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
+    __Vtemp3303[0xbU] = ((IData)((4ULL + vlSelf->pc)) 
                          << 4U);
-    __Vtemp3246[0xcU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
-                          >> 0x1cU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
-                                                >> 0x20U)) 
-                                       << 4U));
-    __Vtemp3246[0xdU] = (0xc0U | (((IData)((4ULL + vlSelf->pc)) 
-                                   << 0x18U) | ((IData)(
-                                                        (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
-                                                         >> 0x20U)) 
-                                                >> 0x1cU)));
-    __Vtemp3246[0xeU] = (((IData)((4ULL + vlSelf->pc)) 
-                          >> 8U) | ((IData)(((4ULL 
-                                              + vlSelf->pc) 
-                                             >> 0x20U)) 
-                                    << 0x18U));
-    __Vtemp3246[0xfU] = (0x4000000U | ((IData)(((4ULL 
+    __Vtemp3303[0xcU] = (((IData)((4ULL + vlSelf->pc)) 
+                          >> 0x1cU) | ((IData)(((4ULL 
                                                  + vlSelf->pc) 
                                                 >> 0x20U)) 
-                                       >> 8U));
-    __Vtemp3246[0x10U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
-                          << 0xcU);
-    __Vtemp3246[0x11U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+                                       << 4U));
+    __Vtemp3303[0xdU] = (0x40U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+                                   << 0x18U) | ((IData)(
+                                                        ((4ULL 
+                                                          + vlSelf->pc) 
+                                                         >> 0x20U)) 
+                                                >> 0x1cU)));
+    __Vtemp3303[0xeU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+                          >> 8U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                             >> 0x20U)) 
+                                    << 0x18U));
+    __Vtemp3303[0xfU] = ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                  >> 0x20U)) >> 8U);
+    __Vtemp3303[0x10U] = (0xcU | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+                                  << 0xcU));
+    __Vtemp3303[0x11U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                            >> 0x14U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                  >> 0x20U)) 
                                         << 0xcU));
-    __Vtemp3246[0x12U] = (0xc00000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3303[0x12U] = (0x800000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                 >> 0x20U)) 
                                        >> 0x14U));
-    VL_CONCAT_WWW(2624,2016,608, __Vtemp3247, __Vtemp3232, __Vtemp3246);
-    VL_CONCAT_WWQ(2688,2624,64, __Vtemp3248, __Vtemp3247, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0);
-    __Vtemp3255[0U] = (IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    VL_CONCAT_WWW(2624,2016,608, __Vtemp3304, __Vtemp3289, __Vtemp3303);
+    VL_CONCAT_WWQ(2688,2624,64, __Vtemp3305, __Vtemp3304, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0);
+    __Vtemp3314[0U] = (IData)(((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                               >> 0x1fU)))
                                 ? (0xffffffff00000000ULL 
                                    | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
                                 : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))));
-    __Vtemp3255[1U] = (IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3314[1U] = (IData)((((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                >> 0x1fU)))
                                  ? (0xffffffff00000000ULL 
                                     | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
                                  : (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0))) 
                                >> 0x20U));
-    __Vtemp3255[2U] = (0x2fU | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
+    __Vtemp3314[2U] = (0x2fU | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
                                 << 0x14U));
-    __Vtemp3255[3U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
+    __Vtemp3314[3U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix) 
                         >> 0xcU) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
                                              >> 0x20U)) 
                                     << 0x14U));
-    __Vtemp3255[4U] = (0x2a00000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
+    __Vtemp3314[4U] = (0x2a00000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_fix 
                                               >> 0x20U)) 
                                      >> 0xcU));
-    __Vtemp3255[5U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3314[5U] = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                        << 8U);
-    __Vtemp3255[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3314[6U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                         >> 0x18U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                               >> 0x20U)) 
                                      << 8U));
-    __Vtemp3255[7U] = (0x1800U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3314[7U] = (0x1800U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                                    << 0x1cU) | ((IData)(
                                                         (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                          >> 0x20U)) 
                                                 >> 0x18U)));
-    __Vtemp3255[8U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+    __Vtemp3314[8U] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
                         >> 4U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                            >> 0x20U)) 
                                   << 0x1cU));
-    __Vtemp3255[9U] = (0x60000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+    __Vtemp3314[9U] = (0x60000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
                                                >> 0x20U)) 
                                       >> 4U));
-    __Vtemp3255[0xaU] = 1U;
-    VL_CONCAT_WWW(3024,2688,336, __Vtemp3256, __Vtemp3248, __Vtemp3255);
-    VL_ASSIGN_W(3024,vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3, __Vtemp3256);
+    __Vtemp3314[0xaU] = (1U | ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+                               << 0x10U));
+    __Vtemp3314[0xbU] = (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0) 
+                          >> 0x10U) | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                                >> 0x20U)) 
+                                       << 0x10U));
+    __Vtemp3314[0xcU] = (0x150000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                               >> 0x20U)) 
+                                      >> 0x10U));
+    __Vtemp3314[0xdU] = 0U;
+    VL_CONCAT_WWW(3108,2688,420, __Vtemp3315, __Vtemp3305, __Vtemp3314);
+    VL_ASSIGN_W(3108,vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3, __Vtemp3315);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list[0U][0U] 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3[0U];
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list[0U][1U] 
@@ -9253,6 +9491,18 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
         = (0xfffffU & ((vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3[0x5eU] 
                         << 4U) | (vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3[0x5dU] 
                                   >> 0x1cU)));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list[0x24U][0U] 
+        = ((vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3[0x5fU] 
+            << 0x10U) | (vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3[0x5eU] 
+                         >> 0x10U));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list[0x24U][1U] 
+        = ((vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3[0x60U] 
+            << 0x10U) | (vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3[0x5fU] 
+                         >> 0x10U));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list[0x24U][2U] 
+        = (0xfffffU & ((vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3[0x61U] 
+                        << 0x10U) | (vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3[0x60U] 
+                                     >> 0x10U)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__data_list[0U] 
         = (((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list
                             [0U][1U])) << 0x20U) | (QData)((IData)(
@@ -9433,6 +9683,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                             [0x23U][1U])) << 0x20U) 
            | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list
                              [0x23U][0U])));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__data_list[0x24U] 
+        = (((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list
+                            [0x24U][1U])) << 0x20U) 
+           | (QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list
+                             [0x24U][0U])));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__key_list[0U] 
         = (0xfffffU & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list
            [0U][2U]);
@@ -9541,6 +9796,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__key_list[0x23U] 
         = (0xfffffU & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list
            [0x23U][2U]);
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__key_list[0x24U] 
+        = (0xfffffU & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list
+           [0x24U][2U]);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__hit 
         = (vlSelf->ysyx_22050612_npc__DOT__opcode == 
            vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__key_list
@@ -9720,6 +9978,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
            | (vlSelf->ysyx_22050612_npc__DOT__opcode 
               == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__key_list
               [0x23U]));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__hit 
+        = ((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__hit) 
+           | (vlSelf->ysyx_22050612_npc__DOT__opcode 
+              == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__key_list
+              [0x24U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__lut_out 
         = ((- (QData)((IData)((vlSelf->ysyx_22050612_npc__DOT__opcode 
                                == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__key_list
@@ -9935,6 +10198,12 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
                                   == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__key_list
                                   [0x23U])))) & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__data_list
               [0x23U]));
+    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__lut_out 
+        = (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__lut_out 
+           | ((- (QData)((IData)((vlSelf->ysyx_22050612_npc__DOT__opcode 
+                                  == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__key_list
+                                  [0x24U])))) & vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__data_list
+              [0x24U]));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata_reg 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__lut_out;
 }
