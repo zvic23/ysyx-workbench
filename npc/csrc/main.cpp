@@ -202,7 +202,9 @@ int main() {
 
   update_gpr_pc();
 
-  sdb_mainloop();
+  
+  if(1) sdb_mainloop();
+  else execute(-1);
 
   while(0){
 
