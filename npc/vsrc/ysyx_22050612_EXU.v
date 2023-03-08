@@ -207,6 +207,14 @@ ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
 
 
 
+
+
+
+
+
+
+
+
 //memory
 wire [7:0]wmask_1byte;
 wire [63:0]wdata_1byte;
@@ -327,6 +335,7 @@ always @(posedge clk) begin
 
 	if (opcode[7]==1'b1 && gpr[10]==64'b0) ebreak(0);
 	else if (opcode[7]==1'b1 && gpr[10]!=64'b0) ebreak(1);
+	else if (opcode==0) ebreak(1);
 end
 
 
