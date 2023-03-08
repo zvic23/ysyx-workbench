@@ -119,7 +119,7 @@ void Vysyx_22050612_npc___024root___ctor_var_reset(Vysyx_22050612_npc___024root*
     for (int __Vi0=0; __Vi0<32; ++__Vi0) {
         vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5[__Vi0] = VL_RAND_RESET_Q(64);
     }
-    VL_RAND_RESET_W(1764, vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3);
+    VL_RAND_RESET_W(1680, vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__gpr_write_data____pinNumber3);
     VL_RAND_RESET_W(252, vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__cpu_pc____pinNumber4);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mode = VL_RAND_RESET_I(8);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__operator_a = VL_RAND_RESET_Q(64);
@@ -142,24 +142,24 @@ void Vysyx_22050612_npc___024root___ctor_var_reset(Vysyx_22050612_npc___024root*
     VL_RAND_RESET_W(252, vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__rdata_fixing____pinNumber3);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_1byte = VL_RAND_RESET_I(8);
     VL_RAND_RESET_W(88, vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__rdata_1byte_fix____pinNumber3);
-    for (int __Vi0=0; __Vi0<21; ++__Vi0) {
+    for (int __Vi0=0; __Vi0<20; ++__Vi0) {
         vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__pair_list[__Vi0] = VL_RAND_RESET_I(21);
     }
-    for (int __Vi0=0; __Vi0<21; ++__Vi0) {
+    for (int __Vi0=0; __Vi0<20; ++__Vi0) {
         vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__key_list[__Vi0] = VL_RAND_RESET_I(20);
     }
-    for (int __Vi0=0; __Vi0<21; ++__Vi0) {
+    for (int __Vi0=0; __Vi0<20; ++__Vi0) {
         vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__data_list[__Vi0] = VL_RAND_RESET_I(1);
     }
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__lut_out = VL_RAND_RESET_I(1);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_enable__DOT__i0__DOT__hit = VL_RAND_RESET_I(1);
-    for (int __Vi0=0; __Vi0<21; ++__Vi0) {
+    for (int __Vi0=0; __Vi0<20; ++__Vi0) {
         VL_RAND_RESET_W(84, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__pair_list[__Vi0]);
     }
-    for (int __Vi0=0; __Vi0<21; ++__Vi0) {
+    for (int __Vi0=0; __Vi0<20; ++__Vi0) {
         vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__key_list[__Vi0] = VL_RAND_RESET_I(20);
     }
-    for (int __Vi0=0; __Vi0<21; ++__Vi0) {
+    for (int __Vi0=0; __Vi0<20; ++__Vi0) {
         vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__data_list[__Vi0] = VL_RAND_RESET_Q(64);
     }
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr_write_data__DOT__i0__DOT__lut_out = VL_RAND_RESET_Q(64);
