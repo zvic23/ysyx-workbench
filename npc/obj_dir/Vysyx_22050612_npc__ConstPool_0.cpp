@@ -4,22 +4,23 @@
 
 #include "verilated_heavy.h"
 
-extern const VlWide<8>/*255:0*/ Vysyx_22050612_npc__ConstPool__CONST_1d5c562d_0 = {{
-    0x4a063b26, 0xec640876, 0x01d8b802, 0x403b3130,
-    0xc2006662, 0x1982806c, 0x00330440, 0x00000000
-}};
-
-extern const VlWide<16>/*511:0*/ Vysyx_22050612_npc__ConstPool__CONST_546691b6_0 = {{
-    0x0aa0005f, 0x8000c400, 0x02b00016, 0x40004e00,
-    0x00d80007, 0x20000900, 0x40040300, 0x10040080,
-    0x08020060, 0x08008040, 0xa0012600, 0x04640024,
-    0x30008b80, 0x02240011, 0x28004200, 0x00040008
+extern const VlWide<8>/*255:0*/ Vysyx_22050612_npc__ConstPool__CONST_67bfc032_0 = {{
+    0x4c073b28, 0xec940c76, 0x05d8c810, 0x6003b170,
+    0xc4807662, 0xd98400cc, 0x80330500, 0x00006608
 }};
 
 extern const VlWide<9>/*287:0*/ Vysyx_22050612_npc__ConstPool__CONST_8b1a7979_0 = {{
     0xa3560daf, 0x4cc306a9, 0x32b0996e, 0xc90264d9,
     0x20519148, 0x6c063823, 0xd718840c, 0x0c614e30,
     0x000019c2
+}};
+
+extern const VlWide<17>/*543:0*/ Vysyx_22050612_npc__ConstPool__CONST_a48f6897_0 = {{
+    0x0aa0005f, 0x8000c400, 0x02b00016, 0x40004e00,
+    0x00d80007, 0x20000900, 0x40040300, 0x10040080,
+    0x08020060, 0x08008040, 0xc0012800, 0x04940024,
+    0x70008c80, 0x02260011, 0x40004480, 0x01050008,
+    0x00000080
 }};
 
 extern const VlWide<25>/*799:0*/ Vysyx_22050612_npc__ConstPool__CONST_dbcda3b8_0 = {{
