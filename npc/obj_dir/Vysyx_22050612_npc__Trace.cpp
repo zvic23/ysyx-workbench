@@ -19,6 +19,7 @@ void Vysyx_22050612_npc___024root__traceChgTop0(void* voidSelf, VerilatedVcd* tr
 void Vysyx_22050612_npc___024root__traceChgSub0(Vysyx_22050612_npc___024root* vlSelf, VerilatedVcd* tracep) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VlWide<8>/*255:0*/ __Vtemp2004;
     vluint32_t* const oldp = tracep->oldp(vlSymsp->__Vm_baseCode + 1);
     if (false && oldp) {}  // Prevent unused
     // Body
@@ -747,7 +748,16 @@ void Vysyx_22050612_npc___024root__traceChgSub0(Vysyx_22050612_npc___024root* vl
             tracep->chgQData(oldp+1230,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr_select__DOT__i0__DOT__data_list[2]),64);
             tracep->chgQData(oldp+1232,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr_select__DOT__i0__DOT__lut_out),64);
             tracep->chgBit(oldp+1234,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr_select__DOT__i0__DOT__hit));
-            tracep->chgWData(oldp+1235,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__waddr_select____pinNumber3),252);
+            __Vtemp2004[0U] = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0);
+            __Vtemp2004[1U] = (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
+                                       >> 0x20U));
+            __Vtemp2004[2U] = 0x2bU;
+            __Vtemp2004[3U] = 0x80002U;
+            __Vtemp2004[4U] = 0x1100000U;
+            __Vtemp2004[5U] = 0x200000U;
+            __Vtemp2004[6U] = 0x80U;
+            __Vtemp2004[7U] = 0x1000U;
+            tracep->chgWData(oldp+1235,(__Vtemp2004),252);
             tracep->chgWData(oldp+1243,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__waddr_select__DOT__i0__DOT__pair_list[0]),84);
             tracep->chgWData(oldp+1246,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__waddr_select__DOT__i0__DOT__pair_list[1]),84);
             tracep->chgWData(oldp+1249,(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__waddr_select__DOT__i0__DOT__pair_list[2]),84);

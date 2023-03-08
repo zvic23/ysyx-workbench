@@ -168,7 +168,6 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     VlWide<61>/*1931:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__operator1____pinNumber3;
     VlWide<17>/*535:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_onebyte____pinNumber3;
     VlWide<8>/*251:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__raddr_select____pinNumber3;
-    VlWide<8>/*251:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__waddr_select____pinNumber3;
     VlWide<8>/*251:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__wdata_select____pinNumber3;
     VlWide<8>/*251:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__rdata_fixing____pinNumber3;
     VlWide<3>/*87:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__rdata_1byte_fix____pinNumber3;
