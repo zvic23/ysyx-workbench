@@ -99,10 +99,11 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 64) gpr_write_data (wdata_reg, 
 //pc
 wire [63:0] snpc;
 assign snpc = pc + 64'd4;
-ysyx_22050612_MuxKeyWithDefault #(3, 20, 64) cpu_pc (dnpc, opcode, snpc, {
+ysyx_22050612_MuxKeyWithDefault #(4, 20, 64) cpu_pc (dnpc, opcode, snpc, {
     20'h300 , result_alu0,
     20'd4   , {result_alu0[63:1],1'b0},
-    20'd6   , (result_alu0!=0)?(imm_B+pc):snpc
+    20'd6   , (result_alu0!=0)?(imm_B+pc):snpc,
+    20'd8   , (result_alu0[63]!=0)?(imm_B+pc):snpc
   });
 
 
@@ -112,7 +113,7 @@ wire [63:0]operator_a;
 wire [63:0]operator_b;
 wire [63:0]result_alu0;
 
-`define alu_inst_count 25
+`define alu_inst_count 26
 
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'h4000 , src1,
@@ -129,6 +130,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'hc00  , src1,
     20'd4    , src1,
     20'd6    , src1,
+    20'd8    , src1,
     20'd13   , src1,
     20'd14   , src1,
     20'd16   , src1,
@@ -156,6 +158,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
     20'hc00  , {{58{1'b0}},shamt},
     20'd4    , imm_I,
     20'd6    , src2 ,
+    20'd8    , src2 ,
     20'd13   , imm_I,
     20'd14   , imm_I,
     20'd16   , imm_S,
@@ -183,6 +186,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 8) alumode (mode, opcode, {
     20'hc00  , 8'd10,
     20'd4    , 8'd0 , 
     20'd6    , 8'd1 , 
+    20'd8    , 8'd1 , 
     20'd13   , 8'd0 ,
     20'd14   , 8'd0 ,
     20'd16   , 8'd0 ,
