@@ -72,7 +72,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
 #ifdef CONFIG_MTRACE			
 	if(raddr >= CONFIG_MTRACE_START && raddr <= CONFIG_MTRACE_END){
 	  	printf("mtrace:memory read    addr:0x%llx(0x%llx)   data:0x%lln \n",\
-		raddr,raddr_set,*(long long*)&pmem[raddr_set-0x80000000]);
+		raddr,raddr_set,(long long*)&pmem[raddr_set-0x80000000]);
 	} 
 #endif
   }
