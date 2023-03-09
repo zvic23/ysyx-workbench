@@ -89,14 +89,10 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 		}
   	}
 
-	  	printf("mtrace:memory write   addr:0x%llx(0x%llx)   data:0x%llx   wmask:%x\n",\
-		waddr,waddr_set,wdata,wmask);
-#ifdef CONFIG_MTRACE			
 	if(waddr >= CONFIG_MTRACE_START && waddr <= CONFIG_MTRACE_END){
 	  	printf("mtrace:memory write   addr:0x%llx(0x%llx)   data:0x%llx   wmask:%x\n",\
 		waddr,waddr_set,wdata,wmask);
 	} 
-#endif
   }
 }
 
