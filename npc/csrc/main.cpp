@@ -57,12 +57,24 @@ uint32_t pmem_read(uint64_t addr){
   return *(uint32_t*)&pmem[addr-0x80000000];
 }
 
-
+extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
+  // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
+  if(raddr>=0x80000000){
+  	long long raddr_set = raddr & ~0x7ull;
+	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
+  }
+}
 extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
   	long long raddr_set = raddr & ~0x7ull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
+#ifdef CONFIG_MTRACE			
+	if(raddr >= CONFIG_MTRACE_START && raddr <= CONFIG_MTRACE_END){
+	  	printf("mtrace:memory read    addr:0x%x(0x%x)   data:0x%lx \n",\
+		raddr,raddr_set,rdata);
+	} 
+#endif
   }
 }
 extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
@@ -70,13 +82,19 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   if(waddr>=0x80000000){
-			//printf("write  addr:%llx,  value:%llx\n",waddr,wdata);
   	long long waddr_set = waddr & ~0x7ull;
   	for(int i=0;i<8;i++){
   	        if( (wmask>>i)&1 == 1){
   	      		pmem[waddr_set-0x80000000+i]=(uint8_t)(wdata>>(i*8));
 		}
   	}
+#ifdef CONFIG_MTRACE			
+	//printf("write  addr:%llx,  value:%llx\n",waddr,wdata);
+	if(waddr >= CONFIG_MTRACE_START && waddr <= CONFIG_MTRACE_END){
+	  	printf("mtrace:memory write   addr:0x%x(0x%x)   data:0x%lx   wmask:%b\n",\
+		waddr,waddr_set,wdata,wmask);
+	} 
+#endif
   }
 }
 

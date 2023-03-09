@@ -19,6 +19,8 @@ extern "C" {
     extern void ftrace_check(long long pc, long long dnpc, int dest_register, int src_register, long long imm);
     // DPI import at vsrc//ysyx_22050612_EXU.v:5:30
     extern void pmem_read(long long raddr, long long* rdata);
+    // DPI import at vsrc//ysyx_22050612_IFU.v:2:30
+    extern void pmem_read_pc(long long raddr, long long* rdata);
     // DPI import at vsrc//ysyx_22050612_EXU.v:7:30
     extern void pmem_write(long long waddr, long long wdata, char wmask);
     // DPI import at vsrc//ysyx_22050612_IFU.v:1:30

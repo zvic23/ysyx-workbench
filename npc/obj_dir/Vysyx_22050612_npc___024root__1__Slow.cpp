@@ -919,7 +919,7 @@ void Vysyx_22050612_npc___024root___ctor_var_reset(Vysyx_22050612_npc___024root*
     }
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_twobyte__DOT__i0__DOT__lut_out = VL_RAND_RESET_I(16);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata_twobyte__DOT__i0__DOT__hit = VL_RAND_RESET_I(1);
-    vlSelf->__Vtask_pmem_read__0__rdata = 0;
+    vlSelf->__Vtask_pmem_read_pc__0__rdata = 0;
     vlSelf->__Vtask_pmem_read__2__rdata = 0;
     for (int __Vi0=0; __Vi0<2; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = VL_RAND_RESET_I(1);

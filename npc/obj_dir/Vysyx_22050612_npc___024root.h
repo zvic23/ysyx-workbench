@@ -201,7 +201,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     VlWide<3>/*87:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__rdata_onebyte____pinNumber3;
     VlWide<5>/*132:0*/ ysyx_22050612_npc__DOT__exu__DOT____Vcellinp__rdata_twobyte____pinNumber3;
     VlWide<23>/*719:0*/ ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT____Vcellinp__alu_result_select____pinNumber3;
-    QData/*63:0*/ __Vtask_pmem_read__0__rdata;
+    QData/*63:0*/ __Vtask_pmem_read_pc__0__rdata;
     QData/*63:0*/ __Vtask_pmem_read__2__rdata;
     VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5;
     VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;

@@ -1,4 +1,6 @@
 import "DPI-C" function void read_inst(int npc_inst);
+import "DPI-C" function void pmem_read_pc(
+  input longint raddr, output longint rdata);
 
 module ysyx_22050612_IFU (
    input clk,
@@ -22,7 +24,7 @@ ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, 1'b1);
 
 wire [63:0]inst_mix;
 always @(*) begin
-  pmem_read(pc, inst_mix);
+  pmem_read_pc(pc, inst_mix);
 end
 assign inst = pc[2]?inst_mix[63:32] : inst_mix[31:0];
 
