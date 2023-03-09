@@ -71,7 +71,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
 #ifdef CONFIG_MTRACE			
 	if(raddr >= CONFIG_MTRACE_START && raddr <= CONFIG_MTRACE_END){
-	  	printf("mtrace:memory read    addr:0x%llx(0x%llx)   data:0x%llo \n",\
+	  	printf("mtrace:memory read    addr:0x%llx(0x%llx)   data:0x%llu \n",\
 		raddr,raddr_set,rdata);
 	} 
 #endif
