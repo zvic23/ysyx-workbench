@@ -1,5 +1,3 @@
-
-
 #include <dlfcn.h>
 
 #include <cstdint>
@@ -8,7 +6,9 @@
 #include <cstdio>
 
 #include "../include/difftesting.h"
+#include "../include/generated/autoconf.h"
 
+#ifdef CONFIG_DIFFTEST
 void (*ref_difftest_memcpy)(uint64_t addr, void *buf, size_t n, bool direction) = NULL;
 void (*ref_difftest_regcpy)(void *dut, bool direction) = NULL;
 void (*ref_difftest_exec)(uint64_t n) = NULL;
@@ -47,7 +47,7 @@ void init_difftest(long img_size, int port) {
   ref_difftest_init= (void(*)(int))dlsym(handle, "difftest_init");
   assert(ref_difftest_init);
 
-printf("difftest is on , so_file is %s\n",ref_so_file);
+  printf("difftest is on , so_file is %s\n",ref_so_file);
 
   ref_difftest_init(port);
 
@@ -60,23 +60,12 @@ printf("difftest is on , so_file is %s\n",ref_so_file);
 
 
 extern int end;
-
-//static void checkregs(uint64_t *ref) {
-//  for(int i=0;i<33;i++){
-//	  if(*ref[i] != cpu_gpr_set[i]){
-//		  ebreak(2);
-//		  return;
-//	  }
-//  }
-//}
-
 void difftest_step() {
   uint64_t ref_r[33];
 
   ref_difftest_exec(1);
   ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
 
-  //checkregs(&ref_r);
   for(int i=0;i<33;i++){
 	  if(ref_r[i] != cpu_gpr_set[i]){
 		  printf("npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",i,cpu_gpr_set[i],i,ref_r[i]);
@@ -85,9 +74,14 @@ void difftest_step() {
 	  }
   }
 }
+#else
+void init_difftest(long img_size, int port){}
+void difftest_step() {}
+#endif
 
 
 
+/*
 uint64_t cpu_gpr_ref[33];
 
 void cmpreg(){
@@ -111,3 +105,5 @@ void cmpreg_0(){
 void ref_diff_exec(uint64_t n){
  ref_difftest_exec(n);
 } 
+*/
+

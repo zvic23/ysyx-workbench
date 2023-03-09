@@ -7,12 +7,15 @@
 
 #include "../include/generated/autoconf.h"
 
+//*************  itrace  *************//
+#ifdef CONFIG_ITRACE
 #define QUEUE_ELEMENTS 15
 #define QUEUE_SIZE (QUEUE_ELEMENTS + 1)
 char Queue[QUEUE_SIZE][128];
 static int QueueIn=0;
 static int QueueOut=0;
 
+char logbuf_once[128];
 
 void itrace(uint64_t pc , uint32_t inst_val){
   char logbuf[128];
@@ -36,6 +39,7 @@ void itrace(uint64_t pc , uint32_t inst_val){
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, inst_val, ilen);
 
+  strcpy(logbuf_once,logbuf);
 	//printf("logbug=%s\n",logbuf);
 //zsl:iringbuf implement*************
     if(QueueIn == (( QueueOut + QUEUE_SIZE) % QUEUE_SIZE)){
@@ -55,16 +59,25 @@ void itrace(uint64_t pc , uint32_t inst_val){
 
 
 void iringbuf_output(){
-      printf("itrace :\n");
+      printf("iringbuf :\n");
       for(int i=0;i<QUEUE_SIZE;i++){
 	      printf("%s\n",Queue[(QueueOut+i)%QUEUE_SIZE]);
       }
 }
 
 
+void itrace_printf_once(){
+	printf("%s\n",logbuf_once);
+}
+#else
+void itrace(uint64_t pc , uint32_t inst_val){}
+void iringbuf_output(){}
+void itrace_printf_once(){}
+#endif
 
 
-
+//************   ftrace     ***************//
+#ifdef CONFIG_FTRACE
 struct func{
 char name[20];
 uint64_t addr_start;
@@ -171,17 +184,10 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){
   fclose(fp_ftrace);
 }
 
-#ifdef CONFIG_FTRACE
 int blanknum=1;
-void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,int src_register,int imm_up, int imm_lo){
+void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register,long long imm){
 	char src_func[20];
 	char dest_func[20];
-	uint64_t pc = pc_up ;
-	pc = (pc <<32) +(uint32_t)pc_lo;
-	uint64_t dnpc = dnpc_up ;
-        dnpc = (dnpc <<32) +(uint32_t)dnpc_lo;
-	uint64_t imm = imm_up ;
-	imm = (imm <<32) +(uint32_t)imm_lo;
 
 	for(int i=0;i<500;i++){
 		if(functab[i].addr_start<=dnpc && dnpc<=functab[i].addr_end){
@@ -195,7 +201,7 @@ void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,
 	//printf("checking.....pc=%lx,pc_up=%x,pc_lo=%x\n",pc,pc_up,pc_lo);
 	if(dest_register == 0 && imm == 0 && src_register == 1){
 		blanknum--;
-		printf("0x%lx:",pc);
+		printf("0x%llx:",pc);
 		for(int i=0;i<blanknum;i++)printf(" ");
 		printf("ret [%s]\n",dest_func);
 	}
@@ -211,15 +217,16 @@ void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,
 		}
 		int i = strcmp(src_func,dest_func);
 		if(i){
-			printf("0x%lx:",pc);
+			printf("0x%llx:",pc);
 			for(int i=0;i<blanknum;i++)printf(" ");
-			printf("call [%s@%lx]\n",dest_func,dnpc);
+			printf("call [%s@%llx]\n",dest_func,dnpc);
 			blanknum++;
 		}
 	}
 }
 #else
-void ftrace_check(int pc_up,int pc_lo,int dnpc_up,int dnpc_lo,int dest_register,int src_register,int imm_up, int imm_lo){}
+void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){}
+void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register,long long imm){}
 #endif
 
 
