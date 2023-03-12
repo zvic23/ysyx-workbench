@@ -129,7 +129,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000000 ????? ????? 000 ????? 01100 11", add    , R, R(dest) = src1 + src2);
 
   INSTPAT("??????? ????? ????? 001 ????? 01000 11", sh     , S, Mw(src1 + imm, 2, src2));
-  INSTPAT("0100000 ????? ????? 101 ????? 00100 11", srai   , I, assert(0);word_t shamt=imm & 0x000000000000003f;word_t src1_s=src1>>shamt;word_t mask_t = 0xffffffffffffffff;mask_t=mask_t<<(64-shamt);printf("111\n");R(dest)=(BITS(src1,63,63)==1)?(mask_t|src1_s):src1_s);  
+  INSTPAT("0100000 ????? ????? 101 ????? 00100 11", srai   , I, word_t shamt=imm & 0x000000000000003f;word_t src1_s=src1>>shamt;word_t mask_t = 0xffffffffffffffff;mask_t=mask_t<<(64-shamt);printf("111\n");R(dest)=(BITS(src1,63,63)==1)?(mask_t|src1_s):src1_s);  
   //word_t shamt=BITS(imm,5,0)     (BITS(0xffffffffffffffff,shamt-1,0)<<(64-shamt))      sword_t src1_sign = *(sword_t*)&src1;R(dest)=(src1_sign >> shamt));        //     !!!!!!!!have doubt 
   INSTPAT("??????? ????? ????? 100 ????? 00000 11", lbu    , I, R(dest) = Mr(src1 + imm, 1));  //!!!!!bitnum have doubt
   INSTPAT("??????? ????? ????? 111 ????? 00100 11", andi   , I, R(dest) = src1 & imm);
