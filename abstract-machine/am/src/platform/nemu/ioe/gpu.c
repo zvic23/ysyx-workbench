@@ -20,12 +20,12 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
     //.width = 0, .height = 0,
     .vmemsz = 0
   };
-  printf("width = %d   height = %d\n",cfg->width,cfg->height);
+  //printf("width = %d   height = %d\n",cfg->width,cfg->height);
 }
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 
-  //printf("x=%d   y=%d   w=%d   h=%d   pixel=%d   sync=%d\n",ctl->x,ctl->y,ctl->w,ctl->h,*(uint32_t*)ctl->pixels,ctl->sync);
+  printf("x=%d   y=%d   w=%d   h=%d   pixel=%d   sync=%d\n",ctl->x,ctl->y,ctl->w,ctl->h,*(uint32_t*)ctl->pixels,ctl->sync);
   if (ctl->sync) {
     outl(SYNC_ADDR, 1);
   }
