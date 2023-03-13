@@ -10,6 +10,7 @@ void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
   printf("keyvalue:%d\n",keyvalue);
   kbd->keydown = keyvalue & KEYDOWN_MASK;
   kbd->keycode = keyvalue & ~KEYDOWN_MASK;
+  if(keyvalue == 0)kbd->keycode = AM_KEY_NONE;
   //kbd->keydown = 0;
   //kbd->keycode = AM_KEY_NONE;
 }
