@@ -6,7 +6,7 @@
 
 void __am_gpu_init() {
   int i;
-  int w = (inw(VGACTL_ADDR)&0xffff)>>4;  // TODO: get the correct width
+  int w = (inw(VGACTL_ADDR)&0xffff0000)>>4;  // TODO: get the correct width
   int h = inw(VGACTL_ADDR)&0xffff;  // TODO: get the correct height
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
   printf("width=%d   height=%d\n",w,h);
