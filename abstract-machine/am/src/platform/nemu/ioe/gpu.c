@@ -9,14 +9,14 @@ void __am_gpu_init() {
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
   *cfg = (AM_GPU_CONFIG_T) {
     .present = true, .has_accel = false,
-    .width = 1000, .height = 1000,
-    .vmemsz = 1
+    .width = 32, .height = 32,
+    .vmemsz = 0
   };
 }
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   if (ctl->sync) {
-    outl(SYNC_ADDR, 6);
+    outl(SYNC_ADDR, 1);
   }
 }
 
