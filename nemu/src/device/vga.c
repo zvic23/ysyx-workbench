@@ -80,10 +80,7 @@ void vga_update_screen() {
   //}
 
   //printf("port:%d\n",(uint32_t)(vgactl_port_base[1]));
-  if( vgactl_port_base[1] == 1){
-	  update_screen();
-	  vgactl_port_base[1] = 0;
-  }
+
 }
 
 void init_vga() {
