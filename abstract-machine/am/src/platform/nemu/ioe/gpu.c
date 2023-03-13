@@ -27,7 +27,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   }
   for(int i=ctl->x;i<ctl->x+ctl->w;i++){
 	  for(int j=ctl->y;j<ctl->y+ctl->h;j++){
-		  outl(FB_ADDR+i*300*4+j*4  , *(uint32_t*)ctl->pixels );
+		  outl(FB_ADDR+i*100*4+j*4  , *(uint32_t*)ctl->pixels );
 	  }
   }
 }
