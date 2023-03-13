@@ -23,6 +23,8 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 }
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
+
+  printf("x=%d   y=%d   w=%d   h=%d   pixel=%d   sync=%d\n",ctl->x,ctl->y,ctl->w,ctl->h,*(uint32_t*)ctl->pixels,ctl->sync);
   if (ctl->sync) {
     outl(SYNC_ADDR, 1);
   }
@@ -31,7 +33,6 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 		  outl(FB_ADDR+i*400*4+j*4  , *(uint32_t*)ctl->pixels );
 	  }
   }
-  printf("x=%d   y=%d   w=%d   h=%d   pixel=%d   sync=%d\n",ctl->x,ctl->y,ctl->w,ctl->h,*(uint32_t*)ctl->pixels,ctl->sync);
 }
 
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
