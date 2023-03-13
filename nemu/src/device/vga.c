@@ -77,7 +77,7 @@ void vga_update_screen() {
   //        update_screen();
   //        io_write(AM_GPU_STATUS,0);
   //}
-  printf("port:%d\n",(uint32_t)vgactl_port_base[0]);
+  printf("port:%d\n",(uint32_t)(vgactl_port_base[0]>>16));
 }
 
 void init_vga() {
