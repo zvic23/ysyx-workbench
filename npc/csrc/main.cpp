@@ -239,9 +239,9 @@ int main() {
   update_gpr_pc();
 
  
-  struct timeval time;
-  gettimeofday(&time,NULL);
-  time_init = (time.tv_sec<<32)+time.tv_usec;
+  struct timeval time_first;
+  gettimeofday(&time_first,NULL);
+  time_init = (time_first.tv_sec<<32)+time_first.tv_usec;
 
 
   if(0) sdb_mainloop();
