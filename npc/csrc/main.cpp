@@ -66,13 +66,14 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
   }
 }
+
+static long long time_init;
 extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
 	if(raddr == 0xa0000048){
 		struct timeval time;
 		gettimeofday(&time,NULL);
-		static long long time_init = (time.tv_sec<<32)+time.tv_usec;
 		long long time_rtc = (time.tv_sec<<32)+time.tv_usec - time_init;
 		//printf("time:   %lld\n",time_rtc);
 		memcpy(rdata, &time_rtc, 8);
@@ -237,7 +238,12 @@ int main() {
 
   update_gpr_pc();
 
-  
+ 
+  struct timeval time;
+  gettimeofday(&time,NULL);
+  time_init = (time.tv_sec<<32)+time.tv_usec;
+
+
   if(0) sdb_mainloop();
   else execute(-1);
 
