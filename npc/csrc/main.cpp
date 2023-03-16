@@ -77,7 +77,6 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
 		gettimeofday(&time,NULL);
 		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec - time_init;
 		memcpy(rdata, &time_rtc, 8);
-		printf("111:%lld\n",time_rtc/1000000);
 		return;
 	}
   	long long raddr_set = raddr & ~0x7ull;
