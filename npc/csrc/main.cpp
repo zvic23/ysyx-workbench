@@ -38,16 +38,17 @@ void step_and_dump_wave(){
 }
 void sim_init(){
   contextp = new VerilatedContext;
-  tfp = new VerilatedVcdC;
+  //tfp = new VerilatedVcdC;
   top = new Vysyx_22050612_npc;
-  contextp->traceEverOn(true);
-  top->trace(tfp, 0);
-  tfp->open("dump.vcd");
+  //contextp->traceEverOn(true);
+  //top->trace(tfp, 0);
+  //tfp->open("dump.vcd");
 }
 
 void sim_exit(){
-  step_and_dump_wave();
-  tfp->close();
+  top->eval();
+  //step_and_dump_wave();
+  //tfp->close();
 }
 
 
@@ -186,13 +187,13 @@ void read_inst(int npc_inst){
 
 void one_cycle(){
   itrace(top->pc, inst);
-  step_and_dump_wave();
+  top->eval();//step_and_dump_wave();
 
   top->clk = 1;
-  step_and_dump_wave();
+  top->eval();//step_and_dump_wave();
 
   top->clk = 0;
-  step_and_dump_wave(); 
+  top->eval();//step_and_dump_wave();
 
   update_gpr_pc();
   difftest_step();
@@ -231,9 +232,9 @@ int main() {
   ftrace_elf_analysis();                      //about ftrace, init the function table 
 					      
 
-  top->clk=0;top->rst=1;step_and_dump_wave();
-  top->clk=1;top->rst=1;step_and_dump_wave();
-  top->clk=0;top->rst=0;step_and_dump_wave();    //init the npc
+  top->clk=0;top->rst=1;top->eval();//step_and_dump_wave();
+  top->clk=1;top->rst=1;top->eval();//step_and_dump_wave();
+  top->clk=0;top->rst=0;top->eval();//step_and_dump_wave();    //init the npc
 
   update_gpr_pc();
 
