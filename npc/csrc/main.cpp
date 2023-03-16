@@ -69,6 +69,12 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
 extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
+	if(raddr == 0xa0000048){
+		struct timeval time;
+		gettimeofday(&time,NULL);
+		memcpy(rdata, &time.tv_usec, 4);
+		return;
+	}
   	long long raddr_set = raddr & ~0x7ull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
 #ifdef CONFIG_MTRACE	
@@ -88,6 +94,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   if(waddr>=0x80000000){
 	if(waddr == 0xa00003f8){                         //uart support
 		putchar((char)wdata);
+		return;
 	}
   	long long waddr_set = waddr & ~0x7ull;
   	for(int i=0;i<8;i++){
