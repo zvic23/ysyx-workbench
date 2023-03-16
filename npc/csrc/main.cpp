@@ -67,7 +67,7 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
   }
 }
 
-static long long time_init;
+long long time_init;
 extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
