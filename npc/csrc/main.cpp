@@ -75,7 +75,6 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
 		struct timeval time;
 		gettimeofday(&time,NULL);
 		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec - time_init;
-		//printf("time:   %lld   %lld\n",time_init,time_rtc);
 		memcpy(rdata, &time_rtc, 8);
 		return;
 	}
