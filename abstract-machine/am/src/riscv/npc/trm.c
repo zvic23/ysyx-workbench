@@ -15,7 +15,7 @@ Area heap = RANGE(&_heap_start, PMEM_END);
 static const char mainargs[] = MAINARGS;
 
 void putch(char ch) {
-  char *SERIAL_PORT = (char*)0x800003f8;
+  char *SERIAL_PORT = (char*)0xa00003f8;
   *SERIAL_PORT = ch;
   //outb(0xa00003f8, ch);
 }
