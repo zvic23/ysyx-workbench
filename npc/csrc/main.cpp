@@ -9,6 +9,8 @@
 #include "include/trace.h"
 #include "include/difftesting.h"
 
+#include <sys/time.h>
+
 #include "include/generated/autoconf.h"
 
 #define GREEN "\33[1;32m"
