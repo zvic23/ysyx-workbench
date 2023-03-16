@@ -67,8 +67,6 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
   }
 }
 
-uint64_t time_init_sec;
-uint64_t time_init_usec;
 uint64_t time_init;
 extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
@@ -76,9 +74,8 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
 	if(raddr == 0xa0000048){
 		struct timeval time;
 		gettimeofday(&time,NULL);
-		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec ;
-		time_rtc = time_rtc - time_init;
-		printf("time:   %lld   %lld\n",time_init,time_rtc);
+		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec - time_init;
+		//printf("time:   %lld   %lld\n",time_init,time_rtc);
 		memcpy(rdata, &time_rtc, 8);
 		return;
 	}
@@ -242,10 +239,8 @@ int main() {
   update_gpr_pc();
 
  
-  struct timeval time_first;
+  struct timeval time_first;                   //get the time when program start
   gettimeofday(&time_first,NULL);
-  time_init_sec = time_first.tv_sec;
-  time_init_usec = time_first.tv_usec;
   time_init = (time_first.tv_sec*1000000)+time_first.tv_usec;
 
 
