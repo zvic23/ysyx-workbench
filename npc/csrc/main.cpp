@@ -51,7 +51,7 @@ void sim_exit(){
 
 
 
-uint8_t pmem[0x50000];
+uint8_t pmem[0x70000000];
 
 uint32_t pmem_read(uint64_t addr){
   return *(uint32_t*)&pmem[addr-0x80000000];
@@ -84,7 +84,9 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   if(waddr>=0x80000000){
-
+	if(waddr == 0xa00003f8){
+		putchar((char)wdata);
+	}
   	long long waddr_set = waddr & ~0x7ull;
   	for(int i=0;i<8;i++){
   	        if( (wmask>>i)&1 == 1){
