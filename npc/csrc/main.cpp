@@ -84,9 +84,8 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   if(waddr>=0x80000000){
-
-		printf("111");
 	if(waddr == 0xa00003f8){
+		printf("111");
 		putchar((char)wdata);
 	}
   	long long waddr_set = waddr & ~0x7ull;
