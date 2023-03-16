@@ -87,7 +87,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 
 	if(waddr == 0xa00003f8){
 
-		printf("write data : %llx\n",wdata);
+		//printf("write data : %llx\n",wdata);
 		putchar((char)wdata);
 	}
   	long long waddr_set = waddr & ~0x7ull;
