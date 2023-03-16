@@ -246,7 +246,7 @@ int main() {
   gettimeofday(&time_first,NULL);
   time_init_sec = time_first.tv_sec;
   time_init_usec = time_first.tv_usec;
-  time_init = (time_first.tv_usec*1000000)+time_first.tv_usec;
+  time_init = (time_first.tv_sec*1000000)+time_first.tv_usec;
 
 
   if(0) sdb_mainloop();
