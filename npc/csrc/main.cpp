@@ -70,11 +70,10 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
 	if(raddr == 0xa0000048){
-		printf("111\n");
 		struct timeval time;
 		gettimeofday(&time,NULL);
-		printf("time:   %ld\n",time.tv_usec);
-		//memcpy(rdata, &time.tv_usec, 4);
+		//printf("time:   %ld\n",time.tv_usec);
+		memcpy(rdata, &time.tv_usec, 4);
 		return;
 	}
   	long long raddr_set = raddr & ~0x7ull;
