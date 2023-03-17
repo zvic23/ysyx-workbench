@@ -206,6 +206,7 @@ void one_cycle(){
 	  printf("111\n");
 	  syn_gpr();
   }else {
+	  printf("222\n");
   	difftest_step();
   }
 	  skip_difftest=0;
@@ -256,7 +257,7 @@ int main() {
   time_init = (time_first.tv_sec*1000000)+time_first.tv_usec;
 
 
-  if(1) sdb_mainloop();
+  if(0) sdb_mainloop();
   else execute(-1);
 
   while(0){
