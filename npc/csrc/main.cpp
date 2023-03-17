@@ -203,6 +203,7 @@ void one_cycle(){
 
   update_gpr_pc();
   if(skip_difftest==1){
+	  printf("11\n");
 	  syn_gpr();
 	  skip_difftest=0;
   }else {
