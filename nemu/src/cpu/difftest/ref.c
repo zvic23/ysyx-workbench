@@ -58,9 +58,10 @@ void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
 
 void difftest_regcpy(void *dut, bool direction) {
   if (direction == DIFFTEST_TO_REF) {
-	  printf("111\n");
     set_regs(dut);
   } else {
+
+	  printf("111\n");
     get_regs(dut);
   }
   //assert(0);
