@@ -18,7 +18,7 @@ void (*ref_difftest_init)(int port) = NULL;
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
 extern uint64_t cpu_gpr_set[33];
-extern uint8_t pmem[0x50000];
+extern uint8_t pmem[0x70000000];
 
 static bool is_skip_ref = false;
 static int skip_dut_nr_inst = 0;
