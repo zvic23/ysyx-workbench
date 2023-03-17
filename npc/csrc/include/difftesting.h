@@ -7,7 +7,7 @@ void init_difftest(long img_size, int port);
 void difftest_step(); 
 
 
-void syn_gpt();
+void syn_gpr();
 
 void cmpreg();
 void cmpreg_0();

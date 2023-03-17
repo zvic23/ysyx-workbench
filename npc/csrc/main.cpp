@@ -202,7 +202,7 @@ void one_cycle(){
   top->eval();//step_and_dump_wave();
 
   update_gpr_pc();
-  if(skip_test==1){
+  if(skip_difftest==1){
 	  syn_gpr();
   }else {
   	difftest_step();
