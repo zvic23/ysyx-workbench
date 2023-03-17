@@ -216,7 +216,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
     20'h4000 , src2 ,
     20'h5000 , src2 ,
-    20'h6000 , {{59{1'b0}},src2[4:0]},
+    20'h6000 , {{58{1'b0}},src2[5:0]},
     20'h7000 , src2 ,
     20'h8000 , src2 ,
     20'h9000 , src2 ,

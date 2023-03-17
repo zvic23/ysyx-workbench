@@ -2478,21 +2478,21 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__3(Vysyx_22050612
     __Vtemp2316[0x36U] = (0x70000000U | ((IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2 
                                                   >> 0x20U)) 
                                          >> 0x10U));
-    __Vtemp2316[0x37U] = ((IData)((QData)((IData)((0x1fU 
+    __Vtemp2316[0x37U] = ((IData)((QData)((IData)((0x3fU 
                                                    & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2))))) 
                           << 4U);
     __Vtemp2316[0x38U] = (((IData)((QData)((IData)(
-                                                   (0x1fU 
+                                                   (0x3fU 
                                                     & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2))))) 
                            >> 0x1cU) | ((IData)(((QData)((IData)(
-                                                                 (0x1fU 
+                                                                 (0x3fU 
                                                                   & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                  >> 0x20U)) 
                                         << 4U));
     __Vtemp2316[0x39U] = (0x60000U | (((IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2) 
                                        << 0x18U) | 
                                       ((IData)(((QData)((IData)(
-                                                                (0x1fU 
+                                                                (0x3fU 
                                                                  & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2)))) 
                                                 >> 0x20U)) 
                                        >> 0x1cU)));
