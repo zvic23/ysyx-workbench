@@ -103,14 +103,19 @@ void cmpreg(){
 
 
 void cmpreg_0(){
-  printf("in\n");
+ // printf("in\n");
   ref_difftest_regcpy(&cpu_gpr_ref, DIFFTEST_TO_DUT);
-  for (int i = 0; i < 32; i++) {
-    printf("nemu.gpr=%lx\n" ,cpu_gpr_ref[i]);
-  }
+ // for (int i = 0; i < 32; i++) {
+ //   printf("nemu.gpr=%lx\n" ,cpu_gpr_ref[i]);
+ // }
 
-    printf("nemu.pc=%lx\n" ,cpu_gpr_ref[32]);
-  printf("out\n");
+ //   printf("nemu.pc=%lx\n" ,cpu_gpr_ref[32]);
+ // printf("out\n");
+
+
+  for(int i=0;i<33;i++){
+		  printf("npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",i,cpu_gpr_set[i],i,cpu_gpr_ref[i]);
+  }
 }
 
 void ref_diff_exec(uint64_t n){
