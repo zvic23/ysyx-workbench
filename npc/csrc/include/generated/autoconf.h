@@ -4,7 +4,6 @@
  * NPC Configuration Menu
  *
  */
-#define CONFIG_WATCHPOINT 1
 #define CONFIG_ITRACE 1
 #define CONFIG_DIFFTEST 1
 #define CONFIG_TRACE_END 10000
