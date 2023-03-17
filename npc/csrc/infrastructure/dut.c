@@ -80,7 +80,6 @@ void difftest_step() {
 
 void syn_gpr(){
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
-printf("222\n");
 }
 #else
 void init_difftest(long img_size, int port){}
