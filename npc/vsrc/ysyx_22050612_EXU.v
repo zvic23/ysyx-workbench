@@ -44,7 +44,7 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, g
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
-`define regwrite_inst_count 41
+`define regwrite_inst_count 42
 ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcode, {
     20'h4000 , 1'b1,
     20'h5000 , 1'b1,
@@ -75,6 +75,7 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcod
     20'h800  , 1'b1,
     20'hc00  , 1'b1,
     20'd4    , 1'b1,
+    20'd11   , 1'b1,
     20'd12   , 1'b1,
     20'd13   , 1'b1,
     20'd14   , 1'b1,
@@ -118,6 +119,7 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 64) gpr_write_data (wdata_reg, 
     20'h800  , result_alu0,
     20'hc00  , result_alu0,
     20'd4    , pc + 64'd4,
+    20'd11   , rdata_fix,
     20'd12   , rdata_fix,
     20'd13   , rdata_fix,
     20'd14   , rdata_fix,
@@ -155,7 +157,7 @@ wire [63:0]operator_a;
 wire [63:0]operator_b;
 wire [63:0]result_alu0;
 
-`define alu_inst_count 44
+`define alu_inst_count 45
 
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'h4000 , src1,
@@ -186,6 +188,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'd8    , src1,
     20'd9    , src1,
     20'd10   , src1,
+    20'd11   , src1,
     20'd12   , src1,
     20'd13   , src1,
     20'd14   , src1,
@@ -232,6 +235,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
     20'd8    , src2 ,
     20'd9    , src2 ,
     20'd10   , src2 ,
+    20'd11   , imm_I,
     20'd12   , imm_I,
     20'd13   , imm_I,
     20'd14   , imm_I,
@@ -278,6 +282,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 8) alumode (mode, opcode, {
     20'd8    , 8'd1 , 
     20'd9    , 8'd1 , 
     20'd10   , 8'd1 , 
+    20'd11   , 8'd0 ,
     20'd12   , 8'd0 ,
     20'd13   , 8'd0 ,
     20'd14   , 8'd0 ,
@@ -375,7 +380,8 @@ wire [63:0] waddr;
 wire [63:0] wdata;
 wire [ 7:0] wmask;
 
-ysyx_22050612_MuxKey #(6, 20, 64) raddr_select (raddr, opcode, {
+ysyx_22050612_MuxKey #(7, 20, 64) raddr_select (raddr, opcode, {
+    20'd11  , result_alu0,
     20'd12  , result_alu0,
     20'd13  , result_alu0,
     20'd14  , result_alu0,
@@ -410,7 +416,8 @@ end
 
 
 wire [63:0] rdata_fix;
-ysyx_22050612_MuxKey #(6, 20, 64) rdata_fixing (rdata_fix, opcode, {
+ysyx_22050612_MuxKey #(7, 20, 64) rdata_fixing (rdata_fix, opcode, {
+    20'd11  , (rdata_1byte[7]?{{56{1'b1}},rdata_1byte}:{{56{1'b0}},rdata_1byte}),
     20'd12  , (rdata_2byte[15]?{{48{1'b1}},rdata_2byte}:{{48{1'b0}},rdata_2byte}),
     20'd13  , (raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]})),
     20'd14  , {{56{1'b0}},rdata_1byte},
