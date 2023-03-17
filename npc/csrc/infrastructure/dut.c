@@ -74,16 +74,22 @@ void difftest_step() {
 	  }
   }
 }
-#else
-void init_difftest(long img_size, int port){}
-void difftest_step() {}
-#endif
+
+
 
 
 void syn_gpr(){
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
 
 }
+#else
+void init_difftest(long img_size, int port){}
+void difftest_step() {}
+void syn_gpr(){}
+#endif
+
+
+
 
 
 
