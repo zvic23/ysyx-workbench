@@ -82,6 +82,7 @@ void difftest_step() {}
 
 void syn_gpr(){
 
+  ref_difftest_exec(1);
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
 
 }
