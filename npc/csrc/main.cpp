@@ -204,11 +204,10 @@ void one_cycle(){
   update_gpr_pc();
   if(skip_difftest==1){
 	  syn_gpr();
-	  skip_difftest=0;
   }else {
   	difftest_step();
   }
-
+	  skip_difftest=0;
 }
 
 int itrace_si = 0;
