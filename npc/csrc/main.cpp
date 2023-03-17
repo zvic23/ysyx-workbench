@@ -206,7 +206,6 @@ void one_cycle(){
 	  printf("111\n");
 	  syn_gpr();
   }else {
-  	difftest_step();
   }
 	  skip_difftest=0;
 }
