@@ -202,21 +202,21 @@ void one_cycle(){
   top->eval();//step_and_dump_wave();
 
   update_gpr_pc();
-//  int oo=0;
-//  if(skip_difftest==1){
-//	  oo = 1;
-//	  printf("111\n");
-//
-//	  printf("oo:%d\n",oo);
-//	  syn_gpr();
-//
-//	  skip_difftest=0;
-//	  return;
-//  }else {
-//	  printf("oo:%d\n",oo);
+  int oo=0;
+  if(skip_difftest==1){
+	  oo = 1;
+	  printf("111\n");
+
+	  printf("oo:%d\n",oo);
+	  syn_gpr();
+
+	  skip_difftest=0;
+	  return;
+  }else {
+	  printf("oo:%d\n",oo);
   	difftest_step();
-//  }
-//	  oo=0;
+  }
+	  oo=0;
 }
 
 int itrace_si = 0;
