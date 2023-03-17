@@ -92,7 +92,7 @@ void syn_gpr(){}
 
 
 
-
+/*
 uint64_t cpu_gpr_ref[33];
 
 void cmpreg(){
@@ -120,5 +120,5 @@ void cmpreg_0(){
 void ref_diff_exec(uint64_t n){
  ref_difftest_exec(n);
 } 
-
+*/
 
