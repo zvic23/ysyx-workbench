@@ -193,7 +193,7 @@ void read_inst(int npc_inst){
 
 void one_cycle(){
   itrace(top->pc, inst);
-  top->eval();//step_and_dump_wave();
+//  top->eval();//step_and_dump_wave();
 
   top->clk = 1;
   top->eval();//step_and_dump_wave();
