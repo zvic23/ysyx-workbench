@@ -112,9 +112,8 @@ void cmpreg_0(){
  //   printf("nemu.pc=%lx\n" ,cpu_gpr_ref[32]);
  // printf("out\n");
 
-
   for(int i=0;i<33;i++){
-		  printf("npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",i,cpu_gpr_set[i],i,cpu_gpr_ref[i]);
+	printf("npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",i,cpu_gpr_set[i],i,cpu_gpr_ref[i]);
   }
 }
 
