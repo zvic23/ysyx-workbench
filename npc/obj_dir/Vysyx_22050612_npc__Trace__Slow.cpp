@@ -1385,8 +1385,8 @@ void Vysyx_22050612_npc___024root__traceFullSub0(Vysyx_22050612_npc___024root* v
         tracep->fullWData(oldp+1538,(__Vtemp4095),88);
         tracep->fullIData(oldp+1541,(0xbU),32);
         tracep->fullIData(oldp+1542,(7U),32);
-        __Vtemp4096[0U] = 0x4698660U;
-        __Vtemp4096[1U] = 0x8320c611U;
+        __Vtemp4096[0U] = 0xc2b06c0U;
+        __Vtemp4096[1U] = 0x8320c631U;
         __Vtemp4096[2U] = 0xcU;
         tracep->fullWData(oldp+1543,(__Vtemp4096),77);
         tracep->fullIData(oldp+1546,(4U),32);
