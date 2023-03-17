@@ -206,6 +206,8 @@ void one_cycle(){
   if(skip_difftest==1){
 	  oo = 1;
 	  printf("111\n");
+
+	  printf("oo:%d\n",oo);
 	  syn_gpr();
   }else {
 	  printf("oo:%d\n",oo);
