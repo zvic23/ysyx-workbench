@@ -52,7 +52,7 @@ void sim_exit(){
 }
 
 
-
+int skip_difftest=0;
 
 uint8_t pmem[0x70000000];
 
@@ -73,6 +73,9 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
 	if(raddr == 0xa0000048){
+
+		skip_difftest=1;
+
 		struct timeval time;
 		gettimeofday(&time,NULL);
 		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec - time_init;
@@ -97,6 +100,9 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   if(waddr>=0x80000000){
 	if(waddr == 0xa00003f8){                         //uart support
+	
+		skip_difftest=1;
+
 		putchar((char)wdata);
 		return;
 	}
@@ -196,7 +202,12 @@ void one_cycle(){
   top->eval();//step_and_dump_wave();
 
   update_gpr_pc();
-  difftest_step();
+  if(skip_test==1){
+	  syn_gpr();
+  }else {
+  	difftest_step();
+  }
+
 }
 
 int itrace_si = 0;

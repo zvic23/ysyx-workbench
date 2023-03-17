@@ -80,6 +80,13 @@ void difftest_step() {}
 #endif
 
 
+void syn_gpt(){
+
+  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
+
+}
+
+
 
 /*
 uint64_t cpu_gpr_ref[33];
