@@ -211,6 +211,8 @@ void one_cycle(){
 	  syn_gpr();
 
 	  skip_difftest=0;
+	  cmpreg();
+	  cmpreg_0();
 	  return;
   }else {
 	  printf("oo:%d\n",oo);
