@@ -209,6 +209,7 @@ void one_cycle(){
 
 	  printf("oo:%d\n",oo);
 	  syn_gpr();
+	  return;
   }else {
 	  printf("oo:%d\n",oo);
   	difftest_step();
