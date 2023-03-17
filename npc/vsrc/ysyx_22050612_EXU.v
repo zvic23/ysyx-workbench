@@ -153,7 +153,7 @@ ysyx_22050612_MuxKeyWithDefault #(8, 20, 64) cpu_pc (dnpc, opcode, snpc, {
     20'd7   , (result_alu0[63]==1)?(imm_B+pc):snpc,
     20'd8   , (result_alu0[63]==0)?(imm_B+pc):snpc,
     20'd9   , (result_alu0[63]==1)?(imm_B+pc):snpc,
-    20'd10  , (result_alu0[63]==0)?(imm_B+pc):snpc
+    20'd10  , (src1>=src2)?(imm_B+pc):snpc  //(result_alu0[63]==0)?(imm_B+pc):snpc
   });
 
 
