@@ -239,7 +239,6 @@ int main() {
 
   sim_init();
 
-  init_difftest(img_size ,0);
   init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
   ftrace_elf_analysis();                      //about ftrace, init the function table 
 					      
@@ -250,6 +249,7 @@ int main() {
 
   update_gpr_pc();
 
+  init_difftest(img_size ,0);
  
   struct timeval time_first;                   //get the time when program start
   gettimeofday(&time_first,NULL);
