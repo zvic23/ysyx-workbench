@@ -209,12 +209,13 @@ void one_cycle(){
 
 	  printf("oo:%d\n",oo);
 	  syn_gpr();
+
+	  skip_difftest=0;
 	  return;
   }else {
 	  printf("oo:%d\n",oo);
   	difftest_step();
   }
-	  skip_difftest=0;
 	  oo=0;
 }
 
