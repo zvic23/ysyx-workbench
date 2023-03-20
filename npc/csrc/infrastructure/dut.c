@@ -73,6 +73,7 @@ void difftest_step() {
 		  return;
 	  }
   }
+  printf("111\n");
 }
 
 

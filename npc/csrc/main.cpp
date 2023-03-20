@@ -210,7 +210,7 @@ void one_cycle(){
 	  syn_gpr();
 	  skip_difftest=0;
   }else {
-  	//difftest_step();
+  	difftest_step();
   }
 }
 
