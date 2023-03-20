@@ -18,7 +18,7 @@ void (*ref_difftest_init)(int port) = NULL;
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
 extern uint64_t cpu_gpr_set[33];
-extern uint8_t pmem[0x50000];
+extern uint8_t pmem[0x70000000];
 
 static bool is_skip_ref = false;
 static int skip_dut_nr_inst = 0;
@@ -74,10 +74,21 @@ void difftest_step() {
 	  }
   }
 }
+
+
+
+
+void syn_gpr(){
+  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
+}
 #else
 void init_difftest(long img_size, int port){}
 void difftest_step() {}
+void syn_gpr(){}
 #endif
+
+
+
 
 
 
@@ -92,14 +103,18 @@ void cmpreg(){
 
 
 void cmpreg_0(){
-  printf("in\n");
+ // printf("in\n");
   ref_difftest_regcpy(&cpu_gpr_ref, DIFFTEST_TO_DUT);
-  for (int i = 0; i < 32; i++) {
-    printf("nemu.gpr=%lx\n" ,cpu_gpr_ref[i]);
-  }
+ // for (int i = 0; i < 32; i++) {
+ //   printf("nemu.gpr=%lx\n" ,cpu_gpr_ref[i]);
+ // }
 
-    printf("nemu.pc=%lx\n" ,cpu_gpr_ref[32]);
-  printf("out\n");
+ //   printf("nemu.pc=%lx\n" ,cpu_gpr_ref[32]);
+ // printf("out\n");
+
+  for(int i=0;i<33;i++){
+	printf("npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",i,cpu_gpr_set[i],i,cpu_gpr_ref[i]);
+  }
 }
 
 void ref_diff_exec(uint64_t n){

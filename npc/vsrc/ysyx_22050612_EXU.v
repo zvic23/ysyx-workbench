@@ -44,12 +44,14 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, g
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
-`define regwrite_inst_count 37
+`define regwrite_inst_count 45
 ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcode, {
     20'h4000 , 1'b1,
     20'h5000 , 1'b1,
+    20'h6000 , 1'b1,
     20'h7000 , 1'b1,
     20'h8000 , 1'b1,
+    20'h9000 , 1'b1,
     20'h12000, 1'b1,
     20'h13000, 1'b1,
     20'h14000, 1'b1,
@@ -65,7 +67,9 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcod
     20'h24000, 1'b1,
     20'h25000, 1'b1,
     20'h26000, 1'b1,
+    20'h27000, 1'b1,
     20'h28000, 1'b1,
+    20'h29000, 1'b1,
     20'h100  , 1'b1,
     20'h200  , 1'b1,
     20'h300  , 1'b1,
@@ -73,22 +77,28 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcod
     20'h800  , 1'b1,
     20'hc00  , 1'b1,
     20'd4    , 1'b1,
+    20'd11   , 1'b1,
     20'd12   , 1'b1,
     20'd13   , 1'b1,
     20'd14   , 1'b1,
     20'd15   , 1'b1,
     20'd19   , 1'b1,
+    20'd20   , 1'b1,
     20'd21   , 1'b1,
     20'd22   , 1'b1,
+    20'd23   , 1'b1,
     20'd24   , 1'b1,
+    20'd41   , 1'b1,
     20'd42   , 1'b1,
     20'd47   , 1'b1
   });
 ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 64) gpr_write_data (wdata_reg, opcode, {
     20'h4000 , result_alu0,
     20'h5000 , result_alu0,
+    20'h6000 , result_alu0,
     20'h7000 , result_alu0,
     20'h8000 , result_alu0,
+    20'h9000 , result_alu0,
     20'h12000, result_alu0,
     20'h13000, result_alu0,
     20'h14000, (result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]})),
@@ -104,7 +114,9 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 64) gpr_write_data (wdata_reg, 
     20'h24000, result_remu0,
     20'h25000, (result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]})),
     20'h26000, (result_divw0[31]?({{32{1'b1}},result_divw0[31:0]}):({{32{1'b0}},result_divw0[31:0]})),
+    20'h27000, (result_divuw0[31]?({{32{1'b1}},result_divuw0[31:0]}):({{32{1'b0}},result_divuw0[31:0]})),
     20'h28000, (result_remw0[31]?({{32{1'b1}},result_remw0[31:0]}):({{32{1'b0}},result_remw0[31:0]})),
+    20'h28000, (result_remuw0[31]?({{32{1'b1}},result_remuw0[31:0]}):({{32{1'b0}},result_remuw0[31:0]})),
     20'h100  , imm_U,
     20'h200  , result_alu0,
     20'h300  , pc + 64'd4,
@@ -112,14 +124,18 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 64) gpr_write_data (wdata_reg, 
     20'h800  , result_alu0,
     20'hc00  , result_alu0,
     20'd4    , pc + 64'd4,
+    20'd11   , rdata_fix,
     20'd12   , rdata_fix,
     20'd13   , rdata_fix,
     20'd14   , rdata_fix,
     20'd15   , rdata_fix,
     20'd19   , result_alu0,
+    20'd20   , result_alu0,
     20'd21   , result_alu0,
     20'd22   , result_alu0,
+    20'd23   , result_alu0,
     20'd24   , result_alu0,
+    20'd41   , rdata_fix,
     20'd42   , rdata_fix,
     20'd47   , (result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}))
   });
@@ -137,7 +153,7 @@ ysyx_22050612_MuxKeyWithDefault #(8, 20, 64) cpu_pc (dnpc, opcode, snpc, {
     20'd7   , (result_alu0[63]==1)?(imm_B+pc):snpc,
     20'd8   , (result_alu0[63]==0)?(imm_B+pc):snpc,
     20'd9   , (result_alu0[63]==1)?(imm_B+pc):snpc,
-    20'd10  , (result_alu0[63]==0)?(imm_B+pc):snpc
+    20'd10  , (src1>=src2)?(imm_B+pc):snpc  //(result_alu0[63]==0)?(imm_B+pc):snpc
   });
 
 
@@ -147,13 +163,15 @@ wire [63:0]operator_a;
 wire [63:0]operator_b;
 wire [63:0]result_alu0;
 
-`define alu_inst_count 40
+`define alu_inst_count 46
 
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'h4000 , src1,
     20'h5000 , src1,
+    20'h6000 , src1,
     20'h7000 , src1,
     20'h8000 , src1,
+    20'h9000 , src1,
     20'h12000, src1,
     20'h13000, src1,
     20'h14000, {{32{1'b0}},src1[31:0]},
@@ -176,6 +194,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'd8    , src1,
     20'd9    , src1,
     20'd10   , src1,
+    20'd11   , src1,
     20'd12   , src1,
     20'd13   , src1,
     20'd14   , src1,
@@ -184,9 +203,12 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
     20'd17   , src1,
     20'd18   , src1,
     20'd19   , src1,
+    20'd20   , src1,
     20'd21   , src1,
     20'd22   , src1,
+    20'd23   , src1,
     20'd24   , src1,
+    20'd41   , src1,
     20'd42   , src1,
     20'd43   , src1,
     20'd47   , src1
@@ -194,8 +216,10 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
     20'h4000 , src2 ,
     20'h5000 , src2 ,
+    20'h6000 , {{58{1'b0}},src2[5:0]},
     20'h7000 , src2 ,
     20'h8000 , src2 ,
+    20'h9000 , src2 ,
     20'h12000, src2 ,
     20'h13000, src2 ,
     20'h14000, {{59{1'b0}},shamt[4:0]},
@@ -218,6 +242,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
     20'd8    , src2 ,
     20'd9    , src2 ,
     20'd10   , src2 ,
+    20'd11   , imm_I,
     20'd12   , imm_I,
     20'd13   , imm_I,
     20'd14   , imm_I,
@@ -226,9 +251,12 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
     20'd17   , imm_S,
     20'd18   , imm_S,
     20'd19   , imm_I,
+    20'd20   , imm_I,
     20'd21   , imm_I,
     20'd22   , imm_I,
+    20'd23   , imm_I,
     20'd24   , imm_I,
+    20'd41   , imm_I,
     20'd42   , imm_I,
     20'd43   , imm_S,
     20'd47   , imm_I
@@ -236,8 +264,10 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator1 (operator_b, opcode, {
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 8) alumode (mode, opcode, {
     20'h4000 , 8'd0 , 
     20'h5000 , 8'd1 , 
+    20'h6000 , 8'd8 , 
     20'h7000 , 8'd2 , 
     20'h8000 , 8'd3 , 
+    20'h9000 , 8'd7 , 
     20'h12000, 8'd6 , 
     20'h13000, 8'd4 , 
     20'h14000, 8'd8 , 
@@ -260,6 +290,7 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 8) alumode (mode, opcode, {
     20'd8    , 8'd1 , 
     20'd9    , 8'd1 , 
     20'd10   , 8'd1 , 
+    20'd11   , 8'd0 ,
     20'd12   , 8'd0 ,
     20'd13   , 8'd0 ,
     20'd14   , 8'd0 ,
@@ -268,9 +299,12 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 8) alumode (mode, opcode, {
     20'd17   , 8'd0 ,
     20'd18   , 8'd0 ,
     20'd19   , 8'd0 ,
+    20'd20   , 8'd2 ,
     20'd21   , 8'd3 ,
     20'd22   , 8'd7 ,
+    20'd23   , 8'd6 ,
     20'd24   , 8'd4 ,
+    20'd41   , 8'd0 ,
     20'd42   , 8'd0 ,
     20'd43   , 8'd0 ,
     20'd47   , 8'd0
@@ -298,6 +332,11 @@ assign result_divw0 = $signed(src1[31:0]) / $signed(src2[31:0]);
 wire[31:0] result_remw0;
 assign result_remw0 = $signed(src1[31:0]) % $signed(src2[31:0]);
 
+wire[31:0] result_divuw0;
+assign result_divuw0 = src1[31:0] / src2[31:0];
+
+wire[31:0] result_remuw0;
+assign result_remuw0 = src1[31:0] % src2[31:0];
 
 
 
@@ -341,10 +380,10 @@ ysyx_22050612_MuxKey #(7, 3, 8 ) wmask_twobyte (wmask_2byte, waddr[2:0], {
     3'd0  , 8'h3 , 
     3'd1  , 8'h6 ,
     3'd2  , 8'hc ,
-    3'd3  , 8'h8 ,
-    3'd4  , 8'h11, 
-    3'd5  , 8'h30, 
-    3'd6  , 8'h60
+    3'd3  , 8'h18,
+    3'd4  , 8'h30, 
+    3'd5  , 8'h60, 
+    3'd6  , 8'hc0
   });
 
 
@@ -355,11 +394,13 @@ wire [63:0] waddr;
 wire [63:0] wdata;
 wire [ 7:0] wmask;
 
-ysyx_22050612_MuxKey #(5, 20, 64) raddr_select (raddr, opcode, {
+ysyx_22050612_MuxKey #(7, 20, 64) raddr_select (raddr, opcode, {
+    20'd11  , result_alu0,
     20'd12  , result_alu0,
     20'd13  , result_alu0,
     20'd14  , result_alu0,
     20'd15  , result_alu0,
+    20'd41  , result_alu0,
     20'd42  , result_alu0
   });
 
@@ -389,11 +430,13 @@ end
 
 
 wire [63:0] rdata_fix;
-ysyx_22050612_MuxKey #(5, 20, 64) rdata_fixing (rdata_fix, opcode, {
+ysyx_22050612_MuxKey #(7, 20, 64) rdata_fixing (rdata_fix, opcode, {
+    20'd11  , (rdata_1byte[7]?{{56{1'b1}},rdata_1byte}:{{56{1'b0}},rdata_1byte}),
     20'd12  , (rdata_2byte[15]?{{48{1'b1}},rdata_2byte}:{{48{1'b0}},rdata_2byte}),
     20'd13  , (raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]})),
     20'd14  , {{56{1'b0}},rdata_1byte},
     20'd15  , {{48{1'b0}},rdata_2byte},
+    20'd41  , {{32{1'b0}},rdata[31:0]},
     20'd42  , rdata
   });
 

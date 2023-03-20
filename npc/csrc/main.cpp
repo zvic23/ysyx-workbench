@@ -9,6 +9,8 @@
 #include "include/trace.h"
 #include "include/difftesting.h"
 
+#include <sys/time.h>
+
 #include "include/generated/autoconf.h"
 
 #define GREEN "\33[1;32m"
@@ -36,22 +38,23 @@ void step_and_dump_wave(){
 }
 void sim_init(){
   contextp = new VerilatedContext;
-  tfp = new VerilatedVcdC;
+  //tfp = new VerilatedVcdC;
   top = new Vysyx_22050612_npc;
-  contextp->traceEverOn(true);
-  top->trace(tfp, 0);
-  tfp->open("dump.vcd");
+  //contextp->traceEverOn(true);
+  //top->trace(tfp, 0);
+  //tfp->open("dump.vcd");
 }
 
 void sim_exit(){
-  step_and_dump_wave();
-  tfp->close();
+  top->eval();
+  //step_and_dump_wave();
+  //tfp->close();
 }
 
 
+int skip_difftest=0;
 
-
-uint8_t pmem[0x50000];
+uint8_t pmem[0x70000000];
 
 uint32_t pmem_read(uint64_t addr){
   return *(uint32_t*)&pmem[addr-0x80000000];
@@ -64,9 +67,21 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
   }
 }
+
+uint64_t time_init;
 extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
+	if(raddr == 0xa0000048){
+
+		skip_difftest=1;
+
+		struct timeval time;
+		gettimeofday(&time,NULL);
+		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec - time_init;
+		memcpy(rdata, &time_rtc, 8);
+		return;
+	}
   	long long raddr_set = raddr & ~0x7ull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
 #ifdef CONFIG_MTRACE	
@@ -84,6 +99,13 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   if(waddr>=0x80000000){
+	if(waddr == 0xa00003f8){                         //uart support
+	
+		skip_difftest=1;
+
+		putchar((char)wdata);
+		return;
+	}
   	long long waddr_set = waddr & ~0x7ull;
   	for(int i=0;i<8;i++){
   	        if( (wmask>>i)&1 == 1){
@@ -171,16 +193,25 @@ void read_inst(int npc_inst){
 
 void one_cycle(){
   itrace(top->pc, inst);
-  step_and_dump_wave();
+//  top->eval();//step_and_dump_wave();
 
   top->clk = 1;
-  step_and_dump_wave();
+  top->eval();//step_and_dump_wave();
 
   top->clk = 0;
-  step_and_dump_wave(); 
+  top->eval();//step_and_dump_wave();
 
   update_gpr_pc();
-  difftest_step();
+  if(skip_difftest == 1){
+	  skip_difftest = 2;
+	  difftest_step();
+  }
+  else if(skip_difftest==2){
+	  syn_gpr();
+	  skip_difftest=0;
+  }else {
+  	difftest_step();
+  }
 }
 
 int itrace_si = 0;
@@ -211,19 +242,24 @@ int main() {
 
   sim_init();
 
-  init_difftest(img_size ,0);
   init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
   ftrace_elf_analysis();                      //about ftrace, init the function table 
 					      
 
-  top->clk=0;top->rst=1;step_and_dump_wave();
-  top->clk=1;top->rst=1;step_and_dump_wave();
-  top->clk=0;top->rst=0;step_and_dump_wave();    //init the npc
+  top->clk=0;top->rst=1;top->eval();//step_and_dump_wave();
+  top->clk=1;top->rst=1;top->eval();//step_and_dump_wave();
+  top->clk=0;top->rst=0;top->eval();//step_and_dump_wave();    //init the npc
 
   update_gpr_pc();
 
-  
-  if(0) sdb_mainloop();
+  init_difftest(img_size ,0);
+ 
+  struct timeval time_first;                   //get the time when program start
+  gettimeofday(&time_first,NULL);
+  time_init = (time_first.tv_sec*1000000)+time_first.tv_usec;
+
+
+  if(1) sdb_mainloop();
   else execute(-1);
 
   while(0){
