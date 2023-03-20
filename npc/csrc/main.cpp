@@ -1,5 +1,5 @@
 #include "verilated.h"
-#include "verilated_vcd_c.h"
+//#include "verilated_vcd_c.h"
 #include "Vysyx_22050612_npc.h"
 
 #include "svdpi.h"
@@ -31,11 +31,11 @@ VerilatedVcdC* tfp = NULL;
 
 static Vysyx_22050612_npc* top;
 
-void step_and_dump_wave(){
-  top->eval();
-  contextp->timeInc(1);
-  tfp->dump(contextp->time());
-}
+//void step_and_dump_wave(){
+//  top->eval();
+//  contextp->timeInc(1);
+//  tfp->dump(contextp->time());
+//}
 void sim_init(){
   contextp = new VerilatedContext;
   //tfp = new VerilatedVcdC;

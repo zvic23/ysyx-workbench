@@ -10,8 +10,6 @@
 //==========
 
 class Vysyx_22050612_npc__Syms;
-class Vysyx_22050612_npc_VerilatedVcd;
-
 
 //----------
 

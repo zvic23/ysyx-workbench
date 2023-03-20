@@ -13,8 +13,6 @@
 
 class Vysyx_22050612_npc__Syms;
 class Vysyx_22050612_npc___024root;
-class VerilatedVcdC;
-class Vysyx_22050612_npc_VerilatedVcd;
 class Vysyx_22050612_npc___024unit;
 
 
@@ -65,8 +63,6 @@ class Vysyx_22050612_npc VL_NOT_FINAL {
     void eval_end_step() {}
     /// Simulation complete, run final blocks.  Application must call on completion.
     void final();
-    /// Trace signals in the model; called by application code
-    void trace(VerilatedVcdC* tfp, int levels, int options = 0);
     /// Return current simulation context for this model.
     /// Used to get to e.g. simulation time via contextp()->time()
     VerilatedContext* contextp() const;

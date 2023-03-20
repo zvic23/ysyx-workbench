@@ -3,7 +3,6 @@
 
 #include "Vysyx_22050612_npc.h"
 #include "Vysyx_22050612_npc__Syms.h"
-#include "verilated_vcd_c.h"
 #include "verilated_dpi.h"
 
 //============================================================
@@ -49,7 +48,6 @@ static void _eval_initial_loop(Vysyx_22050612_npc__Syms* __restrict vlSymsp) {
     // Evaluate till stable
     int __VclockLoop = 0;
     QData __Vchange = 1;
-    vlSymsp->__Vm_activity = true;
     do {
         VL_DEBUG_IF(VL_DBG_MSGF("+ Initial loop\n"););
         Vysyx_22050612_npc___024root___eval_settle(&(vlSymsp->TOP));
@@ -81,7 +79,6 @@ void Vysyx_22050612_npc::eval_step() {
     // Evaluate till stable
     int __VclockLoop = 0;
     QData __Vchange = 1;
-    vlSymsp->__Vm_activity = true;
     do {
         VL_DEBUG_IF(VL_DBG_MSGF("+ Clock loop\n"););
         Vysyx_22050612_npc___024root___eval(&(vlSymsp->TOP));
@@ -117,31 +114,4 @@ VerilatedContext* Vysyx_22050612_npc::contextp() const {
 
 const char* Vysyx_22050612_npc::name() const {
     return vlSymsp->name();
-}
-
-//============================================================
-// Trace configuration
-
-void Vysyx_22050612_npc___024root__traceInitTop(Vysyx_22050612_npc___024root* vlSelf, VerilatedVcd* tracep);
-
-static void traceInit(void* voidSelf, VerilatedVcd* tracep, uint32_t code) {
-    // Callback from tracep->open()
-    Vysyx_22050612_npc___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<Vysyx_22050612_npc___024root*>(voidSelf);
-    Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    if (!vlSymsp->_vm_contextp__->calcUnusedSigs()) {
-        VL_FATAL_MT(__FILE__, __LINE__, __FILE__,
-            "Turning on wave traces requires Verilated::traceEverOn(true) call before time 0.");
-    }
-    vlSymsp->__Vm_baseCode = code;
-    tracep->module(vlSymsp->name());
-    tracep->scopeEscape(' ');
-    Vysyx_22050612_npc___024root__traceInitTop(vlSelf, tracep);
-    tracep->scopeEscape('.');
-}
-
-void Vysyx_22050612_npc___024root__traceRegister(Vysyx_22050612_npc___024root* vlSelf, VerilatedVcd* tracep);
-
-void Vysyx_22050612_npc::trace(VerilatedVcdC* tfp, int, int) {
-    tfp->spTrace()->addInitCb(&traceInit, &(vlSymsp->TOP));
-    Vysyx_22050612_npc___024root__traceRegister(&(vlSymsp->TOP), tfp->spTrace());
 }
