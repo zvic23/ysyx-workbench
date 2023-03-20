@@ -26,7 +26,7 @@ const char *regs_name[] = {
   "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
 };
 
-VerilatedContext* contextp = NULL;
+//VerilatedContext* contextp = NULL;
 //VerilatedVcdC* tfp = NULL;
 
 static Vysyx_22050612_npc* top;
@@ -37,7 +37,7 @@ static Vysyx_22050612_npc* top;
 //  tfp->dump(contextp->time());
 //}
 void sim_init(){
-  contextp = new VerilatedContext;
+  //contextp = new VerilatedContext;
   //tfp = new VerilatedVcdC;
   top = new Vysyx_22050612_npc;
   //contextp->traceEverOn(true);
