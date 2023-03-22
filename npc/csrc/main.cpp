@@ -259,6 +259,8 @@ int main() {
   else built_in_program();
 
   sim_init();
+  init_device();
+
 
   init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
   ftrace_elf_analysis();                      //about ftrace, init the function table 

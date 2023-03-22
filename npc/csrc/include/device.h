@@ -12,4 +12,5 @@ void init_vga();
 void vga_update_screen();
 
 void device_update();
+void init_device();
 #endif
