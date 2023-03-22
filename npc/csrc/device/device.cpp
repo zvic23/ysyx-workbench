@@ -10,7 +10,7 @@ void device_update() {
 		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec;
 		uint64_t now = time_rtc;
   //if (now - last < 1000000 / TIMER_HZ) {
-  if (now - last < 1000000 ) {
+  if (now - last < 500000 ) {
     return;
   }
   last = now;
