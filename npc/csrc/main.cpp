@@ -228,6 +228,8 @@ void one_cycle(){
   }else {
   	difftest_step();
   }
+
+  device_update();
 }
 
 int itrace_si = 0;
