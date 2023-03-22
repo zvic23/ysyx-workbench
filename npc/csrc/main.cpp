@@ -10,6 +10,7 @@
 #include "include/difftesting.h"
 
 #include <sys/time.h>
+#include "include/device.h"
 
 #include "include/generated/autoconf.h"
 
@@ -73,9 +74,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
 	if(raddr == 0xa0000048){
-
 		skip_difftest=1;
-
 		struct timeval time;
 		gettimeofday(&time,NULL);
 		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec - time_init;
@@ -94,18 +93,35 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
 #endif
   }
 }
+
+extern int vgactl_port;
+extern uint8_t vmem[400*300*4];
 extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // 总是往地址为`waddr & ~0x7ull`的8字节按写掩码`wmask`写入`wdata`
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   if(waddr>=0x80000000){
 	if(waddr == 0xa00003f8){                         //uart support
-	
 		skip_difftest=1;
-
 		putchar((char)wdata);
 		return;
 	}
+	else if(waddr == 0xa0000104){
+		vgactl_port = 1;
+	}
+	else if(waddr >= 0xa1000000 && waddr < 0xa1000000+400*300*4){
+  		long long waddr_set = waddr & ~0x7ull;
+  		for(int i=0;i<8;i++){
+  		        if( (wmask>>i)&1 == 1){
+  		      		vmem[waddr_set-0xa1000000+i]=(uint8_t)(wdata>>(i*8));
+			}
+  		}
+	}
+
+
+
+
+
   	long long waddr_set = waddr & ~0x7ull;
   	for(int i=0;i<8;i++){
   	        if( (wmask>>i)&1 == 1){
