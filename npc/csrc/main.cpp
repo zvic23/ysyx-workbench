@@ -16,6 +16,7 @@
 
 #define GREEN "\33[1;32m"
 #define RED   "\33[1;31m"
+#define BLUE  "\33[1;34m"
 #define NONE  "\33[0m"                //zsl:offer color for printf
 
 #include "verilated_dpi.h"            //zsl:for printf the gpr
@@ -241,9 +242,9 @@ void execute(int n){
   		  struct timeval time_end;                   //get the time when program end
   		  gettimeofday(&time_end,NULL);
   		  g_timer = (time_end.tv_sec*1000000)+time_end.tv_usec - time_init;
-		  printf("host time spent = %ld us\n",g_timer);
-		  printf("total guest instructions = %ld \n",g_nr_guest_inst);
-		  printf("simulation frequency = %ld inst/s\n",g_nr_guest_inst * 1000000 / g_timer);
+		  printf(BLUE "host time spent = %ld us\n" NONE,g_timer);
+		  printf(BLUE "total guest instructions = %ld \n" NONE,g_nr_guest_inst);
+		  printf(BLUE "simulation frequency = %ld inst/s\n" NONE,g_nr_guest_inst * 1000000 / g_timer);
 		  printf("execute has finished, please open npc again!\n");
 		  return;
 	  }
