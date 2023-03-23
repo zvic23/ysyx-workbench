@@ -28,7 +28,7 @@ assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[3
 assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0}:{{51{1'b0}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0};
 assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},inst[31:25],inst[11:7]};
 
-/*
+
 ysyx_22050612_MuxKey #(25, 10, 7) decode0 (opcode[6:0], {inst[14:12],inst[6:0]}, {
     10'b000_1100111, 7'd4 ,        //jalr
     10'b000_1100011, 7'd5 ,        //beq
@@ -92,13 +92,13 @@ ysyx_22050612_MuxKey #(3, 16, 2) decode3 (opcode[11:10], {inst[31:26],inst[14:12
     16'b000000_101_0010011, 2'h2,       //srli
     16'b010000_101_0010011, 2'h3        //srai
   });
-*/
 
 
 
 
 
 
+/*
   always @(inst) begin
 	  case ({inst[14:12],inst[6:0]})
     10'b000_1100111:  opcode[6:0]= 7'd4   ;    //jalr
@@ -176,7 +176,7 @@ ysyx_22050612_MuxKey #(3, 16, 2) decode3 (opcode[11:10], {inst[31:26],inst[14:12
 
 
   end
-
+*/
 
 
 
