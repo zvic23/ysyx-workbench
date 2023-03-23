@@ -23,9 +23,9 @@ input [19:0]opcode,
 
 input [63:0]pc,
 
-//input Mr_val,
-//output Mr_addr,
-output [63:0]dnpc
+
+//output [63:0]dnpc
+output reg [63:0]dnpc
 
 );
 
@@ -51,6 +51,8 @@ assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
 always @(*) begin
+
+//reg
 	case (opcode)
     20'h4000 : wen=1'b1;
     20'h5000 : wen=1'b1;
@@ -150,7 +152,7 @@ always @(*) begin
     default : wdata_reg=64'b0;
 	endcase
 
-
+//alu
     case (opcode)
     20'h4000 : operator_a=src1;
     20'h5000 : operator_a=src1;
@@ -303,6 +305,19 @@ always @(*) begin
     endcase
 
 
+
+    case (opcode)
+    20'h300 : dnpc=result_alu0;
+    20'd4   : dnpc={result_alu0[63:1],1'b0};
+    20'd5   : dnpc=(result_alu0==64'b0)?(imm_B+pc):snpc;
+    20'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+pc):snpc;
+    20'd7   : dnpc=(result_alu0[63]==1)?(imm_B+pc):snpc;
+    20'd8   : dnpc=(result_alu0[63]==0)?(imm_B+pc):snpc;
+    20'd9   : dnpc=(result_alu0[63]==1)?(imm_B+pc):snpc;
+    20'd10  : dnpc=(src1>=src2)?(imm_B+pc):snpc        ;        //(result_alu0[63]==0)?(imm_B+pc):snpc
+    default: dnpc=snpc;
+    endcase
+
 end
 
 
@@ -427,6 +442,7 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 64) gpr_write_data (wdata_reg, 
 //pc
 wire [63:0] snpc;
 assign snpc = pc + 64'd4;
+/*
 ysyx_22050612_MuxKeyWithDefault #(8, 20, 64) cpu_pc (dnpc, opcode, snpc, {
     20'h300 , result_alu0,
     20'd4   , {result_alu0[63:1],1'b0},
@@ -437,7 +453,7 @@ ysyx_22050612_MuxKeyWithDefault #(8, 20, 64) cpu_pc (dnpc, opcode, snpc, {
     20'd9   , (result_alu0[63]==1)?(imm_B+pc):snpc,
     20'd10  , (src1>=src2)?(imm_B+pc):snpc  //(result_alu0[63]==0)?(imm_B+pc):snpc
   });
-
+*/
 
 //alu
 //wire [7:0] mode;
