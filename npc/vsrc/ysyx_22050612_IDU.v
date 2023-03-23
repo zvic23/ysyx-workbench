@@ -99,6 +99,46 @@ ysyx_22050612_MuxKey #(3, 16, 2) decode3 (opcode[11:10], {inst[31:26],inst[14:12
 
 
 
+  always @(inst) begin
+	  case ({inst[14:12],inst[6:0]})
+    10'b000_1100111:  opcode[6:0]= 7'd4   ;    //jalr
+    10'b000_1100011:  opcode[6:0]= 7'd5   ;    //beq
+    10'b001_1100011:  opcode[6:0]= 7'd6   ;    //bne
+    10'b100_1100011:  opcode[6:0]= 7'd7   ;    //blt
+    10'b101_1100011:  opcode[6:0]= 7'd8   ;    //bge
+    10'b110_1100011:  opcode[6:0]= 7'd9   ;    //bltu
+    10'b111_1100011:  opcode[6:0]= 7'd10  ;    //bgeu
+    10'b000_0000011:  opcode[6:0]= 7'd11  ;    //lb
+    10'b001_0000011:  opcode[6:0]= 7'd12  ;    //lh
+    10'b010_0000011:  opcode[6:0]= 7'd13  ;    //lw
+    10'b100_0000011:  opcode[6:0]= 7'd14  ;    //lbu
+    10'b101_0000011:  opcode[6:0]= 7'd15  ;    //lhu
+    10'b000_0100011:  opcode[6:0]= 7'd16  ;    //sb   
+    10'b001_0100011:  opcode[6:0]= 7'd17  ;    //sh
+    10'b010_0100011:  opcode[6:0]= 7'd18  ;    //sw
+    10'b000_0010011:  opcode[6:0]= 7'd19  ;    //addi
+    10'b010_0010011:  opcode[6:0]= 7'd20  ;    //slti
+    10'b011_0010011:  opcode[6:0]= 7'd21  ;    //sltiu
+    10'b100_0010011:  opcode[6:0]= 7'd22  ;    //xori
+    10'b110_0010011:  opcode[6:0]= 7'd23  ;    //ori
+    10'b111_0010011:  opcode[6:0]= 7'd24  ;    //andi
+    10'b110_0000011:  opcode[6:0]= 7'd41  ;    //lwu
+    10'b011_0000011:  opcode[6:0]= 7'd42  ;    //ld
+    10'b011_0100011:  opcode[6:0]= 7'd43  ;    //sd
+    10'b000_0011011:  opcode[6:0]= 7'd47  ;    //addiw
+    default:  opcode[6:0]=7'b0;
+	  endcase
+
+
+  end
+
+
+
+
+
+
+
+
 assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
 //always @(posedge clk) begin
 //	if(inst==32'h00100073) ebreak(1);
