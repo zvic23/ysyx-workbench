@@ -107,10 +107,10 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 		putchar((char)wdata);
 		return;
 	}
-	else if(waddr == 0xa0000104){
+	else if(waddr == 0xa0000104){                    //vga ctl support
 		vgactl_port = 1;
 	}
-	else if(waddr >= 0xa1000000 && waddr < 0xa1000000+400*300*4){
+	else if(waddr >= 0xa1000000 && waddr < 0xa1000000+400*300*4){    //vga vmem support
   		long long waddr_set = waddr & ~0x7ull;
   		for(int i=0;i<8;i++){
   		        if( (wmask>>i)&1 == 1){
@@ -118,10 +118,6 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 			}
   		}
 	}
-
-
-
-
 
   	long long waddr_set = waddr & ~0x7ull;
   	for(int i=0;i<8;i++){
