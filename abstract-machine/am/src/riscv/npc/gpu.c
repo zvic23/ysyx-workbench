@@ -1,26 +1,10 @@
 #include <am.h>
 #include <stdio.h>
 
-void __am_timer_init() {
-}
+//#define VGACTL_ADDR  0xa0000100
+//#define FB_ADDR      0xa1000000
+//#define SYNC_ADDR (VGACTL_ADDR + 4)
 
-void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
-  uint64_t *RTC_ADDR = (uint64_t*)0xa0000048;
-  uint64_t us_whole= RTC_ADDR[0];
-  uptime->us = us_whole;
-  //uptime->us = 0;
-}
-
-void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
-  rtc->second = 0;
-  rtc->minute = 0;
-  rtc->hour   = 0;
-  rtc->day    = 0;
-  rtc->month  = 0;
-  rtc->year   = 1900;
-}
-
-/*
 void __am_gpu_init() {
 }
 
@@ -55,4 +39,3 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
   status->ready = true;
 }
-*/

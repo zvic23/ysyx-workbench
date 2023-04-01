@@ -1,5 +1,5 @@
 #include "verilated.h"
-#include "verilated_vcd_c.h"
+//#include "verilated_vcd_c.h"
 #include "Vysyx_22050612_npc.h"
 
 #include "svdpi.h"
@@ -10,11 +10,13 @@
 #include "include/difftesting.h"
 
 #include <sys/time.h>
+#include "include/device.h"
 
 #include "include/generated/autoconf.h"
 
 #define GREEN "\33[1;32m"
 #define RED   "\33[1;31m"
+#define BLUE  "\33[1;34m"
 #define NONE  "\33[0m"                //zsl:offer color for printf
 
 #include "verilated_dpi.h"            //zsl:for printf the gpr
@@ -26,18 +28,18 @@ const char *regs_name[] = {
   "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
 };
 
-VerilatedContext* contextp = NULL;
-VerilatedVcdC* tfp = NULL;
+//VerilatedContext* contextp = NULL;
+//VerilatedVcdC* tfp = NULL;
 
 static Vysyx_22050612_npc* top;
 
-void step_and_dump_wave(){
-  top->eval();
-  contextp->timeInc(1);
-  tfp->dump(contextp->time());
-}
+//void step_and_dump_wave(){
+//  top->eval();
+//  contextp->timeInc(1);
+//  tfp->dump(contextp->time());
+//}
 void sim_init(){
-  contextp = new VerilatedContext;
+  //contextp = new VerilatedContext;
   //tfp = new VerilatedVcdC;
   top = new Vysyx_22050612_npc;
   //contextp->traceEverOn(true);
@@ -73,9 +75,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
 	if(raddr == 0xa0000048){
-
 		skip_difftest=1;
-
 		struct timeval time;
 		gettimeofday(&time,NULL);
 		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec - time_init;
@@ -94,18 +94,31 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
 #endif
   }
 }
+
+extern int vgactl_port;
+extern uint8_t vmem[400*300*4];
 extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // 总是往地址为`waddr & ~0x7ull`的8字节按写掩码`wmask`写入`wdata`
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   if(waddr>=0x80000000){
 	if(waddr == 0xa00003f8){                         //uart support
-	
 		skip_difftest=1;
-
 		putchar((char)wdata);
 		return;
 	}
+	else if(waddr == 0xa0000104){                    //vga ctl support
+		vgactl_port = 1;
+	}
+	else if(waddr >= 0xa1000000 && waddr < 0xa1000000+400*300*4){    //vga vmem support
+  		long long waddr_set = waddr & ~0x7ull;
+  		for(int i=0;i<8;i++){
+  		        if( (wmask>>i)&1 == 1){
+  		      		vmem[waddr_set-0xa1000000+i]=(uint8_t)(wdata>>(i*8));
+			}
+  		}
+	}
+
   	long long waddr_set = waddr & ~0x7ull;
   	for(int i=0;i<8;i++){
   	        if( (wmask>>i)&1 == 1){
@@ -212,21 +225,39 @@ void one_cycle(){
   }else {
   	difftest_step();
   }
+
+  device_update();
 }
 
 int itrace_si = 0;
+uint64_t g_nr_guest_inst = 0;
+static uint64_t g_timer = 0; // unit: us
 void execute(int n){
   for(uint64_t i=0;i<n;i++){
 	  if(end == 1){
+  		  struct timeval time_end;                   //get the time when program end
+  		  gettimeofday(&time_end,NULL);
+  		  g_timer = (time_end.tv_sec*1000000)+time_end.tv_usec - time_init;
+		  printf(BLUE "host time spent = %ld us\n" NONE,g_timer);
+		  printf(BLUE "total guest instructions = %ld \n" NONE,g_nr_guest_inst);
+		  printf(BLUE "simulation frequency = %ld inst/s\n" NONE,g_nr_guest_inst * 1000000 / g_timer);
 		  printf("execute has finished, please open npc again!\n");
 		  return;
 	  }
   	  else if(end == 2){
+  		  struct timeval time_end;                   //get the time when program end
+  		  gettimeofday(&time_end,NULL);
+  		  g_timer = (time_end.tv_sec*1000000)+time_end.tv_usec - time_init;
+		  printf(BLUE "host time spent = %ld us\n" NONE,g_timer);
+		  printf(BLUE "total guest instructions = %ld \n" NONE,g_nr_guest_inst);
+		  printf(BLUE "simulation frequency = %ld inst/s\n" NONE,g_nr_guest_inst * 1000000 / g_timer);
+		  printf("execute has finished, please open npc again!\n");
 		iringbuf_output();
 		printf(RED "ABORT\n" NONE);
 		return;
           }
 	  one_cycle();
+    	  g_nr_guest_inst ++;
 	  if(itrace_si) itrace_printf_once();
 #ifdef CONFIG_WATCHPOINT            
 	  int wp_stop = check_wpchange();
@@ -241,6 +272,8 @@ int main() {
   else built_in_program();
 
   sim_init();
+  init_device();
+
 
   init_disasm("riscv64" "-pc-linux-gnu");     //about itrace, init the disassemble
   ftrace_elf_analysis();                      //about ftrace, init the function table 
@@ -259,7 +292,7 @@ int main() {
   time_init = (time_first.tv_sec*1000000)+time_first.tv_usec;
 
 
-  if(1) sdb_mainloop();
+  if(0) sdb_mainloop();
   else execute(-1);
 
   while(0){

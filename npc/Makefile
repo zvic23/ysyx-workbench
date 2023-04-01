@@ -1,10 +1,10 @@
-CXXSRC += csrc/sdb/sdb.cpp csrc/sdb/expr.cpp csrc/sdb/watchpoint.cpp csrc/infrastructure/trace.cpp csrc/infrastructure/dut.c 
+CXXSRC += csrc/sdb/sdb.cpp csrc/sdb/expr.cpp csrc/sdb/watchpoint.cpp csrc/infrastructure/trace.cpp csrc/infrastructure/dut.c  csrc/device/device.cpp  csrc/device/vga.cpp
 
 
 CXXSRC += csrc/utils/disasm.cc
-CXXFLAGS += $(shell llvm-config --cxxflags) -fPIE
+CXXFLAGS += $(shell llvm-config --cxxflags) -fPIE  
 LIBS += $(shell llvm-config --libs)
-LIBS += -lreadline
+LIBS += -lreadline  -lSDL2main -lSDL2
 
 
 
@@ -13,7 +13,7 @@ all:
 	@echo "Write this Makefile by your self."
 
 sim:
-	verilator --cc --exe --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp  $(CXXSRC) -CFLAGS "$(CXXFLAGS)" -LDFLAGS "$(LIBS)"  --trace -Ivsrc/ #add -Wall later 
+	verilator --cc --exe --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp  $(CXXSRC) -CFLAGS "$(CXXFLAGS)" -LDFLAGS "$(LIBS)"  -Ivsrc/ #add -Wall later      and --trace if want to make wave
 	
 	#verilator --cc --exe --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp --trace -Ivsrc/ #add -Wall later 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!

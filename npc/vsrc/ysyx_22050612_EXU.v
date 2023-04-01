@@ -23,17 +23,19 @@ input [19:0]opcode,
 
 input [63:0]pc,
 
-//input Mr_val,
-//output Mr_addr,
-output [63:0]dnpc
+
+//output [63:0]dnpc
+output reg [63:0]dnpc
 
 );
 
 wire [63:0]src1;
 wire [63:0]src2;
 
-wire [63:0]wdata_reg;
-wire wen;
+//wire [63:0]wdata_reg;
+//wire wen;
+reg [63:0]wdata_reg;
+reg wen;
 wire wen_fix;
 wire [63:0] gpr[31:0];
 assign src1=gpr[rs1];
@@ -44,6 +46,301 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, g
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
+
+
+
+
+always @(*) begin
+
+//reg
+	case (opcode)
+    20'h4000 : wen=1'b1;
+    20'h5000 : wen=1'b1;
+    20'h6000 : wen=1'b1;
+    20'h7000 : wen=1'b1;
+    20'h8000 : wen=1'b1;
+    20'h9000 : wen=1'b1;
+    20'h12000: wen=1'b1;
+    20'h13000: wen=1'b1;
+    20'h14000: wen=1'b1;
+    20'h15000: wen=1'b1;
+    20'h16000: wen=1'b1;
+    20'h17000: wen=1'b1;
+    20'h18000: wen=1'b1;
+    20'h19000: wen=1'b1;
+    20'h1a000: wen=1'b1;
+    20'h1b000: wen=1'b1;
+    20'h1d000: wen=1'b1;
+    20'h22000: wen=1'b1;
+    20'h24000: wen=1'b1;
+    20'h25000: wen=1'b1;
+    20'h26000: wen=1'b1;
+    20'h27000: wen=1'b1;
+    20'h28000: wen=1'b1;
+    20'h29000: wen=1'b1;
+    20'h100  : wen=1'b1;
+    20'h200  : wen=1'b1;
+    20'h300  : wen=1'b1;
+    20'h400  : wen=1'b1;
+    20'h800  : wen=1'b1;
+    20'hc00  : wen=1'b1;
+    20'd4    : wen=1'b1;
+    20'd11   : wen=1'b1;
+    20'd12   : wen=1'b1;
+    20'd13   : wen=1'b1;
+    20'd14   : wen=1'b1;
+    20'd15   : wen=1'b1;
+    20'd19   : wen=1'b1;
+    20'd20   : wen=1'b1;
+    20'd21   : wen=1'b1;
+    20'd22   : wen=1'b1;
+    20'd23   : wen=1'b1;
+    20'd24   : wen=1'b1;
+    20'd41   : wen=1'b1;
+    20'd42   : wen=1'b1;
+    20'd47   : wen=1'b1;
+    default:  wen=1'b0;
+        endcase
+
+
+	case (opcode)
+    20'h4000 : wdata_reg=result_alu0;
+    20'h5000 : wdata_reg=result_alu0;
+    20'h6000 : wdata_reg=result_alu0;
+    20'h7000 : wdata_reg=result_alu0;
+    20'h8000 : wdata_reg=result_alu0;
+    20'h9000 : wdata_reg=result_alu0;
+    20'h12000: wdata_reg=result_alu0;
+    20'h13000: wdata_reg=result_alu0;
+    20'h14000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    20'h15000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    20'h16000: wdata_reg=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
+    20'h17000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    20'h18000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    20'h19000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    20'h1a000: wdata_reg=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
+    20'h1b000: wdata_reg=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
+    20'h1d000: wdata_reg=result_mul0;
+    20'h22000: wdata_reg=result_divu0;
+    20'h24000: wdata_reg=result_remu0;
+    20'h25000: wdata_reg=(result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]}));
+    20'h26000: wdata_reg=(result_divw0[31]?({{32{1'b1}},result_divw0[31:0]}):({{32{1'b0}},result_divw0[31:0]}));
+    20'h27000: wdata_reg=(result_divuw0[31]?({{32{1'b1}},result_divuw0[31:0]}):({{32{1'b0}},result_divuw0[31:0]}));
+    20'h28000: wdata_reg=(result_remw0[31]?({{32{1'b1}},result_remw0[31:0]}):({{32{1'b0}},result_remw0[31:0]}));
+    20'h28000: wdata_reg=(result_remuw0[31]?({{32{1'b1}},result_remuw0[31:0]}):({{32{1'b0}},result_remuw0[31:0]}));
+    20'h100  : wdata_reg=imm_U;
+    20'h200  : wdata_reg=result_alu0;
+    20'h300  : wdata_reg=pc + 64'd4;
+    20'h400  : wdata_reg=result_alu0;
+    20'h800  : wdata_reg=result_alu0;
+    20'hc00  : wdata_reg=result_alu0;
+    20'd4    : wdata_reg=pc + 64'd4;
+    20'd11   : wdata_reg=rdata_fix;
+    20'd12   : wdata_reg=rdata_fix;
+    20'd13   : wdata_reg=rdata_fix;
+    20'd14   : wdata_reg=rdata_fix;
+    20'd15   : wdata_reg=rdata_fix;
+    20'd19   : wdata_reg=result_alu0;
+    20'd20   : wdata_reg=result_alu0;
+    20'd21   : wdata_reg=result_alu0;
+    20'd22   : wdata_reg=result_alu0;
+    20'd23   : wdata_reg=result_alu0;
+    20'd24   : wdata_reg=result_alu0;
+    20'd41   : wdata_reg=rdata_fix;
+    20'd42   : wdata_reg=rdata_fix;
+    20'd47   : wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    default : wdata_reg=64'b0;
+	endcase
+
+//alu
+    case (opcode)
+    20'h4000 : operator_a=src1;
+    20'h5000 : operator_a=src1;
+    20'h6000 : operator_a=src1;
+    20'h7000 : operator_a=src1;
+    20'h8000 : operator_a=src1;
+    20'h9000 : operator_a=src1;
+    20'h12000: operator_a=src1;
+    20'h13000: operator_a=src1;
+    20'h14000: operator_a={{32{1'b0}},src1[31:0]};
+    20'h15000: operator_a={{32{1'b0}},src1[31:0]};
+    20'h16000: operator_a={src1[31:0],{32{1'b0}}};
+    20'h17000: operator_a=src1;
+    20'h18000: operator_a=src1;
+    20'h19000: operator_a=src1;
+    20'h1a000: operator_a={src1[31:0],{32{1'b0}}};
+    20'h1b000: operator_a={src1[31:0],{32{1'b0}}};
+    20'h200  : operator_a=pc;
+    20'h300  : operator_a=pc;
+    20'h400  : operator_a=src1;
+    20'h800  : operator_a=src1;
+    20'hc00  : operator_a=src1;
+    20'd4    : operator_a=src1;
+    20'd5    : operator_a=src1;
+    20'd6    : operator_a=src1;
+    20'd7    : operator_a=src1;
+    20'd8    : operator_a=src1;
+    20'd9    : operator_a=src1;
+    20'd10   : operator_a=src1;
+    20'd11   : operator_a=src1;
+    20'd12   : operator_a=src1;
+    20'd13   : operator_a=src1;
+    20'd14   : operator_a=src1;
+    20'd15   : operator_a=src1;
+    20'd16   : operator_a=src1;
+    20'd17   : operator_a=src1;
+    20'd18   : operator_a=src1;
+    20'd19   : operator_a=src1;
+    20'd20   : operator_a=src1;
+    20'd21   : operator_a=src1;
+    20'd22   : operator_a=src1;
+    20'd23   : operator_a=src1;
+    20'd24   : operator_a=src1;
+    20'd41   : operator_a=src1;
+    20'd42   : operator_a=src1;
+    20'd43   : operator_a=src1;
+    20'd47   : operator_a=src1;
+    default : operator_a=64'b0;
+    endcase
+
+    case (opcode)
+    20'h4000 : operator_b=src2 ;
+    20'h5000 : operator_b=src2 ;
+    20'h6000 : operator_b={{58{1'b0}},src2[5:0]};
+    20'h7000 : operator_b=src2 ;
+    20'h8000 : operator_b=src2 ;
+    20'h9000 : operator_b=src2 ;
+    20'h12000: operator_b=src2 ;
+    20'h13000: operator_b=src2 ;
+    20'h14000: operator_b={{59{1'b0}},shamt[4:0]};
+    20'h15000: operator_b={{59{1'b0}},shamt[4:0]};
+    20'h16000: operator_b={{59{1'b0}},shamt[4:0]};
+    20'h17000: operator_b=src2 ;
+    20'h18000: operator_b=src2 ;
+    20'h19000: operator_b={{59{1'b0}},src2[4:0]};
+    20'h1a000: operator_b={{59{1'b0}},src2[4:0]};
+    20'h1b000: operator_b={{59{1'b0}},src2[4:0]};
+    20'h200  : operator_b=imm_U;
+    20'h300  : operator_b=imm_J;
+    20'h400  : operator_b={{58{1'b0}},shamt};
+    20'h800  : operator_b={{58{1'b0}},shamt};
+    20'hc00  : operator_b={{58{1'b0}},shamt};
+    20'd4    : operator_b=imm_I;
+    20'd5    : operator_b=src2 ;
+    20'd6    : operator_b=src2 ;
+    20'd7    : operator_b=src2 ;
+    20'd8    : operator_b=src2 ;
+    20'd9    : operator_b=src2 ;
+    20'd10   : operator_b=src2 ;
+    20'd11   : operator_b=imm_I;
+    20'd12   : operator_b=imm_I;
+    20'd13   : operator_b=imm_I;
+    20'd14   : operator_b=imm_I;
+    20'd15   : operator_b=imm_I;
+    20'd16   : operator_b=imm_S;
+    20'd17   : operator_b=imm_S;
+    20'd18   : operator_b=imm_S;
+    20'd19   : operator_b=imm_I;
+    20'd20   : operator_b=imm_I;
+    20'd21   : operator_b=imm_I;
+    20'd22   : operator_b=imm_I;
+    20'd23   : operator_b=imm_I;
+    20'd24   : operator_b=imm_I;
+    20'd41   : operator_b=imm_I;
+    20'd42   : operator_b=imm_I;
+    20'd43   : operator_b=imm_S;
+    20'd47   : operator_b=imm_I;
+    default : operator_b=64'b0;
+    endcase
+
+
+    case(opcode)
+    20'h4000 : mode=8'd0 ; 
+    20'h5000 : mode=8'd1 ; 
+    20'h6000 : mode=8'd8 ; 
+    20'h7000 : mode=8'd2 ; 
+    20'h8000 : mode=8'd3 ; 
+    20'h9000 : mode=8'd7 ; 
+    20'h12000: mode=8'd6 ; 
+    20'h13000: mode=8'd4 ; 
+    20'h14000: mode=8'd8 ; 
+    20'h15000: mode=8'd9 ; 
+    20'h16000: mode=8'd10; 
+    20'h17000: mode=8'd0 ; 
+    20'h18000: mode=8'd1 ; 
+    20'h19000: mode=8'd8 ; 
+    20'h1a000: mode=8'd9 ; 
+    20'h1b000: mode=8'd10; 
+    20'h200  : mode=8'd0 ; 
+    20'h300  : mode=8'd0 ; 
+    20'h400  : mode=8'd8 ;
+    20'h800  : mode=8'd9 ;
+    20'hc00  : mode=8'd10;
+    20'd4    : mode=8'd0 ; 
+    20'd5    : mode=8'd1 ; 
+    20'd6    : mode=8'd1 ; 
+    20'd7    : mode=8'd1 ; 
+    20'd8    : mode=8'd1 ; 
+    20'd9    : mode=8'd1 ; 
+    20'd10   : mode=8'd1 ; 
+    20'd11   : mode=8'd0 ;
+    20'd12   : mode=8'd0 ;
+    20'd13   : mode=8'd0 ;
+    20'd14   : mode=8'd0 ;
+    20'd15   : mode=8'd0 ;
+    20'd16   : mode=8'd0 ;
+    20'd17   : mode=8'd0 ;
+    20'd18   : mode=8'd0 ;
+    20'd19   : mode=8'd0 ;
+    20'd20   : mode=8'd2 ;
+    20'd21   : mode=8'd3 ;
+    20'd22   : mode=8'd7 ;
+    20'd23   : mode=8'd6 ;
+    20'd24   : mode=8'd4 ;
+    20'd41   : mode=8'd0 ;
+    20'd42   : mode=8'd0 ;
+    20'd43   : mode=8'd0 ;
+    20'd47   : mode=8'd0 ;
+    default : mode=8'b0;
+    endcase
+
+
+
+    case (opcode)
+    20'h300 : dnpc=result_alu0;
+    20'd4   : dnpc={result_alu0[63:1],1'b0};
+    20'd5   : dnpc=(result_alu0==64'b0)?(imm_B+pc):snpc;
+    20'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+pc):snpc;
+    20'd7   : dnpc=(result_alu0[63]==1)?(imm_B+pc):snpc;
+    20'd8   : dnpc=(result_alu0[63]==0)?(imm_B+pc):snpc;
+    20'd9   : dnpc=(result_alu0[63]==1)?(imm_B+pc):snpc;
+    20'd10  : dnpc=(src1>=src2)?(imm_B+pc):snpc        ;        //(result_alu0[63]==0)?(imm_B+pc):snpc
+    default: dnpc=snpc;
+    endcase
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 `define regwrite_inst_count 45
 ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 1) gpr_write_enable (wen, opcode, {
     20'h4000 , 1'b1,
@@ -139,12 +436,13 @@ ysyx_22050612_MuxKey #(`regwrite_inst_count, 20, 64) gpr_write_data (wdata_reg, 
     20'd42   , rdata_fix,
     20'd47   , (result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}))
   });
-
+*/
 
 
 //pc
 wire [63:0] snpc;
 assign snpc = pc + 64'd4;
+/*
 ysyx_22050612_MuxKeyWithDefault #(8, 20, 64) cpu_pc (dnpc, opcode, snpc, {
     20'h300 , result_alu0,
     20'd4   , {result_alu0[63:1],1'b0},
@@ -155,14 +453,17 @@ ysyx_22050612_MuxKeyWithDefault #(8, 20, 64) cpu_pc (dnpc, opcode, snpc, {
     20'd9   , (result_alu0[63]==1)?(imm_B+pc):snpc,
     20'd10  , (src1>=src2)?(imm_B+pc):snpc  //(result_alu0[63]==0)?(imm_B+pc):snpc
   });
-
+*/
 
 //alu
-wire [7:0] mode;
-wire [63:0]operator_a;
-wire [63:0]operator_b;
+//wire [7:0] mode;
+//wire [63:0]operator_a;
+//wire [63:0]operator_b;
+reg [7:0] mode;
+reg [63:0]operator_a;
+reg [63:0]operator_b;
 wire [63:0]result_alu0;
-
+/*
 `define alu_inst_count 46
 
 ysyx_22050612_MuxKey #(`alu_inst_count, 20, 64) operator0 (operator_a, opcode, {
@@ -309,6 +610,8 @@ ysyx_22050612_MuxKey #(`alu_inst_count, 20, 8) alumode (mode, opcode, {
     20'd43   , 8'd0 ,
     20'd47   , 8'd0
   });
+*/
+
 //ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
 ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
 
@@ -341,8 +644,138 @@ assign result_remuw0 = src1[31:0] % src2[31:0];
 
 
 //memory
-wire [7:0]wmask_1byte;
-wire [63:0]wdata_1byte;
+
+
+always @(*) begin
+	case(waddr[2:0])
+    3'd0  : wdata_1byte={{56{1'b0}},src2[7:0]}; 
+    3'd1  : wdata_1byte={{48{1'b0}},src2[7:0],{ 8{1'b0}}};
+    3'd2  : wdata_1byte={{40{1'b0}},src2[7:0],{16{1'b0}}};
+    3'd3  : wdata_1byte={{32{1'b0}},src2[7:0],{24{1'b0}}};
+    3'd4  : wdata_1byte={{24{1'b0}},src2[7:0],{32{1'b0}}};
+    3'd5  : wdata_1byte={{16{1'b0}},src2[7:0],{40{1'b0}}};
+    3'd6  : wdata_1byte={{ 8{1'b0}},src2[7:0],{48{1'b0}}};
+    3'd7  : wdata_1byte={src2[7:0],{56{1'b0}}};
+    default:wdata_1byte=64'b0;
+	endcase
+
+	case(waddr[2:0])
+    3'd0  : wmask_1byte=8'h1 ; 
+    3'd1  : wmask_1byte=8'h2 ;
+    3'd2  : wmask_1byte=8'h4 ;
+    3'd3  : wmask_1byte=8'h8 ;
+    3'd4  : wmask_1byte=8'h10; 
+    3'd5  : wmask_1byte=8'h20; 
+    3'd6  : wmask_1byte=8'h40; 
+    3'd7  : wmask_1byte=8'h80;
+    default:wmask_1byte=8'b0;
+	endcase
+
+	case(waddr[2:0])
+    3'd0  : wdata_2byte={{48{1'b0}},src2[15:0]}; 
+    3'd1  : wdata_2byte={{40{1'b0}},src2[15:0],{ 8{1'b0}}};
+    3'd2  : wdata_2byte={{32{1'b0}},src2[15:0],{16{1'b0}}};
+    3'd3  : wdata_2byte={{24{1'b0}},src2[15:0],{24{1'b0}}};
+    3'd4  : wdata_2byte={{16{1'b0}},src2[15:0],{32{1'b0}}};
+    3'd5  : wdata_2byte={{ 8{1'b0}},src2[15:0],{40{1'b0}}};
+    3'd6  : wdata_2byte={           src2[15:0],{48{1'b0}}};
+    default:wdata_2byte=64'b0;
+	endcase
+
+	case(waddr[2:0])
+    3'd0  : wmask_2byte=8'h3 ; 
+    3'd1  : wmask_2byte=8'h6 ;
+    3'd2  : wmask_2byte=8'hc ;
+    3'd3  : wmask_2byte=8'h18;
+    3'd4  : wmask_2byte=8'h30; 
+    3'd5  : wmask_2byte=8'h60; 
+    3'd6  : wmask_2byte=8'hc0;
+    default:wmask_2byte=8'b0;
+	endcase
+
+
+	case(raddr[2:0])
+    3'd0  : rdata_1byte=rdata[ 7: 0]; 
+    3'd1  : rdata_1byte=rdata[15: 8];
+    3'd2  : rdata_1byte=rdata[23:16];
+    3'd3  : rdata_1byte=rdata[31:24];
+    3'd4  : rdata_1byte=rdata[39:32];
+    3'd5  : rdata_1byte=rdata[47:40];
+    3'd6  : rdata_1byte=rdata[55:48];
+    3'd7  : rdata_1byte=rdata[63:56];
+    default: rdata_1byte=8'b0;
+	endcase
+
+	case(raddr[2:0])
+    3'd0  : rdata_2byte=rdata[15: 0]; 
+    3'd1  : rdata_2byte=rdata[23: 8];
+    3'd2  : rdata_2byte=rdata[31:16];
+    3'd3  : rdata_2byte=rdata[39:24];
+    3'd4  : rdata_2byte=rdata[47:32];
+    3'd5  : rdata_2byte=rdata[55:40];
+    3'd6  : rdata_2byte=rdata[63:48];
+    default:rdata_2byte=16'b0;
+	endcase
+
+	case(opcode)
+    20'd16  : wdata=wdata_1byte;
+    20'd17  : wdata=wdata_2byte;
+    20'd18  : wdata=(waddr[2]?{src2[31:0],{32{1'b0}}}:{{32{1'b0}},src2[31:0]});
+    20'd43  : wdata=src2;
+    default: wdata=64'b0;
+	endcase
+
+	case(opcode)
+    20'd16  : wmask=wmask_1byte;
+    20'd17  : wmask=wmask_2byte;
+    20'd18  : wmask=(waddr[2]? 8'b11110000:8'b00001111);
+    20'd43  : wmask=8'hff;
+    default: wmask=8'b0;
+	endcase
+
+	case(opcode)
+    20'd11  : rdata_fix=(rdata_1byte[7]?{{56{1'b1}},rdata_1byte}:{{56{1'b0}},rdata_1byte});
+    20'd12  : rdata_fix=(rdata_2byte[15]?{{48{1'b1}},rdata_2byte}:{{48{1'b0}},rdata_2byte});
+    20'd13  : rdata_fix=(raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]}));
+    20'd14  : rdata_fix={{56{1'b0}},rdata_1byte};
+    20'd15  : rdata_fix={{48{1'b0}},rdata_2byte};
+    20'd41  : rdata_fix={{32{1'b0}},rdata[31:0]};
+    20'd42  : rdata_fix=rdata;
+    default: rdata_fix=64'b0;
+	endcase
+end
+
+always @(*) begin
+	case(opcode)
+    20'd11  : raddr=result_alu0;
+    20'd12  : raddr=result_alu0;
+    20'd13  : raddr=result_alu0;
+    20'd14  : raddr=result_alu0;
+    20'd15  : raddr=result_alu0;
+    20'd41  : raddr=result_alu0;
+    20'd42  : raddr=result_alu0;
+    default: waddr=64'b0;
+	endcase
+
+	case(opcode)
+    20'd16  : waddr=result_alu0;
+    20'd17  : waddr=result_alu0;
+    20'd18  : waddr=result_alu0;
+    20'd43  : waddr=result_alu0;
+    default: waddr=64'b0;
+	endcase
+
+
+
+end
+
+
+
+//wire [7:0]wmask_1byte;
+//wire [63:0]wdata_1byte;
+reg [7:0]wmask_1byte;
+reg [63:0]wdata_1byte;
+/*
 ysyx_22050612_MuxKey #(8, 3, 64 ) wdata_onebyte (wdata_1byte, waddr[2:0], {
     3'd0  , {{56{1'b0}},src2[7:0]}, 
     3'd1  , {{48{1'b0}},src2[7:0],{ 8{1'b0}}},
@@ -363,10 +796,13 @@ ysyx_22050612_MuxKey #(8, 3, 8 ) wmask_onebyte (wmask_1byte, waddr[2:0], {
     3'd6  , 8'h40, 
     3'd7  , 8'h80 
   });
+*/
 
-
-wire [7:0]wmask_2byte;
-wire [63:0]wdata_2byte;
+//wire [7:0]wmask_2byte;
+//wire [63:0]wdata_2byte;
+reg [7:0]wmask_2byte;
+reg [63:0]wdata_2byte;
+/*
 ysyx_22050612_MuxKey #(7, 3, 64 ) wdata_twobyte (wdata_2byte, waddr[2:0], {
     3'd0  , {{48{1'b0}},src2[15:0]}, 
     3'd1  , {{40{1'b0}},src2[15:0],{ 8{1'b0}}},
@@ -385,15 +821,20 @@ ysyx_22050612_MuxKey #(7, 3, 8 ) wmask_twobyte (wmask_2byte, waddr[2:0], {
     3'd5  , 8'h60, 
     3'd6  , 8'hc0
   });
+*/
 
 
-
-wire [63:0] raddr;
 wire [63:0] rdata;
-wire [63:0] waddr;
-wire [63:0] wdata;
-wire [ 7:0] wmask;
+//wire [63:0] raddr;
+//wire [63:0] waddr;
+//wire [63:0] wdata;
+//wire [ 7:0] wmask;
+reg [63:0] raddr;
+reg [63:0] waddr;
+reg [63:0] wdata;
+reg [ 7:0] wmask;
 
+/*
 ysyx_22050612_MuxKey #(7, 20, 64) raddr_select (raddr, opcode, {
     20'd11  , result_alu0,
     20'd12  , result_alu0,
@@ -422,6 +863,7 @@ ysyx_22050612_MuxKey #(4, 20, 8 ) wmask_select (wmask, opcode, {
     20'd18  , (waddr[2]? 8'b11110000:8'b00001111),
     20'd43  , 8'hff
   });
+*/
 
 always @(*) begin
   pmem_read(raddr, rdata);
@@ -429,7 +871,9 @@ always @(*) begin
 end
 
 
-wire [63:0] rdata_fix;
+//wire [63:0] rdata_fix;
+reg [63:0] rdata_fix;
+/*
 ysyx_22050612_MuxKey #(7, 20, 64) rdata_fixing (rdata_fix, opcode, {
     20'd11  , (rdata_1byte[7]?{{56{1'b1}},rdata_1byte}:{{56{1'b0}},rdata_1byte}),
     20'd12  , (rdata_2byte[15]?{{48{1'b1}},rdata_2byte}:{{48{1'b0}},rdata_2byte}),
@@ -439,8 +883,11 @@ ysyx_22050612_MuxKey #(7, 20, 64) rdata_fixing (rdata_fix, opcode, {
     20'd41  , {{32{1'b0}},rdata[31:0]},
     20'd42  , rdata
   });
+*/
 
-wire [7:0] rdata_1byte;
+//wire [7:0] rdata_1byte;
+reg [7:0] rdata_1byte;
+/*
 ysyx_22050612_MuxKey #(8, 3, 8) rdata_onebyte (rdata_1byte, raddr[2:0], {
     3'd0  , rdata[ 7: 0], 
     3'd1  , rdata[15: 8],
@@ -451,8 +898,11 @@ ysyx_22050612_MuxKey #(8, 3, 8) rdata_onebyte (rdata_1byte, raddr[2:0], {
     3'd6  , rdata[55:48],
     3'd7  , rdata[63:56]
   });
+*/
 
-wire [15:0] rdata_2byte;
+//wire [15:0] rdata_2byte;
+reg [15:0] rdata_2byte;
+/*
 ysyx_22050612_MuxKey #(7, 3, 16) rdata_twobyte (rdata_2byte, raddr[2:0], {
     3'd0  , rdata[15: 0], 
     3'd1  , rdata[23: 8],
@@ -462,6 +912,7 @@ ysyx_22050612_MuxKey #(7, 3, 16) rdata_twobyte (rdata_2byte, raddr[2:0], {
     3'd5  , rdata[55:40],
     3'd6  , rdata[63:48]
   });   //between two 64bits has not been concerned
+*/
 
 
 
