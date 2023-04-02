@@ -103,7 +103,7 @@ void ftrace_check(uint64_t pc,uint64_t dnpc,uint64_t dest_register,uint64_t src_
 }
 #endif
 
-uint64_t mtvec;
+extern uint64_t mtvec;
 
 static int decode_exec(Decode *s) {
   int dest = 0;
