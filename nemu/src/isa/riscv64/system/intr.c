@@ -23,9 +23,9 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
    */
   mepc=cpu.pc;
   mcause=NO;
-  cpu.pc=epc;
-  printf("%x   %d   %x\n",(uint32_t)mepc,(uint32_t)mcause,(uint32_t)cpu.pc);
-  return 0;
+  printf("%x   %d   %x\n",(uint32_t)mepc,(uint32_t)mcause,(uint32_t)epc);
+  return epc;
+  //return 0;
 }
 
 word_t isa_query_intr() {
