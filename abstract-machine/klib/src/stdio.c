@@ -58,7 +58,7 @@ int printf(const char *fmt, ...) {
   }
   out[j]='\0';
   va_end(ap);
-
+printf("%d\n",j);
   for(int l=0;l<j;l++){
 	  putch(out[l]);
   }
