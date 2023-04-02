@@ -15,12 +15,16 @@
 
 #include <isa.h>
 
+uint64_t mepc,mcause;
+
 word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   /* TODO: Trigger an interrupt/exception with ``NO''.
    * Then return the address of the interrupt/exception vector.
    */
-  return epc;
-  //return 0;
+  mepc=cpu.pc;
+  mcause=NO;
+  cpu.pc=epc;
+  return 0;
 }
 
 word_t isa_query_intr() {
