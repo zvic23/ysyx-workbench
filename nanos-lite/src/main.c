@@ -10,12 +10,9 @@ void init_proc(void);
 int main() {
   extern const char logo[];
   printf("%s", logo);
-  printf("11\n");
-  printf("11\n");
-  printf("11\n");
-  Log("'Hello World!' from Nanos-lite");
-  Log("Build time: %s, %s", __TIME__, __DATE__);
-  printf("22\n");
+  //Log("'Hello World!' from Nanos-lite");
+  //Log("Build time: %s, %s", __TIME__, __DATE__);
+
   init_mm();
 
   init_device();
@@ -30,7 +27,7 @@ int main() {
 
   init_proc();
 
-  Log("Finish initialization");
+  //Log("Finish initialization");
 
 #ifdef HAS_CTE
   yield();
