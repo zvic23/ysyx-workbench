@@ -59,7 +59,7 @@ int printf(const char *fmt, ...) {
   out[j]='\0';
   va_end(ap);
 
-  for(int l=0;l<99;l++){
+  for(int l=0;l<j;l++){
 	  putch(out[l]);
   }
 
