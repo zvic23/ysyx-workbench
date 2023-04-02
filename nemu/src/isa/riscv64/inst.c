@@ -103,7 +103,7 @@ void ftrace_check(uint64_t pc,uint64_t dnpc,uint64_t dest_register,uint64_t src_
 }
 #endif
 
-
+uint64_t mtvec;
 
 static int decode_exec(Decode *s) {
   int dest = 0;
@@ -210,6 +210,9 @@ static int decode_exec(Decode *s) {
   INSTPAT("??????? ????? ????? 010 ????? 00100 11", slti   , I, R(dest) = ((sword_t)src1<(sword_t)imm)?1:0);   
   INSTPAT("0000001 ????? ????? 111 ????? 01110 11", remuw  , R, word_t src1_32=BITS(src1,31,0);word_t src2_32=BITS(src2,31,0);word_t remainder= src1_32 % src2_32;
 	R(dest) = SEXT(remainder,32));               //!!!!!have doubt and to be optimizied    this inst is copy-paste
+
+
+  INSTPAT("??????? ????? ????? 001 ????? 11100 11", csrrw  , I, if(BITS(imm,11,0)==0x305)R(dest)=mtvec;if(BITS(imm,11,0)==0x305)mtvec=src1;);   
 
 
 
