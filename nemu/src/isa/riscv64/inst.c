@@ -212,7 +212,7 @@ static int decode_exec(Decode *s) {
 	R(dest) = SEXT(remainder,32));               //!!!!!have doubt and to be optimizied    this inst is copy-paste
 
 
-  INSTPAT("??????? ????? ????? 001 ????? 11100 11", csrrw  , I, if(BITS(imm,11,0)==0x305)R(dest)=mtvec;if(BITS(imm,11,0)==0x305)mtvec=src1;);   
+  INSTPAT("??????? ????? ????? 001 ????? 11100 11", csrrw  , I, if(BITS(imm,11,0)==0x305)R(dest)=mtvec;if(BITS(imm,11,0)==0x305)mtvec=src1);   
   INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , I, s->dnpc=isa_raise_intr(R(17),mtvec));   
 
 
