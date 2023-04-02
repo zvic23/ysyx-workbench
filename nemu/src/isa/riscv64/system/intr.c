@@ -25,7 +25,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   mepc=cpu.pc;
   mcause=NO;
   printf("%x   %d   %x\n",(uint32_t)mepc,(uint32_t)mcause,(uint32_t)epc);
-  return epc;
+  return mtvec;
   //return 0;
 }
 
