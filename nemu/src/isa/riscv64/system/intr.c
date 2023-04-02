@@ -15,7 +15,7 @@
 
 #include <isa.h>
 
-uint64_t mepc,mcause;
+uint64_t mepc,mcause,mstatus;
 uint64_t mtvec;
 
 word_t isa_raise_intr(word_t NO, vaddr_t epc) {
