@@ -103,7 +103,7 @@ void ftrace_check(uint64_t pc,uint64_t dnpc,uint64_t dest_register,uint64_t src_
 }
 #endif
 
-extern uint64_t mtvec;
+extern uint64_t mtvec,mcause;
 
 
 static int decode_exec(Decode *s) {
@@ -215,6 +215,7 @@ static int decode_exec(Decode *s) {
 
   INSTPAT("??????? ????? ????? 001 ????? 11100 11", csrrw  , I, if(BITS(imm,11,0)==0x305)R(dest)=mtvec;if(BITS(imm,11,0)==0x305)mtvec=src1);   
   INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , I, s->dnpc=isa_raise_intr(R(17),mtvec));   
+  INSTPAT("??????? ????? ????? 010 ????? 11100 11", csrrs  , I, if(BITS(imm,11,0)==0x342)R(dest)=mcause;if(BITS(imm,11,0)==0x342)mcause|=src1);   
 
 
 
