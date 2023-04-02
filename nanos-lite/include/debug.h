@@ -4,13 +4,13 @@
 #include <common.h>
 
 #define Log(format, ...) \
-  printf("\33[1;35m[%s,%d,%s] " format "\33[0m\n", \
-      __FILE__, __LINE__, __func__, ## __VA_ARGS__)
+  printf(format "\n", \
+      ## __VA_ARGS__)
 
 #undef panic
 #define panic(format, ...) \
   do { \
-    Log("\33[1;31msystem panic: " format, ## __VA_ARGS__); \
+    Log("system panic: " format, ## __VA_ARGS__); \
     halt(1); \
   } while (0)
 
