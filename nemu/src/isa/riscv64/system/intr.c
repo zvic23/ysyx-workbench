@@ -21,7 +21,10 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   /* TODO: Trigger an interrupt/exception with ``NO''.
    * Then return the address of the interrupt/exception vector.
    */
-
+  mepc=cpu.pc;
+  mcause=NO;
+  cpu.pc=epc;
+  printf("%d   %d   %d\n",(uint32_t)mepc,(uint32_t)mcause,(uint32_t)cpu.pc);
   return 0;
 }
 
