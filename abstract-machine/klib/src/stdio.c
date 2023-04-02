@@ -10,7 +10,7 @@
 
 const char digits[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 int printf(const char *fmt, ...) {
-  char out[100];
+  char out[65536];
 
   int i = 0;
   int j = 0;
@@ -58,7 +58,7 @@ int printf(const char *fmt, ...) {
   }
   out[j]='\0';
   va_end(ap);
-putch(j);
+
   for(int l=0;l<j;l++){
 	  putch(out[l]);
   }
