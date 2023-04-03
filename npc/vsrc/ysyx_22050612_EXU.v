@@ -9,6 +9,7 @@ import "DPI-C" function void pmem_write(
 
 module ysyx_22050612_EXU(
 input clk,
+input rst,
 input [63:0]imm_I,
 input [63:0]imm_U,
 input [63:0]imm_J,
@@ -45,38 +46,60 @@ assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
 
-//wire [63:0]wdata_csr;
-//wire wen_csr;
-reg [63:0]wdata_csr;
-reg wen_csr;
-wire wen__csr_fix;
-wire [63:0] csr[3:0];
-//wire [1:0]rd_csr;
-reg [1:0]rd_csr;
-wire [63:0]src_csr;
-assign src_csr=csr[rd_csr];
+
+reg [63:0]wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus;
+reg [63:0]mtvec,mepc,mcause,mstatus;
+reg wen_mtvec,wen_mepc,wen_mcause,wen_mstatus;
+reg [63:0]src_csr;
 
 //control and status register
-//(rd) 0:mtvec  1:mepc  2:mstatus  3:mcause
-ysyx_22050612_RegisterFile #(2,64) cpu_csr_group (clk, wdata_csr, rd_csr, wen_csr, csr);
+ysyx_22050612_Reg #(64,64'h0) mtvec_csr           (clk, rst, wdata_mtvec  , mtvec  , wen_mtvec  );
+ysyx_22050612_Reg #(64,64'h0) mepc_csr            (clk, rst, wdata_mepc   , mepc   , wen_mepc   );
+ysyx_22050612_Reg #(64,64'h0) mcause_csr          (clk, rst, wdata_mcause , mcause , wen_mcause );
+ysyx_22050612_Reg #(64,64'ha00001800) mstatus_csr (clk, rst, wdata_mstatus, mstatus, wen_mstatus);
 
 
 always @(*) begin
 
-//csr control
+//mtvec control
   	case (opcode)
-    20'd49   : wen_csr=1'b1;
-    default: wen_csr=1'b0;
-        endcase
-
-  	case (imm_I[11:0])
-    12'h305  : rd_csr=2'b0;
-    default: rd_csr=2'b0;
+    20'd49   : wen_mtvec=1'b1;
+    default:   wen_mtvec=1'b0;
         endcase
 
 	case (opcode)
-    20'd49   : wdata_csr=src1;
-    default: wdata_csr=64'b0;
+    20'd49   : wdata_mtvec=src1;
+    default:   wdata_mtvec=64'b0;
+        endcase
+//mepc control
+  	case (opcode)
+    20'd49   : wen_mepc=1'b1;
+    default:   wen_mepc=1'b0;
+        endcase
+
+	case (opcode)
+    20'd49   : wdata_mepc=src1;
+    default:   wdata_mepc=64'b0;
+        endcase
+//mcause control
+  	case (opcode)
+    20'd49   : wen_mcause=1'b1;
+    default:   wen_mcause=1'b0;
+        endcase
+
+	case (opcode)
+    20'd49   : wdata_mcause=src1;
+    default:   wdata_mcause=64'b0;
+        endcase
+//mstatus control
+  	case (opcode)
+    20'd49   : wen_mstatus=1'b1;
+    default:   wen_mstatus=1'b0;
+        endcase
+
+	case (opcode)
+    20'd49   : wdata_mstatus=src1;
+    default:   wdata_mstatus=64'b0;
         endcase
 
 //gpr control

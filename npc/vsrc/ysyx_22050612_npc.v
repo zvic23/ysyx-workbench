@@ -30,6 +30,6 @@ wire [19:0]opcode;
 //end
 ysyx_22050612_IFU ifu (clk, rst, dnpc, pc, inst);
 ysyx_22050612_IDU idu (clk,inst, imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2, opcode);
-ysyx_22050612_EXU exu (clk,imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,opcode,pc,dnpc);
+ysyx_22050612_EXU exu (clk,rst,imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,opcode,pc,dnpc);
 
 endmodule
