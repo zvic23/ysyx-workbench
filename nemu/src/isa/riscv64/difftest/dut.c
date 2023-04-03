@@ -21,7 +21,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 	for(int i=0;i<32;i++){
 		if(cpu.gpr[i]!=ref_r->gpr[i]){printf("reg:%s  nemu:%lx    :    ref:%lx\n",regs[i],cpu.gpr[i],ref_r->gpr[i]);return false;}
 	}
-	if(cpu.pc!=ref_r->pc)return false;
+	if(cpu.pc!=ref_r->pc){printf("pc   nemu:%lx    :   ref:%lx\n",cpu.pc,ref_r->pc);return false;}
 	else return true;
 }
 
