@@ -218,9 +218,9 @@ static int decode_exec(Decode *s) {
 		  if(BITS(imm,11,0)==0x300)R(dest)=mstatus;if(BITS(imm,11,0)==0x300)mstatus=src1;
 		  if(BITS(imm,11,0)==0x341)R(dest)=mepc;if(BITS(imm,11,0)==0x341)mepc=src1;
 		  );   
-  INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , I, s->dnpc=isa_raise_intr(R(17),mtvec);isa_reg_display();printf("mepc=%lx\n",mepc);printf("mstatus=%lx\n",mstatus);printf("mcause=%lx\n",mcause););   
+  INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , I, s->dnpc=isa_raise_intr(R(17),mtvec););//isa_reg_display();printf("mepc=%lx\n",mepc);printf("mstatus=%lx\n",mstatus);printf("mcause=%lx\n",mcause););   
   INSTPAT("??????? ????? ????? 010 ????? 11100 11", csrrs  , I, 
-		  if(BITS(imm,11,0)==0x342)R(dest)=mcause;if(BITS(imm,11,0)==0x342)mcause|=src1;
+		  if(BITS(imm,11,0)==0x342)R(dest)=0xb;if(BITS(imm,11,0)==0x342)mcause|=src1;
 		  if(BITS(imm,11,0)==0x300)R(dest)=mstatus;if(BITS(imm,11,0)==0x300)mstatus|=src1;
 		  if(BITS(imm,11,0)==0x341)R(dest)=mepc;if(BITS(imm,11,0)==0x341)mepc|=src1;
 		  );   
