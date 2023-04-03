@@ -63,7 +63,7 @@ always @(*) begin
 
 //mtvec control
   	case (opcode)
-    20'd49   : wen_mtvec=1'b1;
+    20'd49   : wen_mtvec=(imm_I[11:0]==12'h305)? 1'b1:1'b0;
     default:   wen_mtvec=1'b0;
         endcase
 
