@@ -60,7 +60,7 @@ ysyx_22050612_Reg #(64,64'ha00001800) mstatus_csr (clk, rst, wdata_mstatus, msta
 
 
 always @(*) begin
-
+/*
 //mtvec control
   	case (opcode)
     20'd49   : wen_mtvec=(imm_I[11:0]==12'h305)? 1'b1:1'b0;
@@ -101,7 +101,7 @@ always @(*) begin
     20'd49   : wdata_mstatus=src1;
     default:   wdata_mstatus=64'b0;
         endcase
-
+*/
 //gpr control
 	case (opcode)
     20'h4000 : wen=1'b1;
