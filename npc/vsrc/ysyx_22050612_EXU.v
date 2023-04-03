@@ -101,7 +101,15 @@ always @(*) begin
     20'd49   : wdata_mstatus=src1;
     default:   wdata_mstatus=64'b0;
         endcase
+//src_csr
+  	case (imm_I[11:0])
+    12'h305: src_csr=mtvec;
+    12'h341: src_csr=mepc;
+    12'h342: src_csr=mcause;
+    12'h300: src_csr=mstatus;
+    default:   src_csr=64'b0;
 
+        endcase
 //gpr control
 	case (opcode)
     20'h4000 : wen=1'b1;
