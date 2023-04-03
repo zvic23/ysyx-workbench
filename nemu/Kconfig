@@ -187,7 +187,10 @@ config FTRACE                            #zsl: I add these,  enable function tra
   bool "Enable function trace(ftrace)"
   default n
 
-
+config ETRACE                            #zsl: I add these,  enable cte trace
+  depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER
+  bool "Enable cte trace(etrace)"
+  default n
 
  
 
