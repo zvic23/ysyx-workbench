@@ -130,12 +130,12 @@ ysyx_22050612_MuxKey #(3, 16, 2) decode3 (opcode[11:10], {inst[31:26],inst[14:12
     10'b001_1110011:  opcode[6:0]= 7'd49  ;    //csrrw
     default:  opcode[6:0]=7'b0;
 	  endcase
-/*
+
 	  case (inst)
     32'h73:   opcode[6:0]=7'd100;        //ecall
     default:  opcode[6:0]=7'b0;
 	  endcase
-*/
+
 	  case (inst[6:0])
     7'b0110111: opcode[9:8]= 2'd1;        //lui
     7'b0010111: opcode[9:8]= 2'd2;        //auipc
