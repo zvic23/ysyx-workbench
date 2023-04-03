@@ -46,7 +46,7 @@ assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
 
-
+/*
 reg [63:0]wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus;
 reg [63:0]mtvec,mepc,mcause,mstatus;
 reg wen_mtvec,wen_mepc,wen_mcause,wen_mstatus;
@@ -57,7 +57,7 @@ ysyx_22050612_Reg #(64,64'h0) mtvec_csr           (clk, rst, wdata_mtvec  , mtve
 ysyx_22050612_Reg #(64,64'h0) mepc_csr            (clk, rst, wdata_mepc   , mepc   , wen_mepc   );
 ysyx_22050612_Reg #(64,64'h0) mcause_csr          (clk, rst, wdata_mcause , mcause , wen_mcause );
 ysyx_22050612_Reg #(64,64'ha00001800) mstatus_csr (clk, rst, wdata_mstatus, mstatus, wen_mstatus);
-
+*/
 
 always @(*) begin
 /*
@@ -149,7 +149,7 @@ always @(*) begin
     20'd41   : wen=1'b1;
     20'd42   : wen=1'b1;
     20'd47   : wen=1'b1;
-    20'd49   : wen=1'b1;
+    //20'd49   : wen=1'b1;
     default:  wen=1'b0;
         endcase
 
@@ -200,7 +200,7 @@ always @(*) begin
     20'd41   : wdata_reg=rdata_fix;
     20'd42   : wdata_reg=rdata_fix;
     20'd47   : wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    20'd49   : wdata_reg=src_csr;
+    //20'd49   : wdata_reg=src_csr;
     default : wdata_reg=64'b0;
 	endcase
 

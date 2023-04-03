@@ -1463,8 +1463,7 @@ void Vysyx_22050612_npc___024root___settle__TOP__2(Vysyx_22050612_npc___024root*
                         | ((0x18U == vlSelf->ysyx_22050612_npc__DOT__opcode) 
                            | ((0x29U == vlSelf->ysyx_22050612_npc__DOT__opcode) 
                               | ((0x2aU == vlSelf->ysyx_22050612_npc__DOT__opcode) 
-                                 | ((0x2fU == vlSelf->ysyx_22050612_npc__DOT__opcode) 
-                                    | (0x31U == vlSelf->ysyx_22050612_npc__DOT__opcode)))))))))));
+                                 | (0x2fU == vlSelf->ysyx_22050612_npc__DOT__opcode))))))))));
     if (((((((((0x4000U == vlSelf->ysyx_22050612_npc__DOT__opcode) 
                | (0x5000U == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
               | (0x6000U == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
@@ -2918,11 +2917,7 @@ void Vysyx_22050612_npc___024root___settle__TOP__2(Vysyx_22050612_npc___024root*
                                                    (0xffffffff00000000ULL 
                                                     | (QData)((IData)(ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
                                                     : (QData)((IData)(ysyx_22050612_npc__DOT__exu__DOT__result_alu0)))
-                                                : (
-                                                   (0x31U 
-                                                    == vlSelf->ysyx_22050612_npc__DOT__opcode)
-                                                    ? vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src_csr
-                                                    : 0ULL)))))))))));
+                                                : 0ULL))))))))));
 }
 
 void Vysyx_22050612_npc___024unit____Vdpiimwrap_set_gpr_ptr__Vdpioc2_TOP____024unit(const VlUnpacked<QData/*63:0*/, 32> &a);
@@ -2978,7 +2973,6 @@ void Vysyx_22050612_npc___024root___ctor_var_reset(Vysyx_22050612_npc___024root*
     for (int __Vi0=0; __Vi0<32; ++__Vi0) {
         vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5[__Vi0] = VL_RAND_RESET_Q(64);
     }
-    vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src_csr = VL_RAND_RESET_Q(64);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr = VL_RAND_RESET_Q(64);
     for (int __Vi0=0; __Vi0<10; ++__Vi0) {
         VL_RAND_RESET_W(72, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__pair_list[__Vi0]);
