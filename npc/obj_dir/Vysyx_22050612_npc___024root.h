@@ -28,7 +28,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     // LOCAL SIGNALS
     CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__wen;
     IData/*31:0*/ ysyx_22050612_npc__DOT__inst;
-    IData/*19:0*/ ysyx_22050612_npc__DOT__opcode;
+    IData/*23:0*/ ysyx_22050612_npc__DOT__opcode;
     QData/*63:0*/ ysyx_22050612_npc__DOT__dnpc;
     QData/*63:0*/ ysyx_22050612_npc__DOT__imm_I;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__src1;

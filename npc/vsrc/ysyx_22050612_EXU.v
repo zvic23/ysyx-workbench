@@ -19,7 +19,7 @@ input [ 5:0]shamt,
 input [ 4:0]rd,
 input [ 4:0]rs1,
 input [ 4:0]rs2,
-input [19:0]opcode,
+input [23:0]opcode,
 
 input [63:0]pc,
 
@@ -63,42 +63,42 @@ always @(*) begin
 
 //mtvec control
   	case (opcode)
-    20'd49   : wen_mtvec=(imm_I[11:0]==12'h305)? 1'b1:1'b0;
+    24'd49   : wen_mtvec=(imm_I[11:0]==12'h305)? 1'b1:1'b0;
     default:   wen_mtvec=1'b0;
         endcase
 
 	case (opcode)
-    20'd49   : wdata_mtvec=src1;
+    24'd49   : wdata_mtvec=src1;
     default:   wdata_mtvec=64'b0;
         endcase
 //mepc control
   	case (opcode)
-    20'd49   : wen_mepc=(imm_I[11:0]==12'h341)? 1'b1:1'b0;
+    24'd49   : wen_mepc=(imm_I[11:0]==12'h341)? 1'b1:1'b0;
     default:   wen_mepc=1'b0;
         endcase
 
 	case (opcode)
-    20'd49   : wdata_mepc=src1;
+    24'd49   : wdata_mepc=src1;
     default:   wdata_mepc=64'b0;
         endcase
 //mcause control
   	case (opcode)
-    20'd49   : wen_mcause=(imm_I[11:0]==12'h342)? 1'b1:1'b0;
+    24'd49   : wen_mcause=(imm_I[11:0]==12'h342)? 1'b1:1'b0;
     default:   wen_mcause=1'b0;
         endcase
 
 	case (opcode)
-    20'd49   : wdata_mcause=src1;
+    24'd49   : wdata_mcause=src1;
     default:   wdata_mcause=64'b0;
         endcase
 //mstatus control
   	case (opcode)
-    20'd49   : wen_mstatus=(imm_I[11:0]==12'h300)? 1'b1:1'b0;
+    24'd49   : wen_mstatus=(imm_I[11:0]==12'h300)? 1'b1:1'b0;
     default:   wen_mstatus=1'b0;
         endcase
 
 	case (opcode)
-    20'd49   : wdata_mstatus=src1;
+    24'd49   : wdata_mstatus=src1;
     default:   wdata_mstatus=64'b0;
         endcase
 //src_csr
@@ -112,269 +112,269 @@ always @(*) begin
         endcase
 //gpr control
 	case (opcode)
-    20'h4000 : wen=1'b1;
-    20'h5000 : wen=1'b1;
-    20'h6000 : wen=1'b1;
-    20'h7000 : wen=1'b1;
-    20'h8000 : wen=1'b1;
-    20'h9000 : wen=1'b1;
-    20'h12000: wen=1'b1;
-    20'h13000: wen=1'b1;
-    20'h14000: wen=1'b1;
-    20'h15000: wen=1'b1;
-    20'h16000: wen=1'b1;
-    20'h17000: wen=1'b1;
-    20'h18000: wen=1'b1;
-    20'h19000: wen=1'b1;
-    20'h1a000: wen=1'b1;
-    20'h1b000: wen=1'b1;
-    20'h1d000: wen=1'b1;
-    20'h22000: wen=1'b1;
-    20'h24000: wen=1'b1;
-    20'h25000: wen=1'b1;
-    20'h26000: wen=1'b1;
-    20'h27000: wen=1'b1;
-    20'h28000: wen=1'b1;
-    20'h29000: wen=1'b1;
-    20'h100  : wen=1'b1;
-    20'h200  : wen=1'b1;
-    20'h300  : wen=1'b1;
-    20'h400  : wen=1'b1;
-    20'h800  : wen=1'b1;
-    20'hc00  : wen=1'b1;
-    20'd4    : wen=1'b1;
-    20'd11   : wen=1'b1;
-    20'd12   : wen=1'b1;
-    20'd13   : wen=1'b1;
-    20'd14   : wen=1'b1;
-    20'd15   : wen=1'b1;
-    20'd19   : wen=1'b1;
-    20'd20   : wen=1'b1;
-    20'd21   : wen=1'b1;
-    20'd22   : wen=1'b1;
-    20'd23   : wen=1'b1;
-    20'd24   : wen=1'b1;
-    20'd41   : wen=1'b1;
-    20'd42   : wen=1'b1;
-    20'd47   : wen=1'b1;
-    20'd49   : wen=1'b1;
+    24'h4000 : wen=1'b1;
+    24'h5000 : wen=1'b1;
+    24'h6000 : wen=1'b1;
+    24'h7000 : wen=1'b1;
+    24'h8000 : wen=1'b1;
+    24'h9000 : wen=1'b1;
+    24'h12000: wen=1'b1;
+    24'h13000: wen=1'b1;
+    24'h14000: wen=1'b1;
+    24'h15000: wen=1'b1;
+    24'h16000: wen=1'b1;
+    24'h17000: wen=1'b1;
+    24'h18000: wen=1'b1;
+    24'h19000: wen=1'b1;
+    24'h1a000: wen=1'b1;
+    24'h1b000: wen=1'b1;
+    24'h1d000: wen=1'b1;
+    24'h22000: wen=1'b1;
+    24'h24000: wen=1'b1;
+    24'h25000: wen=1'b1;
+    24'h26000: wen=1'b1;
+    24'h27000: wen=1'b1;
+    24'h28000: wen=1'b1;
+    24'h29000: wen=1'b1;
+    24'h100  : wen=1'b1;
+    24'h200  : wen=1'b1;
+    24'h300  : wen=1'b1;
+    24'h400  : wen=1'b1;
+    24'h800  : wen=1'b1;
+    24'hc00  : wen=1'b1;
+    24'd4    : wen=1'b1;
+    24'd11   : wen=1'b1;
+    24'd12   : wen=1'b1;
+    24'd13   : wen=1'b1;
+    24'd14   : wen=1'b1;
+    24'd15   : wen=1'b1;
+    24'd19   : wen=1'b1;
+    24'd20   : wen=1'b1;
+    24'd21   : wen=1'b1;
+    24'd22   : wen=1'b1;
+    24'd23   : wen=1'b1;
+    24'd24   : wen=1'b1;
+    24'd41   : wen=1'b1;
+    24'd42   : wen=1'b1;
+    24'd47   : wen=1'b1;
+    24'd49   : wen=1'b1;
     default:  wen=1'b0;
         endcase
 
 
 	case (opcode)
-    20'h4000 : wdata_reg=result_alu0;
-    20'h5000 : wdata_reg=result_alu0;
-    20'h6000 : wdata_reg=result_alu0;
-    20'h7000 : wdata_reg=result_alu0;
-    20'h8000 : wdata_reg=result_alu0;
-    20'h9000 : wdata_reg=result_alu0;
-    20'h12000: wdata_reg=result_alu0;
-    20'h13000: wdata_reg=result_alu0;
-    20'h14000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    20'h15000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    20'h16000: wdata_reg=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
-    20'h17000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    20'h18000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    20'h19000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    20'h1a000: wdata_reg=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
-    20'h1b000: wdata_reg=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
-    20'h1d000: wdata_reg=result_mul0;
-    20'h22000: wdata_reg=result_divu0;
-    20'h24000: wdata_reg=result_remu0;
-    20'h25000: wdata_reg=(result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]}));
-    20'h26000: wdata_reg=(result_divw0[31]?({{32{1'b1}},result_divw0[31:0]}):({{32{1'b0}},result_divw0[31:0]}));
-    20'h27000: wdata_reg=(result_divuw0[31]?({{32{1'b1}},result_divuw0[31:0]}):({{32{1'b0}},result_divuw0[31:0]}));
-    20'h28000: wdata_reg=(result_remw0[31]?({{32{1'b1}},result_remw0[31:0]}):({{32{1'b0}},result_remw0[31:0]}));
-    20'h28000: wdata_reg=(result_remuw0[31]?({{32{1'b1}},result_remuw0[31:0]}):({{32{1'b0}},result_remuw0[31:0]}));
-    20'h100  : wdata_reg=imm_U;
-    20'h200  : wdata_reg=result_alu0;
-    20'h300  : wdata_reg=pc + 64'd4;
-    20'h400  : wdata_reg=result_alu0;
-    20'h800  : wdata_reg=result_alu0;
-    20'hc00  : wdata_reg=result_alu0;
-    20'd4    : wdata_reg=pc + 64'd4;
-    20'd11   : wdata_reg=rdata_fix;
-    20'd12   : wdata_reg=rdata_fix;
-    20'd13   : wdata_reg=rdata_fix;
-    20'd14   : wdata_reg=rdata_fix;
-    20'd15   : wdata_reg=rdata_fix;
-    20'd19   : wdata_reg=result_alu0;
-    20'd20   : wdata_reg=result_alu0;
-    20'd21   : wdata_reg=result_alu0;
-    20'd22   : wdata_reg=result_alu0;
-    20'd23   : wdata_reg=result_alu0;
-    20'd24   : wdata_reg=result_alu0;
-    20'd41   : wdata_reg=rdata_fix;
-    20'd42   : wdata_reg=rdata_fix;
-    20'd47   : wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    20'd49   : wdata_reg=src_csr;
+    24'h4000 : wdata_reg=result_alu0;
+    24'h5000 : wdata_reg=result_alu0;
+    24'h6000 : wdata_reg=result_alu0;
+    24'h7000 : wdata_reg=result_alu0;
+    24'h8000 : wdata_reg=result_alu0;
+    24'h9000 : wdata_reg=result_alu0;
+    24'h12000: wdata_reg=result_alu0;
+    24'h13000: wdata_reg=result_alu0;
+    24'h14000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    24'h15000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    24'h16000: wdata_reg=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
+    24'h17000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    24'h18000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    24'h19000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    24'h1a000: wdata_reg=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
+    24'h1b000: wdata_reg=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
+    24'h1d000: wdata_reg=result_mul0;
+    24'h22000: wdata_reg=result_divu0;
+    24'h24000: wdata_reg=result_remu0;
+    24'h25000: wdata_reg=(result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]}));
+    24'h26000: wdata_reg=(result_divw0[31]?({{32{1'b1}},result_divw0[31:0]}):({{32{1'b0}},result_divw0[31:0]}));
+    24'h27000: wdata_reg=(result_divuw0[31]?({{32{1'b1}},result_divuw0[31:0]}):({{32{1'b0}},result_divuw0[31:0]}));
+    24'h28000: wdata_reg=(result_remw0[31]?({{32{1'b1}},result_remw0[31:0]}):({{32{1'b0}},result_remw0[31:0]}));
+    24'h28000: wdata_reg=(result_remuw0[31]?({{32{1'b1}},result_remuw0[31:0]}):({{32{1'b0}},result_remuw0[31:0]}));
+    24'h100  : wdata_reg=imm_U;
+    24'h200  : wdata_reg=result_alu0;
+    24'h300  : wdata_reg=pc + 64'd4;
+    24'h400  : wdata_reg=result_alu0;
+    24'h800  : wdata_reg=result_alu0;
+    24'hc00  : wdata_reg=result_alu0;
+    24'd4    : wdata_reg=pc + 64'd4;
+    24'd11   : wdata_reg=rdata_fix;
+    24'd12   : wdata_reg=rdata_fix;
+    24'd13   : wdata_reg=rdata_fix;
+    24'd14   : wdata_reg=rdata_fix;
+    24'd15   : wdata_reg=rdata_fix;
+    24'd19   : wdata_reg=result_alu0;
+    24'd20   : wdata_reg=result_alu0;
+    24'd21   : wdata_reg=result_alu0;
+    24'd22   : wdata_reg=result_alu0;
+    24'd23   : wdata_reg=result_alu0;
+    24'd24   : wdata_reg=result_alu0;
+    24'd41   : wdata_reg=rdata_fix;
+    24'd42   : wdata_reg=rdata_fix;
+    24'd47   : wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    24'd49   : wdata_reg=src_csr;
     default : wdata_reg=64'b0;
 	endcase
 
 //alu
     case (opcode)
-    20'h4000 : operator_a=src1;
-    20'h5000 : operator_a=src1;
-    20'h6000 : operator_a=src1;
-    20'h7000 : operator_a=src1;
-    20'h8000 : operator_a=src1;
-    20'h9000 : operator_a=src1;
-    20'h12000: operator_a=src1;
-    20'h13000: operator_a=src1;
-    20'h14000: operator_a={{32{1'b0}},src1[31:0]};
-    20'h15000: operator_a={{32{1'b0}},src1[31:0]};
-    20'h16000: operator_a={src1[31:0],{32{1'b0}}};
-    20'h17000: operator_a=src1;
-    20'h18000: operator_a=src1;
-    20'h19000: operator_a=src1;
-    20'h1a000: operator_a={src1[31:0],{32{1'b0}}};
-    20'h1b000: operator_a={src1[31:0],{32{1'b0}}};
-    20'h200  : operator_a=pc;
-    20'h300  : operator_a=pc;
-    20'h400  : operator_a=src1;
-    20'h800  : operator_a=src1;
-    20'hc00  : operator_a=src1;
-    20'd4    : operator_a=src1;
-    20'd5    : operator_a=src1;
-    20'd6    : operator_a=src1;
-    20'd7    : operator_a=src1;
-    20'd8    : operator_a=src1;
-    20'd9    : operator_a=src1;
-    20'd10   : operator_a=src1;
-    20'd11   : operator_a=src1;
-    20'd12   : operator_a=src1;
-    20'd13   : operator_a=src1;
-    20'd14   : operator_a=src1;
-    20'd15   : operator_a=src1;
-    20'd16   : operator_a=src1;
-    20'd17   : operator_a=src1;
-    20'd18   : operator_a=src1;
-    20'd19   : operator_a=src1;
-    20'd20   : operator_a=src1;
-    20'd21   : operator_a=src1;
-    20'd22   : operator_a=src1;
-    20'd23   : operator_a=src1;
-    20'd24   : operator_a=src1;
-    20'd41   : operator_a=src1;
-    20'd42   : operator_a=src1;
-    20'd43   : operator_a=src1;
-    20'd47   : operator_a=src1;
+    24'h4000 : operator_a=src1;
+    24'h5000 : operator_a=src1;
+    24'h6000 : operator_a=src1;
+    24'h7000 : operator_a=src1;
+    24'h8000 : operator_a=src1;
+    24'h9000 : operator_a=src1;
+    24'h12000: operator_a=src1;
+    24'h13000: operator_a=src1;
+    24'h14000: operator_a={{32{1'b0}},src1[31:0]};
+    24'h15000: operator_a={{32{1'b0}},src1[31:0]};
+    24'h16000: operator_a={src1[31:0],{32{1'b0}}};
+    24'h17000: operator_a=src1;
+    24'h18000: operator_a=src1;
+    24'h19000: operator_a=src1;
+    24'h1a000: operator_a={src1[31:0],{32{1'b0}}};
+    24'h1b000: operator_a={src1[31:0],{32{1'b0}}};
+    24'h200  : operator_a=pc;
+    24'h300  : operator_a=pc;
+    24'h400  : operator_a=src1;
+    24'h800  : operator_a=src1;
+    24'hc00  : operator_a=src1;
+    24'd4    : operator_a=src1;
+    24'd5    : operator_a=src1;
+    24'd6    : operator_a=src1;
+    24'd7    : operator_a=src1;
+    24'd8    : operator_a=src1;
+    24'd9    : operator_a=src1;
+    24'd10   : operator_a=src1;
+    24'd11   : operator_a=src1;
+    24'd12   : operator_a=src1;
+    24'd13   : operator_a=src1;
+    24'd14   : operator_a=src1;
+    24'd15   : operator_a=src1;
+    24'd16   : operator_a=src1;
+    24'd17   : operator_a=src1;
+    24'd18   : operator_a=src1;
+    24'd19   : operator_a=src1;
+    24'd20   : operator_a=src1;
+    24'd21   : operator_a=src1;
+    24'd22   : operator_a=src1;
+    24'd23   : operator_a=src1;
+    24'd24   : operator_a=src1;
+    24'd41   : operator_a=src1;
+    24'd42   : operator_a=src1;
+    24'd43   : operator_a=src1;
+    24'd47   : operator_a=src1;
     default : operator_a=64'b0;
     endcase
 
     case (opcode)
-    20'h4000 : operator_b=src2 ;
-    20'h5000 : operator_b=src2 ;
-    20'h6000 : operator_b={{58{1'b0}},src2[5:0]};
-    20'h7000 : operator_b=src2 ;
-    20'h8000 : operator_b=src2 ;
-    20'h9000 : operator_b=src2 ;
-    20'h12000: operator_b=src2 ;
-    20'h13000: operator_b=src2 ;
-    20'h14000: operator_b={{59{1'b0}},shamt[4:0]};
-    20'h15000: operator_b={{59{1'b0}},shamt[4:0]};
-    20'h16000: operator_b={{59{1'b0}},shamt[4:0]};
-    20'h17000: operator_b=src2 ;
-    20'h18000: operator_b=src2 ;
-    20'h19000: operator_b={{59{1'b0}},src2[4:0]};
-    20'h1a000: operator_b={{59{1'b0}},src2[4:0]};
-    20'h1b000: operator_b={{59{1'b0}},src2[4:0]};
-    20'h200  : operator_b=imm_U;
-    20'h300  : operator_b=imm_J;
-    20'h400  : operator_b={{58{1'b0}},shamt};
-    20'h800  : operator_b={{58{1'b0}},shamt};
-    20'hc00  : operator_b={{58{1'b0}},shamt};
-    20'd4    : operator_b=imm_I;
-    20'd5    : operator_b=src2 ;
-    20'd6    : operator_b=src2 ;
-    20'd7    : operator_b=src2 ;
-    20'd8    : operator_b=src2 ;
-    20'd9    : operator_b=src2 ;
-    20'd10   : operator_b=src2 ;
-    20'd11   : operator_b=imm_I;
-    20'd12   : operator_b=imm_I;
-    20'd13   : operator_b=imm_I;
-    20'd14   : operator_b=imm_I;
-    20'd15   : operator_b=imm_I;
-    20'd16   : operator_b=imm_S;
-    20'd17   : operator_b=imm_S;
-    20'd18   : operator_b=imm_S;
-    20'd19   : operator_b=imm_I;
-    20'd20   : operator_b=imm_I;
-    20'd21   : operator_b=imm_I;
-    20'd22   : operator_b=imm_I;
-    20'd23   : operator_b=imm_I;
-    20'd24   : operator_b=imm_I;
-    20'd41   : operator_b=imm_I;
-    20'd42   : operator_b=imm_I;
-    20'd43   : operator_b=imm_S;
-    20'd47   : operator_b=imm_I;
+    24'h4000 : operator_b=src2 ;
+    24'h5000 : operator_b=src2 ;
+    24'h6000 : operator_b={{58{1'b0}},src2[5:0]};
+    24'h7000 : operator_b=src2 ;
+    24'h8000 : operator_b=src2 ;
+    24'h9000 : operator_b=src2 ;
+    24'h12000: operator_b=src2 ;
+    24'h13000: operator_b=src2 ;
+    24'h14000: operator_b={{59{1'b0}},shamt[4:0]};
+    24'h15000: operator_b={{59{1'b0}},shamt[4:0]};
+    24'h16000: operator_b={{59{1'b0}},shamt[4:0]};
+    24'h17000: operator_b=src2 ;
+    24'h18000: operator_b=src2 ;
+    24'h19000: operator_b={{59{1'b0}},src2[4:0]};
+    24'h1a000: operator_b={{59{1'b0}},src2[4:0]};
+    24'h1b000: operator_b={{59{1'b0}},src2[4:0]};
+    24'h200  : operator_b=imm_U;
+    24'h300  : operator_b=imm_J;
+    24'h400  : operator_b={{58{1'b0}},shamt};
+    24'h800  : operator_b={{58{1'b0}},shamt};
+    24'hc00  : operator_b={{58{1'b0}},shamt};
+    24'd4    : operator_b=imm_I;
+    24'd5    : operator_b=src2 ;
+    24'd6    : operator_b=src2 ;
+    24'd7    : operator_b=src2 ;
+    24'd8    : operator_b=src2 ;
+    24'd9    : operator_b=src2 ;
+    24'd10   : operator_b=src2 ;
+    24'd11   : operator_b=imm_I;
+    24'd12   : operator_b=imm_I;
+    24'd13   : operator_b=imm_I;
+    24'd14   : operator_b=imm_I;
+    24'd15   : operator_b=imm_I;
+    24'd16   : operator_b=imm_S;
+    24'd17   : operator_b=imm_S;
+    24'd18   : operator_b=imm_S;
+    24'd19   : operator_b=imm_I;
+    24'd20   : operator_b=imm_I;
+    24'd21   : operator_b=imm_I;
+    24'd22   : operator_b=imm_I;
+    24'd23   : operator_b=imm_I;
+    24'd24   : operator_b=imm_I;
+    24'd41   : operator_b=imm_I;
+    24'd42   : operator_b=imm_I;
+    24'd43   : operator_b=imm_S;
+    24'd47   : operator_b=imm_I;
     default : operator_b=64'b0;
     endcase
 
 
     case(opcode)
-    20'h4000 : mode=8'd0 ; 
-    20'h5000 : mode=8'd1 ; 
-    20'h6000 : mode=8'd8 ; 
-    20'h7000 : mode=8'd2 ; 
-    20'h8000 : mode=8'd3 ; 
-    20'h9000 : mode=8'd7 ; 
-    20'h12000: mode=8'd6 ; 
-    20'h13000: mode=8'd4 ; 
-    20'h14000: mode=8'd8 ; 
-    20'h15000: mode=8'd9 ; 
-    20'h16000: mode=8'd10; 
-    20'h17000: mode=8'd0 ; 
-    20'h18000: mode=8'd1 ; 
-    20'h19000: mode=8'd8 ; 
-    20'h1a000: mode=8'd9 ; 
-    20'h1b000: mode=8'd10; 
-    20'h200  : mode=8'd0 ; 
-    20'h300  : mode=8'd0 ; 
-    20'h400  : mode=8'd8 ;
-    20'h800  : mode=8'd9 ;
-    20'hc00  : mode=8'd10;
-    20'd4    : mode=8'd0 ; 
-    20'd5    : mode=8'd1 ; 
-    20'd6    : mode=8'd1 ; 
-    20'd7    : mode=8'd1 ; 
-    20'd8    : mode=8'd1 ; 
-    20'd9    : mode=8'd1 ; 
-    20'd10   : mode=8'd1 ; 
-    20'd11   : mode=8'd0 ;
-    20'd12   : mode=8'd0 ;
-    20'd13   : mode=8'd0 ;
-    20'd14   : mode=8'd0 ;
-    20'd15   : mode=8'd0 ;
-    20'd16   : mode=8'd0 ;
-    20'd17   : mode=8'd0 ;
-    20'd18   : mode=8'd0 ;
-    20'd19   : mode=8'd0 ;
-    20'd20   : mode=8'd2 ;
-    20'd21   : mode=8'd3 ;
-    20'd22   : mode=8'd7 ;
-    20'd23   : mode=8'd6 ;
-    20'd24   : mode=8'd4 ;
-    20'd41   : mode=8'd0 ;
-    20'd42   : mode=8'd0 ;
-    20'd43   : mode=8'd0 ;
-    20'd47   : mode=8'd0 ;
+    24'h4000 : mode=8'd0 ; 
+    24'h5000 : mode=8'd1 ; 
+    24'h6000 : mode=8'd8 ; 
+    24'h7000 : mode=8'd2 ; 
+    24'h8000 : mode=8'd3 ; 
+    24'h9000 : mode=8'd7 ; 
+    24'h12000: mode=8'd6 ; 
+    24'h13000: mode=8'd4 ; 
+    24'h14000: mode=8'd8 ; 
+    24'h15000: mode=8'd9 ; 
+    24'h16000: mode=8'd10; 
+    24'h17000: mode=8'd0 ; 
+    24'h18000: mode=8'd1 ; 
+    24'h19000: mode=8'd8 ; 
+    24'h1a000: mode=8'd9 ; 
+    24'h1b000: mode=8'd10; 
+    24'h200  : mode=8'd0 ; 
+    24'h300  : mode=8'd0 ; 
+    24'h400  : mode=8'd8 ;
+    24'h800  : mode=8'd9 ;
+    24'hc00  : mode=8'd10;
+    24'd4    : mode=8'd0 ; 
+    24'd5    : mode=8'd1 ; 
+    24'd6    : mode=8'd1 ; 
+    24'd7    : mode=8'd1 ; 
+    24'd8    : mode=8'd1 ; 
+    24'd9    : mode=8'd1 ; 
+    24'd10   : mode=8'd1 ; 
+    24'd11   : mode=8'd0 ;
+    24'd12   : mode=8'd0 ;
+    24'd13   : mode=8'd0 ;
+    24'd14   : mode=8'd0 ;
+    24'd15   : mode=8'd0 ;
+    24'd16   : mode=8'd0 ;
+    24'd17   : mode=8'd0 ;
+    24'd18   : mode=8'd0 ;
+    24'd19   : mode=8'd0 ;
+    24'd20   : mode=8'd2 ;
+    24'd21   : mode=8'd3 ;
+    24'd22   : mode=8'd7 ;
+    24'd23   : mode=8'd6 ;
+    24'd24   : mode=8'd4 ;
+    24'd41   : mode=8'd0 ;
+    24'd42   : mode=8'd0 ;
+    24'd43   : mode=8'd0 ;
+    24'd47   : mode=8'd0 ;
     default : mode=8'b0;
     endcase
 
 
 //dnpc
     case (opcode)
-    20'h300 : dnpc=result_alu0;
-    20'd4   : dnpc={result_alu0[63:1],1'b0};
-    20'd5   : dnpc=(result_alu0==64'b0)?(imm_B+pc):snpc;
-    20'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+pc):snpc;
-    20'd7   : dnpc=(result_alu0[63]==1)?(imm_B+pc):snpc;
-    20'd8   : dnpc=(result_alu0[63]==0)?(imm_B+pc):snpc;
-    20'd9   : dnpc=(result_alu0[63]==1)?(imm_B+pc):snpc;
-    20'd10  : dnpc=(src1>=src2)?(imm_B+pc):snpc        ;        //(result_alu0[63]==0)?(imm_B+pc):snpc
+    24'h300 : dnpc=result_alu0;
+    24'd4   : dnpc={result_alu0[63:1],1'b0};
+    24'd5   : dnpc=(result_alu0==64'b0)?(imm_B+pc):snpc;
+    24'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+pc):snpc;
+    24'd7   : dnpc=(result_alu0[63]==1)?(imm_B+pc):snpc;
+    24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+pc):snpc;
+    24'd9   : dnpc=(result_alu0[63]==1)?(imm_B+pc):snpc;
+    24'd10  : dnpc=(src1>=src2)?(imm_B+pc):snpc        ;        //(result_alu0[63]==0)?(imm_B+pc):snpc
     default: dnpc=snpc;
     endcase
 
@@ -778,50 +778,50 @@ always @(*) begin
 	endcase
 
 	case(opcode)
-    20'd16  : wdata=wdata_1byte;
-    20'd17  : wdata=wdata_2byte;
-    20'd18  : wdata=(waddr[2]?{src2[31:0],{32{1'b0}}}:{{32{1'b0}},src2[31:0]});
-    20'd43  : wdata=src2;
+    24'd16  : wdata=wdata_1byte;
+    24'd17  : wdata=wdata_2byte;
+    24'd18  : wdata=(waddr[2]?{src2[31:0],{32{1'b0}}}:{{32{1'b0}},src2[31:0]});
+    24'd43  : wdata=src2;
     default: wdata=64'b0;
 	endcase
 
 	case(opcode)
-    20'd16  : wmask=wmask_1byte;
-    20'd17  : wmask=wmask_2byte;
-    20'd18  : wmask=(waddr[2]? 8'b11110000:8'b00001111);
-    20'd43  : wmask=8'hff;
+    24'd16  : wmask=wmask_1byte;
+    24'd17  : wmask=wmask_2byte;
+    24'd18  : wmask=(waddr[2]? 8'b11110000:8'b00001111);
+    24'd43  : wmask=8'hff;
     default: wmask=8'b0;
 	endcase
 
 	case(opcode)
-    20'd11  : rdata_fix=(rdata_1byte[7]?{{56{1'b1}},rdata_1byte}:{{56{1'b0}},rdata_1byte});
-    20'd12  : rdata_fix=(rdata_2byte[15]?{{48{1'b1}},rdata_2byte}:{{48{1'b0}},rdata_2byte});
-    20'd13  : rdata_fix=(raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]}));
-    20'd14  : rdata_fix={{56{1'b0}},rdata_1byte};
-    20'd15  : rdata_fix={{48{1'b0}},rdata_2byte};
-    20'd41  : rdata_fix={{32{1'b0}},rdata[31:0]};
-    20'd42  : rdata_fix=rdata;
+    24'd11  : rdata_fix=(rdata_1byte[7]?{{56{1'b1}},rdata_1byte}:{{56{1'b0}},rdata_1byte});
+    24'd12  : rdata_fix=(rdata_2byte[15]?{{48{1'b1}},rdata_2byte}:{{48{1'b0}},rdata_2byte});
+    24'd13  : rdata_fix=(raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]}));
+    24'd14  : rdata_fix={{56{1'b0}},rdata_1byte};
+    24'd15  : rdata_fix={{48{1'b0}},rdata_2byte};
+    24'd41  : rdata_fix={{32{1'b0}},rdata[31:0]};
+    24'd42  : rdata_fix=rdata;
     default: rdata_fix=64'b0;
 	endcase
 end
 
 always @(*) begin
 	case(opcode)
-    20'd11  : raddr=result_alu0;
-    20'd12  : raddr=result_alu0;
-    20'd13  : raddr=result_alu0;
-    20'd14  : raddr=result_alu0;
-    20'd15  : raddr=result_alu0;
-    20'd41  : raddr=result_alu0;
-    20'd42  : raddr=result_alu0;
+    24'd11  : raddr=result_alu0;
+    24'd12  : raddr=result_alu0;
+    24'd13  : raddr=result_alu0;
+    24'd14  : raddr=result_alu0;
+    24'd15  : raddr=result_alu0;
+    24'd41  : raddr=result_alu0;
+    24'd42  : raddr=result_alu0;
     default: waddr=64'b0;
 	endcase
 
 	case(opcode)
-    20'd16  : waddr=result_alu0;
-    20'd17  : waddr=result_alu0;
-    20'd18  : waddr=result_alu0;
-    20'd43  : waddr=result_alu0;
+    24'd16  : waddr=result_alu0;
+    24'd17  : waddr=result_alu0;
+    24'd18  : waddr=result_alu0;
+    24'd43  : waddr=result_alu0;
     default: waddr=64'b0;
 	endcase
 

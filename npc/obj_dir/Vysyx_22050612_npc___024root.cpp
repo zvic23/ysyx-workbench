@@ -302,7 +302,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     ysyx_22050612_npc__DOT__exu__DOT__src2 = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr
         [(0x1fU & (vlSelf->ysyx_22050612_npc__DOT__inst 
                    >> 0x14U))];
-    vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xfff80U 
+    vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xffff80U 
                                                & vlSelf->ysyx_22050612_npc__DOT__opcode) 
                                               | ((0x4000U 
                                                   & vlSelf->ysyx_22050612_npc__DOT__inst)
@@ -896,7 +896,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                            ? 0xbU
                                                            : 0U)
                                                           : 0U))))))))));
-    vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xffcffU 
+    vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xfffcffU 
                                                & vlSelf->ysyx_22050612_npc__DOT__opcode) 
                                               | (((0x37U 
                                                    == 
@@ -917,7 +917,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                      ? 3U
                                                      : 0U))) 
                                                  << 8U));
-    vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xfffU 
+    vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xf00fffU 
                                                & vlSelf->ysyx_22050612_npc__DOT__opcode) 
                                               | ((((((((((0x33U 
                                                           == 
@@ -1418,7 +1418,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                             : 0x29U)))))))
                                                      : 0U))) 
                                                  << 0xcU));
-    vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xff3ffU 
+    vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xfff3ffU 
                                                & vlSelf->ysyx_22050612_npc__DOT__opcode) 
                                               | (((0x93U 
                                                    == 
@@ -1457,7 +1457,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                      ? 3U
                                                      : 0U))) 
                                                  << 0xaU));
-    vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xfff7fU 
+    vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xffff7fU 
                                                & vlSelf->ysyx_22050612_npc__DOT__opcode) 
                                               | ((0x100073U 
                                                   == vlSelf->ysyx_22050612_npc__DOT__inst) 

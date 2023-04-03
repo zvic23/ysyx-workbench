@@ -23,7 +23,7 @@ wire [ 5:0]shamt;
 wire [ 4:0]rd;
 wire [ 4:0]rs1;
 wire [ 4:0]rs2;
-wire [19:0]opcode;
+wire [23:0]opcode;
 
 //always @(posedge clk) begin
 //  $display("%x",inst);

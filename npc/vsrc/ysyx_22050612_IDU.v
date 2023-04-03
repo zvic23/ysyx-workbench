@@ -13,7 +13,7 @@ output [ 5:0]shamt,
 output [ 4:0]rd,
 output [ 4:0]rs1,
 output [ 4:0]rs2,
-output [19:0]opcode
+output [23:0]opcode
 );
 
 assign rd = inst[11: 7];
