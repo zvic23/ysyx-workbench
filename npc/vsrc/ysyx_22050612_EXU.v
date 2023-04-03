@@ -73,7 +73,7 @@ always @(*) begin
         endcase
 //mepc control
   	case (opcode)
-    20'd49   : wen_mepc=1'b1;
+    20'd49   : wen_mepc=(imm_I[11:0]==12'h341)? 1'b1:1'b0;
     default:   wen_mepc=1'b0;
         endcase
 
@@ -83,7 +83,7 @@ always @(*) begin
         endcase
 //mcause control
   	case (opcode)
-    20'd49   : wen_mcause=1'b1;
+    20'd49   : wen_mcause=(imm_I[11:0]==12'h342)? 1'b1:1'b0;
     default:   wen_mcause=1'b0;
         endcase
 
@@ -93,7 +93,7 @@ always @(*) begin
         endcase
 //mstatus control
   	case (opcode)
-    20'd49   : wen_mstatus=1'b1;
+    20'd49   : wen_mstatus=(imm_I[11:0]==12'h300)? 1'b1:1'b0;
     default:   wen_mstatus=1'b0;
         endcase
 
