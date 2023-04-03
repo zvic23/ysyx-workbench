@@ -836,13 +836,12 @@ void Vysyx_22050612_npc___024root___settle__TOP__2(Vysyx_22050612_npc___024root*
                                                            ? 0xbU
                                                            : 0U)
                                                           : 0U))))))))));
-    vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xfffffU 
+    vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xffff80U 
                                                & vlSelf->ysyx_22050612_npc__DOT__opcode) 
-                                              | (((0x73U 
-                                                   == vlSelf->ysyx_22050612_npc__DOT__inst)
-                                                   ? 2U
-                                                   : 0U) 
-                                                 << 0x14U));
+                                              | ((0x73U 
+                                                  == vlSelf->ysyx_22050612_npc__DOT__inst)
+                                                  ? 0x64U
+                                                  : 0U));
     vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xfffcffU 
                                                & vlSelf->ysyx_22050612_npc__DOT__opcode) 
                                               | (((0x37U 
