@@ -70,7 +70,7 @@ int printf(const char *fmt, ...) {
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='x'){
-		  uint64_t number = va_arg(ap, int);
+		  uint32_t number = va_arg(ap, int);
 		  int base = 16;
 		  char buff[30];
 		  char *a=buff;
