@@ -1,7 +1,6 @@
 import "DPI-C" function void ebreak (int r);
 import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
 import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
-
 import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
 import "DPI-C" function void pmem_write(
@@ -31,7 +30,6 @@ output reg [63:0]dnpc
 
 wire [63:0]src1;
 wire [63:0]src2;
-
 //wire [63:0]wdata_reg;
 //wire wen;
 reg [63:0]wdata_reg;
@@ -47,12 +45,22 @@ assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
 
+//wire [63:0]wdata_csr;
+//wire wen_csr;
+reg [63:0]wdata_csr;
+reg wen_csr;
+wire wen__csr_fix;
+wire [63:0] csr[3:0];
+wire [1:0]rd_csr;
 
+//control and status register
+//(rd) 0:mtvec  1:mepc  2:mstatus  3:mcause
+ysyx_22050612_RegisterFile #(2,64) cpu_csr_group (clk, wdata_csr, rd_csr, wen_csr, csr);
 
 
 always @(*) begin
 
-//reg
+//gpr control
 	case (opcode)
     20'h4000 : wen=1'b1;
     20'h5000 : wen=1'b1;
@@ -305,7 +313,7 @@ always @(*) begin
     endcase
 
 
-
+//dnpc
     case (opcode)
     20'h300 : dnpc=result_alu0;
     20'd4   : dnpc={result_alu0[63:1],1'b0};

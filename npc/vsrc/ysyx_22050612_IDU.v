@@ -29,7 +29,7 @@ assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11
 assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},inst[31:25],inst[11:7]};
 
 /*
-ysyx_22050612_MuxKey #(25, 10, 7) decode0 (opcode[6:0], {inst[14:12],inst[6:0]}, {
+ysyx_22050612_MuxKey #(26, 10, 7) decode0 (opcode[6:0], {inst[14:12],inst[6:0]}, {
     10'b000_1100111, 7'd4 ,        //jalr
     10'b000_1100011, 7'd5 ,        //beq
     10'b001_1100011, 7'd6 ,        //bne
@@ -54,7 +54,8 @@ ysyx_22050612_MuxKey #(25, 10, 7) decode0 (opcode[6:0], {inst[14:12],inst[6:0]},
     10'b110_0000011, 7'd41,        //lwu
     10'b011_0000011, 7'd42,        //ld
     10'b011_0100011, 7'd43,        //sd
-    10'b000_0011011, 7'd47         //addiw
+    10'b000_0011011, 7'd47,        //addiw
+    10'b001_1110011, 7'd49         //csrrw
   });
 ysyx_22050612_MuxKey #(3, 7, 2) decode1 (opcode[9:8], inst[6:0], {
     7'b0110111, 2'd1,        //lui
@@ -126,6 +127,7 @@ ysyx_22050612_MuxKey #(3, 16, 2) decode3 (opcode[11:10], {inst[31:26],inst[14:12
     10'b011_0000011:  opcode[6:0]= 7'd42  ;    //ld
     10'b011_0100011:  opcode[6:0]= 7'd43  ;    //sd
     10'b000_0011011:  opcode[6:0]= 7'd47  ;    //addiw
+    10'b001_1110011:  opcode[6:0]= 7'd49  ;    //csrrw
     default:  opcode[6:0]=7'b0;
 	  endcase
 
