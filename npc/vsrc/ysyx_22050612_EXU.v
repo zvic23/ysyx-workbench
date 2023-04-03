@@ -51,7 +51,10 @@ reg [63:0]wdata_csr;
 reg wen_csr;
 wire wen__csr_fix;
 wire [63:0] csr[3:0];
-wire [1:0]rd_csr;
+//wire [1:0]rd_csr;
+reg [1:0]rd_csr;
+wire [63:0]src_csr;
+assign src_csr=csr[rd_csr];
 
 //control and status register
 //(rd) 0:mtvec  1:mepc  2:mstatus  3:mcause
@@ -59,6 +62,22 @@ ysyx_22050612_RegisterFile #(2,64) cpu_csr_group (clk, wdata_csr, rd_csr, wen_cs
 
 
 always @(*) begin
+
+//csr control
+  	case (opcode)
+    20'd49   : wen_csr=1'b1;
+    default: wen_csr=1'b0;
+        endcase
+
+  	case (imm_I[11:0])
+    12'h305  : rd_csr=2'b0;
+    default: rd_csr=2'b0;
+        endcase
+
+	case (opcode)
+    20'd49   : wdata_csr=src1;
+    default: wdata_csr=64'b0;
+        endcase
 
 //gpr control
 	case (opcode)
@@ -107,6 +126,7 @@ always @(*) begin
     20'd41   : wen=1'b1;
     20'd42   : wen=1'b1;
     20'd47   : wen=1'b1;
+    20'd49   : wen=1'b1;
     default:  wen=1'b0;
         endcase
 
@@ -157,6 +177,7 @@ always @(*) begin
     20'd41   : wdata_reg=rdata_fix;
     20'd42   : wdata_reg=rdata_fix;
     20'd47   : wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    20'd49   : wdata_reg=src_csr;
     default : wdata_reg=64'b0;
 	endcase
 

@@ -31,9 +31,11 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     IData/*19:0*/ ysyx_22050612_npc__DOT__opcode;
     QData/*63:0*/ ysyx_22050612_npc__DOT__dnpc;
     QData/*63:0*/ ysyx_22050612_npc__DOT__imm_I;
+    QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__src1;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__wdata_reg;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__raddr;
     VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT__gpr;
+    VlUnpacked<QData/*63:0*/, 4> ysyx_22050612_npc__DOT__exu__DOT__csr;
     VlUnpacked<VlWide<3>/*71:0*/, 10> ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__pair_list;
     VlUnpacked<CData/*7:0*/, 10> ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__key_list;
     VlUnpacked<QData/*63:0*/, 10> ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__data_list;
@@ -43,6 +45,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     QData/*63:0*/ __Vtask_pmem_read_pc__0__rdata;
     QData/*63:0*/ __Vtask_pmem_read__2__rdata;
     VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5;
+    VlUnpacked<QData/*63:0*/, 4> ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_csr_group____pinNumber5;
 
     // INTERNAL VARIABLES
     Vysyx_22050612_npc__Syms* vlSymsp;  // Symbol table
