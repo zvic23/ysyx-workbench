@@ -219,7 +219,7 @@ static int decode_exec(Decode *s) {
 		  if(BITS(imm,11,0)==0x300)R(dest)=mstatus;if(BITS(imm,11,0)==0x300)mstatus|=src1;
 		  if(BITS(imm,11,0)==0x341)R(dest)=mepc;if(BITS(imm,11,0)==0x341)mepc|=src1;
 		  );   
-
+  INSTPAT("0011000 00010 00000 000 00000 11100 11", mret   , I, s->dnpc=mepc);   
 
 
 
