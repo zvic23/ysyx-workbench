@@ -1484,6 +1484,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
         = VL_DIV_III(32, (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1), (IData)(ysyx_22050612_npc__DOT__exu__DOT__src2));
     ysyx_22050612_npc__DOT__exu__DOT__result_remuw0 
         = VL_MODDIV_III(32, (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1), (IData)(ysyx_22050612_npc__DOT__exu__DOT__src2));
+    if (VL_UNLIKELY((0x30d40U == vlSelf->ysyx_22050612_npc__DOT__opcode))) {
+        VL_WRITEF("%x\n",64,vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mtvec);
+    }
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wen = 
         (((((((((0x4000U == vlSelf->ysyx_22050612_npc__DOT__opcode) 
                 | (0x5000U == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
