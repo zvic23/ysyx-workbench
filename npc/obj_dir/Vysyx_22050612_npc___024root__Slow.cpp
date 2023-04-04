@@ -2402,8 +2402,12 @@ void Vysyx_22050612_npc___024root___settle__TOP__2(Vysyx_22050612_npc___024root*
                                                         : 
                                                        (4ULL 
                                                         + vlSelf->pc)))))))))
-                                             : (4ULL 
-                                                + vlSelf->pc));
+                                             : ((0x30d40U 
+                                                 == vlSelf->ysyx_22050612_npc__DOT__opcode)
+                                                 ? vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mtvec
+                                                 : 
+                                                (4ULL 
+                                                 + vlSelf->pc)));
     if ((0xbU == vlSelf->ysyx_22050612_npc__DOT__opcode)) {
         vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr 
             = ysyx_22050612_npc__DOT__exu__DOT__result_alu0;

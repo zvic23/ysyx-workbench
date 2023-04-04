@@ -73,22 +73,26 @@ always @(*) begin
         endcase
 //mepc control
   	case (opcode)
-    24'd49   : wen_mepc=(imm_I[11:0]==12'h341)? 1'b1:1'b0;
+    24'd49     : wen_mepc=(imm_I[11:0]==12'h341)? 1'b1:1'b0;
+    24'd200000 : wen_mepc=1'b1;
     default:   wen_mepc=1'b0;
         endcase
 
 	case (opcode)
-    24'd49   : wdata_mepc=src1;
+    24'd49     : wdata_mepc=src1;
+    24'd200000 : wdata_mepc=pc;
     default:   wdata_mepc=64'b0;
         endcase
 //mcause control
   	case (opcode)
-    24'd49   : wen_mcause=(imm_I[11:0]==12'h342)? 1'b1:1'b0;
+    24'd49     : wen_mcause=(imm_I[11:0]==12'h342)? 1'b1:1'b0;
+    24'd200000 : wen_mcause=1'b1;
     default:   wen_mcause=1'b0;
         endcase
 
 	case (opcode)
-    24'd49   : wdata_mcause=src1;
+    24'd49     : wdata_mcause=src1;
+    24'd200000 : wdata_mcause=64'hb;
     default:   wdata_mcause=64'b0;
         endcase
 //mstatus control
@@ -375,6 +379,7 @@ always @(*) begin
     24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+pc):snpc;
     24'd9   : dnpc=(result_alu0[63]==1)?(imm_B+pc):snpc;
     24'd10  : dnpc=(src1>=src2)?(imm_B+pc):snpc        ;        //(result_alu0[63]==0)?(imm_B+pc):snpc
+    24'd200000: dnpc=mtvec                             ;        
     default: dnpc=snpc;
     endcase
 
