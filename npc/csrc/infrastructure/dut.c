@@ -58,7 +58,6 @@ void init_difftest(long img_size, int port) {
 }
 
 extern const char *regs[];
-
 extern int end;
 void difftest_step() {
   uint64_t ref_r[33];
