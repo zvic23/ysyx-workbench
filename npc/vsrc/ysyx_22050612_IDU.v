@@ -134,6 +134,7 @@ ysyx_22050612_MuxKey #(3, 16, 2) decode3 (opcode[11:10], {inst[31:26],inst[14:12
 
 	  case (inst)
     32'b1110011:   opcode[23:20]=4'd2;        //ecall
+    32'b00110000001000000000000001110011:   opcode[23:20]=4'd5;        //mret
     default:  opcode[23:20]=4'b0;
 	  endcase
 
