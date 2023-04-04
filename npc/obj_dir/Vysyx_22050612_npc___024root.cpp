@@ -2465,7 +2465,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                         : 
                                                        (4ULL 
                                                         + vlSelf->pc)))))))))
-                                             : ((0x30d40U 
+                                             : ((0x200000U 
                                                  == vlSelf->ysyx_22050612_npc__DOT__opcode)
                                                  ? vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mtvec
                                                  : 
