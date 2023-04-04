@@ -128,6 +128,7 @@ ysyx_22050612_MuxKey #(3, 16, 2) decode3 (opcode[11:10], {inst[31:26],inst[14:12
     10'b011_0100011:  opcode[6:0]= 7'd43  ;    //sd
     10'b000_0011011:  opcode[6:0]= 7'd47  ;    //addiw
     10'b001_1110011:  opcode[6:0]= 7'd49  ;    //csrrw
+    10'b010_1110011:  opcode[6:0]= 7'd50  ;    //csrrs
     default:  opcode[6:0]=7'b0;
 	  endcase
 

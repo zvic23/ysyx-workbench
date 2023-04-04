@@ -73,35 +73,41 @@ always @(*) begin
 //mepc control
   	case (opcode)
     24'd49     : wen_mepc=(imm_I[11:0]==12'h341)? 1'b1:1'b0;
+    24'd50     : wen_mepc=(imm_I[11:0]==12'h341)? 1'b1:1'b0;
     24'h200000 : wen_mepc=1'b1;
     default:   wen_mepc=1'b0;
         endcase
 
 	case (opcode)
     24'd49     : wdata_mepc=src1;
+    24'd50     : wdata_mepc=result_alu0;
     24'h200000 : wdata_mepc=pc;
     default:   wdata_mepc=64'b0;
         endcase
 //mcause control
   	case (opcode)
     24'd49     : wen_mcause=(imm_I[11:0]==12'h342)? 1'b1:1'b0;
+    24'd50     : wen_mcause=(imm_I[11:0]==12'h342)? 1'b1:1'b0;
     24'h200000 : wen_mcause=1'b1;
     default:   wen_mcause=1'b0;
         endcase
 
 	case (opcode)
     24'd49     : wdata_mcause=src1;
+    24'd50     : wdata_mcause=result_alu0;
     24'h200000 : wdata_mcause=64'hb;
     default:   wdata_mcause=64'b0;
         endcase
 //mstatus control
   	case (opcode)
-    24'd49   : wen_mstatus=(imm_I[11:0]==12'h300)? 1'b1:1'b0;
+    24'd49     : wen_mstatus=(imm_I[11:0]==12'h300)? 1'b1:1'b0;
+    24'd50     : wen_mstatus=(imm_I[11:0]==12'h300)? 1'b1:1'b0;
     default:   wen_mstatus=1'b0;
         endcase
 
 	case (opcode)
-    24'd49   : wdata_mstatus=src1;
+    24'd49     : wdata_mstatus=src1;
+    24'd50     : wdata_mstatus=result_alu0;
     default:   wdata_mstatus=64'b0;
         endcase
 //src_csr
@@ -113,6 +119,8 @@ always @(*) begin
     default:   src_csr=64'b0;
 
         endcase
+end
+always @(*) begin
 //gpr control
 	case (opcode)
     24'h4000 : wen=1'b1;
@@ -161,6 +169,7 @@ always @(*) begin
     24'd42   : wen=1'b1;
     24'd47   : wen=1'b1;
     24'd49   : wen=1'b1;
+    24'd50   : wen=1'b1;
     default:  wen=1'b0;
         endcase
 
@@ -212,6 +221,7 @@ always @(*) begin
     24'd42   : wdata_reg=rdata_fix;
     24'd47   : wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
     24'd49   : wdata_reg=src_csr;
+    24'd50   : wdata_reg=src_csr;
     default : wdata_reg=64'b0;
 	endcase
 
@@ -263,6 +273,7 @@ always @(*) begin
     24'd42   : operator_a=src1;
     24'd43   : operator_a=src1;
     24'd47   : operator_a=src1;
+    24'd50   : operator_a=src1;
     default : operator_a=64'b0;
     endcase
 
@@ -313,6 +324,7 @@ always @(*) begin
     24'd42   : operator_b=imm_I;
     24'd43   : operator_b=imm_S;
     24'd47   : operator_b=imm_I;
+    24'd50   : operator_b=src_csr;
     default : operator_b=64'b0;
     endcase
 
@@ -364,6 +376,7 @@ always @(*) begin
     24'd42   : mode=8'd0 ;
     24'd43   : mode=8'd0 ;
     24'd47   : mode=8'd0 ;
+    24'd50   : mode=8'd6 ;
     default : mode=8'b0;
     endcase
 
