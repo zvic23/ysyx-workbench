@@ -60,9 +60,6 @@ ysyx_22050612_Reg #(64,64'ha00001800) mstatus_csr (clk, rst, wdata_mstatus, msta
 
 
 always @(*) begin
-  	case (opcode)
-    24'd200000 : $display("%x",mtvec);
-        endcase
 //mtvec control
   	case (opcode)
     24'd49   : wen_mtvec=(imm_I[11:0]==12'h305)? 1'b1:1'b0;
@@ -76,25 +73,25 @@ always @(*) begin
 //mepc control
   	case (opcode)
     24'd49     : wen_mepc=(imm_I[11:0]==12'h341)? 1'b1:1'b0;
-    24'd200000 : wen_mepc=1'b1;
+    24'h200000 : wen_mepc=1'b1;
     default:   wen_mepc=1'b0;
         endcase
 
 	case (opcode)
     24'd49     : wdata_mepc=src1;
-    24'd200000 : wdata_mepc=pc;
+    24'h200000 : wdata_mepc=pc;
     default:   wdata_mepc=64'b0;
         endcase
 //mcause control
   	case (opcode)
     24'd49     : wen_mcause=(imm_I[11:0]==12'h342)? 1'b1:1'b0;
-    24'd200000 : wen_mcause=1'b1;
+    24'h200000 : wen_mcause=1'b1;
     default:   wen_mcause=1'b0;
         endcase
 
 	case (opcode)
     24'd49     : wdata_mcause=src1;
-    24'd200000 : wdata_mcause=64'hb;
+    24'h200000 : wdata_mcause=64'hb;
     default:   wdata_mcause=64'b0;
         endcase
 //mstatus control
