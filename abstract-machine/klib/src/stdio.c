@@ -8,9 +8,10 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 
-const char digits[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//const char digits[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const char digits[] = "0123456789abcdefghijklmnopqrstuvwsyz";
 int printf(const char *fmt, ...) {
-  char out[100];
+  char out[65536];
 
   int i = 0;
   int j = 0;
@@ -49,6 +50,63 @@ int printf(const char *fmt, ...) {
 			  j++;
 		  }
 		  i=i+2;
+	  }
+	  else if(fmt[i]=='%' && fmt[i+1]=='u'){
+		  uint64_t number = va_arg(ap, int);
+		  int base = 10;
+		  char buff[30];
+		  char *a=buff;
+	          do
+                  {
+                          *a++ = digits[number % base];
+                          number /= base;
+                  } while (number);
+                  //if (!*result) *buff++ = '0';
+                  *a = '\0';
+		  int length = strlen(buff);
+		  for(int k=0;k<length;k++){
+			  out[j] = buff[length-1-k];
+			  j++;
+		  }
+		  i=i+2;
+	  }
+	  else if(fmt[i]=='%' && fmt[i+1]=='x'){
+		  uint32_t number = va_arg(ap, int);
+		  int base = 16;
+		  char buff[30];
+		  char *a=buff;
+	          do
+                  {
+                          *a++ = digits[number % base];
+                          number /= base;
+                  } while (number);
+                  //if (!*result) *buff++ = '0';
+                  *a = '\0';
+		  int length = strlen(buff);
+		  for(int k=0;k<length;k++){
+			  out[j] = buff[length-1-k];
+			  j++;
+		  }
+		  i=i+2;
+	  }
+	  else if(fmt[i]=='%' && fmt[i+1]=='l' && fmt[i+2]=='x'){
+		  uint64_t number = va_arg(ap, long long);
+		  int base = 16;
+		  char buff[30];
+		  char *a=buff;
+	          do
+                  {
+                          *a++ = digits[number % base];
+                          number /= base;
+                  } while (number);
+                  //if (!*result) *buff++ = '0';
+                  *a = '\0';
+		  int length = strlen(buff);
+		  for(int k=0;k<length;k++){
+			  out[j] = buff[length-1-k];
+			  j++;
+		  }
+		  i=i+3;
 	  }
 	  else {
 		  out[j]=fmt[i];

@@ -104,6 +104,22 @@ void ftrace_check(uint64_t pc,uint64_t dnpc,uint64_t dest_register,uint64_t src_
 #endif
 
 
+extern uint64_t mepc,mcause,mstatus;
+extern uint64_t mtvec;
+//zsl:etrace
+#ifdef CONFIG_ETRACE
+void etrace_check(uint64_t pc,int in_or_out){
+	if(in_or_out){
+		printf("etrace: ecall happened at pc:%lx ,mepc=%lx,mcause=%lx,mstatus=%lx\n",pc,mepc,mcause,mstatus);
+	}else {
+		printf("etrace: mret  happened at pc:%lx ,mepc=%lx,mcause=%lx,mstatus=%lx\n",pc,mepc,mcause,mstatus);
+	}
+}
+#else
+void etrace_check(uint64_t pc,int in_or_out){
+}
+#endif
+
 
 static int decode_exec(Decode *s) {
   int dest = 0;
@@ -211,6 +227,19 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000001 ????? ????? 111 ????? 01110 11", remuw  , R, word_t src1_32=BITS(src1,31,0);word_t src2_32=BITS(src2,31,0);word_t remainder= src1_32 % src2_32;
 	R(dest) = SEXT(remainder,32));               //!!!!!have doubt and to be optimizied    this inst is copy-paste
 
+
+  INSTPAT("??????? ????? ????? 001 ????? 11100 11", csrrw  , I, if(BITS(imm,11,0)==0x305)R(dest)=mtvec;if(BITS(imm,11,0)==0x305)mtvec=src1; 
+		  if(BITS(imm,11,0)==0x342)R(dest)=mcause;if(BITS(imm,11,0)==0x342)mcause=src1;
+		  if(BITS(imm,11,0)==0x300)R(dest)=mstatus;if(BITS(imm,11,0)==0x300)mstatus=src1;
+		  if(BITS(imm,11,0)==0x341)R(dest)=mepc;if(BITS(imm,11,0)==0x341)mepc=src1;
+		  );   
+  INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , I, etrace_check(s->pc,1);s->dnpc=isa_raise_intr(R(17),mtvec););//isa_reg_display();printf("mepc=%lx\n",mepc);printf("mstatus=%lx\n",mstatus);printf("mcause=%lx\n",mcause););   
+  INSTPAT("??????? ????? ????? 010 ????? 11100 11", csrrs  , I, 
+		  if(BITS(imm,11,0)==0x342)R(dest)=mcause;if(BITS(imm,11,0)==0x342)mcause|=src1;
+		  if(BITS(imm,11,0)==0x300)R(dest)=mstatus;if(BITS(imm,11,0)==0x300)mstatus|=src1;
+		  if(BITS(imm,11,0)==0x341)R(dest)=mepc;if(BITS(imm,11,0)==0x341)mepc|=src1;
+		  );   
+  INSTPAT("0011000 00010 00000 000 00000 11100 11", mret   , I, etrace_check(s->pc,0);s->dnpc=mepc);   
 
 
 
