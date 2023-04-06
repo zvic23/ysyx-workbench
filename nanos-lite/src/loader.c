@@ -50,6 +50,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		  ramdisk_read(&p_memsz, phoff+phentsize*i+40, 8);
 		  uint64_t *addr = (uint64_t*)p_vaddr;
 		  printf("off=%lx  vaddr=%lx  filesz=%lx  memsz=%lx  addr=%lx\n",p_offset,p_vaddr,p_filesz,p_memsz,addr);
+		  uint8_t buf[4];
+		  ramdisk_read(buf,p_offset,8);
+		  for(int j=0;j<4;j++)printf("%x ",buf[j]);
+		  printf("\n");
 		  memcpy(addr, &ramdisk_start+p_offset, p_filesz);
 		  memset(addr+p_filesz, 0, p_memsz-p_filesz);
 		  printf("%d load over\n",i);
