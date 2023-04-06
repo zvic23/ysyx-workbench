@@ -13,6 +13,13 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern uint8_t ramdisk_start;
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
+  uint8_t ident[16];
+  ramdisk_read(ident, 0, 16);
+  printf("ident:");
+  for(int k=0;k<16;k++)printf("%x ",ident[k]);
+  printf("/n");
+  //assert(*(uint32_t *)elf->e_ident == 0xBadC0de);
+
   uint64_t entry;
   ramdisk_read(&entry, 24, 8);
   printf("entry=%lx\n",entry);
