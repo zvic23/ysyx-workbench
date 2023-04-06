@@ -20,6 +20,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ramdisk_read(&phentsize, 54, 2);
   printf("phentsize=%ld\n",phentsize);
 
+  uint64_t phnum;
+  ramdisk_read(&phnum, 56, 2);
+  printf("phnum=%ld\n",phnum);
+
 
   panic();
   //TODO();
