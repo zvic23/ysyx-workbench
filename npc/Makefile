@@ -8,7 +8,6 @@ LIBS += -lreadline  -lSDL2main -lSDL2
 
 
 
-
 all:
 	@echo "Write this Makefile by your self."
 
