@@ -51,6 +51,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		  uint64_t *addr = (uint64_t*)p_vaddr;
 		  printf("off=%lx  vaddr=%lx  filesz=%ld  memsz=%d\n",p_offset,p_vaddr,p_filesz,p_memsz);
 		  memcpy(addr, &ramdisk_start+p_offset, p_filesz);
+		  printf("one load over\n");
 	  }
   }
 
