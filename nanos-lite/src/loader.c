@@ -9,6 +9,13 @@
 # define Elf_Phdr Elf32_Phdr
 #endif
 
+#if defined(__ISA_RISCV64__)
+# define EXPECT_TYPE EM_RISCV
+#else
+#error Unsupported ISA
+#endif
+
+
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern uint8_t ramdisk_start;
 
@@ -19,7 +26,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   for(int k=0;k<16;k++)printf("%x ",ident[k]);
   printf("\n");
   assert(*(uint64_t *)ident == 0x00010102464c457f && *(uint64_t *)&ident[8] == 0x0);
-  //assert(*(uint32_t *)elf->e_ident == 0xBadC0de);
 
   uint64_t entry;
   ramdisk_read(&entry, 24, 8);
@@ -39,18 +45,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ramdisk_read(&phnum, 56, 2);
   printf("phnum=%ld\n",phnum);
 
-//  uint64_t p_type0;
-//  ramdisk_read(&p_type0, phoff, 4);
-//  printf("type=%ld\n",p_type0);
-//  uint64_t p_type1;
-//  ramdisk_read(&p_type1, phoff+phentsize, 4);
-//  printf("type=%ld\n",p_type1);
-//  uint64_t p_type2;
-//  ramdisk_read(&p_type2, phoff+phentsize*2, 4);
-//  printf("type=%ld\n",p_type2);
-//  uint64_t p_type3;
-//  ramdisk_read(&p_type3, phoff+phentsize*3, 4);
-//  printf("type=%ld\n",p_type3);
   uint32_t p_type;
   for(int i=0; i<phnum; i++){
 	  ramdisk_read(&p_type, phoff+phentsize*i, 4);
@@ -63,29 +57,14 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		  ramdisk_read(&p_memsz, phoff+phentsize*i+40, 8);
 		  uint64_t *addr = (uint64_t*)p_vaddr;
 		  //printf("off=%lx  vaddr=%lx  filesz=%lx  memsz=%lx  addr=%lx\n",p_offset,p_vaddr,p_filesz,p_memsz,addr);
-//		  uint8_t buf[4];
-//		  ramdisk_read(buf,p_offset,4);
-//		  for(int j=0;j<4;j++)printf("%x ",buf[j]);
-//		  printf("\n");
-//
-//		  uint32_t buf1;
-//		  ramdisk_read(&buf1,p_offset,4);
-//		  printf("%x \n",buf1);
 
-  //uint32_t aa=0x7f454c46;
-  //uint32_t aa=0x7f454c46;
 		  memcpy(addr, &ramdisk_start+p_offset, p_filesz);
-  //memcpy(addr, &aa, 4);
 		  memset(addr+p_filesz, 0, p_memsz-p_filesz);
 		  printf("%d load over\n",i);
 	  }
   }
 
   return entry;
-
-
-
-
   //TODO();
   //return 0;
 }
