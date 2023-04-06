@@ -36,11 +36,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 //  uint64_t p_type3;
 //  ramdisk_read(&p_type3, phoff+phentsize*3, 4);
 //  printf("type=%ld\n",p_type3);
-  uint64_t p_type;
-  for(int i=0; i<1; i++){
-	  ramdisk_read(&p_type, phoff+phentsize*i, 4);
-	  printf("p_type[%d]=%ld\n",i,p_type);
-  }
+//  uint64_t p_type;
+//  for(int i=0; i<phnum; i++){
+//	  ramdisk_read(&p_type, phoff+phentsize*i, 4);
+//	  printf("p_type[%d]=%ld\n",i,p_type);
+//  }
 
 
 
