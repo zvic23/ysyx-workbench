@@ -14,7 +14,7 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   uint64_t phoff;
   ramdisk_read(&phoff, 32, 8);
-  //printf("phoff=%ld\n",phoff);
+  printf("phoff=%ld\n",phoff);
 
 //  uint64_t phentsize0;
 //  ramdisk_read(&phentsize0, 54, 2);
@@ -22,16 +22,16 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
   uint64_t phentsize;
   ramdisk_read(&phentsize, 54, 2);
-  //printf("phentsize=%ld\n",phentsize);
+  printf("phentsize=%ld\n",phentsize);
   assert(phentsize==56);
 
   uint64_t phnum;
   ramdisk_read(&phnum, 56, 2);
-  //printf("phnum=%ld\n",phnum);
+  printf("phnum=%ld\n",phnum);
 
   uint64_t p_type0;
-  ramdisk_read(&p_type0, phoff, 4);
-  //printf("type=%ld\n",p_type0);
+  ramdisk_read(&p_type0, 54, 4);
+  printf("type=%ld\n",p_type0);
 //  uint64_t p_type1;
 //  ramdisk_read(&p_type1, phoff+phentsize, 4);
 //  printf("type=%ld\n",p_type1);
