@@ -12,7 +12,7 @@
 const char digits[] = "0123456789abcdefghijklmnopqrstuvwsyz";
 int printf(const char *fmt, ...) {
   char out[65536];
-
+  memset(out,0,65536);
   int i = 0;
   int j = 0;
   va_list ap;
