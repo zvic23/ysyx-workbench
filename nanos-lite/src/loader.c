@@ -40,7 +40,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   uint32_t p_type;
   for(int i=0; i<phnum; i++){
 	  ramdisk_read(&p_type, phoff+phentsize*i, 4);
-	  printf("p_type[%d]=%x\n",i,p_type);
+	  printf("p_type[%d]=%lx\n",i,p_type);
   }
 
 
