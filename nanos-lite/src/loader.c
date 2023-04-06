@@ -60,6 +60,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		  printf("%x \n",buf1);
 
   //uint32_t aa=0x7f454c46;
+  //uint32_t aa=0x7f454c46;
 		  memcpy(addr, &ramdisk_start+p_offset, p_filesz);
   //memcpy(addr, &aa, 4);
 		  memset(addr+p_filesz, 0, p_memsz-p_filesz);
