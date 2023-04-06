@@ -48,10 +48,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		  ramdisk_read(&p_vaddr, phoff+phentsize*i+16, 8);
 		  ramdisk_read(&p_filesz, phoff+phentsize*i+32, 8);
 		  ramdisk_read(&p_memsz, phoff+phentsize*i+40, 8);
-		  //uint64_t *addr = (uint64_t*)p_vaddr;
+		  uint64_t *addr = (uint64_t*)p_vaddr;
 		  printf("off=%lx  vaddr=%lx  filesz=%lx  memsz=%lx\n",p_offset,p_vaddr,p_filesz,p_memsz);
-		  //memcpy(addr, &ramdisk_start+p_offset, p_filesz);
-		  //memset(addr+p_filesz, 0, p_memsz-p_filesz);
+		  memcpy(addr, &ramdisk_start+p_offset, p_filesz);
+		  memset(addr+p_filesz, 0, p_memsz-p_filesz);
 		  printf("%d load over\n",i);
 	  }
   }
