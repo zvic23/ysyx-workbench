@@ -24,7 +24,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ramdisk_read(&machine, 18, 2);
   printf("machine=%d\n",machine);
   uint16_t machine1 = 2;
-  assert(machine1= EXPECT_TYPE);
+  assert(machine1==EXPECT_TYPE);
 
   uint8_t ident[16];
   ramdisk_read(ident, 0, 16);
