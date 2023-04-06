@@ -89,6 +89,25 @@ int printf(const char *fmt, ...) {
 		  }
 		  i=i+2;
 	  }
+	  else if(fmt[i]=='%' && fmt[i+1]=='l' && fmt[i+2]=='d'){
+		  uint64_t number = va_arg(ap, long long);
+		  int base = 10;
+		  char buff[30];
+		  char *a=buff;
+	          do
+                  {
+                          *a++ = digits[number % base];
+                          number /= base;
+                  } while (number);
+                  //if (!*result) *buff++ = '0';
+                  *a = '\0';
+		  int length = strlen(buff);
+		  for(int k=0;k<length;k++){
+			  out[j] = buff[length-1-k];
+			  j++;
+		  }
+		  i=i+3;
+	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='l' && fmt[i+2]=='x'){
 		  uint64_t number = va_arg(ap, long long);
 		  int base = 16;
