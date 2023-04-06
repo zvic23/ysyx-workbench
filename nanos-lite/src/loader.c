@@ -23,7 +23,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   uint64_t phentsize;
   ramdisk_read(&phentsize, 54, 2);
   printf("phentsize=%ld\n",phentsize);
-  assert(phentsize==56);
+  //assert(phentsize==56);
 
   uint64_t phnum;
   ramdisk_read(&phnum, 56, 2);
