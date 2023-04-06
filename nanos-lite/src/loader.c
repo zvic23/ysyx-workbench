@@ -16,14 +16,14 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ramdisk_read(&phoff, 32, 8);
   printf("phoff=%ld\n",phoff);
 
-  uint64_t phentsize;
-  ramdisk_read(&phentsize, 54, 2);
-  printf("phentsize=%ld\n",phentsize);
+
 
   uint64_t phnum;
   ramdisk_read(&phnum, 56, 2);
   printf("phnum=%ld\n",phnum);
-
+  uint64_t phentsize;
+  ramdisk_read(&phentsize, 54, 2);
+  printf("phentsize=%ld\n",phentsize);
   uint64_t p_type0;
   ramdisk_read(&p_type0, 56, 2);
   printf("type=%ld\n",p_type0);
