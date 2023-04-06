@@ -18,6 +18,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   printf("ident:");
   for(int k=0;k<16;k++)printf("%x ",ident[k]);
   printf("\n");
+  assert(*(uint64_t *)ident == 0x00010102464c457f);
   //assert(*(uint32_t *)elf->e_ident == 0xBadC0de);
 
   uint64_t entry;
