@@ -18,11 +18,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
   uint64_t phentsize0;
   ramdisk_read(&phentsize0, 54, 2);
-  printf("phentsize=%ld\n",phentsize0);
+  //printf("phentsize=%ld\n",phentsize0);
 
   uint64_t phentsize;
   ramdisk_read(&phentsize, 54, 2);
-  printf("phentsize=%ld\n",phentsize);
+  //printf("phentsize=%ld\n",phentsize);
 
   uint64_t phnum;
   ramdisk_read(&phnum, 56, 2);
