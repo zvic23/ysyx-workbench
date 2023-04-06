@@ -67,7 +67,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	  }
   }
 
-  return 0x83000004;
+  return 0x83000000;
 
 
 
