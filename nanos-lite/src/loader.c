@@ -20,6 +20,10 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern uint8_t ramdisk_start;
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
+  uint16_t machine;
+  ramdisk_read(&machine, 18, 2);
+  printf("machine=%d\n",machine);
+
   uint8_t ident[16];
   ramdisk_read(ident, 0, 16);
   printf("ident:");
