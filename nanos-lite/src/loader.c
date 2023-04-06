@@ -54,12 +54,14 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		  ramdisk_read(buf,p_offset,4);
 		  for(int j=0;j<4;j++)printf("%x ",buf[j]);
 		  printf("\n");
+
+  uint32_t aa=0x464c457f;
 		  memcpy(addr, &ramdisk_start+p_offset, p_filesz);
+		  memcpy(addr, &aa, 4);
 		  memset(addr+p_filesz, 0, p_memsz-p_filesz);
 		  printf("%d load over\n",i);
 	  }
   }
-
 
   return 0x83000000;
 
