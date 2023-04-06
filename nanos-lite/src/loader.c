@@ -10,6 +10,7 @@
 #endif
 
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
+extern uint8_t ramdisk_start;
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   uint64_t phoff;
@@ -41,6 +42,15 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   for(int i=0; i<phnum; i++){
 	  ramdisk_read(&p_type, phoff+phentsize*i, 4);
 	  printf("p_type[%d]=%lx\n",i,p_type);
+	  if(p_type == 1){
+		  uint64_t p_offset,p_vaddr,p_filesz,p_memsz;
+		  ramdisk_read(&p_offset, phoff+phentsize*i+8, 8);
+		  ramdisk_read(&p_vaddr, phoff+phentsize*i+16, 8);
+		  ramdisk_read(&p_filesz, phoff+phentsize*i+24, 8);
+		  ramdisk_read(&p_memsz, phoff+phentsize*i+32, 8);
+		  uint64_t *addr = (uint64_t*)p_vaddr;
+		  memcpy(addr, &ramdisk_start+p_offset, p_filesz);
+	  }
   }
 
 
