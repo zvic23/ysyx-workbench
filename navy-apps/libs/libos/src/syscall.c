@@ -68,12 +68,11 @@ int _write(int fd, void *buf, size_t count) {
   //return 0;
 }
 
-  extern char _end;
 void *_sbrk(intptr_t increment) {
+  extern char _end;
   static intptr_t program_break = (uintptr_t)&_end;
-  intptr_t program_break_old;
   if(!(_syscall_(SYS_brk, increment, 0, 0))){
-  	  program_break_old = program_break;
+  	  intptr_t program_break_old = program_break;
    	  program_break += increment;
 	  return (void *)program_break_old;
   } 
