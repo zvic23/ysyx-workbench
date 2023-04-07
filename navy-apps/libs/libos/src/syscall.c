@@ -73,7 +73,7 @@ void *_sbrk(intptr_t increment) {
   static intptr_t program_break = (uintptr_t)&_end;
   intptr_t program_break_old;
 
-  int ret=(_syscall_(SYS_brk, increment, 0, 0));
+  int ret=(_syscall_(SYS_yield, increment, 0, 0));
   assert(ret == 0);
   char aa[10];
   sprintf(aa, "%x", ret);
