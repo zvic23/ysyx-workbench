@@ -8,7 +8,7 @@ void do_write(uint64_t a,uint64_t b,uint64_t c) {
 		  putch(buf[i]);
 	  }
   }
-  //asm volatile("mv a0, %0" : : "r"(c));
+  asm volatile("mv a0, %0" : :"r"(c));
 }
 
 void do_syscall(Context *c) {
