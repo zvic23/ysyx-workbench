@@ -12,16 +12,16 @@ void do_write(uint64_t a,uint64_t b,uint64_t c) {
 }
 
 void do_brk(Context *c) {
-  c->GPR2 = 0;
+  c->GPRx = 0;
   //asm volatile("li a0, 0");
 }
 
 void do_syscall(Context *c) {
   uintptr_t a[4];
-  a[0] = c->GPR1;
-  a[1] = c->GPR2;
-  a[2] = c->GPR3;
-  a[3] = c->GPR4;
+  a[0] = c->GPR1;  //a7 type
+  a[1] = c->GPR2;  //a0 
+  a[2] = c->GPR3;  //a1
+  a[3] = c->GPR4;  //a2
   printf("strace: syscall[%d]: %x %x %x\n",a[0],a[1],a[2],a[3]);
 
   switch (a[0]) {
