@@ -74,9 +74,9 @@ void *_sbrk(intptr_t increment) {
   intptr_t program_break_old;
 
   int ret=(_syscall_(SYS_brk, increment, 0, 0));
-  assert(ret == 0);
+  //assert(ret == 0);
   char aa[10];
-  sprintf(aa, "%x", ret);
+  sprintf(aa, "%lx", increment);
   _write(1,aa,10);
   if(ret==0){
   	  program_break_old = program_break;
