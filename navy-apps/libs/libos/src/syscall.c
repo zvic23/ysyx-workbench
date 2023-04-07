@@ -64,7 +64,8 @@ int _open(const char *path, int flags, mode_t mode) {
 int _write(int fd, void *buf, size_t count) {
   _syscall_(SYS_write, fd, (uintptr_t)buf, count);
   //_exit(SYS_write);
-  return 0;
+  //return 0;
+  return count;
 }
 
 void *_sbrk(intptr_t increment) {
