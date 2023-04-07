@@ -71,17 +71,18 @@ int _write(int fd, void *buf, size_t count) {
 extern char _end;
 void *_sbrk(intptr_t increment) {
   static intptr_t program_break = (uintptr_t)&_end;
-//  intptr_t program_break_old;
-////  char aa[10];
-////  sprintf(aa, "%lx", increment);
-////  _write(1,aa,10);
-//  if((_syscall_(SYS_brk, increment, 0, 0))==0){
-//  	  program_break_old = program_break;
-//   	  program_break += increment;
-//	  _exit(SYS_write);
-//	  return (void *)program_break;
-//  } 
-  return (void *)program_break;
+  intptr_t program_break_old;
+//  char aa[10];
+//  sprintf(aa, "%lx", increment);
+//  _write(1,aa,10);
+  int ret=(_syscall_(SYS_brk, increment, 0, 0));
+  if(ret==0){
+  	  program_break_old = program_break;
+   	  program_break += increment;
+	  _exit(SYS_write);
+	  return (void *)program_break_old;
+  } 
+  else return (void *)-1;
   //return (void *)-1;
 }
 
