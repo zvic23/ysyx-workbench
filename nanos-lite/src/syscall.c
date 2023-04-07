@@ -8,8 +8,8 @@ void do_write(Context *c) {
 		  putch(buf[i]);
 	  }
   }
-  c->GPRx = c->GPR4;
-  //asm volatile("mv a0, %0" : :"r"(c));
+  //c->GPRx = c->GPR4;
+  asm volatile("mv a0, %0" : :"r"(c));
 }
 
 void do_brk(Context *c) {
