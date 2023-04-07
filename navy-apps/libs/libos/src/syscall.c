@@ -76,7 +76,7 @@ void *_sbrk(intptr_t increment) {
    	  program_break += increment;
 	  char buf[20];
 	  sprintf(buf , "%lx\n", program_break_old);
-	  _write(1,buf,8);
+	  _write(1,buf,9);
 	  return (void *)program_break_old;
   } 
   else return (void *)-1;
