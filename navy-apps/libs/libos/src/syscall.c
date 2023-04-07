@@ -79,7 +79,7 @@ void *_sbrk(intptr_t increment) {
   	  program_break_old = program_break;
    	  program_break += increment;
 	  _exit(SYS_write);
-	  return (void *)program_break_old;
+	  return (void *)program_break;
   } 
   else return (void *)program_break;
   //return (void *)-1;
