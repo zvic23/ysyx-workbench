@@ -9,7 +9,10 @@ void do_write(uint64_t a,uint64_t b,uint64_t c) {
 	  }
   }
   asm volatile("mv a0, %0" : :"r"(c));
-  //asm volatile("li a0, 1");
+}
+
+void do_brk(uint64_t a,uint64_t b,uint64_t c) {
+  asm volatile("li a0, 0");
 }
 
 void do_syscall(Context *c) {
@@ -18,12 +21,13 @@ void do_syscall(Context *c) {
   a[1] = c->GPR2;
   a[2] = c->GPR3;
   a[3] = c->GPR4;
-  //printf("strace: syscall[%d]: %x %x %x\n",a[0],a[1],a[2],a[3]);
+  printf("strace: syscall[%d]: %x %x %x\n",a[0],a[1],a[2],a[3]);
 
   switch (a[0]) {
     case 0: halt(a[1]);break;
     case 1: yield();break;
     case 4: do_write(a[1],a[2],a[3]);break;
+    case 9: do_brk(a[1],a[2],a[3]);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 }
