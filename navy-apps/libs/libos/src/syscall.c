@@ -72,9 +72,9 @@ extern char _end;
 void *_sbrk(intptr_t increment) {
   static intptr_t program_break = (uintptr_t)&_end;
   intptr_t program_break_old;
-  char aa[10];
-  sprintf(aa, "%lx", increment);
-  _write(1,aa,10);
+//  char aa[10];
+//  sprintf(aa, "%lx", increment);
+//  _write(1,aa,10);
   if((_syscall_(SYS_brk, increment, 0, 0))==0){
   	  program_break_old = program_break;
    	  program_break += increment;
