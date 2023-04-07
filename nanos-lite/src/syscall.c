@@ -9,7 +9,7 @@ void do_write(uint64_t a,uint64_t b,uint64_t c) {
 	  }
   }
   //asm volatile("mv a0, %0" : :"r"(c));
-  asm volatile("li a0, 0");
+  asm volatile("li a0, 2");
 }
 
 void do_syscall(Context *c) {
