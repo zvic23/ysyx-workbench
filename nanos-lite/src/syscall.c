@@ -2,7 +2,12 @@
 #include "syscall.h"
 
 void do_write(uint64_t a,uint64_t b,uint64_t c) {
-  printf("!!\n");
+  uint8_t *buf=(uint8_t*)b;
+  if(a==1 || a==2){
+	  for(int i=0;i<c;i++){
+		  putch(buf[i]);
+	  }
+  }
 }
 
 void do_syscall(Context *c) {
@@ -20,5 +25,3 @@ void do_syscall(Context *c) {
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 }
-//zsl:the next is mine
-
