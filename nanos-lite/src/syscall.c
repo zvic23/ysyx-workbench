@@ -12,8 +12,8 @@ void do_write(uint64_t a,uint64_t b,uint64_t c) {
 }
 
 void do_brk(Context *c) {
-  c->GPRx = 0;
-  //asm volatile("li a0, 0");
+  //c->GPRx = 0;
+  asm volatile("li a0, 0");
 }
 
 void do_syscall(Context *c) {
