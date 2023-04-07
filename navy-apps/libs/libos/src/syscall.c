@@ -76,8 +76,8 @@ void *_sbrk(intptr_t increment) {
   static intptr_t program_break = (intptr_t)&_end;
   if(!(_syscall_(SYS_brk, program_break+increment, 0, 0))){
   	  intptr_t program_break_old = program_break;
-   	  program_break += 0;
    	  //program_break += increment;
+   	  program_break += 0;
 	  char buf[20];
 	  sprintf(buf , "%lx\n", program_break_old);
 	  _write(1,buf,9);
