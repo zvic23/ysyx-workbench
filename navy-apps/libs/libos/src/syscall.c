@@ -71,7 +71,7 @@ int _write(int fd, void *buf, size_t count) {
 void *_sbrk(intptr_t increment) {
 	  char buf0[20];
 	  sprintf(buf0 , "%lx\n", increment);
-	  _write(1,buf0,20);
+	  _write(1,buf0,17);
   extern char _end;
   static intptr_t program_break = (intptr_t)&_end;
   if(!(_syscall_(SYS_brk, program_break+increment, 0, 0))){
