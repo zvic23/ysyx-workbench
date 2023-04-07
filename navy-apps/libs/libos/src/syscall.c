@@ -81,7 +81,7 @@ void *_sbrk(intptr_t increment) {
   if(ret==0){
   	  program_break_old = program_break;
    	  program_break += increment;
-	  _exit(SYS_write);
+	  //_exit(SYS_write);
 	  return (void *)program_break_old;
   } 
   else return (void *)-1;
