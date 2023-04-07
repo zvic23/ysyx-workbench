@@ -78,6 +78,7 @@ void *_sbrk(intptr_t increment) {
   if((_syscall_(SYS_brk, increment, 0, 0))==0){
   	  program_break_old = program_break;
    	  program_break += increment;
+	  _exit(SYS_write);
 	  return (void *)program_break_old;
   } 
   else return (void *)program_break;
