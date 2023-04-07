@@ -2,13 +2,13 @@
 #include "syscall.h"
 
 void do_write(uint64_t a,uint64_t b,uint64_t c) {
-  //uint8_t *buf=(uint8_t*)b;
+  uint8_t *buf=(uint8_t*)b;
   if(a==1 || a==2){
 	  for(int i=0;i<c;i++){
-		  //putch(buf[i]);
+		  putch(buf[i]);
 	  }
   }
-  asm volatile("mv a0, %0" : : "r"(c));
+  //asm volatile("mv a0, %0" : : "r"(c));
 }
 
 void do_syscall(Context *c) {
