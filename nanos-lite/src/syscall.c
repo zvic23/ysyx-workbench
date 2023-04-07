@@ -13,8 +13,8 @@ void do_write(Context *c) {
 }
 
 void do_brk(Context *c) {
-  //c->GPRx = 0;
-  asm volatile("li a0, 0");
+  c->GPRx = 0;
+  //asm volatile("li a0, 0");
 }
 
 void do_syscall(Context *c) {
