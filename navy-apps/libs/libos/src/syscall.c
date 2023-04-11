@@ -83,7 +83,7 @@ void *_sbrk(intptr_t increment) {
 		  gg=1;
 	  }
 	  else {
-		  //assert(0);
+		  assert(0);
 		  program_break+=0;
 		  //program_break+=increment;
 	  }
