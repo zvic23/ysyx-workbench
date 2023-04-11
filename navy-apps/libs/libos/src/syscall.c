@@ -68,7 +68,7 @@ int _write(int fd, void *buf, size_t count) {
   //return 0;
 }
 
-static int first=0;
+int first=0;
 void *_sbrk(intptr_t increment) {
 	  //char buf0[20];
 	  //sprintf(buf0 , "%lx\n", increment);
