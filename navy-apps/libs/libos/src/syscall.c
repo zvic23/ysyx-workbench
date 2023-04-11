@@ -78,8 +78,8 @@ void *_sbrk(intptr_t increment) {
   if(!(_syscall_(SYS_brk, program_break+increment, 0, 0))){
   	  intptr_t program_break_old = program_break;
    	  //program_break += increment;
-   	  if(first==0){program_break += 0;first=1;}
-	  else program_break+=increment;
+   	  //if(first==0){program_break += 0;first=1;}
+	  //else program_break+=increment;
 	  char buf[20];
 	  sprintf(buf , "%lx\n", program_break_old);
 	  _write(1,buf,9);
