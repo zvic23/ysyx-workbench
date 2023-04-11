@@ -73,20 +73,13 @@ void *_sbrk(intptr_t increment) {
 	  //sprintf(buf0 , "%lx\n", increment);
 	  //_write(1,buf0,17);
   extern char _end;
-static int gg = 0;
   static intptr_t program_break = (intptr_t)&_end;
   if(!(_syscall_(SYS_brk, program_break+increment, 0, 0))){
   	  intptr_t program_break_old = program_break;
    	  //program_break += increment;
-   	  if(gg == 0){
-		  program_break += 0;
-		  gg=1;
-	  }
-	  else {
-		  assert(0);
-		  program_break+=0;
-		  //program_break+=increment;
-	  }
+   	  if(program_break+increment > 0x90000000)program_break += 0;
+	  else program_break += increment;
+
 	  char buf[20];
 	  sprintf(buf , "%lx\n", program_break_old);
 	  _write(1,buf,9);
