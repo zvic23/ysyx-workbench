@@ -28,7 +28,8 @@ int fs_close(int fd);
 enum {SEEK_SET, SEEK_CUR, SEEK_END};
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  int fd = fs_open("/bin/hello",0,0);
+  int fd = fs_open(filename,0,0);
+  //int fd = fs_open("/bin/hello",0,0);
 
   uint16_t machine;
   fs_lseek(fd, 18, SEEK_SET);
@@ -147,7 +148,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 //		  ramdisk_read(&p_filesz, phoff+phentsize*i+32, 8);
 //		  ramdisk_read(&p_memsz, phoff+phentsize*i+40, 8);
 //		  uint64_t *addr = (uint64_t*)p_vaddr;
-//		  //printf("off=%lx  vaddr=%lx  filesz=%lx  memsz=%lx  addr=%lx\n",p_offset,p_vaddr,p_filesz,p_memsz,addr);
+//		  //printf("off=%lx  vaddr=%lx  filesz=%lx  memsz=%lx  addr=%lx\n",p_offset,p_vaddr,p_filesz,p_memsz,addr);序只需要修改传入na
 //
 //		  memcpy(addr, &ramdisk_start+p_offset, p_filesz);
 //		  memset(addr+p_filesz, 0, p_memsz-p_filesz);
