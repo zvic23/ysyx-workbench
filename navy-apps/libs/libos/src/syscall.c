@@ -79,7 +79,7 @@ static int gg=0;
   	  intptr_t program_break_old = program_break;
    	  //program_break += increment;
    	  if(gg==0){program_break += 0;gg=1;}
-	  else program_break+=increment;
+	  else {assert(0);program_break+=increment;}
 	  char buf[20];
 	  sprintf(buf , "%lx\n", program_break_old);
 	  _write(1,buf,9);
