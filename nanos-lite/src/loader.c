@@ -80,10 +80,18 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	  printf("p_type[%d]=%lx\n",i,p_type);
 	  if(p_type == 1){
 		  uint64_t p_offset,p_vaddr,p_filesz,p_memsz;
-		  ramdisk_read(&p_offset, phoff+phentsize*i+8, 8);
-		  ramdisk_read(&p_vaddr, phoff+phentsize*i+16, 8);
-		  ramdisk_read(&p_filesz, phoff+phentsize*i+32, 8);
-		  ramdisk_read(&p_memsz, phoff+phentsize*i+40, 8);
+  	          fs_lseek(fd, phoff+phentsize*i+8, SEEK_SET);
+  	          fs_read(fd, &p_offset, 8);
+		  //ramdisk_read(&p_offset, phoff+phentsize*i+8, 8);
+  	          fs_lseek(fd, phoff+phentsize*i+16, SEEK_SET);
+  	          fs_read(fd, &p_vaddr, 8);
+		  //ramdisk_read(&p_vaddr, phoff+phentsize*i+16, 8);
+  	          fs_lseek(fd, phoff+phentsize*i+32, SEEK_SET);
+  	          fs_read(fd, &p_filesz, 8);
+		  //ramdisk_read(&p_filesz, phoff+phentsize*i+32, 8);
+  	          fs_lseek(fd, phoff+phentsize*i+40, SEEK_SET);
+  	          fs_read(fd, &p_memsz, 8);
+		  //ramdisk_read(&p_memsz, phoff+phentsize*i+40, 8);
 		  uint64_t *addr = (uint64_t*)p_vaddr;
 		  //printf("off=%lx  vaddr=%lx  filesz=%lx  memsz=%lx  addr=%lx\n",p_offset,p_vaddr,p_filesz,p_memsz,addr);
 
