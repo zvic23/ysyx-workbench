@@ -83,8 +83,9 @@ void *_sbrk(intptr_t increment) {
 		  gg=1;
 	  }
 	  else {
-		  assert(0);
-		  program_break+=increment;
+		  //assert(0);
+		  program_break+=0;
+		  //program_break+=increment;
 	  }
 	  char buf[20];
 	  sprintf(buf , "%lx\n", program_break_old);
