@@ -47,26 +47,36 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   assert(*(uint64_t *)ident == 0x00010102464c457f && *(uint64_t *)&ident[8] == 0x0);
 
   uint64_t entry;
-  ramdisk_read(&entry, 24, 8);
+  fs_lseek(fd, 24, SEEK_SET);
+  fs_read(fd, &entry, 8);
+  //ramdisk_read(&entry, 24, 8);
   printf("entry=%lx\n",entry);
 
   uint64_t phoff;
-  ramdisk_read(&phoff, 32, 8);
+  fs_lseek(fd, 32, SEEK_SET);
+  fs_read(fd, &phoff, 8);
+  //ramdisk_read(&phoff, 32, 8);
   printf("phoff=%ld\n",phoff);
 
 
   uint16_t phentsize;
-  ramdisk_read(&phentsize, 54, 2);
+  fs_lseek(fd, 54, SEEK_SET);
+  fs_read(fd, &phentsize, 2);
+  //ramdisk_read(&phentsize, 54, 2);
   printf("phentsize=%ld\n",phentsize);
   assert(phentsize==56);
 
   uint16_t phnum;
-  ramdisk_read(&phnum, 56, 2);
+  fs_lseek(fd, 56, SEEK_SET);
+  fs_read(fd, &phnum, 2);
+  //ramdisk_read(&phnum, 56, 2);
   printf("phnum=%ld\n",phnum);
 
   uint32_t p_type;
   for(int i=0; i<phnum; i++){
-	  ramdisk_read(&p_type, phoff+phentsize*i, 4);
+  	  fs_lseek(fd, phoff+phentsize*i, SEEK_SET);
+  	  fs_read(fd, &p_type, 4);
+	  //ramdisk_read(&p_type, phoff+phentsize*i, 4);
 	  printf("p_type[%d]=%lx\n",i,p_type);
 	  if(p_type == 1){
 		  uint64_t p_offset,p_vaddr,p_filesz,p_memsz;
