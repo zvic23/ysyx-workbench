@@ -25,12 +25,15 @@ int fs_open(const char *pathname, int flags, int mode);
 size_t fs_lseek(int fd, size_t offset, int whence);
 size_t fs_read(int fd, void *buf, size_t len);
 int fs_close(int fd);
+enum {SEEK_SET, SEEK_CUR, SEEK_END};
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  fs_open("/bin/hello",0,0);
+  int fd = fs_open("/bin/hello",0,0);
 
   uint16_t machine;
-  ramdisk_read(&machine, 18, 2);
+  fs_lseek(fd, 18, SEEK_SET);
+  fs_read(fd, &machine, 2);
+  //ramdisk_read(&machine, 18, 2);
   printf("machine=%d\n",machine);
   assert(machine == EXPECT_TYPE);
 
