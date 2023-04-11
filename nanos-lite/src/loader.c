@@ -38,7 +38,9 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   assert(machine == EXPECT_TYPE);
 
   uint8_t ident[16];
-  ramdisk_read(ident, 0, 16);
+  fs_lseek(fd, 0, SEEK_SET);
+  fs_read(fd, ident, 16);
+  //ramdisk_read(ident, 0, 16);
   printf("ident:");
   for(int k=0;k<16;k++)printf("%x ",ident[k]);
   printf("\n");
