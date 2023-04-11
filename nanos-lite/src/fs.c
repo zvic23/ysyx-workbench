@@ -34,3 +34,40 @@ static Finfo file_table[] __attribute__((used)) = {
 void init_fs() {
   // TODO: initialize the size of /dev/fb
 }
+
+int fs_open(const char *pathname, int flags, int mode){
+	int table_length = sizeof(file_table)/sizeof(file_table[0]);
+	int i=0;
+	for(i=0;i<table_length;i++){
+		if(strcmp(pathname, file_table[i].name)==0)return i;
+	}
+	assert(i!=table_length);
+	return -1;
+}
+
+static size_t position[100];
+//enum {SEEK_SET=1,SEEK_CUR,SEEK_END};
+size_t fs_lseek(int fd, size_t offset, int whence){
+	size_t f_size = file_table[fd].size;
+	size_t f_offset = file_table[fd].disk_offset;
+	if(whence == SEEK_SET){
+		position[fd] = 0 + offset;
+	}else if(whence == SEEK_CUR){
+		position[fd] = position[fd] + offset;
+	}else if(whence == SEEK_END){
+		position[fd] = f_size + f_offset + offset;
+	}else assert(0);
+return position[fd];
+}
+
+size_t ramdisk_read(void *buf, size_t offset, size_t len);
+size_t fs_read(int fd, void *buf, size_t len){
+	size_t f_offset = file_table[fd].disk_offset;
+	ramdisk_read(buf, f_offset+position[fd], len);
+	return len;
+}
+
+int fs_close(int fd){
+	position[fd]=0;
+	return 0;
+}
