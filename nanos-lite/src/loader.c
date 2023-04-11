@@ -94,7 +94,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		  //ramdisk_read(&p_memsz, phoff+phentsize*i+40, 8);
 		  uint64_t *addr = (uint64_t*)p_vaddr;
 		  //printf("off=%lx  vaddr=%lx  filesz=%lx  memsz=%lx  addr=%lx\n",p_offset,p_vaddr,p_filesz,p_memsz,addr);
-		  uint8_t buf_trans[65535];
+		  uint8_t buf_trans[100000];
   	          fs_lseek(fd, p_offset, SEEK_SET);
   	          fs_read(fd, buf_trans, p_filesz);
 		  memcpy(addr, buf_trans, p_filesz);
