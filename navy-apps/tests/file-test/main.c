@@ -13,6 +13,7 @@ printf("001\n");
   fseek(fp, 500 * 5, SEEK_SET);
   int i, n;
   for (i = 500; i < 1000; i ++) {
+	  n=0;
     fscanf(fp, "%d", &n);
     printf("n=%d\n",n);
     assert(n == i + 1);
