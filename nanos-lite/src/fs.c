@@ -57,7 +57,7 @@ size_t fs_lseek(int fd, size_t offset, int whence){
 		position[fd] = f_size + offset;
 		//position[fd] = f_size + f_offset + offset;
 	}else assert(0);
-	if(position[fd] >= f_size){
+	if(position[fd] > f_size){
 		printf("file system:out of bound\n");
 		assert(0);
 	}
