@@ -49,13 +49,14 @@ static size_t position[100];
 //enum {SEEK_SET=1,SEEK_CUR,SEEK_END};
 size_t fs_lseek(int fd, size_t offset, int whence){
 	size_t f_size = file_table[fd].size;
-	size_t f_offset = file_table[fd].disk_offset;
+	//size_t f_offset = file_table[fd].disk_offset;
 	if(whence == SEEK_SET){
 		position[fd] = 0 + offset;
 	}else if(whence == SEEK_CUR){
 		position[fd] = position[fd] + offset;
 	}else if(whence == SEEK_END){
-		position[fd] = f_size + f_offset + offset;
+		position[fd] = f_size + offset;
+		//position[fd] = f_size + f_offset + offset;
 	}else assert(0);
 return position[fd];
 }
