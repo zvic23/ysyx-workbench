@@ -58,14 +58,13 @@ size_t fs_lseek(int fd, size_t offset, int whence){
 		position[fd] = f_size + offset;
 		//position[fd] = f_size + f_offset + offset;
 	}else assert(0);
-
-	printf("posi=%d\n",position[fd]);
 return position[fd];
 }
 
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t fs_read(int fd, void *buf, size_t len){
 	size_t f_offset = file_table[fd].disk_offset;
+	printf("posi=%ld\n",position[fd]);
 	ramdisk_read(buf, f_offset+position[fd], len);
 	return len;
 }
