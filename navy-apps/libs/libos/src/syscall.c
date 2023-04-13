@@ -64,7 +64,7 @@ int _open(const char *path, int flags, mode_t mode) {
 	//assert(0);
 	int a=_syscall_(SYS_open, path, 0, 0);
 	  char bufa[20];
-	  sprintf(bufa, "%d\n", a);
+	  sprintf(bufa, "a=%d\n", a);
 	  _write(1,bufa,9);
   return  a;
   //return _syscall_(SYS_open, path, 0, 0);
