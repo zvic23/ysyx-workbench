@@ -54,7 +54,7 @@ size_t fs_lseek(int fd, size_t offset, int whence){
 	}else if(whence == SEEK_CUR){
 		position[fd] = position[fd] + offset;
 	}else if(whence == SEEK_END){
-		position[fd] = f_size - 1 + offset;
+		position[fd] = f_size + offset;
 		//position[fd] = f_size + f_offset + offset;
 	}else assert(0);
 	if(position[fd] >= f_size){
