@@ -1,6 +1,8 @@
 #include <common.h>
 #include "syscall.h"
 
+#include <fs.h>
+
 void do_write(Context *c) {
   uint8_t *buf=(uint8_t*)c->GPR3;
   if(c->GPR2==1 || c->GPR2==2){
@@ -17,6 +19,11 @@ void do_brk(Context *c) {
   //asm volatile("li a0, 0");
 }
 
+void do_open(Context *c) {
+  c->GPRx = fs_open((char*)c->GPR2, c->GPR3, c->GPR4);
+  //asm volatile("li a0, 0");
+}
+
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;  //a7 type
@@ -28,6 +35,7 @@ void do_syscall(Context *c) {
   switch (a[0]) {
     case 0: halt(a[1]);break;
     case 1: yield();break;
+    case 2: do_open(c);break;
     case 4: do_write(c);break;
     case 9: do_brk(c);break;//printf("RET:%x\n",c->GPR2);break;
     default: panic("Unhandled syscall ID = %d", a[0]);

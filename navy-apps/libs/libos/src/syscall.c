@@ -58,12 +58,13 @@ void _exit(int status) {
 }
 
 int _open(const char *path, int flags, mode_t mode) {
-char buf[20];
-	  sprintf(buf , "%lx\n", 0x6666);
+	  char buf[20];
+	  sprintf(buf , "%x\n", 0x6666);
 	  _write(1,buf,9);
-	assert(0);
-  _exit(SYS_open);
-  return 0;
+	//assert(0);
+  return _syscall_(SYS_open, path, 0, 0);
+  //_exit(SYS_open);
+  //return 0;
 }
 
 int _write(int fd, void *buf, size_t count) {
