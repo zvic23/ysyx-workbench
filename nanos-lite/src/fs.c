@@ -45,7 +45,7 @@ int fs_open(const char *pathname, int flags, int mode){
 	return -1;
 }
 
-static size_t position[1000];
+static uint64_t position[1000];
 //enum {SEEK_SET=1,SEEK_CUR,SEEK_END};
 size_t fs_lseek(int fd, size_t offset, int whence){
 	size_t f_size = file_table[fd].size;
