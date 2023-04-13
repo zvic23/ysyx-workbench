@@ -20,7 +20,7 @@ void do_brk(Context *c) {
 }
 
 void do_open(Context *c) {
-	printf("val:%d\n",fs_open((char*)c->GPR2, c->GPR3, c->GPR4));
+	//printf("val:%d\n",fs_open((char*)c->GPR2, c->GPR3, c->GPR4));
   c->GPRx = fs_open((char*)c->GPR2, c->GPR3, c->GPR4);
   //asm volatile("li a0, 0");
 }
