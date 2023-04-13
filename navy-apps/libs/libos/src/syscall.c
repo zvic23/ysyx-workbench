@@ -59,7 +59,7 @@ void _exit(int status) {
 
 int _open(const char *path, int flags, mode_t mode) {
 	  char buf[20];
-	  sprintf(buf , "%x\n", 0x6666);
+	  sprintf(buf , "%s\n", "open");
 	  _write(1,buf,9);
 	//assert(0);
 	int a=_syscall_(SYS_open, path, 0, 0);
