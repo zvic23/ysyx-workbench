@@ -22,7 +22,10 @@ void do_brk(Context *c) {
 void do_open(Context *c) {
 	//printf("val:%d\n",fs_open((char*)c->GPR2, c->GPR3, c->GPR4));
   c->GPRx = fs_open((char*)c->GPR2, c->GPR3, c->GPR4);
-  //asm volatile("li a0, 0");
+}
+
+void do_lseek(Context *c) {
+  c->GPRx = fs_lseek(c->GPR2, c->GPR3, c->GPR4);
 }
 
 void do_syscall(Context *c) {
@@ -38,6 +41,7 @@ void do_syscall(Context *c) {
     case 1: yield();break;
     case 2: do_open(c);break;
     case 4: do_write(c);break;
+    case 8: do_lseek(c);break;
     case 9: do_brk(c);break;//printf("RET:%x\n",c->GPR2);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
