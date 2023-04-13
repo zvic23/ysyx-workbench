@@ -10,6 +10,9 @@ void do_write(Context *c) {
 		  putch(buf[i]);
 	  }
   }
+  else if(c->GPR2!=0){
+	  fs_write(c->GPR2, (void*)c->GPR3, c->GPR4);
+  }
   c->GPRx = c->GPR4;
   //asm volatile("mv a0, %0" : :"r"(c));
 }
