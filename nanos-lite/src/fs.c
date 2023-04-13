@@ -50,6 +50,7 @@ static uint64_t position[1000];
 size_t fs_lseek(int fd, size_t offset, int whence){
 	size_t f_size = file_table[fd].size;
 	//size_t f_offset = file_table[fd].disk_offset;
+	printf("posi=%d\n",position[fd]);
 	if(whence == SEEK_SET){
 		position[fd] = 0 + offset;
 	}else if(whence == SEEK_CUR){
