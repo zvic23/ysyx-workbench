@@ -2,7 +2,7 @@
 #include <assert.h>
 
 int main() {
-  int *a  = fopen("/share/files/num", "r+");
+  FILE *a  = fopen("/share/files/num", "r+");
   printf("rtval = %x\n",*a);
   //FILE *fp = fopen("/share/files/num", "r+");
   //assert(fp);
