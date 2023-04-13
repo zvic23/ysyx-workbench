@@ -2,8 +2,8 @@
 #include <assert.h>
 
 int main() {
-  int a  = fopen("/share/files/num", "r+");
-  printf("rtval = %x\n",*(uint32_t*)a);
+  int *a  = fopen("/share/files/num", "r+");
+  printf("rtval = %x\n",*a);
   //FILE *fp = fopen("/share/files/num", "r+");
   //assert(fp);
 
