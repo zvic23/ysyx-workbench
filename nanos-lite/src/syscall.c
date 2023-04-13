@@ -24,6 +24,10 @@ void do_open(Context *c) {
   c->GPRx = fs_open((char*)c->GPR2, c->GPR3, c->GPR4);
 }
 
+void do_read(Context *c) {
+  c->GPRx = fs_read(c->GPR2, (void*)c->GPR3, c->GPR4);
+}
+
 void do_lseek(Context *c) {
   c->GPRx = fs_lseek(c->GPR2, c->GPR3, c->GPR4);
 }
@@ -40,6 +44,7 @@ void do_syscall(Context *c) {
     case 0: halt(a[1]);break;
     case 1: yield();break;
     case 2: do_open(c);break;
+    case 3: do_read(c);break;
     case 4: do_write(c);break;
     case 8: do_lseek(c);break;
     case 9: do_brk(c);break;//printf("RET:%x\n",c->GPR2);break;
