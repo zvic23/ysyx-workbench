@@ -3,7 +3,7 @@
 
 int main() {
   int a  = fopen("/share/files/num", "r+");
-  printf("rtval = %x\n",a);
+  printf("rtval = %x\n",*(uint32_t*)a);
   //FILE *fp = fopen("/share/files/num", "r+");
   //assert(fp);
 
