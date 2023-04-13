@@ -3,6 +3,7 @@
 
 int main() {
   FILE *fp = fopen("/share/files/num", "r+");
+  int a =fp;
   printf("fp=%x\n",*fp);
   assert(fp);
 
