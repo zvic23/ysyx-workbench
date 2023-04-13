@@ -46,7 +46,6 @@ int fs_open(const char *pathname, int flags, int mode){
 }
 
 static uint64_t position[1000];
-//enum {SEEK_SET=1,SEEK_CUR,SEEK_END};
 size_t fs_lseek(int fd, size_t offset, int whence){
 	size_t f_size = file_table[fd].size;
 	//size_t f_offset = file_table[fd].disk_offset;
@@ -55,15 +54,24 @@ size_t fs_lseek(int fd, size_t offset, int whence){
 	}else if(whence == SEEK_CUR){
 		position[fd] = position[fd] + offset;
 	}else if(whence == SEEK_END){
-		position[fd] = f_size + offset;
+		position[fd] = f_size - 1 + offset;
 		//position[fd] = f_size + f_offset + offset;
 	}else assert(0);
-return position[fd];
+	if(position[fd] >= f_size){
+		printf("file system:out of bound\n");
+		assert(0);
+	}
+	return position[fd];
 }
 
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t fs_read(int fd, void *buf, size_t len){
 	size_t f_offset = file_table[fd].disk_offset;
+	size_t f_size = file_table[fd].size;
+	if(position[fd] + len >= f_size){
+		printf("file system:out of bound\n");
+		assert(0);
+	}
 	ramdisk_read(buf, f_offset+position[fd], len);
 	position[fd] += len;
 	return len;
@@ -72,6 +80,11 @@ size_t fs_read(int fd, void *buf, size_t len){
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 size_t fs_write(int fd, const void *buf, size_t len){
 	size_t f_offset = file_table[fd].disk_offset;
+	size_t f_size = file_table[fd].size;
+	if(position[fd] + len >= f_size){
+		printf("file system:out of bound\n");
+		assert(0);
+	}
 	ramdisk_write(buf, f_offset+position[fd], len);
 	position[fd] += len;
 	return len;
