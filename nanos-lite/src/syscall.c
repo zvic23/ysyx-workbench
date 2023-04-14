@@ -47,7 +47,10 @@ void do_syscall(Context *c) {
   a[2] = c->GPR3;  //a1
   a[3] = c->GPR4;  //a2
   char *sys_name[]={"SYS_exit","SYS_yield","SYS_open","SYS_read","SYS_write","SYS_kill","SYS_getpid","SYS_close","SYS_lseek","SYS_brk","SYS_fstat","SYS_time","SYS_signal","SYS_execve","SYS_fork","SYS_link","SYS_unlink","SYS_wait","SYS_times","SYS_gettimeofday" };
-  printf("strace: syscall[%d](%s): %lx %lx %lx\n",a[0],sys_name[a[0]],a[1],a[2],a[3]);
+  switch (a[0]){
+    case 3: case 4: case 7: case 8: {printf("strace: syscall[%d](%s): %lx %lx %lx\n",a[0],sys_name[a[0]],a[1],a[2],a[3]);break;}
+    default: printf("strace: syscall[%d](%s): %lx %lx %lx\n",a[0],sys_name[a[0]],a[1],a[2],a[3]);
+  }
 
   switch (a[0]) {
     case 0: halt(a[1]);break;
