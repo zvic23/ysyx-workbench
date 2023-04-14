@@ -63,6 +63,9 @@ size_t fs_lseek(int fd, size_t offset, int whence){
 
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t fs_read(int fd, void *buf, size_t len){
+  if(fd==0 || fd==1 || fd==2){
+	  return 0;
+  }
 	size_t f_offset = file_table[fd].disk_offset;
 	ramdisk_read(buf, f_offset+position[fd], len);
 	position[fd] += len;
@@ -76,6 +79,7 @@ size_t fs_write(int fd, const void *buf, size_t len){
 		  putch(((uint8_t*)buf)[i]);
 	  }
   }
+  else if(fd==0) return 0;
 	size_t f_offset = file_table[fd].disk_offset;
 	ramdisk_write(buf, f_offset+position[fd], len);
 	position[fd] += len;
