@@ -4,15 +4,16 @@
 #include <fs.h>
 
 void do_write(Context *c) {
-  uint8_t *buf=(uint8_t*)c->GPR3;
-  if(c->GPR2==1 || c->GPR2==2){
-	  for(int i=0;i<c->GPR4;i++){
-		  putch(buf[i]);
-	  }
-  }
-  else if(c->GPR2!=0){
+ // uint8_t *buf=(uint8_t*)c->GPR3;
+ // if(c->GPR2==1 || c->GPR2==2){
+ //         for(int i=0;i<c->GPR4;i++){
+ //       	  putch(buf[i]);
+ //         }
+ // }
+ // else if(c->GPR2!=0){
+ //         fs_write(c->GPR2, (void*)c->GPR3, c->GPR4);
+ // }
 	  fs_write(c->GPR2, (void*)c->GPR3, c->GPR4);
-  }
   c->GPRx = c->GPR4;
   //asm volatile("mv a0, %0" : :"r"(c));
 }
