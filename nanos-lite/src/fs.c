@@ -74,12 +74,13 @@ size_t fs_read(int fd, void *buf, size_t len){
 
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 size_t fs_write(int fd, const void *buf, size_t len){
-  if(fd==1 || fd==2){
-	  for(int i=0;i<len;i++){
-		  putch(((uint8_t*)buf)[i]);
-	  }
-  }
-  else if(fd==0) return 0;
+//  if(fd==1 || fd==2){
+//	  for(int i=0;i<len;i++){
+//		  putch(((uint8_t*)buf)[i]);
+//	  }
+//  }
+//  else if(fd==0) return 0;
+	if(file_table[fd].write != NULL) file_table[fd].write(buf, 0, len);;
 	size_t f_offset = file_table[fd].disk_offset;
 	ramdisk_write(buf, f_offset+position[fd], len);
 	position[fd] += len;
