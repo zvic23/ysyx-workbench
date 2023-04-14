@@ -80,10 +80,12 @@ size_t fs_write(int fd, const void *buf, size_t len){
 //	  }
 //  }
 //  else if(fd==0) return 0;
-	if(file_table[fd].write != NULL) file_table[fd].write(buf, 0, len);;
+	if(file_table[fd].write != NULL) file_table[fd].write(buf, 0, len);
+	else{
 	size_t f_offset = file_table[fd].disk_offset;
 	ramdisk_write(buf, f_offset+position[fd], len);
 	position[fd] += len;
+	}
 	return len;
 }
 
