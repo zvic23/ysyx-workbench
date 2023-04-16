@@ -2,6 +2,7 @@
 #include "syscall.h"
 
 #include <fs.h>
+#include <sys/time.h>
 
 void do_write(Context *c) {
  // uint8_t *buf=(uint8_t*)c->GPR3;
@@ -40,6 +41,10 @@ void do_lseek(Context *c) {
   c->GPRx = fs_lseek(c->GPR2, c->GPR3, c->GPR4);
 }
 
+void do_gettimeofday(Context *c) {
+  //c->GPRx = gettimeofday((timeval*)c->GPR2, (timezone*)c->GPR3);
+}
+
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;  //a7 type
@@ -63,6 +68,7 @@ void do_syscall(Context *c) {
     case 7: do_close(c);break;
     case 8: do_lseek(c);break;
     case 9: do_brk(c);break;//printf("RET:%x\n",c->GPR2);break;
+    case 19: do_gettimeofday(c);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 }
