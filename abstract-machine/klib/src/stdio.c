@@ -13,8 +13,8 @@ const char digits[] = "0123456789abcdefghijklmnopqrstuvwsyz";
 int printf(const char *fmt, ...) {
   char out[65536];
 
-  int i = 0;
-  int j = 0;
+  uint64_t i = 0;
+  uint64_t j = 0;
   va_list ap;
   va_start(ap, fmt);
   while(fmt[i]!='\0'){
@@ -89,6 +89,25 @@ int printf(const char *fmt, ...) {
 		  }
 		  i=i+2;
 	  }
+	  else if(fmt[i]=='%' && fmt[i+1]=='l' && fmt[i+2]=='d'){
+		  uint64_t number = va_arg(ap, long long);
+		  int base = 10;
+		  char buff[30];
+		  char *a=buff;
+	          do
+                  {
+                          *a++ = digits[number % base];
+                          number /= base;
+                  } while (number);
+                  //if (!*result) *buff++ = '0';
+                  *a = '\0';
+		  int length = strlen(buff);
+		  for(int k=0;k<length;k++){
+			  out[j] = buff[length-1-k];
+			  j++;
+		  }
+		  i=i+3;
+	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='l' && fmt[i+2]=='x'){
 		  uint64_t number = va_arg(ap, long long);
 		  int base = 16;
@@ -107,6 +126,25 @@ int printf(const char *fmt, ...) {
 			  j++;
 		  }
 		  i=i+3;
+	  }
+	  else if(fmt[i]=='%' && fmt[i+1]=='p'){
+		  uint64_t number = va_arg(ap, long long);
+		  int base = 16;
+		  char buff[30];
+		  char *a=buff;
+	          do
+                  {
+                          *a++ = digits[number % base];
+                          number /= base;
+                  } while (number);
+                  //if (!*result) *buff++ = '0';
+                  *a = '\0';
+		  int length = strlen(buff);
+		  for(int k=0;k<length;k++){
+			  out[j] = buff[length-1-k];
+			  j++;
+		  }
+		  i=i+2;
 	  }
 	  else {
 		  out[j]=fmt[i];
