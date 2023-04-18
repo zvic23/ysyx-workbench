@@ -19,14 +19,14 @@ uint32_t NDL_GetTicks() {
 int NDL_PollEvent(char *buf, int len) {
   char buf_cache[65535];
   FILE *fp = fopen("/dev/events", "r+");
-  int succ = fscanf(fp, "%s", buf_cache);
+  int succ = fscanf(fp, "%[^\n]", buf_cache);
   //printf("cache:%s\n",buf_cache);
 
-  printf("\n");
-  for(int i=0;i<10;i++){
-  printf("%c",buf_cache[i]);
-  }
-  printf("\n");
+  //printf("\n");
+  //for(int i=0;i<10;i++){
+  //printf("%c",buf_cache[i]);
+  //}
+  //printf("\n");
   fclose(fp);
   strncpy(buf, buf_cache, len);
   if(succ!=-1) return 1;
