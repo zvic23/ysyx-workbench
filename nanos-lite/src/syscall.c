@@ -42,8 +42,12 @@ void do_lseek(Context *c) {
 }
 
 void do_gettimeofday(Context *c) {
-  if(c->GPR2 == 0) c->GPRx = io_read(AM_TIMER_UPTIME).us;
-  else if(c->GPR2 == 1) c->GPRx = io_read(AM_TIMER_UPTIME).us / 1000000;
+  if(c->GPR2 == 0) {
+	  c->GPRx = io_read(AM_TIMER_UPTIME).us;
+  }
+  else if(c->GPR2 == 1) {
+	  c->GPRx = io_read(AM_TIMER_UPTIME).us / 1000000;
+  }
   //c->GPRx = gettimeofday((timeval*)c->GPR2, (timezone*)c->GPR3);
 }
 
