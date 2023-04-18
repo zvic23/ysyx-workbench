@@ -34,8 +34,10 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   int w = io_read(AM_GPU_CONFIG).width;
   int h = io_read(AM_GPU_CONFIG).height;
   uint64_t mix = ((uint64_t)w<<32)+ h;
-  snprintf(buf, len, "%lld\n", mix);
+  snprintf(buf, len, "%ld\n", mix);
   return 0;
+//WIDTH : 640
+//HEIGHT:480
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
