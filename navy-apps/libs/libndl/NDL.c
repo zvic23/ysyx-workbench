@@ -21,7 +21,12 @@ int NDL_PollEvent(char *buf, int len) {
   FILE *fp = fopen("/dev/events", "r+");
   int succ = fscanf(fp, "%s", buf_cache);
   //printf("cache:%s\n",buf_cache);
-  printf("cache:%c\n",buf_cache[3]);
+
+  printf("\n");
+  for(int i=0;i<5;i++){
+  printf("%c",buf_cache[i]);
+  }
+  printf("\n");
   fclose(fp);
   strncpy(buf, buf_cache, len);
   if(succ!=-1) return 1;
