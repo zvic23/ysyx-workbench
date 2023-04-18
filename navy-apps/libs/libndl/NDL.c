@@ -27,12 +27,12 @@ int NDL_PollEvent(char *buf, int len) {
 }
 
 void NDL_OpenCanvas(int *w, int *h) {
-  uint64_t size = 0;
-  FILE *fp = fopen("/proc/dispinfo", "r+");
-  int succ = fscanf(fp, "%ld", &size);
-  fclose(fp);
-  *w = size>>32;
-  *h = size;
+//  uint64_t size = 0;
+//  FILE *fp = fopen("/proc/dispinfo", "r+");
+//  int succ = fscanf(fp, "%ld", &size);
+//  fclose(fp);
+//  *w = size>>32;
+//  *h = size;
 
 
 
