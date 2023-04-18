@@ -242,7 +242,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("0011000 00010 00000 000 00000 11100 11", mret   , I, etrace_check(s->pc,0);s->dnpc=mepc);   
 
 
-  INSTPAT("0000001 ????? ????? 100 00000 01100 11", div    , R, sword_t src1_d=src1;sword_t src2_d=src2;sword_t quotient=src1_d/src2_d;R(dest)=quotient);   
+  INSTPAT("0000001 ????? ????? 100 ????? 01100 11", div    , R, sword_t src1_d=src1;sword_t src2_d=src2;sword_t quotient=src1_d/src2_d;R(dest)=quotient);   
 
 
 
