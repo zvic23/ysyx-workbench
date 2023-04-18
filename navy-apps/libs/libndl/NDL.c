@@ -21,8 +21,8 @@ int NDL_PollEvent(char *buf, int len) {
   int succ = fscanf(fp, buf, len);
   fclose(fp);
   printf("succ = %d\n",succ);
-  if(succ) return 0;
-  else return 0;
+  if(succ!=-1) return 0;
+  else return 1;
 }
 
 void NDL_OpenCanvas(int *w, int *h) {
