@@ -32,7 +32,6 @@ void* BMP_Load(const char *filename, int *width, int *height) {
   int w = hdr.width;
   int h = hdr.height;
   uint32_t *pixels = malloc(w * h * sizeof(uint32_t));
-printf("bmp in \n");
 
   int line_off = (w * 3 + 3) & ~0x3;
   for (int i = 0; i < h; i ++) {
@@ -46,6 +45,7 @@ printf("bmp in \n");
     }
   }
 
+printf("bmp in \n");
   fclose(fp);
   if (width) *width = w;
   if (height) *height = h;
