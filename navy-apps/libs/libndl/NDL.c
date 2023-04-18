@@ -20,7 +20,7 @@ int NDL_PollEvent(char *buf, int len) {
   FILE *fp = fopen("/dev/events", "r+");
   int succ = fscanf(fp, buf, len);
   fclose(fp);
-  if(succ) return 1;
+  if(succ) return 0;
   else return 0;
 }
 
