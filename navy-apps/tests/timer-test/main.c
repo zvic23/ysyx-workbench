@@ -9,7 +9,7 @@ int main() {
   int sec = 1;
   while(1){
 	  gettimeofday(&tv, &tz);
-	  if(tv.tv_usec / 1000000 <sec) {
+	  if(tv.tv_usec / 1000000 >=sec) {
 		  printf("0.5s\n");
 		  sec ++;
 	  }
