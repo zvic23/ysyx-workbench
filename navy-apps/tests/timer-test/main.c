@@ -4,7 +4,6 @@
 #include <sys/time.h>
 
 int main() {
-
   int halfsec = 1;
   while(1){
 	  int us=NDL_GetTicks();
@@ -13,9 +12,6 @@ int main() {
 		  halfsec ++;
 	  }
   }
-
-
-
   printf("PASS!!!\n");
 
   return 0;
@@ -34,9 +30,6 @@ int main() {
 		  halfsec ++;
 	  }
   }
-
-
-
   printf("PASS!!!\n");
 
   return 0;
