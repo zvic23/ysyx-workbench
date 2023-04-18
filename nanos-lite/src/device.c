@@ -32,7 +32,8 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   int w = io_read(AM_GPU_CONFIG).width;
-  int h = io_read(AM_GPU_CONFIG).height;
+  int h = io_read(AM_GPU_CONFIG).height;  
+  printf("in:  w=%d  h=%d\n",w,h);
   //uint64_t mix = ((uint64_t)w<<32)+ h;
   char str_buf[100];
   sprintf(str_buf,"WIDTH:%d\nHEIGHT:%d",w,h);
