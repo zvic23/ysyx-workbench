@@ -23,7 +23,7 @@ int NDL_PollEvent(char *buf, int len) {
   //printf("cache:%s\n",buf_cache);
 
   printf("\n");
-  for(int i=0;i<5;i++){
+  for(int i=0;i<10;i++){
   printf("%c",buf_cache[i]);
   }
   printf("\n");
