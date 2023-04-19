@@ -72,7 +72,7 @@ int NDL_Init(uint32_t flags) {
 
   uint64_t size = 1;
   FILE *fp = fopen("/proc/dispinfo", "r+");
-  int succ = fscanf(fp, "%ld", &size);
+  int succ = fscanf(fp, "%ld", size);
   printf("size:%ld\n",size);
   fclose(fp);
   screen_w = size>>32;
