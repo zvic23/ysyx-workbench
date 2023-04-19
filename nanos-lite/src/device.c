@@ -40,7 +40,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   //sprintf(str_buf,"WIDTH:%d\nHEIGHT:%d",w,h);
 
   //snprintf(buf, len, "%ld",mix);
-  *(uint64_t*)buf = mix;
+  *(uint64_t*)buf = mix>>32;
   printf("buf:%ld\n",*(uint64_t*)buf);
   //snprintf(buf, len, "%s",str_buf);
   return 0;
