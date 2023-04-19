@@ -30,7 +30,7 @@ static int canvas_w = 0, canvas_h = 0;
 void NDL_OpenCanvas(int *w, int *h) {
 
   canvas_w = *w; canvas_h = *h;
-  if(screen_w>canvas_w || screen_h<canvas_h){
+  if(screen_w<canvas_w || screen_h<canvas_h){
 	  printf("canvas should not be larger than screen!!\n");
   }
   //assert(screen_w>=canvas_w && screen_h>=canvas_h);
@@ -58,11 +58,14 @@ void NDL_OpenCanvas(int *w, int *h) {
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	//printf("x=%d,y=%d,w=%d,h=%d\n",x,y,w,h);
+  int x_mid=(screen_w-canvas_w)/2;
+  int y_mid=(screen_h-canvas_h)/2;
   int fp = open("/dev/fb", "r+");
   for(int i=0;i<h;i++){
-	  lseek(fp,x+screen_w*i,SEEK_SET);
+	  lseek(fp,x_mid+x+screen_w*(i+y_mid),SEEK_SET);
 	  write(fp,&pixels[h*i],w);
   }
+  close(fp);
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {
@@ -89,12 +92,12 @@ int NDL_Init(uint32_t flags) {
   FILE *fp = fopen("/proc/dispinfo", "r+");
   int succ = fscanf(fp, "%s\n%s", buf,buf1);
   //printf("succ:%d\n",succ);
-  printf("str:%s\n",buf);
-  printf("str:%s\n",buf1);
+  //printf("str:%s\n",buf);
+  //printf("str:%s\n",buf1);
   int w,h;
   sscanf(buf,"WIDTH:%d",&w);
   sscanf(buf1,"HEIGHT:%d",&h);
-  printf("wh:%d  %d\n",w,h);
+  //printf("wh:%d  %d\n",w,h);
   fclose(fp);
 
     screen_w = w; screen_h = h;
