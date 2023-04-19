@@ -37,7 +37,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   //printf("in:  w=%d  h=%d\n",w,h);
   //printf("para: %d   %d\n",offset,len);
   snprintf(buf, len, "WIDTH:%d\nHEIGHT:%d",w,h);
-  printf("buf:%s\n",buf);
+  //printf("buf:%s\n",buf);
   return len;
 //WIDTH : 640
 //HEIGHT:480
