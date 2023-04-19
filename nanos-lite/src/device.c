@@ -39,6 +39,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   //sprintf(str_buf,"WIDTH:%d\nHEIGHT:%d",w,h);
 
   snprintf(buf, len, "%ld",mix);
+  printf("buf:%s\n",buf);
   //snprintf(buf, len, "%s",str_buf);
   return 0;
 //WIDTH : 640
