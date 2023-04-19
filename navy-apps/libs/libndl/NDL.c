@@ -70,8 +70,8 @@ int NDL_Init(uint32_t flags) {
 
   char buf[20];
   FILE *fp = fopen("/proc/dispinfo", "r+");
-  int succ = fscanf(fp, "%s", buf);
-  printf("str:%c\n",buf);
+  int succ = fscanf(fp, "%d", buf);
+  printf("str:%s\n",buf);
   //printf("str:%s\n",buf);
   fclose(fp);
 
