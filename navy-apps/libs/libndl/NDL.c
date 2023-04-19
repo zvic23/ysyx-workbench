@@ -69,10 +69,12 @@ int NDL_Init(uint32_t flags) {
   }
 
   char buf[20];
+  char buf1[20];
   FILE *fp = fopen("/proc/dispinfo", "r+");
-  int succ = fscanf(fp, "%s", buf);
+  int succ = fscanf(fp, "%s\n%s", buf,buf1);
   printf("succ:%d\n",succ);
   printf("str:%s\n",buf);
+  printf("str:%s\n",buf1);
   //printf("str:%s\n",buf);
   fclose(fp);
 
