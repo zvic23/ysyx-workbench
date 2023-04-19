@@ -45,7 +45,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   //printf("buf:%ld\n",*(uint64_t*)buf);
   //snprintf(buf, len, "%s",str_buf);
 
-  printf("%d   %d\n",offset,len);
+  printf("para: %d   %d\n",offset,len);
 
   snprintf(buf, len, "%s","666");
 
