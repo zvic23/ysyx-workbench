@@ -50,7 +50,9 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   int y = offset / w;
   int x = offset % w;
   printf("x=%d,y=%d\n",x,y);
-  io_write(AM_GPU_FBDRAW, x, y, (uint32_t*)buf, len, 0, false);
+  uint32_t bufff[200];
+  memset(bufff,1,800);
+  io_write(AM_GPU_FBDRAW, x, y, (uint32_t*)bufff, len, 0, false);
   io_write(AM_GPU_FBDRAW, 0, 0, NULL, 0, 0, true);
 
 
