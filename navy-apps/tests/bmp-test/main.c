@@ -7,7 +7,7 @@
 int main() {
   NDL_Init(0);
   int w, h;
-  int ff = open("/dev/fb", "r+");
+  int ff = open("/share/pictures/projectn.bmp", "r+");
   printf("ff=%d\n",ff);
   void *bmp = BMP_Load("/share/pictures/projectn.bmp", &w, &h);
   assert(bmp);
