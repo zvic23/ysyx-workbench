@@ -27,6 +27,7 @@ int NDL_PollEvent(char *buf, int len) {
 }
 
 void NDL_OpenCanvas(int *w, int *h) {
+	  printf("in canvas\n");
   if (getenv("NWM_APP")) {
 	  printf("in canvas\n");
     int fbctl = 4;
