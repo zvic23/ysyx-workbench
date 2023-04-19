@@ -30,9 +30,10 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   }
 }
 
+static int w,h;
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  int w = io_read(AM_GPU_CONFIG).width;
-  int h = io_read(AM_GPU_CONFIG).height;  
+  w = io_read(AM_GPU_CONFIG).width;
+  h = io_read(AM_GPU_CONFIG).height;  
   //printf("in:  w=%d  h=%d\n",w,h);
   //printf("para: %d   %d\n",offset,len);
   snprintf(buf, len, "WIDTH:%d\nHEIGHT:%d",w,h);
@@ -45,6 +46,11 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
+  int y = offset / w;
+  int x = offset % w;
+  io_write(AM_GPU_FBDRAW, x, y, (uint32_t*)buf, len, 0, true);
+
+
   return 0;
 }
 
