@@ -68,16 +68,20 @@ int NDL_Init(uint32_t flags) {
     evtdev = 3;
   }
 
-
-
-  uint64_t size = 1;
+  char buf[20];
   FILE *fp = fopen("/proc/dispinfo", "r+");
-  int succ = fscanf(fp, "%ld", &size);
-  printf("size:%ld\n",size);
+  int succ = fscanf(fp, "%s", buf);
+  printf("str:%s\n",buf);
   fclose(fp);
-  screen_w = size>>32;
-  screen_h = size;
-  printf("screen:w = %d   h = %d\n",screen_w,screen_h);
+
+//  uint64_t size = 1;
+//  FILE *fp = fopen("/proc/dispinfo", "r+");
+//  int succ = fscanf(fp, "%ld", &size);
+//  printf("size:%ld\n",size);
+//  fclose(fp);
+//  screen_w = size>>32;
+//  screen_h = size;
+//  printf("screen:w = %d   h = %d\n",screen_w,screen_h);
 
 
 
