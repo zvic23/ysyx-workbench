@@ -70,7 +70,7 @@ int NDL_Init(uint32_t flags) {
 
 
 
-  uint64_t size = 0;
+  uint64_t size = 1;
   FILE *fp = fopen("/proc/dispinfo", "r+");
   int succ = fscanf(fp, "%ld", &size);
   fclose(fp);
