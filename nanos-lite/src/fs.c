@@ -91,7 +91,6 @@ size_t fs_read(int fd, void *buf, size_t len){
 
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 size_t fs_write(int fd, const void *buf, size_t len){
-	printf("write fd:%d\n",fd);
 	if(file_table[fd].write != NULL) return file_table[fd].write(buf, 0, len);
 	else{
 		size_t f_offset = file_table[fd].disk_offset;
