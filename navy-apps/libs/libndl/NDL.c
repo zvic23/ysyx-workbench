@@ -71,8 +71,8 @@ int NDL_Init(uint32_t flags) {
   char buf[20];
   uint64_t num=0;
   FILE *fp = fopen("/proc/dispinfo", "r+");
-  int succ = fscanf(fp, "%d", num);
-  printf("str:%d\n",num);
+  int succ = fscanf(fp, "%ld", &num);
+  printf("str:%ld\n",num);
   //printf("str:%s\n",buf);
   fclose(fp);
 
