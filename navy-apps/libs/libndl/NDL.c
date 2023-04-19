@@ -26,10 +26,14 @@ int NDL_PollEvent(char *buf, int len) {
   else return 0;
 }
 
+static int canvas_w = 0, canvas_h = 0;
 void NDL_OpenCanvas(int *w, int *h) {
-	  printf("in canvas\n");
+
+  canvas_w = *w; canvas_h = *h;
+
+
+
   if (getenv("NWM_APP")) {
-	  printf("in canvas\n");
     int fbctl = 4;
     fbdev = 5;
     screen_w = *w; screen_h = *h;
@@ -82,6 +86,8 @@ int NDL_Init(uint32_t flags) {
   sscanf(buf1,"HEIGHT:%d",&h);
   printf("wh:%d  %d\n",w,h);
   fclose(fp);
+
+    screen_w = w; screen_h = h;
 
   return 0;
 }
