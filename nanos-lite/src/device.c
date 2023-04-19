@@ -51,8 +51,6 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   printf("buf:%s\n",buf);
 
   return len;
-
-
 //WIDTH : 640
 //HEIGHT:480
 
