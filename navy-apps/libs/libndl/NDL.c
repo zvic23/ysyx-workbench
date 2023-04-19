@@ -76,6 +76,7 @@ int NDL_Init(uint32_t flags) {
   fclose(fp);
   screen_w = size>>32;
   screen_h = size;
+  printf("sieze:%ld\n",size);
   printf("screen:w = %d   h = %d\n",screen_w,screen_h);
 
 
