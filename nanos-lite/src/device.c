@@ -50,6 +50,8 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   snprintf(buf, len, "%s","666");
   printf("buf:%s\n",buf);
 
+  return len;
+
 
 
 
