@@ -76,8 +76,8 @@ int NDL_Init(uint32_t flags) {
   printf("str:%s\n",buf);
   printf("str:%s\n",buf1);
   int h,j;
-  sscanf(buf,"%s:%d",NULL,h);
-  sscanf(buf1,"%s:%d",NULL,j);
+  sscanf(buf,"WIDTH:%d",&h);
+  sscanf(buf1,"HEIGHT:%d",&j);
   printf("hj:%d  %d\n",h,j);
   fclose(fp);
 
