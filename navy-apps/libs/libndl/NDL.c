@@ -30,7 +30,7 @@ static int canvas_w = 0, canvas_h = 0;
 void NDL_OpenCanvas(int *w, int *h) {
 
   canvas_w = *w; canvas_h = *h;
-  assert(screen_w>=canvas_w && screen_h>=canvas_h);
+  assert(screen_w<=canvas_w && screen_h>=canvas_h);
 
 
 
