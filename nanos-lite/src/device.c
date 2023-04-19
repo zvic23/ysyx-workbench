@@ -34,17 +34,6 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   int w = io_read(AM_GPU_CONFIG).width;
   int h = io_read(AM_GPU_CONFIG).height;  
   printf("in:  w=%d  h=%d\n",w,h);
-  //uint64_t mix = ((uint64_t)w<<32)+ h;
-  //printf("mix:%ld\n",mix);
-  
-  //char str_buf[100];
-  //sprintf(str_buf,"WIDTH:%d\nHEIGHT:%d",w,h);
-
-  //snprintf(buf, len, "%ld",mix);
-  //*(uint64_t*)buf = mix>>32;
-  //printf("buf:%ld\n",*(uint64_t*)buf);
-  //snprintf(buf, len, "%s",str_buf);
-
   printf("para: %d   %d\n",offset,len);
 
   snprintf(buf, len, "WIDTH:%d\nHEIGHT:%d",w,h);
