@@ -1,5 +1,9 @@
 #include <common.h>
 
+#include <am.h>
+#include <klib.h>
+#include <klib-macros.h>
+
 #if defined(MULTIPROGRAM) && !defined(TIME_SHARING)
 # define MULTIPROGRAM_YIELD() yield()
 #else
