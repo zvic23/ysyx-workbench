@@ -94,7 +94,7 @@ int NDL_Init(uint32_t flags) {
   int succ = read(fp, buf, 100);
   int w,h;
   sscanf(buf,"WIDTH:%d\nHEIGHT:%d",&w,&h);
-  printf("wh:%d  %d\n",w,h);
+  //printf("wh:%d  %d\n",w,h);
   close(fp);
     screen_w = w; screen_h = h;
 
