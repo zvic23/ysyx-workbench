@@ -94,12 +94,15 @@ int NDL_Init(uint32_t flags) {
   FILE *fp = fopen("/proc/dispinfo", "r+");
   printf("111\n");
   int succ = fscanf(fp, "%s\n%s", buf0,buf1);
-
+  //printf("succ:%d\n",succ);
+  //printf("str:%s\n",buf);
+  //printf("str:%s\n",buf1);
   int w,h;
   sscanf(buf0,"WIDTH:%d",&w);
   sscanf(buf1,"HEIGHT:%d",&h);
 
   printf("211\n");
+  //printf("wh:%d  %d\n",w,h);
   fclose(fp);
 
   printf("311\n");
