@@ -105,6 +105,7 @@ int NDL_Init(uint32_t flags) {
   //printf("wh:%d  %d\n",w,h);
   fclose(fp);
 
+  printf("311\n");
     screen_w = w; screen_h = h;
 
 
