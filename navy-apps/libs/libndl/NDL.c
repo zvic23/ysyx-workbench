@@ -89,32 +89,32 @@ int NDL_Init(uint32_t flags) {
 
 
 
-//  char buf[40];
-//  int fp = open("/proc/dispinfo", "r+");
-//  int succ = read(fp, buf, 100);
-//  int w,h;
-//  sscanf(buf,"WIDTH:%d\nHEIGHT:%d",&w,&h);
-//  printf("wh:%d  %d\n",w,h);
-//  close(fp);
-//    screen_w = w; screen_h = h;
-
-
-
-
-  char buf[20];
-  char buf1[20];
-  FILE *fp = fopen("/proc/dispinfo", "r+");
-  int succ = fscanf(fp, "%s\n%s", buf,buf1);
-  //printf("succ:%d\n",succ);
-  //printf("str:%s\n",buf);
-  //printf("str:%s\n",buf1);
+  char buf[40];
+  int fp = open("/proc/dispinfo", "r+");
+  int succ = read(fp, buf, 100);
   int w,h;
-  sscanf(buf,"WIDTH:%d",&w);
-  sscanf(buf1,"HEIGHT:%d",&h);
-  //printf("wh:%d  %d\n",w,h);
-  fclose(fp);
-
+  sscanf(buf,"WIDTH:%d\nHEIGHT:%d",&w,&h);
+  printf("wh:%d  %d\n",w,h);
+  close(fp);
     screen_w = w; screen_h = h;
+
+
+
+
+//  char buf[20];
+//  char buf1[20];
+//  FILE *fp = fopen("/proc/dispinfo", "r+");
+//  int succ = fscanf(fp, "%s\n%s", buf,buf1);
+//  //printf("succ:%d\n",succ);
+//  //printf("str:%s\n",buf);
+//  //printf("str:%s\n",buf1);
+//  int w,h;
+//  sscanf(buf,"WIDTH:%d",&w);
+//  sscanf(buf1,"HEIGHT:%d",&h);
+//  //printf("wh:%d  %d\n",w,h);
+//  fclose(fp);
+//
+//    screen_w = w; screen_h = h;
 
   return 0;
 }
