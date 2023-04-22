@@ -109,6 +109,7 @@ int NDL_Init(uint32_t flags) {
     screen_w = w; screen_h = h;
 
 
+  printf("411\n");
 
 
 //  char buf[20];
