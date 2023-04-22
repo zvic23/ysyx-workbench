@@ -100,6 +100,8 @@ int NDL_Init(uint32_t flags) {
   int w,h;
   sscanf(buf,"WIDTH:%d",&w);
   sscanf(buf1,"HEIGHT:%d",&h);
+
+  printf("211\n");
   //printf("wh:%d  %d\n",w,h);
   fclose(fp);
 
