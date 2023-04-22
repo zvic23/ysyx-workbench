@@ -87,9 +87,12 @@ int NDL_Init(uint32_t flags) {
     evtdev = 3;
   }
 
+
+
   char buf[20];
   char buf1[20];
   FILE *fp = fopen("/proc/dispinfo", "r+");
+  printf("111\n");
   int succ = fscanf(fp, "%s\n%s", buf,buf1);
   //printf("succ:%d\n",succ);
   //printf("str:%s\n",buf);
@@ -101,6 +104,24 @@ int NDL_Init(uint32_t flags) {
   fclose(fp);
 
     screen_w = w; screen_h = h;
+
+
+
+
+//  char buf[20];
+//  char buf1[20];
+//  FILE *fp = fopen("/proc/dispinfo", "r+");
+//  int succ = fscanf(fp, "%s\n%s", buf,buf1);
+//  //printf("succ:%d\n",succ);
+//  //printf("str:%s\n",buf);
+//  //printf("str:%s\n",buf1);
+//  int w,h;
+//  sscanf(buf,"WIDTH:%d",&w);
+//  sscanf(buf1,"HEIGHT:%d",&h);
+//  //printf("wh:%d  %d\n",w,h);
+//  fclose(fp);
+//
+//    screen_w = w; screen_h = h;
 
   return 0;
 }
