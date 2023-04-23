@@ -156,8 +156,8 @@ static inline fixedpt fixedpt_mul(fixedpt A, fixedpt B) {
 
 /* Divides two fixedpt numbers, returns the result. */
 static inline fixedpt fixedpt_div(fixedpt A, fixedpt B) {
-	fixedptd C = A / B ;
-	//printf("div:  A=%x   B=%x  C=%lx(%ld)  width=%d\n",A,B,C,fixedpt_toint(C),FIXEDPT_FBITS);
+	fixedptd C = A / B * 256;
+	printf("div:  A=%x   B=%x  C=%lx(%ld)  width=%d\n",A,B,C,fixedpt_toint(C),FIXEDPT_FBITS);
 	return (fixedpt)C;
 	//return 0;
 }
