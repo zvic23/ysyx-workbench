@@ -15,7 +15,7 @@ int main() {
     c = fixedpt_toint(fixedpt_div(fixedpt_mul(a + FIXEDPT_ONE, b), fixedpt_rconst(2.3)));
   }
   assert(c > 0);
-  pritnf("c=%d\n",c);
+  printf("c=%d\n",c);
 
   return 0;
 }
