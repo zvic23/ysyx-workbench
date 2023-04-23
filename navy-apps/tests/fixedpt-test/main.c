@@ -29,7 +29,7 @@ if (b > fixedpt_rconst(7.9)) {
 int f=5;
 fixedpt g = fixedpt_rconst(3.5);
 int h = 0;
-  h = fixedpt_toint(fixedpt_divi(fixedpt_muli(g + FIXEDPT_ONE, f), 2));
+  h = fixedpt_toint(fixedpt_divi(fixedpt_muli(g , f), 2));
 
   printf("h=%d\n",h);
 
