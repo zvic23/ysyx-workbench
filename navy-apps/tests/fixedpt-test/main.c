@@ -9,7 +9,7 @@ int main() {
   NDL_Init(0);
 
   fixedpt a = fixedpt_rconst(0);
-  fixedpt b = fixedpt_fromint(1);
+  fixedpt b = fixedpt_fromint(2);
   int c = 0;
   if (b > fixedpt_rconst(7.9)) {
     c = fixedpt_toint(fixedpt_div(fixedpt_mul(a + FIXEDPT_ONE, b), fixedpt_rconst(2.3)));
