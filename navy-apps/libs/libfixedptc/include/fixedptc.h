@@ -183,7 +183,7 @@ static inline fixedpt fixedpt_ceil(fixedpt A) {
 	if((fixedptu)A_whole>>(FIXEDPT_BITS-1) == 0 && A_fraction == 0)return A_whole;
 	else if((fixedptu)A_whole>>(FIXEDPT_BITS-1) == 0 )return A_whole + FIXEDPT_ONE;
 	fixedpt A_abs = fixedpt_abs(A);
-	if(A_abs&~FIXEDPT_FMASK < 0x100) return 0;
+	if(A_abs&~FIXEDPT_FMASK < 0x100) return 1;
 	else if(fixedpt_fracpart(A_abs)==0) return A;
 	else return A&~FIXEDPT_FMASK + FIXEDPT_ONE;
 
