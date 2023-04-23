@@ -33,7 +33,7 @@ int h = 0;
 
   printf("h=%d\n",h);
 
-fixedpt z = fixedpt_rconst(-1.2);
+fixedpt z = fixedpt_rconst(1.2);
 fixedpt z1= fixedpt_abs(z);
 printf("z=%x  z1=%x\n",z,z1);
 
