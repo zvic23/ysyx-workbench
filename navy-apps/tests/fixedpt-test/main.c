@@ -35,7 +35,7 @@ int h = 0;
 
 fixedpt z = fixedpt_rconst(-1.2);
 fixedpt z1= fixedpt_abs(z);
-printf("z1=%x\n",z1);
+printf("z=%x  z1=%x\n",z,z1);
 
   return 0;
 }
