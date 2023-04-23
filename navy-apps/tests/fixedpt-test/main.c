@@ -9,9 +9,9 @@ int main() {
   NDL_Init(0);
 
   fixedpt a = fixedpt_rconst(1);
-  fixedpt b = fixedpt_fromint(5);
+  fixedpt b = fixedpt_fromint(7);
   int c = 0;
-  if (b > fixedpt_rconst(7.9)) {
+  if (b > fixedpt_rconst(0.9)) {
     c = fixedpt_toint(fixedpt_div(fixedpt_mul(a , b), fixedpt_rconst(2.3)));
   }
   //assert(c > 0);
