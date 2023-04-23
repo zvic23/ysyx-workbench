@@ -44,7 +44,7 @@ printf("m=%x(%x)  m1=%x(%x)\n",m,fixedpt_abs(m),m1,fixedpt_abs(m1));
 
 
 
-fixedpt n = fixedpt_rconst(-1.0);
+fixedpt n = fixedpt_rconst(-1.2);
 fixedpt n1= fixedpt_ceil(n);
 printf("n=%x(%x)  n1=%x(%x)\n",n,fixedpt_abs(n),n1,fixedpt_abs(n1));
 
