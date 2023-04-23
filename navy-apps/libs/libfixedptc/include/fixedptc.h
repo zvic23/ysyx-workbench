@@ -170,7 +170,7 @@ static inline fixedpt fixedpt_abs(fixedpt A) {
 static inline fixedpt fixedpt_floor(fixedpt A) {
 	fixedpt A_whole    = (A >> FIXEDPT_FBITS) << FIXEDPT_FBITS;
 	fixedpt A_fraction = A & FIXEDPT_FMASK;
-	if(A_whole>>(FIXEDPT_BITS-1) == 0)return A_whole;
+	if((fixedptu)A_whole>>(FIXEDPT_BITS-1) == 0)return A_whole;
 	else if (A_fraction != 0)return A_whole-((fixedpt)1<<FIXEDPT_FBITS);
 	else return A_whole;
 	//return 0;
