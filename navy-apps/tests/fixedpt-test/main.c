@@ -8,7 +8,7 @@
 int main() {
   NDL_Init(0);
 
-  fixedpt a = fixedpt_rconst(1.2);
+  fixedpt a = fixedpt_rconst(1);
   fixedpt b = fixedpt_fromint(10);
   int c = 0;
   if (b > fixedpt_rconst(7.9)) {
