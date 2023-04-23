@@ -162,9 +162,13 @@ static inline fixedpt fixedpt_div(fixedpt A, fixedpt B) {
 }
 
 static inline fixedpt fixedpt_abs(fixedpt A) {
-	fixedpt A_fix = (A >> FIXEDPT_FBITS) << FIXEDPT_FBITS;
-	if(A_fix>>(FIXEDPT_BITS-1)==1) return A_fix & FIXEDPT_FMASK;
-	else return A_fix;
+	if(A>>(FIXEDPT_BITS-1)==1) return ~A;
+	else return A;
+
+	//fixedpt A_fix = (A >> FIXEDPT_FBITS) << FIXEDPT_FBITS;
+	//if(A_fix>>(FIXEDPT_BITS-1)==1) return A_fix & FIXEDPT_FMASK;
+	//else return A_fix;
+
 	//return 0;
 }
 
