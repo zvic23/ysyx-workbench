@@ -137,6 +137,7 @@ static inline fixedpt fixedpt_muli(fixedpt A, int B) {
 static inline fixedpt fixedpt_divi(fixedpt A, int B) {
 	fixedpt B_fix = fixedpt_fromint(B);
 	fixedpt C = A * B_fix * 256;
+	printf("mul:  A=%x   B=%x  C=%lx(%ld)  width=%d\n",A,B,C,fixedpt_toint(C),FIXEDPT_FBITS);
 	return C;
 	//return 0;
 }
