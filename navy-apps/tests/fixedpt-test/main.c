@@ -27,7 +27,7 @@ if (b > fixedpt_rconst(7.9)) {
   printf("c=%d\n",c);
 
 fixedpt g = fixedpt_rconst(3.5);
-int   h = fixedpt_toint(fixedpt_divi(fixedpt_muli(g , 1), 2));
+int   h = fixedpt_toint(fixedpt_divi(fixedpt_muli(g , 1), 4));
 
   printf("h=%d\n",h);
 
