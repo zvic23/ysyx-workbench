@@ -13,12 +13,18 @@ char *SDL_GetError() {
 }
 
 int SDL_SetError(const char* fmt, ...) {
+	printf("sdl not implement!\n");
+	assert(0);
   return -1;
 }
 
 int SDL_ShowCursor(int toggle) {
+	printf("sdl not implement!\n");
+	assert(0);
   return 0;
 }
 
 void SDL_WM_SetCaption(const char *title, const char *icon) {
+	printf("sdl not implement!\n");
+	assert(0);
 }

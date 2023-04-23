@@ -127,35 +127,58 @@ typedef	__uint128_t fixedptud;
 
 /* Multiplies a fixedpt number with an integer, returns the result. */
 static inline fixedpt fixedpt_muli(fixedpt A, int B) {
-	return 0;
+	fixedpt B_fix = fixedpt_fromint(B);
+	fixedpt C = A * B_fix / (2^FIXEDPT_FBITS);
+	return C;
+	//return 0;
 }
 
 /* Divides a fixedpt number with an integer, returns the result. */
 static inline fixedpt fixedpt_divi(fixedpt A, int B) {
-	return 0;
+	fixedpt B_fix = fixedpt_fromint(B);
+	fixedpt C = A * B_fix * (2^FIXEDPT_FBITS);
+	return C;
+	//return 0;
 }
 
 /* Multiplies two fixedpt numbers, returns the result. */
 static inline fixedpt fixedpt_mul(fixedpt A, fixedpt B) {
-	return 0;
+	fixedpt C = A * B / (2^FIXEDPT_FBITS);
+	return C;
+	//return 0;
 }
 
 
 /* Divides two fixedpt numbers, returns the result. */
 static inline fixedpt fixedpt_div(fixedpt A, fixedpt B) {
-	return 0;
+	fixedpt C = A * B * (2^FIXEDPT_FBITS);
+	return C;
+	//return 0;
 }
 
 static inline fixedpt fixedpt_abs(fixedpt A) {
-	return 0;
+	fixedpt A_fix = (A >> FIXEDPT_FBITS) << FIXEDPT_FBITS;
+	return A_fix;
+	//return 0;
 }
 
 static inline fixedpt fixedpt_floor(fixedpt A) {
-	return 0;
+	fixedpt A_whole    = (A >> FIXEDPT_FBITS) << FIXEDPT_FBITS;
+	fixedpt A_fraction = A & FIXEDPT_FMASK;
+	if(A_whole>>(FIXEDPT_BITS-1) == 0)return A_whole;
+	else if (A_fraction != 0)return A_whole-((fixedpt)1<<FIXEDPT_FBITS);
+	else return A_whole;
+	//return 0;
 }
 
 static inline fixedpt fixedpt_ceil(fixedpt A) {
-	return 0;
+	fixedpt A_whole    = (A >> FIXEDPT_FBITS) << FIXEDPT_FBITS;
+	fixedpt A_fraction = A & FIXEDPT_FMASK;
+	if(~(A_whole>>FIXEDPT_FBITS)==0 && A_fraction != 0)return 0; //~0.x
+	else if (A_whole>>(FIXEDPT_BITS-1) == 1)return A_whole;
+	else if (A_fraction != 0)return A_whole+((fixedpt)1<<FIXEDPT_FBITS);
+	else return A_whole;
+	//return 0;
 }
 
 /*
