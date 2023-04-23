@@ -33,5 +33,9 @@ int h = 0;
 
   printf("h=%d\n",h);
 
+fixedpt z = fixedpt_rconst(3.14);
+fixedpt z1= fixedpt_abs(z);
+printf("z1=%x\n",z1);
+
   return 0;
 }
