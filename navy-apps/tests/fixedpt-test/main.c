@@ -40,13 +40,13 @@ printf("z=%x  z1=%x\n",z,z1);
 //int mm[7]={2.2, 2, 0.3, 0, -0.6, -1.0, -1.2};
 fixedpt m = fixedpt_rconst(-0.2);
 fixedpt m1= fixedpt_floor(m);
-printf("m=%x(-%x)  m1=%x(-%x)\n",m,fixedpt_abs(m),m1,fixedpt_abs(m1));
+printf("m=%x(%x)  m1=%x(%x)\n",m,fixedpt_abs(m),m1,fixedpt_abs(m1));
 
 
 
-fixedpt n = fixedpt_rconst(-3.1);
+fixedpt n = fixedpt_rconst(-0.4);
 fixedpt n1= fixedpt_ceil(n);
-printf("n=%x(-%x)  n1=%x(-%x)\n",n,fixedpt_abs(n),n1,fixedpt_abs(n1));
+printf("n=%x(%x)  n1=%x(%x)\n",n,fixedpt_abs(n),n1,fixedpt_abs(n1));
 
 //printf("%x  %x\n",0x111,-0x111);
 
