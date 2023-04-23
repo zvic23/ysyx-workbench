@@ -143,7 +143,7 @@ static inline fixedpt fixedpt_divi(fixedpt A, int B) {
 
 /* Multiplies two fixedpt numbers, returns the result. */
 static inline fixedpt fixedpt_mul(fixedpt A, fixedpt B) {
-	fixedpt C = A * B ;
+	fixedpt C = A * B / (2^FIXEDPT_FBITS);
 	printf("A=%x   B=%x  C=%x  width=%d\n",A,B,C,FIXEDPT_FBITS);
 	return C;
 	//return 0;
