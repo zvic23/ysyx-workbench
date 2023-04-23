@@ -37,7 +37,7 @@ fixedpt z = fixedpt_rconst(-1.2);
 fixedpt z1= fixedpt_abs(z);
 printf("z=%x  z1=%x\n",z,z1);
 
-fixedpt m = fixedpt_rconst(1);
+fixedpt m = fixedpt_rconst(1.0);
 fixedpt m1= fixedpt_floor(m);
 printf("m=%x  m1=%x\n",m,m1);
 
