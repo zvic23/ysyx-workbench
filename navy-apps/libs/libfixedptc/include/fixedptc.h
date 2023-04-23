@@ -162,7 +162,7 @@ static inline fixedpt fixedpt_div(fixedpt A, fixedpt B) {
 }
 
 static inline fixedpt fixedpt_abs(fixedpt A) {
-	if((fixedptu)A>>(FIXEDPT_BITS-1)==1) return ~A;
+	if((fixedptu)A>>(FIXEDPT_BITS-1)==1) return ~A+1;
 	else return A;
 	//return 0;
 }
