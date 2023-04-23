@@ -174,21 +174,26 @@ static inline fixedpt fixedpt_floor(fixedpt A) {
 	fixedpt A_abs = fixedpt_abs(A);
 	if(fixedpt_fracpart(A_abs)==0) return A;
 	else return A&~FIXEDPT_FMASK;
-	//else return -((A_abs&~FIXEDPT_FMASK)+1);
-
-
-	//else if (A_fraction != 0)return A_whole-((fixedpt)1<<FIXEDPT_FBITS);
-	//else return A_whole;
 	//return 0;
 }
 
 static inline fixedpt fixedpt_ceil(fixedpt A) {
 	fixedpt A_whole    = (A >> FIXEDPT_FBITS) << FIXEDPT_FBITS;
 	fixedpt A_fraction = A & FIXEDPT_FMASK;
-	if(~(A_whole>>FIXEDPT_FBITS)==0 && A_fraction != 0)return 0; //~0.x
-	else if (A_whole>>(FIXEDPT_BITS-1) == 1)return A_whole;
-	else if (A_fraction != 0)return A_whole+((fixedpt)1<<FIXEDPT_FBITS);
-	else return A_whole;
+	if((fixedptu)A_whole>>(FIXEDPT_BITS-1) == 0 && A_fraction == 0)return A_whole;
+	else if((fixedptu)A_whole>>(FIXEDPT_BITS-1) == 0 )return A_whole + FIXEDPT_ONE;
+	fixedpt A_abs = fixedpt_abs(A);
+	if(A_abs&~FIXEDPT_FMASK==0) return 0;
+	else if(fixedpt_fracpart(A_abs)==0) return A;
+	else return A&~FIXEDPT_FMASK + FIXEDPT_ONE;
+
+
+	//if(~(A_whole>>FIXEDPT_FBITS)==0 && A_fraction != 0)return 0; //~0.x
+	//else if (A_whole>>(FIXEDPT_BITS-1) == 1)return A_whole;
+	//else if (A_fraction != 0)return A_whole+((fixedpt)1<<FIXEDPT_FBITS);
+	//else return A_whole;
+
+
 	//return 0;
 }
 
