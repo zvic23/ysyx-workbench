@@ -18,12 +18,21 @@ uint32_t NDL_GetTicks() {
 
 int NDL_PollEvent(char *buf, int len) {
   char buf_cache[65535];
-  FILE *fp = fopen("/dev/events", "r+");
-  int succ = fscanf(fp, "%[^\n]", buf_cache);
-  fclose(fp);
+  int fp = open("/dev/events", "r+");
+  int succ = read(fp, buf_cache, 40);
+  //if(succ)printf("succ=%d\n",succ);
   strncpy(buf, buf_cache, len);
-  if(succ!=-1) return 1;
+  if(succ) return 1;
   else return 0;
+
+
+//  char buf_cache[65535];
+//  FILE *fp = fopen("/dev/events", "r+");
+//  int succ = fscanf(fp, "%[^\n]", buf_cache);
+//  fclose(fp);
+//  strncpy(buf, buf_cache, len);
+//  if(succ!=-1) return 1;
+//  else return 0;
 }
 
 static int canvas_w = 0, canvas_h = 0;
@@ -57,15 +66,30 @@ void NDL_OpenCanvas(int *w, int *h) {
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
-	//printf("x=%d,y=%d,w=%d,h=%d\n",x,y,w,h);
+  uint32_t pixel_buf[screen_w*screen_h];
   int x_mid=(screen_w-canvas_w)/2;
   int y_mid=(screen_h-canvas_h)/2;
   int fp = open("/dev/fb", "r+");
   for(int i=0;i<h;i++){
-	  lseek(fp,x_mid+x+screen_w*(i+y_mid),SEEK_SET);
-	  write(fp,&pixels[h*i],w);
+	  memcpy(pixel_buf+x_mid+x+screen_w*(i+y_mid),&pixels[h*i],w*4);
+	  //memcpy(pixel_buf+x_mid+x+screen_w*(i+y_mid),&pixels[h*i],w);
+	  //lseek(fp,x_mid+x+screen_w*(i+y_mid),SEEK_SET);
+	  //write(fp,&pixels[h*i],w);
   }
+  write(fp,pixel_buf,screen_w*screen_h*4);
+
   close(fp);
+
+
+	//printf("x=%d,y=%d,w=%d,h=%d\n",x,y,w,h);
+//  int x_mid=(screen_w-canvas_w)/2;
+//  int y_mid=(screen_h-canvas_h)/2;
+//  int fp = open("/dev/fb", "r+");
+//  for(int i=0;i<h;i++){
+//	  lseek(fp,x_mid+x+screen_w*(i+y_mid),SEEK_SET);
+//	  write(fp,&pixels[h*i],w);
+//  }
+//  close(fp);
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {
@@ -91,7 +115,7 @@ int NDL_Init(uint32_t flags) {
 
   char buf[40];
   int fp = open("/proc/dispinfo", "r+");
-  int succ = read(fp, buf, 100);
+  int succ = read(fp, buf, 40);
   int w,h;
   sscanf(buf,"WIDTH:%d\nHEIGHT:%d",&w,&h);
   //printf("wh:%d  %d\n",w,h);
