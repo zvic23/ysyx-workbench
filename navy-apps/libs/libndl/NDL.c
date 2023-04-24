@@ -66,8 +66,8 @@ void NDL_OpenCanvas(int *w, int *h) {
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
-  uint32_t pixel_buf[screen_w*screen_h];
-  memset(pixel_buf,0xff,sizeof(pixel_buf));
+  //uint32_t pixel_buf[screen_w*screen_h];
+  //memset(pixel_buf,0xff,sizeof(pixel_buf));
   int x_mid=(screen_w-canvas_w)/2;
   int y_mid=(screen_h-canvas_h)/2;
   int fp = open("/dev/fb", "r+");
