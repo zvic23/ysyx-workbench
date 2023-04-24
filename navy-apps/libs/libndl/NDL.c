@@ -71,6 +71,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   int x_mid=(screen_w-canvas_w)/2;
   int y_mid=(screen_h-canvas_h)/2;
   int fp = open("/dev/fb", "r+");
+	  lseek(fp,0,SEEK_SET);        //!!! this line is important. without this line, the nslider working in native will not change the image
   for(int i=0;i<h;i++){
 	  //printf("i=%d\n",i);
           //memcpy(pixel_buf+x_mid+x+screen_w*(i+y_mid),&pixels[w*i],w*4);
@@ -81,7 +82,11 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   //write(fp,pixel_buf,screen_w*screen_h*4);
   //write(fp,pixels,screen_w*screen_h*4);
 
-  close(fp);
+
+//	  lseek(fp,0,SEEK_SET);
+//  write(fp,pixels,screen_w*screen_h*4);
+
+//  close(fp);
 
 
 //	printf("x_mid=%d,y_mid=%d\n",x_mid,y_mid);
