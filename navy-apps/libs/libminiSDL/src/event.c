@@ -1,5 +1,7 @@
 #include <NDL.h>
 #include <SDL.h>
+#include <assert.h>
+#include <stdio.h>
 
 #define keyname(k) #k,
 
@@ -21,8 +23,8 @@ int SDL_PollEvent(SDL_Event *ev) {
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
-	printf("sdl not implement!\n");
-	assert(0);
+	//printf("sdl not implement!\n");
+	//assert(0);
   return 1;
 }
 

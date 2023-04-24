@@ -15,8 +15,20 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-	printf("sdl not implement!\n");
-	assert(0);
+	printf("rect in \n");
+printf("x=%d,y=%d,w=%d,h=%d\n",x,y,w,h);
+printf("pix:w=%d,h=%d\n",s->w,s->h);
+printf("pix:pitch=%d\n",s->pitch);
+printf("pix:format=%d\n",(s->format)->BytesPerPixel);
+printf("pix:mask=%x\n",(s->format)->Rmask);
+printf("pix:mask=%x\n",(s->format)->Gmask);
+printf("pix:mask=%x\n",(s->format)->Bmask);
+	NDL_DrawRect(s->pixels,0,0,400,300);
+	//NDL_DrawRect(s->pixels,x,y,w,h);
+
+	printf("rect out\n");
+	//printf("sdl not implement!\n");
+	//assert(0);
 }
 
 // APIs below are already implemented.
