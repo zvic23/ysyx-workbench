@@ -23,6 +23,27 @@ int SDL_PollEvent(SDL_Event *ev) {
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
+  char event_buf[64];
+  int hh = NDL_PollEvent(event_buf,sizeof(event_buf));
+  char event0[25];
+  char event1[25];
+  sscanf(event_buf,"%s %s",event0,event1);
+  //printf("%d\n",hh);
+  //printf("%s\n",event_buf);
+  if(hh==1)printf("%s   %s\n",event0,event1);
+  if(strcmp(event0, "kd")==0) event->type = SDL_KEYDOWN;
+  else if(strcmp(event0, "ku")==0) event->type = SDL_KEYUP;
+  else event->type = SDL_KEYUP;
+  
+  if(strcmp(event1, "J")==0) event->key.keysym.sym = SDLK_J;
+  else if(strcmp(event1, "K")==0) event->key.keysym.sym = SDLK_K;
+  else if(strcmp(event1, "G")==0) event->key.keysym.sym = SDLK_G;
+  else if(strcmp(event1, "0")==0) event->key.keysym.sym = SDLK_0;
+  else if(strcmp(event1, "1")==0) event->key.keysym.sym = SDLK_1;
+  else if(strcmp(event1, "2")==0) event->key.keysym.sym = SDLK_2;
+  //else e.type = SDL_KEYUP;
+
+
 	//printf("sdl not implement!\n");
 	//assert(0);
   return 1;
