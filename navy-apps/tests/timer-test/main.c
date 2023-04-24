@@ -8,7 +8,6 @@
 uint32_t NDL_GetTicks();
 int main() {
   uint64_t ms_init = NDL_GetTicks();
-  printf("%x\n",ms_init);
   while(1){
 	  uint64_t ms=NDL_GetTicks();
 	  if((ms-ms_init)>500) {
