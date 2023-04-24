@@ -86,7 +86,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 //	  lseek(fp,0,SEEK_SET);
 //  write(fp,pixels,screen_w*screen_h*4);
 
-//  close(fp);                    //!!! this line is important. with this line, the nslider working in native will not change the image
+//  close(fp);             //!!! this line is important. if use this line, the nslider working in native will not change the image. Maybe once close the fb in native, it can not be opened again.
 
 
 //	printf("x_mid=%d,y_mid=%d\n",x_mid,y_mid);
