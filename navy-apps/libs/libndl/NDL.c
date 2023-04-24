@@ -66,15 +66,11 @@ void NDL_OpenCanvas(int *w, int *h) {
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
-	printf("ndl in\n");
-	printf("x=%d,y=%d,w=%d,h=%d\n",x,y,w,h);
-	printf("x_sc=%d,y_sc=%d\n",screen_w,screen_h);
   uint32_t pixel_buf[screen_w*screen_h];
   //memset(pixel_buf,0,sizeof(pixel_buf));
   int x_mid=(screen_w-canvas_w)/2;
   int y_mid=(screen_h-canvas_h)/2;
   int fp = open("/dev/fb", "r+");
-	printf("ndl in\n");
   for(int i=0;i<h;i++){
 	  //printf("i=%d\n",i);
           //memcpy(pixel_buf+x_mid+x+screen_w*(i+y_mid),&pixels[w*i],w*4);
@@ -83,11 +79,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	  write(fp,&pixels[w*i],w*4);
   }
 	  //memcpy(pixel_buf,pixels,screen_w*screen_h*4);
-	printf("ndl in\n");
   //write(fp,pixels,screen_w*screen_h*4);
-  //
-  //lseek(fp,screen_w*screen_h*2,SEEK_SET);
-  //write(fp,pixel_buf,screen_w*screen_h);
 
   close(fp);
 
@@ -103,7 +95,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 //  int fp = open("/dev/fb", "r+");
 //  for(int i=0;i<h;i++){
 //	  lseek(fp,x_mid+x+screen_w*(i+y_mid),SEEK_SET);
-//	  write(fp,&pixels[h*i],w);
+//	  write(fp,&pixels[w*i],w);
 //  }
 //  close(fp);
 }
