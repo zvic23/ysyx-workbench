@@ -74,6 +74,8 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   int fp = open("/dev/fb", "r+");
 	printf("ndl in\n");
   for(int i=0;i<h;i++){
+
+	printf("x=%d,y=%d,w=%d,h=%d\n",x,y,w,h);
           memcpy(pixel_buf+x_mid+x+screen_w*(i+y_mid),&pixels[w*i],w*4);
           //memcpy(pixel_buf+screen_w*i,&pixels[w*i],w*4);
   }
@@ -81,10 +83,8 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	printf("ndl in\n");
   write(fp,pixel_buf,screen_w*screen_h*4);
 
-	printf("ndl in\n");
   close(fp);
 
-	printf("ndl in\n");
 
 	printf("x_mid=%d,y_mid=%d\n",x_mid,y_mid);
 	printf("x_canvas=%d,y_canvas=%d\n",canvas_w,canvas_h);
