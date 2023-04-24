@@ -78,7 +78,6 @@ void *memmove(void *dst, const void *src, size_t n) {
 void *memcpy(void *out, const void *in, size_t n) {
   uint8_t *dest = (uint8_t*)out;
   uint8_t *src  = (uint8_t*)in ;
-  printf("cpy in \n");
   for(int i=0; i<n ; i++){
 	  dest[i]=src[i];
   }
