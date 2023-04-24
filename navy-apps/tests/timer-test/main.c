@@ -1,15 +1,19 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include <sys/time.h>
+#include <NDL.h>
+//#include <sys/time.h>
 
+
+uint32_t NDL_GetTicks();
 int main() {
-  int halfsec = 1;
+  uint64_t ms_init = NDL_GetTicks();
+  printf("%x\n",ms_init);
   while(1){
-	  int us=NDL_GetTicks();
-	  if(us / 500000 >= halfsec) {
+	  uint64_t ms=NDL_GetTicks();
+	  if((ms-ms_init)>500) {
 		  printf("0.5s\n");
-		  halfsec ++;
+		  ms_init=ms;
 	  }
   }
   printf("PASS!!!\n");

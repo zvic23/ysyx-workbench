@@ -12,7 +12,7 @@ uint32_t NDL_GetTicks() {
   struct timeval tv;
   //struct timezone tz;
   gettimeofday(&tv, NULL);
-  return tv.tv_usec;
+  return tv.tv_usec/1000;
   //return 0;
 }
 
@@ -72,9 +72,6 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   int fp = open("/dev/fb", "r+");
   for(int i=0;i<h;i++){
 	  memcpy(pixel_buf+x_mid+x+screen_w*(i+y_mid),&pixels[h*i],w*4);
-	  //memcpy(pixel_buf+x_mid+x+screen_w*(i+y_mid),&pixels[h*i],w);
-	  //lseek(fp,x_mid+x+screen_w*(i+y_mid),SEEK_SET);
-	  //write(fp,&pixels[h*i],w);
   }
   write(fp,pixel_buf,screen_w*screen_h*4);
 
