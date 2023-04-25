@@ -23,6 +23,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	if(srcrect == NULL){
 		srcrect_x = 0;     srcrect_y = 0;
 		srcrect_w = src_w; srcrect_h = src_h;
+	}else {
+		printf("srcrect !!!!\n");
 	}
 	//printf("11  sw=%d,sh=%d\n",srcrect_w,srcrect_h);
 	uint32_t src_buf[srcrect_w*srcrect_h];
@@ -95,7 +97,8 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 //printf("pix:mask=%x\n",(s->format)->Gmask);
 //printf("pix:mask=%x\n",(s->format)->Bmask);
   if(x==0&&y==0&&w==0&&h==0){
-	NDL_DrawRect(s->pixels,0,0,400,300);
+	NDL_DrawRect(s->pixels,0,0,s->w,s->h);
+	//NDL_DrawRect(s->pixels,0,0,400,300);
   }
   else {
 	NDL_DrawRect(s->pixels,x,y,w,h);
