@@ -7,7 +7,7 @@
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
-  printf("blit in\n");
+//  printf("blit in\n");
 //	int dst_w = dst->w;          int dst_h = dst->h;
 //	int src_w = src->w;          int src_h = src->h;
 //	int srcrect_x = srcrect->x;  int srcrect_y = srcrect->y;
@@ -34,29 +34,36 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 //		}
 //	}
 
-  printf("blit out\n");
+//  printf("blit out\n");
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
-	int dst_w = dst->w;
-	int dst_h = dst->h;
-	int rect_x=dstrect->x;
-	int rect_y=dstrect->y;
-	int rect_w=dstrect->w;
-	int rect_h=dstrect->h;
-	uint32_t *dst_p = dst->pixels;
-	printf("fill in\n");
-	if(dstrect == NULL){
-		for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
-	}
-	else {
-		for(int i=0;i<rect_h;i++){
-			for(int j=0;j<rect_w;j++){
-				dst_p[(rect_y+i)*dst_w+rect_x+j]=color;
-			}
-		}
-	}
-
+	printf("dw=%d\n",dst->w);
+	printf("dh=%d\n",dst->h);
+	if(dstrect == NULL) printf("null!!!\n");
+	printf("add:%d\n",dstrect);
+	//printf("rx=%d\n",dstrect->x);
+//	printf("dw=%d,dh=%d,rx=%d,ry=%d,rw=%d,rh=%d\n",dst->w,dst->h,dstrect->x,dstrect->y,dstrect->w,dstrect->h);
+//	int dst_w = dst->w;
+//	int dst_h = dst->h;
+//	int rect_x=dstrect->x;
+//	int rect_y=dstrect->y;
+//	int rect_w=dstrect->w;
+//	int rect_h=dstrect->h;
+//	printf("dw=%d,dh=%d,rx=%d,ry=%d,rw=%d,rh=%d\n",dst_w,dst_h,rect_x,rect_y,rect_w,rect_h);
+//	uint32_t *dst_p = (uint32_t*)dst->pixels;
+//	printf("fill in\n");
+//	if(dstrect == NULL){
+//		for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
+//	}
+//	else {
+//		for(int i=0;i<rect_h;i++){
+//			for(int j=0;j<rect_w;j++){
+//				dst_p[(rect_y+i)*dst_w+rect_x+j]=color;
+//			}
+//		}
+//	}
+//
 	printf("fill out\n");
 	//printf("sdl fillrect not implement!\n");
 	//assert(0);
