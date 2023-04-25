@@ -27,8 +27,9 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 		printf("srcrect !!!!\n");
 	}
 	//printf("11  sw=%d,sh=%d\n",srcrect_w,srcrect_h);
-	uint32_t src_buf[srcrect_w*srcrect_h];
-	uint64_t pst = 0;
+	uint32_t src_buf[500*500];
+	//uint32_t src_buf[srcrect_w*srcrect_h];
+	uint32_t pst = 0;
 	uint32_t *src_p = (uint32_t*)src->pixels;
 	for(int i=0;i<srcrect_h;i++){
 		for(int j=0;j<srcrect_w;j++){
