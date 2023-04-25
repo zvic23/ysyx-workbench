@@ -40,8 +40,14 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 	printf("dw=%d\n",dst->w);
 	printf("dh=%d\n",dst->h);
-	if(dstrect == NULL) printf("null!!!\n");
-	printf("add:%d\n",dstrect);
+	printf("color=%x\n",color);
+	if(dst == NULL) {
+		printf("null!!!\n");
+		return;
+	}
+	printf("addr:%p\n",dst);
+	static int time = 0;
+	printf("time : %d\n",time++);
 	//printf("rx=%d\n",dstrect->x);
 //	printf("dw=%d,dh=%d,rx=%d,ry=%d,rw=%d,rh=%d\n",dst->w,dst->h,dstrect->x,dstrect->y,dstrect->w,dstrect->h);
 //	int dst_w = dst->w;
@@ -137,7 +143,7 @@ SDL_Surface* SDL_CreateRGBSurface(uint32_t flags, int width, int height, int dep
     s->pixels = malloc(s->pitch * height);
     assert(s->pixels);
   }
-
+printf("ssssss:%p\n",s);
   return s;
 }
 
