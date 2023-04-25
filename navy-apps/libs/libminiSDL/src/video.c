@@ -143,7 +143,7 @@ SDL_Surface* SDL_CreateRGBSurface(uint32_t flags, int width, int height, int dep
     s->pixels = malloc(s->pitch * height);
     assert(s->pixels);
   }
-printf("ssssss:%p\n",s);
+
   return s;
 }
 
