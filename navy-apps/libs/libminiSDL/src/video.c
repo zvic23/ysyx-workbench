@@ -60,9 +60,10 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 //	printf("dw=%d,dh=%d,rx=%d,ry=%d,rw=%d,rh=%d\n",dst_w,dst_h,rect_x,rect_y,rect_w,rect_h);
 //	uint32_t *dst_p = (uint32_t*)dst->pixels;
 //	printf("fill in\n");
-//	if(dstrect == NULL){
-//		for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
-//	}
+	if(dstrect == NULL){
+		for(int k=0;k<500;k++) dst->pixels[k]=color;
+		//for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
+	}
 //	else {
 //		for(int i=0;i<rect_h;i++){
 //			for(int j=0;j<rect_w;j++){
@@ -86,6 +87,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 //printf("pix:mask=%x\n",(s->format)->Gmask);
 //printf("pix:mask=%x\n",(s->format)->Bmask);
   if(x==0&&y==0&&w==0&&h==0){
+		for(int k=0;k<4000;k++) s->pixels[k]=0xffffff;
 	NDL_DrawRect(s->pixels,0,0,400,300);
   }
 	//NDL_DrawRect(s->pixels,x,y,w,h);
