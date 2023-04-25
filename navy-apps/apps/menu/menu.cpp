@@ -145,6 +145,7 @@ static void display_menu(int n) {
   SDL_Rect rect = { .x = screen->w - logo_sf->w, .y = 0 };
   printf("121\n");
   SDL_BlitSurface(logo_sf, NULL, screen, &rect);
+  printf("131\n");
   printf("Available applications:\n");
   char buf[80];
   int i;
