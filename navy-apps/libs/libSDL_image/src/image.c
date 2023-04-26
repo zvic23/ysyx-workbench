@@ -30,6 +30,7 @@ printf("1111\n");
   SDL_Surface *img = STBIMG_LoadFromMemory(img_buf, size);
   //STBIMG_LoadFromMemory(const unsigned char* buffer, int length);
 
+printf("1211\n");
   free(img_buf);
   fclose(fp);
 printf("%p   done!\n",img);
