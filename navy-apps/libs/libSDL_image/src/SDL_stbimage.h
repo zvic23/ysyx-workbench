@@ -202,6 +202,7 @@ printf("1121\n");
 		return NULL;
 	}
 
+printf("1131\n");
 	inforet = stbi_info_from_memory(buffer, length, &img.w, &img.h, &img.format);
 	if(!inforet)
 	{
