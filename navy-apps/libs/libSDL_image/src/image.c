@@ -32,8 +32,8 @@ SDL_Surface* IMG_Load(const char *filename) {
 
   free(img_buf);
   fclose(fp);
-printf("%p   done!\n",img);
-printf("%x   done!\n",img->format->Gmask);
+//printf("%p   done!\n",img);
+//printf("%x   done!\n",img->format->Gmask);
   return img;
   //return NULL;
 }

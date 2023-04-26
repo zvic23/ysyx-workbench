@@ -23,9 +23,11 @@ uint32_t SDL_GetTicks() {
 
 void SDL_Delay(uint32_t ms) {
 	uint64_t first = NDL_GetTicks();
-	uint64_t next  = NDL_GetTicks();
-	while(next - first < ms) next =  NDL_GetTicks();
-	
+	uint64_t next  = 0;
+	do{ next =  NDL_GetTicks();}
+	while(next - first < ms);
+	//static int time = 0;
+	//printf("time : %d       ms:%d \n",time++,ms);
 	//printf("delay sdl not implement!\n");
 	//assert(0);
 }
