@@ -204,13 +204,13 @@ printf("1121\n");
 
 printf("1131\n");
 	inforet = stbi_info_from_memory(buffer, length, &img.w, &img.h, &img.format);
+printf("113e\n");
 	if(!inforet)
 	{
 		SDL_SetError("STBIMG_LoadFromMemory(): Couldn't get image info: %s!\n", stbi_failure_reason());
 		return NULL;
 	}
 
-printf("113e\n");
 	// no alpha => use RGB, else use RGBA
 	origin_has_alpha = !(img.format == STBI_grey || img.format == STBI_rgb);
 	bppToUse = STBI_rgb_alpha;
