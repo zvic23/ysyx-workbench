@@ -222,6 +222,7 @@ printf("1131\n");
 	}
 	img.format = bppToUse;
 
+printf("1141\n");
 	ret = STBIMG__CreateSurfaceImpl(img, origin_has_alpha, 1);
 
 	if(ret == NULL)
