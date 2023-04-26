@@ -26,7 +26,7 @@ SDL_Surface* IMG_Load(const char *filename) {
   fseek(fp, 0, SEEK_SET);
   int ret = fread(img_buf, size, 1, fp);
   assert(ret == 1);
-
+printf("1111\n");
   SDL_Surface *img = STBIMG_LoadFromMemory(img_buf, size);
   //STBIMG_LoadFromMemory(const unsigned char* buffer, int length);
 
