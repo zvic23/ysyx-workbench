@@ -78,7 +78,7 @@ void *_sbrk(intptr_t increment) {
   if(!(_syscall_(SYS_brk, program_break+increment, 0, 0))){
   	  intptr_t program_break_old = program_break;
    	  //program_break += increment;
-   	  if(program_break+increment > 0xa0000000)program_break += 0;
+   	  if(program_break+increment > 0x90000000)program_break += 0;
 	  else program_break += increment;
 
 	  //char buf[20];

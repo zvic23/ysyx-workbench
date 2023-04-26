@@ -18,7 +18,7 @@ SDL_Surface* IMG_Load(const char *filename) {
 
   fseek(fp, 0, SEEK_END);
   int size = ftell(fp);
-  printf("The image is %s, size = %ld\n", filename, size);
+ // printf("The image is %s, size = %ld\n", filename, size);
 
   //unsigned char img_buf[size];
   unsigned char *img_buf;
@@ -32,7 +32,7 @@ SDL_Surface* IMG_Load(const char *filename) {
 
   free(img_buf);
   fclose(fp);
-printf("%p   done!\n",img);
+//printf("%p   done!\n",img);
 //printf("%x   done!\n",img->format->Gmask);
   return img;
   //return NULL;
