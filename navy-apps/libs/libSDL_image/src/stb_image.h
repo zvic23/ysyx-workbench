@@ -3930,12 +3930,15 @@ static int stbi__png_info_raw(stbi__png *p, int *x, int *y, int *comp)
 {
    printf("gggg\n");
    if (!stbi__parse_png_file(p, STBI__SCAN_header, 0)) {
+   printf("gggg in \n");
       stbi__rewind( p->s );
       return 0;
    }
+   printf("gggg 0 \n");
    if (x) *x = p->s->img_x;
    if (y) *y = p->s->img_y;
    if (comp) *comp = p->s->img_n;
+   printf("gggg 1 \n");
    return 1;
 }
 
