@@ -83,8 +83,8 @@ size_t fs_read(int fd, void *buf, size_t len){
         }
 	else if(file_table[fd].read != NULL) return file_table[fd].read(buf, 0, len);
 	else {
-		printf("fd: %d  position:%d   len:  %d\n",fd,position[fd],len);
 		size_t f_offset = file_table[fd].disk_offset;
+		printf("fd: %d  position: %d  offset:%d   len: %d\n",fd,position[fd],f_offset,len);
 		ramdisk_read(buf, f_offset+position[fd], len);
 		position[fd] += len;
 	}
