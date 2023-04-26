@@ -3928,17 +3928,13 @@ static int stbi__png_test(stbi__context *s)
 
 static int stbi__png_info_raw(stbi__png *p, int *x, int *y, int *comp)
 {
-   printf("gggg\n");
    if (!stbi__parse_png_file(p, STBI__SCAN_header, 0)) {
-   printf("gggg in \n");
       stbi__rewind( p->s );
       return 0;
    }
-   printf("gggg 0 \n");
    if (x) *x = p->s->img_x;
    if (y) *y = p->s->img_y;
    if (comp) *comp = p->s->img_n;
-   printf("gggg 1 \n");
    return 1;
 }
 
@@ -3946,7 +3942,6 @@ static int stbi__png_info(stbi__context *s, int *x, int *y, int *comp)
 {
    stbi__png p;
    p.s = s;
-   printf("gggg\n");
    return stbi__png_info_raw(&p, x, y, comp);
 }
 
@@ -5353,12 +5348,10 @@ static int stbi__info_main(stbi__context *s, int *x, int *y, int *comp)
    if (stbi__jpeg_info(s, x, y, comp)) return 1;
    #endif
 
-printf("sts\n");
    #ifndef STBI_NO_PNG
    if (stbi__png_info(s, x, y, comp))  return 1;
    #endif
 
-printf("sss\n");
    #ifndef STBI_NO_GIF
    if (stbi__gif_info(s, x, y, comp))  return 1;
    #endif
@@ -5366,6 +5359,7 @@ printf("sss\n");
    #ifndef STBI_NO_BMP
    if (stbi__bmp_info(s, x, y, comp))  return 1;
    #endif
+
 
 
    #ifndef STBI_NO_PNM
