@@ -65,6 +65,8 @@ int SDL_WaitEvent(SDL_Event *event) {
   else if(strcmp(event1, "2")==0) event->key.keysym.sym = SDLK_2;
   else if(strcmp(event1, "RIGHT")==0) event->key.keysym.sym = SDLK_RIGHT;
   else if(strcmp(event1, "LEFT")==0)  event->key.keysym.sym = SDLK_LEFT;
+  else if(strcmp(event1, "SPACE")==0)  event->key.keysym.sym = SDLK_SPACE;
+  else if(strcmp(event1, "RETURN")==0)  event->key.keysym.sym = SDLK_RETURN;
   //else e.type = SDL_KEYUP;
 
 
