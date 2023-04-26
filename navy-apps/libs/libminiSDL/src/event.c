@@ -36,6 +36,8 @@ int SDL_PollEvent(SDL_Event *ev) {
   else if(strcmp(event1, "2")==0) ev->key.keysym.sym = SDLK_2;
   else if(strcmp(event1, "RIGHT")==0) ev->key.keysym.sym = SDLK_RIGHT;
   else if(strcmp(event1, "LEFT")==0)  ev->key.keysym.sym = SDLK_LEFT;
+  else if(strcmp(event1, "SPACE")==0)  event->key.keysym.sym = SDLK_SPACE;
+  else if(strcmp(event1, "RETURN")==0)  event->key.keysym.sym = SDLK_RETURN;
   //else e.type = SDL_KEYUP;
   if(ev->type == SDL_KEYDOWN || ev->type == SDL_KEYUP) return 1;
   else return 0;
