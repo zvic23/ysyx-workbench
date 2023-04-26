@@ -77,5 +77,4 @@ void do_syscall(Context *c) {
     case 19: do_gettimeofday(c);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
-  printf("end\n");
 }
