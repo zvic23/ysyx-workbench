@@ -5360,7 +5360,7 @@ static int stbi__info_main(stbi__context *s, int *x, int *y, int *comp)
    if (stbi__bmp_info(s, x, y, comp))  return 1;
    #endif
 
-
+printf("sss\n");
 
    #ifndef STBI_NO_PNM
    if (stbi__pnm_info(s, x, y, comp))  return 1;
@@ -5389,9 +5389,7 @@ static int stbi__is_16_main(stbi__context *s)
 STBIDEF int stbi_info_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp)
 {
    stbi__context s;
-   printf("aaa\n");
    stbi__start_mem(&s,buffer,len);
-   printf("aba\n");
    return stbi__info_main(&s,x,y,comp);
 }
 
