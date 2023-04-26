@@ -81,9 +81,9 @@ void *_sbrk(intptr_t increment) {
    	  if(program_break+increment > 0xa0000000)program_break += 0;
 	  else program_break += increment;
 
-	  char buf[20];
-	  sprintf(buf , "%lx\n", program_break_old);
-	  _write(1,buf,9);
+	  //char buf[20];
+	  //sprintf(buf , "%lx\n", program_break_old);
+	  //_write(1,buf,9);
 	  return (void *)program_break_old;
   } 
   else return (void *)-1;
