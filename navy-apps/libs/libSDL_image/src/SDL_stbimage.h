@@ -210,6 +210,7 @@ printf("1131\n");
 		return NULL;
 	}
 
+printf("113e\n");
 	// no alpha => use RGB, else use RGBA
 	origin_has_alpha = !(img.format == STBI_grey || img.format == STBI_rgb);
 	bppToUse = STBI_rgb_alpha;
