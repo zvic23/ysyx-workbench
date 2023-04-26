@@ -3,13 +3,13 @@
 #include <stdio.h>
 
 SDL_TimerID SDL_AddTimer(uint32_t interval, SDL_NewTimerCallback callback, void *param) {
-	printf("sdl not implement!\n");
+	printf("addtimer sdl not implement!\n");
 	//assert(0);
   return NULL;
 }
 
 int SDL_RemoveTimer(SDL_TimerID id) {
-	printf("sdl not implement!\n");
+	printf("removetimer sdl not implement!\n");
 	//assert(0);
   return 1;
 }
@@ -22,6 +22,10 @@ uint32_t SDL_GetTicks() {
 }
 
 void SDL_Delay(uint32_t ms) {
-	printf("sdl not implement!\n");
+	uint64_t first = NDL_GetTicks();
+	uint64_t next  = NDL_GetTicks();
+	while(next - first < ms) next =  NDL_GetTicks();
+	
+	//printf("delay sdl not implement!\n");
 	//assert(0);
 }

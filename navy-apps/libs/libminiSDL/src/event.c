@@ -74,13 +74,13 @@ int SDL_WaitEvent(SDL_Event *event) {
 }
 
 int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
-	printf("sdl not implement!\n");
+	printf("peepevents sdl not implement!\n");
 	assert(0);
   return 0;
 }
 
 uint8_t* SDL_GetKeyState(int *numkeys) {
-	printf("sdl not implement!\n");
+	printf("getkeystate sdl not implement!\n");
 	assert(0);
   return NULL;
 }
