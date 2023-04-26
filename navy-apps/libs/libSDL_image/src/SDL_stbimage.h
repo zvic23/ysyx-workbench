@@ -190,7 +190,7 @@ SDL_STBIMG_DEF SDL_Surface* STBIMG_LoadFromMemory(const unsigned char* buffer, i
 	int inforet = 0;
 	SDL_Surface* ret = NULL;
 	int origin_has_alpha;
-printf("1121\n");
+
 	if(buffer == NULL)
 	{
 		SDL_SetError("STBIMG_LoadFromMemory(): passed buffer was NULL!");
@@ -202,9 +202,7 @@ printf("1121\n");
 		return NULL;
 	}
 
-printf("1131\n");
 	inforet = stbi_info_from_memory(buffer, length, &img.w, &img.h, &img.format);
-printf("113e\n");
 	if(!inforet)
 	{
 		SDL_SetError("STBIMG_LoadFromMemory(): Couldn't get image info: %s!\n", stbi_failure_reason());
@@ -223,7 +221,6 @@ printf("113e\n");
 	}
 	img.format = bppToUse;
 
-printf("1141\n");
 	ret = STBIMG__CreateSurfaceImpl(img, origin_has_alpha, 1);
 
 	if(ret == NULL)
