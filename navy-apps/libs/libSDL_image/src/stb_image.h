@@ -5344,6 +5344,7 @@ static int      stbi__pnm_info(stbi__context *s, int *x, int *y, int *comp)
 
 static int stbi__info_main(stbi__context *s, int *x, int *y, int *comp)
 {
+printf("sss\n");
    #ifndef STBI_NO_JPEG
    if (stbi__jpeg_info(s, x, y, comp)) return 1;
    #endif
@@ -5360,7 +5361,6 @@ static int stbi__info_main(stbi__context *s, int *x, int *y, int *comp)
    if (stbi__bmp_info(s, x, y, comp))  return 1;
    #endif
 
-printf("sss\n");
 
    #ifndef STBI_NO_PNM
    if (stbi__pnm_info(s, x, y, comp))  return 1;
