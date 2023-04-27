@@ -58,6 +58,7 @@ void _exit(int status) {
 }
 
 int _open(const char *path, int flags, mode_t mode) {
+	while(1);
 	int re = _syscall_(SYS_open, path, 0, 0);
 	char buf0[20];
 	  sprintf(buf0 , "%x\n", re);
