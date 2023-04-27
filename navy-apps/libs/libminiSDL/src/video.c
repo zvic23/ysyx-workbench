@@ -168,6 +168,7 @@ SDL_Surface* SDL_CreateRGBSurface(uint32_t flags, int width, int height, int dep
 printf("s->w:%d\n",s->w);
   if (!(flags & SDL_PREALLOC)) {
     s->pixels = malloc(s->pitch * height);
+printf("s->h:%d\n",s->h);
     assert(s->pixels);
   }
 
