@@ -70,6 +70,18 @@ int _write(int fd, void *buf, size_t count) {
 }
 
 void *_sbrk(intptr_t increment) {
+  extern char _end;
+  static intptr_t program_break = (intptr_t)&_end;
+  if(!(_syscall_(SYS_brk, program_break+increment, 0, 0))){
+  	  intptr_t program_break_old = program_break;
+   	  program_break += increment;
+	  return (void *)program_break_old;
+  } 
+  else return (void *)-1;
+ 
+
+
+
 	  //char buf0[20];
 	  //sprintf(buf0 , "%lx\n", increment);
 	  //_write(1,buf0,17);
