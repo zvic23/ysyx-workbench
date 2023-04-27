@@ -171,6 +171,7 @@ printf("s->w:%d\n",s->w);
     int *a = malloc(0x110);
     int *b = malloc(0x120);
 printf("s->h:%d\n",s->h);
+printf("s->h:%d\n",s->h);
     assert(s->pixels);
   }
 
