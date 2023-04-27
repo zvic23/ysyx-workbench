@@ -51,6 +51,7 @@ void init_fs() {
 }
 
 int fs_open(const char *pathname, int flags, int mode){
+	printf("filename:%s\n",pathname);
 	int table_length = sizeof(file_table)/sizeof(file_table[0]);
 	int i=0;
 	for(i=0;i<table_length;i++){
