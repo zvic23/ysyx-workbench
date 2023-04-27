@@ -169,7 +169,7 @@ printf("s->w:%d\n",s->w);
   if (!(flags & SDL_PREALLOC)) {
     s->pixels = malloc(s->pitch * height);
     int *a = malloc(0x110);
-    int *b = malloc(0x110);
+    int *b = malloc(0x120);
 printf("s->h:%d\n",s->h);
     assert(s->pixels);
   }
