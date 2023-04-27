@@ -37,7 +37,7 @@ static bool g_print_step = false;
 
 /* zsl:iringbuf Queue structure */
 #ifdef CONFIG_ITRACE
-#define QUEUE_ELEMENTS 15
+#define QUEUE_ELEMENTS 30
 #define QUEUE_SIZE (QUEUE_ELEMENTS + 1)
 char Queue[QUEUE_SIZE][128];
 static int QueueIn=0;
