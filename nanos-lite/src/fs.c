@@ -104,6 +104,7 @@ size_t fs_write(int fd, const void *buf, size_t len){
 		size_t f_size = file_table[fd].size;
 		size_t len_fix = 0;
 		if(len+position[fd] > f_size) len_fix = f_size - position[fd];
+		else len_fix = len;
 		ramdisk_write(buf, f_offset+position[fd], len_fix);
 		printf("write  fd: %d  position: %d  offset:%d   len: %d  len_fix: %d\n",fd,position[fd],f_offset,len,len_fix);
 		position[fd] += len_fix;
