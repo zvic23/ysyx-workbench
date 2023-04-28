@@ -27,7 +27,7 @@
  * This is useful when you use the `si' command.
  * You can modify this value as you want.
  */
-#define MAX_INST_TO_PRINT 50
+#define MAX_INST_TO_PRINT 10
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
@@ -37,7 +37,7 @@ static bool g_print_step = false;
 
 /* zsl:iringbuf Queue structure */
 #ifdef CONFIG_ITRACE
-#define QUEUE_ELEMENTS 30
+#define QUEUE_ELEMENTS 15
 #define QUEUE_SIZE (QUEUE_ELEMENTS + 1)
 char Queue[QUEUE_SIZE][128];
 static int QueueIn=0;
