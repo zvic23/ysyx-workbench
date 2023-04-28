@@ -107,7 +107,7 @@ static int cmd_x(char *args){
 
    printf("%lx\n",result.value);
    for(int i=0;i<atoi(n);i++){
-      uint32_t mem = paddr_read(result.value+i*4,1);
+      uint32_t mem = paddr_read(result.value+i*4,4);
       printf("0x%lx: " "%08x  ",result.value+i*4,mem); 
    }
    printf("\n");
