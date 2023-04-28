@@ -96,12 +96,13 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   	          fs_read(fd, &p_memsz, 8);
 		  //ramdisk_read(&p_memsz, phoff+phentsize*i+40, 8);
 		  uint64_t *addr = (uint64_t*)p_vaddr;
-		  printf("off=%lx  vaddr=%lx  filesz=%lx  memsz=%lx  addr=%lx\n",p_offset,p_vaddr,p_filesz,p_memsz,addr);
+		  //printf("off=%lx  vaddr=%lx  filesz=%lx  memsz=%lx  addr=%lx\n",p_offset,p_vaddr,p_filesz,p_memsz,addr);
 
   	          fs_lseek(fd, p_offset, SEEK_SET);
   	          fs_read(fd, addr, p_filesz);
 		  //memcpy(addr, &ramdisk_start+p_offset+400143, p_filesz);
 		  memset(addr+p_filesz, 0, p_memsz-p_filesz);
+		  printf("mem : %lx\n",*(uint64_t*)(addr+p_filesz));
 		  printf("%d load over\n",i);
 	  }
   }
