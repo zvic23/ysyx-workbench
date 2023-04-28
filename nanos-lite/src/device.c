@@ -22,14 +22,38 @@ size_t serial_write(const void *buf, size_t offset, size_t len) {
 }
 
 size_t events_read(void *buf, size_t offset, size_t len) {
-  return 0;
+  AM_INPUT_KEYBRD_T ev = io_read(AM_INPUT_KEYBRD);
+  if (ev.keycode == AM_KEY_NONE) return 0;
+  else{
+	  snprintf(buf, len, "%s %s\n", ev.keydown ? "kd" : "ku", keyname[ev.keycode] );
+  	  return len;
+  }
 }
 
+static int w,h;
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  return 0;
+  w = io_read(AM_GPU_CONFIG).width;
+  h = io_read(AM_GPU_CONFIG).height;  
+  //printf("in:  w=%d  h=%d\n",w,h);
+  //printf("para: %d   %d\n",offset,len);
+  snprintf(buf, len, "WIDTH:%d\nHEIGHT:%d",w,h);
+  //printf("buf:%s\n",buf);
+  return len;
+//WIDTH : 640
+//HEIGHT:480
+
+  //return 0;
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
+	//printf("fb in off:%d, len:%d\n",offset,len);
+  int y = offset/4 / w;
+  int x = offset/4 % w;
+        //printf("x=%d,y=%d\n",x,y);
+  io_write(AM_GPU_FBDRAW, x, y, (uint32_t*)buf, len/4, 1, false);
+  //io_write(AM_GPU_FBDRAW, 0, 0, (uint32_t*)buf, 400, 300, false);
+  io_write(AM_GPU_FBDRAW, 0, 0, NULL, 0, 0, true);
+
   return 0;
 }
 

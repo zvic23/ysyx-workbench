@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <assert.h>
+#include <stdlib.h>
+#include <NDL.h>
+#include <BMP.h>
+#include <fixedptc.h>
+
+int main() {
+  NDL_Init(0);
+
+//  fixedpt a = fixedpt_rconst(1);
+//  fixedpt b = fixedpt_fromint(1);
+//  int c = 0;
+//  if (b > fixedpt_rconst(0.9)) {
+//    c = fixedpt_toint(fixedpt_div(fixedpt_mul(a , b), fixedpt_rconst(2.3)));
+//  }
+//  //assert(c > 0);
+//  printf("c=%d\n",c);
+
+fixedpt a = fixedpt_rconst(1.2);
+fixedpt b = fixedpt_fromint(10);
+int c = 0;
+if (b > fixedpt_rconst(7.9)) {
+  c = fixedpt_toint(fixedpt_div(fixedpt_mul(a + FIXEDPT_ONE, b), fixedpt_rconst(2.3)));
+}
+
+  printf("c=%d\n",c);
+
+int f=4;
+fixedpt g = fixedpt_rconst(7.1);
+int h = 0;
+  h = fixedpt_toint(fixedpt_divi(fixedpt_muli(g + FIXEDPT_ONE, f), 3));
+
+  printf("h=%d\n",h);
+
+fixedpt z = fixedpt_rconst(-1.2);
+fixedpt z1= fixedpt_abs(z);
+printf("z=%x  z1=%x\n",z,z1);
+
+//int mm[7]={2.2, 2, 0.3, 0, -0.6, -1.0, -1.2};
+fixedpt m = fixedpt_rconst(-0.2);
+fixedpt m1= fixedpt_floor(m);
+printf("m=%x(%x)  m1=%x(%x)\n",m,fixedpt_abs(m),m1,fixedpt_abs(m1));
+
+
+
+fixedpt n = fixedpt_rconst(-0.3);
+fixedpt n1= fixedpt_ceil(n);
+printf("n=%x(%x)  n1=%x(%x)\n",n,fixedpt_abs(n),n1,fixedpt_abs(n1));
+
+//printf("%x  %x\n",0x111,-0x111);
+
+  return 0;
+}

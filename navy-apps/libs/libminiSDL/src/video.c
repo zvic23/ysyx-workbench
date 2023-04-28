@@ -7,12 +7,119 @@
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
+//  printf("blit in\n");
+	int dst_w = dst->w;          int dst_h = dst->h;
+	int src_w = src->w;          int src_h = src->h;
+//	int srcrect_x = srcrect->x;  int srcrect_y = srcrect->y;
+//	int srcrect_w = srcrect->w;  int srcrect_h = srcrect->h;
+	int srcrect_x = 0;  int srcrect_y = 0;
+	int srcrect_w = 0;  int srcrect_h = 0;
+	//int dstrect_x = dstrect->x;  int dstrect_y = dstrect->y;
+	int dstrect_x = 0;  int dstrect_y = 0;
+	//printf("dw=%d,dh=%d,rx=%d,ry=%d,rw=%d,rh=%d\n",dst->w,dst->h,dstrect->x,dstrect->y,dstrect->w,dstrect->h);
+	//printf("sw=%d,sh=%d\n",src->w,src->h);
+	if(dstrect == NULL){
+		dstrect_x = 0; dstrect_y = 0;
+	}else{
+		dstrect_x = dstrect->x;  dstrect_y = dstrect->y;
+	}
+	if(srcrect == NULL){
+		srcrect_x = 0;     srcrect_y = 0;
+		srcrect_w = src_w; srcrect_h = src_h;
+	}else {
+		//printf("srcrect not null !!!!\n");
+		srcrect_x = srcrect->x;  srcrect_y = srcrect->y;
+		srcrect_w = srcrect->w;  srcrect_h = srcrect->h;
+	}
+	//printf("11  sw=%d,sh=%d\n",srcrect_w,srcrect_h);
+	uint32_t *src_p = (uint32_t*)src->pixels;
+	uint32_t *dst_p = (uint32_t*)dst->pixels;	
+	for(int i=0;i<srcrect_h;i++){
+		for(int j=0;j<srcrect_w;j++){
+			dst_p[(dstrect_y+i)*dst_w+dstrect_x+j]=src_p[(srcrect_y+i)*src_w+srcrect_x+j];
+		}
+	}
+//	uint32_t src_buf[srcrect_w*srcrect_h];  //The app "menu" worked in nemu needs a large certain number in size, such as "400*300", instead of "srcrect_w*srcrect_h". But the other app like "nslider" and "nterm" in nemu don't need to change, why?
+//	uint32_t pst = 0;
+//	for(int i=0;i<srcrect_h;i++){
+//		for(int j=0;j<srcrect_w;j++){
+//			src_buf[pst++]=src_p[(srcrect_y+i)*src_w+srcrect_x+j];
+//		}
+//	}
+//	pst = 0;
+//	for(int i=0;i<srcrect_h;i++){
+//		for(int j=0;j<srcrect_w;j++){
+//			dst_p[(dstrect_y+i)*dst_w+dstrect_x+j]=src_buf[pst++];
+//		}
+//	}
+
+//  printf("blit out\n");
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
+//  printf("fill in\n");
+//	printf("dw=%d\n",dst->w);
+//	printf("dh=%d\n",dst->h);
+//	printf("dp=%d\n",dst->pitch);
+//	printf("color=%x\n",color);
+//	if(dst == NULL) {
+//		printf("null!!!\n");
+//		return;
+//	}
+//	printf("addr:%p\n",dst);
+
+//	static int time = 0;
+//	printf("time : %d\n",time++);
+
+//	printf("dw=%d,dh=%d,rx=%d,ry=%d,rw=%d,rh=%d\n",dst->w,dst->h,dstrect->x,dstrect->y,dstrect->w,dstrect->h);
+	int dst_w = dst->w;
+	int dst_h = dst->h;
+//	int rect_x=dstrect->x;
+//	int rect_y=dstrect->y;
+//	int rect_w=dstrect->w;
+//	int rect_h=dstrect->h;
+//	printf("dw=%d,dh=%d,rx=%d,ry=%d,rw=%d,rh=%d\n",dst_w,dst_h,rect_x,rect_y,rect_w,rect_h);
+	uint32_t *dst_p = (uint32_t*)dst->pixels;
+//	printf("fill in\n");
+	if(dstrect == NULL){
+		//for(int k=0;k<900*600;k++) dst->pixels[k]=color;
+		for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
+	}
+//	else {
+//		for(int i=0;i<rect_h;i++){
+//			for(int j=0;j<rect_w;j++){
+//				dst_p[(rect_y+i)*dst_w+rect_x+j]=color;
+//			}
+//		}
+//	}
+//
+//	printf("fill out\n");
+	//printf("sdl fillrect not implement!\n");
+	//assert(0);
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
+//	printf("rect in \n");
+//printf("x=%d,y=%d,w=%d,h=%d\n",x,y,w,h);
+//printf("pix:w=%d,h=%d\n",s->w,s->h);
+//printf("pix:pitch=%d\n",s->pitch);
+//printf("pix:format=%d\n",(s->format)->BytesPerPixel);
+//printf("pix:mask=%x\n",(s->format)->Rmask);
+//printf("pix:mask=%x\n",(s->format)->Gmask);
+//printf("pix:mask=%x\n",(s->format)->Bmask);
+  if(x==0&&y==0&&w==0&&h==0){
+	NDL_DrawRect(s->pixels,0,0,s->w,s->h);
+	//NDL_DrawRect(s->pixels,0,0,400,300);
+  }
+  else {
+	NDL_DrawRect(s->pixels,x,y,w,h);
+  }
+	//NDL_DrawRect(s->pixels,x,y,w,h);
+
+//	printf("rect out\n");
+	
+	//printf("sdl not implement!\n");
+	//assert(0);
 }
 
 // APIs below are already implemented.
@@ -193,8 +300,12 @@ uint32_t SDL_MapRGBA(SDL_PixelFormat *fmt, uint8_t r, uint8_t g, uint8_t b, uint
 }
 
 int SDL_LockSurface(SDL_Surface *s) {
+	printf("sdl not implement!\n");
+	assert(0);
   return 0;
 }
 
 void SDL_UnlockSurface(SDL_Surface *s) {
+	printf("sdl not implement!\n");
+	assert(0);
 }
