@@ -96,6 +96,24 @@ static int cmd_x(char *args){
     char *position = strtok(pst, " ");
     printf("%d and %d\n",atoi(n),atoi(position));
 
+
+  //  long  a = atol(pst);
+  //  long sum=0;
+   //for (int i=0;i<8;i++){
+   //  sum = sum+(a%10)*pow(16,i);
+   //  a = a/10;
+   //} 
+   struct figure result = evaluation(pst);
+
+   printf("%lx\n",result.value);
+   for(int i=0;i<atoi(n);i++){
+      uint32_t mem = paddr_read(result.value+i*4,1);
+      printf("0x%lx: " "%08x  ",result.value+i*4,mem); 
+   }
+   printf("\n");
+
+
+/*
     long  a = atol(pst);
     long sum=0;
    for (int i=0;i<8;i++){
@@ -109,6 +127,7 @@ static int cmd_x(char *args){
    }
    printf("\n");
 //    printf("%lx\n",paddr_read(atoi(position),atoi(n))); 
+*/
 
 return 0;
 }
