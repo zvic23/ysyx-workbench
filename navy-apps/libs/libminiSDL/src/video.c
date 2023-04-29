@@ -132,6 +132,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	  pixels = pixels_fix;
   }else pixels = s->pixels;
 
+	printf("rect in \n");
 
   if(x==0&&y==0&&w==0&&h==0){
 	NDL_DrawRect(pixels,0,0,s->w,s->h);
