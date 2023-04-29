@@ -114,7 +114,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	//printf("ncolor:%x\n",s->format->palette->ncolors);
 	//printf("color:%p\n",s->format->palette->colors);
 //printf("x=%d,y=%d,w=%d,h=%d\n",x,y,w,h);
-printf("pix:w=%d,h=%d\n",s->w,s->h);
+//printf("pix:w=%d,h=%d\n",s->w,s->h);
 //printf("pix:pitch=%d\n",s->pitch);
 //printf("pix:format=%d\n",(s->format)->BytesPerPixel);
 //printf("pix:mask=%x\n",(s->format)->Rmask);
@@ -128,7 +128,7 @@ printf("pix:w=%d,h=%d\n",s->w,s->h);
 	printf("rect in \n");
 	  uint32_t *palette =(uint32_t*)(s->format->palette->colors);
 	printf("rect in \n");
-	  for(int i=0;i<200*200;i++){
+	  for(int i=0;i<320*200;i++){
 		  pixels_fix[i] = palette[((uint8_t*)s->pixels)[i]];
 	  }
 	printf("rect in \n");
