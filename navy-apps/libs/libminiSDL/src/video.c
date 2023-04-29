@@ -129,7 +129,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	  uint32_t *palette =(uint32_t*)(s->format->palette->colors);
 	printf("rect in \n");
 	  for(int i=0;i<s->w*s->h;i++){
-		  //pixels_fix[i] = palette[((uint8_t*)s->pixels)[i]];
+		  pixels_fix[i] = palette[((uint8_t*)s->pixels)[i]];
 	  }
 	printf("rect in \n");
 	  pixels = pixels_fix;
