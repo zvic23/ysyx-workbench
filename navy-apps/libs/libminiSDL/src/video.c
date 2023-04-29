@@ -109,14 +109,34 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 //printf("pix:mask=%x\n",(s->format)->Rmask);
 //printf("pix:mask=%x\n",(s->format)->Gmask);
 //printf("pix:mask=%x\n",(s->format)->Bmask);
+
+
+  uint32_t pixels_fix[s->w * s->h];
+  uint32_t *pixels;
+  if(s->w == s->pitch){
+	  uint32_t *palette = s->format->palette->colors;
+	  for(int i=0;i<s->w*s->h;i++){
+		  pixels_fix[i] = palette[((uint8_t*)s->pixels)[i]];
+	  }
+	  pixels = pixels_fix;
+  }else pixels = s->pixels;
+
+
   if(x==0&&y==0&&w==0&&h==0){
-	NDL_DrawRect(s->pixels,0,0,s->w,s->h);
+	NDL_DrawRect(pixels,0,0,s->w,s->h);
 	//NDL_DrawRect(s->pixels,0,0,400,300);
   }
   else {
-	NDL_DrawRect(s->pixels,x,y,w,h);
+	NDL_DrawRect(pixels,x,y,w,h);
   }
-	//NDL_DrawRect(s->pixels,x,y,w,h);
+
+//  if(x==0&&y==0&&w==0&&h==0){
+//	NDL_DrawRect(s->pixels,0,0,s->w,s->h);
+//	//NDL_DrawRect(s->pixels,0,0,400,300);
+//  }
+//  else {
+//	NDL_DrawRect(s->pixels,x,y,w,h);
+//  }
 
 	printf("rect out\n");
 	
