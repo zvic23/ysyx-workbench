@@ -126,18 +126,14 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   //uint32_t pixels_fix[s->w * s->h];       //zsl:it can't use variable value to initial the array, or nemu can't run correct in "pal" (but am-native can)
   uint32_t *pixels;
   if(s->w == s->pitch){
-	printf("rect in \n");
 	  uint32_t *palette =(uint32_t*)(s->format->palette->colors);
-	printf("rect in \n");
 	  for(int i=0;i<s->w * s->h;i++){
 		  pixels_fix[i] = palette[((uint8_t*)s->pixels)[i]];
 	  }
-	printf("rect in \n");
 	  pixels = pixels_fix;
   }else pixels = s->pixels;
 
 
-	printf("rect in \n");
   if(x==0&&y==0&&w==0&&h==0){
 	NDL_DrawRect(pixels,0,0,s->w,s->h);
 	//NDL_DrawRect(s->pixels,0,0,400,300);
