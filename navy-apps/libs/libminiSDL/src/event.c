@@ -91,7 +91,7 @@ uint8_t* SDL_GetKeyState(int *numkeys) {
   char event_buf[64];
   int receive_event = 0;
   receive_event = NDL_PollEvent(event_buf,sizeof(event_buf));
-  if(receive_event == 1) return SDL_keybuf;
+  if(receive_event == 0) return SDL_keybuf;
 //  char event0[25];
 //  char event1[25];
 //  sscanf(event_buf,"%s %s",event0,event1);
