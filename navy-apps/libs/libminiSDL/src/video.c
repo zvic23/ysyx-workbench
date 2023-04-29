@@ -32,13 +32,24 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 		srcrect_w = srcrect->w;  srcrect_h = srcrect->h;
 	}
 	//printf("11  sw=%d,sh=%d\n",srcrect_w,srcrect_h);
-	uint32_t *src_p = (uint32_t*)src->pixels;
-	uint32_t *dst_p = (uint32_t*)dst->pixels;	
-	for(int i=0;i<srcrect_h;i++){
-		for(int j=0;j<srcrect_w;j++){
-			dst_p[(dstrect_y+i)*dst_w+dstrect_x+j]=src_p[(srcrect_y+i)*src_w+srcrect_x+j];
+	if(src->w == src->pitch){
+		uint8_t *src_p = (uint8_t*)src->pixels;
+		uint8_t *dst_p = (uint8_t*)dst->pixels;	
+		for(int i=0;i<srcrect_h;i++){
+			for(int j=0;j<srcrect_w;j++){
+				dst_p[(dstrect_y+i)*dst_w+dstrect_x+j]=src_p[(srcrect_y+i)*src_w+srcrect_x+j];
+			}
+		}
+	}else{
+		uint32_t *src_p = (uint32_t*)src->pixels;
+		uint32_t *dst_p = (uint32_t*)dst->pixels;	
+		for(int i=0;i<srcrect_h;i++){
+			for(int j=0;j<srcrect_w;j++){
+				dst_p[(dstrect_y+i)*dst_w+dstrect_x+j]=src_p[(srcrect_y+i)*src_w+srcrect_x+j];
+			}
 		}
 	}
+
 //	uint32_t src_buf[srcrect_w*srcrect_h];  //The app "menu" worked in nemu needs a large certain number in size, such as "400*300", instead of "srcrect_w*srcrect_h". But the other app like "nslider" and "nterm" in nemu don't need to change, why?
 //	uint32_t pst = 0;
 //	for(int i=0;i<srcrect_h;i++){
