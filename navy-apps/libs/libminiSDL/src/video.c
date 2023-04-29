@@ -122,7 +122,8 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 //printf("pix:mask=%x\n",(s->format)->Bmask);
 
 
-  uint32_t pixels_fix[s->w * s->h];
+  uint32_t pixels_fix[400*300];
+  //uint32_t pixels_fix[s->w * s->h];
   uint32_t *pixels;
   if(s->w == s->pitch){
 	printf("rect in \n");
