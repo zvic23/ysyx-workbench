@@ -100,8 +100,8 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	printf("rect in \n");
-	printf("ncolor:%x\n",s->format->palette->ncolors);
-	printf("color:%p\n",s->format->palette->colors);
+	//printf("ncolor:%x\n",s->format->palette->ncolors);
+	//printf("color:%p\n",s->format->palette->colors);
 //printf("x=%d,y=%d,w=%d,h=%d\n",x,y,w,h);
 //printf("pix:w=%d,h=%d\n",s->w,s->h);
 //printf("pix:pitch=%d\n",s->pitch);
