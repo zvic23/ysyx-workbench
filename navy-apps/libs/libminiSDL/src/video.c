@@ -125,6 +125,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   uint32_t pixels_fix[s->w * s->h];
   uint32_t *pixels;
   if(s->w == s->pitch){
+	printf("rect in \n");
 	  uint32_t *palette = s->format->palette->colors;
 	  for(int i=0;i<s->w*s->h;i++){
 		  pixels_fix[i] = palette[((uint8_t*)s->pixels)[i]];
@@ -132,8 +133,8 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	  pixels = pixels_fix;
   }else pixels = s->pixels;
 
-	printf("rect in \n");
 
+	printf("rect in \n");
   if(x==0&&y==0&&w==0&&h==0){
 	NDL_DrawRect(pixels,0,0,s->w,s->h);
 	//NDL_DrawRect(s->pixels,0,0,400,300);
