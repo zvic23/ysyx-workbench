@@ -121,9 +121,9 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 //printf("pix:mask=%x\n",(s->format)->Gmask);
 //printf("pix:mask=%x\n",(s->format)->Bmask);
 
-  uint32_t size = s->w * s->h;
-  //uint32_t pixels_fix[400*300];
-  uint32_t pixels_fix[size];       //zsl:it can't use variable value to initial the array, or nemu can't run correct in "pal" (but am-native can)
+
+  uint32_t pixels_fix[400*300];
+  //uint32_t pixels_fix[s->w * s->h];       //zsl:it can't use variable value to initial the array, or nemu can't run correct in "pal" (but am-native can)
   uint32_t *pixels;
   if(s->w == s->pitch){
 	  uint32_t *palette =(uint32_t*)(s->format->palette->colors);
