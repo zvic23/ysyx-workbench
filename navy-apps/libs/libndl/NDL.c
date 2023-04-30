@@ -17,12 +17,14 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
-  char buf_cache[65535];
+  char buf_cache[100];
   int fp = open("/dev/events", "r+");
   int succ = read(fp, buf_cache, 40);
   //if(succ)printf("succ=%d\n",succ);
-  strncpy(buf, buf_cache, len);
-  if(succ) return 1;
+  if(succ) {
+  	  strncpy(buf, buf_cache, len);
+	  return 1;
+  }
   else return 0;
 
 

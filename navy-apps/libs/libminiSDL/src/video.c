@@ -68,7 +68,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
-  //printf("fill in\n");
+  printf("fill in\n");
 //	printf("dw=%d\n",dst->w);
 //	printf("dh=%d\n",dst->h);
 //	printf("dp=%d\n",dst->pitch);
@@ -104,7 +104,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 //		}
 //	}
 //
-	//printf("fill out\n");
+	printf("fill out\n");
 	//printf("sdl fillrect not implement!\n");
 	//assert(0);
 }
@@ -128,7 +128,12 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   if(s->w == s->pitch){
 	  uint32_t *palette =(uint32_t*)(s->format->palette->colors);
 	  for(int i=0;i<s->w * s->h;i++){
-		  pixels_fix[i] = palette[((uint8_t*)s->pixels)[i]];
+		  pixels_fix[i] = palette[((uint8_t*)(s->pixels))[i]];
+		  //uint32_t R = pixels_fix[i] & 0x00ff0000;
+		  //uint32_t B = pixels_fix[i] & 0xff;
+		  //pixels_fix[i] = pixels_fix[i] & 0x00ff00;
+		  //pixels_fix[i] = pixels_fix[i] | (R>>12);
+		  //pixels_fix[i] = pixels_fix[i] | (B<<12);
 	  }
 	  pixels = pixels_fix;
   }else pixels = s->pixels;
