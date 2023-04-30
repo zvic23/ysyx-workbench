@@ -105,7 +105,8 @@ int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
 
 uint8_t SDL_keybuf[50];
 uint8_t* SDL_GetKeyState(int *numkeys) {
-	printf("111\n");
+	static uint64_t times = 0;
+	printf("time : %d\n",times);
   memset(SDL_keybuf, 0, 50);
   char event_buf[64];
   int receive_event = 0;
