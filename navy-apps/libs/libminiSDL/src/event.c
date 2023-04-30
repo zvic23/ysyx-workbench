@@ -117,7 +117,7 @@ uint8_t* SDL_GetKeyState(int *numkeys) {
 	  SDL_keybuf[get_keyvalue(event1)]=1;
   }
   //else if(strcmp(event0, "ku")==0) ev->type = SDL_KEYUP;
-  
+  printf("get key %s\n",event1); 
   return SDL_keybuf;
 
 	//printf("getkeystate sdl not implement!\n");
