@@ -110,25 +110,17 @@ uint8_t* SDL_GetKeyState(int *numkeys) {
   int receive_event = 0;
   receive_event = NDL_PollEvent(event_buf,sizeof(event_buf));
   if(receive_event == 0) return SDL_keybuf;
-//  char event0[25];
-//  char event1[25];
-//  sscanf(event_buf,"%s %s",event0,event1);
-//  if(strcmp(event0, "kd")==0) ev->type = SDL_KEYDOWN;
-//  else if(strcmp(event0, "ku")==0) ev->type = SDL_KEYUP;
-//  else ev->type = 0;
-//  
-//  if(strcmp(event1, "J")==0) ev->key.keysym.sym = SDLK_J;
-//  else if(strcmp(event1, "K")==0) ev->key.keysym.sym = SDLK_K;
-//  else if(strcmp(event1, "G")==0) ev->key.keysym.sym = SDLK_G;
-//  else if(strcmp(event1, "0")==0) ev->key.keysym.sym = SDLK_0;
-//  else if(strcmp(event1, "1")==0) ev->key.keysym.sym = SDLK_1;
-//  else if(strcmp(event1, "2")==0) ev->key.keysym.sym = SDLK_2;
-//  else if(strcmp(event1, "RIGHT")==0) ev->key.keysym.sym = SDLK_RIGHT;
-//  else if(strcmp(event1, "LEFT")==0)  ev->key.keysym.sym = SDLK_LEFT;
-//  else if(strcmp(event1, "SPACE")==0)  ev->key.keysym.sym = SDLK_SPACE;
-//  else if(strcmp(event1, "RETURN")==0)  ev->key.keysym.sym = SDLK_RETURN;
+  char event0[25];
+  char event1[25];
+  sscanf(event_buf,"%s %s",event0,event1);
+  if(strcmp(event0, "kd")==0){
+	  SDL_keybuf[get_keyvalue(event1)]=1;
+  }
+  //else if(strcmp(event0, "ku")==0) ev->type = SDL_KEYUP;
+  
+  return SDL_keybuf;
 
-	printf("getkeystate sdl not implement!\n");
-	assert(0);
-  return NULL;
+	//printf("getkeystate sdl not implement!\n");
+	//assert(0);
+  //return NULL;
 }
