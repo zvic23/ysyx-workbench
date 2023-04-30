@@ -114,3 +114,16 @@ uint8_t* SDL_GetKeyState(int *numkeys) {
 	assert(0);
   return NULL;
 }
+
+static uint64_t get_keyvalue(char *keychar){
+  if     (strcmp(keychar, "J")==0)       return  SDLK_J;
+  else if(strcmp(keychar, "K")==0)       return  SDLK_K;
+  else if(strcmp(keychar, "G")==0)       return  SDLK_G;
+  else if(strcmp(keychar, "0")==0)       return  SDLK_0;
+  else if(strcmp(keychar, "1")==0)       return  SDLK_1;
+  else if(strcmp(keychar, "2")==0)       return  SDLK_2;
+  else if(strcmp(keychar, "RIGHT")==0)   return  SDLK_RIGHT;
+  else if(strcmp(keychar, "LEFT")==0)    return  SDLK_LEFT;
+  else if(strcmp(keychar, "SPACE")==0)   return  SDLK_SPACE;
+  else if(strcmp(keychar, "RETURN")==0)  return  SDLK_RETURN;
+}
