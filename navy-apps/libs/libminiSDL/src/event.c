@@ -41,17 +41,19 @@ int SDL_PollEvent(SDL_Event *ev) {
   if(strcmp(event0, "kd")==0) ev->type = SDL_KEYDOWN;
   else if(strcmp(event0, "ku")==0) ev->type = SDL_KEYUP;
   else ev->type = 0;
-  
-  if(strcmp(event1, "J")==0) ev->key.keysym.sym = SDLK_J;
-  else if(strcmp(event1, "K")==0) ev->key.keysym.sym = SDLK_K;
-  else if(strcmp(event1, "G")==0) ev->key.keysym.sym = SDLK_G;
-  else if(strcmp(event1, "0")==0) ev->key.keysym.sym = SDLK_0;
-  else if(strcmp(event1, "1")==0) ev->key.keysym.sym = SDLK_1;
-  else if(strcmp(event1, "2")==0) ev->key.keysym.sym = SDLK_2;
-  else if(strcmp(event1, "RIGHT")==0) ev->key.keysym.sym = SDLK_RIGHT;
-  else if(strcmp(event1, "LEFT")==0)  ev->key.keysym.sym = SDLK_LEFT;
-  else if(strcmp(event1, "SPACE")==0)  ev->key.keysym.sym = SDLK_SPACE;
-  else if(strcmp(event1, "RETURN")==0)  ev->key.keysym.sym = SDLK_RETURN;
+ 
+  ev->key.keysym.sym = get_keyvalue(event1);;
+
+//  if(strcmp(event1, "J")==0) ev->key.keysym.sym = SDLK_J;
+//  else if(strcmp(event1, "K")==0) ev->key.keysym.sym = SDLK_K;
+//  else if(strcmp(event1, "G")==0) ev->key.keysym.sym = SDLK_G;
+//  else if(strcmp(event1, "0")==0) ev->key.keysym.sym = SDLK_0;
+//  else if(strcmp(event1, "1")==0) ev->key.keysym.sym = SDLK_1;
+//  else if(strcmp(event1, "2")==0) ev->key.keysym.sym = SDLK_2;
+//  else if(strcmp(event1, "RIGHT")==0) ev->key.keysym.sym = SDLK_RIGHT;
+//  else if(strcmp(event1, "LEFT")==0)  ev->key.keysym.sym = SDLK_LEFT;
+//  else if(strcmp(event1, "SPACE")==0)  ev->key.keysym.sym = SDLK_SPACE;
+//  else if(strcmp(event1, "RETURN")==0)  ev->key.keysym.sym = SDLK_RETURN;
 
 
   if(ev->type == SDL_KEYDOWN || ev->type == SDL_KEYUP) return 1;
