@@ -31,6 +31,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 		srcrect_x = srcrect->x;  srcrect_y = srcrect->y;
 		srcrect_w = srcrect->w;  srcrect_h = srcrect->h;
 	}
+	if((src->w == src->pitch && dst->w != dst->pitch) ||(src->w != src->pitch && dst->w == dst->pitch))printf("kkkk/n");
 	//printf("11  sw=%d,sh=%d\n",srcrect_w,srcrect_h);
 	if(src->w == src->pitch){
 		uint8_t *src_p = (uint8_t*)src->pixels;
