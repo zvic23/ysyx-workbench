@@ -79,7 +79,6 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 //		return;
 //	}
 //	printf("addr:%p\n",dst);
-	if(dst->w == dst->pitch)printf("match\n");
 
 //	static int time = 0;
 //	printf("time : %d\n",time++);
@@ -92,24 +91,36 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 //	int rect_w=dstrect->w;
 //	int rect_h=dstrect->h;
 //	printf("dw=%d,dh=%d,rx=%d,ry=%d,rw=%d,rh=%d\n",dst_w,dst_h,rect_x,rect_y,rect_w,rect_h);
-	uint32_t *dst_p = (uint32_t*)dst->pixels;
-//	printf("fill in\n");
+
+
+		//if(dst->w == dst->pitch) uint8_t *dst_p  = (uint8_t*)dst->pixels;
+		//else uint32_t *dst_p  = (uint32_t*) dst->pixels;
 	if(dstrect == NULL){
-		printf("null\n");
-		//for(int k=0;k<900*600;k++) dst->pixels[k]=color;
-		for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
+		if(dst->w == dst->pitch){
+			uint8_t  *dst_p  = (uint8_t*)  dst->pixels;
+			for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
+		}else{
+			uint32_t *dst_p  = (uint32_t*) dst->pixels;
+			for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
+		}
 	}
-	else {
-	int rect_x=dstrect->x;
-	int rect_y=dstrect->y;
-	int rect_w=dstrect->w;
-	int rect_h=dstrect->h;
-		printf("not null\n");
-		printf("clr: %x\n",color);
-		for(int i=0;i<rect_h;i++){
-			for(int j=0;j<rect_w;j++){
-				dst_p[(rect_y+i)*dst_w+rect_x+j]=color;
-			}
+	else {		
+	        int rect_x=dstrect->x;   int rect_y=dstrect->y;
+	        int rect_w=dstrect->w;   int rect_h=dstrect->h;
+		if(dst->w == dst->pitch){
+			uint8_t  *dst_p  = (uint8_t*)  dst->pixels;
+			for(int i=0;i<rect_h;i++){
+				for(int j=0;j<rect_w;j++){
+					dst_p[(rect_y+i)*dst_w+rect_x+j]=color;
+				}
+			}	
+		}else{
+			uint32_t *dst_p  = (uint32_t*) dst->pixels;
+			for(int i=0;i<rect_h;i++){
+				for(int j=0;j<rect_w;j++){
+					dst_p[(rect_y+i)*dst_w+rect_x+j]=color;
+				}
+			}	
 		}
 	}
 
