@@ -117,9 +117,9 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 //printf("pix:w=%d,h=%d\n",s->w,s->h);
 //printf("pix:pitch=%d\n",s->pitch);
 //printf("pix:format=%d\n",(s->format)->BytesPerPixel);
-printf("pix:rmask=%x\n",(s->format)->Rmask);
-printf("pix:gmask=%x\n",(s->format)->Gmask);
-printf("pix:bmask=%x\n",(s->format)->Bmask);
+//printf("pix:rmask=%x\n",(s->format)->Rmask);
+//printf("pix:gmask=%x\n",(s->format)->Gmask);
+//printf("pix:bmask=%x\n",(s->format)->Bmask);
 
 
   uint32_t pixels_fix[400*300];
@@ -129,11 +129,15 @@ printf("pix:bmask=%x\n",(s->format)->Bmask);
 	  uint32_t *palette =(uint32_t*)(s->format->palette->colors);
 	  for(int i=0;i<s->w * s->h;i++){
 		  pixels_fix[i] = palette[((uint8_t*)(s->pixels))[i]];
-		  //uint32_t R = pixels_fix[i] & 0x00ff0000;
-		  //uint32_t B = pixels_fix[i] & 0xff;
-		  //pixels_fix[i] = pixels_fix[i] & 0x00ff00;
-		  //pixels_fix[i] = pixels_fix[i] | (R>>12);
-		  //pixels_fix[i] = pixels_fix[i] | (B<<12);
+		  //uint32_t R = palette[((uint8_t*)(s->pixels))[i]].R;
+		  //uint32_t G = palette[((uint8_t*)(s->pixels))[i]].G;
+		  //uint32_t B = palette[((uint8_t*)(s->pixels))[i]].B;
+		  //pixels_fix[i] = (R<<12) + (G<<8) + (B);
+		  uint32_t R = pixels_fix[i] & 0x00ff0000;
+		  uint32_t B = pixels_fix[i] & 0xff;
+		  pixels_fix[i] = pixels_fix[i] & 0x00ff00;
+		  pixels_fix[i] = pixels_fix[i] | (R>>16);
+		  pixels_fix[i] = pixels_fix[i] | (B<<16);
 	  }
 	  pixels = pixels_fix;
   }else pixels = s->pixels;
