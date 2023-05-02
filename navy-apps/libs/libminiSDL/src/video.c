@@ -105,6 +105,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 	int rect_w=dstrect->w;
 	int rect_h=dstrect->h;
 		printf("not null\n");
+		printf("clr: %x\n",color);
 		for(int i=0;i<rect_h;i++){
 			for(int j=0;j<rect_w;j++){
 				dst_p[(rect_y+i)*dst_w+rect_x+j]=color;
