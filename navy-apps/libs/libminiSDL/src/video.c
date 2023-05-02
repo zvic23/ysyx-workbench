@@ -99,14 +99,19 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 		//for(int k=0;k<900*600;k++) dst->pixels[k]=color;
 		for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
 	}
-//	else {
-//		for(int i=0;i<rect_h;i++){
-//			for(int j=0;j<rect_w;j++){
-//				dst_p[(rect_y+i)*dst_w+rect_x+j]=color;
-//			}
-//		}
-//	}
-//
+	else {
+	int rect_x=dstrect->x;
+	int rect_y=dstrect->y;
+	int rect_w=dstrect->w;
+	int rect_h=dstrect->h;
+		printf("not null\n");
+		for(int i=0;i<rect_h;i++){
+			for(int j=0;j<rect_w;j++){
+				dst_p[(rect_y+i)*dst_w+rect_x+j]=color;
+			}
+		}
+	}
+
 	printf("fill out\n");
 	//printf("sdl fillrect not implement!\n");
 	//assert(0);
