@@ -79,6 +79,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 //		return;
 //	}
 //	printf("addr:%p\n",dst);
+	if(dst->w == dst->pitch)printf("match\n");
 
 //	static int time = 0;
 //	printf("time : %d\n",time++);
