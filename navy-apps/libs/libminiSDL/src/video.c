@@ -128,16 +128,16 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   if(s->w == s->pitch){
 	  uint32_t *palette =(uint32_t*)(s->format->palette->colors);
 	  for(int i=0;i<s->w * s->h;i++){
-		  uint32_t R = ((SDL_Color)palette[((uint8_t*)(s->pixels))[i]]).r;
-		  uint32_t G = ((SDL_Color)palette[((uint8_t*)(s->pixels))[i]]).g;
-		  uint32_t B = ((SDL_Color)palette[((uint8_t*)(s->pixels))[i]]).b;
-		  pixels_fix[i] = (R<<12) + (G<<8) + (B);
-		  //pixels_fix[i] = palette[((uint8_t*)(s->pixels))[i]];
-		  //uint32_t R = pixels_fix[i] & 0x00ff0000;
-		  //uint32_t B = pixels_fix[i] & 0xff;
-		  //pixels_fix[i] = pixels_fix[i] & 0x00ff00;
-		  //pixels_fix[i] = pixels_fix[i] | (R>>16);
-		  //pixels_fix[i] = pixels_fix[i] | (B<<16);
+		  //uint32_t R = ((SDL_Color)palette[((uint8_t*)(s->pixels))[i]]).r;
+		  //uint32_t G = ((SDL_Color)palette[((uint8_t*)(s->pixels))[i]]).g;
+		  //uint32_t B = ((SDL_Color)palette[((uint8_t*)(s->pixels))[i]]).b;
+		  //pixels_fix[i] = (R<<16) + (G<<8) + (B);
+		  pixels_fix[i] = palette[((uint8_t*)(s->pixels))[i]];
+		  uint32_t R = pixels_fix[i] & 0x00ff0000;
+		  uint32_t B = pixels_fix[i] & 0xff;
+		  pixels_fix[i] = pixels_fix[i] & 0x00ff00;
+		  pixels_fix[i] = pixels_fix[i] | (R>>16);
+		  pixels_fix[i] = pixels_fix[i] | (B<<16);
 	  }
 	  pixels = pixels_fix;
   }else pixels = s->pixels;
