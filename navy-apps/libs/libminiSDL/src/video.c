@@ -95,35 +95,35 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 
 		//if(dst->w == dst->pitch) uint8_t *dst_p  = (uint8_t*)dst->pixels;
 		//else uint32_t *dst_p  = (uint32_t*) dst->pixels;
-//	if(dstrect == NULL){
-//		if(dst->w == dst->pitch){
-//			uint8_t  *dst_p  = (uint8_t*)  dst->pixels;
-//			for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
-//		}else{
-//			uint32_t *dst_p  = (uint32_t*) dst->pixels;
-//			for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
-//		}
-//	}
-//	else {		
-//	        int rect_x=dstrect->x;   int rect_y=dstrect->y;
-//	        int rect_w=dstrect->w;   int rect_h=dstrect->h;
-//		if(dst->w == dst->pitch){
-//			printf("ffff\n");
-//			uint8_t  *dst_p  = (uint8_t*)  dst->pixels;
-//			for(int i=0;i<rect_h;i++){
-//				for(int j=0;j<rect_w;j++){
-//					dst_p[(rect_y+i)*dst_w+rect_x+j]=(uint8_t)color;
-//				}
-//			}	
-//		}else{
-//			uint32_t *dst_p  = (uint32_t*) dst->pixels;
-//			for(int i=0;i<rect_h;i++){
-//				for(int j=0;j<rect_w;j++){
-//					dst_p[(rect_y+i)*dst_w+rect_x+j]=color;
-//				}
-//			}	
-//		}
-//	}
+	if(dstrect == NULL){
+		if(dst->w == dst->pitch){
+			uint8_t  *dst_p  = (uint8_t*)  dst->pixels;
+			for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
+		}else{
+			uint32_t *dst_p  = (uint32_t*) dst->pixels;
+			for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
+		}
+	}
+	else {		
+	        int rect_x=dstrect->x;   int rect_y=dstrect->y;
+	        int rect_w=dstrect->w;   int rect_h=dstrect->h;
+		if(dst->w == dst->pitch){
+			printf("color:%x\n",color);
+			uint8_t  *dst_p  = (uint8_t*)  dst->pixels;
+			for(int i=0;i<rect_h;i++){
+				for(int j=0;j<rect_w;j++){
+					dst_p[(rect_y+i)*dst_w+rect_x+j]=(uint8_t)color;
+				}
+			}	
+		}else{
+			uint32_t *dst_p  = (uint32_t*) dst->pixels;
+			for(int i=0;i<rect_h;i++){
+				for(int j=0;j<rect_w;j++){
+					dst_p[(rect_y+i)*dst_w+rect_x+j]=color;
+				}
+			}	
+		}
+	}
 
 	printf("fill out\n");
 	//printf("sdl fillrect not implement!\n");
