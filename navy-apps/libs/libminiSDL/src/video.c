@@ -117,9 +117,9 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 //printf("pix:w=%d,h=%d\n",s->w,s->h);
 //printf("pix:pitch=%d\n",s->pitch);
 //printf("pix:format=%d\n",(s->format)->BytesPerPixel);
-printf("pix:mask=%x\n",(s->format)->Rmask);
-printf("pix:mask=%x\n",(s->format)->Gmask);
-printf("pix:mask=%x\n",(s->format)->Bmask);
+printf("pix:rmask=%x\n",(s->format)->Rmask);
+printf("pix:gmask=%x\n",(s->format)->Gmask);
+printf("pix:bmask=%x\n",(s->format)->Bmask);
 
 
   uint32_t pixels_fix[400*300];
