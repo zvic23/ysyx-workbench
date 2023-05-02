@@ -108,6 +108,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 	        int rect_x=dstrect->x;   int rect_y=dstrect->y;
 	        int rect_w=dstrect->w;   int rect_h=dstrect->h;
 		if(dst->w == dst->pitch){
+			printf("ffff\n");
 			uint8_t  *dst_p  = (uint8_t*)  dst->pixels;
 			for(int i=0;i<rect_h;i++){
 				for(int j=0;j<rect_w;j++){
