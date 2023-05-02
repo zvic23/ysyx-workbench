@@ -19,15 +19,18 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	//printf("dw=%d,dh=%d,rx=%d,ry=%d,rw=%d,rh=%d\n",dst->w,dst->h,dstrect->x,dstrect->y,dstrect->w,dstrect->h);
 	//printf("sw=%d,sh=%d\n",src->w,src->h);
 	if(dstrect == NULL){
+		printf("dstrect null !!!!\n");
 		dstrect_x = 0; dstrect_y = 0;
 	}else{
+		printf("dstrect not null !!!!\n");
 		dstrect_x = dstrect->x;  dstrect_y = dstrect->y;
 	}
 	if(srcrect == NULL){
+		printf("srcrect  null !!!!\n");
 		srcrect_x = 0;     srcrect_y = 0;
 		srcrect_w = src_w; srcrect_h = src_h;
 	}else {
-		//printf("srcrect not null !!!!\n");
+		printf("srcrect not null !!!!\n");
 		srcrect_x = srcrect->x;  srcrect_y = srcrect->y;
 		srcrect_w = srcrect->w;  srcrect_h = srcrect->h;
 	}
@@ -69,7 +72,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
-  printf("fill in\n");
+//  printf("fill in\n");
 //	printf("dw=%d\n",dst->w);
 //	printf("dh=%d\n",dst->h);
 //	printf("dp=%d\n",dst->pitch);
@@ -98,7 +101,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 	if(dstrect == NULL){
 		if(dst->w == dst->pitch){
 			uint8_t  *dst_p  = (uint8_t*)  dst->pixels;
-			for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
+			for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=(uint8_t)color;
 		}else{
 			uint32_t *dst_p  = (uint32_t*) dst->pixels;
 			for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
@@ -108,7 +111,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 	        int rect_x=dstrect->x;   int rect_y=dstrect->y;
 	        int rect_w=dstrect->w;   int rect_h=dstrect->h;
 		if(dst->w == dst->pitch){
-			printf("color:%x\n",color);
+		//	printf("color:%lx\n",color);
 			uint8_t  *dst_p  = (uint8_t*)  dst->pixels;
 			for(int i=0;i<rect_h;i++){
 				for(int j=0;j<rect_w;j++){
@@ -125,7 +128,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 		}
 	}
 
-	printf("fill out\n");
+//	printf("fill out\n");
 	//printf("sdl fillrect not implement!\n");
 	//assert(0);
 }
