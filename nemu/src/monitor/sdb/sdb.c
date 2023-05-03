@@ -210,6 +210,27 @@ static int cmd_attach(char *args){
 }
 
 
+static int cmd_save(char *args){
+	FILE *p = fopen(args, "w");
+	if( p == NULL) printf("File open failed!\n");
+	else{
+		printf("state:%lx\n",cpu.pc);
+
+	}
+	fclose(p);
+	return 0;
+}
+
+static int cmd_load(char *args){
+	detach_difftest = 0;
+	syn_state_to_ref();
+	printf("difftest on!!\n");
+	return 0;
+}
+
+
+
+
 
 static struct {
   const char *name;
@@ -232,6 +253,8 @@ static struct {
   { "d", "delete watchpoint", cmd_d },
   { "dt", "turn off difftest", cmd_detach },
   { "at", "turn on difftest", cmd_attach },
+  { "save", "save snapshot", cmd_save},
+  { "load", "load snapshot", cmd_load},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
