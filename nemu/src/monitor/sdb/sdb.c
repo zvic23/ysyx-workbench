@@ -219,6 +219,7 @@ static int cmd_save(char *args){
 extern uint64_t mepc,mcause,mstatus;
 extern uint64_t mtvec;
 		fwrite(&cpu, 33*8, 1, p);
+		fseek(p, 40*8, SEEK_SET);
 		fwrite(&mtvec, 8, 1, p);
 		fwrite(&mcause, 8, 1, p);
 		fwrite(&mstatus, 8, 1, p);
