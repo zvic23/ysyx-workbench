@@ -216,7 +216,7 @@ static int cmd_save(char *args){
 	FILE *p = fopen(path, "wb");
 	if( p == NULL) printf("File %s open failed!\n",path);
 	else{
-		printf("state:%lx\n",cpu.pc);
+		fwrite(&cpu, 33*8, 1, p);
 
 	}
 	fclose(p);
