@@ -3,6 +3,7 @@
 
 #include <fs.h>
 #include <sys/time.h>
+#include <proc.h>
 
 void do_write(Context *c) {
  // uint8_t *buf=(uint8_t*)c->GPR3;
@@ -41,6 +42,11 @@ void do_lseek(Context *c) {
   c->GPRx = fs_lseek(c->GPR2, c->GPR3, c->GPR4);
 }
 
+extern void naive_uload(PCB *pcb, const char *filename);
+void do_execve(Context *c) {
+  naive_uload(NULL, (const char*)c->GPR2);
+}
+
 void do_gettimeofday(Context *c) {
   if(c->GPR2 == 0) {
 	  c->GPRx = io_read(AM_TIMER_UPTIME).us;
@@ -74,6 +80,7 @@ void do_syscall(Context *c) {
     case 7: do_close(c);break;
     case 8: do_lseek(c);break;
     case 9: do_brk(c);break;//printf("RET:%x\n",c->GPR2);break;
+    case 13: do_execve(c);break;
     case 19: do_gettimeofday(c);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }

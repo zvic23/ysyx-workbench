@@ -24,6 +24,13 @@ static uint64_t get_keyvalue(char *keychar){
   else if(strcmp(keychar, "0")==0)       return  SDLK_0;
   else if(strcmp(keychar, "1")==0)       return  SDLK_1;
   else if(strcmp(keychar, "2")==0)       return  SDLK_2;
+  else if(strcmp(keychar, "3")==0)       return  SDLK_3;
+  else if(strcmp(keychar, "4")==0)       return  SDLK_4;
+  else if(strcmp(keychar, "5")==0)       return  SDLK_5;
+  else if(strcmp(keychar, "6")==0)       return  SDLK_6;
+  else if(strcmp(keychar, "7")==0)       return  SDLK_7;
+  else if(strcmp(keychar, "8")==0)       return  SDLK_8;
+  else if(strcmp(keychar, "9")==0)       return  SDLK_9;
   else if(strcmp(keychar, "RIGHT")==0)   return  SDLK_RIGHT;
   else if(strcmp(keychar, "LEFT")==0)    return  SDLK_LEFT;
   else if(strcmp(keychar, "DOWN")==0)    return  SDLK_DOWN;
@@ -72,7 +79,6 @@ int SDL_PollEvent(SDL_Event *ev) {
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
-	printf("inwait\n");
   char event_buf[64];
   //int hh = NDL_PollEvent(event_buf,sizeof(event_buf));
   int receive_event = 0;

@@ -111,13 +111,15 @@ off_t _lseek(int fd, off_t offset, int whence) {
 int _gettimeofday(struct timeval *tv, struct timezone *tz) {
   tv->tv_usec = _syscall_(SYS_gettimeofday, 0, 0, 0);
   tv->tv_sec  = _syscall_(SYS_gettimeofday, 1, 0, 0);
+  return 0;
   //_exit(SYS_gettimeofday);
   //return 0;
 }
 
 int _execve(const char *fname, char * const argv[], char *const envp[]) {
-  _exit(SYS_execve);
-  return 0;
+  _syscall_(SYS_execve, fname, argv, envp);
+  //_exit(SYS_execve);
+  //return 0;
 }
 
 // Syscalls below are not used in Nanos-lite.
