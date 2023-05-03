@@ -224,6 +224,7 @@ extern uint64_t mtvec;
 		fwrite(&mcause, 8, 1, p);
 		fwrite(&mstatus, 8, 1, p);
 		fwrite(&mepc, 8, 1, p);
+		printf("mstatus:%lx\n",mstatus);
 	}
 	fclose(p);
 	return 0;
