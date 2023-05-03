@@ -31,7 +31,6 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 static bool is_skip_ref = false;
 static int skip_dut_nr_inst = 0;
 
-static long img_size_buf = 0;  //zsl: i add this
 
 // this is used to let ref skip instructions which
 // can not produce consistent behavior with NEMU
@@ -91,7 +90,6 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   ref_difftest_init(port);
   ref_difftest_memcpy(RESET_VECTOR, guest_to_host(RESET_VECTOR), img_size, DIFFTEST_TO_REF);
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
-  img_size_buf = img_size;
 }
 
 void syn_state_to_ref(){    //zsl:i add this function
