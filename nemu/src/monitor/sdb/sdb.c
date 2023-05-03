@@ -209,15 +209,14 @@ static int cmd_attach(char *args){
 	return 0;
 }
 
-
+extern uint64_t mepc,mcause,mstatus;
+extern uint64_t mtvec;
 static int cmd_save(char *args){
         char path_pre[100] = "/home/zsl/snapshot/";	
 	char *path = strcat(path_pre, args);
 	FILE *p = fopen(path, "wb");
 	if( p == NULL) printf("File %s open failed!\n",path);
 	else{
-extern uint64_t mepc,mcause,mstatus;
-extern uint64_t mtvec;
 		fwrite(&cpu, 33*8, 1, p);
 		fseek(p, 40*8, SEEK_SET);
 		fwrite(&mtvec, 8, 1, p);
@@ -237,8 +236,6 @@ static int cmd_load(char *args){
 	FILE *p = fopen(path, "rb");
 	if( p == NULL) printf("File %s open failed!\n",path);
 	else{
-extern uint64_t mepc,mcause,mstatus;
-extern uint64_t mtvec;
 		int done = fread(&cpu, 33*8, 1, p);
 		assert(done);
 		fseek(p, 40*8, SEEK_SET);
