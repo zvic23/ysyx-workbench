@@ -30,8 +30,6 @@ extern uint8_t ramdisk_start;
 //enum {SEEK_SET, SEEK_CUR, SEEK_END};
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-	uint64_t *reset = (uint64_t*)0x83000000;
-	memset(reset, 0, 0x4ffffff);
   int fd = fs_open(filename,0,0);
   //int fd = fs_open("/bin/hello",0,0);
 

@@ -23,6 +23,12 @@ static void sh_prompt() {
 }
 
 static void sh_handle_cmd(const char *cmd) {
+	if(strlen(cmd)==1) return;
+	//printf("cmd: %s  %d\n",cmd,strlen(cmd));
+	char cmd_buf[100];
+	strcpy(cmd_buf, cmd);
+	cmd_buf[strlen(cmd)-1] = '\0';   //zsl: delete the "enter" in the end
+	execve(cmd_buf, NULL, NULL);
 }
 
 void builtin_sh_run() {

@@ -20,7 +20,23 @@ static uint64_t get_keyvalue(char *keychar){
   else if(strcmp(keychar, "S")==0)       return  SDLK_S;
   else if(strcmp(keychar, "F")==0)       return  SDLK_F;
   else if(strcmp(keychar, "A")==0)       return  SDLK_A;
+  else if(strcmp(keychar, "B")==0)       return  SDLK_B;
+  else if(strcmp(keychar, "C")==0)       return  SDLK_C;
   else if(strcmp(keychar, "D")==0)       return  SDLK_D;
+  else if(strcmp(keychar, "H")==0)       return  SDLK_H;
+  else if(strcmp(keychar, "I")==0)       return  SDLK_I;
+  else if(strcmp(keychar, "L")==0)       return  SDLK_L;
+  else if(strcmp(keychar, "M")==0)       return  SDLK_M;
+  else if(strcmp(keychar, "N")==0)       return  SDLK_N;
+  else if(strcmp(keychar, "O")==0)       return  SDLK_O;
+  else if(strcmp(keychar, "P")==0)       return  SDLK_P;
+  else if(strcmp(keychar, "R")==0)       return  SDLK_R;
+  else if(strcmp(keychar, "T")==0)       return  SDLK_T;
+  else if(strcmp(keychar, "U")==0)       return  SDLK_U;
+  else if(strcmp(keychar, "V")==0)       return  SDLK_V;
+  else if(strcmp(keychar, "X")==0)       return  SDLK_X;
+  else if(strcmp(keychar, "Y")==0)       return  SDLK_Y;
+  else if(strcmp(keychar, "Z")==0)       return  SDLK_Z;
   else if(strcmp(keychar, "0")==0)       return  SDLK_0;
   else if(strcmp(keychar, "1")==0)       return  SDLK_1;
   else if(strcmp(keychar, "2")==0)       return  SDLK_2;
@@ -40,6 +56,8 @@ static uint64_t get_keyvalue(char *keychar){
   else if(strcmp(keychar, "ESCAPE")==0)  return  SDLK_ESCAPE;
   else if(strcmp(keychar, "LALT")==0)    return  SDLK_LALT;
   else if(strcmp(keychar, "RALT")==0)    return  SDLK_RALT;
+  else if(strcmp(keychar, "BACKSPACE")==0)    return  SDLK_BACKSPACE;
+  else if(strcmp(keychar, "SLASH")==0)    return  SDLK_SLASH;
   else return -1;
 }
 

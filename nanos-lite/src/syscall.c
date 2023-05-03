@@ -5,6 +5,11 @@
 #include <sys/time.h>
 #include <proc.h>
 
+extern void naive_uload(PCB *pcb, const char *filename);
+void do_exit(Context *c) {
+  naive_uload(NULL, "/bin/nterm");
+}
+
 void do_write(Context *c) {
  // uint8_t *buf=(uint8_t*)c->GPR3;
  // if(c->GPR2==1 || c->GPR2==2){
@@ -42,7 +47,7 @@ void do_lseek(Context *c) {
   c->GPRx = fs_lseek(c->GPR2, c->GPR3, c->GPR4);
 }
 
-extern void naive_uload(PCB *pcb, const char *filename);
+//extern void naive_uload(PCB *pcb, const char *filename);
 void do_execve(Context *c) {
   naive_uload(NULL, (const char*)c->GPR2);
 }
@@ -72,7 +77,7 @@ void do_syscall(Context *c) {
   }
 
   switch (a[0]) {
-    case 0: halt(a[1]);break;
+    case 0: do_exit(c);break;
     case 1: yield();break;
     case 2: do_open(c);break;
     case 3: do_read(c);break;
