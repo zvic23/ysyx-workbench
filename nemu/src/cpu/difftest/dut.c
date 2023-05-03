@@ -110,7 +110,7 @@ extern uint64_t mtvec;
   ref_difftest_regcpy(&csr_buf, DIFFTEST_TO_REF);
   ref_difftest_exec(4);
 
-  ref_difftest_memcpy(RESET_VECTOR, guest_to_host(RESET_VECTOR), img_size_buf, DIFFTEST_TO_REF);
+  ref_difftest_memcpy(RESET_VECTOR, guest_to_host(RESET_VECTOR), 0x7ffffff, DIFFTEST_TO_REF);
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
 }
 
