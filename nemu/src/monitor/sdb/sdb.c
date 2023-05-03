@@ -210,9 +210,11 @@ static int cmd_attach(char *args){
 }
 
 
-static int cmd_save(char *args){  
-	FILE *p = fopen(args, "wb");
-	if( p == NULL) printf("File %s open failed!\n",args);
+static int cmd_save(char *args){
+        char path_pre[] = "/home/zsl/snapshot/";	
+	char *path = strcat(path_pre, args);
+	FILE *p = fopen(path, "wb");
+	if( p == NULL) printf("File %s open failed!\n",path);
 	else{
 		printf("state:%lx\n",cpu.pc);
 
