@@ -211,7 +211,7 @@ static int cmd_attach(char *args){
 
 
 static int cmd_save(char *args){
-	FILE *p = fopen(args, "w+");
+	FILE *p = fopen(args, "wb+");
 	if( p == NULL) printf("File %s open failed!\n",args);
 	else{
 		printf("state:%lx\n",cpu.pc);
