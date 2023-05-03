@@ -90,7 +90,7 @@ size_t fs_read(int fd, void *buf, size_t len){
 		else len_fix = len;
 		ramdisk_read(buf, f_offset+position[fd], len_fix);
 		char a[50];
-		sprintf(a, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		sprintf(a, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		//printf("read   fd: %d  position: %d  offset:%d   len: %d  len_fix: %d\n",fd,position[fd],f_offset,len,len_fix);
 		position[fd] += len_fix;
 		return len_fix;
