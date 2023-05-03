@@ -232,9 +232,29 @@ extern uint64_t mtvec;
 }
 
 static int cmd_load(char *args){
-	detach_difftest = 0;
-	syn_state_to_ref();
-	printf("difftest on!!\n");
+        char path_pre[100] = "/home/zsl/snapshot/";	
+	char *path = strcat(path_pre, args);
+	FILE *p = fopen(path, "rb");
+	if( p == NULL) printf("File %s open failed!\n",path);
+	else{
+extern uint64_t mepc,mcause,mstatus;
+extern uint64_t mtvec;
+		int done = fread(&cpu, 33*8, 1, p);
+		assert(done);
+		fseek(p, 40*8, SEEK_SET);
+		done = fread(&mtvec, 8, 1, p);
+		assert(done);
+		done = fread(&mcause, 8, 1, p);
+		assert(done);
+		done = fread(&mstatus, 8, 1, p);
+		assert(done);
+		done = fread(&mepc, 8, 1, p);
+		assert(done);
+		fseek(p, 50*8, SEEK_SET);
+		done = fread(guest_to_host(RESET_VECTOR), 0x7ffffff, 1, p);
+		assert(done);
+	}
+	fclose(p);
 	return 0;
 }
 
