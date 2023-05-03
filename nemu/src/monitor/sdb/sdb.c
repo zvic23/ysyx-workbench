@@ -203,7 +203,7 @@ static int cmd_detach(char *args){
 extern void syn_state_to_ref();
 static int cmd_attach(char *args){
 	detach_difftest = 0;
-	//syn_state_to_ref();
+	syn_state_to_ref();
 	return 0;
 }
 

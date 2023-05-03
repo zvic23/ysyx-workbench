@@ -98,8 +98,8 @@ void syn_state_to_ref(){    //zsl:i add this function
   CPU_state csr_buf;
 extern uint64_t mepc,mcause,mstatus;
 extern uint64_t mtvec;
-  csr_buf.a0 = mtvec;    csr_buf.a1 = mcause;  
-  csr_buf.a2 = mstatus;  csr_buf.a3 = mepc;
+  csr_buf.gpr[10] = mtvec;    csr_buf.gpr[11] = mcause;  
+  csr_buf.gpr[12] = mstatus;  csr_buf.gpr[13] = mepc;
   csr_buf.pc = RESET_VECTOR;
   uint32_t buf[4];
   buf[0]=0x30551073;     //  0x305 01010 001 00000 1110011    0x30551073
