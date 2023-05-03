@@ -194,9 +194,18 @@ static int cmd_d(char *args){
 	return 0;
 }
 
+int detach_difftest = 0;
+static int cmd_detach(char *args){
+	detach_difftest = 1;
+	return 0;
+}
 
-
-
+extern void syn_state_to_ref();
+static int cmd_attach(char *args){
+	detach_difftest = 0;
+	syn_state_to_ref();
+	return 0;
+}
 
 
 
@@ -219,6 +228,8 @@ static struct {
   { "t", "test exprsstion evaluation", cmd_t },
   { "w", "set watchpoint", cmd_w },
   { "d", "delete watchpoint", cmd_d },
+  { "dt", "turn off difftest", cmd_detach },
+  { "at", "turn on difftest", cmd_attach },
 };
 
 #define NR_CMD ARRLEN(cmd_table)

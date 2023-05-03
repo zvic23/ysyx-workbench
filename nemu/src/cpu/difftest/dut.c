@@ -31,6 +31,8 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 static bool is_skip_ref = false;
 static int skip_dut_nr_inst = 0;
 
+static long img_size_buf = 0;  //zsl: i add this
+
 // this is used to let ref skip instructions which
 // can not produce consistent behavior with NEMU
 void difftest_skip_ref() {
@@ -89,6 +91,27 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   ref_difftest_init(port);
   ref_difftest_memcpy(RESET_VECTOR, guest_to_host(RESET_VECTOR), img_size, DIFFTEST_TO_REF);
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
+  img_size_buf = img_size;
+}
+
+void syn_state_to_ref(){    //zsl:i add this function
+  CPU_state csr_buf;
+extern uint64_t mepc,mcause,mstatus;
+extern uint64_t mtvec;
+  csr_buf.a0 = mtvec;    csr_buf.a1 = mcause;  
+  csr_buf.a2 = mstatus;  csr_buf.a3 = mepc;
+  csr_buf.pc = RESET_VECTOR;
+  uint32_t buf[4];
+  buf[0]=0x30551073;     //  0x305 01010 001 00000 1110011    0x30551073
+  buf[1]=0x34259073;     //  0x342 01011 001 00000 1110011    0x34259073
+  buf[2]=0x30061073;     //  0x300 01100 001 00000 1110011    0x30061073
+  buf[3]=0x34169073;     //  0x341 01101 001 00000 1110011    0x34169073
+  ref_difftest_memcpy(RESET_VECTOR, buf, 16, DIFFTEST_TO_REF);
+  ref_difftest_regcpy(&csr_buf, DIFFTEST_TO_REF);
+  ref_difftest_exec(4);
+
+  ref_difftest_memcpy(RESET_VECTOR, guest_to_host(RESET_VECTOR), img_size_buf, DIFFTEST_TO_REF);
+  ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
 }
 
 static void checkregs(CPU_state *ref, vaddr_t pc) {
@@ -100,6 +123,9 @@ static void checkregs(CPU_state *ref, vaddr_t pc) {
 }
 
 void difftest_step(vaddr_t pc, vaddr_t npc) {
+  extern int detach_difftest;
+  if(detach_difftest == 1) return;
+
   CPU_state ref_r;
 
   if (skip_dut_nr_inst > 0) {
