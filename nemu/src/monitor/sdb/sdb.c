@@ -197,6 +197,7 @@ static int cmd_d(char *args){
 int detach_difftest = 0;
 static int cmd_detach(char *args){
 	detach_difftest = 1;
+	printf("difftest off!!\n");
 	return 0;
 }
 
@@ -204,6 +205,7 @@ extern void syn_state_to_ref();
 static int cmd_attach(char *args){
 	detach_difftest = 0;
 	syn_state_to_ref();
+	printf("difftest on!!\n");
 	return 0;
 }
 
