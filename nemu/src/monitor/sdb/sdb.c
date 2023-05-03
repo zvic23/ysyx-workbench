@@ -224,7 +224,8 @@ extern uint64_t mtvec;
 		fwrite(&mcause, 8, 1, p);
 		fwrite(&mstatus, 8, 1, p);
 		fwrite(&mepc, 8, 1, p);
-		printf("mstatus:%lx\n",mstatus);
+		fseek(p, 50*8, SEEK_SET);
+		fwrite(guest_to_host(RESET_VECTOR), 0x7ffffff, 1, p);
 	}
 	fclose(p);
 	return 0;
