@@ -211,7 +211,7 @@ static int cmd_attach(char *args){
 
 
 static int cmd_save(char *args){
-        char path_pre[] = "/home/zsl/snapshot/";	
+        char path_pre[100] = "/home/zsl/snapshot/";	
 	char *path = strcat(path_pre, args);
 	FILE *p = fopen(path, "wb");
 	if( p == NULL) printf("File %s open failed!\n",path);
