@@ -216,8 +216,8 @@ static int cmd_save(char *args){
 	FILE *p = fopen(path, "wb");
 	if( p == NULL) printf("File %s open failed!\n",path);
 	else{
-		fwrite(&cpu, 33*8, 1, p);
-
+		int a =fwrite(&cpu, 33*8, 1, p);
+		printf("a = %d\n",a);
 	}
 	fclose(p);
 	return 0;
