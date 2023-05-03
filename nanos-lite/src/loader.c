@@ -30,6 +30,8 @@ extern uint8_t ramdisk_start;
 //enum {SEEK_SET, SEEK_CUR, SEEK_END};
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
+	uint64_t *reset = (uint64_t*)0x83000000;
+	memset(reset, 0, 0x4ffffff);
   int fd = fs_open(filename,0,0);
   //int fd = fs_open("/bin/hello",0,0);
 
@@ -99,7 +101,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		  printf("off=%lx  vaddr=%lx  filesz=%lx  memsz=%lx  addr=%lx  fileend:%lx   memend:%lx\n",p_offset,p_vaddr,p_filesz,p_memsz,addr,p_vaddr+p_filesz,p_vaddr+p_memsz);
 
   	          fs_lseek(fd, p_offset, SEEK_SET);
-		  memset(addr, 0, p_filesz);
   	          fs_read(fd, addr, p_filesz);
 		  //memcpy(addr, &ramdisk_start+p_offset+400143, p_filesz);
 		  memset((void*)(p_vaddr+p_filesz), 0, p_memsz-p_filesz);
