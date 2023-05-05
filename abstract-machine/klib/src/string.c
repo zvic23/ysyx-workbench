@@ -79,6 +79,8 @@ void *memcpy(void *out, const void *in, size_t n) {
   uint8_t *dest = (uint8_t*)out;
   uint8_t *src  = (uint8_t*)in ;
   for(size_t i=0; i<n ; i++){
+	  uint64_t add = (uint64_t)&dest[i];
+	  if(add==0x8302c158)printf("yyyyy  %x   %x\n",dest[i],src[i]);
 	  dest[i]=src[i];
   }
   return dest;
