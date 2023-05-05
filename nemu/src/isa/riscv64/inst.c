@@ -191,21 +191,21 @@ static int decode_exec(Decode *s) {
 //	if(BITS(src1,63,63)==BITS(src2,63,63))match=(src1<src2)?1:0;
 //	if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==1)?1:0;
 //	s->dnpc = (match)?(s->pc+imm):s->dnpc);     //!!!!!have doubt and to be optimized
-//  INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, sword_t src1_s=src1; sword_t src2_s=src2;R(dest) = (src1_s<src2_s)?1:0);
-  INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, word_t match=0;
-	if(BITS(src1,63,63)==BITS(src2,63,63))match=(src1<src2)?1:0;
-	if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==1)?1:0;
-	R(dest) = (match)?1:0);     //!!!!!to be optimized
+  INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, sword_t src1_s=src1; sword_t src2_s=src2;R(dest) = (src1_s<src2_s)?1:0);
+//  INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, word_t match=0;
+//	if(BITS(src1,63,63)==BITS(src2,63,63))match=(src1<src2)?1:0;
+//	if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==1)?1:0;
+//	R(dest) = (match)?1:0);     //!!!!!to be optimized
 
   INSTPAT("??????? ????? ????? 001 ????? 00000 11", lh     , I, R(dest) = SEXT(Mr(src1 + imm, 2),16));
   INSTPAT("??????? ????? ????? 101 ????? 00000 11", lhu    , I, R(dest) = Mr(src1 + imm, 2));
   INSTPAT("0100000 ????? ????? 000 ????? 01110 11", subw   , R, R(dest) = SEXT(BITS(BITS(src1,31,0)-BITS(src2,31,0),31,0), 32));
 
   INSTPAT("0000000 ????? ????? 001 ????? 00110 11", slliw  , I, R(dest) = SEXT(BITS(src1 << BITS(imm, 4, 0),31,0),32));
-  INSTPAT("0100000 ????? ????? 101 ????? 00110 11", sraiw  , I, sword_t src1_32s=BITS(src1,31,0);  word_t shamt=BITS(imm,4,0);R(dest)=SEXT(BITS(src1_32s,31,0)>>shamt,32));
-//  INSTPAT("0100000 ????? ????? 101 ????? 00110 11", sraiw  , I, word_t shamt=BITS(imm,4,0);word_t src1_s=BITS(src1,31,0)>>shamt;
-//	R(dest)=(BITS(src1,31,31)==1)?((BITS(0xffffffff,shamt-1,0)<<(32-shamt))|src1_s):src1_s;
-//	R(dest)=SEXT(R(dest),32));  //!!!!!!!have doubt 
+//  INSTPAT("0100000 ????? ????? 101 ????? 00110 11", sraiw  , I, sword_t src1_32s=BITS(src1,31,0);  word_t shamt=BITS(imm,4,0);R(dest)=SEXT(BITS(src1_32s,31,0)>>shamt,32));
+  INSTPAT("0100000 ????? ????? 101 ????? 00110 11", sraiw  , I, word_t shamt=BITS(imm,4,0);word_t src1_s=BITS(src1,31,0)>>shamt;
+	R(dest)=(BITS(src1,31,31)==1)?((BITS(0xffffffff,shamt-1,0)<<(32-shamt))|src1_s):src1_s;
+	R(dest)=SEXT(R(dest),32));  //!!!!!!!have doubt 
 
   INSTPAT("0000001 ????? ????? 000 ????? 01100 11", mul    , R, R(dest) = src1 * src2);
 
