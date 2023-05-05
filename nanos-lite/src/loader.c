@@ -100,7 +100,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
   	          fs_lseek(fd, p_offset, SEEK_SET);
   	          int a = fs_read(fd, addr, p_filesz);
-		  printf("size = %d\n",a);
+		  printf("size = %x\n",a);
 		  //memcpy(addr, &ramdisk_start+p_offset+400143, p_filesz);
 		  memset((void*)(p_vaddr+p_filesz), 0, p_memsz-p_filesz);
 		  printf("%d load over\n",i);
