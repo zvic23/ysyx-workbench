@@ -82,7 +82,7 @@ void *memcpy(void *out, const void *in, size_t n) {
   for(i=0; i<n ; i++){
 	  dest[i]=src[i];
   }
-  printf("i=%x\n");
+  printf("i=%x\n",i);
   return dest;
   //panic("Not implemented");
 }
