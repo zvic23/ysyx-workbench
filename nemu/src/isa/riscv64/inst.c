@@ -202,9 +202,10 @@ static int decode_exec(Decode *s) {
   INSTPAT("0100000 ????? ????? 000 ????? 01110 11", subw   , R, R(dest) = SEXT(BITS(BITS(src1,31,0)-BITS(src2,31,0),31,0), 32));
 
   INSTPAT("0000000 ????? ????? 001 ????? 00110 11", slliw  , I, R(dest) = SEXT(BITS(src1 << BITS(imm, 4, 0),31,0),32));
-  INSTPAT("0100000 ????? ????? 101 ????? 00110 11", sraiw  , I, word_t shamt=BITS(imm,4,0);word_t src1_s=BITS(src1,31,0)>>shamt;
-	R(dest)=(BITS(src1,31,31)==1)?((BITS(0xffffffff,shamt-1,0)<<(32-shamt))|src1_s):src1_s;
-	R(dest)=SEXT(R(dest),32));  //!!!!!!!have doubt 
+  INSTPAT("0100000 ????? ????? 101 ????? 00110 11", sraiw  , I, sword_t src1_32s=BITS(src1,31,0);  word_t shamt=BITS(imm,4,0);R(dest)=SEXT(BITS(src1_32s,31,0)>>shamt,32));
+//  INSTPAT("0100000 ????? ????? 101 ????? 00110 11", sraiw  , I, word_t shamt=BITS(imm,4,0);word_t src1_s=BITS(src1,31,0)>>shamt;
+//	R(dest)=(BITS(src1,31,31)==1)?((BITS(0xffffffff,shamt-1,0)<<(32-shamt))|src1_s):src1_s;
+//	R(dest)=SEXT(R(dest),32));  //!!!!!!!have doubt 
 
   INSTPAT("0000001 ????? ????? 000 ????? 01100 11", mul    , R, R(dest) = src1 * src2);
 
