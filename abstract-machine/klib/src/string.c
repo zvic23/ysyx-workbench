@@ -17,8 +17,6 @@ size_t strlen(const char *s) {
 }
 
 char *strcpy(char *dst, const char *src) {
-	uint64_t a = (uint64_t)dst;
-	if(a>0x81cfb000&&a<0x81cfb100)printf("strcpy!!!\n");
   size_t src_len = strlen(src);
 
   for (size_t i = 0; i < src_len; i++){
@@ -34,8 +32,6 @@ char *strncpy(char *dst, const char *src, size_t n) {
 }
 
 char *strcat(char *dst, const char *src) {
-	uint64_t a = (uint64_t)dst;
-	if(a>0x81cfb000&&a<0x81cfb100)printf("strcat!!!\n");
   size_t dst_len = strlen(dst);
   size_t src_len = strlen(src);
   
@@ -67,8 +63,6 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 }
 
 void *memset(void *s, int c, size_t n) {
-	uint64_t h = (uint64_t)s;
-	if(h>0x81cfb000&&h<0x81cfb100)printf("set!!!\n");
   char *a = s;                      //zsl: char can be replaced by uint8_t
   for(size_t i=0; i<n; i++){
 	  a[i]=c;
