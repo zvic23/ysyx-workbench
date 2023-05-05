@@ -366,8 +366,7 @@ struct figure eval(int p, int q){
 	       	  	addrhex = addrhex+(addr%10)*pow(16,i);
 	       	  	addr = addr/10;
 	       	}
-		uint64_t a = 0x81cfb000;
-		uint64_t value = paddr_read(a,1);
+		uint64_t value = paddr_read(addrhex,1);
 		//printf("aaa %lx\n", value);
 		struct figure number;
 	        number.sign=0;
