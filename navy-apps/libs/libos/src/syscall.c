@@ -83,7 +83,7 @@ void *_sbrk(intptr_t increment) {
 
 	  char buf[20];
 	  sprintf(buf , "break %lx\n", program_break_old);
-	  _write(1,buf,9);
+	  _write(1,buf,20);
 	  return (void *)program_break_old;
   } 
   else return (void *)-1;
