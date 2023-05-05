@@ -186,16 +186,16 @@ static int decode_exec(Decode *s) {
 //	if(BITS(src1,31,31)!=BITS(src2,31,31))remainder=(remainder^0xffffffff)+1;//|0x80000000;
 //	R(dest) = SEXT(remainder,32));               //!!!!!have doubt and to be optimizied    this inst is copy-paste
 						     
-//  INSTPAT("??????? ????? ????? 100 ????? 11000 11", blt    , B, sword_t src1_s=src1; sword_t src2_s=src2; s->dnpc = (src1_s<src2_s)?(s->pc+imm):s->dnpc);
-  INSTPAT("??????? ????? ????? 100 ????? 11000 11", blt    , B, word_t match=0;
-	if(BITS(src1,63,63)==BITS(src2,63,63))match=(src1<src2)?1:0;
-	if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==1)?1:0;
-	s->dnpc = (match)?(s->pc+imm):s->dnpc);     //!!!!!have doubt and to be optimized
-  INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, sword_t src1_s=src1; sword_t src2_s=src2;R(dest) = (src1_s<src2_s)?1:0);
-//  INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, word_t match=0;
+  INSTPAT("??????? ????? ????? 100 ????? 11000 11", blt    , B, sword_t src1_s=src1; sword_t src2_s=src2; s->dnpc = (src1_s<src2_s)?(s->pc+imm):s->dnpc);
+//  INSTPAT("??????? ????? ????? 100 ????? 11000 11", blt    , B, word_t match=0;
 //	if(BITS(src1,63,63)==BITS(src2,63,63))match=(src1<src2)?1:0;
 //	if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==1)?1:0;
-//	R(dest) = (match)?1:0);     //!!!!!to be optimized
+//	s->dnpc = (match)?(s->pc+imm):s->dnpc);     //!!!!!have doubt and to be optimized
+//  INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, sword_t src1_s=src1; sword_t src2_s=src2;R(dest) = (src1_s<src2_s)?1:0);
+  INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, word_t match=0;
+	if(BITS(src1,63,63)==BITS(src2,63,63))match=(src1<src2)?1:0;
+	if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==1)?1:0;
+	R(dest) = (match)?1:0);     //!!!!!to be optimized
 
   INSTPAT("??????? ????? ????? 001 ????? 00000 11", lh     , I, R(dest) = SEXT(Mr(src1 + imm, 2),16));
   INSTPAT("??????? ????? ????? 101 ????? 00000 11", lhu    , I, R(dest) = Mr(src1 + imm, 2));
