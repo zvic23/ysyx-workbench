@@ -22,7 +22,7 @@ size_t ramdisk_write(const void *buf, size_t offset, size_t len) {
   memcpy(&ramdisk_start + offset, buf, len);
   uint64_t add0 = (uint64_t)&ramdisk_start + offset ;
   uint64_t add1 = (uint64_t)&ramdisk_start + offset +len;
-  if(add0 < 0x81cfb000 && add1 > 0x81cfb000) printf("write!!\n");
+  if(add0 < 0x81cfb000 && add1 > 0x81cfb000) printf("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggwrite!!\n");
   return len;
 }
 
