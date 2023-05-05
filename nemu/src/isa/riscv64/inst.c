@@ -168,13 +168,14 @@ static int decode_exec(Decode *s) {
   INSTPAT("??????? ????? ????? 010 ????? 01000 11", sw     , S, Mw(src1 + imm, 4, src2));
 
   INSTPAT("0000001 ????? ????? 000 ????? 01110 11", mulw   , R, R(dest) = SEXT(BITS(BITS(src1,31,0)*BITS(src2,31,0),31,0),32));
-  INSTPAT("0000001 ????? ????? 100 ????? 01110 11", divw   , R,	word_t src1_32=BITS(src1,31,0);word_t src2_32=BITS(src2,31,0);word_t quotient=0;word_t src1_32_cpl=(src1_32^0xffffffff)+1; word_t src2_32_cpl=(src2_32^0xffffffff)+1; 
-	if(BITS(src1,31,31)==BITS(src2,31,31)&&BITS(src1,31,31)==0)quotient=src1_32/src2_32;
-	if(BITS(src1,31,31)==BITS(src2,31,31)&&BITS(src1,31,31)==1)quotient=src1_32_cpl/src2_32_cpl;
-	if(BITS(src1,31,31)!=BITS(src2,31,31)&&BITS(src1,31,31)==0)quotient=src1_32/src2_32_cpl;
-	if(BITS(src1,31,31)!=BITS(src2,31,31)&&BITS(src1,31,31)==1)quotient=src1_32_cpl/src2_32;
-	if(BITS(src1,31,31)!=BITS(src2,31,31))quotient=(quotient^0xffffffff)+1;//|0x80000000;
-	R(dest) = SEXT(quotient,32));               //!!!!!have doubt and to be optimizied 
+  INSTPAT("0000001 ????? ????? 100 ????? 01110 11", divw   , R,	sword_t src1_32s=BITS(src1,31,0);sword_t src2_32s=BITS(src2,31,0);sword_t quotient=src1_32s/src2_32s;R(dest) = SEXT(quotient,32)); 
+//  INSTPAT("0000001 ????? ????? 100 ????? 01110 11", divw   , R,	word_t src1_32=BITS(src1,31,0);word_t src2_32=BITS(src2,31,0);word_t quotient=0;word_t src1_32_cpl=(src1_32^0xffffffff)+1; word_t src2_32_cpl=(src2_32^0xffffffff)+1; 
+//	if(BITS(src1,31,31)==BITS(src2,31,31)&&BITS(src1,31,31)==0)quotient=src1_32/src2_32;
+//	if(BITS(src1,31,31)==BITS(src2,31,31)&&BITS(src1,31,31)==1)quotient=src1_32_cpl/src2_32_cpl;
+//	if(BITS(src1,31,31)!=BITS(src2,31,31)&&BITS(src1,31,31)==0)quotient=src1_32/src2_32_cpl;
+//	if(BITS(src1,31,31)!=BITS(src2,31,31)&&BITS(src1,31,31)==1)quotient=src1_32_cpl/src2_32;
+//	if(BITS(src1,31,31)!=BITS(src2,31,31))quotient=(quotient^0xffffffff)+1;//|0x80000000;
+//	R(dest) = SEXT(quotient,32));               //!!!!!have doubt and to be optimizied 
 						    
   INSTPAT("0000001 ????? ????? 110 ????? 01110 11", remw   , R, word_t src1_32=BITS(src1,31,0);word_t src2_32=BITS(src2,31,0);word_t remainder=0;word_t src1_32_cpl=(src1_32^0xffffffff)+1; word_t src2_32_cpl=(src2_32^0xffffffff)+1; 
 	if(BITS(src1,31,31)==BITS(src2,31,31)&&BITS(src1,31,31)==0)remainder=src1_32%src2_32;
