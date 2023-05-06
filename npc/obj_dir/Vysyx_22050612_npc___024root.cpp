@@ -111,7 +111,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                 : ((0x32U == vlSelf->ysyx_22050612_npc__DOT__opcode)
                     ? vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0
                     : ((0x200000U == vlSelf->ysyx_22050612_npc__DOT__opcode)
-                        ? 1ULL : 0ULL)));
+                        ? 0xbULL : 0ULL)));
     }
     if (vlSelf->rst) {
         vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mepc = 0ULL;
