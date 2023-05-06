@@ -13,11 +13,8 @@
 #include "include/device.h"
 
 #include "include/generated/autoconf.h"
+#include "include/common.h"
 
-#define GREEN "\33[1;32m"
-#define RED   "\33[1;31m"
-#define BLUE  "\33[1;34m"
-#define NONE  "\33[0m"                //zsl:offer color for printf
 
 #include "verilated_dpi.h"            //zsl:for printf the gpr
 
