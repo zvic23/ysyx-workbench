@@ -263,7 +263,7 @@ void execute(int n){
 
 
 int main() {
-  if(1) load_img();
+  if(0) load_img();
   else built_in_program();
 
   sim_init();
