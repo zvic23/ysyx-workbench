@@ -43,6 +43,7 @@ VM_USER_LDLIBS = \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
+	cpu-exec \
 	device \
 	vga \
 	dut \
@@ -57,6 +58,7 @@ VM_USER_CLASSES = \
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
 	csrc \
+	csrc/cpu \
 	csrc/device \
 	csrc/infrastructure \
 	csrc/memory \
@@ -73,6 +75,8 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
+cpu-exec.o: csrc/cpu/cpu-exec.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 device.o: csrc/device/device.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 vga.o: csrc/device/vga.cpp

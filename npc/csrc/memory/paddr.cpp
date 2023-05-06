@@ -1,3 +1,5 @@
+//#include "svdpi.h"
+//#include "Vysyx_22050612_npc__Dpi.h"  //zsl:ebreak support (DPI-C)
 
 #include "verilated_dpi.h"            //zsl:for printf the gpr
 
