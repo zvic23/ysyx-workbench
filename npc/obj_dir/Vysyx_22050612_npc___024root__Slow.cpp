@@ -2470,10 +2470,8 @@ void Vysyx_22050612_npc___024root___settle__TOP__2(Vysyx_22050612_npc___024root*
                                                      ((9U 
                                                        == vlSelf->ysyx_22050612_npc__DOT__opcode)
                                                        ? 
-                                                      ((1U 
-                                                        & (IData)(
-                                                                  (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__result_alu0 
-                                                                   >> 0x3fU)))
+                                                      ((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 
+                                                        < ysyx_22050612_npc__DOT__exu__DOT__src2)
                                                         ? 
                                                        (ysyx_22050612_npc__DOT__imm_B 
                                                         + vlSelf->pc)
