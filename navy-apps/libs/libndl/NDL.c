@@ -17,12 +17,14 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
-  char buf_cache[65535];
+  char buf_cache[100];
   int fp = open("/dev/events", "r+");
   int succ = read(fp, buf_cache, 40);
   //if(succ)printf("succ=%d\n",succ);
-  strncpy(buf, buf_cache, len);
-  if(succ) return 1;
+  if(succ) {
+  	  strncpy(buf, buf_cache, len);
+	  return 1;
+  }
   else return 0;
 
 
@@ -76,8 +78,10 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	  //printf("i=%d\n",i);
           //memcpy(pixel_buf+x_mid+x+screen_w*(i+y_mid),&pixels[w*i],w*4);
           //memcpy(pixel_buf+screen_w*i,&pixels[w*i],w*4);
-	  lseek(fp,(x_mid+x+screen_w*(i+y_mid))*4,SEEK_SET);
-	  write(fp,&pixels[w*i],w*4);
+	  lseek(fp,(x_mid+x+screen_w*(i+y+y_mid))*4,SEEK_SET);
+	  write(fp,&pixels[canvas_w*(i+y)+x],w*4);
+	  //lseek(fp,(x_mid+x+screen_w*(i+y_mid))*4,SEEK_SET);
+	  //write(fp,&pixels[w*i],w*4);
   }
   //write(fp,pixel_buf,screen_w*screen_h*4);
   //write(fp,pixels,screen_w*screen_h*4);

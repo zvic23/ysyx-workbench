@@ -19,11 +19,14 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	//printf("dw=%d,dh=%d,rx=%d,ry=%d,rw=%d,rh=%d\n",dst->w,dst->h,dstrect->x,dstrect->y,dstrect->w,dstrect->h);
 	//printf("sw=%d,sh=%d\n",src->w,src->h);
 	if(dstrect == NULL){
+		//printf("dstrect null !!!!\n");
 		dstrect_x = 0; dstrect_y = 0;
 	}else{
+		//printf("dstrect not null !!!!\n");
 		dstrect_x = dstrect->x;  dstrect_y = dstrect->y;
 	}
 	if(srcrect == NULL){
+		//printf("srcrect  null !!!!\n");
 		srcrect_x = 0;     srcrect_y = 0;
 		srcrect_w = src_w; srcrect_h = src_h;
 	}else {
@@ -31,14 +34,26 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 		srcrect_x = srcrect->x;  srcrect_y = srcrect->y;
 		srcrect_w = srcrect->w;  srcrect_h = srcrect->h;
 	}
+	if((src->w == src->pitch && dst->w != dst->pitch) ||(src->w != src->pitch && dst->w == dst->pitch))printf("kkkk/n");
 	//printf("11  sw=%d,sh=%d\n",srcrect_w,srcrect_h);
-	uint32_t *src_p = (uint32_t*)src->pixels;
-	uint32_t *dst_p = (uint32_t*)dst->pixels;	
-	for(int i=0;i<srcrect_h;i++){
-		for(int j=0;j<srcrect_w;j++){
-			dst_p[(dstrect_y+i)*dst_w+dstrect_x+j]=src_p[(srcrect_y+i)*src_w+srcrect_x+j];
+	if(src->w == src->pitch){
+		uint8_t *src_p = (uint8_t*)src->pixels;
+		uint8_t *dst_p = (uint8_t*)dst->pixels;	
+		for(int i=0;i<srcrect_h;i++){
+			for(int j=0;j<srcrect_w;j++){
+				dst_p[(dstrect_y+i)*dst_w+dstrect_x+j]=src_p[(srcrect_y+i)*src_w+srcrect_x+j];
+			}
+		}
+	}else{
+		uint32_t *src_p = (uint32_t*)src->pixels;
+		uint32_t *dst_p = (uint32_t*)dst->pixels;	
+		for(int i=0;i<srcrect_h;i++){
+			for(int j=0;j<srcrect_w;j++){
+				dst_p[(dstrect_y+i)*dst_w+dstrect_x+j]=src_p[(srcrect_y+i)*src_w+srcrect_x+j];
+			}
 		}
 	}
+
 //	uint32_t src_buf[srcrect_w*srcrect_h];  //The app "menu" worked in nemu needs a large certain number in size, such as "400*300", instead of "srcrect_w*srcrect_h". But the other app like "nslider" and "nterm" in nemu don't need to change, why?
 //	uint32_t pst = 0;
 //	for(int i=0;i<srcrect_h;i++){
@@ -79,20 +94,40 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 //	int rect_w=dstrect->w;
 //	int rect_h=dstrect->h;
 //	printf("dw=%d,dh=%d,rx=%d,ry=%d,rw=%d,rh=%d\n",dst_w,dst_h,rect_x,rect_y,rect_w,rect_h);
-	uint32_t *dst_p = (uint32_t*)dst->pixels;
-//	printf("fill in\n");
+
+
+		//if(dst->w == dst->pitch) uint8_t *dst_p  = (uint8_t*)dst->pixels;
+		//else uint32_t *dst_p  = (uint32_t*) dst->pixels;
 	if(dstrect == NULL){
-		//for(int k=0;k<900*600;k++) dst->pixels[k]=color;
-		for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
+		if(dst->w == dst->pitch){
+			uint8_t  *dst_p  = (uint8_t*)  dst->pixels;
+			for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=(uint8_t)color;
+		}else{
+			uint32_t *dst_p  = (uint32_t*) dst->pixels;
+			for(int k=0;k<dst_w*dst_h;k++) dst_p[k]=color;
+		}
 	}
-//	else {
-//		for(int i=0;i<rect_h;i++){
-//			for(int j=0;j<rect_w;j++){
-//				dst_p[(rect_y+i)*dst_w+rect_x+j]=color;
-//			}
-//		}
-//	}
-//
+	else {		
+	        int rect_x=dstrect->x;   int rect_y=dstrect->y;
+	        int rect_w=dstrect->w;   int rect_h=dstrect->h;
+		if(dst->w == dst->pitch){
+		//	printf("color:%lx\n",color);
+			uint8_t  *dst_p  = (uint8_t*)  dst->pixels;
+			for(int i=0;i<rect_h;i++){
+				for(int j=0;j<rect_w;j++){
+					dst_p[(rect_y+i)*dst_w+rect_x+j]=(uint8_t)color;
+				}
+			}	
+		}else{
+			uint32_t *dst_p  = (uint32_t*) dst->pixels;
+			for(int i=0;i<rect_h;i++){
+				for(int j=0;j<rect_w;j++){
+					dst_p[(rect_y+i)*dst_w+rect_x+j]=color;
+				}
+			}	
+		}
+	}
+
 //	printf("fill out\n");
 	//printf("sdl fillrect not implement!\n");
 	//assert(0);
@@ -100,21 +135,55 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 //	printf("rect in \n");
+	//printf("ncolor:%x\n",s->format->palette->ncolors);
+	//printf("color:%p\n",s->format->palette->colors);
 //printf("x=%d,y=%d,w=%d,h=%d\n",x,y,w,h);
 //printf("pix:w=%d,h=%d\n",s->w,s->h);
 //printf("pix:pitch=%d\n",s->pitch);
 //printf("pix:format=%d\n",(s->format)->BytesPerPixel);
-//printf("pix:mask=%x\n",(s->format)->Rmask);
-//printf("pix:mask=%x\n",(s->format)->Gmask);
-//printf("pix:mask=%x\n",(s->format)->Bmask);
+//printf("pix:rmask=%x\n",(s->format)->Rmask);
+//printf("pix:gmask=%x\n",(s->format)->Gmask);
+//printf("pix:bmask=%x\n",(s->format)->Bmask);
+
+uint32_t *pixels_fix = malloc(400*300*4);
+  //uint32_t pixels_fix[400*300];           //zsl:if use this line, if can't not load pal in nterm in nemu
+  //uint32_t pixels_fix[s->w * s->h];       //zsl:it can't use variable value to initial the array, or nemu can't run correct in "pal" (but am-native can)
+  uint32_t *pixels;
+  if(s->w == s->pitch){
+	  uint32_t *palette =(uint32_t*)(s->format->palette->colors);
+	  for(int i=0;i<s->w * s->h;i++){
+		  uint32_t R = ((SDL_Color)palette[((uint8_t*)(s->pixels))[i]]).r;
+		  uint32_t G = ((SDL_Color)palette[((uint8_t*)(s->pixels))[i]]).g;
+		  uint32_t B = ((SDL_Color)palette[((uint8_t*)(s->pixels))[i]]).b;
+		  pixels_fix[i] = (R<<16) + (G<<8) + (B);
+		  //pixels_fix[i] = palette[((uint8_t*)(s->pixels))[i]];
+		  //uint32_t R = pixels_fix[i] & 0x00ff0000;
+		  //uint32_t B = pixels_fix[i] & 0xff;
+		  //pixels_fix[i] = pixels_fix[i] & 0x00ff00;
+		  //pixels_fix[i] = pixels_fix[i] | (R>>16);
+		  //pixels_fix[i] = pixels_fix[i] | (B<<16);
+	  }
+	  pixels = pixels_fix;
+  }else pixels = s->pixels;
+
+
   if(x==0&&y==0&&w==0&&h==0){
-	NDL_DrawRect(s->pixels,0,0,s->w,s->h);
+//	  printf("full\n");
+	NDL_DrawRect(pixels,0,0,s->w,s->h);
 	//NDL_DrawRect(s->pixels,0,0,400,300);
   }
   else {
-	NDL_DrawRect(s->pixels,x,y,w,h);
+//	  printf("not full   %d %d     %d %d %d %d\n",s->w,s->h,x,y,w,h);
+	NDL_DrawRect(pixels,x,y,w,h);
   }
-	//NDL_DrawRect(s->pixels,x,y,w,h);
+free(pixels_fix);
+//  if(x==0&&y==0&&w==0&&h==0){
+//	NDL_DrawRect(s->pixels,0,0,s->w,s->h);
+//	//NDL_DrawRect(s->pixels,0,0,400,300);
+//  }
+//  else {
+//	NDL_DrawRect(s->pixels,x,y,w,h);
+//  }
 
 //	printf("rect out\n");
 	

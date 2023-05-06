@@ -23,11 +23,20 @@ static void sh_prompt() {
 }
 
 static void sh_handle_cmd(const char *cmd) {
+	if(strlen(cmd)==1) return;
+	//printf("cmd: %s  %d\n",cmd,strlen(cmd));
+	char cmd_buf[100];
+	strcpy(cmd_buf, cmd);
+	cmd_buf[strlen(cmd)-1] = '\0';   //zsl: delete the "enter" in the end
+	execvp(cmd_buf, NULL);
+	//execve(cmd_buf, NULL, NULL);
 }
 
 void builtin_sh_run() {
   sh_banner();
   sh_prompt();
+
+  setenv("PATH", "/bin", 0);
 
   while (1) {
     SDL_Event ev;
