@@ -95,7 +95,7 @@ always @(*) begin
 	case (opcode)
     24'd49     : wdata_mcause=src1;
     24'd50     : wdata_mcause=result_alu0;
-    24'h200000 : wdata_mcause=64'hb;
+    24'h200000 : wdata_mcause=64'h1;
     default:   wdata_mcause=64'b0;
         endcase
 //mstatus control
