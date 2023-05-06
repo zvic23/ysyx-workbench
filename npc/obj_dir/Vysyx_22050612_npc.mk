@@ -48,6 +48,7 @@ VM_USER_CLASSES = \
 	dut \
 	trace \
 	main \
+	paddr \
 	expr \
 	sdb \
 	watchpoint \
@@ -58,6 +59,7 @@ VM_USER_DIR = \
 	csrc \
 	csrc/device \
 	csrc/infrastructure \
+	csrc/memory \
 	csrc/sdb \
 	csrc/utils \
 
@@ -80,6 +82,8 @@ dut.o: csrc/infrastructure/dut.c
 trace.o: csrc/infrastructure/trace.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 main.o: csrc/main.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+paddr.o: csrc/memory/paddr.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 expr.o: csrc/sdb/expr.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
