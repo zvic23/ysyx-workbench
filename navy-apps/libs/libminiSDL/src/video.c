@@ -146,7 +146,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 //printf("pix:bmask=%x\n",(s->format)->Bmask);
 
 uint32_t *pixels_fix = malloc(400*300*4);
-  //uint32_t pixels_fix[400*300];
+  //uint32_t pixels_fix[400*300];           //zsl:if use this line, if can't not load pal in nterm in nemu
   //uint32_t pixels_fix[s->w * s->h];       //zsl:it can't use variable value to initial the array, or nemu can't run correct in "pal" (but am-native can)
   uint32_t *pixels;
   if(s->w == s->pitch){
