@@ -123,7 +123,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 
 #ifdef CONFIG_MTRACE			
 	if(waddr >= CONFIG_MTRACE_START && waddr <= CONFIG_MTRACE_END){
-	  	printf("mtrace: write   addr:0x%llx(0x%llx)   data:0x%llx   wmask:%x     at pc=%lx    inst num=%lx\n",\
+	  	printf("mtrace: write   addr:0x%llx(0x%llx)   data:0x%llx   wmask:%x     at pc=%lx    inst num=%ld\n",\
 		waddr,waddr_set,wdata,wmask, cpu_gpr_set[32],g_nr_guest_inst);
 	} 
 #endif
