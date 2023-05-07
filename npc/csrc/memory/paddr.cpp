@@ -25,10 +25,11 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
 }
 
 extern uint64_t time_init;
+extern uint32_t i8042_data_io_handler();
 extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
-	if(raddr == 0xa0000048){
+	if(raddr == 0xa0000048){                         //rtc support
 		skip_difftest=1;
 		struct timeval time;
 		gettimeofday(&time,NULL);
@@ -36,6 +37,12 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
 		memcpy(rdata, &time_rtc, 8);
 		return;
 	}
+	else if(raddr == 0xa0000060){                    //keyboard support
+		uint32_t key = i8042_data_io_handler();
+		memcpy(rdata, &key, 4);
+	}
+
+
   	long long raddr_set = raddr & ~0x7ull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
 #ifdef CONFIG_MTRACE	
@@ -72,6 +79,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 			}
   		}
 	}
+
 
   	long long waddr_set = waddr & ~0x7ull;
   	for(int i=0;i<8;i++){
