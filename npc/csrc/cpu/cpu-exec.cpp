@@ -89,12 +89,12 @@ void one_cycle(){
   update_gpr_pc();
   if(skip_difftest == 1){
 	  printf("skip = 1  !\n");
+	  skip_difftest = 0;
 	  syn_gpr();
   }else {
 	  printf("skip = 0!!!\n");
 	  difftest_step();
   }
-	  skip_difftest = 0;
   top->clk = 0;
   top->eval();//step_and_dump_wave();
 
