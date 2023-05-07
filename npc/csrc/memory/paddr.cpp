@@ -52,7 +52,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
 	if(raddr == 0xa0000048){                         //rtc support
-		skip_difftest=1;
+		skip_difftest=2;
 		struct timeval time;
 		gettimeofday(&time,NULL);
 		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec - time_init;
