@@ -82,6 +82,11 @@ uint64_t skip_old = 0;
 void one_cycle(){
   itrace(top->pc, inst);
 //  top->eval();//step_and_dump_wave();
+
+  top->clk = 1;
+  top->eval();//step_and_dump_wave();
+
+  update_gpr_pc();
   if(skip_difftest == 1){
 	  printf("skip = 1  !         pc:%lx\n",cpu_gpr_set[32]);
 	  skip_difftest = 0;
@@ -90,11 +95,6 @@ void one_cycle(){
 	  printf("skip = 0!!!            pc:%lx\n",cpu_gpr_set[32]);
 	  difftest_step();
   }
-  top->clk = 1;
-  top->eval();//step_and_dump_wave();
-
-  update_gpr_pc();
-
   top->clk = 0;
   top->eval();//step_and_dump_wave();
 
