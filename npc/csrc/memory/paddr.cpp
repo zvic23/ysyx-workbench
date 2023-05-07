@@ -92,7 +92,6 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   if(waddr>=0x80000000){
 	if(waddr == 0xa00003f8){                         //uart support
 		skip_difftest=1;
-		printf("uart     \n");
 		putchar((char)wdata);
 		return;
 	}
