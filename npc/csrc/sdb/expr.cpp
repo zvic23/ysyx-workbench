@@ -379,12 +379,13 @@ struct figure eval(int p, int q){
 	else if((tokens[p].type==DEREF)&&((p+1==q)||(check_parentheses(p+1,q)))){   //zsl:dereference gets the value of an address
 		struct figure address = eval(p+1,q);
 		uint64_t addr = address.value;
-	        uint64_t addrhex=0;
-	       	for (int i=0;i<64;i++){
-	       	  	addrhex = addrhex+(addr%10)*pow(16,i);
-	       	  	addr = addr/10;
-	       	}
-		uint8_t value = host_read(addrhex,1);
+	        //uint64_t addrhex=0;
+	       	//for (int i=0;i<64;i++){
+	       	//  	addrhex = addrhex+(addr%10)*pow(16,i);
+	       	//  	addr = addr/10;
+	       	//}
+		uint8_t value = host_read(addr,1);
+		//uint8_t value = host_read(addrhex,1);
 		//printf("aaa %lx\n", value);
 		struct figure number;
 	        number.sign=0;
