@@ -53,7 +53,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   if(raddr>=0x80000000){
 	if(raddr == 0xa0000048){                         //rtc support
 		skip_difftest=1;
-		printf("rtc     ");
+		printf("rtc     \n");
 		struct timeval time;
 		gettimeofday(&time,NULL);
 		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec - time_init;
@@ -62,7 +62,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
 	}
 	else if(raddr == 0xa0000060){                    //keyboard support
 		skip_difftest=1;
-		printf("key     ");
+		printf("key     \n");
 		uint64_t key = i8042_data_io_handler();
 		//if(key)printf("key = %lx\n",key);
 		memcpy(rdata, &key, 8);
@@ -92,7 +92,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   if(waddr>=0x80000000){
 	if(waddr == 0xa00003f8){                         //uart support
 		skip_difftest=1;
-		printf("uart     ");
+		printf("uart     \n");
 		putchar((char)wdata);
 		return;
 	}
