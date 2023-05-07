@@ -91,10 +91,12 @@ void one_cycle(){
 
   update_gpr_pc();
   if(skip_difftest == 1){
+	  printf("skip = 1  !\n");
 	  skip_difftest = 2;
 	  difftest_step();
   }
   else if(skip_difftest==2){
+	  printf("skip = 2  !!\n");
 	  syn_gpr();
 	  skip_difftest=0;
   }else {
