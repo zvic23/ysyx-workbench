@@ -79,6 +79,7 @@ void difftest_step() {
 
 void syn_gpr(){
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
+  printf("pc  ===   %lx\n",cpu_gpr_set[32]);
 }
 #else
 void init_difftest(long img_size, int port){}
