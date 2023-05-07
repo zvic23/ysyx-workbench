@@ -20,6 +20,8 @@ f(UP) f(DOWN) f(LEFT) f(RIGHT) f(INSERT) f(DELETE) f(HOME) f(END) f(PAGEUP) f(PA
 
 #define _KEY_NAME(k) _KEY_##k,
 
+
+
 #define MAP(c, f) c(f)
 #define concat_temp(x, y) x ## y  
 #define concat(x, y) concat_temp(x, y)
@@ -93,4 +95,5 @@ void init_i8042() {
 //  add_mmio_map("keyboard", CONFIG_I8042_DATA_MMIO, i8042_data_port_base, 4, i8042_data_io_handler);
 //#endif
   //IFNDEF(CONFIG_TARGET_AM, init_keymap());
+init_keymap();
 }

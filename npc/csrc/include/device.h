@@ -11,8 +11,8 @@
 void init_vga();
 void vga_update_screen();
 
-//void init_i8042();
-//void send_key(uint8_t scancode, bool is_keydown);
+void init_i8042();
+void send_key(uint8_t scancode, bool is_keydown);
 
 void device_update();
 void init_device();
