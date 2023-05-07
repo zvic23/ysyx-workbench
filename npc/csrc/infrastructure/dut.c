@@ -58,7 +58,7 @@ void init_difftest(long img_size, int port) {
 }
 
 extern const char *regs[];
-extern int end;
+extern int npc_state;
 void difftest_step() {
   uint64_t ref_r[33];
 
@@ -68,7 +68,7 @@ void difftest_step() {
   for(int i=0;i<33;i++){
 	  if(ref_r[i] != cpu_gpr_set[i]){
 		  printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]);
-		  end = 2;
+		  npc_state = 3;
 		  return;
 	  }
   }

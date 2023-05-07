@@ -55,7 +55,7 @@ void update_gpr_pc(){
           cpu_gpr_set[32]=top->pc;
 }
 
-int end = 0;
+//int end = 0;
 void ebreak(int r){
 	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);
 
@@ -63,7 +63,7 @@ void ebreak(int r){
 		iringbuf_output();
 		printf(RED "HIT BAD TRAP\n" NONE);
 	}
-	end = 1;
+	//end = 1;
 	npc_state == END;
 
 }
