@@ -90,24 +90,8 @@ void one_cycle(){
   top->clk = 1;
   top->eval();//step_and_dump_wave();
 
-//  update_gpr_pc();
-//  if(skip_difftest == 1){
-//	  printf("skip = 1  !         pc:%lx\n",cpu_gpr_set[32]);
-//	  skip_difftest = 0;
-//	  syn_gpr();
-//  }else {
-//	  printf("skip = 0!!!            pc:%lx\n",cpu_gpr_set[32]);
-//	  difftest_step();
-//  }
-
-
   top->clk = 0;
   top->eval();//step_and_dump_wave();
-
-//  if(skip_difftest == 1){
-//	 skip_old = 1; 
-//	  skip_difftest = 0;
-//  }
 
 
   update_gpr_pc();
@@ -131,8 +115,6 @@ void one_cycle(){
 //  }else {
 //  	difftest_step();
 //  }
-
-
 
   device_update();
 }
