@@ -100,38 +100,45 @@ void one_cycle(){
   device_update();
 }
 
-int itrace_si = 0;
 uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
+
+void program_exec_statistics(){
+  	 struct timeval time_end;                   //get the time when program end
+  	 gettimeofday(&time_end,NULL);
+  	 g_timer = (time_end.tv_sec*1000000)+time_end.tv_usec - time_init;
+	 printf(BLUE "host time spent = %ld us\n" NONE,g_timer);
+	 printf(BLUE "total guest instructions = %ld \n" NONE,g_nr_guest_inst);
+	 printf(BLUE "simulation frequency = %ld inst/s\n" NONE,g_nr_guest_inst * 1000000 / g_timer);
+	 printf("execute has finished, please open npc again!\n");
+}
+
+
+
+
+
+int itrace_si = 0;
 void execute(int n){
   for(uint64_t i=0;i<n;i++){
 	  if(npc_state == END || npc_state == QUIT){
 	  //if(end == 1){
-  		  struct timeval time_end;                   //get the time when program end
-  		  gettimeofday(&time_end,NULL);
-  		  g_timer = (time_end.tv_sec*1000000)+time_end.tv_usec - time_init;
-		  printf(BLUE "host time spent = %ld us\n" NONE,g_timer);
-		  printf(BLUE "total guest instructions = %ld \n" NONE,g_nr_guest_inst);
-		  printf(BLUE "simulation frequency = %ld inst/s\n" NONE,g_nr_guest_inst * 1000000 / g_timer);
-		  printf("execute has finished, please open npc again!\n");
+		  program_exec_statistics();
 		  return;
 	  }
   	  else if(npc_state == ABORT){
   	  //else if(end == 2){
-  		  struct timeval time_end;                   //get the time when program end
-  		  gettimeofday(&time_end,NULL);
-  		  g_timer = (time_end.tv_sec*1000000)+time_end.tv_usec - time_init;
-		  printf(BLUE "host time spent = %ld us\n" NONE,g_timer);
-		  printf(BLUE "total guest instructions = %ld \n" NONE,g_nr_guest_inst);
-		  printf(BLUE "simulation frequency = %ld inst/s\n" NONE,g_nr_guest_inst * 1000000 / g_timer);
-		  printf("execute has finished, please open npc again!\n");
-		iringbuf_output();
-		printf(RED "ABORT\n" NONE);
-		return;
+		  printf(RED "ABORT\n" NONE);
+		  program_exec_statistics();
+		  iringbuf_output();
+		  return;
           }
 	  one_cycle();
     	  g_nr_guest_inst ++;
 	  if(itrace_si) itrace_printf_once();
+
+
+
+
 #ifdef CONFIG_WATCHPOINT            
 	  int wp_stop = check_wpchange();
 	  if(wp_stop)break;
