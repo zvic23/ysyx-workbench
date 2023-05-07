@@ -7,6 +7,7 @@
 
 
 uint8_t pmem[0x70000000];
+extern uint64_t cpu_gpr_set[33];
 
 uint32_t pmem_read(uint64_t addr){
   return *(uint32_t*)&pmem[addr-0x80000000];
@@ -121,8 +122,8 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 
 #ifdef CONFIG_MTRACE			
 	if(waddr >= CONFIG_MTRACE_START && waddr <= CONFIG_MTRACE_END){
-	  	printf("mtrace: write   addr:0x%llx(0x%llx)   data:0x%llx   wmask:%x\n",\
-		waddr,waddr_set,wdata,wmask);
+	  	printf("mtrace: write   addr:0x%llx(0x%llx)   data:0x%llx   wmask:%x     at pc=%lx\n",\
+		waddr,waddr_set,wdata,wmask, cpu_gpr_set[32]);
 	} 
 #endif
   }
