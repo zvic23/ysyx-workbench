@@ -384,7 +384,7 @@ struct figure eval(int p, int q){
 	       	  	addrhex = addrhex+(addr%10)*pow(16,i);
 	       	  	addr = addr/10;
 	       	}
-		uint8_t value = pmem_read(addrhex);
+		uint8_t value = host_read(addrhex,1);
 		//printf("aaa %lx\n", value);
 		struct figure number;
 	        number.sign=0;

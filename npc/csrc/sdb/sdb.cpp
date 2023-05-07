@@ -86,7 +86,7 @@ static int cmd_x(char *args){
 
    printf("%lx\n",result.value);
    for(int i=0;i<atoi(n);i++){
-      uint32_t mem = pmem_read(result.value+i*4);
+      uint32_t mem = host_read(result.value+i*4,4);
       printf(YELLOW "0x%lx: " NONE "%08x  ",result.value+i*4,mem); 
    }
    printf("\n");

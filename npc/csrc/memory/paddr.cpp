@@ -1,6 +1,3 @@
-//#include "svdpi.h"
-//#include "Vysyx_22050612_npc__Dpi.h"  //zsl:ebreak support (DPI-C)
-
 #include "verilated_dpi.h"            //zsl:for printf the gpr
 
 #include "../include/generated/autoconf.h"
@@ -15,6 +12,31 @@ uint8_t pmem[0x70000000];
 uint32_t pmem_read(uint64_t addr){
   return *(uint32_t*)&pmem[addr-0x80000000];
 }
+
+
+
+uint64_t host_read(uint64_t addr, int len) {
+  switch (len) {
+    case 1: return *(uint8_t  *)&pmem[addr-0x80000000];
+    case 2: return *(uint16_t *)&pmem[addr-0x80000000];
+    case 4: return *(uint32_t *)&pmem[addr-0x80000000];
+    case 8: return *(uint64_t *)&pmem[addr-0x80000000];
+    default: assert(0);
+  }
+}
+
+void host_write(uint64_t addr, int len, uint64_t data) {
+  switch (len) {
+    case 1: *(uint8_t  *)&pmem[addr-0x80000000] = data; return;
+    case 2: *(uint16_t *)&pmem[addr-0x80000000] = data; return;
+    case 4: *(uint32_t *)&pmem[addr-0x80000000] = data; return;
+    case 8: *(uint64_t *)&pmem[addr-0x80000000] = data; return;
+    default: assert(0);
+  }
+}
+
+
+
 
 extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
