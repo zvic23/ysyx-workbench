@@ -5,7 +5,6 @@
 
 #include <sys/time.h>
 
-int skip_difftest=0;
 
 uint8_t pmem[0x70000000];
 
@@ -45,6 +44,8 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
   }
 }
+
+int skip_difftest=0;
 
 extern uint64_t time_init;
 extern uint32_t i8042_data_io_handler();
@@ -92,7 +93,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   if(waddr>=0x80000000){
 	if(waddr == 0xa00003f8){                         //uart support
 		skip_difftest=1;
-		printf("uart     \n");
+		//printf("uart     \n");
 		putchar((char)wdata);
 		return;
 	}
