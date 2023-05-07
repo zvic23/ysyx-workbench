@@ -45,6 +45,7 @@ VM_USER_LDLIBS = \
 VM_USER_CLASSES = \
 	cpu-exec \
 	device \
+	keyboard \
 	vga \
 	dut \
 	trace \
@@ -78,6 +79,8 @@ VPATH += $(VM_USER_DIR)
 cpu-exec.o: csrc/cpu/cpu-exec.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 device.o: csrc/device/device.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+keyboard.o: csrc/device/keyboard.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 vga.o: csrc/device/vga.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<

@@ -20,6 +20,13 @@ f(UP) f(DOWN) f(LEFT) f(RIGHT) f(INSERT) f(DELETE) f(HOME) f(END) f(PAGEUP) f(PA
 
 #define _KEY_NAME(k) _KEY_##k,
 
+#define MAP(c, f) c(f)
+#define concat_temp(x, y) x ## y  
+#define concat(x, y) concat_temp(x, y)
+
+
+
+
 enum {
   _KEY_NONE = 0,
   MAP(_KEYS, _KEY_NAME)
@@ -39,7 +46,7 @@ static int key_f = 0, key_r = 0;
 static void key_enqueue(uint32_t am_scancode) {
   key_queue[key_r] = am_scancode;
   key_r = (key_r + 1) % KEY_QUEUE_LEN;
-  Assert(key_r != key_f, "key queue overflow!");
+  //Assert(key_r != key_f, "key queue overflow!");
 }
 
 static uint32_t key_dequeue() {
@@ -51,8 +58,10 @@ static uint32_t key_dequeue() {
   return key;
 }
 
+extern int end;
 void send_key(uint8_t scancode, bool is_keydown) {
-  if (nemu_state.state == NEMU_RUNNING && keymap[scancode] != _KEY_NONE) {
+  //if (nemu_state.state == NEMU_RUNNING && keymap[scancode] != _KEY_NONE) {
+  if (end == 0 && keymap[scancode] != _KEY_NONE) {
     uint32_t am_scancode = keymap[scancode] | (is_keydown ? KEYDOWN_MASK : 0);
     key_enqueue(am_scancode);
   }
@@ -83,5 +92,5 @@ void init_i8042() {
 //#else
 //  add_mmio_map("keyboard", CONFIG_I8042_DATA_MMIO, i8042_data_port_base, 4, i8042_data_io_handler);
 //#endif
-  IFNDEF(CONFIG_TARGET_AM, init_keymap());
+  //IFNDEF(CONFIG_TARGET_AM, init_keymap());
 }
