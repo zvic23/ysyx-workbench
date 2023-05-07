@@ -105,7 +105,7 @@ uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
 void execute(int n){
   for(uint64_t i=0;i<n;i++){
-	  if(npc_state == END){
+	  if(npc_state == END || npc_state == QUIT){
 	  //if(end == 1){
   		  struct timeval time_end;                   //get the time when program end
   		  gettimeofday(&time_end,NULL);

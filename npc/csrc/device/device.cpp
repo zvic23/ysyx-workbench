@@ -20,13 +20,13 @@ void device_update() {
   if(1)vga_update_screen();
  // IFDEF(CONFIG_HAS_VGA, vga_update_screen());
 
-  extern int end ;
+  extern int npc_state ;
 //#ifndef CONFIG_TARGET_AM
   SDL_Event event;
   while (SDL_PollEvent(&event)) {
     switch (event.type) {
       case SDL_QUIT:
-        end = 1;
+        npc_state = 4;
         break;
 //#ifdef CONFIG_HAS_KEYBOARD
       // If a key was pressed
