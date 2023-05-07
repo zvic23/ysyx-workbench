@@ -86,15 +86,15 @@ void one_cycle(){
   top->clk = 1;
   top->eval();//step_and_dump_wave();
 
-  update_gpr_pc();
-  if(skip_difftest == 1){
-	  printf("skip = 1  !         pc:%lx\n",cpu_gpr_set[32]);
-	  skip_difftest = 0;
-	  syn_gpr();
-  }else {
-	  printf("skip = 0!!!            pc:%lx\n",cpu_gpr_set[32]);
-	  difftest_step();
-  }
+//  update_gpr_pc();
+//  if(skip_difftest == 1){
+//	  printf("skip = 1  !         pc:%lx\n",cpu_gpr_set[32]);
+//	  skip_difftest = 0;
+//	  syn_gpr();
+//  }else {
+//	  printf("skip = 0!!!            pc:%lx\n",cpu_gpr_set[32]);
+//	  difftest_step();
+//  }
   top->clk = 0;
   top->eval();//step_and_dump_wave();
 
@@ -103,19 +103,19 @@ void one_cycle(){
 //	  skip_difftest = 0;
 //  }
 
-//  update_gpr_pc();
-//  if(skip_difftest == 1){
-//	  printf("skip = 1  !\n");
-//	  skip_difftest = 2;
-//	  difftest_step();
-//  }
-//  else if(skip_difftest==2){
-//	  printf("skip = 2  !!\n");
-//	  syn_gpr();
-//	  skip_difftest=0;
-//  }else {
-//  	difftest_step();
-//  }
+  update_gpr_pc();
+  if(skip_difftest == 1){
+	  printf("skip = 1  !\n");
+	  skip_difftest = 2;
+	  difftest_step();
+  }
+  else if(skip_difftest==2){
+	  printf("skip = 2  !!\n");
+	  syn_gpr();
+	  skip_difftest=0;
+  }else {
+  	difftest_step();
+  }
 
   device_update();
 }
