@@ -98,11 +98,11 @@ void one_cycle(){
   top->clk = 0;
   top->eval();//step_and_dump_wave();
 
-  if(skip_difftest == 1){
-	  printf("skip = 1  !         pc:%lx\n",cpu_gpr_set[32]);
-	  skip_difftest = 0;
-	  syn_gpr();
-  }
+//  if(skip_difftest == 1){
+//	  printf("skip = 1  !         pc:%lx\n",cpu_gpr_set[32]);
+//	  skip_difftest = 0;
+//	  syn_gpr();
+//  }
 
 //  if(skip_difftest == 1){
 //	  printf("skip = 1  !\n");
