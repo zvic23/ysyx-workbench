@@ -67,6 +67,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   if(waddr>=0x80000000){
 	if(waddr == 0xa00003f8){                         //uart support
+		skip_difftest=1;
 		putchar((char)wdata);
 		return;
 	}
