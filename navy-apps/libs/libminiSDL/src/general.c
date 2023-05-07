@@ -16,7 +16,7 @@ char *SDL_GetError() {
 
 int SDL_SetError(const char* fmt, ...) {
 	printf("seterror sdl not implement!\n");
-	assert(0);
+	//assert(0);
   return -1;
 }
 
