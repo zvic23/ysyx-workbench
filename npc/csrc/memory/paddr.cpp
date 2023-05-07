@@ -8,6 +8,7 @@
 
 uint8_t pmem[0x70000000];
 extern uint64_t cpu_gpr_set[33];
+extern uint64_t g_nr_guest_inst ;
 
 uint32_t pmem_read(uint64_t addr){
   return *(uint32_t*)&pmem[addr-0x80000000];
