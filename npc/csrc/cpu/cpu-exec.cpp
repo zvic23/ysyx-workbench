@@ -25,7 +25,8 @@
 extern Vysyx_22050612_npc* top;
 
 
-
+enum{ RUNNING, STOP, END, ABORT, QUIT};
+int npc_state = RUNNING;
 
 
 extern int skip_difftest;
@@ -63,6 +64,7 @@ void ebreak(int r){
 		printf(RED "HIT BAD TRAP\n" NONE);
 	}
 	end = 1;
+	npc_state == END;
 
 }
 
@@ -103,7 +105,8 @@ uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
 void execute(int n){
   for(uint64_t i=0;i<n;i++){
-	  if(end == 1){
+	  if(npc_state == END){
+	  //if(end == 1){
   		  struct timeval time_end;                   //get the time when program end
   		  gettimeofday(&time_end,NULL);
   		  g_timer = (time_end.tv_sec*1000000)+time_end.tv_usec - time_init;
@@ -113,7 +116,8 @@ void execute(int n){
 		  printf("execute has finished, please open npc again!\n");
 		  return;
 	  }
-  	  else if(end == 2){
+  	  else if(npc_state == ABORT){
+  	  //else if(end == 2){
   		  struct timeval time_end;                   //get the time when program end
   		  gettimeofday(&time_end,NULL);
   		  g_timer = (time_end.tv_sec*1000000)+time_end.tv_usec - time_init;
