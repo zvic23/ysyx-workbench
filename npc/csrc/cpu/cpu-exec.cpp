@@ -33,6 +33,10 @@ extern int skip_difftest;
 
 extern uint64_t time_init;
 
+
+
+
+
 uint64_t *cpu_gpr = NULL;
 extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
   cpu_gpr = (uint64_t *)(((VerilatedDpiOpenVar*)r)->datap());
@@ -115,8 +119,6 @@ void program_exec_statistics(){
 
 
 
-
-
 int itrace_si = 0;
 void execute(int n){
   for(uint64_t i=0;i<n;i++){
@@ -132,10 +134,11 @@ void execute(int n){
 		  iringbuf_output();
 		  return;
           }
+
 	  one_cycle();
+
     	  g_nr_guest_inst ++;
 	  if(itrace_si) itrace_printf_once();
-
 
 
 
