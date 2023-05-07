@@ -38,6 +38,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
 		return;
 	}
 	else if(raddr == 0xa0000060){                    //keyboard support
+		skip_difftest=1;
 		uint64_t key = i8042_data_io_handler();
 		//if(key)printf("key = %lx\n",key);
 		memcpy(rdata, &key, 8);
