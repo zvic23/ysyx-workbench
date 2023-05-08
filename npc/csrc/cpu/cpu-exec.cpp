@@ -78,6 +78,7 @@ void read_inst(int npc_inst){
 }
 
 
+int itrace_si = 0;
 uint64_t skip_old = 0;
 void one_cycle(){
   itrace(top->pc, inst);
@@ -96,11 +97,11 @@ void one_cycle(){
 
   update_gpr_pc();
   if(skip_difftest_now == 1){
-	  printf("skip = 1\n");
+	  if(itrace_si)printf("skip = 1\n");
 	  syn_gpr();
   }
   else {
-	  printf("skip = 0\n");
+	  if(itrace_si)printf("skip = 0\n");
   	  difftest_step();
   }
 
@@ -136,7 +137,7 @@ void program_exec_statistics(){
 
 
 
-int itrace_si = 0;
+//int itrace_si = 0;
 void execute(int n){
   for(uint64_t i=0;i<n;i++){
 	  if(npc_state == END || npc_state == QUIT){
