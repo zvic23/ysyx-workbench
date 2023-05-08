@@ -96,8 +96,8 @@ void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S
 	}else load_store = 0;
 
 	if(getinst == 2){
-		if((base+imm_S>=0x830695c0 && base+imm_S<=0x830695cc)){
-		//if((base+imm_S>=0x81d58eac && base+imm_S<=0x81d58eb0)){
+		//if((base+imm_S>=0x830695c0 && base+imm_S<=0x830695cc)){
+		if((base+imm_S>=0x81d58ea8 && base+imm_S<0x81d58eb0)){
 			printf("mem write  at %lx\n",top->pc);
 		}
 	}
