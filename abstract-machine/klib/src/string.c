@@ -4,8 +4,9 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
+size_t i = 0;
 size_t strlen(const char *s) {
-  size_t i = 0;
+	i = 0;
   while(1){
 	  if(s[i] == '\0'){
 		  break;
