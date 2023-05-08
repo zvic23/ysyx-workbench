@@ -90,7 +90,7 @@ void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S
 		}
 	}else if(getinst == 2){
 		if(base+imm_S==0xa00003f8 || base+imm_S==0xa0000104 ||
-		(base+imm_S>0xa1000000&&base+imm_S<0xa1000000+400*300*4))
+		(base+imm_S>=0xa1000000&&base+imm_S<0xa1000000+400*300*4))
 			load_store = 1;
 		else load_store = 0;
 	}else load_store = 0;
