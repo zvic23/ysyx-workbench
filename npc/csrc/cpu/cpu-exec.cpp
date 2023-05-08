@@ -46,7 +46,7 @@ extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
 void dump_gpr() {
   int i;
   for (i = 0; i < 32; i++) {
-    printf("gpr[%d] %s = 0x%lx\n", i, regs_name[i], cpu_gpr[i]);
+    printf("gpr[%d] %s = 0x%lx    ", i, regs_name[i], cpu_gpr[i]);
   }
   printf("pc  = 0x%lx\n" , top->pc);  //zsl:I add this line to output pc
 }
