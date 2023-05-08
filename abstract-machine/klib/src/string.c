@@ -6,7 +6,7 @@
 
 size_t strlen(const char *s) {
   //size_t i = 0;
-  uint64_t * a = malloc(1);
+  uint64_t * a = malloc(8);
   uint64_t i = *a;
   while(1){
 	  if(s[i] == '\0'){
