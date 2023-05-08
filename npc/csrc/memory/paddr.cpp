@@ -56,17 +56,17 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   if(raddr>=0x80000000){
 	if(raddr == 0xa0000048){                         //rtc support
 		skip_difftest=1;
-		printf("rtc     \n");
+		//printf("rtc     \n");
 		struct timeval time;
 		gettimeofday(&time,NULL);
 		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec - time_init;
-		printf("time:%lx\n",time_rtc);
+		//printf("time:%lx\n",time_rtc);
 		memcpy(rdata, &time_rtc, 8);
 		return;
 	}
 	else if(raddr == 0xa0000060){                    //keyboard support
 		skip_difftest=1;
-		printf("key     \n");
+		//printf("key     \n");
 		uint64_t key = i8042_data_io_handler();
 		//if(key)printf("key = %lx\n",key);
 		memcpy(rdata, &key, 8);
