@@ -6,9 +6,8 @@
 
 size_t strlen(const char *s) {
   size_t i = 0;
-  uint8_t *s0 = (uint8_t*)s;
   while(1){
-	  if(s0[i] == '\0'){
+	  if(s[i] == '\0'){
 		  break;
 	  }
 	  i++;
