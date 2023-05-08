@@ -4,15 +4,17 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
-size_t i = 0;
 size_t strlen(const char *s) {
-	i = 0;
+  //size_t i = 0;
+  uint64_t * a = malloc(1);
+  uint64_t i = *a;
   while(1){
 	  if(s[i] == '\0'){
 		  break;
 	  }
 	  i++;
-  } 
+  }
+ free(a); 
   return i;
   //panic("Not implemented");
 }
