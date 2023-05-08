@@ -141,6 +141,7 @@ always @(*) begin
     24'h1a000: wen=1'b1;
     24'h1b000: wen=1'b1;
     24'h1d000: wen=1'b1;
+    24'h21000: wen=1'b1;
     24'h22000: wen=1'b1;
     24'h24000: wen=1'b1;
     24'h25000: wen=1'b1;
@@ -193,6 +194,7 @@ always @(*) begin
     24'h1a000: wdata_reg=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
     24'h1b000: wdata_reg=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
     24'h1d000: wdata_reg=result_mul0;
+    24'h21000: wdata_reg=result_div0;
     24'h22000: wdata_reg=result_divu0;
     24'h24000: wdata_reg=result_remu0;
     24'h25000: wdata_reg=(result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]}));
@@ -698,6 +700,9 @@ ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
 //multipulicatin and division
 wire[63:0] result_mul0;
 assign result_mul0 = src1[63:0] * src2[63:0];
+
+wire[63:0] result_div0;
+assign result_div0 = src1[63:0] / src2[63:0];
 
 wire[63:0] result_divu0;
 assign result_divu0 = src1[63:0] / src2[63:0];
