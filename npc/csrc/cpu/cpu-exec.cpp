@@ -98,7 +98,7 @@ void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S
 	if(getinst == 2){
 		//if((base+imm_S>=0x830695c0 && base+imm_S<=0x830695cc)){
 		if((base+imm_S>=0x81d58ea8 && base+imm_S<0x81d58eb0)){
-			printf("mem (%lx)  write  at %lx\n",base+imm_S,top->pc);
+			//printf("mem (%lx)  write  at %lx\n",base+imm_S,top->pc);
 		}
 	}
 }
