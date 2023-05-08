@@ -9,6 +9,7 @@
 
 //==========
 
+void Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(IData/*31:0*/ getinst);
 void Vysyx_22050612_npc___024unit____Vdpiimwrap_ftrace_check_TOP____024unit(QData/*63:0*/ pc, QData/*63:0*/ dnpc, IData/*31:0*/ dest_register, IData/*31:0*/ src_register, QData/*63:0*/ imm);
 void Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024unit(IData/*31:0*/ r);
 void Vysyx_22050612_npc___024unit____Vdpiimwrap_pmem_read_pc_TOP____024unit(QData/*63:0*/ raddr, QData/*63:0*/ &rdata);
@@ -55,6 +56,40 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     QData/*63:0*/ __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0;
     // Body
     __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0 = 0U;
+    if (((((((((0xbU == vlSelf->ysyx_22050612_npc__DOT__opcode) 
+               | (0xcU == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
+              | (0xdU == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
+             | (0xeU == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
+            | (0xfU == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
+           | (0x10U == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
+          | (0x11U == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
+         | (0x12U == vlSelf->ysyx_22050612_npc__DOT__opcode))) {
+        if ((0xbU == vlSelf->ysyx_22050612_npc__DOT__opcode)) {
+            Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(1U);
+        } else if ((0xcU == vlSelf->ysyx_22050612_npc__DOT__opcode)) {
+            Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(1U);
+        } else if ((0xdU == vlSelf->ysyx_22050612_npc__DOT__opcode)) {
+            Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(1U);
+        } else if ((0xeU == vlSelf->ysyx_22050612_npc__DOT__opcode)) {
+            Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(1U);
+        } else if ((0xfU == vlSelf->ysyx_22050612_npc__DOT__opcode)) {
+            Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(1U);
+        } else if ((0x10U == vlSelf->ysyx_22050612_npc__DOT__opcode)) {
+            Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(1U);
+        } else if ((0x11U == vlSelf->ysyx_22050612_npc__DOT__opcode)) {
+            Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(1U);
+        } else {
+            Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(1U);
+        }
+    } else if ((0x29U == vlSelf->ysyx_22050612_npc__DOT__opcode)) {
+        Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(1U);
+    } else if ((0x2aU == vlSelf->ysyx_22050612_npc__DOT__opcode)) {
+        Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(1U);
+    } else if ((0x2bU == vlSelf->ysyx_22050612_npc__DOT__opcode)) {
+        Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(1U);
+    } else {
+        Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(0U);
+    }
     if ((3U == (3U & (vlSelf->ysyx_22050612_npc__DOT__opcode 
                       >> 8U)))) {
         Vysyx_22050612_npc___024unit____Vdpiimwrap_ftrace_check_TOP____024unit(vlSelf->pc, vlSelf->ysyx_22050612_npc__DOT__dnpc, 1U, 0U, 1ULL);

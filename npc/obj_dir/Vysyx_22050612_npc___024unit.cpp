@@ -41,6 +41,16 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024u
     ebreak(r__Vcvt);
 }
 
+extern "C" void npc_loadstore(int getinst);
+
+VL_INLINE_OPT void Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(IData/*31:0*/ getinst) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit\n"); );
+    // Body
+    int getinst__Vcvt;
+    for (size_t getinst__Vidx = 0; getinst__Vidx < 1; ++getinst__Vidx) getinst__Vcvt = getinst;
+    npc_loadstore(getinst__Vcvt);
+}
+
 extern "C" void set_gpr_ptr(const svOpenArrayHandle a);
 
 VL_INLINE_OPT void Vysyx_22050612_npc___024unit____Vdpiimwrap_set_gpr_ptr__Vdpioc2_TOP____024unit(const VlUnpacked<QData/*63:0*/, 32> &a) {

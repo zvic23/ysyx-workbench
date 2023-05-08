@@ -72,6 +72,14 @@ void ebreak(int r){
 
 }
 
+int load_store = 0;
+void npc_loadstore(int getinst){
+	if(getinst == 1)
+		load_store = 1;
+	else 
+		load_store = 0;
+}
+
 uint32_t inst;
 void read_inst(int npc_inst){
 	inst = npc_inst;
@@ -94,9 +102,10 @@ void one_cycle(){
   top->clk = 0;
   top->eval();//step_and_dump_wave();
 
-
   update_gpr_pc();
-  if(skip_difftest_now == 1){
+
+
+  if(skip_difftest_now == 1 && load_store == 1){
 	  if(itrace_si)printf("skip = 1\n");
 	  syn_gpr();
   }
