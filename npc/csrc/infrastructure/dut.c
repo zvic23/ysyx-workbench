@@ -52,9 +52,9 @@ void init_difftest(long img_size, int port) {
 
   ref_difftest_init(port);
 
-  uint8_t resetmem[0x7fffffff];
-  memset(resetmem, 0, 0x7fffffff);
-  ref_difftest_memcpy(0x80000000,  resetmem, 0x7fffffff, DIFFTEST_TO_REF );
+  uint8_t resetmem[0x5fffffff];
+  memset(resetmem, 0, 0x5fffffff);
+  ref_difftest_memcpy(0x80000000,  resetmem, 0x5fffffff, DIFFTEST_TO_REF );
   ref_difftest_memcpy(0x80000000,  pmem, img_size, DIFFTEST_TO_REF );
 
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
