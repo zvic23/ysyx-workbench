@@ -17,7 +17,6 @@ uint32_t pmem_read(uint64_t addr){
 
 
 uint64_t host_read(uint64_t addr, int len) {
-	printf("addr = %lx\n",addr);
   switch (len) {
     case 1: return *(uint8_t  *)&pmem[addr-0x80000000];
     case 2: return *(uint16_t *)&pmem[addr-0x80000000];
