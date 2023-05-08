@@ -1057,7 +1057,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                 >> 5U)) 
                                                             | (0x7fU 
                                                                & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                    | (0x333U 
+                                                    | (0x2b3U 
                                                        == 
                                                        ((0x1fc00U 
                                                          & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1067,7 +1067,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                >> 5U)) 
                                                            | (0x7fU 
                                                               & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                   | (0x3b3U 
+                                                   | (0x333U 
                                                       == 
                                                       ((0x1fc00U 
                                                         & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1150,7 +1150,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                 & vlSelf->ysyx_22050612_npc__DOT__inst))))
                                                          ? 9U
                                                          : 
-                                                        ((0x333U 
+                                                        ((0x2b3U 
                                                           == 
                                                           ((0x1fc00U 
                                                             & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1160,10 +1160,10 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                   >> 5U)) 
                                                               | (0x7fU 
                                                                  & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                          ? 0x12U
-                                                          : 0x13U)))))))
+                                                          ? 0x10U
+                                                          : 0x12U)))))))
                                                    : 
-                                                  (((((((((0x9bU 
+                                                  (((((((((0x3b3U 
                                                            == 
                                                            ((0x1fc00U 
                                                              & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1173,7 +1173,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                    >> 5U)) 
                                                                | (0x7fU 
                                                                   & vlSelf->ysyx_22050612_npc__DOT__inst)))) 
-                                                          | (0x29bU 
+                                                          | (0x9bU 
                                                              == 
                                                              ((0x1fc00U 
                                                                & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1183,7 +1183,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                      >> 5U)) 
                                                                  | (0x7fU 
                                                                     & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                         | (0x829bU 
+                                                         | (0x29bU 
                                                             == 
                                                             ((0x1fc00U 
                                                               & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1193,7 +1193,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                     >> 5U)) 
                                                                 | (0x7fU 
                                                                    & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                        | (0x3bU 
+                                                        | (0x829bU 
                                                            == 
                                                            ((0x1fc00U 
                                                              & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1203,7 +1203,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                    >> 5U)) 
                                                                | (0x7fU 
                                                                   & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                       | (0x803bU 
+                                                       | (0x3bU 
                                                           == 
                                                           ((0x1fc00U 
                                                             & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1213,7 +1213,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                   >> 5U)) 
                                                               | (0x7fU 
                                                                  & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                      | (0xbbU 
+                                                      | (0x803bU 
                                                          == 
                                                          ((0x1fc00U 
                                                            & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1223,7 +1223,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                  >> 5U)) 
                                                              | (0x7fU 
                                                                 & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                     | (0x2bbU 
+                                                     | (0xbbU 
                                                         == 
                                                         ((0x1fc00U 
                                                           & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1233,7 +1233,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                 >> 5U)) 
                                                             | (0x7fU 
                                                                & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                    | (0x82bbU 
+                                                    | (0x2bbU 
                                                        == 
                                                        ((0x1fc00U 
                                                          & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1244,7 +1244,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                            | (0x7fU 
                                                               & vlSelf->ysyx_22050612_npc__DOT__inst)))))
                                                     ? 
-                                                   ((0x9bU 
+                                                   ((0x3b3U 
                                                      == 
                                                      ((0x1fc00U 
                                                        & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1254,9 +1254,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                              >> 5U)) 
                                                          | (0x7fU 
                                                             & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                     ? 0x14U
+                                                     ? 0x13U
                                                      : 
-                                                    ((0x29bU 
+                                                    ((0x9bU 
                                                       == 
                                                       ((0x1fc00U 
                                                         & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1266,9 +1266,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                               >> 5U)) 
                                                           | (0x7fU 
                                                              & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                      ? 0x15U
+                                                      ? 0x14U
                                                       : 
-                                                     ((0x829bU 
+                                                     ((0x29bU 
                                                        == 
                                                        ((0x1fc00U 
                                                          & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1278,9 +1278,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                >> 5U)) 
                                                            | (0x7fU 
                                                               & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                       ? 0x16U
+                                                       ? 0x15U
                                                        : 
-                                                      ((0x3bU 
+                                                      ((0x829bU 
                                                         == 
                                                         ((0x1fc00U 
                                                           & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1290,9 +1290,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                 >> 5U)) 
                                                             | (0x7fU 
                                                                & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                        ? 0x17U
+                                                        ? 0x16U
                                                         : 
-                                                       ((0x803bU 
+                                                       ((0x3bU 
                                                          == 
                                                          ((0x1fc00U 
                                                            & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1302,9 +1302,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                  >> 5U)) 
                                                              | (0x7fU 
                                                                 & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                         ? 0x18U
+                                                         ? 0x17U
                                                          : 
-                                                        ((0xbbU 
+                                                        ((0x803bU 
                                                           == 
                                                           ((0x1fc00U 
                                                             & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1314,9 +1314,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                   >> 5U)) 
                                                               | (0x7fU 
                                                                  & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                          ? 0x19U
+                                                          ? 0x18U
                                                           : 
-                                                         ((0x2bbU 
+                                                         ((0xbbU 
                                                            == 
                                                            ((0x1fc00U 
                                                              & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1326,10 +1326,10 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                    >> 5U)) 
                                                                | (0x7fU 
                                                                   & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                           ? 0x1aU
-                                                           : 0x1bU)))))))
+                                                           ? 0x19U
+                                                           : 0x1aU)))))))
                                                     : 
-                                                   (((((((((0x433U 
+                                                   (((((((((0x82bbU 
                                                             == 
                                                             ((0x1fc00U 
                                                               & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1339,7 +1339,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                     >> 5U)) 
                                                                 | (0x7fU 
                                                                    & vlSelf->ysyx_22050612_npc__DOT__inst)))) 
-                                                           | (0x633U 
+                                                           | (0x433U 
                                                               == 
                                                               ((0x1fc00U 
                                                                 & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1349,7 +1349,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                       >> 5U)) 
                                                                   | (0x7fU 
                                                                      & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                          | (0x6b3U 
+                                                          | (0x633U 
                                                              == 
                                                              ((0x1fc00U 
                                                                & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1359,7 +1359,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                      >> 5U)) 
                                                                  | (0x7fU 
                                                                     & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                         | (0x7b3U 
+                                                         | (0x6b3U 
                                                             == 
                                                             ((0x1fc00U 
                                                               & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1369,7 +1369,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                     >> 5U)) 
                                                                 | (0x7fU 
                                                                    & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                        | (0x43bU 
+                                                        | (0x7b3U 
                                                            == 
                                                            ((0x1fc00U 
                                                              & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1379,7 +1379,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                    >> 5U)) 
                                                                | (0x7fU 
                                                                   & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                       | (0x63bU 
+                                                       | (0x43bU 
                                                           == 
                                                           ((0x1fc00U 
                                                             & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1389,7 +1389,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                   >> 5U)) 
                                                               | (0x7fU 
                                                                  & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                      | (0x6bbU 
+                                                      | (0x63bU 
                                                          == 
                                                          ((0x1fc00U 
                                                            & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1399,7 +1399,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                  >> 5U)) 
                                                              | (0x7fU 
                                                                 & vlSelf->ysyx_22050612_npc__DOT__inst))))) 
-                                                     | (0x73bU 
+                                                     | (0x6bbU 
                                                         == 
                                                         ((0x1fc00U 
                                                           & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1410,7 +1410,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                             | (0x7fU 
                                                                & vlSelf->ysyx_22050612_npc__DOT__inst)))))
                                                      ? 
-                                                    ((0x433U 
+                                                    ((0x82bbU 
                                                       == 
                                                       ((0x1fc00U 
                                                         & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1420,9 +1420,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                               >> 5U)) 
                                                           | (0x7fU 
                                                              & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                      ? 0x1dU
+                                                      ? 0x1bU
                                                       : 
-                                                     ((0x633U 
+                                                     ((0x433U 
                                                        == 
                                                        ((0x1fc00U 
                                                          & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1432,9 +1432,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                >> 5U)) 
                                                            | (0x7fU 
                                                               & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                       ? 0x21U
+                                                       ? 0x1dU
                                                        : 
-                                                      ((0x6b3U 
+                                                      ((0x633U 
                                                         == 
                                                         ((0x1fc00U 
                                                           & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1444,9 +1444,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                 >> 5U)) 
                                                             | (0x7fU 
                                                                & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                        ? 0x22U
+                                                        ? 0x21U
                                                         : 
-                                                       ((0x7b3U 
+                                                       ((0x6b3U 
                                                          == 
                                                          ((0x1fc00U 
                                                            & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1456,9 +1456,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                  >> 5U)) 
                                                              | (0x7fU 
                                                                 & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                         ? 0x24U
+                                                         ? 0x22U
                                                          : 
-                                                        ((0x43bU 
+                                                        ((0x7b3U 
                                                           == 
                                                           ((0x1fc00U 
                                                             & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1468,9 +1468,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                   >> 5U)) 
                                                               | (0x7fU 
                                                                  & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                          ? 0x25U
+                                                          ? 0x24U
                                                           : 
-                                                         ((0x63bU 
+                                                         ((0x43bU 
                                                            == 
                                                            ((0x1fc00U 
                                                              & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1480,9 +1480,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                    >> 5U)) 
                                                                | (0x7fU 
                                                                   & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                           ? 0x26U
+                                                           ? 0x25U
                                                            : 
-                                                          ((0x6bbU 
+                                                          ((0x63bU 
                                                             == 
                                                             ((0x1fc00U 
                                                               & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1492,10 +1492,10 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                                     >> 5U)) 
                                                                 | (0x7fU 
                                                                    & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                            ? 0x27U
-                                                            : 0x28U)))))))
+                                                            ? 0x26U
+                                                            : 0x27U)))))))
                                                      : 
-                                                    ((0x7bbU 
+                                                    ((0x73bU 
                                                       == 
                                                       ((0x1fc00U 
                                                         & (vlSelf->ysyx_22050612_npc__DOT__inst 
@@ -1505,8 +1505,20 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                                               >> 5U)) 
                                                           | (0x7fU 
                                                              & vlSelf->ysyx_22050612_npc__DOT__inst))))
-                                                      ? 0x29U
-                                                      : 0U)))) 
+                                                      ? 0x28U
+                                                      : 
+                                                     ((0x7bbU 
+                                                       == 
+                                                       ((0x1fc00U 
+                                                         & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                            >> 0xfU)) 
+                                                        | ((0x380U 
+                                                            & (vlSelf->ysyx_22050612_npc__DOT__inst 
+                                                               >> 5U)) 
+                                                           | (0x7fU 
+                                                              & vlSelf->ysyx_22050612_npc__DOT__inst))))
+                                                       ? 0x29U
+                                                       : 0U))))) 
                                                  << 0xcU));
     vlSelf->ysyx_22050612_npc__DOT__opcode = ((0xfff3ffU 
                                                & vlSelf->ysyx_22050612_npc__DOT__opcode) 
