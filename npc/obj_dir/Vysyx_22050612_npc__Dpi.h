@@ -18,7 +18,7 @@ extern "C" {
     // DPI import at vsrc//ysyx_22050612_EXU.v:4:30
     extern void ftrace_check(long long pc, long long dnpc, int dest_register, int src_register, long long imm);
     // DPI import at vsrc//ysyx_22050612_EXU.v:2:30
-    extern void npc_loadstore(int getinst);
+    extern void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S);
     // DPI import at vsrc//ysyx_22050612_EXU.v:5:30
     extern void pmem_read(long long raddr, long long* rdata);
     // DPI import at vsrc//ysyx_22050612_IFU.v:2:30

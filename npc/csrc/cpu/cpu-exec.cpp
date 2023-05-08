@@ -72,17 +72,28 @@ void ebreak(int r){
 
 }
 
-int load_store = 0;
-void npc_loadstore(int getinst){
-	if(getinst == 1)
-		load_store = 1;
-	else 
-		load_store = 0;
-}
+
 
 uint32_t inst;
 void read_inst(int npc_inst){
 	inst = npc_inst;
+}
+
+
+int load_store = 0;
+void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S){
+	if(getinst == 1){
+		switch(base + imm_I){
+		case 0xa0000048:
+		case 0xa0000060:{load_store = 1;break;}
+		default:   {load_store = 0;break;}
+		}
+	}else if(getinst == 2){
+		if(base+imm_S==0xa00003f8 || base+imm_S==0xa0000104 ||
+		(base+imm_S>0xa1000000&&base+imm_S<0xa1000000+400*300*4))
+			load_store = 1;
+		else load_store = 0;
+	}else load_store = 0;
 }
 
 
@@ -105,7 +116,7 @@ void one_cycle(){
   update_gpr_pc();
 
 
-  if(skip_difftest_now == 1 && load_store == 1){
+  if( load_store == 1){
 	  if(itrace_si)printf("skip = 1\n");
 	  syn_gpr();
   }

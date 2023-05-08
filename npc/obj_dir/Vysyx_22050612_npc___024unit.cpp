@@ -41,14 +41,20 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024unit____Vdpiimwrap_ebreak_TOP____024u
     ebreak(r__Vcvt);
 }
 
-extern "C" void npc_loadstore(int getinst);
+extern "C" void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S);
 
-VL_INLINE_OPT void Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(IData/*31:0*/ getinst) {
+VL_INLINE_OPT void Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(IData/*31:0*/ getinst, QData/*63:0*/ base, QData/*63:0*/ imm_I, QData/*63:0*/ imm_S) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit\n"); );
     // Body
     int getinst__Vcvt;
     for (size_t getinst__Vidx = 0; getinst__Vidx < 1; ++getinst__Vidx) getinst__Vcvt = getinst;
-    npc_loadstore(getinst__Vcvt);
+    long long base__Vcvt;
+    for (size_t base__Vidx = 0; base__Vidx < 1; ++base__Vidx) base__Vcvt = base;
+    long long imm_I__Vcvt;
+    for (size_t imm_I__Vidx = 0; imm_I__Vidx < 1; ++imm_I__Vidx) imm_I__Vcvt = imm_I;
+    long long imm_S__Vcvt;
+    for (size_t imm_S__Vidx = 0; imm_S__Vidx < 1; ++imm_S__Vidx) imm_S__Vcvt = imm_S;
+    npc_loadstore(getinst__Vcvt, base__Vcvt, imm_I__Vcvt, imm_S__Vcvt);
 }
 
 extern "C" void set_gpr_ptr(const svOpenArrayHandle a);

@@ -1,5 +1,5 @@
 import "DPI-C" function void ebreak (int r);
-import "DPI-C" function void npc_loadstore(int getinst);
+import "DPI-C" function void npc_loadstore(int getinst, longint base, longint imm_I, longint imm_S);
 import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
 import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
 import "DPI-C" function void pmem_read(
@@ -1014,18 +1014,18 @@ end
 
 always @(posedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
 	case(opcode)
-    24'd11  : npc_loadstore(1);
-    24'd12  : npc_loadstore(1);
-    24'd13  : npc_loadstore(1);
-    24'd14  : npc_loadstore(1);
-    24'd15  : npc_loadstore(1);
-    24'd16  : npc_loadstore(1);
-    24'd17  : npc_loadstore(1);
-    24'd18  : npc_loadstore(1);
-    24'd41  : npc_loadstore(1);
-    24'd42  : npc_loadstore(1);
-    24'd43  : npc_loadstore(1);
-    default: npc_loadstore(0);
+    24'd11  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd12  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd13  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd14  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd15  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd16  : npc_loadstore(2, src1, imm_I, imm_S);
+    24'd17  : npc_loadstore(2, src1, imm_I, imm_S);
+    24'd18  : npc_loadstore(2, src1, imm_I, imm_S);
+    24'd41  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd42  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd43  : npc_loadstore(2, src1, imm_I, imm_S);
+    default: npc_loadstore(0, 0, 0, 0);
 	endcase
 end
 
