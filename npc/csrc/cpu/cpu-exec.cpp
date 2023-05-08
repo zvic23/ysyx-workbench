@@ -96,9 +96,11 @@ void one_cycle(){
 
   update_gpr_pc();
   if(skip_difftest_now == 1){
+	  printf("skip = 1\n");
 	  syn_gpr();
   }
   else {
+	  printf("skip = 0\n");
   	  difftest_step();
   }
 
