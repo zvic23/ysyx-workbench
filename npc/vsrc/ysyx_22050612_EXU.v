@@ -130,6 +130,7 @@ always @(*) begin
     24'h7000 : wen=1'b1;
     24'h8000 : wen=1'b1;
     24'h9000 : wen=1'b1;
+    24'h10000: wen=1'b1;
     24'h12000: wen=1'b1;
     24'h13000: wen=1'b1;
     24'h14000: wen=1'b1;
@@ -183,6 +184,7 @@ always @(*) begin
     24'h7000 : wdata_reg=result_alu0;
     24'h8000 : wdata_reg=result_alu0;
     24'h9000 : wdata_reg=result_alu0;
+    24'h10000: wdata_reg=result_alu0;
     24'h12000: wdata_reg=result_alu0;
     24'h13000: wdata_reg=result_alu0;
     24'h14000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
@@ -236,6 +238,7 @@ always @(*) begin
     24'h7000 : operator_a=src1;
     24'h8000 : operator_a=src1;
     24'h9000 : operator_a=src1;
+    24'h10000: operator_a=src1;
     24'h12000: operator_a=src1;
     24'h13000: operator_a=src1;
     24'h14000: operator_a={{32{1'b0}},src1[31:0]};
@@ -287,6 +290,7 @@ always @(*) begin
     24'h7000 : operator_b=src2 ;
     24'h8000 : operator_b=src2 ;
     24'h9000 : operator_b=src2 ;
+    24'h10000: operator_b={{58{1'b0}},src2[5:0]};
     24'h12000: operator_b=src2 ;
     24'h13000: operator_b=src2 ;
     24'h14000: operator_b={{59{1'b0}},shamt[4:0]};
@@ -339,6 +343,7 @@ always @(*) begin
     24'h7000 : mode=8'd2 ; 
     24'h8000 : mode=8'd3 ; 
     24'h9000 : mode=8'd7 ; 
+    24'h10000: mode=8'd9 ; 
     24'h12000: mode=8'd6 ; 
     24'h13000: mode=8'd4 ; 
     24'h14000: mode=8'd8 ; 
