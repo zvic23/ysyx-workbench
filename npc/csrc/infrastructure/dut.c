@@ -55,9 +55,9 @@ void init_difftest(long img_size, int port) {
   ref_difftest_init(port);
 
   //uint8_t resetmem[0x4fffffff];
-  uint8_t *resetmem = (uint8_t*)malloc(0x4fffffff);
-  memset(resetmem, 0, 0x4fffffff);
-  ref_difftest_memcpy(0x80000000,  resetmem, 0x4fffffff, DIFFTEST_TO_REF );
+  uint8_t *resetmem = (uint8_t*)malloc(0x2fffffff);
+  memset(resetmem, 0, 0x2fffffff);
+  ref_difftest_memcpy(0x80000000,  resetmem, 0x2fffffff, DIFFTEST_TO_REF );
   ref_difftest_memcpy(0x80000000,  pmem, img_size, DIFFTEST_TO_REF );
 free(resetmem);
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
