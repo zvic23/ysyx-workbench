@@ -117,9 +117,11 @@ void one_cycle(){
 
 
   if( load_store == 1){
+	  if(itrace_si)printf("skip = 1\n");
 	  syn_gpr();
   }
   else {
+	  if(itrace_si)printf("skip = 0\n");
   	  difftest_step();
   }
 
