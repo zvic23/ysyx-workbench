@@ -54,6 +54,7 @@ void init_difftest(long img_size, int port) {
 
   uint8_t resetmem[0x4fffffff];
   memset(resetmem, 0, 0x4fffffff);
+  printf("ininiin\n");
   ref_difftest_memcpy(0x80000000,  resetmem, 0x4fffffff, DIFFTEST_TO_REF );
   printf("ininiin\n");
   ref_difftest_memcpy(0x80000000,  pmem, img_size, DIFFTEST_TO_REF );
