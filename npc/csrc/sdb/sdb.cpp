@@ -128,6 +128,25 @@ static int cmd_d(char *args){
 }
 
 
+int detach_difftest = 0;
+static int cmd_detach(char *args){
+	detach_difftest = 1;
+	printf("difftest off!!\n");
+	return 0;
+}
+
+extern void syn_state_to_ref();
+static int cmd_attach(char *args){
+	detach_difftest = 0;
+	syn_state_to_ref();
+	printf("difftest on!!\n");
+	return 0;
+}
+
+
+
+
+
 
 
 
@@ -144,6 +163,10 @@ static struct {
   { "p", "expression evaluation", cmd_p },
   { "w", "set watchpoint", cmd_w },
   { "d", "delete watchpoint", cmd_d },
+  { "dt", "turn off difftest", cmd_detach },
+  { "at", "turn on difftest", cmd_attach },
+//  { "save", "save snapshot", cmd_save},
+//  { "load", "load snapshot", cmd_load},
 
 };
 

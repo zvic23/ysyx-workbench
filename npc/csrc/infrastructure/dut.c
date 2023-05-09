@@ -68,8 +68,8 @@ free(resetmem);
 void syn_state_to_ref(){    //zsl:i add this function
 //  CPU_state csr_buf;
   uint64_t csr_buf[33];
-//extern uint64_t mepc,mcause,mstatus;
-//extern uint64_t mtvec;
+extern uint64_t mepc,mcause,mstatus;
+extern uint64_t mtvec;
   csr_buf[10] = mtvec;    csr_buf[11] = mcause;  
   csr_buf[12] = mstatus;  csr_buf[13] = mepc;
   csr_buf[32] = RESET_VECTOR;
@@ -118,9 +118,12 @@ void difftest_step() {
 void syn_gpr(){
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
 }
+
+
 #else
 void init_difftest(long img_size, int port){}
 void difftest_step() {}
+void syn_state_to_ref(){} 
 void syn_gpr(){}
 #endif
 
