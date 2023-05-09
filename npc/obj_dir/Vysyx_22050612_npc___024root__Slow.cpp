@@ -2881,7 +2881,15 @@ void Vysyx_22050612_npc___024root___settle__TOP__2(Vysyx_22050612_npc___024root*
                                                         : 
                                                        ((0x29U 
                                                          == vlSelf->ysyx_22050612_npc__DOT__opcode)
-                                                         ? (QData)((IData)(ysyx_22050612_npc__DOT__exu__DOT__rdata))
+                                                         ? 
+                                                        ((1U 
+                                                          & (IData)(
+                                                                    (vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr 
+                                                                     >> 2U)))
+                                                          ? (QData)((IData)(
+                                                                            (ysyx_22050612_npc__DOT__exu__DOT__rdata 
+                                                                             >> 0x20U)))
+                                                          : (QData)((IData)(ysyx_22050612_npc__DOT__exu__DOT__rdata)))
                                                          : 
                                                         ((0x2aU 
                                                           == vlSelf->ysyx_22050612_npc__DOT__opcode)

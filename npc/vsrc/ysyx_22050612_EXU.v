@@ -828,7 +828,7 @@ always @(*) begin
     24'd13  : rdata_fix=(raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]}));
     24'd14  : rdata_fix={{56{1'b0}},rdata_1byte};
     24'd15  : rdata_fix={{48{1'b0}},rdata_2byte};
-    24'd41  : rdata_fix={{32{1'b0}},rdata[31:0]};
+    24'd41  : rdata_fix=raddr[2]?{{32{1'b0}},rdata[63:32]}:{{32{1'b0}},rdata[31:0]};
     24'd42  : rdata_fix=rdata;
     default: rdata_fix=64'b0;
 	endcase
