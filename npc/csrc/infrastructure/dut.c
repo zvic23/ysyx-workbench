@@ -98,7 +98,6 @@ extern int detach_difftest;
 void difftest_step() {
   if(detach_difftest == 1) return;
 
-  printf("check!!\n");
   uint64_t ref_r[33];
 
   ref_difftest_exec(1);
