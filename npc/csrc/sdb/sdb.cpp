@@ -13,6 +13,8 @@
 #define NONE  "\33[0m"    
 
 
+extern int npc_state;
+
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
   static char *line_read = NULL;
@@ -33,6 +35,9 @@ static char* rl_gets() {
 
 
 static int cmd_c(char *args){
+	if(npc_state == 0 ||npc_state == 1){
+		npc_state = 0;
+	}
 	execute(-1);
 	return 0;
 }
@@ -43,6 +48,9 @@ static int cmd_q(char *args) {
 
 extern int itrace_si;
 static int cmd_si(char *args) {
+  if(npc_state == 0 ||npc_state == 1){
+	npc_state = 0;
+  }  	
   char *arg = strtok(NULL, " ");
   int i = atoi(arg);
   if(i <= 50)itrace_si = 1;

@@ -170,6 +170,9 @@ void execute(int n){
 		  program_exec_statistics();
 		  return;
 	  }
+  	  else if(npc_state == STOP){
+		  return;
+          }
   	  else if(npc_state == ABORT){
   	  //else if(end == 2){
 		  printf(RED "ABORT\n" NONE);
