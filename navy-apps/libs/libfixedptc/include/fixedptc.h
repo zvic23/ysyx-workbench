@@ -128,7 +128,8 @@ typedef	__uint128_t fixedptud;
 /* Multiplies a fixedpt number with an integer, returns the result. */
 static inline fixedpt fixedpt_muli(fixedpt A, int B) {
 	fixedpt B_fix = fixedpt_fromint(B);
-	fixedpt C = A * B_fix / 2^8;
+	fixedpt C = (fixedpt)(((fixedptd)(A * B_fix)) >> FIXEDPT_FBITS);
+	//fixedpt C = (A * B_fix) / 2^8;
 	//fixedpt C = A * B_fix / 256;
 	return C;
 	//return 0;
@@ -137,7 +138,9 @@ static inline fixedpt fixedpt_muli(fixedpt A, int B) {
 /* Divides a fixedpt number with an integer, returns the result. */
 static inline fixedpt fixedpt_divi(fixedpt A, int B) {
 	fixedpt B_fix = fixedpt_fromint(B);
-	fixedpt C = A / B_fix * 2^8;
+	fixedpt C = (fixedpt)(((fixedptd)(A << FIXEDPT_FBITS))/ B_fix) ;
+	//fixedpt C = (A * 2^8)/ B_fix ;
+	//fixedpt C = (A / B_fix) * 2^8;
 	return C;
 	//return 0;
 }
@@ -148,7 +151,8 @@ static inline fixedpt fixedpt_mul(fixedpt A, fixedpt B) {
 	//int32_t tt0=4;
 	//printf("%d  %d\n",tt,tt0);
 	
-	fixedpt C = A * B / 2^8;   //fixedptd C = A * B >> FIXEDPT_FBITS;
+	fixedpt C = (fixedpt)(((fixedptd)(A * B)) >> FIXEDPT_FBITS);   //fixedptd C = A * B >> FIXEDPT_FBITS;
+	//fixedpt C = (A * B) / 2^8;   //fixedptd C = A * B >> FIXEDPT_FBITS;
 	//printf("mul:  A=%x   B=%x  C=%lx(%ld)  width=%d\n",A,B,C,fixedpt_toint(C),FIXEDPT_FBITS);
 	return C;
 	//return 0;
@@ -157,36 +161,68 @@ static inline fixedpt fixedpt_mul(fixedpt A, fixedpt B) {
 
 /* Divides two fixedpt numbers, returns the result. */
 static inline fixedpt fixedpt_div(fixedpt A, fixedpt B) {
-	fixedpt C = A / B * 2^8;
+	fixedpt C = (fixedpt)(((fixedptd)(A << FIXEDPT_FBITS))/ B) ;
+	//fixedpt C = (A* 2^8 )/ B ;
 	return C;
 	//return 0;
 }
 
 static inline fixedpt fixedpt_abs(fixedpt A) {
-	if((fixedptu)A>>(FIXEDPT_BITS-1)==1) return -A;  //-A is complement, not ~A
+	if((A&0x80000000)==0x80000000) return -A;  //-A is complement, not ~A
+	//if(((fixedptu)A>>(FIXEDPT_BITS-1))==1) return -A;  //-A is complement, not ~A
 	else return A;
 	//return 0;
 }
 
 static inline fixedpt fixedpt_floor(fixedpt A) {
-	fixedpt A_whole    = (A >> FIXEDPT_FBITS) << FIXEDPT_FBITS;
-	fixedpt A_fraction = fixedpt_fracpart(A);
-	if((fixedptu)A_whole>>(FIXEDPT_BITS-1) == 0)return A_whole;
-	fixedpt A_abs = fixedpt_abs(A);
-	if(fixedpt_fracpart(A_abs)==0) return A;
-	else return A&~FIXEDPT_FMASK;
+	fixedpt D = (fixedpt)(A & 0xffffff00);
+	return D;
+
+
+//	if((A&0x80000000)==0x80000000)return A&0xffffff00;
+//	else{
+//		fixedpt A_abs = (fixedpt_abs(A)&0xffffff00)+FIXEDPT_ONE;
+//		return A_abs;
+//	}
+
+//	fixedpt A_whole    = A & 0xffffff00;
+//	//fixedpt A_whole    = (A >> FIXEDPT_FBITS) << FIXEDPT_FBITS;
+//	fixedpt A_fraction = fixedpt_fracpart(A);
+//	if((fixedptu)A_whole>>(FIXEDPT_BITS-1) == 0)return A_whole;
+//	fixedpt A_abs = fixedpt_abs(A);
+//	if(fixedpt_fracpart(A_abs)==0) return A;
+//	else return A&~FIXEDPT_FMASK;
 	//return 0;
 }
 
 static inline fixedpt fixedpt_ceil(fixedpt A) {
-	fixedpt A_whole    = (A >> FIXEDPT_FBITS) << FIXEDPT_FBITS;
-	fixedpt A_fraction = A & FIXEDPT_FMASK;
-	if((fixedptu)A_whole>>(FIXEDPT_BITS-1) == 0 && A_fraction == 0)return A_whole;
-	else if((fixedptu)A_whole>>(FIXEDPT_BITS-1) == 0 )return A_whole + FIXEDPT_ONE;
-	fixedpt A_abs = fixedpt_abs(A);
-	if(A_abs&~FIXEDPT_FMASK==0) return 0;
-	else if(fixedpt_fracpart(A_abs)==0) return A;
-	else return (A&~FIXEDPT_FMASK) + FIXEDPT_ONE;
+	fixedpt D = 0;
+	if((A & 0xff) == 0){
+		D = A;
+	}else{
+		D = ((A + FIXEDPT_ONE) & 0xffffff00);
+	}
+	return D;
+
+
+
+//	if((A&0x80000000)==0x80000000)return (A&0xffffff00)+FIXEDPT_ONE;
+//	else{
+//		fixedpt A_abs = (fixedpt_abs(A)&0xffffff00)-FIXEDPT_ONE;
+//		return A_abs;
+//	}
+
+
+
+//	fixedpt A_whole    = A & 0xffffff00;
+//	//fixedpt A_whole    = (A >> FIXEDPT_FBITS) << FIXEDPT_FBITS;
+//	fixedpt A_fraction = A & FIXEDPT_FMASK;
+//	if((fixedptu)A_whole>>(FIXEDPT_BITS-1) == 0 && A_fraction == 0)return A_whole;
+//	else if((fixedptu)A_whole>>(FIXEDPT_BITS-1) == 0 )return A_whole + FIXEDPT_ONE;
+//	fixedpt A_abs = fixedpt_abs(A);
+//	if(A_abs&~FIXEDPT_FMASK==0) return 0;
+//	else if(fixedpt_fracpart(A_abs)==0) return A;
+//	else return (A&~FIXEDPT_FMASK) + FIXEDPT_ONE;
 	//return 0;
 }
 
