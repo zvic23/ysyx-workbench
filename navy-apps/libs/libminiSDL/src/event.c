@@ -86,8 +86,19 @@ int SDL_PollEvent(SDL_Event *ev) {
 
   if(ev->type == SDL_KEYDOWN || ev->type == SDL_KEYUP) {
 	  //printf("num:%d     %d\n",ev->key.keysym.sym,ev->type);
-	  if(ev->type == SDL_KEYUP)SDL_keybuf[ev->key.keysym.sym]=0;
-	   else if(ev->type == SDL_KEYDOWN)SDL_keybuf[ev->key.keysym.sym ]=1;
+
+	  if(ev->type == SDL_KEYUP){
+		  for(int i=0;i<100;i++)SDL_keybuf[i]=0;
+		  SDL_keybuf[ev->key.keysym.sym]=0;
+	  }
+	   else if(ev->type == SDL_KEYDOWN){
+		  for(int i=0;i<100;i++)SDL_keybuf[i]=0;
+		  SDL_keybuf[ev->key.keysym.sym]=1;
+	  }
+
+
+	  //if(ev->type == SDL_KEYUP)SDL_keybuf[ev->key.keysym.sym]=0;
+	  // else if(ev->type == SDL_KEYDOWN)SDL_keybuf[ev->key.keysym.sym ]=1;
 	  return 1;
   }
   else return 0;
