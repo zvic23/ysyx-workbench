@@ -4,6 +4,8 @@
 
 #include <SDL2/SDL.h>
 
+#define TIMER_HZ 60
+
 void device_update() {
   static uint64_t last = 0;
   //uint64_t now = get_time();
@@ -11,8 +13,7 @@ void device_update() {
 		gettimeofday(&time,NULL);
 		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec;
 		uint64_t now = time_rtc;
-  //if (now - last < 1000000 / TIMER_HZ) {
-  if (now - last < 1000000 ) {
+  if (now - last < 1000000 / TIMER_HZ) {
   //if (now - last < 200000 ) {
     return;
   }
