@@ -170,7 +170,7 @@ static struct {
 
 };
 
-#define NR_CMD 8
+#define NR_CMD 10
 
 char buf[1024] = {0};
 
