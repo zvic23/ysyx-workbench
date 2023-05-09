@@ -57,6 +57,22 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP_
     npc_loadstore(getinst__Vcvt, base__Vcvt, imm_I__Vcvt, imm_S__Vcvt);
 }
 
+extern "C" void update_csr(long long mtvec_npc, long long mcause_npc, long long mepc_npc, long long mstatus_npc);
+
+VL_INLINE_OPT void Vysyx_22050612_npc___024unit____Vdpiimwrap_update_csr_TOP____024unit(QData/*63:0*/ mtvec_npc, QData/*63:0*/ mcause_npc, QData/*63:0*/ mepc_npc, QData/*63:0*/ mstatus_npc) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        Vysyx_22050612_npc___024unit____Vdpiimwrap_update_csr_TOP____024unit\n"); );
+    // Body
+    long long mtvec_npc__Vcvt;
+    for (size_t mtvec_npc__Vidx = 0; mtvec_npc__Vidx < 1; ++mtvec_npc__Vidx) mtvec_npc__Vcvt = mtvec_npc;
+    long long mcause_npc__Vcvt;
+    for (size_t mcause_npc__Vidx = 0; mcause_npc__Vidx < 1; ++mcause_npc__Vidx) mcause_npc__Vcvt = mcause_npc;
+    long long mepc_npc__Vcvt;
+    for (size_t mepc_npc__Vidx = 0; mepc_npc__Vidx < 1; ++mepc_npc__Vidx) mepc_npc__Vcvt = mepc_npc;
+    long long mstatus_npc__Vcvt;
+    for (size_t mstatus_npc__Vidx = 0; mstatus_npc__Vidx < 1; ++mstatus_npc__Vidx) mstatus_npc__Vcvt = mstatus_npc;
+    update_csr(mtvec_npc__Vcvt, mcause_npc__Vcvt, mepc_npc__Vcvt, mstatus_npc__Vcvt);
+}
+
 extern "C" void set_gpr_ptr(const svOpenArrayHandle a);
 
 VL_INLINE_OPT void Vysyx_22050612_npc___024unit____Vdpiimwrap_set_gpr_ptr__Vdpioc2_TOP____024unit(const VlUnpacked<QData/*63:0*/, 32> &a) {

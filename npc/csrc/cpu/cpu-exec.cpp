@@ -59,6 +59,19 @@ void update_gpr_pc(){
           cpu_gpr_set[32]=top->pc;
 }
 
+
+uint64_t mtvec,mcause,mepc,mstatus;
+void update_csr(long long mtvec_npc, long long mcause_npc, long long mepc_npc, long long mstatus_npc){
+	mtvec = mtvec_npc;
+	mcause = mcause_npc;
+	mepc = mepc_npc;
+	mstatus = mstatus_npc;
+}
+
+
+
+
+
 //int end = 0;
 void ebreak(int r){
 	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);

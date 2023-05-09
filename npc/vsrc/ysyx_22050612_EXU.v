@@ -1,5 +1,6 @@
 import "DPI-C" function void ebreak (int r);
 import "DPI-C" function void npc_loadstore(int getinst, longint base, longint imm_I, longint imm_S);
+import "DPI-C" function void update_csr(longint mtvec_npc, longint mcause_npc, longint mepc_npc, longint mstatus_npc);
 import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
 import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
 import "DPI-C" function void pmem_read(
@@ -1041,10 +1042,9 @@ end
 
 
 
-
-
-
-
+always @(mtvec or mepc or mcause or mstatus) begin
+       update_csr(mtvec,mcause,mepc,mstatus);	
+end
 
 
 
