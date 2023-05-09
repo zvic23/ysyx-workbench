@@ -135,14 +135,14 @@ void one_cycle(){
 
   update_gpr_pc();
 
-
+#ifdef CONFIG_DIFFTEST
   if( load_store == 1){
 	  syn_gpr();
   }
   else {
   	  difftest_step();
   }
-
+#endif
 //  update_gpr_pc();
 //  if(skip_difftest == 1){
 //	  printf("skip = 1  !\n");
