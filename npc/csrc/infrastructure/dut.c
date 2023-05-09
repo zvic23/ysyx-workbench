@@ -94,10 +94,11 @@ extern uint64_t mtvec;
 
 extern const char *regs[];
 extern int npc_state;
+extern int detach_difftest;
 void difftest_step() {
-  extern int detach_difftest;
   if(detach_difftest == 1) return;
 
+  printf("check!!\n");
   uint64_t ref_r[33];
 
   ref_difftest_exec(1);
@@ -116,6 +117,7 @@ void difftest_step() {
 
 
 void syn_gpr(){
+  if(detach_difftest == 1) return;
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
 }
 
