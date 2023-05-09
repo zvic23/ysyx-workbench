@@ -72,7 +72,7 @@ extern uint64_t mepc,mcause,mstatus;
 extern uint64_t mtvec;
   csr_buf[10] = mtvec;    csr_buf[11] = mcause;  
   csr_buf[12] = mstatus;  csr_buf[13] = mepc;
-  csr_buf[32] = RESET_VECTOR;
+  csr_buf[32] = 0x80000000;
   //printf("csr: %lx  %lx  %lx  %lx\n",mtvec,mcause,mstatus,mepc);
   uint32_t buf[4];
   buf[0]=0x30551073;     //  0x305 01010 001 00000 1110011    0x30551073
