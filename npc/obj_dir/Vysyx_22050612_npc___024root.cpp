@@ -1612,7 +1612,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                  | (0x26000U == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
                 | (0x27000U == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
                | (((((((((0x28000U == vlSelf->ysyx_22050612_npc__DOT__opcode) 
-                         | (0x29000U == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
+                         | (0x28000U == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
                         | (0x100U == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
                        | (0x200U == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
                       | (0x300U == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
