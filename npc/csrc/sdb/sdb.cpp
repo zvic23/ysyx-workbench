@@ -1,6 +1,7 @@
 #include "../include/sdb.h"
 #include <cstdio>
 #include <cstring>
+#include <cassert>
 #include <math.h>
 
 #include "../include/generated/autoconf.h"
@@ -143,6 +144,57 @@ static int cmd_attach(char *args){
 	return 0;
 }
 
+extern uint8_t pmem[0x70000000];
+extern uint64_t cpu_gpr_set[33];
+extern uint64_t mepc,mcause,mstatus;
+extern uint64_t mtvec;
+static int cmd_save(char *args){
+        char path_pre[100] = "/home/zsl/snapshot/";	
+	char *path = strcat(path_pre, args);
+	FILE *p = fopen(path, "wb");
+	if( p == NULL) printf("File %s open failed!\n",path);
+	else{
+		fwrite(&cpu_gpr_set, 33*8, 1, p);
+		fseek(p, 40*8, SEEK_SET);
+		fwrite(&mtvec, 8, 1, p);
+		fwrite(&mcause, 8, 1, p);
+		fwrite(&mstatus, 8, 1, p);
+		fwrite(&mepc, 8, 1, p);
+		fseek(p, 50*8, SEEK_SET);
+		fwrite(pmem, 0x7ffffff, 1, p);
+	}
+	fclose(p);
+	return 0;
+}
+
+static int cmd_load(char *args){
+        char path_pre[100] = "/home/zsl/snapshot/";	
+	char *path = strcat(path_pre, args);
+	FILE *p = fopen(path, "rb");
+	if( p == NULL) printf("File %s open failed!\n",path);
+	else{
+		int done = fread(&cpu_gpr_set, 33*8, 1, p);
+		assert(done);
+		fseek(p, 40*8, SEEK_SET);
+		done = fread(&mtvec, 8, 1, p);
+		assert(done);
+		done = fread(&mcause, 8, 1, p);
+		assert(done);
+		done = fread(&mstatus, 8, 1, p);
+		assert(done);
+		done = fread(&mepc, 8, 1, p);
+		assert(done);
+		fseek(p, 50*8, SEEK_SET);
+		done = fread(pmem, 0x7ffffff, 1, p);
+		assert(done);
+	}
+	fclose(p);
+	return 0;
+}
+
+
+
+
 
 
 
@@ -165,12 +217,12 @@ static struct {
   { "d", "delete watchpoint", cmd_d },
   { "dt", "turn off difftest", cmd_detach },
   { "at", "turn on difftest", cmd_attach },
-//  { "save", "save snapshot", cmd_save},
-//  { "load", "load snapshot", cmd_load},
+  { "save", "save snapshot", cmd_save},
+  { "load", "load snapshot", cmd_load},
 
 };
 
-#define NR_CMD 10
+#define NR_CMD 12
 
 char buf[1024] = {0};
 
