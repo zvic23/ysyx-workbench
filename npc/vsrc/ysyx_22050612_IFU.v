@@ -12,7 +12,7 @@ module ysyx_22050612_IFU (
    //output [31:0]inst, 
 
    output reg arvalid,
-   output [31:0]araddr,
+   output reg [31:0]araddr,
    input arready,
 
    input reg rvalid,
@@ -25,7 +25,7 @@ module ysyx_22050612_IFU (
 
 reg [63:0]inst_64;
 
-assign araddr = arvalid?pc[31:0]:32'b0;
+//assign araddr = arvalid?pc[31:0]:32'b0;
 assign rready = 1'b1;
 
 always @(posedge clk) begin
@@ -35,7 +35,7 @@ always @(posedge clk) begin
 //		arvalid = 1'b0;
 //	end
 	if(rvalid == 1'b1 && rready == 1'b1)begin
-		inst <= pc[2]?rdata[63:32] : rdata[31:0];
+		inst <= araddr[2]?rdata[63:32] : rdata[31:0];
 		//inst_64 = rdata;
 		$display("inst:%x",inst);
 		$display("3\n");
@@ -53,6 +53,7 @@ always @(edge clk) begin
 	end
 	else if(rvalid == 1'b0 && clk == 1'b0)begin
 		arvalid <= 1'b1;
+		araddr <= pc[31:0];
 	$display("1\n");
 	//$display("%d   \n",arvalid);
 	end
