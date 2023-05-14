@@ -35,13 +35,13 @@ always @(posedge clk) begin
 //		arvalid = 1'b0;
 //	end
 	if(rvalid == 1'b1 && rready == 1'b1)begin
-		inst = pc[2]?rdata[63:32] : rdata[31:0];
+		inst <= pc[2]?rdata[63:32] : rdata[31:0];
 		//inst_64 = rdata;
 		$display("inst:%x",inst);
 		$display("3\n");
 	end
 	else begin
-		inst = 32'b0;
+		inst <= 32'b0;
 	end
 end
 
