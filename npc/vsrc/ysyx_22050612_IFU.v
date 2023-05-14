@@ -37,7 +37,7 @@ always @(posedge clk) begin
 	if(rvalid == 1'b1 && rready == 1'b1)begin
 		inst <= pc[2]?rdata[63:32] : rdata[31:0];
 		//inst_64 = rdata;
-		//$display("inst:%x\n",inst);
+		$display("inst:%x\n",inst);
 		$display("3\n");
 	end
 	else begin
