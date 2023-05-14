@@ -37,13 +37,13 @@ always @(posedge clk) begin
 	else if(rvalid == 1'b1 && rready == 1'b1)begin
 		inst_64 = rdata;
 	end
-	$display("%d   \n",arvalid);
 end
 
 
 always @(negedge clk) begin
 	if(rvalid == 1'b0)begin
 		arvalid = 1'b1;
+	$display("%d   \n",arvalid);
 	end
 end
 

@@ -14,8 +14,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___sequent__TOP__1\n"); );
     // Body
-    if ((1U & (~ (IData)(vlSelf->ysyx_22050612_npc__DOT__rvalid_pc)))) {
+    if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->ysyx_22050612_npc__DOT__rvalid_pc))))) {
         vlSelf->ysyx_22050612_npc__DOT__arvalid_pc = 1U;
+        VL_WRITEF("1   \n\n");
     }
 }
 
@@ -108,7 +109,6 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
         vlSelf->ysyx_22050612_npc__DOT__ifu__DOT__inst_64 
             = vlSelf->ysyx_22050612_npc__DOT__rdata_pc;
     }
-    VL_WRITEF("%1#   \n\n",1,vlSelf->ysyx_22050612_npc__DOT__arvalid_pc);
     if (vlSelf->rst) {
         vlSelf->ysyx_22050612_npc__DOT__rvalid_pc = 0U;
     } else if (vlSelf->ysyx_22050612_npc__DOT__arvalid_pc) {
