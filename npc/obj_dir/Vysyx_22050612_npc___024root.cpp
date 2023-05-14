@@ -82,7 +82,8 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
         vlSelf->ysyx_22050612_npc__DOT__rvalid_pc = 1U;
         Vysyx_22050612_npc___024unit____Vdpiimwrap_pmem_read_pc_TOP____024unit((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__araddr_pc)), __Vtask_pmem_read_pc__21__rdata);
         vlSelf->ysyx_22050612_npc__DOT__rdata_pc = __Vtask_pmem_read_pc__21__rdata;
-        VL_WRITEF("get inst!!  %x\n\n",32,vlSelf->ysyx_22050612_npc__DOT__araddr_pc);
+        VL_WRITEF("get inst!!  %x  %x\n\n",32,vlSelf->ysyx_22050612_npc__DOT__araddr_pc,
+                  64,vlSelf->ysyx_22050612_npc__DOT__rdata_pc);
     } else if (vlSelf->ysyx_22050612_npc__DOT__rvalid_pc) {
         vlSelf->ysyx_22050612_npc__DOT__rvalid_pc = 0U;
     }
