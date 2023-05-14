@@ -10,9 +10,9 @@ module ysyx_22050612_SRAM(
    input [31:0]araddr,
    output arready,
 
-   output rvalid,
+   output reg rvalid,
    output [63:0]rdata,
-   output rresp,
+   output reg rresp,
    input rready
 
 );
@@ -26,12 +26,30 @@ module ysyx_22050612_SRAM(
 //	end
 //end
 
+assign arready = 1'b1;
 
-
-
-always @(*) begin
-  pmem_read_pc({{32{1'b0}},araddr}, rdata);
+always @(posedge clk) begin
+	if(rst == 1'b1)begin
+		rvalid = 1'b0;
+		rresp = 1'b0;
+	end
+	else if(arready && arvalid)begin
+		rvalid = 1'b1;
+  		pmem_read_pc({{32{1'b0}},araddr}, rdata);
+		rresp = 1'b1;
+	end
+	else if(rvalid && rready)begin
+		rvalid = 1'b0;
+		rresp = 1'b0;
+	end
 end
+
+
+
+
+//always @(*) begin
+//  pmem_read_pc({{32{1'b0}},araddr}, rdata);
+//end
 
 
 

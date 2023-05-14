@@ -22,6 +22,8 @@ module ysyx_22050612_IFU (
 
 );
 
+reg [63:0]inst_64;
+
 assign araddr = arvalid?pc[31:0]:32'b0;
 assign rready = 1'b1;
 
@@ -31,6 +33,9 @@ always @(posedge clk) begin
 	end
 	else if(arvalid == 1'b1 && arready == 1'b1)begin
 		arvalid = 1'b0;
+	end
+	else if(rvalid == 1'b1 && rready == 1'b1)begin
+		inst_64 = rdata;
 	end
 end
 
@@ -66,7 +71,7 @@ end
 assign inst = pc[2]?inst_mix[63:32] : inst_mix[31:0];
 */
 
-assign inst = pc[2]?rdata[63:32] : rdata[31:0];
+assign inst = pc[2]?inst_64[63:32] : inst_64[31:0];
 
 
 

@@ -28,7 +28,6 @@ Vysyx_22050612_npc___024root::~Vysyx_22050612_npc___024root() {
 }
 
 void Vysyx_22050612_npc___024unit____Vdpiimwrap_update_csr_TOP____024unit(QData/*63:0*/ mtvec_npc, QData/*63:0*/ mcause_npc, QData/*63:0*/ mepc_npc, QData/*63:0*/ mstatus_npc);
-void Vysyx_22050612_npc___024unit____Vdpiimwrap_pmem_read_pc_TOP____024unit(QData/*63:0*/ raddr, QData/*63:0*/ &rdata);
 void Vysyx_22050612_npc___024unit____Vdpiimwrap_read_inst_TOP____024unit(IData/*31:0*/ npc_inst);
 void Vysyx_22050612_npc___024unit____Vdpiimwrap_pmem_read_TOP____024unit(QData/*63:0*/ raddr, QData/*63:0*/ &rdata);
 void Vysyx_22050612_npc___024unit____Vdpiimwrap_pmem_write_TOP____024unit(QData/*63:0*/ waddr, QData/*63:0*/ wdata, CData/*7:0*/ wmask);
@@ -52,7 +51,6 @@ void Vysyx_22050612_npc___024root___settle__TOP__2(Vysyx_22050612_npc___024root*
     VlWide<3>/*95:0*/ __Vtemp79;
     QData/*63:0*/ ysyx_22050612_npc__DOT__imm_U;
     QData/*63:0*/ ysyx_22050612_npc__DOT__imm_B;
-    QData/*63:0*/ ysyx_22050612_npc__DOT__rdata_pc;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__src2;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__src_csr;
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__operator_a;
@@ -165,15 +163,13 @@ void Vysyx_22050612_npc___024root___settle__TOP__2(Vysyx_22050612_npc___024root*
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr[0U] 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5
         [0U];
-    Vysyx_22050612_npc___024unit____Vdpiimwrap_pmem_read_pc_TOP____024unit((QData)((IData)(vlSelf->pc)), vlSelf->__Vtask_pmem_read_pc__21__rdata);
-    ysyx_22050612_npc__DOT__rdata_pc = vlSelf->__Vtask_pmem_read_pc__21__rdata;
     vlSelf->ysyx_22050612_npc__DOT__inst = ((1U & (IData)(
                                                           (vlSelf->pc 
                                                            >> 2U)))
                                              ? (IData)(
-                                                       (ysyx_22050612_npc__DOT__rdata_pc 
+                                                       (vlSelf->ysyx_22050612_npc__DOT__ifu__DOT__inst_64 
                                                         >> 0x20U))
-                                             : (IData)(ysyx_22050612_npc__DOT__rdata_pc));
+                                             : (IData)(vlSelf->ysyx_22050612_npc__DOT__ifu__DOT__inst_64));
     Vysyx_22050612_npc___024unit____Vdpiimwrap_read_inst_TOP____024unit(vlSelf->ysyx_22050612_npc__DOT__inst);
     if ((vlSelf->ysyx_22050612_npc__DOT__inst >> 0x1fU)) {
         ysyx_22050612_npc__DOT__imm_B = (0xffffffffffffe000ULL 
@@ -3165,7 +3161,9 @@ void Vysyx_22050612_npc___024root___ctor_var_reset(Vysyx_22050612_npc___024root*
     vlSelf->ysyx_22050612_npc__DOT__imm_S = VL_RAND_RESET_Q(64);
     vlSelf->ysyx_22050612_npc__DOT__opcode = VL_RAND_RESET_I(24);
     vlSelf->ysyx_22050612_npc__DOT__arvalid_pc = VL_RAND_RESET_I(1);
-    vlSelf->ysyx_22050612_npc__DOT__arready_pc = VL_RAND_RESET_I(1);
+    vlSelf->ysyx_22050612_npc__DOT__rvalid_pc = VL_RAND_RESET_I(1);
+    vlSelf->ysyx_22050612_npc__DOT__rdata_pc = VL_RAND_RESET_Q(64);
+    vlSelf->ysyx_22050612_npc__DOT__ifu__DOT__inst_64 = VL_RAND_RESET_Q(64);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src1 = VL_RAND_RESET_Q(64);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata_reg = VL_RAND_RESET_Q(64);
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wen = VL_RAND_RESET_I(1);
@@ -3191,5 +3189,4 @@ void Vysyx_22050612_npc___024root___ctor_var_reset(Vysyx_22050612_npc___024root*
         vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__data_list[__Vi0] = VL_RAND_RESET_Q(64);
     }
     vlSelf->__Vtask_pmem_read__1__rdata = 0;
-    vlSelf->__Vtask_pmem_read_pc__21__rdata = 0;
 }
