@@ -26,6 +26,8 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     VL_OUT64(pc,63,0);
 
     // LOCAL SIGNALS
+    CData/*0:0*/ ysyx_22050612_npc__DOT__arvalid_pc;
+    CData/*0:0*/ ysyx_22050612_npc__DOT__arready_pc;
     CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__wen;
     IData/*31:0*/ ysyx_22050612_npc__DOT__inst;
     IData/*23:0*/ ysyx_22050612_npc__DOT__opcode;
@@ -47,8 +49,8 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
 
     // LOCAL VARIABLES
     CData/*0:0*/ __Vclklast__TOP__clk;
-    QData/*63:0*/ __Vtask_pmem_read_pc__0__rdata;
-    QData/*63:0*/ __Vtask_pmem_read__2__rdata;
+    QData/*63:0*/ __Vtask_pmem_read__1__rdata;
+    QData/*63:0*/ __Vtask_pmem_read_pc__21__rdata;
     VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5;
 
     // INTERNAL VARIABLES
