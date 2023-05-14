@@ -6,7 +6,7 @@ module ysyx_22050612_SRAM(
    input clk,
    input rst,
    
-   input arvalid,
+   input reg arvalid,
    input [31:0]araddr,
    output arready,
 
