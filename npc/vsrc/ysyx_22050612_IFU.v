@@ -37,6 +37,7 @@ always @(posedge clk) begin
 	else if(rvalid == 1'b1 && rready == 1'b1)begin
 		inst_64 = rdata;
 	end
+	$display("%d   \n",arvalid);
 end
 
 always @(pc) begin
