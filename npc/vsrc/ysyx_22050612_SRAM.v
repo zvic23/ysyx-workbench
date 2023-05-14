@@ -29,7 +29,7 @@ module ysyx_22050612_SRAM(
 assign arready = 1'b1;
 
 always @(posedge clk) begin
-	$display("sram:   arvalid = %d  arready = %d  \n",arvalid, arready);   
+	//$display("sram:   arvalid = %d  arready = %d  \n",arvalid, arready);   
 	if(rst == 1'b1)begin
 		rvalid = 1'b0;
 		rresp = 1'b0;
@@ -37,7 +37,7 @@ always @(posedge clk) begin
 	else if(arready == 1'b1 && arvalid == 1'b1)begin
 		rvalid = 1'b1;
   		pmem_read_pc({{32{1'b0}},araddr}, rdata);	
-		$display("get inst!!  %x  %x\n",araddr,rdata);
+		//$display("get inst!!  %x  %x\n",araddr,rdata);
 		rresp = 1'b1;
 	end
 	else if(rvalid == 1'b1 && rready == 1'b1)begin
