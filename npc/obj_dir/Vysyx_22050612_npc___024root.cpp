@@ -69,11 +69,6 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     QData/*63:0*/ __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0;
     // Body
     __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0 = 0U;
-    VL_WRITEF("ifu:   arvalid = %1#  arready = 1  \n\n",
-              1,vlSelf->ysyx_22050612_npc__DOT__arvalid_pc);
-    if (vlSelf->rst) {
-        vlSelf->ysyx_22050612_npc__DOT__arvalid_pc = 0U;
-    }
     VL_WRITEF("sram:   arvalid = %1#  arready = 1  \n\n",
               1,vlSelf->ysyx_22050612_npc__DOT__arvalid_pc);
     if (vlSelf->rst) {
@@ -121,11 +116,14 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     } else {
         Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(0U, 0ULL, 0ULL, 0ULL);
     }
-    if ((1U & (~ (IData)(vlSelf->rst)))) {
-        if (vlSelf->ysyx_22050612_npc__DOT__rvalid_pc) {
-            vlSelf->ysyx_22050612_npc__DOT__ifu__DOT__inst_64 
-                = vlSelf->ysyx_22050612_npc__DOT__rdata_pc;
-        }
+    VL_WRITEF("ifu:   arvalid = %1#  arready = 1  \n\n",
+              1,vlSelf->ysyx_22050612_npc__DOT__arvalid_pc);
+    if (vlSelf->rst) {
+        vlSelf->ysyx_22050612_npc__DOT__arvalid_pc = 0U;
+    } else if (VL_UNLIKELY(vlSelf->ysyx_22050612_npc__DOT__rvalid_pc)) {
+        VL_WRITEF("inst_64\n\n");
+        vlSelf->ysyx_22050612_npc__DOT__ifu__DOT__inst_64 
+            = vlSelf->ysyx_22050612_npc__DOT__rdata_pc;
     }
     if ((3U == (3U & (vlSelf->ysyx_22050612_npc__DOT__opcode 
                       >> 8U)))) {
