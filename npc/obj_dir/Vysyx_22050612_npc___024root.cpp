@@ -14,8 +14,10 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___sequent__TOP__1\n"); );
     // Body
-    if (VL_UNLIKELY((1U & ((~ (IData)(vlSelf->ysyx_22050612_npc__DOT__rvalid_pc)) 
-                           & (~ (IData)(vlSelf->clk)))))) {
+    if (vlSelf->rst) {
+        vlSelf->ysyx_22050612_npc__DOT__arvalid_pc = 0U;
+    } else if (VL_UNLIKELY((1U & ((~ (IData)(vlSelf->ysyx_22050612_npc__DOT__rvalid_pc)) 
+                                  & (~ (IData)(vlSelf->clk)))))) {
         vlSelf->ysyx_22050612_npc__DOT__arvalid_pc = 1U;
         VL_WRITEF("1\n\n");
     } else if (((IData)(vlSelf->ysyx_22050612_npc__DOT__rvalid_pc) 
@@ -118,9 +120,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     } else {
         Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(0U, 0ULL, 0ULL, 0ULL);
     }
-    if (vlSelf->rst) {
-        vlSelf->ysyx_22050612_npc__DOT__arvalid_pc = 0U;
-    } else if (VL_UNLIKELY(vlSelf->ysyx_22050612_npc__DOT__rvalid_pc)) {
+    if (VL_UNLIKELY(vlSelf->ysyx_22050612_npc__DOT__rvalid_pc)) {
         vlSelf->ysyx_22050612_npc__DOT__inst = ((1U 
                                                  & (IData)(
                                                            (vlSelf->pc 
@@ -3270,7 +3270,7 @@ void Vysyx_22050612_npc___024root___eval(Vysyx_22050612_npc___024root* vlSelf) {
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___eval\n"); );
     // Body
-    if (((~ (IData)(vlSelf->clk)) & (IData)(vlSelf->__Vclklast__TOP__clk))) {
+    if (((IData)(vlSelf->clk) ^ (IData)(vlSelf->__Vclklast__TOP__clk))) {
         Vysyx_22050612_npc___024root___sequent__TOP__1(vlSelf);
     }
     if (((IData)(vlSelf->clk) & (~ (IData)(vlSelf->__Vclklast__TOP__clk)))) {

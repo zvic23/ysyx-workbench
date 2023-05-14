@@ -30,13 +30,11 @@ assign rready = 1'b1;
 
 always @(posedge clk) begin
 	//$display("ifu:   arvalid = %d  arready = %d  \n",arvalid, arready);   
-	if(rst == 1'b1)begin
-		arvalid = 1'b0;
-	end
+
 //	else if(arvalid == 1'b1 && arready == 1'b1)begin
 //		arvalid = 1'b0;
 //	end
-	else if(rvalid == 1'b1 && rready == 1'b1)begin
+	if(rvalid == 1'b1 && rready == 1'b1)begin
 		inst = pc[2]?rdata[63:32] : rdata[31:0];
 		//inst_64 = rdata;
 		//$display("inst:%x\n",inst);
@@ -49,8 +47,11 @@ end
 
 
 
-always @(negedge clk) begin
-	if(rvalid == 1'b0 && clk == 1'b0)begin
+always @(edge clk) begin
+	if(rst == 1'b1)begin
+		arvalid = 1'b0;
+	end
+	else if(rvalid == 1'b0 && clk == 1'b0)begin
 		arvalid = 1'b1;
 	$display("1\n");
 	//$display("%d   \n",arvalid);
