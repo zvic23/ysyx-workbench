@@ -41,7 +41,6 @@ end
 
 always @(pc) begin
 	arvalid = 1'b1;
-		$display("get inst!!\n");
 end
 
 
