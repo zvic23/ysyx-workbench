@@ -1,4 +1,4 @@
-CXXSRC += csrc/sdb/sdb.cpp csrc/sdb/expr.cpp csrc/sdb/watchpoint.cpp csrc/infrastructure/trace.cpp csrc/infrastructure/dut.c  csrc/device/device.cpp  csrc/device/vga.cpp
+CXXSRC += csrc/sdb/sdb.cpp csrc/sdb/expr.cpp csrc/sdb/watchpoint.cpp csrc/infrastructure/trace.cpp csrc/infrastructure/dut.c  csrc/device/device.cpp  csrc/device/vga.cpp  csrc/device/keyboard.cpp  csrc/memory/paddr.cpp  csrc/cpu/cpu-exec.cpp
 
 
 CXXSRC += csrc/utils/disasm.cc

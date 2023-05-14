@@ -8,6 +8,7 @@
 extern void naive_uload(PCB *pcb, const char *filename);
 void do_exit(Context *c) {
   naive_uload(NULL, "/bin/nterm");
+  //halt(0);
 }
 
 void do_write(Context *c) {

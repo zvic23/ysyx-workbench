@@ -1,4 +1,6 @@
 import "DPI-C" function void ebreak (int r);
+import "DPI-C" function void npc_loadstore(int getinst, longint base, longint imm_I, longint imm_S);
+import "DPI-C" function void update_csr(longint mtvec_npc, longint mcause_npc, longint mepc_npc, longint mstatus_npc);
 import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
 import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
 import "DPI-C" function void pmem_read(
@@ -129,6 +131,7 @@ always @(*) begin
     24'h7000 : wen=1'b1;
     24'h8000 : wen=1'b1;
     24'h9000 : wen=1'b1;
+    24'h10000: wen=1'b1;
     24'h12000: wen=1'b1;
     24'h13000: wen=1'b1;
     24'h14000: wen=1'b1;
@@ -140,6 +143,7 @@ always @(*) begin
     24'h1a000: wen=1'b1;
     24'h1b000: wen=1'b1;
     24'h1d000: wen=1'b1;
+    24'h21000: wen=1'b1;
     24'h22000: wen=1'b1;
     24'h24000: wen=1'b1;
     24'h25000: wen=1'b1;
@@ -181,6 +185,7 @@ always @(*) begin
     24'h7000 : wdata_reg=result_alu0;
     24'h8000 : wdata_reg=result_alu0;
     24'h9000 : wdata_reg=result_alu0;
+    24'h10000: wdata_reg=result_alu0;
     24'h12000: wdata_reg=result_alu0;
     24'h13000: wdata_reg=result_alu0;
     24'h14000: wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
@@ -192,13 +197,14 @@ always @(*) begin
     24'h1a000: wdata_reg=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
     24'h1b000: wdata_reg=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
     24'h1d000: wdata_reg=result_mul0;
+    24'h21000: wdata_reg=result_div0;
     24'h22000: wdata_reg=result_divu0;
     24'h24000: wdata_reg=result_remu0;
     24'h25000: wdata_reg=(result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]}));
     24'h26000: wdata_reg=(result_divw0[31]?({{32{1'b1}},result_divw0[31:0]}):({{32{1'b0}},result_divw0[31:0]}));
     24'h27000: wdata_reg=(result_divuw0[31]?({{32{1'b1}},result_divuw0[31:0]}):({{32{1'b0}},result_divuw0[31:0]}));
     24'h28000: wdata_reg=(result_remw0[31]?({{32{1'b1}},result_remw0[31:0]}):({{32{1'b0}},result_remw0[31:0]}));
-    24'h28000: wdata_reg=(result_remuw0[31]?({{32{1'b1}},result_remuw0[31:0]}):({{32{1'b0}},result_remuw0[31:0]}));
+    24'h29000: wdata_reg=(result_remuw0[31]?({{32{1'b1}},result_remuw0[31:0]}):({{32{1'b0}},result_remuw0[31:0]}));
     24'h100  : wdata_reg=imm_U;
     24'h200  : wdata_reg=result_alu0;
     24'h300  : wdata_reg=pc + 64'd4;
@@ -233,6 +239,7 @@ always @(*) begin
     24'h7000 : operator_a=src1;
     24'h8000 : operator_a=src1;
     24'h9000 : operator_a=src1;
+    24'h10000: operator_a=src1;
     24'h12000: operator_a=src1;
     24'h13000: operator_a=src1;
     24'h14000: operator_a={{32{1'b0}},src1[31:0]};
@@ -284,6 +291,7 @@ always @(*) begin
     24'h7000 : operator_b=src2 ;
     24'h8000 : operator_b=src2 ;
     24'h9000 : operator_b=src2 ;
+    24'h10000: operator_b={{58{1'b0}},src2[5:0]};
     24'h12000: operator_b=src2 ;
     24'h13000: operator_b=src2 ;
     24'h14000: operator_b={{59{1'b0}},shamt[4:0]};
@@ -336,6 +344,7 @@ always @(*) begin
     24'h7000 : mode=8'd2 ; 
     24'h8000 : mode=8'd3 ; 
     24'h9000 : mode=8'd7 ; 
+    24'h10000: mode=8'd9 ; 
     24'h12000: mode=8'd6 ; 
     24'h13000: mode=8'd4 ; 
     24'h14000: mode=8'd8 ; 
@@ -389,7 +398,7 @@ always @(*) begin
     24'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+pc):snpc;
     24'd7   : dnpc=(result_alu0[63]==1)?(imm_B+pc):snpc;
     24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+pc):snpc;
-    24'd9   : dnpc=(result_alu0[63]==1)?(imm_B+pc):snpc;
+    24'd9   : dnpc=(src1<src2)?(imm_B+pc):snpc;
     24'd10  : dnpc=(src1>=src2)?(imm_B+pc):snpc        ;        //(result_alu0[63]==0)?(imm_B+pc):snpc
     24'h200000: dnpc=mtvec                             ;        
     24'h500000: dnpc=mepc                              ;        
@@ -698,6 +707,9 @@ ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
 wire[63:0] result_mul0;
 assign result_mul0 = src1[63:0] * src2[63:0];
 
+wire[63:0] result_div0;
+assign result_div0 = src1[63:0] / src2[63:0];
+
 wire[63:0] result_divu0;
 assign result_divu0 = src1[63:0] / src2[63:0];
 
@@ -817,7 +829,7 @@ always @(*) begin
     24'd13  : rdata_fix=(raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]}));
     24'd14  : rdata_fix={{56{1'b0}},rdata_1byte};
     24'd15  : rdata_fix={{48{1'b0}},rdata_2byte};
-    24'd41  : rdata_fix={{32{1'b0}},rdata[31:0]};
+    24'd41  : rdata_fix=raddr[2]?{{32{1'b0}},rdata[63:32]}:{{32{1'b0}},rdata[31:0]};
     24'd42  : rdata_fix=rdata;
     default: rdata_fix=64'b0;
 	endcase
@@ -1011,14 +1023,28 @@ end
 
 
 
+always @(posedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
+	case(opcode)
+    24'd11  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd12  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd13  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd14  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd15  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd16  : npc_loadstore(2, src1, imm_I, imm_S);
+    24'd17  : npc_loadstore(2, src1, imm_I, imm_S);
+    24'd18  : npc_loadstore(2, src1, imm_I, imm_S);
+    24'd41  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd42  : npc_loadstore(1, src1, imm_I, imm_S);
+    24'd43  : npc_loadstore(2, src1, imm_I, imm_S);
+    default: npc_loadstore(0, 0, 0, 0);
+	endcase
+end
 
 
 
-
-
-
-
-
+always @(mtvec or mepc or mcause or mstatus) begin
+       update_csr(mtvec,mcause,mepc,mstatus);	
+end
 
 
 
