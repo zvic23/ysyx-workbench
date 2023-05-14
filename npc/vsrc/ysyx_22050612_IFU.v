@@ -7,6 +7,7 @@ module ysyx_22050612_IFU (
    input rst, 
    input [63:0]dnpc,
    output [63:0]pc,
+   input pc_update,
    output [31:0]inst, 
 
    output reg arvalid,
@@ -25,7 +26,7 @@ assign araddr = arvalid?pc[31:0]:32'b0;
 assign rready = 1'b1;
 
 always @(posedge clk) begin
-	if(rst == 1'b0)begin
+	if(rst == 1'b1)begin
 		arvalid = 1'b0;
 	end
 	else if(arvalid == 1'b1 && arready == 1'b1)begin
@@ -41,7 +42,10 @@ end
 
 
 
-ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, 1'b1);
+ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, pc_update);
+//ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, 1'b1);
+
+
 
 //Reg #(1,1'b0) pc0  (clk, rst,    clk, pc[ ], 1'b1);
 //Reg #(1,1'b0) pc1  (clk, rst, ~pc[ ], pc[ ], 1'b1);

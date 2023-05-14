@@ -17,7 +17,14 @@ module ysyx_22050612_SRAM(
 
 );
 
-
+//always @(posedge clk) begin
+//	if(rst == 1'b1)begin
+//		arvalid = 1'b0;
+//	end
+//	else if(arvalid == 1'b1 && arready == 1'b1)begin
+//		arvalid = 1'b0;
+//	end
+//end
 
 
 
