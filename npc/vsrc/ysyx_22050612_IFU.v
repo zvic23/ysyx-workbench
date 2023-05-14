@@ -15,7 +15,7 @@ module ysyx_22050612_IFU (
    output [31:0]araddr,
    input arready,
 
-   input rvalid,
+   input reg rvalid,
    input [63:0]rdata,
    input rresp,
    output rready
