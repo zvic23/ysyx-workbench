@@ -37,7 +37,7 @@ always @(posedge clk) begin
 //	end
 	else if(rvalid == 1'b1 && rready == 1'b1)begin
 		inst_64 = rdata;
-		$display("inst_64:%x\n",inst_64);
+		$display("inst_64:%x\n",inst);
 	end
 end
 
