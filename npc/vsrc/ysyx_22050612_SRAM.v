@@ -38,11 +38,13 @@ always @(posedge clk) begin
 		rvalid = 1'b1;
   		pmem_read_pc({{32{1'b0}},araddr}, rdata);	
 		//$display("get inst!!  %x  %x\n",araddr,rdata);
+		$display("2\n");
 		rresp = 1'b1;
 	end
 	else if(rvalid == 1'b1 && rready == 1'b1)begin
 		rvalid = 1'b0;
 		rresp = 1'b0;
+		$display("4\n");
 	end
 end
 

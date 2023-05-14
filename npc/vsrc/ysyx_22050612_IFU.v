@@ -40,6 +40,7 @@ always @(posedge clk) begin
 		inst = pc[2]?rdata[63:32] : rdata[31:0];
 		//inst_64 = rdata;
 		//$display("inst:%x\n",inst);
+		$display("3\n");
 	end
 	else begin
 		inst = 32'b0;
@@ -47,15 +48,27 @@ always @(posedge clk) begin
 end
 
 
+
 always @(negedge clk) begin
-	if(rvalid == 1'b0)begin
+	if(rvalid == 1'b0 && clk == 1'b0)begin
 		arvalid = 1'b1;
+	$display("1\n");
 	//$display("%d   \n",arvalid);
 	end
-	else begin
+	else if(rvalid == 1'b1 && clk == 1'b0) begin
 		arvalid = 1'b0;
 	end
 end
+
+//always @(negedge clk) begin
+//	if(rvalid == 1'b0)begin
+//		arvalid = 1'b1;
+//	//$display("%d   \n",arvalid);
+//	end
+//	else begin
+//		arvalid = 1'b0;
+//	end
+//end
 
 //always @(pc) begin
 //	arvalid = 1'b1;
