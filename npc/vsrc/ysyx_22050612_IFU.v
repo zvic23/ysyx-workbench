@@ -8,7 +8,8 @@ module ysyx_22050612_IFU (
    input [63:0]dnpc,
    output [63:0]pc,
    input pc_update,
-   output [31:0]inst, 
+   output reg [31:0]inst, 
+   //output [31:0]inst, 
 
    output reg arvalid,
    output [31:0]araddr,
@@ -36,7 +37,8 @@ always @(posedge clk) begin
 //		arvalid = 1'b0;
 //	end
 	else if(rvalid == 1'b1 && rready == 1'b1)begin
-		inst_64 = rdata;
+		inst = pc[2]?rdata[63:32] : rdata[31:0];
+		//inst_64 = rdata;
 		$display("inst_64:%x\n",inst);
 	end
 end
@@ -83,7 +85,7 @@ end
 assign inst = pc[2]?inst_mix[63:32] : inst_mix[31:0];
 */
 
-assign inst = pc[2]?inst_64[63:32] : inst_64[31:0];
+//assign inst = pc[2]?inst_64[63:32] : inst_64[31:0];
 
 
 
