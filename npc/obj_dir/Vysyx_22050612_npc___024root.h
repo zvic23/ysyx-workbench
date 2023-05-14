@@ -49,6 +49,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     VlUnpacked<QData/*63:0*/, 10> ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__data_list;
 
     // LOCAL VARIABLES
+    CData/*0:0*/ __Vdly__ysyx_22050612_npc__DOT__rvalid_pc;
     CData/*0:0*/ __Vclklast__TOP__clk;
     QData/*63:0*/ __Vtask_pmem_read__1__rdata;
     VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5;
