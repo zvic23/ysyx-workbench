@@ -101,6 +101,8 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     } else {
         Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(0U, 0ULL, 0ULL, 0ULL);
     }
+    VL_WRITEF("arvalid = %1#  arready = 1  \n\n",1,
+              vlSelf->ysyx_22050612_npc__DOT__arvalid_pc);
     if (vlSelf->rst) {
         vlSelf->ysyx_22050612_npc__DOT__arvalid_pc = 0U;
     } else if (vlSelf->ysyx_22050612_npc__DOT__arvalid_pc) {
