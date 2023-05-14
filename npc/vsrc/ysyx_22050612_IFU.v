@@ -41,6 +41,9 @@ always @(posedge clk) begin
 		//inst_64 = rdata;
 		//$display("inst:%x\n",inst);
 	end
+	else begin
+		inst = 32'b0;
+	end
 end
 
 
