@@ -30,13 +30,13 @@ assign rready = 1'b1;
 always @(posedge clk) begin
 	if(rst == 1'b1)begin
 		arvalid = 1'b0;
+		$display("get inst!!\n");
 	end
 	else if(arvalid == 1'b1 && arready == 1'b1)begin
 		arvalid = 1'b0;
 	end
 	else if(rvalid == 1'b1 && rready == 1'b1)begin
 		inst_64 = rdata;
-		$display("get inst!!\n");
 	end
 end
 
