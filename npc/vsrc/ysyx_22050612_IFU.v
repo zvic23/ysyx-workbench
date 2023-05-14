@@ -28,7 +28,7 @@ assign araddr = arvalid?pc[31:0]:32'b0;
 assign rready = 1'b1;
 
 always @(posedge clk) begin
-	//$display("arvalid = %d  arready = %d  \n",arvalid, arready);   
+	$display("ifu:   arvalid = %d  arready = %d  \n",arvalid, arready);   
 	if(rst == 1'b1)begin
 		arvalid = 1'b0;
 	end
