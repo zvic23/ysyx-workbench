@@ -29,7 +29,7 @@ module ysyx_22050612_SRAM(
 assign arready = 1'b1;
 
 always @(posedge clk) begin
-	$display("arvalid = %d  arready = %d  \n",arvalid, arready);   
+	$display("sram:   arvalid = %d  arready = %d  \n",arvalid, arready);   
 	if(rst == 1'b1)begin
 		rvalid = 1'b0;
 		rresp = 1'b0;

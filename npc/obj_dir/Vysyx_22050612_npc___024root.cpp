@@ -109,8 +109,8 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
         vlSelf->ysyx_22050612_npc__DOT__ifu__DOT__inst_64 
             = vlSelf->ysyx_22050612_npc__DOT__rdata_pc;
     }
-    VL_WRITEF("arvalid = %1#  arready = 1  \n\n",1,
-              vlSelf->ysyx_22050612_npc__DOT__arvalid_pc);
+    VL_WRITEF("sram:   arvalid = %1#  arready = 1  \n\n",
+              1,vlSelf->ysyx_22050612_npc__DOT__arvalid_pc);
     if (vlSelf->rst) {
         vlSelf->ysyx_22050612_npc__DOT__rvalid_pc = 0U;
     } else if (VL_UNLIKELY(vlSelf->ysyx_22050612_npc__DOT__arvalid_pc)) {
