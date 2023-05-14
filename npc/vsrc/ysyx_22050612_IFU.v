@@ -40,10 +40,16 @@ always @(posedge clk) begin
 	$display("%d   \n",arvalid);
 end
 
-always @(pc) begin
-	arvalid = 1'b1;
+
+always @(negedge clk) begin
+	if(rvalid == 1'b0)begin
+		arvalid = 1'b1;
+	end
 end
 
+//always @(pc) begin
+//	arvalid = 1'b1;
+//end
 
 
 
