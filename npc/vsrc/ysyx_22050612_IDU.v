@@ -101,7 +101,6 @@ ysyx_22050612_MuxKey #(3, 16, 2) decode3 (opcode[11:10], {inst[31:26],inst[14:12
 
 
   always @(inst) begin
-	  $display("clk = %d",clk);
 	  case ({inst[14:12],inst[6:0]})
     10'b000_1100111:  opcode[6:0]= 7'd4   ;    //jalr
     10'b000_1100011:  opcode[6:0]= 7'd5   ;    //beq

@@ -63,6 +63,7 @@ ysyx_22050612_Reg #(64,64'ha00001800) mstatus_csr (clk, rst, wdata_mstatus, msta
 
 
 always @(*) begin
+	$display("clk = %d",clk);
 //mtvec control
   	case (opcode)
     24'd49   : wen_mtvec=(imm_I[11:0]==12'h305)? 1'b1:1'b0;
