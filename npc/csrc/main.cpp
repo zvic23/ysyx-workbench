@@ -280,6 +280,10 @@ int main() {
   top->clk=1;top->rst=0;top->eval();//step_and_dump_wave();
   top->clk=0;top->rst=0;top->eval();//step_and_dump_wave();    //init the npc
 
+  top->clk=1;top->rst=0;top->eval();//step_and_dump_wave();
+  top->clk=0;top->rst=0;top->eval();//step_and_dump_wave();    //init the npc
+
+
   update_gpr_pc();
 extern uint64_t img_size;
   init_difftest(img_size ,0);
