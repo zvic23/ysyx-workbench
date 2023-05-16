@@ -27,6 +27,7 @@ input [63:0]pc,
 
 
 //output [63:0]dnpc
+output pc_update,
 output reg [63:0]dnpc
 
 );
@@ -408,7 +409,7 @@ always @(*) begin
 end
 
 
-
+assign pc_update = (opcode != 24'b0)? 1'b1:1'b0;
 
 
 
