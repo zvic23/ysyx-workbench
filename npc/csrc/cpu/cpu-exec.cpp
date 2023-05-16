@@ -83,6 +83,7 @@ void ebreak(int r){
 	//end = 1;
 	npc_state == END;
 
+	  printf("ebreak stats == %d\n",npc_state);
 }
 
 
