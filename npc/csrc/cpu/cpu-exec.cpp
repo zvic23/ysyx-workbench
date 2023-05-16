@@ -178,6 +178,7 @@ void program_exec_statistics(){
 //int itrace_si = 0;
 void execute(int n){
   for(uint64_t i=0;i<n;i++){
+	  printf("stats == %d\n",npc_state);
 	  if(npc_state == END || npc_state == QUIT){
 	  //if(end == 1){
 		  program_exec_statistics();
