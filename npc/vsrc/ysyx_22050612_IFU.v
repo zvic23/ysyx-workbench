@@ -47,9 +47,10 @@ end
 
 
 
-always @(edge clk) begin
-	if(rst == 1'b1 && clk == 1'b1)begin
-		arvalid <= 1'b0;
+always @(negedge clk) begin
+	if(rst == 1'b1 && clk == 1'b0)begin
+		arvalid <= 1'b1;
+		araddr <= 32'h80000000;
 	end
 	else if(rvalid == 1'b0 && clk == 1'b0)begin
 		arvalid <= 1'b1;
