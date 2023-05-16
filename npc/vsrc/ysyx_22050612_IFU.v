@@ -37,8 +37,8 @@ always @(posedge clk) begin
 	if(rvalid == 1'b1 && rready == 1'b1)begin
 		inst <= araddr[2]?rdata[63:32] : rdata[31:0];
 		//inst_64 = rdata;
-		$display("inst:%x",inst);
-		$display("3\n");
+		//$display("inst:%x",inst);
+		//$display("3\n");
 	end
 	else begin
 		inst <= 32'b0;
@@ -55,7 +55,7 @@ always @(negedge clk) begin
 	else if(rvalid == 1'b0 && clk == 1'b0)begin
 		arvalid <= 1'b1;
 		araddr <= dnpc[31:0];
-	$display("1\n");
+	//$display("1\n");
 	//$display("%d   \n",arvalid);
 	end
 	else if(rvalid == 1'b1 && clk == 1'b0) begin
