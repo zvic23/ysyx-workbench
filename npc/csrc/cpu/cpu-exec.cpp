@@ -81,9 +81,8 @@ void ebreak(int r){
 		printf(RED "HIT BAD TRAP\n" NONE);
 	}
 	//end = 1;
-	npc_state == END;
+	npc_state = END;
 
-	  printf("ebreak stats == %d\n",npc_state);
 }
 
 
@@ -179,7 +178,6 @@ void program_exec_statistics(){
 //int itrace_si = 0;
 void execute(int n){
   for(uint64_t i=0;i<n;i++){
-	  printf("stats == %d\n",npc_state);
 	  if(npc_state == END || npc_state == QUIT){
 	  //if(end == 1){
 		  program_exec_statistics();
