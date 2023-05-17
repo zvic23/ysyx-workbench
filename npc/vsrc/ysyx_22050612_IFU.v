@@ -25,15 +25,11 @@ module ysyx_22050612_IFU (
 
 reg [63:0]inst_64;
 
-//assign araddr = arvalid?pc[31:0]:32'b0;
 assign rready = 1'b1;
 
 always @(posedge clk) begin
 	//$display("ifu:   arvalid = %d  arready = %d  \n",arvalid, arready);   
 
-//	else if(arvalid == 1'b1 && arready == 1'b1)begin
-//		arvalid = 1'b0;
-//	end
 	if(rvalid == 1'b1 && rready == 1'b1)begin
 		inst <= araddr[2]?rdata[63:32] : rdata[31:0];
 		//inst_64 = rdata;

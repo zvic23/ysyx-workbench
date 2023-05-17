@@ -893,20 +893,33 @@ end
 
 //****   AXI   *******
 /*
+assign rready = 1'b1;
+
 always @(posedge clk) begin
 	//$display("ifu:   arvalid = %d  arready = %d  \n",arvalid, arready);   
-
-//	else if(arvalid == 1'b1 && arready == 1'b1)begin
-//		arvalid = 1'b0;
-//	end
 	if(rvalid == 1'b1 && rready == 1'b1)begin
-		inst <= araddr[2]?rdata[63:32] : rdata[31:0];
+		rdata <= rrdata;
 		//inst_64 = rdata;
 		//$display("inst:%x",inst);
 		//$display("3\n");
 	end
 	else begin
-		inst <= 32'b0;
+		rdata <= 64'b0;
+	end
+end
+
+
+always @(posedge clk) begin
+	if(rst == 1'b1)begin
+		arvalid <= 1'b0;
+		araddr <= 32'h0;
+	end
+	else if(rvalid == 1'b0 && raddr != 64'h0 )begin
+		arvalid <= 1'b1;
+		araddr <= raddr[31:0];
+	end
+	else if(arvalid == 1'b1 && arready == 1'b1) begin
+		arvalid <= 1'b0;
 	end
 end
  
@@ -938,8 +951,8 @@ always @(posedge clk) begin
 
 end
 
+//******************************************
 */
-
 
 
 //wire [7:0]wmask_1byte;
