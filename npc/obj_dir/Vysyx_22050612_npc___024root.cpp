@@ -262,8 +262,8 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     Vysyx_22050612_npc___024unit____Vdpiimwrap_update_csr_TOP____024unit(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mtvec, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mcause, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mepc, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mstatus);
     if (vlSelf->rst) {
         vlSelf->pc = 0x80000000ULL;
-    } else if ((1U & ((0U != vlSelf->ysyx_22050612_npc__DOT__opcode) 
-                      | (~ (IData)(vlSelf->ysyx_22050612_npc__DOT__exu_block))))) {
+    } else if (((0U != vlSelf->ysyx_22050612_npc__DOT__opcode) 
+                & (~ (IData)(vlSelf->ysyx_22050612_npc__DOT__exu_block)))) {
         vlSelf->pc = vlSelf->ysyx_22050612_npc__DOT__dnpc;
     }
     if (vlSelf->ysyx_22050612_npc__DOT__rvalid_pc) {

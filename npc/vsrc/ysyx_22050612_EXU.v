@@ -440,7 +440,7 @@ always @(*) begin
 end
 
 
-assign pc_update = (opcode != 24'b0 || exu_block == 1'b0)? 1'b1:1'b0;
+assign pc_update = (opcode != 24'b0 && exu_block == 1'b0)? 1'b1:1'b0;
 
 
 
