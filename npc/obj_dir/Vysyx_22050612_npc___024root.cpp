@@ -16,16 +16,6 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     // Body
     vlSelf->__Vdly__ysyx_22050612_npc__DOT__arvalid_pc 
         = vlSelf->ysyx_22050612_npc__DOT__arvalid_pc;
-    if (((IData)(vlSelf->rst) & (~ (IData)(vlSelf->clk)))) {
-        vlSelf->__Vdly__ysyx_22050612_npc__DOT__arvalid_pc = 1U;
-    } else if ((1U & (((~ (IData)(vlSelf->ysyx_22050612_npc__DOT__rvalid_pc)) 
-                       & (~ (IData)(vlSelf->ysyx_22050612_npc__DOT__exu_block))) 
-                      & (~ (IData)(vlSelf->clk))))) {
-        vlSelf->__Vdly__ysyx_22050612_npc__DOT__arvalid_pc = 1U;
-    } else if (((IData)(vlSelf->ysyx_22050612_npc__DOT__arvalid_pc) 
-                & (IData)(vlSelf->clk))) {
-        vlSelf->__Vdly__ysyx_22050612_npc__DOT__arvalid_pc = 0U;
-    }
 }
 
 void Vysyx_22050612_npc___024unit____Vdpiimwrap_npc_loadstore_TOP____024unit(IData/*31:0*/ getinst, QData/*63:0*/ base, QData/*63:0*/ imm_I, QData/*63:0*/ imm_S);
@@ -3222,14 +3212,20 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__4(Vysyx_22050612
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___sequent__TOP__4\n"); );
     // Body
-    vlSelf->ysyx_22050612_npc__DOT__arvalid_pc = vlSelf->__Vdly__ysyx_22050612_npc__DOT__arvalid_pc;
     if (((IData)(vlSelf->rst) & (~ (IData)(vlSelf->clk)))) {
+        vlSelf->__Vdly__ysyx_22050612_npc__DOT__arvalid_pc = 1U;
         vlSelf->ysyx_22050612_npc__DOT__araddr_pc = 0x80000000U;
-    } else if ((1U & (((~ (IData)(vlSelf->ysyx_22050612_npc__DOT__rvalid_pc)) 
-                       & (~ (IData)(vlSelf->ysyx_22050612_npc__DOT__exu_block))) 
-                      & (~ (IData)(vlSelf->clk))))) {
+    } else if (VL_UNLIKELY((1U & (((~ (IData)(vlSelf->ysyx_22050612_npc__DOT__rvalid_pc)) 
+                                   & (~ (IData)(vlSelf->ysyx_22050612_npc__DOT__exu_block))) 
+                                  & (~ (IData)(vlSelf->clk)))))) {
+        VL_WRITEF("block = %1# \n",1,vlSelf->ysyx_22050612_npc__DOT__exu_block);
+        vlSelf->__Vdly__ysyx_22050612_npc__DOT__arvalid_pc = 1U;
         vlSelf->ysyx_22050612_npc__DOT__araddr_pc = (IData)(vlSelf->ysyx_22050612_npc__DOT__dnpc);
+    } else if (((IData)(vlSelf->ysyx_22050612_npc__DOT__arvalid_pc) 
+                & (IData)(vlSelf->clk))) {
+        vlSelf->__Vdly__ysyx_22050612_npc__DOT__arvalid_pc = 0U;
     }
+    vlSelf->ysyx_22050612_npc__DOT__arvalid_pc = vlSelf->__Vdly__ysyx_22050612_npc__DOT__arvalid_pc;
 }
 
 VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__6(Vysyx_22050612_npc___024root* vlSelf) {
