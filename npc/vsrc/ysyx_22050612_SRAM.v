@@ -17,7 +17,7 @@ module ysyx_22050612_SRAM(
 
    output reg rvalid,
    output [63:0]rdata,
-   output reg rresp,
+   output reg [1:0]rresp,
    input rready,
 
    input awvalid,
@@ -45,8 +45,8 @@ assign wready  = 1'b1;
 always @(posedge clk) begin
 	//$display("sram:   arvalid = %d  arready = %d  \n",arvalid, arready);   
 	if(rst == 1'b1)begin
-		rvalid <= 1'b0;
-		rresp <= 1'b0;
+		bvalid <= 1'b0;
+		bresp <= 2'b0;
 	end
 	else if(awready == 1'b1 && awvalid == 1'b1 && wready == 1'b1 && wvalid == 1'b1)begin
 		pmem_write({{32{1'b0}},awaddr}, wdata, wstrb);
@@ -70,7 +70,7 @@ always @(posedge clk) begin
 	//$display("sram:   arvalid = %d  arready = %d  \n",arvalid, arready);   
 	if(rst == 1'b1)begin
 		rvalid <= 1'b0;
-		rresp <= 1'b0;
+		rresp <= 2'b0;
 	end
 	else if(arready == 1'b1 && arvalid == 1'b1)begin
 		rvalid <= 1'b1;
@@ -78,11 +78,11 @@ always @(posedge clk) begin
   		//pmem_read_pc({{32{1'b0}},araddr}, rdata);	
 		//$display("get inst!!  %x  %x\n",araddr,rdata);
 		//$display("2\n");
-		rresp <= 1'b1;
+		rresp <= 2'b0;
 	end
 	else if(rvalid == 1'b1 && rready == 1'b1)begin
 		rvalid <= 1'b0;
-		rresp <= 1'b0;
+		rresp <= 2'b0;
 		//$display("4\n");
 	end
 end

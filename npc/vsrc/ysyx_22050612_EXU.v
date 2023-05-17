@@ -28,17 +28,17 @@ input [63:0]pc,
 
 //output [63:0]dnpc
 output pc_update,
-output reg [63:0]dnpc
+output reg [63:0]dnpc,
 
 
-/*
+
 output reg arvalid,
 output [31:0]araddr,
 input arready,
 
 input reg rvalid,
-input [63:0]rdata,
-input reg rresp,
+input [63:0]rrdata,
+input reg [1:0]rresp,
 output rready,
 
 output awvalid,
@@ -46,15 +46,19 @@ output [31:0]awaddr,
 input awready,
 
 output wvalid,
-output [63:0]wdata,
-output [[7:0]wstrb,
+output [63:0]wwdata,
+output [7:0]wstrb,
 input wready,
 
 input [1:0]bresp,
 input bvalid,
-output bready
+output bready,
 
-*/
+
+
+output reg exu_block
+
+
 
 
 );
@@ -891,8 +895,28 @@ end
 //	$display("pose  clk=%d",clk);
 //end
 
-//****   AXI   *******
-/*
+//***********************   AXI   *********************
+
+always @(posedge clk) begin
+	if(rst == 1'b1)begin
+		exu_block = 1'b0;
+	end
+	else if(rresp == 2'b0 && rvalid == 1'b1)begin
+		exu_block = 1'b0;
+	end
+	else if(bresp == 2'b0 && bvalid == 1'b1)begin
+		exu_block = 1'b0;
+	end
+	else if(raddr != 64'b0 || waddr != 64'b0)begin
+		exu_block = 1'b1;
+	end
+	else begin
+		exu_block = 1'b0;
+	end
+end
+
+//***********************   read   *********************
+
 assign rready = 1'b1;
 
 always @(posedge clk) begin
@@ -903,9 +927,9 @@ always @(posedge clk) begin
 		//$display("inst:%x",inst);
 		//$display("3\n");
 	end
-	else begin
-		rdata <= 64'b0;
-	end
+//	else begin
+//		rdata <= 64'b0;
+//	end
 end
 
 
@@ -925,34 +949,41 @@ end
  
  
  
- 
- 
+//***********************   write   *********************
+assign bready = 1'b1;
+
 always @(posedge clk) begin
-	case(opcode)
-    24'd11  : begin raddr=result_alu0;
-    24'd12  : begin raddr=result_alu0;
-    24'd13  : begin raddr=result_alu0;
-    24'd14  : begin raddr=result_alu0;
-    24'd15  : begin raddr=result_alu0;
-    24'd41  : begin raddr=result_alu0;
-    24'd42  : begin raddr=result_alu0;
-    default: waddr=64'b0;
-	endcase
+	if(rst == 1'b1)begin
+		awvalid <= 1'b0;
+		awaddr <= 32'h0;
+	end
+	else if(bvalid == 1'b0 && waddr != 64'h0 )begin
+		awvalid <= 1'b1;
+		awaddr <= waddr[31:0];
+	end
+	else if(awvalid == 1'b1 && awready == 1'b1) begin
+		awvalid <= 1'b0;
+	end
+end
 
-	case(opcode)
-    24'd16  : waddr=result_alu0;
-    24'd17  : waddr=result_alu0;
-    24'd18  : waddr=result_alu0;
-    24'd43  : waddr=result_alu0;
-    default: waddr=64'b0;
-	endcase
-
-
-
+always @(posedge clk) begin
+	if(rst == 1'b1)begin
+		wvalid <= 1'b0;
+		wwdata <= 64'h0;
+		wstrb <= 8'h0;
+	end
+	else if(bvalid == 1'b0 && waddr != 64'h0 )begin
+		wvalid <= 1'b1;
+		wwdata <= wdata;
+		wstrb <= wmask;
+	end
+	else if(awvalid == 1'b1 && awready == 1'b1) begin
+		awvalid <= 1'b0;
+	end
 end
 
 //******************************************
-*/
+
 
 
 //wire [7:0]wmask_1byte;
@@ -1008,7 +1039,7 @@ ysyx_22050612_MuxKey #(7, 3, 8 ) wmask_twobyte (wmask_2byte, waddr[2:0], {
 */
 
 
-wire [63:0] rdata;
+reg [63:0] rdata;
 //wire [63:0] raddr;
 //wire [63:0] waddr;
 //wire [63:0] wdata;
@@ -1049,10 +1080,10 @@ ysyx_22050612_MuxKey #(4, 20, 8 ) wmask_select (wmask, opcode, {
   });
 */
 
-always @(*) begin
-  pmem_read(raddr, rdata);
-  pmem_write(waddr, wdata, wmask);
-end
+//always @(*) begin
+//  pmem_read(raddr, rdata);
+//  pmem_write(waddr, wdata, wmask);
+//end
 
 
 //wire [63:0] rdata_fix;

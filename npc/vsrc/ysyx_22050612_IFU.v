@@ -17,8 +17,10 @@ module ysyx_22050612_IFU (
 
    input reg rvalid,
    input [63:0]rdata,
-   input rresp,
-   output rready
+   input [1:0]rresp,
+   output rready,
+
+   input exu_block
 
 
 );
@@ -48,7 +50,7 @@ always @(edge clk) begin
 		arvalid <= 1'b1;
 		araddr <= 32'h80000000;
 	end
-	else if(rvalid == 1'b0 && clk == 1'b0)begin
+	else if(rvalid == 1'b0 && exu_block == 1'b0 && clk == 1'b0 )begin
 		arvalid <= 1'b1;
 		araddr <= dnpc[31:0];
 	//$display("1\n");
