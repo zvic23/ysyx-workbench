@@ -258,7 +258,8 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
                   64,vlSelf->ysyx_22050612_npc__DOT__wdata_lsu);
         vlSelf->ysyx_22050612_npc__DOT__bresp_lsu = 0U;
         __Vdly__ysyx_22050612_npc__DOT__bvalid_lsu = 1U;
-    } else if (vlSelf->ysyx_22050612_npc__DOT__bvalid_lsu) {
+    } else if (VL_UNLIKELY(vlSelf->ysyx_22050612_npc__DOT__bvalid_lsu)) {
+        VL_WRITEF("write  respon!! \n\n");
         __Vdly__ysyx_22050612_npc__DOT__bvalid_lsu = 0U;
     }
     Vysyx_22050612_npc___024unit____Vdpiimwrap_update_csr_TOP____024unit(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mtvec, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mcause, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mepc, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mstatus);

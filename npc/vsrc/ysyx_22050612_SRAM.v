@@ -57,6 +57,7 @@ always @(posedge clk) begin
 	end
 	else if(bvalid == 1'b1 && bready == 1'b1)begin
 		bvalid <= 1'b0;
+		$display("write  respon!! \n");
 		//bresp <= 1'b1;
 		//$display("4\n");
 	end
