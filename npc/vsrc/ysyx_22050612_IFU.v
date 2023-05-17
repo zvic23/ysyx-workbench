@@ -53,7 +53,7 @@ always @(edge clk) begin
 	else if(rvalid == 1'b0 && exu_block == 1'b0 && clk == 1'b0 )begin
 		arvalid <= 1'b1;
 		araddr <= dnpc[31:0];
-	$display("block = %d ",exu_block);
+	//$display("block = %d ",exu_block);
 	//$display("1\n");
 	//$display("%d   \n",arvalid);
 	end
