@@ -56,7 +56,7 @@ output bready,
 
 
 
-output reg exu_block
+output exu_block
 
 
 
@@ -896,23 +896,37 @@ end
 //end
 
 //***********************   AXI   *********************
-
+reg exu_block_ls;
+assign exu_block = (((raddr!=64'b0)||(waddr!=64'b0))? 1'b1:1'b0) & exu_block_ls;
 always @(posedge clk) begin
 	if(rst == 1'b1)begin
-		exu_block = 1'b0;
+		exu_block_ls = 1'b1;
 	end
 	else if(rresp == 2'b0 && rvalid == 1'b1)begin
-		exu_block = 1'b0;
+		exu_block_ls = 1'b0;
 	end
 	else if(bresp == 2'b0 && bvalid == 1'b1)begin
-		exu_block = 1'b0;
-	end
-	else if(raddr != 64'b0 || waddr != 64'b0)begin
-		exu_block = 1'b1;
+		exu_block_ls = 1'b0;
 	end
 	else begin
-		exu_block = 1'b0;
+		exu_block_ls = 1'b1;
 	end
+
+//	if(rst == 1'b1)begin
+//		exu_block_ls = 1'b0;
+//	end
+//	else if(rresp == 2'b0 && rvalid == 1'b1)begin
+//		exu_block_ls = 1'b0;
+//	end
+//	else if(bresp == 2'b0 && bvalid == 1'b1)begin
+//		exu_block_ls = 1'b0;
+//	end
+//	else if(raddr != 64'b0 || waddr != 64'b0)begin
+//		exu_block_ls = 1'b1;
+//	end
+//	else begin
+//		exu_block_ls = 1'b0;
+//	end
 end
 
 //***********************   read   *********************

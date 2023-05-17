@@ -38,6 +38,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     CData/*1:0*/ ysyx_22050612_npc__DOT__bresp_lsu;
     CData/*0:0*/ ysyx_22050612_npc__DOT__bvalid_lsu;
     CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__wen;
+    CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__exu_block_ls;
     CData/*7:0*/ ysyx_22050612_npc__DOT__exu__DOT__wmask;
     IData/*31:0*/ ysyx_22050612_npc__DOT__inst;
     IData/*23:0*/ ysyx_22050612_npc__DOT__opcode;
