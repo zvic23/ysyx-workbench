@@ -36,9 +36,9 @@ always @(posedge clk) begin
 		//$display("inst:%x",inst);
 		//$display("3\n");
 	end
-	else begin
-		inst <= 32'b0;
-	end
+//	else begin
+//		inst <= 32'b0;
+//	end
 end
 
 
