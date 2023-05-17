@@ -47,7 +47,7 @@ end
 
 
 
-always @(negedge clk) begin
+always @(edge clk) begin
 	if(rst == 1'b1 && clk == 1'b0)begin
 		arvalid <= 1'b1;
 		araddr <= 32'h80000000;
@@ -58,9 +58,12 @@ always @(negedge clk) begin
 	//$display("1\n");
 	//$display("%d   \n",arvalid);
 	end
-	else if(rvalid == 1'b1 && clk == 1'b0) begin
+	else if(arvalid == 1'b1 && arready == 1'b1 && clk == 1'b1) begin
 		arvalid <= 1'b0;
 	end
+//	else if(rvalid == 1'b1 && clk == 1'b0) begin
+//		arvalid <= 1'b0;
+//	end
 end
 
 //always @(negedge clk) begin
