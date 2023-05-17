@@ -864,6 +864,7 @@ always @(*) begin
 end
 
 always @(*) begin
+	$display("*  clk=%d",clk);
 	case(opcode)
     24'd11  : raddr=result_alu0;
     24'd12  : raddr=result_alu0;
@@ -886,7 +887,9 @@ always @(*) begin
 
 
 end
-
+always @(posedge clk) begin
+	$display("pose  clk=%d",clk);
+end
 
 //****   AXI   *******
 /*
