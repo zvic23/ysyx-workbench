@@ -264,9 +264,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     if (vlSelf->rst) {
         __Vdly__ysyx_22050612_npc__DOT__bvalid_lsu = 0U;
         vlSelf->ysyx_22050612_npc__DOT__bresp_lsu = 0U;
-    } else if (((IData)(vlSelf->ysyx_22050612_npc__DOT__awvalid_lsu) 
-                & (IData)(vlSelf->ysyx_22050612_npc__DOT__wvalid_lsu))) {
+    } else if (VL_UNLIKELY(((IData)(vlSelf->ysyx_22050612_npc__DOT__awvalid_lsu) 
+                            & (IData)(vlSelf->ysyx_22050612_npc__DOT__wvalid_lsu)))) {
         Vysyx_22050612_npc___024unit____Vdpiimwrap_pmem_write_TOP____024unit((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__awaddr_lsu)), vlSelf->ysyx_22050612_npc__DOT__wdata_lsu, (IData)(vlSelf->ysyx_22050612_npc__DOT__wstrb_lsu));
+        VL_WRITEF("write!!  %x  %x\n\n",32,vlSelf->ysyx_22050612_npc__DOT__awaddr_lsu,
+                  64,vlSelf->ysyx_22050612_npc__DOT__wdata_lsu);
         vlSelf->ysyx_22050612_npc__DOT__bresp_lsu = 0U;
         __Vdly__ysyx_22050612_npc__DOT__bvalid_lsu = 1U;
     } else if (vlSelf->ysyx_22050612_npc__DOT__bvalid_lsu) {
