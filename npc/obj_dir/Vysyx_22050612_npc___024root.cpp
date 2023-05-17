@@ -218,6 +218,8 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
                                                            (vlSelf->ysyx_22050612_npc__DOT__rdata_pc 
                                                             >> 0x20U))
                                                  : (IData)(vlSelf->ysyx_22050612_npc__DOT__rdata_pc));
+    } else if (vlSelf->ysyx_22050612_npc__DOT__arvalid_pc) {
+        vlSelf->ysyx_22050612_npc__DOT__inst = 0U;
     }
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__gpr[0x1fU] 
         = vlSelf->ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5
