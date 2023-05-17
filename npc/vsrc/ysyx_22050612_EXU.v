@@ -30,6 +30,33 @@ input [63:0]pc,
 output pc_update,
 output reg [63:0]dnpc
 
+
+/*
+output reg arvalid,
+output [31:0]araddr,
+input arready,
+
+input reg rvalid,
+input [63:0]rdata,
+input reg rresp,
+output rready,
+
+output awvalid,
+output [31:0]awaddr,
+input awready,
+
+output wvalid,
+output [63:0]wdata,
+output [[7:0]wstrb,
+input wready,
+
+input [1:0]bresp,
+input bvalid,
+output bready
+
+*/
+
+
 );
 
 wire [63:0]src1;
@@ -63,7 +90,6 @@ ysyx_22050612_Reg #(64,64'ha00001800) mstatus_csr (clk, rst, wdata_mstatus, msta
 
 
 always @(*) begin
-	$display("clk = %d",clk);
 //mtvec control
   	case (opcode)
     24'd49   : wen_mtvec=(imm_I[11:0]==12'h305)? 1'b1:1'b0;
@@ -860,6 +886,56 @@ always @(*) begin
 
 
 end
+
+
+//****   AXI   *******
+/*
+always @(posedge clk) begin
+	//$display("ifu:   arvalid = %d  arready = %d  \n",arvalid, arready);   
+
+//	else if(arvalid == 1'b1 && arready == 1'b1)begin
+//		arvalid = 1'b0;
+//	end
+	if(rvalid == 1'b1 && rready == 1'b1)begin
+		inst <= araddr[2]?rdata[63:32] : rdata[31:0];
+		//inst_64 = rdata;
+		//$display("inst:%x",inst);
+		//$display("3\n");
+	end
+	else begin
+		inst <= 32'b0;
+	end
+end
+ 
+ 
+ 
+ 
+ 
+always @(posedge clk) begin
+	case(opcode)
+    24'd11  : begin raddr=result_alu0;
+    24'd12  : begin raddr=result_alu0;
+    24'd13  : begin raddr=result_alu0;
+    24'd14  : begin raddr=result_alu0;
+    24'd15  : begin raddr=result_alu0;
+    24'd41  : begin raddr=result_alu0;
+    24'd42  : begin raddr=result_alu0;
+    default: waddr=64'b0;
+	endcase
+
+	case(opcode)
+    24'd16  : waddr=result_alu0;
+    24'd17  : waddr=result_alu0;
+    24'd18  : waddr=result_alu0;
+    24'd43  : waddr=result_alu0;
+    default: waddr=64'b0;
+	endcase
+
+
+
+end
+
+*/
 
 
 
