@@ -3,10 +3,10 @@ import "DPI-C" function void npc_loadstore(int getinst, longint base, longint im
 import "DPI-C" function void update_csr(longint mtvec_npc, longint mcause_npc, longint mepc_npc, longint mstatus_npc);
 import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
 import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
-import "DPI-C" function void pmem_read(
-  input longint raddr, output longint rdata);
-import "DPI-C" function void pmem_write(
-  input longint waddr, input longint wdata, input byte wmask);
+//import "DPI-C" function void pmem_read(
+//  input longint raddr, output longint rdata);
+//import "DPI-C" function void pmem_write(
+//  input longint waddr, input longint wdata, input byte wmask);
 
 
 module ysyx_22050612_EXU(

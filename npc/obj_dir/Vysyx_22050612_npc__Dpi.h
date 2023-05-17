@@ -19,11 +19,11 @@ extern "C" {
     extern void ftrace_check(long long pc, long long dnpc, int dest_register, int src_register, long long imm);
     // DPI import at vsrc//ysyx_22050612_EXU.v:2:30
     extern void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S);
-    // DPI import at vsrc//ysyx_22050612_EXU.v:6:30
+    // DPI import at vsrc//ysyx_22050612_SRAM.v:4:30
     extern void pmem_read(long long raddr, long long* rdata);
     // DPI import at vsrc//ysyx_22050612_SRAM.v:1:30
     extern void pmem_read_pc(long long raddr, long long* rdata);
-    // DPI import at vsrc//ysyx_22050612_EXU.v:8:30
+    // DPI import at vsrc//ysyx_22050612_SRAM.v:6:30
     extern void pmem_write(long long waddr, long long wdata, char wmask);
     // DPI import at vsrc//ysyx_22050612_IFU.v:1:30
     extern void read_inst(int npc_inst);

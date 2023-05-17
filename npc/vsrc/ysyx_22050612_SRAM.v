@@ -1,10 +1,10 @@
 import "DPI-C" function void pmem_read_pc(
   input longint raddr, output longint rdata);
 
-//import "DPI-C" function void pmem_read(
-//  input longint raddr, output longint rdata);
-//import "DPI-C" function void pmem_write(
-//  input longint waddr, input longint wdata, input byte wmask);
+import "DPI-C" function void pmem_read(
+  input longint raddr, output longint rdata);
+import "DPI-C" function void pmem_write(
+  input longint waddr, input longint wdata, input byte wmask);
 
 
 module ysyx_22050612_SRAM(
