@@ -993,8 +993,8 @@ always @(posedge clk) begin
 		wwdata <= wdata;
 		wstrb <= wmask;
 	end
-	else if(awvalid == 1'b1 && awready == 1'b1) begin
-		awvalid <= 1'b0;
+	else if(wvalid == 1'b1 && wready == 1'b1) begin
+		wvalid <= 1'b0;
 	end
 end
 
