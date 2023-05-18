@@ -249,8 +249,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
     Vysyx_22050612_npc___024unit____Vdpiimwrap_update_csr_TOP____024unit(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mtvec, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mcause, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mepc, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mstatus);
     if (vlSelf->rst) {
         vlSelf->pc = 0x80000000ULL;
-    } else if (((0U != vlSelf->ysyx_22050612_npc__DOT__opcode) 
-                & (~ (IData)(vlSelf->ysyx_22050612_npc__DOT__exu_block)))) {
+    } else if (vlSelf->ysyx_22050612_npc__DOT__pc_update) {
         vlSelf->pc = vlSelf->ysyx_22050612_npc__DOT__dnpc;
     }
     if (vlSelf->rst) {
@@ -2864,6 +2863,11 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                     : ((0x2bU == vlSelf->ysyx_22050612_npc__DOT__opcode)
                         ? vlSelf->ysyx_22050612_npc__DOT__exu__DOT__src2
                         : 0ULL))));
+    vlSelf->ysyx_22050612_npc__DOT__exu_block = (((0ULL 
+                                                   != vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr) 
+                                                  | (0ULL 
+                                                     != vlSelf->ysyx_22050612_npc__DOT__exu__DOT__waddr)) 
+                                                 & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__exu_block_ls));
     if ((1U & (IData)((vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr 
                        >> 2U)))) {
         ysyx_22050612_npc__DOT__exu__DOT__rdata_1byte 
@@ -3225,8 +3229,8 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     __Vdly__ysyx_22050612_npc__DOT__arvalid_pc = vlSelf->ysyx_22050612_npc__DOT__arvalid_pc;
     if (((IData)(vlSelf->rst) & (~ (IData)(vlSelf->clk)))) {
         __Vdly__ysyx_22050612_npc__DOT__arvalid_pc = 1U;
-    } else if ((1U & ((~ (IData)(vlSelf->ysyx_22050612_npc__DOT__exu_block)) 
-                      & (~ (IData)(vlSelf->clk))))) {
+    } else if (((IData)(vlSelf->ysyx_22050612_npc__DOT__pc_update) 
+                & (~ (IData)(vlSelf->clk)))) {
         __Vdly__ysyx_22050612_npc__DOT__arvalid_pc = 1U;
     } else if (((IData)(vlSelf->ysyx_22050612_npc__DOT__arvalid_pc) 
                 & (IData)(vlSelf->clk))) {
@@ -3234,8 +3238,8 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     }
     if (((IData)(vlSelf->rst) & (~ (IData)(vlSelf->clk)))) {
         vlSelf->ysyx_22050612_npc__DOT__araddr_pc = 0x80000000U;
-    } else if ((1U & ((~ (IData)(vlSelf->ysyx_22050612_npc__DOT__exu_block)) 
-                      & (~ (IData)(vlSelf->clk))))) {
+    } else if (((IData)(vlSelf->ysyx_22050612_npc__DOT__pc_update) 
+                & (~ (IData)(vlSelf->clk)))) {
         vlSelf->ysyx_22050612_npc__DOT__araddr_pc = (IData)(vlSelf->ysyx_22050612_npc__DOT__dnpc);
     }
     vlSelf->ysyx_22050612_npc__DOT__arvalid_pc = __Vdly__ysyx_22050612_npc__DOT__arvalid_pc;
@@ -3246,11 +3250,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__4(Vysyx_22050612
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___sequent__TOP__4\n"); );
     // Body
-    vlSelf->ysyx_22050612_npc__DOT__exu_block = (((0ULL 
-                                                   != vlSelf->ysyx_22050612_npc__DOT__exu__DOT__raddr) 
-                                                  | (0ULL 
-                                                     != vlSelf->ysyx_22050612_npc__DOT__exu__DOT__waddr)) 
-                                                 & (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__exu_block_ls));
+    vlSelf->ysyx_22050612_npc__DOT__pc_update = ((0U 
+                                                  != vlSelf->ysyx_22050612_npc__DOT__opcode) 
+                                                 & (~ (IData)(vlSelf->ysyx_22050612_npc__DOT__exu_block)));
     vlSelf->ysyx_22050612_npc__DOT__dnpc = ((((((((
                                                    (0x300U 
                                                     == vlSelf->ysyx_22050612_npc__DOT__opcode) 

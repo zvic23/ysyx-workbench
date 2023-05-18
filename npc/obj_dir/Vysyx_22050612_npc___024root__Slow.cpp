@@ -2829,6 +2829,9 @@ void Vysyx_22050612_npc___024root___settle__TOP__3(Vysyx_22050612_npc___024root*
                                                           == vlSelf->ysyx_22050612_npc__DOT__opcode)
                                                           ? vlSelf->ysyx_22050612_npc__DOT__exu__DOT__rdata
                                                           : 0ULL)))))));
+    vlSelf->ysyx_22050612_npc__DOT__pc_update = ((0U 
+                                                  != vlSelf->ysyx_22050612_npc__DOT__opcode) 
+                                                 & (~ (IData)(vlSelf->ysyx_22050612_npc__DOT__exu_block)));
     vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata_reg 
         = (((((((((0x4000U == vlSelf->ysyx_22050612_npc__DOT__opcode) 
                   | (0x5000U == vlSelf->ysyx_22050612_npc__DOT__opcode)) 
@@ -3092,6 +3095,7 @@ void Vysyx_22050612_npc___024root___ctor_var_reset(Vysyx_22050612_npc___024root*
     vlSelf->pc = VL_RAND_RESET_Q(64);
     vlSelf->ysyx_22050612_npc__DOT__inst = VL_RAND_RESET_I(32);
     vlSelf->ysyx_22050612_npc__DOT__dnpc = VL_RAND_RESET_Q(64);
+    vlSelf->ysyx_22050612_npc__DOT__pc_update = VL_RAND_RESET_I(1);
     vlSelf->ysyx_22050612_npc__DOT__imm_I = VL_RAND_RESET_Q(64);
     vlSelf->ysyx_22050612_npc__DOT__imm_B = VL_RAND_RESET_Q(64);
     vlSelf->ysyx_22050612_npc__DOT__imm_S = VL_RAND_RESET_Q(64);

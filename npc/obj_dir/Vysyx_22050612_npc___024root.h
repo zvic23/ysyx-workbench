@@ -26,6 +26,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     VL_OUT64(pc,63,0);
 
     // LOCAL SIGNALS
+    CData/*0:0*/ ysyx_22050612_npc__DOT__pc_update;
     CData/*0:0*/ ysyx_22050612_npc__DOT__exu_block;
     CData/*0:0*/ ysyx_22050612_npc__DOT__arvalid_pc;
     CData/*0:0*/ ysyx_22050612_npc__DOT__rvalid_pc;
