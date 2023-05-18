@@ -896,7 +896,7 @@ end
 //end
 
 always @(edge clk) begin
-	$display(" clk=%d",clk);
+	$display(" clk=%d    block=%d",clk,exu_block);
 end
 //***********************   AXI   *********************
 reg exu_block_ls;
