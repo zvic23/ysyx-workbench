@@ -976,15 +976,16 @@ always @(posedge clk) begin
 		awvalid <= 1'b0;
 		awaddr <= 32'h0;
 	end
-	else if(awvalid == 1'b1 && awready == 1'b1) begin
-		$display("2");
-		awvalid <= 1'b0;
-	end
 	else if(bvalid == 1'b0 && waddr != 64'h0 && opcode_lastcycle == 24'b0)begin
 		$display("1");
 		awvalid <= 1'b1;
 		awaddr <= waddr[31:0];
 	end
+	else if(awvalid == 1'b1 && awready == 1'b1) begin
+		$display("2");
+		awvalid <= 1'b0;
+	end
+
 end
 
 always @(posedge clk) begin

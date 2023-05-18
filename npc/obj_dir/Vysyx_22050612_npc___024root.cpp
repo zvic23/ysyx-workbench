@@ -391,9 +391,6 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     if (vlSelf->rst) {
         __Vdly__ysyx_22050612_npc__DOT__awvalid_lsu = 0U;
         vlSelf->ysyx_22050612_npc__DOT__awaddr_lsu = 0U;
-    } else if (VL_UNLIKELY(vlSelf->ysyx_22050612_npc__DOT__awvalid_lsu)) {
-        VL_WRITEF("2\n");
-        __Vdly__ysyx_22050612_npc__DOT__awvalid_lsu = 0U;
     } else if (VL_UNLIKELY((((~ (IData)(vlSelf->ysyx_22050612_npc__DOT__bvalid_lsu)) 
                              & (0ULL != vlSelf->ysyx_22050612_npc__DOT__exu__DOT__waddr)) 
                             & (0U == vlSelf->ysyx_22050612_npc__DOT__exu__DOT__opcode_lastcycle)))) {
@@ -401,6 +398,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
         __Vdly__ysyx_22050612_npc__DOT__awvalid_lsu = 1U;
         vlSelf->ysyx_22050612_npc__DOT__awaddr_lsu 
             = (IData)(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__waddr);
+    } else if (VL_UNLIKELY(vlSelf->ysyx_22050612_npc__DOT__awvalid_lsu)) {
+        VL_WRITEF("2\n");
+        __Vdly__ysyx_22050612_npc__DOT__awvalid_lsu = 0U;
     }
     Vysyx_22050612_npc___024unit____Vdpiimwrap_read_inst_TOP____024unit(vlSelf->ysyx_22050612_npc__DOT__inst);
     if ((vlSelf->ysyx_22050612_npc__DOT__inst >> 0x1fU)) {
