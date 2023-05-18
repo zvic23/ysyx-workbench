@@ -968,8 +968,10 @@ end
  
 //***********************   write   *********************
 assign bready = 1'b1;
+reg [23:0]opcode_lastcycle;
 
 always @(posedge clk) begin
+	opcode_lastcycle <= opcode;
 	if(rst == 1'b1)begin
 		awvalid <= 1'b0;
 		awaddr <= 32'h0;
