@@ -294,7 +294,7 @@ extern uint64_t img_size;
   time_init = (time_first.tv_sec*1000000)+time_first.tv_usec;
 
 
-  if(0) sdb_mainloop();
+  if(1) sdb_mainloop();
   else execute(-1);
 
   while(0){
