@@ -76,7 +76,8 @@ assign src2=gpr[rs2];
 
 //general register
 ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, gpr);
-assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
+assign wen_fix = ( (rd != 5'b0)&&(exu_block == 1'b0) )?  wen : 1'b0;
+//assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
 
