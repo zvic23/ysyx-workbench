@@ -50,14 +50,14 @@ always @(posedge clk) begin
 	end
 	else if(awready == 1'b1 && awvalid == 1'b1 && wready == 1'b1 && wvalid == 1'b1)begin
 		pmem_write({{32{1'b0}},awaddr}, wdata, wstrb);
-		$display("write!!  %x  %x\n",awaddr,wdata);
+		//$display("write!!  %x  %x\n",awaddr,wdata);
 		//$display("2\n");
 		bresp <= 2'b00;
 		bvalid <= 1'b1;
 	end
 	else if(bvalid == 1'b1 && bready == 1'b1)begin
 		bvalid <= 1'b0;
-		$display("write  respon!! \n");
+		//$display("write  respon!! \n");
 		//bresp <= 1'b1;
 		//$display("4\n");
 	end
