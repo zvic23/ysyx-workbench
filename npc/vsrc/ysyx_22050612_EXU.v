@@ -877,7 +877,7 @@ always @(*) begin
     24'd15  : raddr=result_alu0;
     24'd41  : raddr=result_alu0;
     24'd42  : raddr=result_alu0;
-    default: waddr=64'b0;
+    default: raddr=64'b0;
 	endcase
 
 	case(opcode)
