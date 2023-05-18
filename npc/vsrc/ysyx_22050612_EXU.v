@@ -895,6 +895,9 @@ end
 //	$display("pose  clk=%d",clk);
 //end
 
+always @(edge clk) begin
+	$display(" clk=%d",clk);
+end
 //***********************   AXI   *********************
 reg exu_block_ls;
 assign exu_block = (((raddr!=64'b0)||(waddr!=64'b0))? 1'b1:1'b0) & exu_block_ls;
