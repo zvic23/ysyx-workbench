@@ -50,7 +50,7 @@ always @(edge clk) begin
 		arvalid <= 1'b1;
 		araddr <= 32'h80000000;
 	end
-	else if(rvalid == 1'b0 && exu_block == 1'b0 && clk == 1'b0 )begin
+	else if( exu_block == 1'b0 && clk == 1'b0 )begin
 		arvalid <= 1'b1;
 		araddr <= dnpc[31:0];
 	//$display("block = %d ",exu_block);

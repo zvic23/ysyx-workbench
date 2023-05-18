@@ -42,13 +42,20 @@ module ysyx_22050612_SRAM(
 assign awready = 1'b1;
 assign wready  = 1'b1;
 
+reg delay_write;
+
 always @(posedge clk) begin
 	//$display("sram:   arvalid = %d  arready = %d  \n",arvalid, arready);   
 	if(rst == 1'b1)begin
 		bvalid <= 1'b0;
 		bresp <= 2'b0;
+		delay_write <= 1'b0;
 	end
 	else if(awready == 1'b1 && awvalid == 1'b1 && wready == 1'b1 && wvalid == 1'b1)begin
+		delay_write <= 1'b1;
+	end
+	else if(delay_write == 1'b1)begin
+		delay_write <= 1'b0;
 		pmem_write({{32{1'b0}},awaddr}, wdata, wstrb);
 		//$display("write!!  %x  %x\n",awaddr,wdata);
 		//$display("2\n");
@@ -67,13 +74,20 @@ end
 //************** read  *******************
 assign arready = 1'b1;
 
+reg delay_read;
+
 always @(posedge clk) begin
 	//$display("sram:   arvalid = %d  arready = %d  \n",arvalid, arready);   
 	if(rst == 1'b1)begin
 		rvalid <= 1'b0;
 		rresp <= 2'b0;
+		delay_read <=1'b0;
 	end
 	else if(arready == 1'b1 && arvalid == 1'b1)begin
+		delay_read <=1'b1;
+	end
+	else if(delay_read ==1'b1)begin
+		delay_read <=1'b0;
 		rvalid <= 1'b1;
   		pmem_read({{32{1'b0}},araddr}, rdata);	
   		//pmem_read_pc({{32{1'b0}},araddr}, rdata);	
