@@ -906,6 +906,7 @@ always @(posedge clk) begin
 		exu_block_ls <= 1'b1;
 	end
 	else if(rresp == 2'b0 && rvalid == 1'b1)begin
+		$display("unblock");
 		exu_block_ls <= 1'b0;
 	end
 	else if(bresp == 2'b0 && bvalid == 1'b1)begin
