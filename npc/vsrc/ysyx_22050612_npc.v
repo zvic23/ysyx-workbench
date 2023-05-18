@@ -44,18 +44,18 @@ wire rvalid_pc       ;
 wire [63:0]rdata_pc  ; 
 wire [1:0]rresp_pc   ;
 wire rready_pc       ;
-/*
+
 wire awvalid_pc      ;  
 wire [31:0]awaddr_pc ; 
 wire awready_pc      ; 
 wire wvalid_pc       ;    
 wire [63:0]wdata_pc  ;  
-wire [[7:0]wstrb_pc  ;  
+wire [7:0]wstrb_pc  ;  
 wire wready_pc       ;      
 wire [1:0]bresp_pc   ; 
 wire bvalid_pc       ;   
 wire bready_pc       ;   
-*/
+
 
 wire arvalid_lsu      ;  
 wire [31:0]araddr_lsu ;  
@@ -76,9 +76,57 @@ wire bvalid_lsu       ;
 wire bready_lsu       ;   
 
 
+wire arvalid      ;  
+wire [31:0]araddr ;  
+wire arready      ;  
+wire rvalid       ;   
+wire [63:0]rdata  ; 
+wire [1:0]rresp   ;
+wire rready       ;
+wire awvalid      ;  
+wire [31:0]awaddr ; 
+wire awready      ; 
+wire wvalid       ;    
+wire [63:0]wdata  ;  
+wire [7:0]wstrb   ;  
+wire wready       ;      
+wire [1:0]bresp   ; 
+wire bvalid       ;   
+wire bready       ;  
 
-ysyx_22050612_SRAM sram_pc (clk,rst,arvalid_pc,araddr_pc,arready_pc,rvalid_pc,rdata_pc,rresp_pc,rready_pc, 1'b0, 32'b0,  , 1'b0, 64'b0, 8'b0, , , , 1'b0);
+
+
+//ysyx_22050612_SRAM sram_pc (clk,rst,arvalid_pc,araddr_pc,arready_pc,rvalid_pc,rdata_pc,rresp_pc,rready_pc, 1'b0, 32'b0,  , 1'b0, 64'b0, 8'b0, , , , 1'b0);
 //ysyx_22050612_SRAM sram_pc (clk,rst,arvalid_pc,araddr_pc,arready_pc,rvalid_pc,rdata_pc,rresp_pc,rready_pc,awvalid_pc,awaddr_pc,awready_pc,wvalid_pc,wdata_pc,wstrb_pc,wready_pc,bresp_pc,bvalid_pc,bready_pc);
 
-ysyx_22050612_SRAM sram (clk,rst,arvalid_lsu,araddr_lsu,arready_lsu,rvalid_lsu,rdata_lsu,rresp_lsu,rready_lsu,awvalid_lsu,awaddr_lsu,awready_lsu,wvalid_lsu,wdata_lsu,wstrb_lsu,wready_lsu,bresp_lsu,bvalid_lsu,bready_lsu);
+//ysyx_22050612_SRAM sram (clk,rst,arvalid_lsu,araddr_lsu,arready_lsu,rvalid_lsu,rdata_lsu,rresp_lsu,rready_lsu,awvalid_lsu,awaddr_lsu,awready_lsu,wvalid_lsu,wdata_lsu,wstrb_lsu,wready_lsu,bresp_lsu,bvalid_lsu,bready_lsu);
+ysyx_22050612_SRAM sram (clk,rst,arvalid,araddr,arready,rvalid,rdata,rresp,rready,awvalid,awaddr,awready,wvalid,wdata,wstrb,wready,bresp,bvalid,bready);
+ysyx_22050612_Arbiter arbiter (clk,rst,
+	arvalid_pc,arvalid_lsu,arvalid,
+	araddr_pc,araddr_lsu,araddr,
+	arready_pc,arready_lsu,arready,
+	rvalid_pc,rvalid_lsu,rvalid,
+	rdata_pc,rdata_lsu,rdata,
+	rresp_pc,rresp_lsu,rresp,
+	rready_pc,rready_lsu,rready,
+	awvalid_pc,awvalid_lsu,awvalid,
+	awaddr_pc,awaddr_lsu,awaddr,
+	awready_pc,awready_lsu,awready,
+	wvalid_pc,wvalid_lsu,wvalid,
+	wdata_pc,wdata_lsu,wdata,
+	wstrb_pc,wstrb_lsu,wstrb,
+	wready_pc,wready_lsu,wready,
+	bresp_pc,bresp_lsu,bresp,
+	bvalid_pc,bvalid_lsu,bvalid,
+	bready_pc,bready_lsu,bready);
+//	1'b0,awvalid_lsu,awvalid,
+//	32'b0,awaddr_lsu,awaddr,
+//	1'b0,awready_lsu,awready,
+//	1'b0,wvalid_lsu,wvalid,
+//	64'b0,wdata_lsu,wdata,
+//	8'b0,wstrb_lsu,wstrb,
+//	1'b0,wready_lsu,wready,
+//	2'b0,bresp_lsu,bresp,
+//	1'b0,bvalid_lsu,bvalid,
+//	1'b0,bready_lsu,bready);
 endmodule
