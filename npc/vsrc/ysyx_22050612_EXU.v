@@ -896,7 +896,7 @@ end
 //end
 
 always @(edge clk) begin
-	$display(" clk=%d    block=%d   waddr=%x   raddr=%x  ls=%d",clk,exu_block,waddr,raddr,exu_block_ls);
+	//$display(" clk=%d    block=%d   waddr=%x   raddr=%x  ls=%d",clk,exu_block,waddr,raddr,exu_block_ls);
 end
 //***********************   AXI   *********************
 reg exu_block_ls;
@@ -906,7 +906,7 @@ always @(posedge clk) begin
 		exu_block_ls <= 1'b1;
 	end
 	else if(rresp == 2'b0 && rvalid == 1'b1)begin
-		$display("unblock");
+		//$display("unblock");
 		exu_block_ls <= 1'b0;
 	end
 	else if(bresp == 2'b0 && bvalid == 1'b1)begin
