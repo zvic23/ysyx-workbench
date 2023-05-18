@@ -45,6 +45,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     IData/*31:0*/ ysyx_22050612_npc__DOT__araddr_pc;
     IData/*31:0*/ ysyx_22050612_npc__DOT__araddr_lsu;
     IData/*31:0*/ ysyx_22050612_npc__DOT__awaddr_lsu;
+    IData/*23:0*/ ysyx_22050612_npc__DOT__exu__DOT__opcode_lastcycle;
     QData/*63:0*/ ysyx_22050612_npc__DOT__dnpc;
     QData/*63:0*/ ysyx_22050612_npc__DOT__imm_I;
     QData/*63:0*/ ysyx_22050612_npc__DOT__imm_B;
