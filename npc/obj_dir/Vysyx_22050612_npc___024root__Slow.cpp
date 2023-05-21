@@ -3390,8 +3390,6 @@ void Vysyx_22050612_npc___024root___ctor_var_reset(Vysyx_22050612_npc___024root*
     for (int __Vi0=0; __Vi0<10; ++__Vi0) {
         vlSelf->ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__data_list[__Vi0] = VL_RAND_RESET_Q(64);
     }
-    vlSelf->ysyx_22050612_npc__DOT__sram__DOT__delay_write = VL_RAND_RESET_I(1);
-    vlSelf->ysyx_22050612_npc__DOT__sram__DOT__delay_read = VL_RAND_RESET_I(1);
     vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__writing_1 = VL_RAND_RESET_I(1);
     vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__writing_2 = VL_RAND_RESET_I(1);
     vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__writing = VL_RAND_RESET_I(1);

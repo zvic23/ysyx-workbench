@@ -59,8 +59,6 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
         CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__wen;
         CData/*0:0*/ ysyx_22050612_npc__DOT__exu__DOT__exu_block_ls;
         CData/*7:0*/ ysyx_22050612_npc__DOT__exu__DOT__wmask;
-        CData/*0:0*/ ysyx_22050612_npc__DOT__sram__DOT__delay_write;
-        CData/*0:0*/ ysyx_22050612_npc__DOT__sram__DOT__delay_read;
         CData/*0:0*/ ysyx_22050612_npc__DOT__arbiter__DOT__writing_1;
         CData/*0:0*/ ysyx_22050612_npc__DOT__arbiter__DOT__writing_2;
         CData/*0:0*/ ysyx_22050612_npc__DOT__arbiter__DOT__writing;
@@ -92,10 +90,10 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__mtvec;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__mepc;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__mcause;
-    };
-    struct {
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__mstatus;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__result_alu0;
+    };
+    struct {
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__rdata;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__raddr;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__waddr;

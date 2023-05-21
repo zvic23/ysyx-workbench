@@ -51,9 +51,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     CData/*4:0*/ __Vdlyvdim0__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0;
     CData/*0:0*/ __Vdlyvset__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0;
     CData/*0:0*/ __Vdly__ysyx_22050612_npc__DOT__bvalid;
-    CData/*0:0*/ __Vdly__ysyx_22050612_npc__DOT__sram__DOT__delay_write;
     CData/*0:0*/ __Vdly__ysyx_22050612_npc__DOT__rvalid;
-    CData/*0:0*/ __Vdly__ysyx_22050612_npc__DOT__sram__DOT__delay_read;
     CData/*0:0*/ __Vdly__ysyx_22050612_npc__DOT__arbiter__DOT__writing_1;
     CData/*0:0*/ __Vdly__ysyx_22050612_npc__DOT__arbiter__DOT__writing_2;
     CData/*0:0*/ __Vdly__ysyx_22050612_npc__DOT__arbiter__DOT__reading_1;
@@ -78,11 +76,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     QData/*63:0*/ __Vtask_pmem_read__20__rdata;
     QData/*63:0*/ __Vdlyvval__ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5__v0;
     // Body
-    __Vdly__ysyx_22050612_npc__DOT__sram__DOT__delay_read 
-        = vlSelf->ysyx_22050612_npc__DOT__sram__DOT__delay_read;
     __Vdly__ysyx_22050612_npc__DOT__rvalid = vlSelf->ysyx_22050612_npc__DOT__rvalid;
-    __Vdly__ysyx_22050612_npc__DOT__sram__DOT__delay_write 
-        = vlSelf->ysyx_22050612_npc__DOT__sram__DOT__delay_write;
     __Vdly__ysyx_22050612_npc__DOT__bvalid = vlSelf->ysyx_22050612_npc__DOT__bvalid;
     __Vdly__ysyx_22050612_npc__DOT__arbiter__DOT__reading_2 
         = vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading_2;
@@ -164,13 +158,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     if (vlSelf->rst) {
         __Vdly__ysyx_22050612_npc__DOT__rvalid = 0U;
         vlSelf->ysyx_22050612_npc__DOT__rresp = 0U;
-        __Vdly__ysyx_22050612_npc__DOT__sram__DOT__delay_read = 0U;
     } else if (vlSelf->ysyx_22050612_npc__DOT__arvalid) {
-        __Vdly__ysyx_22050612_npc__DOT__sram__DOT__delay_read = 1U;
-    } else if (vlSelf->ysyx_22050612_npc__DOT__sram__DOT__delay_read) {
         Vysyx_22050612_npc___024unit____Vdpiimwrap_pmem_read_TOP____024unit((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__araddr)), __Vtask_pmem_read__20__rdata);
         vlSelf->ysyx_22050612_npc__DOT__rdata = __Vtask_pmem_read__20__rdata;
-        __Vdly__ysyx_22050612_npc__DOT__sram__DOT__delay_read = 0U;
         __Vdly__ysyx_22050612_npc__DOT__rvalid = 1U;
         vlSelf->ysyx_22050612_npc__DOT__rresp = 0U;
     } else if (((IData)(vlSelf->ysyx_22050612_npc__DOT__rvalid) 
@@ -186,13 +176,9 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     if (vlSelf->rst) {
         __Vdly__ysyx_22050612_npc__DOT__bvalid = 0U;
         vlSelf->ysyx_22050612_npc__DOT__bresp = 0U;
-        __Vdly__ysyx_22050612_npc__DOT__sram__DOT__delay_write = 0U;
     } else if (((IData)(vlSelf->ysyx_22050612_npc__DOT__awvalid) 
                 & (IData)(vlSelf->ysyx_22050612_npc__DOT__wvalid))) {
-        __Vdly__ysyx_22050612_npc__DOT__sram__DOT__delay_write = 1U;
-    } else if (vlSelf->ysyx_22050612_npc__DOT__sram__DOT__delay_write) {
         Vysyx_22050612_npc___024unit____Vdpiimwrap_pmem_write_TOP____024unit((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__awaddr)), vlSelf->ysyx_22050612_npc__DOT__wdata, (IData)(vlSelf->ysyx_22050612_npc__DOT__wstrb));
-        __Vdly__ysyx_22050612_npc__DOT__sram__DOT__delay_write = 0U;
         vlSelf->ysyx_22050612_npc__DOT__bresp = 0U;
         __Vdly__ysyx_22050612_npc__DOT__bvalid = 1U;
     } else if (((IData)(vlSelf->ysyx_22050612_npc__DOT__bvalid) 
@@ -358,11 +344,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
             = (0x1fU & (vlSelf->ysyx_22050612_npc__DOT__inst 
                         >> 7U));
     }
-    vlSelf->ysyx_22050612_npc__DOT__sram__DOT__delay_read 
-        = __Vdly__ysyx_22050612_npc__DOT__sram__DOT__delay_read;
     vlSelf->ysyx_22050612_npc__DOT__rvalid = __Vdly__ysyx_22050612_npc__DOT__rvalid;
-    vlSelf->ysyx_22050612_npc__DOT__sram__DOT__delay_write 
-        = __Vdly__ysyx_22050612_npc__DOT__sram__DOT__delay_write;
     vlSelf->ysyx_22050612_npc__DOT__bvalid = __Vdly__ysyx_22050612_npc__DOT__bvalid;
     vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading_2 
         = __Vdly__ysyx_22050612_npc__DOT__arbiter__DOT__reading_2;
