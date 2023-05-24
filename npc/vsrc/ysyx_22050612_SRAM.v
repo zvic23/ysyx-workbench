@@ -1,6 +1,11 @@
 import "DPI-C" function void pmem_read_pc(
   input longint raddr, output longint rdata);
 
+import "DPI-C" function void pmem_read(
+  input longint raddr, output longint rdata);
+import "DPI-C" function void pmem_write(
+  input longint waddr, input longint wdata, input byte wmask);
+
 
 module ysyx_22050612_SRAM(
    input clk,
@@ -12,41 +17,107 @@ module ysyx_22050612_SRAM(
 
    output reg rvalid,
    output [63:0]rdata,
-   output reg rresp,
-   input rready
+   output reg [1:0]rresp,
+   input rready,
+
+   input awvalid,
+   input [31:0]awaddr,
+   output awready,
+
+   input wvalid,
+   input [63:0]wdata,
+   input [ 7:0]wstrb,
+   output wready,
+
+   output [1:0]bresp,
+   output bvalid,
+   input bready
+
 
 );
 
-//always @(posedge clk) begin
-//	if(rst == 1'b1)begin
-//		arvalid = 1'b0;
-//	end
-//	else if(arvalid == 1'b1 && arready == 1'b1)begin
-//		arvalid = 1'b0;
-//	end
-//end
 
+
+//************** write *******************
+assign awready = 1'b1;
+assign wready  = 1'b1;
+
+//reg delay_write;
+
+always @(posedge clk) begin
+	//$display("sram:   arvalid = %d  arready = %d  \n",arvalid, arready);   
+	if(rst == 1'b1)begin
+		bvalid <= 1'b0;
+		bresp <= 2'b0;
+	//	delay_write <= 1'b0;
+	end
+//	else if(awready == 1'b1 && awvalid == 1'b1 && wready == 1'b1 && wvalid == 1'b1)begin
+//		delay_write <= 1'b1;
+//	end
+//	else if(delay_write == 1'b1)begin
+	else if(awready == 1'b1 && awvalid == 1'b1 && wready == 1'b1 && wvalid == 1'b1)begin
+	//	delay_write <= 1'b0;
+		pmem_write({{32{1'b0}},awaddr}, wdata, wstrb);
+		//$display("write!!  %x  %x\n",awaddr,wdata);
+		//$display("2\n");
+		bresp <= 2'b00;
+		bvalid <= 1'b1;
+	end
+	else if(bvalid == 1'b1 && bready == 1'b1)begin
+		bvalid <= 1'b0;
+		//$display("write  respon!! \n");
+		//bresp <= 1'b1;
+		//$display("4\n");
+	end
+end
+
+
+//************** read  *******************
 assign arready = 1'b1;
+
+//reg delay_read;
 
 always @(posedge clk) begin
 	//$display("sram:   arvalid = %d  arready = %d  \n",arvalid, arready);   
 	if(rst == 1'b1)begin
 		rvalid <= 1'b0;
-		rresp <= 1'b0;
+		rresp <= 2'b0;
+	//	delay_read <=1'b0;
 	end
+//	else if(arready == 1'b1 && arvalid == 1'b1)begin
+//		delay_read <=1'b1;
+//	end
+//	else if(delay_read ==1'b1)begin
 	else if(arready == 1'b1 && arvalid == 1'b1)begin
+	//	delay_read <=1'b0;
 		rvalid <= 1'b1;
-  		pmem_read_pc({{32{1'b0}},araddr}, rdata);	
+  		pmem_read({{32{1'b0}},araddr}, rdata);	
+  		//pmem_read_pc({{32{1'b0}},araddr}, rdata);	
 		//$display("get inst!!  %x  %x\n",araddr,rdata);
-		$display("2\n");
-		rresp <= 1'b1;
+		//$display("2\n");
+		rresp <= 2'b0;
 	end
 	else if(rvalid == 1'b1 && rready == 1'b1)begin
 		rvalid <= 1'b0;
-		rresp <= 1'b0;
-		$display("4\n");
+		rresp <= 2'b0;
+		//$display("4\n");
 	end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
