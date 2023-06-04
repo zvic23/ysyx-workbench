@@ -7,6 +7,7 @@ void one_cycle();
 void execute(int n);
 void dump_gpr();
 uint32_t pmem_read(uint64_t addr);
+uint64_t host_read(uint64_t addr, int len);
 
 
 void sdb_mainloop();

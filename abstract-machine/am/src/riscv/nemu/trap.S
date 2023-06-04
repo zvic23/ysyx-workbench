@@ -53,6 +53,7 @@ __am_asm_trap:
   LOAD t1, OFFSET_STATUS(sp)
   LOAD t2, OFFSET_EPC(sp)
   csrw mstatus, t1
+  addi t2, t2, 4              //zsl: i add this line to add 4 to mepc in software
   csrw mepc, t2
 
   MAP(REGS, POP)

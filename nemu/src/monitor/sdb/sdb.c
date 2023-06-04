@@ -96,6 +96,26 @@ static int cmd_x(char *args){
     char *position = strtok(pst, " ");
     printf("%d and %d\n",atoi(n),atoi(position));
 
+
+  //  long  a = atol(pst);
+  //  long sum=0;
+
+
+   //for (int i=0;i<8;i++){
+   //  sum = sum+(a%10)*pow(16,i);
+   //  a = a/10;
+   //} 
+   struct figure result = evaluation(pst);
+
+   printf("%lx\n",result.value);
+   for(int i=0;i<atoi(n);i++){
+      uint32_t mem = paddr_read(result.value+i*4,4);
+      printf("0x%lx: " "%08x  ",result.value+i*4,mem); 
+   }
+   printf("\n");
+
+
+/*
     long  a = atol(pst);
     long sum=0;
    for (int i=0;i<8;i++){
@@ -109,6 +129,7 @@ static int cmd_x(char *args){
    }
    printf("\n");
 //    printf("%lx\n",paddr_read(atoi(position),atoi(n))); 
+*/
 
 return 0;
 }
@@ -173,7 +194,66 @@ static int cmd_d(char *args){
 	return 0;
 }
 
+int detach_difftest = 0;
+static int cmd_detach(char *args){
+	detach_difftest = 1;
+	printf("difftest off!!\n");
+	return 0;
+}
 
+extern void syn_state_to_ref();
+static int cmd_attach(char *args){
+	detach_difftest = 0;
+	syn_state_to_ref();
+	printf("difftest on!!\n");
+	return 0;
+}
+
+extern uint64_t mepc,mcause,mstatus;
+extern uint64_t mtvec;
+static int cmd_save(char *args){
+        char path_pre[100] = "/home/zsl/snapshot/";	
+	char *path = strcat(path_pre, args);
+	FILE *p = fopen(path, "wb");
+	if( p == NULL) printf("File %s open failed!\n",path);
+	else{
+		fwrite(&cpu, 33*8, 1, p);
+		fseek(p, 40*8, SEEK_SET);
+		fwrite(&mtvec, 8, 1, p);
+		fwrite(&mcause, 8, 1, p);
+		fwrite(&mstatus, 8, 1, p);
+		fwrite(&mepc, 8, 1, p);
+		fseek(p, 50*8, SEEK_SET);
+		fwrite(guest_to_host(RESET_VECTOR), 0x7ffffff, 1, p);
+	}
+	fclose(p);
+	return 0;
+}
+
+static int cmd_load(char *args){
+        char path_pre[100] = "/home/zsl/snapshot/";	
+	char *path = strcat(path_pre, args);
+	FILE *p = fopen(path, "rb");
+	if( p == NULL) printf("File %s open failed!\n",path);
+	else{
+		int done = fread(&cpu, 33*8, 1, p);
+		assert(done);
+		fseek(p, 40*8, SEEK_SET);
+		done = fread(&mtvec, 8, 1, p);
+		assert(done);
+		done = fread(&mcause, 8, 1, p);
+		assert(done);
+		done = fread(&mstatus, 8, 1, p);
+		assert(done);
+		done = fread(&mepc, 8, 1, p);
+		assert(done);
+		fseek(p, 50*8, SEEK_SET);
+		done = fread(guest_to_host(RESET_VECTOR), 0x7ffffff, 1, p);
+		assert(done);
+	}
+	fclose(p);
+	return 0;
+}
 
 
 
@@ -198,6 +278,10 @@ static struct {
   { "t", "test exprsstion evaluation", cmd_t },
   { "w", "set watchpoint", cmd_w },
   { "d", "delete watchpoint", cmd_d },
+  { "dt", "turn off difftest", cmd_detach },
+  { "at", "turn on difftest", cmd_attach },
+  { "save", "save snapshot", cmd_save},
+  { "load", "load snapshot", cmd_load},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
