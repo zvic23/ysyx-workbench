@@ -3,10 +3,10 @@ import "DPI-C" function void npc_loadstore(int getinst, longint base, longint im
 import "DPI-C" function void update_csr(longint mtvec_npc, longint mcause_npc, longint mepc_npc, longint mstatus_npc);
 import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
 import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
-import "DPI-C" function void pmem_read(
-  input longint raddr, output longint rdata);
-import "DPI-C" function void pmem_write(
-  input longint waddr, input longint wdata, input byte wmask);
+//import "DPI-C" function void pmem_read(
+//  input longint raddr, output longint rdata);
+//import "DPI-C" function void pmem_write(
+//  input longint waddr, input longint wdata, input byte wmask);
 
 
 module ysyx_22050612_EXU(
@@ -27,7 +27,39 @@ input [63:0]pc,
 
 
 //output [63:0]dnpc
-output reg [63:0]dnpc
+output pc_update,
+output reg [63:0]dnpc,
+
+
+
+output reg arvalid,
+output [31:0]araddr,
+input arready,
+
+input reg rvalid,
+input [63:0]rrdata,
+input reg [1:0]rresp,
+output rready,
+
+output awvalid,
+output [31:0]awaddr,
+input awready,
+
+output wvalid,
+output [63:0]wwdata,
+output [7:0]wstrb,
+input wready,
+
+input [1:0]bresp,
+input bvalid,
+output bready,
+
+
+
+output exu_block
+
+
+
 
 );
 
@@ -44,7 +76,8 @@ assign src2=gpr[rs2];
 
 //general register
 ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, gpr);
-assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
+assign wen_fix = ( (rd != 5'b0)&&(exu_block == 1'b0) )?  wen : 1'b0;
+//assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
 
@@ -408,7 +441,7 @@ always @(*) begin
 end
 
 
-
+assign pc_update = (opcode != 24'b0 && exu_block == 1'b0)? 1'b1:1'b0;
 
 
 
@@ -836,6 +869,7 @@ always @(*) begin
 end
 
 always @(*) begin
+	//$display("*  clk=%d",clk);
 	case(opcode)
     24'd11  : raddr=result_alu0;
     24'd12  : raddr=result_alu0;
@@ -844,7 +878,7 @@ always @(*) begin
     24'd15  : raddr=result_alu0;
     24'd41  : raddr=result_alu0;
     24'd42  : raddr=result_alu0;
-    default: waddr=64'b0;
+    default: raddr=64'b0;
 	endcase
 
 	case(opcode)
@@ -858,6 +892,121 @@ always @(*) begin
 
 
 end
+//always @(posedge clk) begin
+//	$display("pose  clk=%d",clk);
+//end
+
+always @(edge clk) begin
+	//$display(" clk=%d    block=%d   waddr=%x   raddr=%x  ls=%d",clk,exu_block,waddr,raddr,exu_block_ls);
+end
+//***********************   AXI   *********************
+reg exu_block_ls;
+assign exu_block = (((raddr!=64'b0)||(waddr!=64'b0))? 1'b1:1'b0) & exu_block_ls;
+always @(posedge clk) begin
+	if(rst == 1'b1)begin
+		exu_block_ls <= 1'b1;
+	end
+	else if(rresp == 2'b0 && rvalid == 1'b1)begin
+		//$display("unblock");
+		exu_block_ls <= 1'b0;
+	end
+	else if(bresp == 2'b0 && bvalid == 1'b1)begin
+		exu_block_ls <= 1'b0;
+	end
+	else begin
+		exu_block_ls <= 1'b1;
+	end
+
+//	if(rst == 1'b1)begin
+//		exu_block_ls = 1'b0;
+//	end
+//	else if(rresp == 2'b0 && rvalid == 1'b1)begin
+//		exu_block_ls = 1'b0;
+//	end
+//	else if(bresp == 2'b0 && bvalid == 1'b1)begin
+//		exu_block_ls = 1'b0;
+//	end
+//	else if(raddr != 64'b0 || waddr != 64'b0)begin
+//		exu_block_ls = 1'b1;
+//	end
+//	else begin
+//		exu_block_ls = 1'b0;
+//	end
+end
+
+//***********************   read   *********************
+
+assign rready = 1'b1;
+
+always @(posedge clk) begin
+	//$display("ifu:   arvalid = %d  arready = %d  \n",arvalid, arready);   
+	if(rvalid == 1'b1 && rready == 1'b1)begin
+		rdata <= rrdata;
+		//inst_64 = rdata;
+		//$display("inst:%x",inst);
+		//$display("3\n");
+	end
+//	else begin
+//		rdata <= 64'b0;
+//	end
+end
+
+
+always @(posedge clk) begin
+	if(rst == 1'b1)begin
+		arvalid <= 1'b0;
+		araddr <= 32'h0;
+	end
+	else if(rvalid == 1'b0 && raddr != 64'h0 && opcode_lastcycle == 24'b0)begin
+		arvalid <= 1'b1;
+		araddr <= raddr[31:0];
+	end
+	else if(arvalid == 1'b1 && arready == 1'b1) begin
+		arvalid <= 1'b0;
+	end
+end
+ 
+ 
+ 
+//***********************   write   *********************
+assign bready = 1'b1;
+reg [23:0]opcode_lastcycle;
+
+always @(posedge clk) begin
+	opcode_lastcycle <= opcode;
+	if(rst == 1'b1)begin
+		awvalid <= 1'b0;
+		awaddr <= 32'h0;
+	end
+	else if(bvalid == 1'b0 && waddr != 64'h0 && opcode_lastcycle == 24'b0)begin
+		//$display("1");
+		awvalid <= 1'b1;
+		awaddr <= waddr[31:0];
+	end
+	else if(awvalid == 1'b1 && awready == 1'b1) begin
+		//$display("2");
+		awvalid <= 1'b0;
+	end
+
+end
+
+always @(posedge clk) begin
+	if(rst == 1'b1)begin
+		wvalid <= 1'b0;
+		wwdata <= 64'h0;
+		wstrb <= 8'h0;
+	end
+	else if(bvalid == 1'b0 && waddr != 64'h0 && opcode_lastcycle == 24'b0)begin
+		wvalid <= 1'b1;
+		wwdata <= wdata;
+		wstrb <= wmask;
+	end
+	else if(wvalid == 1'b1 && wready == 1'b1) begin
+		wvalid <= 1'b0;
+	end
+end
+
+//******************************************
 
 
 
@@ -914,7 +1063,7 @@ ysyx_22050612_MuxKey #(7, 3, 8 ) wmask_twobyte (wmask_2byte, waddr[2:0], {
 */
 
 
-wire [63:0] rdata;
+reg [63:0] rdata;
 //wire [63:0] raddr;
 //wire [63:0] waddr;
 //wire [63:0] wdata;
@@ -955,10 +1104,10 @@ ysyx_22050612_MuxKey #(4, 20, 8 ) wmask_select (wmask, opcode, {
   });
 */
 
-always @(*) begin
-  pmem_read(raddr, rdata);
-  pmem_write(waddr, wdata, wmask);
-end
+//always @(*) begin
+//  pmem_read(raddr, rdata);
+//  pmem_write(waddr, wdata, wmask);
+//end
 
 
 //wire [63:0] rdata_fix;
