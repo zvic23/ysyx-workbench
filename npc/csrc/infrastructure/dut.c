@@ -5,9 +5,6 @@
 #include <cassert>
 #include <cstdio>
 
-#include <cstring>
-#include <cstdlib>
-
 #include "../include/difftesting.h"
 #include "../include/generated/autoconf.h"
 
@@ -54,50 +51,16 @@ void init_difftest(long img_size, int port) {
 
   ref_difftest_init(port);
 
-  //uint8_t resetmem[0x4fffffff];
-  uint8_t *resetmem = (uint8_t*)malloc(0x7ffffff);
-  memset(resetmem, 0, 0x7ffffff);
-  ref_difftest_memcpy(0x80000000,  resetmem, 0x7ffffff, DIFFTEST_TO_REF );
   ref_difftest_memcpy(0x80000000,  pmem, img_size, DIFFTEST_TO_REF );
-free(resetmem);
+
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
 
 }
 
 
-void syn_state_to_ref(){    //zsl:i add this function
-//  CPU_state csr_buf;
-  uint64_t csr_buf[33];
-extern uint64_t mepc,mcause,mstatus;
-extern uint64_t mtvec;
-  csr_buf[10] = mtvec;    csr_buf[11] = mcause;  
-  csr_buf[12] = mstatus;  csr_buf[13] = mepc;
-  csr_buf[32] = 0x80000000;
-  //printf("csr: %lx  %lx  %lx  %lx\n",mtvec,mcause,mstatus,mepc);
-  uint32_t buf[4];
-  buf[0]=0x30551073;     //  0x305 01010 001 00000 1110011    0x30551073
-  buf[1]=0x34259073;     //  0x342 01011 001 00000 1110011    0x34259073
-  buf[2]=0x30061073;     //  0x300 01100 001 00000 1110011    0x30061073
-  buf[3]=0x34169073;     //  0x341 01101 001 00000 1110011    0x34169073
-  ref_difftest_memcpy(0x80000000, buf, 16, DIFFTEST_TO_REF);
-  ref_difftest_regcpy(&csr_buf, DIFFTEST_TO_REF);
-  ref_difftest_exec(4);
 
-  ref_difftest_memcpy(0x80000000, pmem, 0x7ffffff, DIFFTEST_TO_REF);
-  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
-}
-
-
-
-
-
-
-extern const char *regs[];
-extern int npc_state;
-extern int detach_difftest;
+extern int end;
 void difftest_step() {
-  if(detach_difftest == 1) return;
-
   uint64_t ref_r[33];
 
   ref_difftest_exec(1);
@@ -105,8 +68,8 @@ void difftest_step() {
 
   for(int i=0;i<33;i++){
 	  if(ref_r[i] != cpu_gpr_set[i]){
-		  printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]);
-		  npc_state = 3;
+		  printf("npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",i,cpu_gpr_set[i],i,ref_r[i]);
+		  end = 2;
 		  return;
 	  }
   }
@@ -116,15 +79,11 @@ void difftest_step() {
 
 
 void syn_gpr(){
-  if(detach_difftest == 1) return;
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
 }
-
-
 #else
 void init_difftest(long img_size, int port){}
 void difftest_step() {}
-void syn_state_to_ref(){} 
 void syn_gpr(){}
 #endif
 
