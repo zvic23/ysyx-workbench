@@ -14,11 +14,12 @@ const char *regs[] = {
   "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
   "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
   "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7",
-  "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
+  "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6","pc"
 };
 
 uint64_t isa_reg_str2val(const char *s, bool *success) {
 	extern uint64_t *cpu_gpr;
+	extern uint64_t cpu_gpr_set[33];
 	uint64_t value = 0;
 	int j =0;
 	//if((s[0] == 'p') && (s[1] == 'c')){
@@ -26,15 +27,15 @@ uint64_t isa_reg_str2val(const char *s, bool *success) {
 	//	value = cpu.pc;
 	//	return value;
 	//}
-	for(j=0;j<32;j++){
+	for(j=0;j<33;j++){
 		if((s[0] == regs[j][0])&&(s[1] == regs[j][1])){
 			*success = true;
-			value = cpu_gpr[j];
+			value = cpu_gpr_set[j];
 			break;
 		}
 	}
 	//printf("j is %d\n",j);
-	if(j == 32){*success = false;}
+	if(j == 33){*success = false;}
 	return value;
   //return 0;
 }
@@ -379,12 +380,13 @@ struct figure eval(int p, int q){
 	else if((tokens[p].type==DEREF)&&((p+1==q)||(check_parentheses(p+1,q)))){   //zsl:dereference gets the value of an address
 		struct figure address = eval(p+1,q);
 		uint64_t addr = address.value;
-	        uint64_t addrhex=0;
-	       	for (int i=0;i<64;i++){
-	       	  	addrhex = addrhex+(addr%10)*pow(16,i);
-	       	  	addr = addr/10;
-	       	}
-		uint8_t value = pmem_read(addrhex);
+	        //uint64_t addrhex=0;
+	       	//for (int i=0;i<64;i++){
+	       	//  	addrhex = addrhex+(addr%10)*pow(16,i);
+	       	//  	addr = addr/10;
+	       	//}
+		uint32_t value = host_read(addr,4);
+		//uint8_t value = host_read(addrhex,1);
 		//printf("aaa %lx\n", value);
 		struct figure number;
 	        number.sign=0;
