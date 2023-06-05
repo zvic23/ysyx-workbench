@@ -178,7 +178,7 @@ always @(read_current_state or arvalid) begin
 		        rdata = rrrdata;	
 			//if(araddr==32'ha0000060 && rdata != 64'b0)$display("data:%x",rdata);
 			//else $display("***********");
-			if(araddr==32'ha0000060 )$display("data:%x  araddr:%x  arvalid:%d  rvalid:%d clk:%d",rdata,araddr,arvalid,rvalid,clk);
+			if(araddr==32'ha0000060 )$display("data:%x  araddr:%x  arvalid:%d  rvalid:%d clk:%d current_state:%d",rdata,araddr,arvalid,rvalid,clk,read_current_state);
 			rvalid = 1'b1;
 			rresp  = 2'b0;
 			read_next_state = read_idle;
