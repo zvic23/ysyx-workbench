@@ -158,6 +158,7 @@ always @(posedge clk) begin
 //			$display("1");
 //		else
 //			$display("2");
+   if(read_current_state == read_idle)$display("data:%x",rdata);
 end
 
 always @(*) begin
@@ -174,8 +175,8 @@ always @(*) begin
   			//pmem_read({{32{1'b0}},araddr}, rdata);	
   			pmem_read({{32{1'b0}},araddr}, rrrdata);
 		        rdata = rrrdata;	
-			if(araddr==32'ha0000060 )$display("data:%x",rdata);
-			else $display("***********");
+			//if(araddr==32'ha0000060 )$display("data:%x",rdata);
+			//else $display("***********");
 			//if(araddr==32'ha0000060 )$display("data:%x",rdata);
 			rvalid = 1'b1;
 			rresp  = 2'b0;
