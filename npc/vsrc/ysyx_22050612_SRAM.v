@@ -150,7 +150,7 @@ localparam read_r_rsp = 2'b11;        //read respone
 
 always @(posedge clk) begin
 	if(rst == 1'b1) read_current_state <= read_idle;
-	else            read_current_state <= read_next_state;
+	else            read_current_state <= read_idle ;
 end
 
 always @(read_current_state or arvalid) begin
@@ -183,6 +183,7 @@ always @(read_current_state or arvalid) begin
 		end
 	endcase
 end
+
 reg aaa;
 always @(read_current_state) begin
 	if(rst) aaa = 1'b0;
