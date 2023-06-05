@@ -45,6 +45,8 @@ wire [63:0]rdata_pc  ;
 wire [1:0]rresp_pc   ;
 wire rready_pc       ;
 
+always @(posedge clk) $display("rrrrrdata:%x",rdata_lsu);
+
 wire awvalid_pc      ;  
 wire [31:0]awaddr_pc ; 
 wire awready_pc      ; 
