@@ -3412,9 +3412,15 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___combo__TOP__4(Vysyx_22050612_n
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_22050612_npc__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050612_npc___024root___combo__TOP__4\n"); );
+    // Variables
+    CData/*0:0*/ ysyx_22050612_npc__DOT__sram__DOT__aaa;
     // Body
-    VL_WRITEF("clk:%1#  state:%1#\n",1,vlSelf->clk,
-              2,(IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state));
+    ysyx_22050612_npc__DOT__sram__DOT__aaa = (1U & 
+                                              ((~ (IData)(vlSelf->rst)) 
+                                               & (IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state)));
+    VL_WRITEF("clk:%1#  state:%1#  aaa:%1#\n",1,vlSelf->clk,
+              2,(IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state),
+              1,ysyx_22050612_npc__DOT__sram__DOT__aaa);
     if ((0U == (IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state))) {
         vlSelf->ysyx_22050612_npc__DOT__rvalid = 0U;
         vlSelf->ysyx_22050612_npc__DOT__rresp = 0U;

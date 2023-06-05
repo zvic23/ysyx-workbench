@@ -186,8 +186,8 @@ end
 reg aaa;
 always @(read_current_state) begin
 	if(rst) aaa = 1'b0;
-	else aaa = ~aaa;
-	$display("clk:%d  state:%d",clk,read_current_state);
+	else aaa = read_current_state[0];
+	$display("clk:%d  state:%d  aaa:%d",clk,read_current_state,aaa);
 end
 
 endmodule
