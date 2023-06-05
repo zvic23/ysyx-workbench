@@ -111,7 +111,7 @@ end
 
 //************** read  *******************
 assign arready = 1'b1;
-/*
+
 //reg delay_read;
 
 always @(posedge clk) begin
@@ -140,9 +140,9 @@ always @(posedge clk) begin
 		//$display("4\n");
 	end
 end
-*/
 
 
+/*
 reg [1:0]read_current_state, read_next_state;
 
 localparam read_idle  = 2'b00;
@@ -165,7 +165,7 @@ always @(*) begin
   			pmem_read({{32{1'b0}},araddr}, rdata);	
 			rvalid = 1'b1;
 			rresp  = 2'b0;
-			read_next_state = (arvalid == 1'b1)? read_ar_hs:read_idle;
+			read_next_state = read_idle;
 		end
 		read_r_rsp: begin
 			rvalid = 1'b0;
@@ -179,7 +179,7 @@ always @(*) begin
 		end
 	endcase
 end
-
+*/
 
 
 endmodule
