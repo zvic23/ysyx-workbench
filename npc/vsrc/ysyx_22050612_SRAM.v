@@ -41,7 +41,7 @@ module ysyx_22050612_SRAM(
 //************** write *******************
 assign awready = 1'b1;
 assign wready  = 1'b1;
-
+/*
 //reg delay_write;
 
 always @(posedge clk) begin
@@ -69,6 +69,43 @@ always @(posedge clk) begin
 		//bresp <= 1'b1;
 		//$display("4\n");
 	end
+end
+*/
+reg [1:0]write_current_state, write_next_state;
+
+localparam write_idle  = 2'b00;
+localparam write_aw_hs = 2'b01;        //write address handshake
+localparam write_w_rsp = 2'b11;        //write respone
+
+always @(posedge clk) begin
+	if(rst == 1'b1) write_current_state <= write_idle;
+	else            write_current_state <= write_next_state;
+end
+
+always @(*) begin
+	case(write_current_state)
+		write_idle: begin
+			bvalid = 1'b0;
+			bresp  = 2'b0;
+			write_next_state = (awvalid && wvalid)? write_aw_hs:write_idle;
+		end
+		write_aw_hs: begin
+			pmem_write({{32{1'b0}},awaddr}, wdata, wstrb);
+			bvalid = 1'b1;
+			bresp  = 2'b0;
+			write_next_state = write_w_rsp;
+		end
+		write_w_rsp: begin
+			bvalid = 1'b0;
+			bresp  = 2'b0;
+			write_next_state = write_idle;
+		end
+		default: begin
+			bvalid = 1'b0;
+			bresp  = 2'b0;
+			write_next_state = write_idle;
+		end
+	endcase
 end
 
 
