@@ -93,7 +93,7 @@ always @(*) begin
 			pmem_write({{32{1'b0}},awaddr}, wdata, wstrb);
 			bvalid = 1'b1;
 			bresp  = 2'b0;
-			write_next_state = write_idle;
+			write_next_state = write_w_rsp;
 		end
 		write_w_rsp: begin
 			bvalid = 1'b0;
@@ -165,7 +165,7 @@ always @(*) begin
   			pmem_read({{32{1'b0}},araddr}, rdata);	
 			rvalid = 1'b1;
 			rresp  = 2'b0;
-			read_next_state = read_r_rsp;
+			read_next_state = read_idle;
 		end
 		read_r_rsp: begin
 			rvalid = 1'b0;
