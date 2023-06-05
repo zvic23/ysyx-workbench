@@ -46,7 +46,6 @@ void Vysyx_22050612_npc___024root___settle__TOP__3(Vysyx_22050612_npc___024root*
     CData/*7:0*/ ysyx_22050612_npc__DOT__exu__DOT__wmask_2byte;
     CData/*7:0*/ ysyx_22050612_npc__DOT__exu__DOT__rdata_1byte;
     SData/*15:0*/ ysyx_22050612_npc__DOT__exu__DOT__rdata_2byte;
-    IData/*31:0*/ ysyx_22050612_npc__DOT__araddr;
     IData/*31:0*/ ysyx_22050612_npc__DOT__awaddr;
     IData/*31:0*/ ysyx_22050612_npc__DOT__exu__DOT__result_divw0;
     IData/*31:0*/ ysyx_22050612_npc__DOT__exu__DOT__result_remw0;
@@ -1471,7 +1470,7 @@ void Vysyx_22050612_npc___024root___settle__TOP__3(Vysyx_22050612_npc___024root*
     if (((~ (IData)(vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading)) 
          & (IData)(vlSelf->ysyx_22050612_npc__DOT__arvalid_pc))) {
         ysyx_22050612_npc__DOT__arvalid = vlSelf->ysyx_22050612_npc__DOT__arvalid_pc;
-        ysyx_22050612_npc__DOT__araddr = vlSelf->ysyx_22050612_npc__DOT__araddr_pc;
+        vlSelf->ysyx_22050612_npc__DOT__araddr = vlSelf->ysyx_22050612_npc__DOT__araddr_pc;
     } else {
         ysyx_22050612_npc__DOT__arvalid = (((~ (IData)(vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading)) 
                                             & (IData)(vlSelf->ysyx_22050612_npc__DOT__arvalid_lsu))
@@ -1480,14 +1479,17 @@ void Vysyx_22050612_npc___024root___settle__TOP__3(Vysyx_22050612_npc___024root*
                                                 ? (IData)(vlSelf->ysyx_22050612_npc__DOT__arvalid_pc)
                                                 : ((IData)(vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading_2) 
                                                    & (IData)(vlSelf->ysyx_22050612_npc__DOT__arvalid_lsu))));
-        ysyx_22050612_npc__DOT__araddr = (((~ (IData)(vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading)) 
-                                           & (IData)(vlSelf->ysyx_22050612_npc__DOT__arvalid_lsu))
-                                           ? vlSelf->ysyx_22050612_npc__DOT__araddr_lsu
-                                           : ((IData)(vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading_1)
-                                               ? vlSelf->ysyx_22050612_npc__DOT__araddr_pc
-                                               : ((IData)(vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading_2)
+        vlSelf->ysyx_22050612_npc__DOT__araddr = ((
+                                                   (~ (IData)(vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading)) 
+                                                   & (IData)(vlSelf->ysyx_22050612_npc__DOT__arvalid_lsu))
                                                    ? vlSelf->ysyx_22050612_npc__DOT__araddr_lsu
-                                                   : 0U)));
+                                                   : 
+                                                  ((IData)(vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading_1)
+                                                    ? vlSelf->ysyx_22050612_npc__DOT__araddr_pc
+                                                    : 
+                                                   ((IData)(vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading_2)
+                                                     ? vlSelf->ysyx_22050612_npc__DOT__araddr_lsu
+                                                     : 0U)));
     }
     vlSelf->ysyx_22050612_npc__DOT__awready_lsu = (
                                                    (~ 
@@ -1909,7 +1911,7 @@ void Vysyx_22050612_npc___024root___settle__TOP__3(Vysyx_22050612_npc___024root*
             = ((IData)(ysyx_22050612_npc__DOT__arvalid)
                 ? 1U : 0U);
     } else if ((1U == (IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state))) {
-        Vysyx_22050612_npc___024unit____Vdpiimwrap_pmem_read_TOP____024unit((QData)((IData)(ysyx_22050612_npc__DOT__araddr)), vlSelf->__Vtask_pmem_read__20__rdata);
+        Vysyx_22050612_npc___024unit____Vdpiimwrap_pmem_read_TOP____024unit((QData)((IData)(vlSelf->ysyx_22050612_npc__DOT__araddr)), vlSelf->__Vtask_pmem_read__20__rdata);
         vlSelf->ysyx_22050612_npc__DOT__sram__DOT__rrrdata 
             = vlSelf->__Vtask_pmem_read__20__rdata;
         vlSelf->ysyx_22050612_npc__DOT__rvalid = 1U;
@@ -3383,6 +3385,7 @@ void Vysyx_22050612_npc___024root___ctor_var_reset(Vysyx_22050612_npc___024root*
     vlSelf->ysyx_22050612_npc__DOT__wstrb_lsu = VL_RAND_RESET_I(8);
     vlSelf->ysyx_22050612_npc__DOT__bresp_lsu = VL_RAND_RESET_I(2);
     vlSelf->ysyx_22050612_npc__DOT__bvalid_lsu = VL_RAND_RESET_I(1);
+    vlSelf->ysyx_22050612_npc__DOT__araddr = VL_RAND_RESET_I(32);
     vlSelf->ysyx_22050612_npc__DOT__rvalid = VL_RAND_RESET_I(1);
     vlSelf->ysyx_22050612_npc__DOT__rdata = VL_RAND_RESET_Q(64);
     vlSelf->ysyx_22050612_npc__DOT__rresp = VL_RAND_RESET_I(2);

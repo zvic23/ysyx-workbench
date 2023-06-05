@@ -158,7 +158,7 @@ always @(posedge clk) begin
 //			$display("1");
 //		else
 //			$display("2");
-   if(read_current_state == read_idle)$display("data:%x",rdata);
+   if(read_current_state == read_idle&& araddr==32'ha0000060 )$display("data:%x",rdata);
 end
 
 always @(*) begin
