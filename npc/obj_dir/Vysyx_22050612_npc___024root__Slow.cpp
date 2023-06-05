@@ -1927,7 +1927,11 @@ void Vysyx_22050612_npc___024root___settle__TOP__3(Vysyx_22050612_npc___024root*
     } else {
         vlSelf->ysyx_22050612_npc__DOT__rvalid = 0U;
         vlSelf->ysyx_22050612_npc__DOT__rresp = 0U;
-        vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_next_state = 0U;
+        if (ysyx_22050612_npc__DOT__arvalid) {
+            vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_next_state = 1U;
+        } else if (vlSelf->ysyx_22050612_npc__DOT__rvalid) {
+            vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_next_state = 0U;
+        }
     }
     if ((0U == (IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__write_current_state))) {
         vlSelf->ysyx_22050612_npc__DOT__bvalid = 0U;
