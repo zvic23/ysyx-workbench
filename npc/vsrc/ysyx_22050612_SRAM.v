@@ -17,7 +17,7 @@ module ysyx_22050612_SRAM(
    output arready,
 
    output reg rvalid,
-   output [63:0]rdata,
+   output reg [63:0]rdata,
    output reg [1:0]rresp,
    input rready,
 
@@ -170,7 +170,7 @@ always @(*) begin
 		end
 		read_ar_hs: begin
   			pmem_read({{32{1'b0}},araddr}, rdata);	
-			//if(araddr==32'ha0000060 && rdata != 64'b0)$display("data:%x",rdata);
+			if(araddr==32'ha0000060 && rdata != 64'b0)$display("data:%x",rdata);
 			//if(araddr==32'ha0000060 )$display("data:%x",rdata);
 			rvalid = 1'b1;
 			rresp  = 2'b0;
