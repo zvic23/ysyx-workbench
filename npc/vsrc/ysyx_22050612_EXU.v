@@ -942,7 +942,7 @@ always @(posedge clk) begin
 	//$display("ifu:   arvalid = %d  arready = %d  \n",arvalid, arready);   
 	if(rvalid == 1'b1 && rready == 1'b1)begin
 		rdata <= rrdata;
-		if(araddr==32'ha0000060 )$display("aaaaaaadata:%x",rrdata);
+		if(araddr==32'ha0000060 && rrdata != 64'b0)$display("aaaaaaadata:%x",rrdata);
 		//inst_64 = rdata;
 		//$display("inst:%x",inst);
 		//$display("3\n");
