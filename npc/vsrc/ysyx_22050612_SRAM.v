@@ -159,18 +159,16 @@ always @(*) begin
 		read_idle: begin
 			rvalid = 1'b0;
 			rresp  = 2'b0;
-			//read_next_state = (arvalid == 1'b1)? read_ar_hs:read_idle;
-			if(arvalid)read_next_state = read_ar_hs;
-			else if(rvalid)read_next_state = read_idle;
+			read_next_state = (arvalid == 1'b1)? read_ar_hs:read_idle;
+			//if(arvalid)read_next_state = read_ar_hs;
+			//else if(rvalid)read_next_state = read_idle;
 		end
 		read_ar_hs: begin
   			pmem_read({{32{1'b0}},araddr}, rdata);	
 			if(araddr==32'ha0000060 && rdata != 64'b0)$display("data:%x",rdata);
 			rvalid = 1'b1;
 			rresp  = 2'b0;
-			//read_next_state = read_idle;
-			if(arvalid)read_next_state = read_ar_hs;
-			else if(rvalid)read_next_state = read_idle;
+			read_next_state = read_idle;
 		end
 		read_r_rsp: begin
 			rvalid = 1'b0;
@@ -180,9 +178,7 @@ always @(*) begin
 		default: begin
 			rvalid = 1'b0;
 			rresp  = 2'b0;
-			//read_next_state = read_idle;
-			if(arvalid)read_next_state = read_ar_hs;
-			else if(rvalid)read_next_state = read_idle;
+			read_next_state = read_idle;
 		end
 	endcase
 end
