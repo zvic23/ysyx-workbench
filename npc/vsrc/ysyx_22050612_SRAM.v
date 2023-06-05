@@ -113,34 +113,34 @@ end
 assign arready = 1'b1;
 
 //reg delay_read;
-/*
-always @(posedge clk) begin
-	//$display("sram:   arvalid = %d  arready = %d  \n",arvalid, arready);   
-	if(rst == 1'b1)begin
-		rvalid <= 1'b0;
-		rresp <= 2'b0;
-	//	delay_read <=1'b0;
-	end
-//	else if(arready == 1'b1 && arvalid == 1'b1)begin
-//		delay_read <=1'b1;
+
+//always @(posedge clk) begin
+//	//$display("sram:   arvalid = %d  arready = %d  \n",arvalid, arready);   
+//	if(rst == 1'b1)begin
+//		rvalid <= 1'b0;
+//		rresp <= 2'b0;
+//	//	delay_read <=1'b0;
 //	end
-//	else if(delay_read ==1'b1)begin
-	else if(arready == 1'b1 && arvalid == 1'b1)begin
-	//	delay_read <=1'b0;
-		rvalid <= 1'b1;
-  		pmem_read({{32{1'b0}},araddr}, rdata);	
-  		//pmem_read_pc({{32{1'b0}},araddr}, rdata);	
-		//$display("get inst!!  %x  %x\n",araddr,rdata);
-		//$display("2\n");
-		rresp <= 2'b0;
-	end
-	else if(rvalid == 1'b1 && rready == 1'b1)begin
-		rvalid <= 1'b0;
-		rresp <= 2'b0;
-		//$display("4\n");
-	end
-end
-*/
+////	else if(arready == 1'b1 && arvalid == 1'b1)begin
+////		delay_read <=1'b1;
+////	end
+////	else if(delay_read ==1'b1)begin
+//	else if(arready == 1'b1 && arvalid == 1'b1)begin
+//	//	delay_read <=1'b0;
+//		rvalid <= 1'b1;
+//  		pmem_read({{32{1'b0}},araddr}, rdata);	
+//  		//pmem_read_pc({{32{1'b0}},araddr}, rdata);	
+//		//$display("get inst!!  %x  %x\n",araddr,rdata);
+//		//$display("2\n");
+//		rresp <= 2'b0;
+//	end
+//	else if(rvalid == 1'b1 && rready == 1'b1)begin
+//		rvalid <= 1'b0;
+//		rresp <= 2'b0;
+//		//$display("4\n");
+//	end
+//end
+
 
 
 reg [1:0]read_current_state, read_next_state;
