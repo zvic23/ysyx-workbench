@@ -161,7 +161,7 @@ always @(posedge clk) begin
    //if(read_current_state == read_idle&& araddr==32'ha0000060 )$display("data:%x",rdata);
 end
 
-always @(*) begin
+always @(arvalid) begin
 	case(read_current_state)
 		read_idle: begin
 			rvalid = 1'b0;
