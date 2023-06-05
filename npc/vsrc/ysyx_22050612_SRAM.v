@@ -170,7 +170,7 @@ always @(arvalid) begin
 			//if(arvalid)read_next_state = read_ar_hs;
 			//else if(rvalid)read_next_state = read_idle;
 			//else read_next_state = read_idle;			
-			if(araddr==32'ha0000060 )$display("*********");
+			if(araddr==32'ha0000060 )$display("*********araddr:%x  arvalid:%d  rvalid:%d",araddr,arvalid,rvalid);
 		end
 		read_ar_hs: begin
   			//pmem_read({{32{1'b0}},araddr}, rdata);	
