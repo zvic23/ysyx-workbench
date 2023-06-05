@@ -152,6 +152,10 @@ localparam read_r_rsp = 2'b11;        //read respone
 always @(posedge clk) begin
 	if(rst == 1'b1) read_current_state <= read_idle;
 	else            read_current_state <= read_next_state;
+	if(read_current_state == read_idle)
+			$display("1");
+		else
+			$display("2");
 end
 
 always @(*) begin
@@ -160,14 +164,13 @@ always @(*) begin
 			rvalid = 1'b0;
 			rresp  = 2'b0;
 			read_next_state = (arvalid == 1'b1)? read_ar_hs:read_idle;
-			$display("1");
 			//if(arvalid)read_next_state = read_ar_hs;
 			//else if(rvalid)read_next_state = read_idle;
 		end
 		read_ar_hs: begin
   			pmem_read({{32{1'b0}},araddr}, rdata);	
-			$display("2");
 			//if(araddr==32'ha0000060 && rdata != 64'b0)$display("data:%x",rdata);
+			//if(araddr==32'ha0000060 )$display("data:%x",rdata);
 			rvalid = 1'b1;
 			rresp  = 2'b0;
 			read_next_state = read_idle;

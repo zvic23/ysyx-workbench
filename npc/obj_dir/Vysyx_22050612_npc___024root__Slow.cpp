@@ -1902,20 +1902,18 @@ void Vysyx_22050612_npc___024root___settle__TOP__3(Vysyx_22050612_npc___024root*
                                                       & (IData)(vlSelf->ysyx_22050612_npc__DOT__imm_I)))
                                                      ? vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mstatus
                                                      : 0ULL))));
-    if (VL_UNLIKELY((0U == (IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state)))) {
+    if ((0U == (IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state))) {
         vlSelf->ysyx_22050612_npc__DOT__rvalid = 0U;
         vlSelf->ysyx_22050612_npc__DOT__rresp = 0U;
         vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_next_state 
             = ((IData)(ysyx_22050612_npc__DOT__arvalid)
                 ? 1U : 0U);
-        VL_WRITEF("1\n");
-    } else if (VL_UNLIKELY((1U == (IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state)))) {
+    } else if ((1U == (IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state))) {
         Vysyx_22050612_npc___024unit____Vdpiimwrap_pmem_read_TOP____024unit((QData)((IData)(ysyx_22050612_npc__DOT__araddr)), vlSelf->__Vtask_pmem_read__20__rdata);
+        vlSelf->ysyx_22050612_npc__DOT__rdata = vlSelf->__Vtask_pmem_read__20__rdata;
         vlSelf->ysyx_22050612_npc__DOT__rvalid = 1U;
         vlSelf->ysyx_22050612_npc__DOT__rresp = 0U;
         vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_next_state = 0U;
-        vlSelf->ysyx_22050612_npc__DOT__rdata = vlSelf->__Vtask_pmem_read__20__rdata;
-        VL_WRITEF("2\n");
     } else if ((3U == (IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state))) {
         vlSelf->ysyx_22050612_npc__DOT__rvalid = 0U;
         vlSelf->ysyx_22050612_npc__DOT__rresp = 0U;
