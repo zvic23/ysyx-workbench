@@ -144,7 +144,7 @@ void built_in_program(){
 
 uint64_t img_size;
 void load_img(){
-  FILE *fp = fopen("./csrc/obj.bin", "rb");
+  FILE *fp = fopen("./obj.bin", "rb");
 
   fseek(fp, 0, SEEK_END);
   img_size = ftell(fp);
