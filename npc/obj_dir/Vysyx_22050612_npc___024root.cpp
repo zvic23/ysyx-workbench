@@ -504,7 +504,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
         Vysyx_22050612_npc___024unit____Vdpiimwrap_pmem_write_TOP____024unit((QData)((IData)(ysyx_22050612_npc__DOT__awaddr)), ysyx_22050612_npc__DOT__wdata, (IData)(ysyx_22050612_npc__DOT__wstrb));
         vlSelf->ysyx_22050612_npc__DOT__bvalid = 1U;
         vlSelf->ysyx_22050612_npc__DOT__bresp = 0U;
-        vlSelf->ysyx_22050612_npc__DOT__sram__DOT__write_next_state = 3U;
+        vlSelf->ysyx_22050612_npc__DOT__sram__DOT__write_next_state = 0U;
     } else if ((3U == (IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__write_current_state))) {
         vlSelf->ysyx_22050612_npc__DOT__bvalid = 0U;
         vlSelf->ysyx_22050612_npc__DOT__bresp = 0U;

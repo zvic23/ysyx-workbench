@@ -11,12 +11,12 @@ module ysyx_22050612_SRAM(
    input clk,
    input rst,
    
-   input arvalid,
+   input reg arvalid,
    input [31:0]araddr,
    output arready,
 
    output reg rvalid,
-   output reg [63:0]rdata,
+   output [63:0]rdata,
    output reg [1:0]rresp,
    input rready,
 
@@ -29,8 +29,8 @@ module ysyx_22050612_SRAM(
    input [ 7:0]wstrb,
    output wready,
 
-   output reg [1:0]bresp,
-   output reg bvalid,
+   output [1:0]bresp,
+   output bvalid,
    input bready
 
 
@@ -93,7 +93,7 @@ always @(*) begin
 			pmem_write({{32{1'b0}},awaddr}, wdata, wstrb);
 			bvalid = 1'b1;
 			bresp  = 2'b0;
-			write_next_state = write_w_rsp;
+			write_next_state = write_idle;
 		end
 		write_w_rsp: begin
 			bvalid = 1'b0;
