@@ -17,7 +17,7 @@ module ysyx_22050612_SRAM(
 
    output reg rvalid,
    output [63:0]rdata,
-   output reg [1:0]rresp,
+   output [1:0]rresp,
    input rready,
 
    input awvalid,
