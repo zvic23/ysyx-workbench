@@ -161,7 +161,7 @@ always @(posedge clk) begin
    //if(read_current_state == read_idle&& araddr==32'ha0000060 )$display("data:%x",rdata);
 end
 
-always @(posedge clk) begin
+always @(*) begin
 
   			pmem_read({{32{1'b0}},araddr}, rrrdata);
 	end
