@@ -68,8 +68,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
 		skip_difftest=1;
 		//printf("key     \n");
 		uint64_t key = i8042_data_io_handler();
-printf("key = %lx\n",key);
-		//if(key)printf("key = %lx\n",key);
+		if(key)printf("key = %lx\n",key);
 		memcpy(rdata, &key, 8);
 		return;
 	}
