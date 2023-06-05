@@ -44,7 +44,6 @@ void Vysyx_22050612_npc___024root___settle__TOP__3(Vysyx_22050612_npc___024root*
     CData/*7:0*/ ysyx_22050612_npc__DOT__exu__DOT__wmask_1byte;
     CData/*7:0*/ ysyx_22050612_npc__DOT__exu__DOT__wmask_2byte;
     CData/*7:0*/ ysyx_22050612_npc__DOT__exu__DOT__rdata_1byte;
-    CData/*0:0*/ ysyx_22050612_npc__DOT__sram__DOT__aaa;
     SData/*15:0*/ ysyx_22050612_npc__DOT__exu__DOT__rdata_2byte;
     IData/*31:0*/ ysyx_22050612_npc__DOT__awaddr;
     IData/*31:0*/ ysyx_22050612_npc__DOT__exu__DOT__result_divw0;
@@ -66,12 +65,6 @@ void Vysyx_22050612_npc___024root___settle__TOP__3(Vysyx_22050612_npc___024root*
     QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__lut_out;
     // Body
     Vysyx_22050612_npc___024unit____Vdpiimwrap_update_csr_TOP____024unit(vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mtvec, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mcause, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mepc, vlSelf->ysyx_22050612_npc__DOT__exu__DOT__mstatus);
-    ysyx_22050612_npc__DOT__sram__DOT__aaa = (1U & 
-                                              ((~ (IData)(vlSelf->rst)) 
-                                               & (IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state)));
-    VL_WRITEF("clk:%1#  state:%1#  aaa:%1#\n",1,vlSelf->clk,
-              2,(IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state),
-              1,ysyx_22050612_npc__DOT__sram__DOT__aaa);
     vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading 
         = ((IData)(vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading_1) 
            | (IData)(vlSelf->ysyx_22050612_npc__DOT__arbiter__DOT__reading_2));

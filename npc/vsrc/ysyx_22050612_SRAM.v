@@ -184,12 +184,13 @@ always @(read_current_state or arvalid) begin
 	endcase
 end
 
+/*
 reg aaa;
 always @(read_current_state) begin
 	if(rst) aaa = 1'b0;
 	else aaa = read_current_state[0];
 	$display("clk:%d  state:%d  aaa:%d",clk,read_current_state,aaa);
 end
-
+*/
 endmodule
 
