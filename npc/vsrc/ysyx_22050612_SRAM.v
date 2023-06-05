@@ -153,9 +153,7 @@ localparam read_r_rsp = 2'b11;        //read respone
 
 always @(posedge clk) begin
 	if(rst == 1'b1) read_current_state <= read_idle;
-	else            begin read_current_state <= read_next_state;
-	$display("rdata   :   %x",rdata);
-end
+	else            read_current_state <= read_next_state;
 //	if(read_current_state == read_idle)
 //			$display("1");
 //		else
