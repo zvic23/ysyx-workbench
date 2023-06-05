@@ -11,12 +11,12 @@ module ysyx_22050612_SRAM(
    input clk,
    input rst,
    
-   input reg arvalid,
+   input arvalid,
    input [31:0]araddr,
    output arready,
 
    output reg rvalid,
-   output [63:0]rdata,
+   output reg [63:0]rdata,
    output reg [1:0]rresp,
    input rready,
 
