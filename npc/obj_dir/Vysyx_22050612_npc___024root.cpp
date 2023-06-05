@@ -188,7 +188,8 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
         vlSelf->ysyx_22050612_npc__DOT__wdata_lsu = vlSelf->ysyx_22050612_npc__DOT__exu__DOT__wdata;
     }
     if (vlSelf->ysyx_22050612_npc__DOT__rvalid_lsu) {
-        if (VL_UNLIKELY(((0xa0000060U == vlSelf->ysyx_22050612_npc__DOT__araddr_lsu) 
+        if (VL_UNLIKELY((((0xa0000050U <= vlSelf->ysyx_22050612_npc__DOT__araddr_lsu) 
+                          & (0xa0000070U >= vlSelf->ysyx_22050612_npc__DOT__araddr_lsu)) 
                          & (0ULL != vlSelf->ysyx_22050612_npc__DOT__rdata_lsu)))) {
             VL_WRITEF("aaaaaaadata:%x\n",64,vlSelf->ysyx_22050612_npc__DOT__rdata_lsu);
         }
