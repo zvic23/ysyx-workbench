@@ -3409,7 +3409,7 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
             = ((IData)(ysyx_22050612_npc__DOT__arvalid)
                 ? 1U : 0U);
         if (VL_UNLIKELY((0xa0000060U == ysyx_22050612_npc__DOT__araddr))) {
-            VL_WRITEF("*********araddr:%x  arvalid:%1#  rvalid:%1#\n",
+            VL_WRITEF("**************************araddr:%x  arvalid:%1#  rvalid:%1#\n",
                       32,ysyx_22050612_npc__DOT__araddr,
                       1,(IData)(ysyx_22050612_npc__DOT__arvalid),
                       1,vlSelf->ysyx_22050612_npc__DOT__rvalid);
