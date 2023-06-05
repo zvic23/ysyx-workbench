@@ -162,6 +162,12 @@ always @(posedge clk) begin
 end
 
 always @(*) begin
+
+  			pmem_read({{32{1'b0}},araddr}, rrrdata);
+	end
+
+
+always @(*) begin
 	case(read_current_state)
 		read_idle: begin
 			rvalid = 1'b0;
@@ -174,7 +180,6 @@ always @(*) begin
 		end
 		read_ar_hs: begin
   			//pmem_read({{32{1'b0}},araddr}, rdata);	
-  			pmem_read({{32{1'b0}},araddr}, rrrdata);
 		        rdata = rrrdata;	
 			//if(araddr==32'ha0000060 && rdata != 64'b0)$display("data:%x",rdata);
 			//else $display("***********");
