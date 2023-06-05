@@ -142,7 +142,6 @@ always @(posedge clk) begin
 end
 */
 
-
 reg [1:0]read_current_state, read_next_state;
 
 localparam read_idle  = 2'b00;
@@ -185,8 +184,8 @@ always @(read_current_state or arvalid) begin
 	endcase
 end
 
-always @(read_current_state ) begin
-	$display("clk:%d",clk);
+always @(read_current_state) begin
+	$display("clk:%d  state:%d",clk,read_current_state);
 end
 
 endmodule
