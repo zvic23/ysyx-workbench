@@ -165,7 +165,7 @@ always @(*) begin
   			pmem_read({{32{1'b0}},araddr}, rdata);	
 			rvalid = 1'b1;
 			rresp  = 2'b0;
-			read_next_state = read_idle;
+			read_next_state = (arvalid == 1'b1)? read_ar_hs:read_idle;
 		end
 		read_r_rsp: begin
 			rvalid = 1'b0;
