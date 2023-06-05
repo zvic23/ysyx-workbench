@@ -71,6 +71,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
         IData/*31:0*/ ysyx_22050612_npc__DOT__awaddr_pc;
         IData/*31:0*/ ysyx_22050612_npc__DOT__araddr_lsu;
         IData/*31:0*/ ysyx_22050612_npc__DOT__awaddr_lsu;
+        IData/*31:0*/ ysyx_22050612_npc__DOT__araddr;
         IData/*23:0*/ ysyx_22050612_npc__DOT__exu__DOT__opcode_lastcycle;
         QData/*63:0*/ ysyx_22050612_npc__DOT__dnpc;
         QData/*63:0*/ ysyx_22050612_npc__DOT__imm_I;
@@ -91,10 +92,11 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__result_alu0;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__rdata;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__raddr;
-        QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__waddr;
     };
     struct {
+        QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__waddr;
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__wdata;
+        QData/*63:0*/ ysyx_22050612_npc__DOT__sram__DOT__rrrdata;
         VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT__gpr;
         VlUnpacked<VlWide<3>/*71:0*/, 10> ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__pair_list;
         VlUnpacked<CData/*7:0*/, 10> ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__key_list;
@@ -103,7 +105,6 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
 
     // LOCAL VARIABLES
     CData/*0:0*/ __Vclklast__TOP__clk;
-    QData/*63:0*/ __Vtask_pmem_read__20__rdata;
     VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT____Vcellout__cpu_gpr_group____pinNumber5;
 
     // INTERNAL VARIABLES
