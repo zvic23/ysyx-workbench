@@ -169,15 +169,16 @@ always @(*) begin
 			//read_next_state = (arvalid == 1'b1)? read_ar_hs:read_idle;
 			if(arvalid)read_next_state = read_ar_hs;
 			else if(rvalid)read_next_state = read_idle;
-			else read_next_state = read_idle;
+			else read_next_state = read_idle;			
+			if(araddr==32'ha0000060 )$display("*********");
 		end
 		read_ar_hs: begin
   			//pmem_read({{32{1'b0}},araddr}, rdata);	
   			pmem_read({{32{1'b0}},araddr}, rrrdata);
 		        rdata = rrrdata;	
-			if(araddr==32'ha0000060 && rdata != 64'b0)$display("data:%x",rdata);
+			//if(araddr==32'ha0000060 && rdata != 64'b0)$display("data:%x",rdata);
 			//else $display("***********");
-			//if(araddr==32'ha0000060 )$display("data:%x",rdata);
+			if(araddr==32'ha0000060 )$display("data:%x",rdata);
 			rvalid = 1'b1;
 			rresp  = 2'b0;
 			//read_next_state = read_idle;
