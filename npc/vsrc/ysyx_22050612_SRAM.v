@@ -11,7 +11,7 @@ module ysyx_22050612_SRAM(
    input clk,
    input rst,
    
-   input reg arvalid,
+   input arvalid,
    input [31:0]araddr,
    output arready,
 
@@ -29,8 +29,8 @@ module ysyx_22050612_SRAM(
    input [ 7:0]wstrb,
    output wready,
 
-   output [1:0]bresp,
-   output bvalid,
+   output reg [1:0]bresp,
+   output reg bvalid,
    input bready
 
 
