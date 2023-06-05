@@ -95,6 +95,7 @@ VL_MODULE(Vysyx_22050612_npc___024root) {
     };
     struct {
         QData/*63:0*/ ysyx_22050612_npc__DOT__exu__DOT__wdata;
+        QData/*63:0*/ ysyx_22050612_npc__DOT__sram__DOT__rrrdata;
         VlUnpacked<QData/*63:0*/, 32> ysyx_22050612_npc__DOT__exu__DOT__gpr;
         VlUnpacked<VlWide<3>/*71:0*/, 10> ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__pair_list;
         VlUnpacked<CData/*7:0*/, 10> ysyx_22050612_npc__DOT__exu__DOT__alu0__DOT__alu_result_select__DOT__i0__DOT__key_list;
