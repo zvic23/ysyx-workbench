@@ -11,7 +11,7 @@ void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
   if( (keyvalue & KEYDOWN_MASK) == 0x8000) kbd->keydown = 1;
   else kbd->keydown = 0;
   kbd->keycode = keyvalue & ~KEYDOWN_MASK;
-  //if(keyvalue)printf("am key:%x\n",keyvalue);
+  if(keyvalue)printf("am key:%x\n",keyvalue);
 
 //  kbd->keydown = 0;
 //  kbd->keycode = AM_KEY_NONE;
