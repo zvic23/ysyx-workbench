@@ -131,12 +131,12 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__1(Vysyx_22050612
                                          & (~ ((0U 
                                                 == (IData)(vlSelf->ysyx_22050612_npc__DOT__bresp_lsu)) 
                                                & (IData)(vlSelf->ysyx_22050612_npc__DOT__bvalid_lsu))))));
-    if (vlSelf->rst) {
-        vlSelf->ysyx_22050612_npc__DOT__sram__DOT__write_current_state = 0U;
+    vlSelf->ysyx_22050612_npc__DOT__sram__DOT__write_current_state 
+        = ((IData)(vlSelf->rst) ? 0U : (IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__write_next_state));
+    if (VL_LIKELY(vlSelf->rst)) {
         vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state = 0U;
     } else {
-        vlSelf->ysyx_22050612_npc__DOT__sram__DOT__write_current_state 
-            = vlSelf->ysyx_22050612_npc__DOT__sram__DOT__write_next_state;
+        VL_WRITEF("rdata   :   %x\n",64,vlSelf->ysyx_22050612_npc__DOT__rdata);
         vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state 
             = vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_next_state;
     }
