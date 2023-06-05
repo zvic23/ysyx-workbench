@@ -165,6 +165,7 @@ always @(*) begin
 		end
 		read_ar_hs: begin
   			pmem_read({{32{1'b0}},araddr}, rdata);	
+			$display("data:%x",rdata);
 			rvalid = 1'b1;
 			rresp  = 2'b0;
 			//read_next_state = read_idle;
