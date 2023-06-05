@@ -190,9 +190,9 @@ always @(*) begin
 			rresp  = 2'b0;
 			//read_next_state = read_idle;
 
-			if(arvalid)read_next_state = read_ar_hs;
-			else if(rvalid)read_next_state = read_idle;
-			else read_next_state = read_idle;
+			//if(arvalid)read_next_state = read_ar_hs;
+			//else if(rvalid)read_next_state = read_idle;
+			//else read_next_state = read_idle;
 		end
 	endcase
 end
