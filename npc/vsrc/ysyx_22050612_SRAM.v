@@ -167,9 +167,6 @@ always @(read_current_state or arvalid) begin
 			rvalid = 1'b0;
 			rresp  = 2'b0;
 			read_next_state = (arvalid == 1'b1)? read_ar_hs:read_idle;
-			//if(arvalid)read_next_state = read_ar_hs;
-			//else if(rvalid)read_next_state = read_idle;
-			//else read_next_state = read_idle;			
 			if(araddr==32'ha0000060 )$display("**************************araddr:%x  arvalid:%d  rvalid:%d",araddr,arvalid,rvalid);
 		end
 		read_ar_hs: begin
@@ -182,10 +179,6 @@ always @(read_current_state or arvalid) begin
 			rvalid = 1'b1;
 			rresp  = 2'b0;
 			read_next_state = read_idle;
-
-			//if(arvalid)read_next_state = read_ar_hs;
-			//else if(rvalid)read_next_state = read_idle;
-			//else read_next_state = read_ar_hs;
 		end
 		read_r_rsp: begin
 			rvalid = 1'b0;
@@ -196,7 +189,6 @@ always @(read_current_state or arvalid) begin
 			rvalid = 1'b0;
 			rresp  = 2'b0;
 			read_next_state = read_idle;
-
 			//if(arvalid)read_next_state = read_ar_hs;
 			//else if(rvalid)read_next_state = read_idle;
 			//else read_next_state = read_idle;
