@@ -111,7 +111,7 @@ end
 
 //************** read  *******************
 assign arready = 1'b1;
-
+/*
 //reg delay_read;
 
 always @(posedge clk) begin
@@ -140,8 +140,45 @@ always @(posedge clk) begin
 		//$display("4\n");
 	end
 end
+*/
 
 
+reg [1:0]read_current_state, read_next_state;
+
+localparam read_idle  = 2'b00;
+localparam read_ar_hs = 2'b01;        //read address handshake
+localparam read_r_rsp = 2'b11;        //read respone
+
+always @(posedge clk) begin
+	if(rst == 1'b1) read_current_state <= read_idle;
+	else            read_current_state <= read_next_state;
+end
+
+always @(*) begin
+	case(read_current_state)
+		read_idle: begin
+			rvalid = 1'b0;
+			rresp  = 2'b0;
+			read_next_state = (arvalid)? read_ar_hs:read_idle;
+		end
+		read_ar_hs: begin
+  			pmem_read({{32{1'b0}},araddr}, rdata);	
+			rvalid = 1'b1;
+			rresp  = 2'b0;
+			read_next_state = read_r_rsp;
+		end
+		read_r_rsp: begin
+			rvalid = 1'b0;
+			rresp  = 2'b0;
+			read_next_state = read_idle;
+		end
+		default: begin
+			rvalid = 1'b0;
+			rresp  = 2'b0;
+			read_next_state = read_idle;
+		end
+	endcase
+end
 
 
 
