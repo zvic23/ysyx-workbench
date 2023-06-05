@@ -1918,9 +1918,10 @@ void Vysyx_22050612_npc___024root___settle__TOP__3(Vysyx_22050612_npc___024root*
             = ((IData)(ysyx_22050612_npc__DOT__arvalid)
                 ? 1U : 0U);
         vlSelf->ysyx_22050612_npc__DOT__rdata = vlSelf->ysyx_22050612_npc__DOT__sram__DOT__rrrdata;
-        if (VL_UNLIKELY(((0xa0000060U == ysyx_22050612_npc__DOT__araddr) 
-                         & (0ULL != vlSelf->ysyx_22050612_npc__DOT__rdata)))) {
+        if ((0xa0000060U == ysyx_22050612_npc__DOT__araddr)) {
             VL_WRITEF("data:%x\n",64,vlSelf->ysyx_22050612_npc__DOT__rdata);
+        } else {
+            VL_WRITEF("***********\n");
         }
     } else if ((3U == (IData)(vlSelf->ysyx_22050612_npc__DOT__sram__DOT__read_current_state))) {
         vlSelf->ysyx_22050612_npc__DOT__rvalid = 0U;

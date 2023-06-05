@@ -174,7 +174,8 @@ always @(*) begin
   			//pmem_read({{32{1'b0}},araddr}, rdata);	
   			pmem_read({{32{1'b0}},araddr}, rrrdata);
 		        rdata = rrrdata;	
-			if(araddr==32'ha0000060 && rdata != 64'b0)$display("data:%x",rdata);
+			if(araddr==32'ha0000060 )$display("data:%x",rdata);
+			else $display("***********");
 			//if(araddr==32'ha0000060 )$display("data:%x",rdata);
 			rvalid = 1'b1;
 			rresp  = 2'b0;
