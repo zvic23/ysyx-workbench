@@ -111,7 +111,7 @@ end
 
 //************** read  *******************
 assign arready = 1'b1;
-/*
+
 //reg delay_read;
 
 always @(posedge clk) begin
@@ -140,9 +140,9 @@ always @(posedge clk) begin
 		//$display("4\n");
 	end
 end
-*/
 
 
+/*
 reg [1:0]read_current_state, read_next_state;
 
 localparam read_idle  = 2'b00;
@@ -179,7 +179,7 @@ always @(*) begin
 		end
 	endcase
 end
-
+*/
 
 
 endmodule
