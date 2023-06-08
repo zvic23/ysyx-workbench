@@ -11,15 +11,17 @@ module ysyx_22050612_SRAM(
    input clk,
    input rst,
    
-   input reg arvalid,
+//read
+   input arvalid,
    input [31:0]araddr,
    output arready,
 
    output reg rvalid,
-   output [63:0]rdata,
+   output reg [63:0]rdata,
    output reg [1:0]rresp,
    input rready,
 
+//write
    input awvalid,
    input [31:0]awaddr,
    output awready,
@@ -29,11 +31,9 @@ module ysyx_22050612_SRAM(
    input [ 7:0]wstrb,
    output wready,
 
-   output [1:0]bresp,
-   output bvalid,
+   output reg [1:0]bresp,
+   output reg bvalid,
    input bready
-
-
 );
 
 
@@ -41,7 +41,7 @@ module ysyx_22050612_SRAM(
 //************** write *******************
 assign awready = 1'b1;
 assign wready  = 1'b1;
-
+/*
 //reg delay_write;
 
 always @(posedge clk) begin
@@ -70,11 +70,48 @@ always @(posedge clk) begin
 		//$display("4\n");
 	end
 end
+*/
+reg [1:0]write_current_state, write_next_state;
+
+localparam write_idle  = 2'b00;
+localparam write_aw_hs = 2'b01;        //write address handshake
+localparam write_w_rsp = 2'b11;        //write respone
+
+always @(posedge clk) begin
+	if(rst == 1'b1) write_current_state <= write_idle;
+	else            write_current_state <= write_next_state;
+end
+
+always @(*) begin
+	case(write_current_state)
+		write_idle: begin
+			bvalid = 1'b0;
+			bresp  = 2'b0;
+			write_next_state = (awvalid && wvalid)? write_aw_hs:write_idle;
+		end
+		write_aw_hs: begin
+			pmem_write({{32{1'b0}},awaddr}, wdata, wstrb);
+			bvalid = 1'b1;
+			bresp  = 2'b0;
+			write_next_state = write_w_rsp;
+		end
+		write_w_rsp: begin
+			bvalid = 1'b0;
+			bresp  = 2'b0;
+			write_next_state = write_idle;
+		end
+		default: begin
+			bvalid = 1'b0;
+			bresp  = 2'b0;
+			write_next_state = write_idle;
+		end
+	endcase
+end
 
 
 //************** read  *******************
 assign arready = 1'b1;
-
+/*
 //reg delay_read;
 
 always @(posedge clk) begin
@@ -103,105 +140,57 @@ always @(posedge clk) begin
 		//$display("4\n");
 	end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//always @(*) begin
-//  pmem_read_pc({{32{1'b0}},araddr}, rdata);
-//end
-
-
-
-
-
-
-
-
-
-
-
-/*
-wire [63:0]add_sub_result;
-wire [63:0]and_result;
-wire [63:0]or_result;
-wire [63:0]xor_result;
-wire [63:0]slt_result;
-wire [63:0]sltu_result;
-wire [63:0]sll_result;
-wire [63:0]srl_result;
-wire [63:0]sra_result;
-
-wire [63:0]C;
-assign C= (mode==8'd1)?(~B+64'b1):B;
-assign add_sub_result = A + C;
-assign slt_result = ($signed(A) < $signed(B))? 64'b1:64'b0;
-assign sltu_result = (A < B)? 64'b1:64'b0;
-assign sll_result = (A <<  B);
-assign srl_result = (A >>  B);
-assign sra_result = ($signed(A) >>> B);
-assign and_result = (A & B);
-assign or_result = (A | B);
-assign xor_result = (A ^ B);
-
-
-ysyx_22050612_MuxKey #(10, 8, 64) alu_result_select (Z , mode,{
-	8'd0 , add_sub_result,
-	8'd1 , add_sub_result,
-	8'd2 , slt_result,
-	8'd3 , sltu_result,
-	8'd4 , and_result,
-	8'd6 , or_result,
-	8'd7 , xor_result,
-	8'd8 , sll_result,
-	8'd9 , srl_result,
-	8'd10, sra_result
-      });
 */
 
-//reg [63:0]C;
-//
-//always @(mode or A or B)begin
-//	Z = 0;
-//	if(mode == 8'b1)begin
-//		Z = A + B;
-//	end
-//	else if(mode == 8'd2 || mode == 8'd9)begin
-//		C = ~B + 64'b1;
-//		Z = A + C;
-//	end
-//	else if(mode == 8'd3)begin
-//		Z = ~A;
-//	end
-//	else if(mode == 8'd4)begin
-//		Z = A & B;
-//	end
-//	else if(mode == 8'd5)begin
-//		Z = A | B;
-//	end
-//	else if(mode == 8'd6)begin
-//		Z = A ^ B;
-//	end
-//	else if(mode == 8'd7)begin
-//		Z = A << B;
-//	end
-//	else if(mode == 8'd8)begin
-//		Z = A >> B;
-//	end
-//end
+reg [1:0]read_current_state, read_next_state;
+
+localparam read_idle  = 2'b00;
+localparam read_ar_hs = 2'b01;        //read address handshake
+localparam read_r_rsp = 2'b11;        //read respone
+
+always @(posedge clk) begin
+	if(rst == 1'b1) read_current_state <= read_idle;
+	else            read_current_state <= read_next_state;
+end
+
+always @(read_current_state or arvalid) begin
+	case(read_current_state)
+		read_idle: begin
+			rvalid = 1'b0;
+			rresp  = 2'b0;
+			read_next_state = (arvalid == 1'b1)? read_ar_hs:read_idle;
+			//if(araddr==32'ha0000060 )$display("**************************araddr:%x  arvalid:%d  rvalid:%d",araddr,arvalid,rvalid);
+		end
+		read_ar_hs: begin
+  			if(clk)pmem_read({{32{1'b0}},araddr}, rdata);	
+			//if(araddr==32'ha0000060 )$display("data:%x  araddr:%x  arvalid:%d  rvalid:%d clk:%d current_state:%d",rdata,araddr,arvalid,rvalid,clk,read_current_state);
+			rvalid = 1'b1;
+			rresp  = 2'b0;
+			read_next_state = read_idle;
+		end
+//		read_r_rsp: begin
+//			rvalid = 1'b0;
+//			rresp  = 2'b0;
+//			read_next_state = read_idle;
+//		end
+		default: begin
+			rvalid = 1'b0;
+			rresp  = 2'b0;
+			read_next_state = read_idle;
+			//if(arvalid)read_next_state = read_ar_hs;
+			//else if(rvalid)read_next_state = read_idle;
+			//else read_next_state = read_idle;
+		end
+	endcase
+end
+
+/*
+reg aaa;
+always @(read_current_state) begin
+	if(rst) aaa = 1'b0;
+	else aaa = read_current_state[0];
+	$display("clk:%d  state:%d  aaa:%d",clk,read_current_state,aaa);
+end
+*/
 endmodule
+
