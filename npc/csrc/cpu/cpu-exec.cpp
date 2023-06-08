@@ -81,7 +81,7 @@ void ebreak(int r){
 		printf(RED "HIT BAD TRAP\n" NONE);
 	}
 	//end = 1;
-	npc_state = END;
+	npc_state == END;
 
 }
 
