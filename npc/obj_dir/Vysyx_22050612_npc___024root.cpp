@@ -3346,13 +3346,13 @@ VL_INLINE_OPT void Vysyx_22050612_npc___024root___sequent__TOP__2(Vysyx_22050612
     if (((IData)(vlSelf->rst) & (~ (IData)(vlSelf->clk)))) {
         vlSelf->ysyx_22050612_npc__DOT__araddr_pc = 0x80000000U;
     } else if (((IData)(vlSelf->ysyx_22050612_npc__DOT__pc_update) 
-                & (~ (IData)(vlSelf->clk)))) {
+                & (IData)(vlSelf->clk))) {
         vlSelf->ysyx_22050612_npc__DOT__araddr_pc = (IData)(vlSelf->ysyx_22050612_npc__DOT__dnpc);
     }
     if (((IData)(vlSelf->rst) & (~ (IData)(vlSelf->clk)))) {
         __Vdly__ysyx_22050612_npc__DOT__arvalid_pc = 1U;
     } else if (((IData)(vlSelf->ysyx_22050612_npc__DOT__pc_update) 
-                & (~ (IData)(vlSelf->clk)))) {
+                & (IData)(vlSelf->clk))) {
         __Vdly__ysyx_22050612_npc__DOT__arvalid_pc = 1U;
     } else if ((((IData)(vlSelf->ysyx_22050612_npc__DOT__arvalid_pc) 
                  & (IData)(vlSelf->ysyx_22050612_npc__DOT__arready_pc)) 
