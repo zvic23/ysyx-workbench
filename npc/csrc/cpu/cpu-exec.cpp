@@ -184,7 +184,6 @@ void execute(int n){
 		  return;
 	  }
   	  else if(npc_state == STOP){
-		  program_exec_statistics();
 		  return;
           }
   	  else if(npc_state == ABORT){
