@@ -39,6 +39,7 @@ ysyx_22050612_IDU idu (clk,inst, imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, r
 ysyx_22050612_EXU exu (clk,rst,imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,opcode,pc,dnpc,pc_update /*,  arvalid_lsu,araddr_lsu,arready_lsu,rvalid_lsu,rdata_lsu,rresp_lsu,rready_lsu,awvalid_lsu,awaddr_lsu,awready_lsu,wvalid_lsu,wdata_lsu,wstrb_lsu,wready_lsu,bresp_lsu,bvalid_lsu,bready_lsu,   exu_block*/);
 
 /*
+//*******************  axi  *******************************
 wire arvalid_pc      ;  
 wire [31:0]araddr_pc ;  
 wire arready_pc      ;  
@@ -103,6 +104,7 @@ wire bready       ;
 
 //ysyx_22050612_SRAM sram (clk,rst,arvalid_lsu,araddr_lsu,arready_lsu,rvalid_lsu,rdata_lsu,rresp_lsu,rready_lsu,awvalid_lsu,awaddr_lsu,awready_lsu,wvalid_lsu,wdata_lsu,wstrb_lsu,wready_lsu,bresp_lsu,bvalid_lsu,bready_lsu);
 ysyx_22050612_SRAM sram (clk,rst,arvalid,araddr,arready,rvalid,rdata,rresp,rready,awvalid,awaddr,awready,wvalid,wdata,wstrb,wready,bresp,bvalid,bready);
+
 ysyx_22050612_Arbiter arbiter (clk,rst,
 	arvalid_pc,arvalid_lsu,arvalid,
 	araddr_pc,araddr_lsu,araddr,
@@ -132,6 +134,8 @@ ysyx_22050612_Arbiter arbiter (clk,rst,
 //	1'b0,bvalid_lsu,bvalid,
 //	1'b0,bready_lsu,bready);
 
+//************************************************************
 */
+
 
 endmodule
