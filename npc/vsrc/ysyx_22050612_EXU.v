@@ -3,10 +3,10 @@ import "DPI-C" function void npc_loadstore(int getinst, longint base, longint im
 import "DPI-C" function void update_csr(longint mtvec_npc, longint mcause_npc, longint mepc_npc, longint mstatus_npc);
 import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
 import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
-//import "DPI-C" function void pmem_read(
-//  input longint raddr, output longint rdata);
-//import "DPI-C" function void pmem_write(
-//  input longint waddr, input longint wdata, input byte wmask);
+import "DPI-C" function void pmem_read(
+  input longint raddr, output longint rdata);
+import "DPI-C" function void pmem_write(
+  input longint waddr, input longint wdata, input byte wmask);
 
 
 module ysyx_22050612_EXU(
@@ -26,12 +26,12 @@ input [23:0]opcode,
 input [63:0]pc,
 
 
-//output [63:0]dnpc
-output pc_update,
+//output [63:0]dnpc,
 output reg [63:0]dnpc,
+output pc_update
 
 
-
+/*
 output reg arvalid,
 output [31:0]araddr,
 input arready,
@@ -57,7 +57,7 @@ output bready,
 
 
 output exu_block
-
+*/
 
 
 
@@ -76,8 +76,8 @@ assign src2=gpr[rs2];
 
 //general register
 ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, gpr);
-assign wen_fix = ( (rd != 5'b0)&&(exu_block == 1'b0) )?  wen : 1'b0;
-//assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
+//assign wen_fix = ( (rd != 5'b0)&&(exu_block == 1'b0) )?  wen : 1'b0;
+assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
 
@@ -441,7 +441,8 @@ always @(*) begin
 end
 
 
-assign pc_update = (opcode != 24'b0 && exu_block == 1'b0)? 1'b1:1'b0;
+assign pc_update = (opcode != 24'b0 )? 1'b1:1'b0;
+//assign pc_update = (opcode != 24'b0 && exu_block == 1'b0)? 1'b1:1'b0;
 
 
 
@@ -896,6 +897,8 @@ end
 //	$display("pose  clk=%d",clk);
 //end
 
+
+/*
 always @(edge clk) begin
 	//$display(" clk=%d    block=%d   waddr=%x   raddr=%x  ls=%d",clk,exu_block,waddr,raddr,exu_block_ls);
 end
@@ -1007,7 +1010,7 @@ always @(posedge clk) begin
 end
 
 //******************************************
-
+*/
 
 
 //wire [7:0]wmask_1byte;
@@ -1104,10 +1107,10 @@ ysyx_22050612_MuxKey #(4, 20, 8 ) wmask_select (wmask, opcode, {
   });
 */
 
-//always @(*) begin
-//  pmem_read(raddr, rdata);
-//  pmem_write(waddr, wdata, wmask);
-//end
+always @(*) begin
+  pmem_read(raddr, rdata);
+  pmem_write(waddr, wdata, wmask);
+end
 
 
 //wire [63:0] rdata_fix;
