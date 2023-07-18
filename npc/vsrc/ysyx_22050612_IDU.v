@@ -2,8 +2,12 @@
 
 module ysyx_22050612_IDU(
 input clk,
-input [31:0]inst,
+input rst,
+input [63:0]pc_IF_ID  ,
+input [31:0]inst_IF_ID,
+//input [31:0]inst,
 
+/*
 output [63:0]imm_I,
 output [63:0]imm_U,
 output [63:0]imm_J,
@@ -13,9 +17,44 @@ output [ 5:0]shamt,
 output [ 4:0]rd,
 output [ 4:0]rs1,
 output [ 4:0]rs2,
-output [23:0]opcode
+*/
+output [23:0]opcode,
+output [63:0]pc_ID_EX,
+output [31:0]inst_ID_EX
 );
 
+//*************************  pipeline ********************************
+reg       ID_reg_valid;
+reg [63:0]ID_reg_pc   ;
+reg [31:0]ID_reg_inst ;
+
+always @(posedge clk) begin
+	if(rst) begin
+		ID_reg_valid <= 1'b0;
+		ID_reg_pc    <= 64'b0;
+		ID_reg_inst  <= 32'b0;
+	end
+	else begin
+		ID_reg_valid <= 1'b1;
+		ID_reg_pc    <= pc_IF_ID;
+		ID_reg_inst  <= inst_IF_ID;
+	end
+end
+
+assign pc_ID_EX   = ID_reg_pc;
+assign inst_ID_EX = ID_reg_inst;
+
+
+wire [31:0]inst;
+assign inst = ID_reg_valid ? ID_reg_inst : 32'b0;
+
+
+//********************************************************************
+
+
+
+
+/*
 assign rd = inst[11: 7];
 assign rs1= inst[19:15];
 assign rs2= inst[24:20];
@@ -27,7 +66,7 @@ assign imm_U = (inst[31]==1'b1)?{{32{1'b1}},inst[31:12],{12{1'b0}}}:{{32{1'b0}},
 assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
 assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0}:{{51{1'b0}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0};
 assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},inst[31:25],inst[11:7]};
-
+*/
 
 
 

@@ -74,8 +74,8 @@ end
 
 
 
-
-ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, pc_update);
+ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc+64'd4, pc, 1'b1);
+//ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, pc_update);
 //ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, 1'b1);
 
 

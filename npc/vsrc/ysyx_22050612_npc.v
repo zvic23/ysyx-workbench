@@ -33,10 +33,28 @@ wire exu_block;
 //  $display("%x",inst);
 //end
 
-ysyx_22050612_IFU ifu (clk, rst, dnpc, pc, pc_update, inst /*,arvalid_pc,araddr_pc,arready_pc,rvalid_pc,rdata_pc,rresp_pc,rready_pc,   exu_block*/);
+ysyx_22050612_IFU ifu (clk, rst, dnpc, pc_IF_ID, pc_update, inst_IF_ID /*,arvalid_pc,araddr_pc,arready_pc,rvalid_pc,rdata_pc,rresp_pc,rready_pc,   exu_block*/);
 
-ysyx_22050612_IDU idu (clk,inst, imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2, opcode);
-ysyx_22050612_EXU exu (clk,rst,imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,opcode,pc,dnpc,pc_update /*,  arvalid_lsu,araddr_lsu,arready_lsu,rvalid_lsu,rdata_lsu,rresp_lsu,rready_lsu,awvalid_lsu,awaddr_lsu,awready_lsu,wvalid_lsu,wdata_lsu,wstrb_lsu,wready_lsu,bresp_lsu,bvalid_lsu,bready_lsu,   exu_block*/);
+ysyx_22050612_IDU idu (clk, rst, pc_IF_ID, inst_IF_ID, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ opcode, pc_ID_EX, inst_ID_EX);
+
+ysyx_22050612_EXU exu (clk,rst, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode,pc,dnpc,pc_update /*,  arvalid_lsu,araddr_lsu,arready_lsu,rvalid_lsu,rdata_lsu,rresp_lsu,rready_lsu,awvalid_lsu,awaddr_lsu,awready_lsu,wvalid_lsu,wdata_lsu,wstrb_lsu,wready_lsu,bresp_lsu,bvalid_lsu,bready_lsu,   exu_block*/);
+
+
+
+//************************  pipeline  ******************************
+wire [63:0]pc_IF_ID  ;
+wire [31:0]inst_IF_ID;
+
+wire [63:0]pc_ID_EX  ;
+wire [31:0]inst_ID_EX;
+
+
+//*****************************************************************
+
+
+
+
+
 
 /*
 //*******************  axi  *******************************

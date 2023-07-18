@@ -12,6 +12,9 @@ import "DPI-C" function void pmem_write(
 module ysyx_22050612_EXU(
 input clk,
 input rst,
+input [63:0]pc_ID_EX,
+input [31:0]inst_ID_EX,
+/*
 input [63:0]imm_I,
 input [63:0]imm_U,
 input [63:0]imm_J,
@@ -21,7 +24,9 @@ input [ 5:0]shamt,
 input [ 4:0]rd,
 input [ 4:0]rs1,
 input [ 4:0]rs2,
-input [23:0]opcode,
+*/
+input [23:0]opcode_in,
+//input [23:0]opcode,
 
 input [63:0]pc,
 
@@ -62,6 +67,77 @@ output exu_block
 
 
 );
+
+
+
+
+//*************************  pipeline ********************************
+reg       EX_reg_valid;
+reg [63:0]EX_reg_pc   ;
+reg [31:0]EX_reg_inst ;
+reg [23:0]EX_reg_opcode;
+
+always @(posedge clk) begin
+	if(rst) begin
+		EX_reg_valid <= 1'b0;
+		EX_reg_pc    <= 64'b0;
+		EX_reg_inst  <= 32'b0;
+		EX_reg_opcode<= 24'b0;
+	end
+	else begin
+		EX_reg_valid <= 1'b1;
+		EX_reg_pc    <= pc_ID_EX;
+		EX_reg_inst  <= inst_ID_EX;
+		EX_reg_opcode<= opcode_in;
+	end
+end
+
+wire [31:0]inst;
+assign inst = EX_reg_valid ? EX_reg_inst : 32'b0;
+
+wire [23:0]opcode;
+assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
+
+
+wire [63:0]imm_I;
+wire [63:0]imm_U;
+wire [63:0]imm_J;
+wire [63:0]imm_B;
+wire [63:0]imm_S;
+wire [ 5:0]shamt;
+wire [ 4:0]rd   ;
+wire [ 4:0]rs1  ;
+wire [ 4:0]rs2  ;
+
+
+
+
+assign rd = inst[11: 7];
+assign rs1= inst[19:15];
+assign rs2= inst[24:20];
+
+assign shamt= inst[25:20];
+
+assign imm_I = (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]};
+assign imm_U = (inst[31]==1'b1)?{{32{1'b1}},inst[31:12],{12{1'b0}}}:{{32{1'b0}},inst[31:12],{12{1'b0}}};
+assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
+assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0}:{{51{1'b0}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0};
+assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},inst[31:25],inst[11:7]};
+
+
+
+//********************************************************************
+
+
+
+
+
+
+
+
+
+
+
 
 wire [63:0]src1;
 wire [63:0]src2;
