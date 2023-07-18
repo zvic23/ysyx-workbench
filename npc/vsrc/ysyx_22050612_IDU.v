@@ -48,7 +48,9 @@ assign inst_ID_EX = ID_reg_inst;
 wire [31:0]inst;
 assign inst = ID_reg_valid ? ID_reg_inst : 32'b0;
 
-
+always @(posedge clk) begin
+	$display("ID   pc:%x   inst:%x",ID_reg_pc,ID_reg_inst);
+end
 //********************************************************************
 
 
