@@ -48,7 +48,7 @@ end
 
 
 
-always @(posedge clk) begin
+always @(negedge clk) begin
 	$display("WB   pc:%x   inst:%x",WB_reg_pc,WB_reg_inst);
 end
 //********************************************************************

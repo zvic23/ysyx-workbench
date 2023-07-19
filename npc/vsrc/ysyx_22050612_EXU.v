@@ -143,7 +143,7 @@ assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11
 assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},inst[31:25],inst[11:7]};
 
 
-always @(posedge clk) begin
+always @(negedge clk) begin
 	$display("EX   pc:%x   inst:%x",EX_reg_pc,EX_reg_inst);
 end
 //********************************************************************

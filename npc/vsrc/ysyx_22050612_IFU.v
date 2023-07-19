@@ -81,7 +81,7 @@ ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc+64'd4, pc, 1'b1);
 
 
 //************************  pipeline  ******************************
-always @(posedge clk) begin
+always @(negedge clk) begin
 	$display("IF   pc:%x   inst:%x",pc,inst);
 end
 
