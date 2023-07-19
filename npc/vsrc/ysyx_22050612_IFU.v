@@ -1,7 +1,7 @@
 
 import "DPI-C" function void read_inst(int npc_inst);
-//import "DPI-C" function void pmem_read_pc(
-//  input longint raddr, output longint rdata);
+import "DPI-C" function void pmem_read_pc(
+  input longint raddr, output longint rdata);
 
 module ysyx_22050612_IFU (
    input clk,
@@ -9,9 +9,10 @@ module ysyx_22050612_IFU (
    input [63:0]dnpc,
    output [63:0]pc,
    input pc_update,
-   output reg [31:0]inst, 
-   //output [31:0]inst, 
+   //output reg [31:0]inst, 
+   output [31:0]inst 
 
+/*
    output reg arvalid,
    output reg [31:0]araddr,
    input arready,
@@ -22,10 +23,12 @@ module ysyx_22050612_IFU (
    output rready,
 
    input exu_block
-
+*/
 
 );
 
+/*
+//****************  AXI  ************************
 reg [63:0]inst_64;
 
 assign rready = 1'b1;
@@ -66,26 +69,24 @@ always @(edge clk) begin
 //		arvalid <= 1'b0;
 //	end
 end
-
-//always @(negedge clk) begin
-//	if(rvalid == 1'b0)begin
-//		arvalid = 1'b1;
-//	//$display("%d   \n",arvalid);
-//	end
-//	else begin
-//		arvalid = 1'b0;
-//	end
-//end
-
-//always @(pc) begin
-//	arvalid = 1'b1;
-//end
+//**************************************
+*/
 
 
 
-
-ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, pc_update);
+ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc+64'd4, pc, 1'b1);
+//ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, pc_update);
 //ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, 1'b1);
+
+
+
+//************************  pipeline  ******************************
+always @(negedge clk) begin
+	$display("IF   pc:%x   inst:%x",pc,inst);
+end
+
+
+//*****************************************************************
 
 
 
@@ -100,13 +101,11 @@ ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, pc_update);
 
 
 
-/*
 wire [63:0]inst_mix;
 always @(*) begin
   pmem_read_pc(pc, inst_mix);
 end
 assign inst = pc[2]?inst_mix[63:32] : inst_mix[31:0];
-*/
 
 //assign inst = pc[2]?inst_64[63:32] : inst_64[31:0];
 
