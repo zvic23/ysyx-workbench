@@ -37,9 +37,9 @@ ysyx_22050612_IFU ifu (clk, rst, dnpc, pc_IF_ID, pc_update, inst_IF_ID /*,arvali
 
 ysyx_22050612_IDU idu (clk, rst, pc_IF_ID, inst_IF_ID, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ opcode, pc_ID_EX, inst_ID_EX);
 
-ysyx_22050612_EXU exu (clk,rst, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode,pc,dnpc,pc_update /*,  arvalid_lsu,araddr_lsu,arready_lsu,rvalid_lsu,rdata_lsu,rresp_lsu,rready_lsu,awvalid_lsu,awaddr_lsu,awready_lsu,wvalid_lsu,wdata_lsu,wstrb_lsu,wready_lsu,bresp_lsu,bvalid_lsu,bready_lsu,   exu_block*/);
+ysyx_22050612_EXU exu (clk,rst, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode,pc,dnpc,pc_update, pc_EX_WB, inst_EX_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr/*,  arvalid_lsu,araddr_lsu,arready_lsu,rvalid_lsu,rdata_lsu,rresp_lsu,rready_lsu,awvalid_lsu,awaddr_lsu,awready_lsu,wvalid_lsu,wdata_lsu,wstrb_lsu,wready_lsu,bresp_lsu,bvalid_lsu,bready_lsu,   exu_block*/);
 
-
+ysyx_22050612_WBU wbu (clk,rst, pc_EX_WB, inst_EX_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr);
 
 //************************  pipeline  ******************************
 wire [63:0]pc_IF_ID  ;
@@ -48,7 +48,13 @@ wire [31:0]inst_IF_ID;
 wire [63:0]pc_ID_EX  ;
 wire [31:0]inst_ID_EX;
 
+wire [63:0]pc_EX_WB  ;
+wire [31:0]inst_EX_WB;
+wire       reg_wr_wen   ;
+wire [ 4:0]reg_wr_ID    ;
+wire [63:0]reg_wr_value ;
 
+wire [63:0] gpr[31:0];
 //*****************************************************************
 
 
