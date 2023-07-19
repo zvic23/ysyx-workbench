@@ -57,7 +57,7 @@ end
 
 
 assign wen =  reg_wr_wen ;
-assign rd  =reg_wr_ID ;
+assign rd  =  reg_wr_ID  ;
 assign wdata_reg = reg_wr_value ;
 
 
