@@ -110,7 +110,8 @@ assign reg_wr_wen   = wen ;
 assign reg_wr_ID    = rd  ;
 assign reg_wr_value = wdata_reg;
 
-
+assign pc_EX_WB   = EX_reg_pc;
+assign inst_EX_WB = EX_reg_inst;
 
 
 
