@@ -106,7 +106,7 @@ always @(posedge clk) begin
 		EX_reg_inst           <= inst_ID_EX;
 		EX_reg_opcode         <= opcode_in;
 		EX_reg_alu_operator_a <= ALU_operator_a;
-		EX_reg_alu_operator_b <= ALU_operator_a;
+		EX_reg_alu_operator_b <= ALU_operator_b;
 		EX_reg_alu_mode       <= ALU_mode      ;
 	end
 end
