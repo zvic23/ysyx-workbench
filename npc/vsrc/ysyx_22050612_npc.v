@@ -1,4 +1,5 @@
 //import "DPI-C" function void ebreak ();
+import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
 
 `define ysyx_22050612_rgsize 64
 
@@ -195,6 +196,6 @@ ysyx_22050612_Arbiter arbiter (clk,rst,
 //  $display("%x",inst);
 //end
 
-
+initial set_gpr_ptr(gpr); 
 
 endmodule
