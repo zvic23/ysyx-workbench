@@ -143,9 +143,9 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 
 void built_in_program(){
   *(uint32_t*)&pmem[0x00000000]=0x00100093; //gpr[1](ra)+1
-  *(uint32_t*)&pmem[0x00000004]=0x00308113; //gpr[1](ra)+1
-  *(uint32_t*)&pmem[0x00000008]=0x00510193; //gpr[1](ra)+1
-  *(uint32_t*)&pmem[0x0000000c]=0x00718213; //gpr[1](ra)+1
+  *(uint32_t*)&pmem[0x00000004]=0x00300113; //gpr[1](ra)+1
+  *(uint32_t*)&pmem[0x00000008]=0x00500193; //gpr[1](ra)+1
+  *(uint32_t*)&pmem[0x0000000c]=0x00700213; //gpr[1](ra)+1
   *(uint32_t*)&pmem[0x00000010]=0x021102b3; //gpr[1](ra)+1
   *(uint32_t*)&pmem[0x00000014]=0x00430533; //gpr[2](sp)+2
   *(uint32_t*)&pmem[0x00000018]=0x006385b3; //gpr[3](gp)+3
