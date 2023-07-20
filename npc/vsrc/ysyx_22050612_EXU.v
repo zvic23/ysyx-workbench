@@ -82,23 +82,32 @@ output exu_block
 
 
 //*************************  pipeline ********************************
-reg       EX_reg_valid;
-reg [63:0]EX_reg_pc   ;
-reg [31:0]EX_reg_inst ;
-reg [23:0]EX_reg_opcode;
+reg       EX_reg_valid         ;
+reg [63:0]EX_reg_pc            ;
+reg [31:0]EX_reg_inst          ;
+reg [23:0]EX_reg_opcode        ;
+reg [63:0]EX_reg_alu_operator_a;
+reg [63:0]EX_reg_alu_operator_b;
+reg [ 7:0]EX_reg_alu_mode      ;
 
 always @(posedge clk) begin
 	if(rst) begin
-		EX_reg_valid <= 1'b0;
-		EX_reg_pc    <= 64'b0;
-		EX_reg_inst  <= 32'b0;
-		EX_reg_opcode<= 24'b0;
+		EX_reg_valid          <=  1'b0;
+		EX_reg_pc             <= 64'b0;
+		EX_reg_inst           <= 32'b0;
+		EX_reg_opcode         <= 24'b0;
+		EX_reg_alu_operator_a <= 64'b0;
+		EX_reg_alu_operator_b <= 64'b0;
+		EX_reg_alu_mode       <=  8'b0;
 	end
 	else begin
-		EX_reg_valid <= 1'b1;
-		EX_reg_pc    <= pc_ID_EX;
-		EX_reg_inst  <= inst_ID_EX;
-		EX_reg_opcode<= opcode_in;
+		EX_reg_valid          <= 1'b1;
+		EX_reg_pc             <= pc_ID_EX;
+		EX_reg_inst           <= inst_ID_EX;
+		EX_reg_opcode         <= opcode_in;
+		EX_reg_alu_operator_a <= ALU_operator_a;
+		EX_reg_alu_operator_b <= ALU_operator_a;
+		EX_reg_alu_mode       <= ALU_mode      ;
 	end
 end
 
@@ -564,7 +573,7 @@ wire [63:0]result_alu0;
 
 
 //ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
-ysyx_22050612_ALU alu0 (ALU_mode,ALU_operator_a,ALU_operator_b,result_alu0);
+ysyx_22050612_ALU alu0 (EX_reg_alu_mode,EX_reg_alu_operator_a,EX_reg_alu_operator_b,result_alu0);
 
 
 //multipulicatin and division
