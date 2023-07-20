@@ -27,6 +27,10 @@ input [ 4:0]rs2,
 */
 input [23:0]opcode_in,
 //input [23:0]opcode,
+input [63:0]ALU_operator_a,
+input [63:0]ALU_operator_b,
+input [ 7:0]ALU_mode,
+
 
 input [63:0]pc,
 
@@ -361,6 +365,7 @@ always @(*) begin
     default : wdata_reg=64'b0;
 	endcase
 
+/*
 //alu
     case (opcode)
     24'h4000 : operator_a=src1;
@@ -518,7 +523,7 @@ always @(*) begin
     24'd50   : mode=8'd6 ;
     default : mode=8'b0;
     endcase
-
+*/
 
 //dnpc
     case (opcode)
@@ -552,14 +557,14 @@ assign snpc = pc + 64'd4;
 //wire [7:0] mode;
 //wire [63:0]operator_a;
 //wire [63:0]operator_b;
-reg [7:0] mode;
-reg [63:0]operator_a;
-reg [63:0]operator_b;
+//reg [7:0] mode;
+//reg [63:0]operator_a;
+//reg [63:0]operator_b;
 wire [63:0]result_alu0;
 
 
 //ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
-ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
+ysyx_22050612_ALU alu0 (ALU_mode,ALU_operator_a,ALU_operator_b,result_alu0);
 
 
 //multipulicatin and division

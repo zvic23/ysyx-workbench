@@ -55,7 +55,7 @@ end
 
 
 
-
+/*
 assign wen =  reg_wr_wen ;
 assign rd  =  reg_wr_ID  ;
 assign wdata_reg = reg_wr_value ;
@@ -76,7 +76,7 @@ wire wen_fix;
 ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, gpr);
 //assign wen_fix = ( (rd != 5'b0)&&(exu_block == 1'b0) )?  wen : 1'b0;
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
-
+*/
 
 
 /*

@@ -3,6 +3,7 @@
 module ysyx_22050612_IDU(
 input clk,
 input rst,
+input [63:0]gpr[31:0],
 input [63:0]pc_IF_ID  ,
 input [31:0]inst_IF_ID,
 //input [31:0]inst,
@@ -18,6 +19,9 @@ output [ 4:0]rd,
 output [ 4:0]rs1,
 output [ 4:0]rs2,
 */
+output reg [63:0]ALU_operator_a,
+output reg [63:0]ALU_operator_b,
+output reg [ 7:0]ALU_mode,
 output [23:0]opcode,
 output [63:0]pc_ID_EX,
 output [31:0]inst_ID_EX
@@ -56,19 +60,199 @@ end
 
 
 
-/*
+
+
+wire [ 4:0]rd   ;
+wire [ 4:0]rs1  ;
+wire [ 4:0]rs2  ;
+wire [63:0]imm_I;
+wire [63:0]imm_U;
+wire [63:0]imm_J;
+wire [63:0]imm_B;
+wire [63:0]imm_S;
+wire [ 5:0]shamt;
+
+
 assign rd = inst[11: 7];
 assign rs1= inst[19:15];
 assign rs2= inst[24:20];
-
 assign shamt= inst[25:20];
-
 assign imm_I = (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]};
 assign imm_U = (inst[31]==1'b1)?{{32{1'b1}},inst[31:12],{12{1'b0}}}:{{32{1'b0}},inst[31:12],{12{1'b0}}};
 assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
 assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0}:{{51{1'b0}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0};
 assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},inst[31:25],inst[11:7]};
-*/
+
+wire [63:0]src1;
+wire [63:0]src2;
+
+assign src1=gpr[rs1];
+assign src2=gpr[rs2];
+
+
+always @(*) begin
+//The input of ALU
+    case (opcode)
+    24'h4000 : ALU_operator_a=src1;
+    24'h5000 : ALU_operator_a=src1;
+    24'h6000 : ALU_operator_a=src1;
+    24'h7000 : ALU_operator_a=src1;
+    24'h8000 : ALU_operator_a=src1;
+    24'h9000 : ALU_operator_a=src1;
+    24'h10000: ALU_operator_a=src1;
+    24'h12000: ALU_operator_a=src1;
+    24'h13000: ALU_operator_a=src1;
+    24'h14000: ALU_operator_a={{32{1'b0}},src1[31:0]};
+    24'h15000: ALU_operator_a={{32{1'b0}},src1[31:0]};
+    24'h16000: ALU_operator_a={src1[31:0],{32{1'b0}}};
+    24'h17000: ALU_operator_a=src1;
+    24'h18000: ALU_operator_a=src1;
+    24'h19000: ALU_operator_a=src1;
+    24'h1a000: ALU_operator_a={src1[31:0],{32{1'b0}}};
+    24'h1b000: ALU_operator_a={src1[31:0],{32{1'b0}}};
+    24'h200  : ALU_operator_a=pc_IF_ID;
+    24'h300  : ALU_operator_a=pc_IF_ID;
+    24'h400  : ALU_operator_a=src1;
+    24'h800  : ALU_operator_a=src1;
+    24'hc00  : ALU_operator_a=src1;
+    24'd4    : ALU_operator_a=src1;
+    24'd5    : ALU_operator_a=src1;
+    24'd6    : ALU_operator_a=src1;
+    24'd7    : ALU_operator_a=src1;
+    24'd8    : ALU_operator_a=src1;
+    24'd9    : ALU_operator_a=src1;
+    24'd10   : ALU_operator_a=src1;
+    24'd11   : ALU_operator_a=src1;
+    24'd12   : ALU_operator_a=src1;
+    24'd13   : ALU_operator_a=src1;
+    24'd14   : ALU_operator_a=src1;
+    24'd15   : ALU_operator_a=src1;
+    24'd16   : ALU_operator_a=src1;
+    24'd17   : ALU_operator_a=src1;
+    24'd18   : ALU_operator_a=src1;
+    24'd19   : ALU_operator_a=src1;
+    24'd20   : ALU_operator_a=src1;
+    24'd21   : ALU_operator_a=src1;
+    24'd22   : ALU_operator_a=src1;
+    24'd23   : ALU_operator_a=src1;
+    24'd24   : ALU_operator_a=src1;
+    24'd41   : ALU_operator_a=src1;
+    24'd42   : ALU_operator_a=src1;
+    24'd43   : ALU_operator_a=src1;
+    24'd47   : ALU_operator_a=src1;
+    24'd50   : ALU_operator_a=src1;
+    default :  ALU_operator_a=64'b0;
+    endcase
+
+    case (opcode)
+    24'h4000 : ALU_operator_b=src2 ;
+    24'h5000 : ALU_operator_b=src2 ;
+    24'h6000 : ALU_operator_b={{58{1'b0}},src2[5:0]};
+    24'h7000 : ALU_operator_b=src2 ;
+    24'h8000 : ALU_operator_b=src2 ;
+    24'h9000 : ALU_operator_b=src2 ;
+    24'h10000: ALU_operator_b={{58{1'b0}},src2[5:0]};
+    24'h12000: ALU_operator_b=src2 ;
+    24'h13000: ALU_operator_b=src2 ;
+    24'h14000: ALU_operator_b={{59{1'b0}},shamt[4:0]};
+    24'h15000: ALU_operator_b={{59{1'b0}},shamt[4:0]};
+    24'h16000: ALU_operator_b={{59{1'b0}},shamt[4:0]};
+    24'h17000: ALU_operator_b=src2 ;
+    24'h18000: ALU_operator_b=src2 ;
+    24'h19000: ALU_operator_b={{59{1'b0}},src2[4:0]};
+    24'h1a000: ALU_operator_b={{59{1'b0}},src2[4:0]};
+    24'h1b000: ALU_operator_b={{59{1'b0}},src2[4:0]};
+    24'h200  : ALU_operator_b=imm_U;
+    24'h300  : ALU_operator_b=imm_J;
+    24'h400  : ALU_operator_b={{58{1'b0}},shamt};
+    24'h800  : ALU_operator_b={{58{1'b0}},shamt};
+    24'hc00  : ALU_operator_b={{58{1'b0}},shamt};
+    24'd4    : ALU_operator_b=imm_I;
+    24'd5    : ALU_operator_b=src2 ;
+    24'd6    : ALU_operator_b=src2 ;
+    24'd7    : ALU_operator_b=src2 ;
+    24'd8    : ALU_operator_b=src2 ;
+    24'd9    : ALU_operator_b=src2 ;
+    24'd10   : ALU_operator_b=src2 ;
+    24'd11   : ALU_operator_b=imm_I;
+    24'd12   : ALU_operator_b=imm_I;
+    24'd13   : ALU_operator_b=imm_I;
+    24'd14   : ALU_operator_b=imm_I;
+    24'd15   : ALU_operator_b=imm_I;
+    24'd16   : ALU_operator_b=imm_S;
+    24'd17   : ALU_operator_b=imm_S;
+    24'd18   : ALU_operator_b=imm_S;
+    24'd19   : ALU_operator_b=imm_I;
+    24'd20   : ALU_operator_b=imm_I;
+    24'd21   : ALU_operator_b=imm_I;
+    24'd22   : ALU_operator_b=imm_I;
+    24'd23   : ALU_operator_b=imm_I;
+    24'd24   : ALU_operator_b=imm_I;
+    24'd41   : ALU_operator_b=imm_I;
+    24'd42   : ALU_operator_b=imm_I;
+    24'd43   : ALU_operator_b=imm_S;
+    24'd47   : ALU_operator_b=imm_I;
+//    24'd50   : ALU_operator_b=src_csr;
+    default :  ALU_operator_b=64'b0;
+    endcase
+
+
+    case(opcode)
+    24'h4000 : ALU_mode=8'd0 ; 
+    24'h5000 : ALU_mode=8'd1 ; 
+    24'h6000 : ALU_mode=8'd8 ; 
+    24'h7000 : ALU_mode=8'd2 ; 
+    24'h8000 : ALU_mode=8'd3 ; 
+    24'h9000 : ALU_mode=8'd7 ; 
+    24'h10000: ALU_mode=8'd9 ; 
+    24'h12000: ALU_mode=8'd6 ; 
+    24'h13000: ALU_mode=8'd4 ; 
+    24'h14000: ALU_mode=8'd8 ; 
+    24'h15000: ALU_mode=8'd9 ; 
+    24'h16000: ALU_mode=8'd10; 
+    24'h17000: ALU_mode=8'd0 ; 
+    24'h18000: ALU_mode=8'd1 ; 
+    24'h19000: ALU_mode=8'd8 ; 
+    24'h1a000: ALU_mode=8'd9 ; 
+    24'h1b000: ALU_mode=8'd10; 
+    24'h200  : ALU_mode=8'd0 ; 
+    24'h300  : ALU_mode=8'd0 ; 
+    24'h400  : ALU_mode=8'd8 ;
+    24'h800  : ALU_mode=8'd9 ;
+    24'hc00  : ALU_mode=8'd10;
+    24'd4    : ALU_mode=8'd0 ; 
+    24'd5    : ALU_mode=8'd1 ; 
+    24'd6    : ALU_mode=8'd1 ; 
+    24'd7    : ALU_mode=8'd1 ; 
+    24'd8    : ALU_mode=8'd1 ; 
+    24'd9    : ALU_mode=8'd1 ; 
+    24'd10   : ALU_mode=8'd1 ; 
+    24'd11   : ALU_mode=8'd0 ;
+    24'd12   : ALU_mode=8'd0 ;
+    24'd13   : ALU_mode=8'd0 ;
+    24'd14   : ALU_mode=8'd0 ;
+    24'd15   : ALU_mode=8'd0 ;
+    24'd16   : ALU_mode=8'd0 ;
+    24'd17   : ALU_mode=8'd0 ;
+    24'd18   : ALU_mode=8'd0 ;
+    24'd19   : ALU_mode=8'd0 ;
+    24'd20   : ALU_mode=8'd2 ;
+    24'd21   : ALU_mode=8'd3 ;
+    24'd22   : ALU_mode=8'd7 ;
+    24'd23   : ALU_mode=8'd6 ;
+    24'd24   : ALU_mode=8'd4 ;
+    24'd41   : ALU_mode=8'd0 ;
+    24'd42   : ALU_mode=8'd0 ;
+    24'd43   : ALU_mode=8'd0 ;
+    24'd47   : ALU_mode=8'd0 ;
+    24'd50   : ALU_mode=8'd6 ;
+    default :  ALU_mode=8'b0;
+    endcase
+
+end
+
+
+
 
 
 
