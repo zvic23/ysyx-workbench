@@ -142,10 +142,14 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 //}
 
 void built_in_program(){
-  *(uint32_t*)&pmem[0x00000000]=0x00100093; //gpr[1](ra)+1
-  *(uint32_t*)&pmem[0x00000004]=0x00208113; //gpr[2](sp)+2
-  *(uint32_t*)&pmem[0x00000008]=0x00310193; //gpr[3](gp)+3
-  *(uint32_t*)&pmem[0x0000000c]=0x00418213; //gpr[4](tp)+4
+  *(uint32_t*)&pmem[0x00000000]=0x00100013; //gpr[1](ra)+1
+  *(uint32_t*)&pmem[0x00000000]=0x00300093; //gpr[1](ra)+1
+  *(uint32_t*)&pmem[0x00000000]=0x00500113; //gpr[1](ra)+1
+  *(uint32_t*)&pmem[0x00000000]=0x00700193; //gpr[1](ra)+1
+  *(uint32_t*)&pmem[0x00000000]=0x00228533; //gpr[1](ra)+1
+  *(uint32_t*)&pmem[0x00000004]=0x00430533; //gpr[2](sp)+2
+  *(uint32_t*)&pmem[0x00000008]=0x006385b3; //gpr[3](gp)+3
+  *(uint32_t*)&pmem[0x0000000c]=0x008401b3; //gpr[4](tp)+4
   *(uint32_t*)&pmem[0x00000010]=0x00100073; //ebreak
 }
 

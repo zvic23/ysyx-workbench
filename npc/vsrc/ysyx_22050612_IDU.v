@@ -141,6 +141,18 @@ always @(*) begin
     24'd43   : ALU_operator_a=src1;
     24'd47   : ALU_operator_a=src1;
     24'd50   : ALU_operator_a=src1;
+
+//mul / div
+    24'h1d000: ALU_operator_a=src1;  //mul
+    24'h21000: ALU_operator_a=src1;  //div
+    24'h22000: ALU_operator_a=src1;  //divu
+    24'h24000: ALU_operator_a=src1;  //remu
+    24'h25000: ALU_operator_a=src1;  //mulw
+    24'h26000: ALU_operator_a=src1;  //divw
+    24'h27000: ALU_operator_a=src1;  //divuw
+    24'h28000: ALU_operator_a=src1;  //remw
+    24'h29000: ALU_operator_a=src1;  //remuw
+
     default :  ALU_operator_a=64'b0;
     endcase
 
@@ -193,6 +205,18 @@ always @(*) begin
     24'd43   : ALU_operator_b=imm_S;
     24'd47   : ALU_operator_b=imm_I;
 //    24'd50   : ALU_operator_b=src_csr;
+
+//mul / div
+    24'h1d000: ALU_operator_b=src2;  //mul
+    24'h21000: ALU_operator_b=src2;  //div
+    24'h22000: ALU_operator_b=src2;  //divu
+    24'h24000: ALU_operator_b=src2;  //remu
+    24'h25000: ALU_operator_b=src2;  //mulw
+    24'h26000: ALU_operator_b=src2;  //divw
+    24'h27000: ALU_operator_b=src2;  //divuw
+    24'h28000: ALU_operator_b=src2;  //remw
+    24'h29000: ALU_operator_b=src2;  //remuw
+
     default :  ALU_operator_b=64'b0;
     endcase
 
