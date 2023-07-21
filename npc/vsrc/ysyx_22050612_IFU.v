@@ -152,7 +152,7 @@ always @(*) begin
 end
 
 
-assign  valid_IF_ID = branching ? 1'b1 : 1'b0;
+//assign  valid_IF_ID = branching ? 1'b1 : 1'b0;
 
 reg branching;
 
