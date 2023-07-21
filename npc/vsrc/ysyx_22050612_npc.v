@@ -85,7 +85,27 @@ ysyx_22050612_WBU wbu (clk,rst, valid_EX_WB, pc_EX_WB, inst_EX_WB, reg_wr_wen, r
 
 //************************  pipeline  ******************************
 
+reg branching;
 
+  always @(inst) begin
+	  case ({inst[14:12],inst[6:0]})
+    10'b000_1100111:  branching= 1'b1 ;    //jalr
+    10'b000_1100011:  branching= 1'b1 ;    //beq
+    10'b001_1100011:  branching= 1'b1 ;    //bne
+    10'b100_1100011:  branching= 1'b1 ;    //blt
+    10'b101_1100011:  branching= 1'b1 ;    //bge
+    10'b110_1100011:  branching= 1'b1 ;    //bltu
+    10'b111_1100011:  branching= 1'b1 ;    //bgeu
+    default:          branching= 1'b0 ;
+	  endcase
+
+
+	  case (inst[6:0])
+    7'b1101111: branching= 1'b1 ;        //jal
+    default:    branching= 1'b0 ;
+	  endcase
+
+  end
 
 //*****************************************************************
 
