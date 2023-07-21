@@ -88,7 +88,27 @@ ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, 1'b1);
 
 assign  valid_IF_ID = 1'b1;
 
+reg branching;
 
+  always @(inst) begin
+	  case ({inst[14:12],inst[6:0]})
+    10'b000_1100111:  branching= 1'b1 ;    //jalr
+    10'b000_1100011:  branching= 1'b1 ;    //beq
+    10'b001_1100011:  branching= 1'b1 ;    //bne
+    10'b100_1100011:  branching= 1'b1 ;    //blt
+    10'b101_1100011:  branching= 1'b1 ;    //bge
+    10'b110_1100011:  branching= 1'b1 ;    //bltu
+    10'b111_1100011:  branching= 1'b1 ;    //bgeu
+    default:          branching= 1'b0 ;
+	  endcase
+
+
+	  case (inst[6:0])
+    7'b1101111: branching= 1'b1 ;        //jal
+    default:    branching= 1'b0 ;
+	  endcase
+
+  end
 
 
 always @(negedge clk) begin
