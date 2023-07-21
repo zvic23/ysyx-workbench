@@ -85,6 +85,12 @@ ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, 1'b1);
 
 
 //************************  pipeline  ******************************
+
+assign  valid_IF_ID = 1'b1;
+
+
+
+
 always @(negedge clk) begin
 	$display("IF   pc:%x   inst:%x",pc,inst);
 end
