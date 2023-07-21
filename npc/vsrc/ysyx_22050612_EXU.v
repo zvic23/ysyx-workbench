@@ -142,7 +142,7 @@ wire [ 4:0]rs2  ;
 
 
 
-
+/*
 assign rd = inst[11: 7];
 assign rs1= inst[19:15];
 assign rs2= inst[24:20];
@@ -154,7 +154,7 @@ assign imm_U = (inst[31]==1'b1)?{{32{1'b1}},inst[31:12],{12{1'b0}}}:{{32{1'b0}},
 assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
 assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0}:{{51{1'b0}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0};
 assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},inst[31:25],inst[11:7]};
-
+*/
 
 always @(negedge clk) begin
 	$display("EX   pc:%x   inst:%x       op_a:%x   op_b:%x  op_mode:%x",EX_reg_pc,EX_reg_inst,EX_reg_alu_operator_a,EX_reg_alu_operator_b,EX_reg_alu_mode);
