@@ -30,6 +30,7 @@ input [23:0]opcode_in,
 input [63:0]ALU_operator_a,
 input [63:0]ALU_operator_b,
 input [ 7:0]ALU_mode,
+input [ 4:0]rd,
 
 
 input [63:0]pc,
@@ -129,7 +130,7 @@ assign inst_EX_WB = EX_reg_inst;
 
 
 
-
+/*
 wire [63:0]imm_I;
 wire [63:0]imm_U;
 wire [63:0]imm_J;
@@ -144,7 +145,6 @@ wire [ 4:0]rs2  ;
 
 
 assign rd = inst[11: 7];
-/*
 assign rs1= inst[19:15];
 assign rs2= inst[24:20];
 
@@ -173,16 +173,16 @@ end
 
 
 
-wire [63:0]src1;
-wire [63:0]src2;
-//wire [63:0]wdata_reg;
-//wire wen;
+//wire [63:0]src1;
+//wire [63:0]src2;
+////wire [63:0]wdata_reg;
+////wire wen;
 reg [63:0]wdata_reg;
 reg wen;
-//wire wen_fix;
-//wire [63:0] gpr[31:0];
-assign src1=gpr[rs1];
-assign src2=gpr[rs2];
+////wire wen_fix;
+////wire [63:0] gpr[31:0];
+//assign src1=gpr[rs1];
+//assign src2=gpr[rs2];
 
 /*
 //general register
@@ -190,7 +190,6 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, g
 //assign wen_fix = ( (rd != 5'b0)&&(exu_block == 1'b0) )?  wen : 1'b0;
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 */
-
 
 
 reg [63:0]wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus;
@@ -203,8 +202,7 @@ ysyx_22050612_Reg #(64,64'h0) mtvec_csr           (clk, rst, wdata_mtvec  , mtve
 ysyx_22050612_Reg #(64,64'h0) mepc_csr            (clk, rst, wdata_mepc   , mepc   , wen_mepc   );
 ysyx_22050612_Reg #(64,64'h0) mcause_csr          (clk, rst, wdata_mcause , mcause , wen_mcause );
 ysyx_22050612_Reg #(64,64'ha00001800) mstatus_csr (clk, rst, wdata_mstatus, mstatus, wen_mstatus);
-
-
+/*
 always @(*) begin
 //mtvec control
   	case (opcode)
@@ -266,6 +264,7 @@ always @(*) begin
 
         endcase
 end
+*/
 always @(*) begin
 //gpr control
 	case (opcode)
@@ -535,7 +534,7 @@ always @(*) begin
     default : mode=8'b0;
     endcase
 */
-
+/*
 //dnpc
     case (opcode)
     24'h300 : dnpc=result_alu0                         ;
@@ -550,7 +549,7 @@ always @(*) begin
     24'h500000: dnpc=mepc                              ;        
     default: dnpc=snpc;
     endcase
-
+*/
 end
 
 
@@ -638,7 +637,7 @@ assign result_remuw0 = src1[31:0] % src2[31:0];
 
 //memory
 
-
+/*
 always @(*) begin
 	case(waddr[2:0])
     3'd0  : wdata_1byte={{56{1'b0}},src2[7:0]}; 
@@ -737,7 +736,7 @@ always @(*) begin
     default: rdata_fix=64'b0;
 	endcase
 end
-
+*/
 always @(*) begin
 	//$display("*  clk=%d",clk);
 	case(opcode)
@@ -932,8 +931,8 @@ reg [15:0] rdata_2byte;
 //initial set_gpr_ptr(gpr);  
 
 always @(posedge clk) begin
-	if (opcode[9:8]==2'd3) ftrace_check(pc[63:0],dnpc[63:0], 1, 0, 1);
-	else if (opcode[6:0]==7'd4) ftrace_check(pc[63:0],dnpc[63:0], {{27{1'b0}},rd}, {{27{1'b0}},rs1}, imm_I[63:0]);
+//	if (opcode[9:8]==2'd3) ftrace_check(pc[63:0],dnpc[63:0], 1, 0, 1);
+//	else if (opcode[6:0]==7'd4) ftrace_check(pc[63:0],dnpc[63:0], {{27{1'b0}},rd}, {{27{1'b0}},rs1}, imm_I[63:0]);
 
 	if (opcode[7]==1'b1 && gpr[10]==64'b0) ebreak(0);
 	else if (opcode[7]==1'b1 && gpr[10]!=64'b0) ebreak(1);
@@ -941,7 +940,7 @@ end
 
 
 
-
+/*
 always @(posedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
 	case(opcode)
     24'd11  : npc_loadstore(1, src1, imm_I, imm_S);
@@ -958,7 +957,7 @@ always @(posedge clk) begin            //support mtrace, to give the csrc a sign
     default: npc_loadstore(0, 0, 0, 0);
 	endcase
 end
-
+*/
 
 
 always @(mtvec or mepc or mcause or mstatus) begin

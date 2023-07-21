@@ -22,6 +22,7 @@ output [ 4:0]rs2,
 output reg [63:0]ALU_operator_a,
 output reg [63:0]ALU_operator_b,
 output reg [ 7:0]ALU_mode,
+output     [ 4:0]rd,
 output [23:0]opcode,
 output [63:0]pc_ID_EX,
 output [31:0]inst_ID_EX
@@ -62,7 +63,7 @@ end
 
 
 
-wire [ 4:0]rd   ;
+//wire [ 4:0]rd   ;
 wire [ 4:0]rs1  ;
 wire [ 4:0]rs2  ;
 wire [63:0]imm_I;
