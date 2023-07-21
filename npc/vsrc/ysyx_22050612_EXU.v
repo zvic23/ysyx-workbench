@@ -539,33 +539,66 @@ always @(*) begin
     default : mode=8'b0;
     endcase
 */
-/*
+
 //dnpc
+
+//    case (opcode)
+//    24'h300 : dnpc=result_alu0                         ;
+//    24'd4   : dnpc={result_alu0[63:1],1'b0}            ;
+//    24'd5   : dnpc=(result_alu0==64'b0)?(imm_B+pc):snpc;
+//    24'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+pc):snpc;
+//    24'd7   : dnpc=(result_alu0[63]==1)?(imm_B+pc):snpc;
+//    24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+pc):snpc;
+//    24'd9   : dnpc=(src1<src2)?(imm_B+pc):snpc         ;
+//    24'd10  : dnpc=(src1>=src2)?(imm_B+pc):snpc        ;        //(result_alu0[63]==0)?(imm_B+pc):snpc
+//    24'h200000: dnpc=mtvec                             ;        
+//    24'h500000: dnpc=mepc                              ;        
+//    default: dnpc=snpc;
+//    endcase
+
     case (opcode)
     24'h300 : dnpc=result_alu0                         ;
     24'd4   : dnpc={result_alu0[63:1],1'b0}            ;
-    24'd5   : dnpc=(result_alu0==64'b0)?(imm_B+pc):snpc;
-    24'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+pc):snpc;
-    24'd7   : dnpc=(result_alu0[63]==1)?(imm_B+pc):snpc;
-    24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+pc):snpc;
-    24'd9   : dnpc=(src1<src2)?(imm_B+pc):snpc         ;
-    24'd10  : dnpc=(src1>=src2)?(imm_B+pc):snpc        ;        //(result_alu0[63]==0)?(imm_B+pc):snpc
+    24'd5   : dnpc=(result_alu0==64'b0)?(imm_B+EX_reg_pc):snpc;
+    24'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+EX_reg_pc):snpc;
+    24'd7   : dnpc=(result_alu0[63]==1)?(imm_B+EX_reg_pc):snpc;
+    24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc;
+    24'd9   : dnpc=(EX_reg_alu_operator_a<EX_reg_alu_operator_b)?(imm_B+EX_reg_pc):snpc         ;
+    24'd10  : dnpc=(EX_reg_alu_operator_a>=EX_reg_alu_operator_b)?(imm_B+EX_reg_pc):snpc        ;        //(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc
     24'h200000: dnpc=mtvec                             ;        
     24'h500000: dnpc=mepc                              ;        
     default: dnpc=snpc;
     endcase
-*/
+
+
+
+    case (opcode)
+    24'h300 : pc_update=1'b1;
+    24'd4   : pc_update=1'b1;
+    24'd5   : pc_update=1'b1;
+    24'd6   : pc_update=1'b1;
+    24'd7   : pc_update=1'b1;
+    24'd8   : pc_update=1'b1;
+    24'd9   : pc_update=1'b1;
+    24'd10  : pc_update=1'b1;
+    24'h200000: pc_update=1'b1;    
+    24'h500000: pc_update=1'b1;           
+    default: pc_update=1'b0;
+    endcase
 end
 
 
-assign pc_update = (opcode != 24'b0 )? 1'b1:1'b0;
+//assign pc_update = (opcode != 24'b0 )? 1'b1:1'b0;
 //assign pc_update = (opcode != 24'b0 && exu_block == 1'b0)? 1'b1:1'b0;
 
 
-
 //pc
-//wire [63:0] snpc;
-//assign snpc = pc + 64'd4;
+wire [63:0] snpc;
+assign snpc = EX_reg_pc + 64'd4;
+wire [63:0]imm_B;
+assign imm_B = (EX_reg_inst[31]==1'b1)?{{51{1'b1}},EX_reg_inst[31],EX_reg_inst[7],EX_reg_inst[30:25],EX_reg_inst[11:8],1'b0}:{{51{1'b0}},EX_reg_inst[31],EX_reg_inst[7],EX_reg_inst[30:25],EX_reg_inst[11:8],1'b0};
+
+
 
 
 //alu
