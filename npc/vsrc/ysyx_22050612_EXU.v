@@ -142,8 +142,9 @@ wire [ 4:0]rs2  ;
 
 
 
-/*
+
 assign rd = inst[11: 7];
+/*
 assign rs1= inst[19:15];
 assign rs2= inst[24:20];
 
