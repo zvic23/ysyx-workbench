@@ -127,10 +127,12 @@ assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
 
 
 
-assign reg_wr_wen   = wen ;
-assign reg_wr_ID    = EX_reg_rd  ;
-assign reg_wr_value = wdata_reg;
+assign reg_wr_wen   = EX_reg_valid ? wen : 1'b0;
+assign reg_wr_ID    = EX_reg_valid ? EX_reg_rd : 5'b0;
+assign reg_wr_value = EX_reg_valid ? wdata_reg : 64'b0;
 
+
+//output
 assign valid_EX_WB   = EX_reg_valid;
 assign pc_EX_WB   = EX_reg_pc;
 assign inst_EX_WB = EX_reg_inst;
@@ -578,16 +580,16 @@ always @(*) begin
 
 
     case (opcode)
-    24'h300 : pc_update=1'b1;
-    24'd4   : pc_update=1'b1;
-    24'd5   : pc_update=1'b1;
-    24'd6   : pc_update=1'b1;
-    24'd7   : pc_update=1'b1;
-    24'd8   : pc_update=1'b1;
-    24'd9   : pc_update=1'b1;
-    24'd10  : pc_update=1'b1;
-    24'h200000: pc_update=1'b1;    
-    24'h500000: pc_update=1'b1;           
+    24'h300 : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+    24'd4   : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
+    24'd5   : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
+    24'd6   : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
+    24'd7   : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
+    24'd8   : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
+    24'd9   : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
+    24'd10  : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
+    24'h200000: pc_update=EX_reg_valid ? 1'b1 : 1'b1;   
+    24'h500000: pc_update=EX_reg_valid ? 1'b1 : 1'b1;             
     default: pc_update=1'b0;
     endcase
 end

@@ -7,7 +7,7 @@ module ysyx_22050612_IFU (
    input clk,
    input rst, 
    input [63:0]dnpc,
-   output valid_IF_ID,
+   output reg valid_IF_ID,
    output [63:0]pc,
    input pc_update,
    //output reg [31:0]inst, 
@@ -74,9 +74,25 @@ end
 */
 
 
-wire [63:0]pc_next;
-assign pc_next = pc_update ? dnpc : pc+64'd4;
-ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, 1'b1);
+reg  [63:0]pc_next;
+reg  pc_en;
+//assign pc_next = pc_update ? dnpc : pc+64'd4;
+always @(*) begin
+	if(branching && pc_update)begin
+		pc_next = dnpc;
+		pc_en   = 1'b1;
+	end
+	else if(branching) begin
+		pc_next = pc;
+		pc_en   = 1'b0;
+	end
+	else begin
+		pc_next = pc + 64'd4;
+		pc_en   = 1'b1;
+	end
+end
+
+ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, pc_en);
 //ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc+64'd4, pc, 1'b1);
 
 //ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, pc_update);
@@ -85,8 +101,58 @@ ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, 1'b1);
 
 
 //************************  pipeline  ******************************
+reg [1:0]if_current_state, if_next_state;
 
-assign  valid_IF_ID = 1'b1;
+localparam if_idle  = 2'b00;
+localparam if_branch_id = 2'b01;        //the first cycle of getting the branch inst
+localparam if_waiting_branch = 2'b11;        //waiting for processing
+
+always @(posedge clk) begin
+	if(rst == 1'b1) if_current_state <= if_idle;
+	else            if_current_state <= if_next_state;
+end
+
+always @(*) begin
+	case(if_current_state)
+		if_idle: begin
+			valid_IF_ID = 1'b1;
+		//	if_next_state = (awvalid && wvalid)? if_branch_id:if_idle;
+                 	  case ({inst[14:12],inst[6:0]})
+                     10'b000_1100111:  if_next_state= if_branch_id ;    //jalr
+                     10'b000_1100011:  if_next_state= if_branch_id ;    //beq
+                     10'b001_1100011:  if_next_state= if_branch_id ;    //bne
+                     10'b100_1100011:  if_next_state= if_branch_id ;    //blt
+                     10'b101_1100011:  if_next_state= if_branch_id ;    //bge
+                     10'b110_1100011:  if_next_state= if_branch_id ;    //bltu
+                     10'b111_1100011:  if_next_state= if_branch_id ;    //bgeu
+                     default:          if_next_state= if_idle ;
+                 	  endcase
+                 
+                 	  case (inst[6:0])
+                         7'b1101111:   if_next_state= if_branch_id ;    //jal
+                     default:          if_next_state= if_idle ;
+                 	  endcase
+		end
+		if_branch_id: begin
+			valid_IF_ID = 1'b0;
+			if_next_state = pc_update ? if_branch_id : if_idle;
+		end
+		/*
+		if_waiting_branch: begin
+			bvalid = 1'b0;
+			bresp  = 2'b0;
+			if_next_state = if_idle;
+		end
+		*/
+		default: begin
+			valid_IF_ID = 1'b1;
+			if_next_state = if_idle;
+		end
+	endcase
+end
+
+
+assign  valid_IF_ID = branching ? 1'b1 : 1'b0;
 
 reg branching;
 
@@ -109,6 +175,21 @@ reg branching;
 	  endcase
 
   end
+/*
+reg branch_processing;
+always @(posedge clk) begin
+	if(rst)begin
+		branch_processing <= 1'b0;
+	end
+	else if (branching) begin
+		branch_processing <= 1'b1;
+	end
+	else begin
+
+	end
+end
+*/
+
 
 
 always @(negedge clk) begin
