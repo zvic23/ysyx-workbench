@@ -7,6 +7,7 @@ module ysyx_22050612_IFU (
    input clk,
    input rst, 
    input [63:0]dnpc,
+   output valid_IF_ID,
    output [63:0]pc,
    input pc_update,
    //output reg [31:0]inst, 
@@ -73,8 +74,11 @@ end
 */
 
 
+wire [63:0]pc_next;
+assign pc_next = pc_update ? dnpc : pc+64'd4;
+ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, 1'b1);
+//ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc+64'd4, pc, 1'b1);
 
-ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc+64'd4, pc, 1'b1);
 //ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, pc_update);
 //ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, 1'b1);
 

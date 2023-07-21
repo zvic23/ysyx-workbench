@@ -2,6 +2,7 @@
 module ysyx_22050612_WBU(
 input clk,
 input rst,
+input       valid_EX_WB  ,
 input [63:0]pc_EX_WB  ,
 input [31:0]inst_EX_WB,
 
@@ -32,7 +33,7 @@ always @(posedge clk) begin
 //		WB_reg_opcode<= 24'b0;
 	end
 	else begin
-		WB_reg_valid <= 1'b1;
+		WB_reg_valid <= valid_EX_WB;
 		WB_reg_pc    <= pc_EX_WB;
 		WB_reg_inst  <= inst_EX_WB;
 //		WB_reg_opcode<= opcode_in;

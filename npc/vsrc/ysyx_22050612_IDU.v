@@ -4,6 +4,7 @@ module ysyx_22050612_IDU(
 input clk,
 input rst,
 input [63:0]gpr[31:0],
+input       valid_IF_ID,
 input [63:0]pc_IF_ID  ,
 input [31:0]inst_IF_ID,
 //input [31:0]inst,
@@ -24,6 +25,7 @@ output reg [63:0]ALU_operator_b,
 output reg [ 7:0]ALU_mode,
 output     [ 4:0]rd,
 output [23:0]opcode,
+output     valid_ID_EX,
 output [63:0]pc_ID_EX,
 output [31:0]inst_ID_EX
 );
@@ -40,12 +42,13 @@ always @(posedge clk) begin
 		ID_reg_inst  <= 32'b0;
 	end
 	else begin
-		ID_reg_valid <= 1'b1;
+		ID_reg_valid <= valid_IF_ID;
 		ID_reg_pc    <= pc_IF_ID;
 		ID_reg_inst  <= inst_IF_ID;
 	end
 end
 
+assign valid_ID_EX= ID_reg_valid;
 assign pc_ID_EX   = ID_reg_pc;
 assign inst_ID_EX = ID_reg_inst;
 

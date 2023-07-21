@@ -12,6 +12,7 @@ import "DPI-C" function void pmem_write(
 module ysyx_22050612_EXU(
 input clk,
 input rst,
+input       valid_ID_EX,
 input [63:0]pc_ID_EX,
 input [31:0]inst_ID_EX,
 /*
@@ -39,8 +40,11 @@ input [ 4:0]rd,
 //output [63:0]dnpc,
 output reg [63:0]dnpc,
 output pc_update,
+
+output       valid_EX_WB  ,
 output [63:0]pc_EX_WB  ,
 output [31:0]inst_EX_WB,
+
 output       reg_wr_wen   ,
 output [ 4:0]reg_wr_ID    ,
 output [63:0]reg_wr_value ,
@@ -104,7 +108,7 @@ always @(posedge clk) begin
 		EX_reg_rd             <=  5'b0;
 	end
 	else begin
-		EX_reg_valid          <= 1'b1;
+		EX_reg_valid          <= valid_ID_EX;
 		EX_reg_pc             <= pc_ID_EX;
 		EX_reg_inst           <= inst_ID_EX;
 		EX_reg_opcode         <= opcode_in;
@@ -127,6 +131,7 @@ assign reg_wr_wen   = wen ;
 assign reg_wr_ID    = EX_reg_rd  ;
 assign reg_wr_value = wdata_reg;
 
+assign valid_EX_WB   = EX_reg_valid;
 assign pc_EX_WB   = EX_reg_pc;
 assign inst_EX_WB = EX_reg_inst;
 
