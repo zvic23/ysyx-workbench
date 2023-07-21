@@ -127,9 +127,9 @@ assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
 
 
 
-assign reg_wr_wen   =  wen       ;
-assign reg_wr_ID    =  EX_reg_rd ;
-assign reg_wr_value =  wdata_reg ;
+assign reg_wr_wen   = EX_reg_valid ? wen       : 1'b0;
+assign reg_wr_ID    = EX_reg_valid ? EX_reg_rd : 5'b0;
+assign reg_wr_value = EX_reg_valid ? wdata_reg : 64'b0;
 
 
 //output
