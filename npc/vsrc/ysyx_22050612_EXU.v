@@ -90,6 +90,7 @@ reg [23:0]EX_reg_opcode        ;
 reg [63:0]EX_reg_alu_operator_a;
 reg [63:0]EX_reg_alu_operator_b;
 reg [ 7:0]EX_reg_alu_mode      ;
+reg [ 4:0]EX_reg_rd            ;
 
 always @(posedge clk) begin
 	if(rst) begin
@@ -100,6 +101,7 @@ always @(posedge clk) begin
 		EX_reg_alu_operator_a <= 64'b0;
 		EX_reg_alu_operator_b <= 64'b0;
 		EX_reg_alu_mode       <=  8'b0;
+		EX_reg_rd             <=  5'b0;
 	end
 	else begin
 		EX_reg_valid          <= 1'b1;
@@ -109,6 +111,7 @@ always @(posedge clk) begin
 		EX_reg_alu_operator_a <= ALU_operator_a;
 		EX_reg_alu_operator_b <= ALU_operator_b;
 		EX_reg_alu_mode       <= ALU_mode      ;
+		EX_reg_rd             <= rd            ;
 	end
 end
 
@@ -121,7 +124,7 @@ assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
 
 
 assign reg_wr_wen   = wen ;
-assign reg_wr_ID    = rd  ;
+assign reg_wr_ID    = EX_reg_rd  ;
 assign reg_wr_value = wdata_reg;
 
 assign pc_EX_WB   = EX_reg_pc;
