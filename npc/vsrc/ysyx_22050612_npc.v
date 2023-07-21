@@ -67,7 +67,7 @@ wire [63:0]ALU_operator_b;
 wire [ 7:0]ALU_mode      ;
 wire [ 4:0]rd            ;
 
-ysyx_22050612_EXU exu (clk,rst, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode,ALU_operator_a,ALU_operator_b,ALU_mode, rd, pc,dnpc,pc_update, pc_EX_WB, inst_EX_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr);
+ysyx_22050612_EXU exu (clk,rst, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode,ALU_operator_a,ALU_operator_b,ALU_mode, rd, dnpc,pc_update, pc_EX_WB, inst_EX_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr);
 
 wire [63:0]pc_EX_WB  ;
 wire [31:0]inst_EX_WB;

@@ -33,7 +33,7 @@ input [ 7:0]ALU_mode,
 input [ 4:0]rd,
 
 
-input [63:0]pc,
+//input [63:0]pc,
 
 
 //output [63:0]dnpc,
@@ -354,11 +354,13 @@ always @(*) begin
     //24'h100  : wdata_reg=imm_U;
     24'h100  : wdata_reg=EX_reg_alu_operator_a;
     24'h200  : wdata_reg=result_alu0;
-    24'h300  : wdata_reg=pc + 64'd4;
+    //24'h300  : wdata_reg=pc + 64'd4;
+    24'h300  : wdata_reg=EX_reg_pc + 64'd4;
     24'h400  : wdata_reg=result_alu0;
     24'h800  : wdata_reg=result_alu0;
     24'hc00  : wdata_reg=result_alu0;
-    24'd4    : wdata_reg=pc + 64'd4;
+    //24'd4    : wdata_reg=pc + 64'd4;
+    24'd4    : wdata_reg=EX_reg_pc + 64'd4;
     24'd11   : wdata_reg=rdata_fix;
     24'd12   : wdata_reg=rdata_fix;
     24'd13   : wdata_reg=rdata_fix;
@@ -562,8 +564,8 @@ assign pc_update = (opcode != 24'b0 )? 1'b1:1'b0;
 
 
 //pc
-wire [63:0] snpc;
-assign snpc = pc + 64'd4;
+//wire [63:0] snpc;
+//assign snpc = pc + 64'd4;
 
 
 //alu
