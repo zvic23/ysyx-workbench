@@ -25,6 +25,7 @@ output [ 4:0]rs2,
 output reg [63:0]ALU_operator_a,
 output reg [63:0]ALU_operator_b,
 output reg [ 7:0]ALU_mode,
+output [63:0]src2,
 output     [ 4:0]rd,
 output     wen,
 output [23:0]opcode,
@@ -157,7 +158,7 @@ assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11
 assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},inst[31:25],inst[11:7]};
 
 wire [63:0]src1;
-wire [63:0]src2;
+//wire [63:0]src2;
 
 assign src1=gpr[rs1];
 assign src2=gpr[rs2];

@@ -32,6 +32,7 @@ input [23:0]opcode_in,
 input [63:0]ALU_operator_a,
 input [63:0]ALU_operator_b,
 input [ 7:0]ALU_mode,
+input [63:0]src2_in,
 input [ 4:0]rd,
 
 
@@ -97,6 +98,7 @@ reg [63:0]EX_reg_alu_operator_a;
 reg [63:0]EX_reg_alu_operator_b;
 reg [ 7:0]EX_reg_alu_mode      ;
 reg [ 4:0]EX_reg_rd            ;
+reg [63:0]EX_reg_src2          ;
 
 always @(posedge clk) begin
 	if(rst) begin
@@ -108,6 +110,7 @@ always @(posedge clk) begin
 		EX_reg_alu_operator_b <= 64'b0;
 		EX_reg_alu_mode       <=  8'b0;
 		EX_reg_rd             <=  5'b0;
+		EX_reg_src2           <= 64'b0;
 	end
 	else begin
 		EX_reg_valid          <= valid_ID_EX;
@@ -118,6 +121,7 @@ always @(posedge clk) begin
 		EX_reg_alu_operator_b <= ALU_operator_b;
 		EX_reg_alu_mode       <= ALU_mode      ;
 		EX_reg_rd             <= rd            ;
+		EX_reg_src2           <= src2_in       ;
 	end
 end
 
@@ -127,6 +131,8 @@ assign inst = EX_reg_valid ? EX_reg_inst : 32'b0;
 wire [23:0]opcode;
 assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
 
+wire [63:0]src2;
+assign src2 = EX_reg_valid ? EX_reg_src2 : 64'b0;
 
 
 assign reg_wr_wen   = EX_reg_valid ? wen       : 1'b0;
@@ -684,7 +690,7 @@ assign result_remuw0 = src1[31:0] % src2[31:0];
 
 //memory
 
-/*
+
 always @(*) begin
 	case(waddr[2:0])
     3'd0  : wdata_1byte={{56{1'b0}},src2[7:0]}; 
@@ -783,7 +789,7 @@ always @(*) begin
     default: rdata_fix=64'b0;
 	endcase
 end
-*/
+
 always @(*) begin
 	//$display("*  clk=%d",clk);
 	case(opcode)
