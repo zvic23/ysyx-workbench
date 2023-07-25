@@ -87,10 +87,6 @@ always @(*) begin
 		pc_next = pc;
 		pc_en   = 1'b0;
 	end
-	else if(ready_IF_ID == 1'b0)begin
-		pc_next = pc;
-		pc_en   = 1'b0;
-	end
 	else begin
 		pc_next = pc + 64'd4;
 		pc_en   = 1'b1;
