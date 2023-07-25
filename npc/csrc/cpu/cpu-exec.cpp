@@ -129,12 +129,12 @@ void one_cycle(){
   top->clk = 1;
   top->eval();//step_and_dump_wave();
 
+  itrace(top->pc, inst);
   top->clk = 0;
   top->eval();//step_and_dump_wave();
 
   update_gpr_pc();
 
-  itrace(top->pc, inst);
 #ifdef CONFIG_DIFFTEST
   if( load_store == 1){
 	  syn_gpr();
