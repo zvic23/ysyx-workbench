@@ -1,4 +1,5 @@
 #include "verilated_dpi.h"            //zsl:for printf the gpr
+
 #include "../include/trace.h"
 #include "verilated.h"
 //#include "verilated_vcd_c.h"
@@ -61,6 +62,7 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
 	}
         itrace(top->pc, inst);
 	itrace_printf_once();
+
   }
 }
 
