@@ -57,7 +57,7 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
 	}else{
 		inst= (uint32_t)inst_64;
 	}
-        itrace(top->pc, inst);
+        itrace(top->pc, inst);itrace_printf_once();
   }
 }
 
