@@ -175,7 +175,7 @@ void built_in_program(){
   *(uint32_t*)&pmem[0x00000028]=0x023203b3; //t2 = gp * tp
   *(uint32_t*)&pmem[0x0000002c]=0x02408433; //s0 = ra * tp
 					    
-  *(uint32_t*)&pmem[0x00000030]=0xfc1591e3; //beq ra a1
+  *(uint32_t*)&pmem[0x00000030]=0xfc159fe3; //beq ra a1
   //*(uint32_t*)&pmem[0x00000030]=0xfd1ff56f; //jal   80000000
   //*(uint32_t*)&pmem[0x00000030]=0xfe1ff56f; //jal   80000010
   //*(uint32_t*)&pmem[0x00000030]=0xff1ff56f; //jal   80000020
