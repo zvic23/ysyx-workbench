@@ -135,7 +135,7 @@ always @(*) begin
 		end
 		if_branch_id: begin
 			valid_IF_ID = 1'b0;
-			if_next_state = pc_update ? if_branch_id : if_idle;
+			if_next_state = pc_update ? if_idle : if_branch_id ;
 		end
 		/*
 		if_waiting_branch: begin
