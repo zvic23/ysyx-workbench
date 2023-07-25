@@ -43,6 +43,7 @@ void host_write(uint64_t addr, int len, uint64_t data) {
 
 
 extern Vysyx_22050612_npc* top;
+extern int itrace_si;
 extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
@@ -58,7 +59,7 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
 		inst= (uint32_t)inst_64;
 	}
         itrace(top->pc, inst);
-	itrace_printf_once();
+	if(itrace_si) itrace_printf_once();
   }
 }
 
