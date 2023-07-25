@@ -175,7 +175,7 @@ void built_in_program(){
   *(uint32_t*)&pmem[0x00000028]=0x023203b3; //gpr[3](gp)+3
   *(uint32_t*)&pmem[0x0000002c]=0x02408433; //gpr[4](tp)+4
 					    //
-  *(uint32_t*)&pmem[0x00000030]=0xfffff56f; //jal
+  *(uint32_t*)&pmem[0x00000030]=0xff1ff56f; //jal
 
   *(uint32_t*)&pmem[0x00000034]=0x00100073; //ebreak
 }
