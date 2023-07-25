@@ -168,7 +168,7 @@ assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},
 */
 
 always @(negedge clk) begin
-	$display("EX   pc:%x   inst:%x       op_a:%x   op_b:%x  op_mode:%x",EX_reg_pc,EX_reg_inst,EX_reg_alu_operator_a,EX_reg_alu_operator_b,EX_reg_alu_mode);
+	$display("EX   pc:%x   inst:%x   op_a:%x   op_b:%x  op_mode:%x   valid:%x",EX_reg_pc,EX_reg_inst,EX_reg_alu_operator_a,EX_reg_alu_operator_b,EX_reg_alu_mode,EX_reg_valid);
 end
 //********************************************************************
 
