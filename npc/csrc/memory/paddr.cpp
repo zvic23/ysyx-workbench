@@ -48,7 +48,7 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
   if(raddr>=0x80000000){
   	long long raddr_set = raddr & ~0x7ull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
-/*
+
 	uint64_t inst_64 = 0;
 	memcpy(&inst_64, &pmem[raddr_set-0x80000000], 8);
 	uint32_t inst = 0;
@@ -58,8 +58,7 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
 		inst= (uint32_t)inst_64;
 	}
         itrace(top->pc, inst);
-	*/
-itrace_printf_once();
+	itrace_printf_once();
   }
 }
 
