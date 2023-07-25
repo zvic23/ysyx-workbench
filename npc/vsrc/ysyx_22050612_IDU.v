@@ -165,7 +165,8 @@ assign src2=gpr[rs2];
 
 
 
-
+wire ID_block;
+assign ID_block = src1_conflict || src2_conflict;
 
 
 
