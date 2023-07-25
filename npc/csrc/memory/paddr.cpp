@@ -160,10 +160,10 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 //}
 
 void built_in_program(){
-  *(uint32_t*)&pmem[0x00000000]=0x00108093; //gpr[1](ra)+1
-  *(uint32_t*)&pmem[0x00000004]=0x00310113; //gpr[1](ra)+1
-  *(uint32_t*)&pmem[0x00000008]=0x00518193; //gpr[1](ra)+1
-  *(uint32_t*)&pmem[0x0000000c]=0x00720213; //gpr[1](ra)+1
+  *(uint32_t*)&pmem[0x00000000]=0x00108093; //ra = ra + 1
+  *(uint32_t*)&pmem[0x00000004]=0x00310113; //sp = sp + 3
+  *(uint32_t*)&pmem[0x00000008]=0x00518193; //gp = gp + 5
+  *(uint32_t*)&pmem[0x0000000c]=0x00720213; //tp = tp + 7
 					    //
   *(uint32_t*)&pmem[0x00000010]=0x00100013; //gpr[1](ra)+1
   *(uint32_t*)&pmem[0x00000014]=0x00100013; //gpr[1](ra)+1
