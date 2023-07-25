@@ -165,9 +165,9 @@ void built_in_program(){
   *(uint32_t*)&pmem[0x00000008]=0x00518193; //gp = gp + 5
   *(uint32_t*)&pmem[0x0000000c]=0x00720213; //tp = tp + 7
 					    //
-  *(uint32_t*)&pmem[0x00000010]=0x00400593; //give $0 the "1",it equals invalid operation
-  *(uint32_t*)&pmem[0x00000014]=0x00100013; //in order to give the gprs time to write
-  *(uint32_t*)&pmem[0x00000018]=0x00100013; //
+  *(uint32_t*)&pmem[0x00000010]=0x00400593; //a1 = $0 + 4
+  *(uint32_t*)&pmem[0x00000014]=0x00100013; //give $0 the "1",it equals invalid operation
+  *(uint32_t*)&pmem[0x00000018]=0x00100013; //in order to give the gprs time to write
   *(uint32_t*)&pmem[0x0000001c]=0x00100013; //
 					    //
   *(uint32_t*)&pmem[0x00000020]=0x021102b3; //t0 = ra * sp
@@ -175,7 +175,8 @@ void built_in_program(){
   *(uint32_t*)&pmem[0x00000028]=0x023203b3; //t2 = gp * tp
   *(uint32_t*)&pmem[0x0000002c]=0x02408433; //s0 = ra * tp
 					    
-  *(uint32_t*)&pmem[0x00000030]=0xfd1ff56f; //jal   80000000
+  *(uint32_t*)&pmem[0x00000030]=0xfe1581e3; //beq ra a1
+  //*(uint32_t*)&pmem[0x00000030]=0xfd1ff56f; //jal   80000000
   //*(uint32_t*)&pmem[0x00000030]=0xfe1ff56f; //jal   80000010
   //*(uint32_t*)&pmem[0x00000030]=0xff1ff56f; //jal   80000020
 
