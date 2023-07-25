@@ -46,11 +46,11 @@ always @(posedge clk) begin
 		ID_reg_pc    <= 64'b0;
 		ID_reg_inst  <= 32'b0;
 	end
-	else if(ID_block)begin
-		ID_reg_valid <= ID_reg_valid;
-		ID_reg_pc    <= ID_reg_pc;
-		ID_reg_inst  <= ID_reg_inst ;
-	end
+//	else if(ID_block)begin
+//		ID_reg_valid <= ID_reg_valid;
+//		ID_reg_pc    <= ID_reg_pc;
+//		ID_reg_inst  <= ID_reg_inst ;
+//	end
 	else begin
 		ID_reg_valid <= valid_IF_ID;
 		ID_reg_pc    <= pc_IF_ID;
