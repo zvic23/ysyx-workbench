@@ -49,7 +49,14 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
   	long long raddr_set = raddr & ~0x7ull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
 
-	uint32_t inst = ((raddr>>2)&&1)&pmem[raddr_set-0x80000000];
+	uint64_t* inst_64;
+	memcpy(inst_64, &pmem[raddr_set-0x80000000], 8);
+	uint32_t inst ;
+	if((raddr>>2)&1){
+		inst = (*inst_64>>32);
+	}else{
+		inst= *inst_64;
+	}
         itrace(top->pc, inst);
   }
 }
