@@ -78,11 +78,11 @@ reg  [63:0]pc_next;
 reg  pc_en;
 //assign pc_next = pc_update ? dnpc : pc+64'd4;
 always @(*) begin
-	if(branching && pc_update)begin
+	if((branching!=4'b0) && pc_update)begin
 		pc_next = dnpc;
 		pc_en   = 1'b1;
 	end
-	else if(branching) begin
+	else if(branching!=4'b0) begin
 		pc_next = pc;
 		pc_en   = 1'b0;
 	end
@@ -116,7 +116,10 @@ always @(*) begin
 	case(if_current_state)
 		if_idle: begin
 			valid_IF_ID = 1'b1;
-		//	if_next_state = (awvalid && wvalid)? if_branch_id:if_idle;
+			if(inst[6:0] == 7'b1101111)begin
+				if_next_state= if_branch_id ;    //jal
+			end
+			else begin
                  	  case ({inst[14:12],inst[6:0]})
                      10'b000_1100111:  if_next_state= if_branch_id ;    //jalr
                      10'b000_1100011:  if_next_state= if_branch_id ;    //beq
@@ -127,11 +130,13 @@ always @(*) begin
                      10'b111_1100011:  if_next_state= if_branch_id ;    //bgeu
                      default:          if_next_state= if_idle ;
                  	  endcase
-                 
+		        end
+                /* 
                  	  case (inst[6:0])
                          7'b1101111:   if_next_state= if_branch_id ;    //jal
                      default:          if_next_state= if_idle ;
                  	  endcase
+			  */
 		end
 		if_branch_id: begin
 			valid_IF_ID = 1'b0;
@@ -154,24 +159,24 @@ end
 
 //assign  valid_IF_ID = branching ? 1'b1 : 1'b0;
 
-reg branching;
+reg [3:0]branching;
 
   always @(inst) begin
 	  case ({inst[14:12],inst[6:0]})
-    10'b000_1100111:  branching= 1'b1 ;    //jalr
-    10'b000_1100011:  branching= 1'b1 ;    //beq
-    10'b001_1100011:  branching= 1'b1 ;    //bne
-    10'b100_1100011:  branching= 1'b1 ;    //blt
-    10'b101_1100011:  branching= 1'b1 ;    //bge
-    10'b110_1100011:  branching= 1'b1 ;    //bltu
-    10'b111_1100011:  branching= 1'b1 ;    //bgeu
-    default:          branching= 1'b0 ;
+    10'b000_1100111:  branching[0] = 1'b1 ;    //jalr
+    10'b000_1100011:  branching[0] = 1'b1 ;    //beq
+    10'b001_1100011:  branching[0] = 1'b1 ;    //bne
+    10'b100_1100011:  branching[0] = 1'b1 ;    //blt
+    10'b101_1100011:  branching[0] = 1'b1 ;    //bge
+    10'b110_1100011:  branching[0] = 1'b1 ;    //bltu
+    10'b111_1100011:  branching[0] = 1'b1 ;    //bgeu
+    default:          branching[0] = 1'b0 ;
 	  endcase
 
 
 	  case (inst[6:0])
-    7'b1101111: branching= 1'b1 ;        //jal
-    default:    branching= 1'b0 ;
+    7'b1101111: branching[1] = 1'b1 ;        //jal
+    default:    branching[1] = 1'b0 ;
 	  endcase
 
   end
