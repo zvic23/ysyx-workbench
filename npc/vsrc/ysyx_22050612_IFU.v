@@ -8,6 +8,7 @@ module ysyx_22050612_IFU (
    input rst, 
    input [63:0]dnpc,
    output reg valid_IF_ID,
+   input ready_IF_ID,
    output [63:0]pc,
    input pc_update,
    //output reg [31:0]inst, 

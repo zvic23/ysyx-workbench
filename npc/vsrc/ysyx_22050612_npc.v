@@ -51,16 +51,18 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, gpr_wdata, gpr_rd, gpr_we
 
 
 //**************        processor       *******************
-ysyx_22050612_IFU ifu (clk, rst, dnpc,valid_IF_ID, pc_IF_ID, pc_update, inst_IF_ID);
+ysyx_22050612_IFU ifu (clk, rst, dnpc,valid_IF_ID, ready_IF_ID, pc_IF_ID, pc_update, inst_IF_ID);
 
 wire       valid_IF_ID;
+wire       ready_IF_ID;
 wire [63:0]pc_IF_ID  ;
 wire [31:0]inst_IF_ID;
 assign pc = pc_IF_ID;
 
-ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, pc_IF_ID, inst_IF_ID, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ ALU_operator_a,ALU_operator_b,ALU_mode, rd, opcode, valid_ID_EX, pc_ID_EX, inst_ID_EX);
+ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ ALU_operator_a,ALU_operator_b,ALU_mode, rd, opcode, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX);
 
 wire       valid_ID_EX  ;
+wire       ready_ID_EX  ;
 wire [63:0]pc_ID_EX  ;
 wire [31:0]inst_ID_EX;
 wire [63:0]ALU_operator_a;
@@ -68,9 +70,10 @@ wire [63:0]ALU_operator_b;
 wire [ 7:0]ALU_mode      ;
 wire [ 4:0]rd            ;
 
-ysyx_22050612_EXU exu (clk,rst, valid_ID_EX, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode,ALU_operator_a,ALU_operator_b,ALU_mode, rd, dnpc,pc_update, valid_EX_WB, pc_EX_WB, inst_EX_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr);
+ysyx_22050612_EXU exu (clk,rst, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode,ALU_operator_a,ALU_operator_b,ALU_mode, rd, dnpc,pc_update, valid_EX_WB, ready_EX_WB, pc_EX_WB, inst_EX_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr);
 
 wire       valid_EX_WB  ;
+wire       ready_EX_WB  ;
 wire [63:0]pc_EX_WB  ;
 wire [31:0]inst_EX_WB;
 wire       reg_wr_wen   ;

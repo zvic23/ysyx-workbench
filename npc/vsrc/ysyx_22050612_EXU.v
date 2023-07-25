@@ -13,6 +13,7 @@ module ysyx_22050612_EXU(
 input clk,
 input rst,
 input       valid_ID_EX,
+output      ready_ID_IF,
 input [63:0]pc_ID_EX,
 input [31:0]inst_ID_EX,
 /*
@@ -42,6 +43,7 @@ output reg [63:0]dnpc,
 output pc_update,
 
 output       valid_EX_WB  ,
+input        ready_EX_WB  ,
 output [63:0]pc_EX_WB  ,
 output [31:0]inst_EX_WB,
 
