@@ -25,6 +25,7 @@ output reg [63:0]ALU_operator_a,
 output reg [63:0]ALU_operator_b,
 output reg [ 7:0]ALU_mode,
 output     [ 4:0]rd,
+output     wen,
 output [23:0]opcode,
 output     valid_ID_EX,
 input      ready_ID_EX,
@@ -53,6 +54,71 @@ end
 assign valid_ID_EX= ID_reg_valid;
 assign pc_ID_EX   = ID_reg_pc;
 assign inst_ID_EX = ID_reg_inst;
+
+
+
+
+
+always @(*) begin
+//gpr control
+	case (opcode)
+    24'h4000 : wen=1'b1;
+    24'h5000 : wen=1'b1;
+    24'h6000 : wen=1'b1;
+    24'h7000 : wen=1'b1;
+    24'h8000 : wen=1'b1;
+    24'h9000 : wen=1'b1;
+    24'h10000: wen=1'b1;
+    24'h12000: wen=1'b1;
+    24'h13000: wen=1'b1;
+    24'h14000: wen=1'b1;
+    24'h15000: wen=1'b1;
+    24'h16000: wen=1'b1;
+    24'h17000: wen=1'b1;
+    24'h18000: wen=1'b1;
+    24'h19000: wen=1'b1;
+    24'h1a000: wen=1'b1;
+    24'h1b000: wen=1'b1;
+    24'h1d000: wen=1'b1;
+    24'h21000: wen=1'b1;
+    24'h22000: wen=1'b1;
+    24'h24000: wen=1'b1;
+    24'h25000: wen=1'b1;
+    24'h26000: wen=1'b1;
+    24'h27000: wen=1'b1;
+    24'h28000: wen=1'b1;
+    24'h29000: wen=1'b1;
+    24'h100  : wen=1'b1;
+    24'h200  : wen=1'b1;
+    24'h300  : wen=1'b1;
+    24'h400  : wen=1'b1;
+    24'h800  : wen=1'b1;
+    24'hc00  : wen=1'b1;
+    24'd4    : wen=1'b1;
+    24'd11   : wen=1'b1;
+    24'd12   : wen=1'b1;
+    24'd13   : wen=1'b1;
+    24'd14   : wen=1'b1;
+    24'd15   : wen=1'b1;
+    24'd19   : wen=1'b1;
+    24'd20   : wen=1'b1;
+    24'd21   : wen=1'b1;
+    24'd22   : wen=1'b1;
+    24'd23   : wen=1'b1;
+    24'd24   : wen=1'b1;
+    24'd41   : wen=1'b1;
+    24'd42   : wen=1'b1;
+    24'd47   : wen=1'b1;
+    24'd49   : wen=1'b1;
+    24'd50   : wen=1'b1;
+    default:  wen=1'b0;
+        endcase
+end
+
+
+
+
+
 
 
 wire [31:0]inst;
