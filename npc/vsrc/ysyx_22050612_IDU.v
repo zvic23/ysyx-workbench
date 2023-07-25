@@ -52,9 +52,9 @@ always @(posedge clk) begin
 	end
 end
 
-assign valid_ID_EX= ID_reg_valid;
-assign pc_ID_EX   = ID_reg_pc;
-assign inst_ID_EX = ID_reg_inst;
+assign valid_ID_EX= ID_block ? ID_reg_valid : 1'b0;
+assign pc_ID_EX   = ID_block ? ID_reg_pc    : 64'b0;
+assign inst_ID_EX = ID_block ? ID_reg_inst  : 32'b0;
 
 
 
@@ -167,7 +167,7 @@ assign src2=gpr[rs2];
 
 wire ID_block;
 assign ID_block = src1_conflict || src2_conflict;
-
+assign ready_IF_ID = ID_block;
 
 
 
