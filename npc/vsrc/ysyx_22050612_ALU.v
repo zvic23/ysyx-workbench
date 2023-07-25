@@ -19,7 +19,7 @@ wire [63:0]sra_result;
 
 wire [63:0]C;
 assign C= (mode==8'd1)?(~B+64'b1):B;
-assign add_sub_result = 0;
+assign add_sub_result = A + C;
 assign slt_result = ($signed(A) < $signed(B))? 64'b1:64'b0;
 assign sltu_result = (A < B)? 64'b1:64'b0;
 assign sll_result = (A <<  B);
