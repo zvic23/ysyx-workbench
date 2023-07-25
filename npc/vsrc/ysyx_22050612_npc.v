@@ -102,7 +102,9 @@ ysyx_22050612_WBU wbu (clk,rst, valid_EX_WB, pc_EX_WB, inst_EX_WB, reg_wr_wen, r
 
 //************************  pipeline  ******************************
 
-
+always @(negedge clk) begin
+	$display("busy %d",gpr_busy[2]);
+end
 
 //*****************************************************************
 
