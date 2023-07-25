@@ -53,10 +53,10 @@ always@(posedge clk) begin
 	if(rst) begin
 		gpr_busy <= 32'b0;
 	end
-	if(gpr_rd != 5'b0 && gpr_wen == 1'b1) begin
+	else if(gpr_rd != 5'b0 && gpr_wen == 1'b1) begin
 		gpr_busy[gpr_rd] <= 1'b0;
 	end
-	if(rd != 5'b0 && wen == 1'b1) begin
+	else if(rd != 5'b0 && wen == 1'b1) begin
 		gpr_busy[rd]     <= 1'b1;
 	end
 end
@@ -72,7 +72,7 @@ wire [63:0]pc_IF_ID  ;
 wire [31:0]inst_IF_ID;
 assign pc = pc_IF_ID;
 
-ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ ALU_operator_a,ALU_operator_b,ALU_mode, rd, wen, opcode, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX);
+ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, gpr_busy, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ ALU_operator_a,ALU_operator_b,ALU_mode, rd, wen, opcode, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX);
 
 wire       valid_ID_EX  ;
 wire       ready_ID_EX  ;
