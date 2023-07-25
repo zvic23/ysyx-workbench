@@ -120,7 +120,6 @@ void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S
 int itrace_si = 0;
 uint64_t skip_old = 0;
 void one_cycle(){
-  itrace(top->pc, inst);
 //  top->eval();//step_and_dump_wave();
 
 
@@ -135,6 +134,7 @@ void one_cycle(){
 
   update_gpr_pc();
 
+  itrace(top->pc, inst);
 #ifdef CONFIG_DIFFTEST
   if( load_store == 1){
 	  syn_gpr();
