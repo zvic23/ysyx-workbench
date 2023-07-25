@@ -47,6 +47,18 @@ assign gpr_wdata = reg_wr_value ;
 ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, gpr_wdata, gpr_rd, gpr_wen, gpr);
 //assign wen_fix = ( (rd != 5'b0)&&(exu_block == 1'b0) )?  wen : 1'b0;
 
+reg [31:0]gpr_busy;
+always@(posedge clk) begin
+	if(rst) begin
+		gpr_busy <= 32'b0;
+	end
+	if(gpr_rd != 5'b0 && gpr_wen == 1'b1) begin
+		gpr_busy[gpr_rd] <= 1'b0;
+	end
+	if(rd != 5'b0) begin
+		gpr_busy[gpr_rd] <= 1'b1;
+	end
+end
 
 
 
