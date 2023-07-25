@@ -197,7 +197,7 @@ void execute(int n){
 	  one_cycle();
 
     	  g_nr_guest_inst ++;
-	  if(itrace_si) itrace_printf_once();
+	  //if(itrace_si) itrace_printf_once();
 
 
 
