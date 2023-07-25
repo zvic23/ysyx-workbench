@@ -1,4 +1,8 @@
 #include "verilated_dpi.h"            //zsl:for printf the gpr
+#include "../include/trace.h"
+#include "verilated.h"
+//#include "verilated_vcd_c.h"
+#include "Vysyx_22050612_npc.h"
 
 #include "../include/generated/autoconf.h"
 //#include "../include/common.h"
@@ -38,12 +42,15 @@ void host_write(uint64_t addr, int len, uint64_t data) {
 
 
 
-
+extern Vysyx_22050612_npc* top;
 extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
   	long long raddr_set = raddr & ~0x7ull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
+
+	uint32_t inst = ((raddr>>2)&&1)&pmem[raddr_set-0x80000000];
+        itrace(top->pc, inst);
   }
 }
 
