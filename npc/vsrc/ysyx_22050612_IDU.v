@@ -312,8 +312,8 @@ always @(*) begin
     24'h1a000: ALU_operator_a={src1[31:0],{32{1'b0}}};
     24'h1b000: ALU_operator_a={src1[31:0],{32{1'b0}}};
     24'h100  : ALU_operator_a=imm_U;                             //wdata_reg=imm_U
-    24'h200  : ALU_operator_a=pc_IF_ID;
-    24'h300  : ALU_operator_a=pc_IF_ID;
+    24'h200  : ALU_operator_a=ID_reg_pc;
+    24'h300  : ALU_operator_a=ID_reg_pc;
     24'h400  : ALU_operator_a=src1;
     24'h800  : ALU_operator_a=src1;
     24'hc00  : ALU_operator_a=src1;
