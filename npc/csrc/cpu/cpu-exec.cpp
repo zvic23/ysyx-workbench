@@ -117,6 +117,14 @@ void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S
 }
 
 
+
+int to_check = 0;
+void npc_complete_one_inst(){
+	to_check = 1;
+}
+
+
+
 int itrace_si = 0;
 uint64_t skip_old = 0;
 void one_cycle(){
@@ -136,13 +144,23 @@ void one_cycle(){
   update_gpr_pc();
 
 #ifdef CONFIG_DIFFTEST
+/*
   if( load_store == 1){
 	  syn_gpr();
   }
   else {
   	  difftest_step();
   }
+  */
+  if(to_check){
+	  difftest_step();
+	  to_check = 0;
+  }
 #endif
+
+
+
+
 //  update_gpr_pc();
 //  if(skip_difftest == 1){
 //	  printf("skip = 1  !\n");

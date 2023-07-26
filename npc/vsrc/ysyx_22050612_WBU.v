@@ -1,3 +1,4 @@
+import "DPI-C" function void npc_complete_one_inst ();
 
 module ysyx_22050612_WBU(
 input clk,
@@ -51,6 +52,9 @@ end
 
 always @(negedge clk) begin
 	//$display("WB   pc:%x   inst:%x",WB_reg_pc,WB_reg_inst);
+	if(WB_reg_valid) begin 
+		npc_complete_one_inst();
+	end
 end
 //********************************************************************
 
