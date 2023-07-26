@@ -53,10 +53,10 @@ always@(posedge clk) begin
 	if(rst) begin
 		gpr_busy <= 32'b0;
 	end
-	else if(gpr_rd != 5'b0 && gpr_wen == 1'b1 ) begin
+	if(gpr_rd != 5'b0 && gpr_wen == 1'b1 ) begin
 		gpr_busy[gpr_rd] <= 1'b0;
 	end
-	else if(rd != 5'b0 && wen == 1'b1 && ready_IF_ID == 1'b1 ) begin
+	if(rd != 5'b0 && wen == 1'b1 && ready_IF_ID == 1'b1 ) begin
 		gpr_busy[rd]     <= 1'b1;
 	end
 end
