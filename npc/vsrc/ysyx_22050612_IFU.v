@@ -122,17 +122,17 @@ always @(*) begin
 		if_idle: begin
 			valid_IF_ID = 1'b1;
 			if(inst[6:0] == 7'b1101111)begin
-				if_next_state= if_branch_id ;    //jal
+				if_next_state= ready_IF_ID ? if_branch_id :if_idle;    //jal
 			end
 			else begin
                  	  case ({inst[14:12],inst[6:0]})
-                     10'b000_1100111:  if_next_state= if_branch_id ;    //jalr
-                     10'b000_1100011:  if_next_state= if_branch_id ;    //beq
-                     10'b001_1100011:  if_next_state= if_branch_id ;    //bne
-                     10'b100_1100011:  if_next_state= if_branch_id ;    //blt
-                     10'b101_1100011:  if_next_state= if_branch_id ;    //bge
-                     10'b110_1100011:  if_next_state= if_branch_id ;    //bltu
-                     10'b111_1100011:  if_next_state= if_branch_id ;    //bgeu
+                     10'b000_1100111:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //jalr
+                     10'b000_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //beq
+                     10'b001_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //bne
+                     10'b100_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //blt
+                     10'b101_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //bge
+                     10'b110_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //bltu
+                     10'b111_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //bgeu
                      default:          if_next_state= if_idle ;
                  	  endcase
 		        end
