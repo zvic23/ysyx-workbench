@@ -132,7 +132,7 @@ wire [31:0]inst;
 assign inst = ID_reg_valid ? ID_reg_inst : 32'b0;
 
 always @(negedge clk) begin
-	$display("ID   pc:%x   inst:%x   valid:%x",ID_reg_pc,ID_reg_inst,ID_reg_valid);
+	//$display("ID   pc:%x   inst:%x   valid:%x",ID_reg_pc,ID_reg_inst,ID_reg_valid);
 end
 //********************************************************************
 
@@ -270,6 +270,9 @@ always @(*) begin
 
 //sd  sb  sh  sw have imm and two src, and the same time alu just use src1 and
 //imm, so it need to add src2 to check conflict
+    24'd16   : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'd17   : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'd18   : src2_conflict = gpr_busy[rs2] == 1'b1; 
     24'd43   : src2_conflict = gpr_busy[rs2] == 1'b1; 
 
 
