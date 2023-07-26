@@ -270,10 +270,10 @@ always @(*) begin
 
 //sd  sb  sh  sw have imm and two src, and the same time alu just use src1 and
 //imm, so it need to add src2 to check conflict
-//    24'd16   : src2_conflict = gpr_busy[rs2] == 1'b1; 
-//    24'd17   : src2_conflict = gpr_busy[rs2] == 1'b1; 
-//    24'd18   : src2_conflict = gpr_busy[rs2] == 1'b1; 
-//    24'd43   : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'd16   : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'd17   : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'd18   : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'd43   : src2_conflict = gpr_busy[rs2] == 1'b1; 
 
 
 
