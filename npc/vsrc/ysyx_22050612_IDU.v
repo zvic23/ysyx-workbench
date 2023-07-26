@@ -132,7 +132,7 @@ wire [31:0]inst;
 assign inst = ID_reg_valid ? ID_reg_inst : 32'b0;
 
 always @(negedge clk) begin
-	//$display("ID   pc:%x   inst:%x   valid:%x",ID_reg_pc,ID_reg_inst,ID_reg_valid);
+	$display("ID   pc:%x   inst:%x   valid:%x",ID_reg_pc,ID_reg_inst,ID_reg_valid);
 end
 //********************************************************************
 
