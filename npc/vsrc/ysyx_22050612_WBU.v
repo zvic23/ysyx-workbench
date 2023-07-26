@@ -48,13 +48,12 @@ end
 //assign opcode = WB_reg_valid ? WB_reg_opcode : 24'b0;
 
 
-reg [63:0]pc_last;
+
 
 always @(negedge clk) begin
 	//$display("WB   pc:%x   inst:%x",WB_reg_pc,WB_reg_inst);
-	if(pc_last != WB_reg_pc) begin 
+	if(WB_reg_valid) begin 
 		npc_complete_one_inst();
-		pc_last <= WB_reg_pc;
 	end
 end
 //********************************************************************
