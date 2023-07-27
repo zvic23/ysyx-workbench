@@ -475,8 +475,8 @@ always @(*) begin
     24'd47   : wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
 //    24'd49   : wdata_reg=src_csr;
 //    24'd50   : wdata_reg=src_csr;
-    24'd49   : wdata_reg=EX_reg_alu_operator_a;
-    24'd50   : wdata_reg=EX_reg_alu_operator_a;
+    24'd49   : wdata_reg=EX_reg_alu_operator_b;
+    24'd50   : wdata_reg=EX_reg_alu_operator_b;
     default : wdata_reg=64'b0;
 	endcase
 
