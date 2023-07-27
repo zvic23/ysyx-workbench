@@ -665,8 +665,8 @@ always @(*) begin
     24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc;
     24'd9   : dnpc=(EX_reg_alu_operator_a<EX_reg_alu_operator_b)?(imm_B+EX_reg_pc):snpc         ;
     24'd10  : dnpc=(EX_reg_alu_operator_a>=EX_reg_alu_operator_b)?(imm_B+EX_reg_pc):snpc        ;        //(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc
-    24'h200000: dnpc=EX_reg_alu_operator_a                             ;        
-    24'h500000: dnpc=EX_reg_alu_operator_a                             ;        
+    24'h200000: dnpc=EX_reg_alu_operator_b                             ;        
+    24'h500000: dnpc=EX_reg_alu_operator_b                             ;        
     default: dnpc=snpc;
     endcase
 
