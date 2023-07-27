@@ -10,6 +10,10 @@ input [63:0]pc_IF_ID  ,
 input [31:0]inst_IF_ID,
 //input [31:0]inst,
 input [31:0]gpr_busy,
+input [63:0]mtvec,
+input [63:0]mepc,
+input [63:0]mcause,
+input [63:0]mstatus,
 
 /*
 output [63:0]imm_I,
@@ -299,8 +303,17 @@ end
 
 
 
+reg [63:0] src_csr;
+always @(*) begin
+    case (imm_I[11:0])
+    12'h305: src_csr=mtvec;
+    12'h341: src_csr=mepc;
+    12'h342: src_csr=mcause;
+    12'h300: src_csr=mstatus;
+    default: src_csr=64'b0;
+    endcase
 
-
+end
 
 always @(*) begin
 //The input of ALU
@@ -353,7 +366,8 @@ always @(*) begin
     24'd42   : ALU_operator_a=src1;
     24'd43   : ALU_operator_a=src1;
     24'd47   : ALU_operator_a=src1;
-    24'd50   : ALU_operator_a=src1;
+    24'd49   : ALU_operator_a=src1;  //csrrw
+    24'd50   : ALU_operator_a=src1;  //csrrs
 
 //mul / div
     24'h1d000: ALU_operator_a=src1;  //mul
@@ -365,6 +379,10 @@ always @(*) begin
     24'h27000: ALU_operator_a=src1;  //divuw
     24'h28000: ALU_operator_a=src1;  //remw
     24'h29000: ALU_operator_a=src1;  //remuw
+
+//ecall  mret
+    24'h200000: ALU_operator_a=mtvec                             ;        
+    24'h500000: ALU_operator_a=mepc                              ; 
 
     default :  ALU_operator_a=64'b0;
     endcase
@@ -417,7 +435,8 @@ always @(*) begin
     24'd42   : ALU_operator_b=imm_I;
     24'd43   : ALU_operator_b=imm_S;
     24'd47   : ALU_operator_b=imm_I;
-//    24'd50   : ALU_operator_b=src_csr;
+    24'd49   : ALU_operator_b=src_csr;
+    24'd50   : ALU_operator_b=src_csr;
 
 //mul / div
     24'h1d000: ALU_operator_b=src2;  //mul

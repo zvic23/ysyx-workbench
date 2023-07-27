@@ -210,6 +210,80 @@ assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 */
 
 
+
+reg [63:0]wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus;
+reg wen_mtvec,wen_mepc,wen_mcause,wen_mstatus;
+
+
+always @(*) begin
+//mtvec control
+  	case (opcode)
+    24'd49   : wen_mtvec=(EX_reg_inst[31:20]==12'h305)? 1'b1:1'b0;
+    default:   wen_mtvec=1'b0;
+        endcase
+
+	case (opcode)
+    24'd49   : wdata_mtvec=EX_reg_alu_operator_a;
+    default:   wdata_mtvec=64'b0;
+        endcase
+//mepc control
+  	case (opcode)
+    24'd49     : wen_mepc=(EX_reg_inst[31:20]==12'h341)? 1'b1:1'b0;
+    24'd50     : wen_mepc=(EX_reg_inst[31:20]==12'h341)? 1'b1:1'b0;
+    24'h200000 : wen_mepc=1'b1;
+    default:   wen_mepc=1'b0;
+        endcase
+
+	case (opcode)
+    24'd49     : wdata_mepc=EX_reg_alu_operator_a;
+    24'd50     : wdata_mepc=result_alu0;
+    24'h200000 : wdata_mepc=EX_reg_pc;
+    default:   wdata_mepc=64'b0;
+        endcase
+//mcause control
+  	case (opcode)
+    24'd49     : wen_mcause=(EX_reg_inst[31:20]==12'h342)? 1'b1:1'b0;
+    24'd50     : wen_mcause=(EX_reg_inst[31:20]==12'h342)? 1'b1:1'b0;
+    24'h200000 : wen_mcause=1'b1;
+    default:   wen_mcause=1'b0;
+        endcase
+
+	case (opcode)
+    24'd49     : wdata_mcause=EX_reg_alu_operator_a;
+    24'd50     : wdata_mcause=result_alu0;
+    24'h200000 : wdata_mcause=64'hb;
+    default:   wdata_mcause=64'b0;
+        endcase
+//mstatus control
+  	case (opcode)
+    24'd49     : wen_mstatus=(EX_reg_inst[31:20]==12'h300)? 1'b1:1'b0;
+    24'd50     : wen_mstatus=(EX_reg_inst[31:20]==12'h300)? 1'b1:1'b0;
+    default:   wen_mstatus=1'b0;
+        endcase
+
+	case (opcode)
+    24'd49     : wdata_mstatus=EX_reg_alu_operator_a;
+    24'd50     : wdata_mstatus=result_alu0;
+    default:   wdata_mstatus=64'b0;
+        endcase
+//src_csr
+/*
+  	case (EX_reg_inst[31:20])
+    12'h305: src_csr=mtvec;
+    12'h341: src_csr=mepc;
+    12'h342: src_csr=mcause;
+    12'h300: src_csr=mstatus;
+    default:   src_csr=64'b0;
+
+        endcase
+	*/
+end
+
+
+
+
+
+/*
 reg [63:0]wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus;
 reg [63:0]mtvec,mepc,mcause,mstatus;
 reg wen_mtvec,wen_mepc,wen_mcause,wen_mstatus;
@@ -220,7 +294,7 @@ ysyx_22050612_Reg #(64,64'h0) mtvec_csr           (clk, rst, wdata_mtvec  , mtve
 ysyx_22050612_Reg #(64,64'h0) mepc_csr            (clk, rst, wdata_mepc   , mepc   , wen_mepc   );
 ysyx_22050612_Reg #(64,64'h0) mcause_csr          (clk, rst, wdata_mcause , mcause , wen_mcause );
 ysyx_22050612_Reg #(64,64'ha00001800) mstatus_csr (clk, rst, wdata_mstatus, mstatus, wen_mstatus);
-/*
+
 always @(*) begin
 //mtvec control
   	case (opcode)
@@ -390,8 +464,10 @@ always @(*) begin
     24'd41   : wdata_reg=rdata_fix;
     24'd42   : wdata_reg=rdata_fix;
     24'd47   : wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    24'd49   : wdata_reg=src_csr;
-    24'd50   : wdata_reg=src_csr;
+//    24'd49   : wdata_reg=src_csr;
+//    24'd50   : wdata_reg=src_csr;
+    24'd49   : wdata_reg=EX_reg_alu_operator_a;
+    24'd50   : wdata_reg=EX_reg_alu_operator_a;
     default : wdata_reg=64'b0;
 	endcase
 
@@ -580,8 +656,8 @@ always @(*) begin
     24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc;
     24'd9   : dnpc=(EX_reg_alu_operator_a<EX_reg_alu_operator_b)?(imm_B+EX_reg_pc):snpc         ;
     24'd10  : dnpc=(EX_reg_alu_operator_a>=EX_reg_alu_operator_b)?(imm_B+EX_reg_pc):snpc        ;        //(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc
-    24'h200000: dnpc=mtvec                             ;        
-    24'h500000: dnpc=mepc                              ;        
+    24'h200000: dnpc=EX_reg_alu_operator_a                             ;        
+    24'h500000: dnpc=EX_reg_alu_operator_a                             ;        
     default: dnpc=snpc;
     endcase
 
@@ -1013,9 +1089,9 @@ end
 */
 
 
-always @(mtvec or mepc or mcause or mstatus) begin
-       update_csr(mtvec,mcause,mepc,mstatus);	
-end
+//always @(mtvec or mepc or mcause or mstatus) begin
+//       update_csr(mtvec,mcause,mepc,mstatus);	
+//end
 
 
 

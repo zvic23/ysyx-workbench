@@ -63,6 +63,21 @@ end
 
 
 
+
+//***************    control status register   ********************
+
+wire [63:0]wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus;
+wire [63:0]mtvec,mepc,mcause,mstatus;
+wire wen_mtvec,wen_mepc,wen_mcause,wen_mstatus;
+wire [63:0]src_csr;
+
+//control and status register
+ysyx_22050612_Reg #(64,64'h0) mtvec_csr           (clk, rst, wdata_mtvec  , mtvec  , wen_mtvec  );
+ysyx_22050612_Reg #(64,64'h0) mepc_csr            (clk, rst, wdata_mepc   , mepc   , wen_mepc   );
+ysyx_22050612_Reg #(64,64'h0) mcause_csr          (clk, rst, wdata_mcause , mcause , wen_mcause );
+ysyx_22050612_Reg #(64,64'ha00001800) mstatus_csr (clk, rst, wdata_mstatus, mstatus, wen_mstatus);
+
+
 //**************        processor       *******************
 ysyx_22050612_IFU ifu (clk, rst, dnpc,valid_IF_ID, ready_IF_ID, pc_IF_ID, pc_update, inst_IF_ID);
 
@@ -72,7 +87,7 @@ wire [63:0]pc_IF_ID  ;
 wire [31:0]inst_IF_ID;
 assign pc = pc_IF_ID;
 
-ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, gpr_busy, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ ALU_operator_a,ALU_operator_b,ALU_mode, src2, rd, wen, opcode, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX);
+ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, gpr_busy, mtvec, mepc, mcause, mstatus, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ ALU_operator_a,ALU_operator_b,ALU_mode, src2, rd, wen, opcode, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX);
 
 wire       valid_ID_EX  ;
 wire       ready_ID_EX  ;
