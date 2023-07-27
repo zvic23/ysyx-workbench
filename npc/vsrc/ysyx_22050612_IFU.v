@@ -124,6 +124,12 @@ always @(*) begin
 			if(inst[6:0] == 7'b1101111)begin
 				if_next_state= ready_IF_ID ? if_branch_id :if_idle;    //jal
 			end
+			else if(inst == 32'b1110011)begin
+				if_next_state= ready_IF_ID ? if_branch_id :if_idle;    //jal
+			end
+			else if(inst == 32'b00110000001000000000000001110011)begin
+				if_next_state= ready_IF_ID ? if_branch_id :if_idle;    //jal
+			end
 			else begin
                  	  case ({inst[14:12],inst[6:0]})
                      10'b000_1100111:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //jalr
