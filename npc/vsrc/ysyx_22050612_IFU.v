@@ -178,6 +178,12 @@ reg [3:0]branching;
     default:          branching[0] = 1'b0 ;
 	  endcase
 
+	  case (inst)
+    32'b1110011:   branching[2] = 1'b1 ;         //ecall
+    32'b00110000001000000000000001110011:   branching[2] = 1'b1 ;         //mret
+    default:  branching[2] = 1'b0 ; 
+	  endcase
+
 
 	  case (inst[6:0])
     7'b1101111: branching[1] = 1'b1 ;        //jal
