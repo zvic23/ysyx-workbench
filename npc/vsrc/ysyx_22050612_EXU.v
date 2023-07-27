@@ -52,6 +52,15 @@ output       reg_wr_wen   ,
 output [ 4:0]reg_wr_ID    ,
 output [63:0]reg_wr_value ,
 
+output [63:0]wdata_mtvec,
+output [63:0]wdata_mepc,
+output [63:0]wdata_mcause,
+output [63:0]wdata_mstatus,
+output wen_mtvec,
+output wen_mepc,
+output wen_mcause,
+output wen_mstatus,
+
 input [63:0] gpr[31:0]
 
 /*
@@ -211,8 +220,8 @@ assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
 
 
 
-reg [63:0]wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus;
-reg wen_mtvec,wen_mepc,wen_mcause,wen_mstatus;
+//reg [63:0]wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus;
+//reg wen_mtvec,wen_mepc,wen_mcause,wen_mstatus;
 
 
 always @(*) begin

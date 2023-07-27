@@ -233,6 +233,7 @@ always @(*) begin
     24'd42   : src1_conflict = gpr_busy[rs1] == 1'b1; 
     24'd43   : src1_conflict = gpr_busy[rs1] == 1'b1; 
     24'd47   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd49   : src1_conflict = gpr_busy[rs1] == 1'b1; 
     24'd50   : src1_conflict = gpr_busy[rs1] == 1'b1; 
 
 //mul / div
