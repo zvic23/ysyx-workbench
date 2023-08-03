@@ -1,4 +1,5 @@
 //import "DPI-C" function void ebreak ();
+import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
 
 `define ysyx_22050612_rgsize 64
 
@@ -29,32 +30,97 @@ wire [23:0]opcode;
 
 wire exu_block;
 
-//always @(posedge clk) begin
-//  $display("%x",inst);
-//end
 
-ysyx_22050612_IFU ifu (clk, rst, dnpc, pc_IF_ID, pc_update, inst_IF_ID /*,arvalid_pc,araddr_pc,arready_pc,rvalid_pc,rdata_pc,rresp_pc,rready_pc,   exu_block*/);
 
-ysyx_22050612_IDU idu (clk, rst, pc_IF_ID, inst_IF_ID, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ opcode, pc_ID_EX, inst_ID_EX);
 
-ysyx_22050612_EXU exu (clk,rst, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode,pc,dnpc,pc_update, pc_EX_WB, inst_EX_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr/*,  arvalid_lsu,araddr_lsu,arready_lsu,rvalid_lsu,rdata_lsu,rresp_lsu,rready_lsu,awvalid_lsu,awaddr_lsu,awready_lsu,wvalid_lsu,wdata_lsu,wstrb_lsu,wready_lsu,bresp_lsu,bvalid_lsu,bready_lsu,   exu_block*/);
 
-ysyx_22050612_WBU wbu (clk,rst, pc_EX_WB, inst_EX_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr);
+//***************    general register   ********************
+wire [63:0] gpr[31:0];
+wire [4:0]gpr_rd;
+wire [63:0]gpr_wdata;
+wire gpr_wen;
 
-//************************  pipeline  ******************************
+assign gpr_wen =  (reg_wr_ID == 5'b0)? 1'b0 : reg_wr_wen ;
+assign gpr_rd  =  reg_wr_ID  ;
+assign gpr_wdata = reg_wr_value ;
+
+ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, gpr_wdata, gpr_rd, gpr_wen, gpr);
+//assign wen_fix = ( (rd != 5'b0)&&(exu_block == 1'b0) )?  wen : 1'b0;
+
+reg [31:0]gpr_busy;
+wire wen;
+always@(posedge clk) begin
+	if(rst) begin
+		gpr_busy <= 32'b0;
+	end
+	if(gpr_rd != 5'b0 && gpr_wen == 1'b1 ) begin
+		gpr_busy[gpr_rd] <= 1'b0;
+	end
+	if(rd != 5'b0 && wen == 1'b1 && ready_IF_ID == 1'b1 ) begin
+		gpr_busy[rd]     <= 1'b1;
+	end
+end
+
+
+
+
+//***************    control status register   ********************
+
+wire [63:0]wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus;
+wire [63:0]mtvec,mepc,mcause,mstatus;
+wire wen_mtvec,wen_mepc,wen_mcause,wen_mstatus;
+wire [63:0]src_csr;
+
+//control and status register
+ysyx_22050612_Reg #(64,64'h0) mtvec_csr           (clk, rst, wdata_mtvec  , mtvec  , wen_mtvec  );
+ysyx_22050612_Reg #(64,64'h0) mepc_csr            (clk, rst, wdata_mepc   , mepc   , wen_mepc   );
+ysyx_22050612_Reg #(64,64'h0) mcause_csr          (clk, rst, wdata_mcause , mcause , wen_mcause );
+ysyx_22050612_Reg #(64,64'ha00001800) mstatus_csr (clk, rst, wdata_mstatus, mstatus, wen_mstatus);
+
+
+//**************        processor       *******************
+ysyx_22050612_IFU ifu (clk, rst, dnpc,valid_IF_ID, ready_IF_ID, pc_IF_ID, pc_update, inst_IF_ID);
+
+wire       valid_IF_ID;
+wire       ready_IF_ID;
 wire [63:0]pc_IF_ID  ;
 wire [31:0]inst_IF_ID;
+assign pc = pc_IF_ID;
 
+ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, gpr_busy, mtvec, mepc, mcause, mstatus, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ ALU_operator_a,ALU_operator_b,ALU_mode, src2, rd, wen, opcode, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX);
+
+wire       valid_ID_EX  ;
+wire       ready_ID_EX  ;
 wire [63:0]pc_ID_EX  ;
 wire [31:0]inst_ID_EX;
+wire [63:0]ALU_operator_a;
+wire [63:0]ALU_operator_b;
+wire [ 7:0]ALU_mode      ;
+wire [ 4:0]rd            ;
+wire [63:0]src2;
 
+ysyx_22050612_EXU exu (clk,rst, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode,ALU_operator_a,ALU_operator_b,ALU_mode, src2, rd, dnpc,pc_update, valid_EX_WB, ready_EX_WB, pc_EX_WB, inst_EX_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus,wen_mtvec,wen_mepc,wen_mcause,wen_mstatus,gpr);
+
+wire       valid_EX_WB  ;
+wire       ready_EX_WB  ;
 wire [63:0]pc_EX_WB  ;
 wire [31:0]inst_EX_WB;
 wire       reg_wr_wen   ;
 wire [ 4:0]reg_wr_ID    ;
 wire [63:0]reg_wr_value ;
 
-wire [63:0] gpr[31:0];
+ysyx_22050612_WBU wbu (clk,rst, valid_EX_WB, pc_EX_WB, inst_EX_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr);
+
+
+
+
+
+//************************  pipeline  ******************************
+
+always @(negedge clk) begin
+	//$display("busy %x",gpr_busy);
+end
+
 //*****************************************************************
 
 
@@ -161,5 +227,12 @@ ysyx_22050612_Arbiter arbiter (clk,rst,
 //************************************************************
 */
 
+
+
+//always @(posedge clk) begin
+//  $display("%x",inst);
+//end
+
+initial set_gpr_ptr(gpr); 
 
 endmodule

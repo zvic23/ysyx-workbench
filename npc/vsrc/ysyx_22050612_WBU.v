@@ -1,7 +1,9 @@
+import "DPI-C" function void npc_complete_one_inst ();
 
 module ysyx_22050612_WBU(
 input clk,
 input rst,
+input       valid_EX_WB  ,
 input [63:0]pc_EX_WB  ,
 input [31:0]inst_EX_WB,
 
@@ -32,7 +34,7 @@ always @(posedge clk) begin
 //		WB_reg_opcode<= 24'b0;
 	end
 	else begin
-		WB_reg_valid <= 1'b1;
+		WB_reg_valid <= valid_EX_WB;
 		WB_reg_pc    <= pc_EX_WB;
 		WB_reg_inst  <= inst_EX_WB;
 //		WB_reg_opcode<= opcode_in;
@@ -49,13 +51,16 @@ end
 
 
 always @(negedge clk) begin
-	$display("WB   pc:%x   inst:%x",WB_reg_pc,WB_reg_inst);
+	//$display("WB   pc:%x   inst:%x   valid:%d",WB_reg_pc,WB_reg_inst,WB_reg_valid);
+	if(WB_reg_valid) begin 
+		npc_complete_one_inst();
+	end
 end
 //********************************************************************
 
 
 
-
+/*
 assign wen =  reg_wr_wen ;
 assign rd  =  reg_wr_ID  ;
 assign wdata_reg = reg_wr_value ;
@@ -76,7 +81,7 @@ wire wen_fix;
 ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, wdata_reg, rd, wen_fix, gpr);
 //assign wen_fix = ( (rd != 5'b0)&&(exu_block == 1'b0) )?  wen : 1'b0;
 assign wen_fix = (rd == 5'b0)? 1'b0 : wen;
-
+*/
 
 
 /*
