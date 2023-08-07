@@ -30,8 +30,11 @@ output reg [63:0]src_A,
 output reg [63:0]src_B,
 output reg [63:0]imm,
 //output reg [ 7:0]ALU_mode,
-//output     [ 4:0]rd,
-//output     wen,
+
+output     [ 4:0]rd,                //these two lines for board
+output     wen,
+
+
 output [23:0]opcode,
 output     valid_ID_EX,
 input      ready_ID_EX,
@@ -69,7 +72,7 @@ assign inst_ID_EX = (ID_block==1'b0) ? ID_reg_inst  : 32'b0;
 
 
 
-reg wen;
+//reg wen;
 always @(*) begin
 //gpr control
 	case (opcode)
@@ -156,7 +159,7 @@ wire [63:0]imm_S;
 wire [ 5:0]shamt;
 
 
-//assign rd = inst[11: 7];
+assign rd = inst[11: 7];
 assign rs1= inst[19:15];
 assign rs2= inst[24:20];
 assign shamt= inst[25:20];

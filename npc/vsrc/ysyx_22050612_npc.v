@@ -86,7 +86,7 @@ wire [63:0]pc_IF_ID  ;
 wire [31:0]inst_IF_ID;
 assign pc = pc_IF_ID;
 
-ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, gpr_busy, mtvec, mepc, mcause, mstatus, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ src_A,src_B, imm,/* rd, wen,*/ opcode_ID_EX, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX);
+ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, gpr_busy, mtvec, mepc, mcause, mstatus, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ src_A,src_B, imm, rd, wen, opcode_ID_EX, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX);
 
 wire       valid_ID_EX  ;
 wire       ready_ID_EX  ;
