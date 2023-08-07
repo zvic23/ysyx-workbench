@@ -24,6 +24,9 @@ output [63:0] gpr[31:0]
 reg       WB_reg_valid;
 reg [63:0]WB_reg_pc   ;
 reg [31:0]WB_reg_inst ;
+reg       WB_reg_wen ;
+reg [ 4:0]WB_reg_id ;
+reg [63:0]WB_reg_wdata ;
 //reg [23:0]WB_reg_opcode;
 
 always @(posedge clk) begin
@@ -32,12 +35,18 @@ always @(posedge clk) begin
 		WB_reg_pc    <= 64'b0;
 		WB_reg_inst  <= 32'b0;
 //		WB_reg_opcode<= 24'b0;
+		WB_reg_wen  <=  1'b0;
+		WB_reg_id   <=  5'b0;
+		WB_reg_wdata<= 64'b0;
 	end
 	else begin
 		WB_reg_valid <= valid_EX_WB;
 		WB_reg_pc    <= pc_EX_WB;
 		WB_reg_inst  <= inst_EX_WB;
 //		WB_reg_opcode<= opcode_in;
+		WB_reg_wen  <= reg_wr_wen   ;
+		WB_reg_id   <= reg_wr_ID    ;
+		WB_reg_wdata<= reg_wr_value ;
 	end
 end
 
@@ -51,7 +60,8 @@ end
 
 
 always @(negedge clk) begin
-	$display("WB   pc:%x   inst:%x   valid:%d  wen:%d  wdata:%x rd:%x\n",WB_reg_pc,WB_reg_inst,WB_reg_valid,reg_wr_wen,reg_wr_value,reg_wr_ID);
+	$display("WB   pc:%x   inst:%x   valid:%d  wen:%d  wdata:%x rd:%x\n",WB_reg_pc,WB_reg_inst,WB_reg_valid,WB_reg_wen,WB_reg_id,WB_reg_wdata);
+	//$display("WB   pc:%x   inst:%x   valid:%d  wen:%d  wdata:%x rd:%x\n",WB_reg_pc,WB_reg_inst,WB_reg_valid,reg_wr_wen,reg_wr_value,reg_wr_ID);
 	if(WB_reg_valid) begin 
 		npc_complete_one_inst();
 	end
