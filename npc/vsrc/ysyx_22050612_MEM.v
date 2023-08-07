@@ -116,7 +116,7 @@ assign inst_MEM_WB = MEM_reg_inst;
 
 
 always @(negedge clk) begin
-	$display("MEM   pc:%x   inst:%x   valid:%x   aluout:%x   op_b:%x  ",MEM_reg_pc,MEM_reg_inst,MEM_reg_valid,MEM_reg_aluoutput,MEM_reg_src2);
+	$display("MEM  pc:%x   inst:%x   valid:%x   aluout:%x   op_b:%x  ",MEM_reg_pc,MEM_reg_inst,MEM_reg_valid,MEM_reg_aluoutput,MEM_reg_src2);
 end
 //********************************************************************
 
