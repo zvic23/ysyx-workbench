@@ -99,7 +99,7 @@ wire [23:0]opcode_ID_EX;
 //wire [ 7:0]ALU_mode      ;
 //wire [ 4:0]rd            ;
 
-ysyx_22050612_EXU exu (clk,rst, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode_ID_EX,src_A,src_B,/*ALU_mode, src2, rd,*/ imm, dnpc,pc_update, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM, ALUoutput_EX_MEM , src_B_EX_MEM,/*reg_wr_wen, reg_wr_ID, reg_wr_value, */wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus,wen_mtvec,wen_mepc,wen_mcause,wen_mstatus,gpr);
+ysyx_22050612_EXU exu (clk,rst, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode_ID_EX,src_A,src_B,/*ALU_mode, src2, rd,*/ imm, dnpc,pc_update, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM, opcode_EX_MEM, ALUoutput_EX_MEM , src_B_EX_MEM,/*reg_wr_wen, reg_wr_ID, reg_wr_value, */wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus,wen_mtvec,wen_mepc,wen_mcause,wen_mstatus,gpr);
 
 wire       valid_EX_MEM  ;
 wire       ready_EX_MEM  ;

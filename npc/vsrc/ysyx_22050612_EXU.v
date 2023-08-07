@@ -48,6 +48,7 @@ output       valid_EX_MEM  ,
 input        ready_EX_MEM  ,
 output [63:0]pc_EX_MEM  ,
 output [31:0]inst_EX_MEM,
+output [23:0]opcode_EX_MEM,
 
 output [63:0]ALUoutput_EX_MEM,
 output [63:0]src_B_EX_MEM,
@@ -167,6 +168,7 @@ assign pc_EX_MEM   = EX_reg_pc;
 assign inst_EX_MEM = EX_reg_inst;
 
 
+assign opcode_EX_MEM = EX_reg_opcode;
 assign src_B_EX_MEM = EX_reg_src_b;
 
 
