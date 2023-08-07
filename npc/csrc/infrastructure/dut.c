@@ -103,9 +103,9 @@ void difftest_step() {
   ref_difftest_exec(1);
   ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
 
-  for(int i=0;i<33;i++){
+  for(int i=0;i<32;i++){
 	  if(ref_r[i] != cpu_gpr_set[i]){
-		  printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]);
+		  printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx  pc:%x\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]   , ref_r[32]);
 		  npc_state = 3;
 		  return;
 	  }
