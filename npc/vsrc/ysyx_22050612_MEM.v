@@ -8,56 +8,25 @@ import "DPI-C" function void pmem_write(
 module ysyx_22050612_MEM(
 input clk,
 input rst,
-input       valid_ID_EX,
-output      ready_ID_IF,
-input [63:0]pc_ID_EX,
-input [31:0]inst_ID_EX,
-/*
-input [63:0]imm_I,
-input [63:0]imm_U,
-input [63:0]imm_J,
-input [63:0]imm_B,
-input [63:0]imm_S,
-input [ 5:0]shamt,
-input [ 4:0]rd,
-input [ 4:0]rs1,
-input [ 4:0]rs2,
-*/
+input       valid_EX_MEM,
+output      ready_EX_MEM,
+input [63:0]pc_EX_MEM,
+input [31:0]inst_EX_MEM,
 input [23:0]opcode_in,
-//input [23:0]opcode,
-input [63:0]ALU_operator_a,
-input [63:0]ALU_operator_b,
-input [ 7:0]ALU_mode,
+input [63:0]ALUoutput_in,
 input [63:0]src2_in,
-input [ 4:0]rd,
 
 
-//input [63:0]pc,
 
-
-//output [63:0]dnpc,
-output reg [63:0]dnpc,
-output pc_update,
-
-output       valid_EX_WB  ,
-input        ready_EX_WB  ,
-output [63:0]pc_EX_WB  ,
-output [31:0]inst_EX_WB,
+output       valid_MEM_WB  ,
+input        ready_MEM_WB  ,
+output [63:0]pc_MEM_WB  ,
+output [31:0]inst_MEM_WB,
 
 output       reg_wr_wen   ,
 output [ 4:0]reg_wr_ID    ,
-output [63:0]reg_wr_value ,
+output [63:0]reg_wr_value 
 
-output [63:0]wdata_mtvec,
-output [63:0]wdata_mepc,
-output [63:0]wdata_mcause,
-output [63:0]wdata_mstatus,
-output wen_mtvec,
-output wen_mepc,
-output wen_mcause,
-output wen_mstatus,
-
-input [63:0] gpr[31:0]
 
 /*
 output reg arvalid,
@@ -95,72 +64,189 @@ output exu_block
 
 
 //*************************  pipeline ********************************
-reg       EX_reg_valid         ;
-reg [63:0]EX_reg_pc            ;
-reg [31:0]EX_reg_inst          ;
-reg [23:0]EX_reg_opcode        ;
-reg [63:0]EX_reg_alu_operator_a;
-reg [63:0]EX_reg_alu_operator_b;
-reg [ 7:0]EX_reg_alu_mode      ;
-reg [ 4:0]EX_reg_rd            ;
-reg [63:0]EX_reg_src2          ;
+reg       MEM_reg_valid         ;
+reg [63:0]MEM_reg_pc            ;
+reg [31:0]MEM_reg_inst          ;
+reg [23:0]MEM_reg_opcode        ;
+reg [63:0]MEM_reg_aluoutput     ;
+reg [63:0]MEM_reg_src2          ;
 
 always @(posedge clk) begin
 	if(rst) begin
-		EX_reg_valid          <=  1'b0;
-		EX_reg_pc             <= 64'b0;
-		EX_reg_inst           <= 32'b0;
-		EX_reg_opcode         <= 24'b0;
-		EX_reg_alu_operator_a <= 64'b0;
-		EX_reg_alu_operator_b <= 64'b0;
-		EX_reg_alu_mode       <=  8'b0;
-		EX_reg_rd             <=  5'b0;
-		EX_reg_src2           <= 64'b0;
+		MEM_reg_valid          <=  1'b0;
+		MEM_reg_pc             <= 64'b0;
+		MEM_reg_inst           <= 32'b0;
+		MEM_reg_opcode         <= 24'b0;
+		MEM_reg_aluoutput      <= 64'b0;
+		MEM_reg_src2           <= 64'b0;
 	end
 	else begin
-		EX_reg_valid          <= valid_ID_EX;
-		EX_reg_pc             <= pc_ID_EX;
-		EX_reg_inst           <= inst_ID_EX;
-		EX_reg_opcode         <= opcode_in;
-		EX_reg_alu_operator_a <= ALU_operator_a;
-		EX_reg_alu_operator_b <= ALU_operator_b;
-		EX_reg_alu_mode       <= ALU_mode      ;
-		EX_reg_rd             <= rd            ;
-		EX_reg_src2           <= src2_in       ;
+		MEM_reg_valid          <= valid_EX_MEM;
+		MEM_reg_pc             <= pc_EX_MEM;
+		MEM_reg_inst           <= inst_EX_MEM;
+		MEM_reg_opcode         <= opcode_in;
+		MEM_reg_aluoutput      <= ALUoutput_in;
+		MEM_reg_src2           <= src2_in       ;
 	end
 end
 
 wire [31:0]inst;
-assign inst = EX_reg_valid ? EX_reg_inst : 32'b0;
+assign inst = MEM_reg_valid ? MEM_reg_inst : 32'b0;
 
 wire [23:0]opcode;
-assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
+assign opcode = MEM_reg_valid ? MEM_reg_opcode : 24'b0;
+
+wire [63:0]aluoutput;
+assign aluoutput = MEM_reg_valid ? MEM_reg_aluoutput : 64'b0;
 
 wire [63:0]src2;
-assign src2 = EX_reg_valid ? EX_reg_src2 : 64'b0;
+assign src2 = MEM_reg_valid ? MEM_reg_src2 : 64'b0;
 
-
-assign reg_wr_wen   = EX_reg_valid ? wen       : 1'b0;
-assign reg_wr_ID    = EX_reg_valid ? EX_reg_rd : 5'b0;
-assign reg_wr_value = EX_reg_valid ? wdata_reg : 64'b0;
+assign reg_wr_wen   = MEM_reg_valid ? wen       : 1'b0;
+assign reg_wr_ID    = MEM_reg_valid ? MEM_reg_inst[11:7] : 5'b0;
+assign reg_wr_value = MEM_reg_valid ? wdata_reg : 64'b0;
 
 
 //output
-assign valid_EX_WB   = EX_reg_valid;
-assign pc_EX_WB   = EX_reg_pc;
-assign inst_EX_WB = EX_reg_inst;
+assign valid_MEM_WB   = MEM_reg_valid;
+assign pc_MEM_WB   = MEM_reg_pc;
+assign inst_MEM_WB = MEM_reg_inst;
 
 
 
 
 always @(negedge clk) begin
-	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  op_mode:%x",EX_reg_pc,EX_reg_inst,EX_reg_valid,EX_reg_alu_operator_a,EX_reg_alu_operator_b,EX_reg_alu_mode);
+	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  op_mode:%x",MEM_reg_pc,MEM_reg_inst,MEM_reg_valid,MEM_reg_alu_operator_a,MEM_reg_alu_operator_b,MEM_reg_alu_mode);
 end
 //********************************************************************
 
 
-//memory
 
+
+reg wen;
+reg [63:0]wdata_reg;
+always @(*) begin
+//gpr control
+	case (opcode)
+    24'h4000 : wen=1'b1;
+    24'h5000 : wen=1'b1;
+    24'h6000 : wen=1'b1;
+    24'h7000 : wen=1'b1;
+    24'h8000 : wen=1'b1;
+    24'h9000 : wen=1'b1;
+    24'h10000: wen=1'b1;
+    24'h12000: wen=1'b1;
+    24'h13000: wen=1'b1;
+    24'h14000: wen=1'b1;
+    24'h15000: wen=1'b1;
+    24'h16000: wen=1'b1;
+    24'h17000: wen=1'b1;
+    24'h18000: wen=1'b1;
+    24'h19000: wen=1'b1;
+    24'h1a000: wen=1'b1;
+    24'h1b000: wen=1'b1;
+    24'h1d000: wen=1'b1;
+    24'h21000: wen=1'b1;
+    24'h22000: wen=1'b1;
+    24'h24000: wen=1'b1;
+    24'h25000: wen=1'b1;
+    24'h26000: wen=1'b1;
+    24'h27000: wen=1'b1;
+    24'h28000: wen=1'b1;
+    24'h29000: wen=1'b1;
+    24'h100  : wen=1'b1;
+    24'h200  : wen=1'b1;
+    24'h300  : wen=1'b1;
+    24'h400  : wen=1'b1;
+    24'h800  : wen=1'b1;
+    24'hc00  : wen=1'b1;
+    24'd4    : wen=1'b1;
+    24'd11   : wen=1'b1;
+    24'd12   : wen=1'b1;
+    24'd13   : wen=1'b1;
+    24'd14   : wen=1'b1;
+    24'd15   : wen=1'b1;
+    24'd19   : wen=1'b1;
+    24'd20   : wen=1'b1;
+    24'd21   : wen=1'b1;
+    24'd22   : wen=1'b1;
+    24'd23   : wen=1'b1;
+    24'd24   : wen=1'b1;
+    24'd41   : wen=1'b1;
+    24'd42   : wen=1'b1;
+    24'd47   : wen=1'b1;
+    24'd49   : wen=1'b1;
+    24'd50   : wen=1'b1;
+    default:  wen=1'b0;
+        endcase
+
+
+	case (opcode)
+    24'h4000 : wdata_reg=aluoutput;
+    24'h5000 : wdata_reg=aluoutput;
+    24'h6000 : wdata_reg=aluoutput;
+    24'h7000 : wdata_reg=aluoutput;
+    24'h8000 : wdata_reg=aluoutput;
+    24'h9000 : wdata_reg=aluoutput;
+    24'h10000: wdata_reg=aluoutput;
+    24'h12000: wdata_reg=aluoutput;
+    24'h13000: wdata_reg=aluoutput;
+    24'h14000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
+    24'h15000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
+    24'h16000: wdata_reg=(aluoutput[63]?({{32{1'b1}},aluoutput[63:32]}):({{32{1'b0}},aluoutput[63:32]}));
+    24'h17000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
+    24'h18000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
+    24'h19000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
+    24'h1a000: wdata_reg=(aluoutput[63]?({{32{1'b1}},aluoutput[63:32]}):({{32{1'b0}},aluoutput[63:32]}));
+    24'h1b000: wdata_reg=(aluoutput[63]?({{32{1'b1}},aluoutput[63:32]}):({{32{1'b0}},aluoutput[63:32]}));
+    24'h1d000: wdata_reg=aluoutput;
+    24'h21000: wdata_reg=aluoutput;
+    24'h22000: wdata_reg=aluoutput;
+    24'h24000: wdata_reg=aluoutput;
+    24'h25000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
+    24'h26000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
+    24'h27000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
+    24'h28000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
+    24'h29000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
+    //24'h100  : wdata_reg=imm_U;
+    24'h100  : wdata_reg=aluoutput;
+    24'h200  : wdata_reg=aluoutput;
+    //24'h300  : wdata_reg=pc + 64'd4;
+    24'h300  : wdata_reg=MEM_reg_pc + 64'd4;
+    24'h400  : wdata_reg=aluoutput;
+    24'h800  : wdata_reg=aluoutput;
+    24'hc00  : wdata_reg=aluoutput;
+    //24'd4    : wdata_reg=pc + 64'd4;
+    24'd4    : wdata_reg=MEM_reg_pc + 64'd4;
+    24'd11   : wdata_reg=rdata_fix;
+    24'd12   : wdata_reg=rdata_fix;
+    24'd13   : wdata_reg=rdata_fix;
+    24'd14   : wdata_reg=rdata_fix;
+    24'd15   : wdata_reg=rdata_fix;
+    24'd19   : wdata_reg=aluoutput;
+    24'd20   : wdata_reg=aluoutput;
+    24'd21   : wdata_reg=aluoutput;
+    24'd22   : wdata_reg=aluoutput;
+    24'd23   : wdata_reg=aluoutput;
+    24'd24   : wdata_reg=aluoutput;
+    24'd41   : wdata_reg=rdata_fix;
+    24'd42   : wdata_reg=rdata_fix;
+    24'd47   : wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
+//    24'd49   : wdata_reg=src_csr;
+//    24'd50   : wdata_reg=src_csr;
+    24'd49   : wdata_reg=MEM_reg_src2;
+    24'd50   : wdata_reg=MEM_reg_src2;
+    default  : wdata_reg=64'b0;
+	endcase
+end
+
+
+
+
+
+
+
+//memory
 
 always @(*) begin
 	case(waddr[2:0])
@@ -264,21 +350,21 @@ end
 always @(*) begin
 	//$display("*  clk=%d",clk);
 	case(opcode)
-    24'd11  : raddr=result_alu0;
-    24'd12  : raddr=result_alu0;
-    24'd13  : raddr=result_alu0;
-    24'd14  : raddr=result_alu0;
-    24'd15  : raddr=result_alu0;
-    24'd41  : raddr=result_alu0;
-    24'd42  : raddr=result_alu0;
+    24'd11  : raddr=aluoutput;
+    24'd12  : raddr=aluoutput;
+    24'd13  : raddr=aluoutput;
+    24'd14  : raddr=aluoutput;
+    24'd15  : raddr=aluoutput;
+    24'd41  : raddr=aluoutput;
+    24'd42  : raddr=aluoutput;
     default: raddr=64'b0;
 	endcase
 
 	case(opcode)
-    24'd16  : waddr=result_alu0;
-    24'd17  : waddr=result_alu0;
-    24'd18  : waddr=result_alu0;
-    24'd43  : waddr=result_alu0;
+    24'd16  : waddr=aluoutput;
+    24'd17  : waddr=aluoutput;
+    24'd18  : waddr=aluoutput;
+    24'd43  : waddr=aluoutput;
     default: waddr=64'b0;
 	endcase
 
@@ -484,8 +570,8 @@ end
 
 //  always @(posedge clk) begin
 //    $display("%d,%d,%d",rd,rs1,imm_I);
-//    $display("%d,%d,%d,%d",result_alu0,wdata_reg,wen,opcode);
-//    $display("%d,%d,%d",result_alu0,src1,imm_I);
+//    $display("%d,%d,%d,%d",aluoutput,wdata_reg,wen,opcode);
+//    $display("%d,%d,%d",aluoutput,src1,imm_I);
 //  end
 
 endmodule
