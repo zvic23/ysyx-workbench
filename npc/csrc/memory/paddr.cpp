@@ -184,7 +184,7 @@ void built_in_program(){
   *(uint32_t*)&pmem[0x00000008]=0x00518193; //gp = gp + 5
   *(uint32_t*)&pmem[0x0000000c]=0x00720213; //tp = tp + 7
 					    //
-  *(uint32_t*)&pmem[0x00000010]=0x00600593; //a1 = $0 + 4
+  *(uint32_t*)&pmem[0x00000010]=0x00600593; //a1 = $0 + 6
   *(uint32_t*)&pmem[0x00000014]=0x00100013; //give $0 the "1",it equals invalid operation
   *(uint32_t*)&pmem[0x00000018]=0x00100013; //in order to give the gprs time to write
   *(uint32_t*)&pmem[0x0000001c]=0x00100013; //
