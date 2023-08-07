@@ -264,7 +264,7 @@ uint64_t time_init;
 
 
 int main() {
-  if(0) load_img();
+  if(1) load_img();
   else built_in_program();
 
   sim_init();
@@ -293,7 +293,7 @@ extern uint64_t img_size;
   time_init = (time_first.tv_sec*1000000)+time_first.tv_usec;
 
 
-  if(1) sdb_mainloop();
+  if(0) sdb_mainloop();
   else execute(-1);
 
   while(0){
