@@ -51,7 +51,7 @@ end
 
 
 always @(negedge clk) begin
-	//$display("WB   pc:%x   inst:%x   valid:%d",WB_reg_pc,WB_reg_inst,WB_reg_valid);
+	$display("WB   pc:%x   inst:%x   valid:%d",WB_reg_pc,WB_reg_inst,WB_reg_valid);
 	if(WB_reg_valid) begin 
 		npc_complete_one_inst();
 	end
