@@ -668,16 +668,16 @@ always @(*) begin
 
 
     case (opcode)
-    24'h300 : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
-    24'd4   : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
-    24'd5   : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
-    24'd6   : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
-    24'd7   : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
-    24'd8   : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
-    24'd9   : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
-    24'd10  : pc_update= EX_reg_valid ? 1'b1 : 1'b1;
-    24'h200000: pc_update=EX_reg_valid ? 1'b1 : 1'b1;   
-    24'h500000: pc_update=EX_reg_valid ? 1'b1 : 1'b1;             
+    24'h300  : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+    24'd4    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+    24'd5    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+    24'd6    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+    24'd7    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+    24'd8    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+    24'd9    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+    24'd10   : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+    24'h200000: pc_update=EX_reg_valid ? 1'b1 : 1'b0;   
+    24'h500000: pc_update=EX_reg_valid ? 1'b1 : 1'b0;             
     default: pc_update=1'b0;
     endcase
 end
