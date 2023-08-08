@@ -856,12 +856,12 @@ always@(*) begin
 //    24'd8    : mode=8'd1 ; 
 //    24'd9    : mode=8'd1 ; 
 //    24'd10   : mode=8'd1 ; 
-    24'd5    : mode=8'd1 ; 
-    24'd6    : mode=8'd1 ; 
-    24'd7    : mode=8'd1 ; 
-    24'd8    : mode=8'd1 ; 
-    24'd9    : mode=8'd1 ; 
-    24'd10   : mode=8'd1 ; 
+    24'd5    : mode=8'd0 ; 
+    24'd6    : mode=8'd0 ; 
+    24'd7    : mode=8'd0 ; 
+    24'd8    : mode=8'd0 ; 
+    24'd9    : mode=8'd0 ; 
+    24'd10   : mode=8'd0 ; 
 
     24'd20   : mode=8'd2 ;
     24'd21   : mode=8'd3 ;
