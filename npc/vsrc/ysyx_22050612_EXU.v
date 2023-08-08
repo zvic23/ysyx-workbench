@@ -797,8 +797,8 @@ always@(*) begin
     24'h800  : operator_b={{58{1'b0}},shamt};
     24'hc00  : operator_b={{58{1'b0}},shamt};
 
-    //branching inst : calculate the address
     24'd4    : operator_b=imm;
+    //branching inst : calculate the address
     24'd5    : operator_b=imm; 
     24'd6    : operator_b=imm; 
     24'd7    : operator_b=imm; 
