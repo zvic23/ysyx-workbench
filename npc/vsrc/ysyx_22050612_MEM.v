@@ -112,7 +112,9 @@ assign valid_MEM_WB   = MEM_reg_valid;
 assign pc_MEM_WB   = MEM_reg_pc;
 assign inst_MEM_WB = MEM_reg_inst;
 
-
+wire MEM_block;
+assign MEM_block = 1'b0;
+assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
 
 
 always @(negedge clk) begin

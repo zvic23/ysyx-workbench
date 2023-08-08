@@ -13,7 +13,7 @@ module ysyx_22050612_EXU(
 input clk,
 input rst,
 input       valid_ID_EX,
-output      ready_ID_IF,
+output      ready_ID_EX,
 input [63:0]pc_ID_EX,
 input [31:0]inst_ID_EX,
 /*
@@ -166,6 +166,10 @@ assign imm  = EX_reg_valid ? EX_reg_imm  : 64'b0;
 assign valid_EX_MEM   = EX_reg_valid;
 assign pc_EX_MEM   = EX_reg_pc;
 assign inst_EX_MEM = EX_reg_inst;
+
+wire EX_block;
+assign EX_block = 1'b0;
+assign ready_ID_EX = EX_block ? 1'b0 : ready_EX_MEM;
 
 
 assign opcode_EX_MEM = EX_reg_opcode;

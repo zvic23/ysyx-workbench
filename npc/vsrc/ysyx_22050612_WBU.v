@@ -3,9 +3,10 @@ import "DPI-C" function void npc_complete_one_inst ();
 module ysyx_22050612_WBU(
 input clk,
 input rst,
-input       valid_EX_WB  ,
-input [63:0]pc_EX_WB  ,
-input [31:0]inst_EX_WB,
+input       valid_MEM_WB  ,
+output      ready_MEM_WB  ,
+input [63:0]pc_MEM_WB  ,
+input [31:0]inst_MEM_WB,
 
 input       reg_wr_wen,
 input [ 4:0]reg_wr_ID,
@@ -40,9 +41,9 @@ always @(posedge clk) begin
 		WB_reg_wdata<= 64'b0;
 	end
 	else begin
-		WB_reg_valid <= valid_EX_WB;
-		WB_reg_pc    <= pc_EX_WB;
-		WB_reg_inst  <= inst_EX_WB;
+		WB_reg_valid <= valid_MEM_WB;
+		WB_reg_pc    <= pc_MEM_WB;
+		WB_reg_inst  <= inst_MEM_WB;
 //		WB_reg_opcode<= opcode_in;
 		WB_reg_wen  <= reg_wr_wen   ;
 		WB_reg_id   <= reg_wr_ID    ;
@@ -56,6 +57,7 @@ end
 //wire [23:0]opcode;
 //assign opcode = WB_reg_valid ? WB_reg_opcode : 24'b0;
 
+assign ready_MEM_WB = 1'b1;
 
 
 
