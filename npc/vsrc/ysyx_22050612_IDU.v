@@ -180,7 +180,7 @@ assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},
 
 wire ID_block;
 assign ID_block = src1_conflict || src2_conflict;
-assign ready_IF_ID = ID_block ? 1'b0 : ready_ID_EX;;
+assign ready_IF_ID = ID_block ? 1'b0 : ready_ID_EX;
 
 
 
