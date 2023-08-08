@@ -544,7 +544,13 @@ always @(*) begin
     24'd18   : imm=imm_S;
     24'd43   : imm=imm_S;
 
-
+    //24'd4    : imm=imm_B;
+    24'd5    : imm=imm_B;
+    24'd6    : imm=imm_B;
+    24'd7    : imm=imm_B;
+    24'd8    : imm=imm_B;
+    24'd9    : imm=imm_B;
+    24'd10   : imm=imm_B;
 
     default  : imm=imm_I;
     endcase
