@@ -466,7 +466,7 @@ always @(*) begin
 //    24'd23   : wdata_reg=result_alu0;
 //    24'd24   : wdata_reg=result_alu0;
 //    24'd41   : wdata_reg=rdata_fix;
-//    24'd42   : wdata_reg=rdata_fix;
+//    24'd42   : wdata_reg=rdata_fix;;
 //    24'd47   : wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
 ////    24'd49   : wdata_reg=src_csr;
 ////    24'd50   : wdata_reg=src_csr;
@@ -660,8 +660,8 @@ always @(*) begin
     24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc;
     24'd9   : dnpc=(EX_reg_src_a<EX_reg_src_b)?(imm_B+EX_reg_pc):snpc         ;
     24'd10  : dnpc=(EX_reg_src_a>=EX_reg_src_b)?(imm_B+EX_reg_pc):snpc        ;        //(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc
-    24'h200000: dnpc=EX_reg_src_a                             ;        
-    24'h500000: dnpc=EX_reg_src_a                             ;        
+    24'h200000: dnpc=EX_reg_src_b                             ;        
+    24'h500000: dnpc=EX_reg_src_b                             ;        
     default: dnpc=snpc;
     endcase
 
@@ -737,7 +737,7 @@ always@(*) begin
 //    24'h300  : wdata_reg=EX_reg_pc + 64'd4;
 //    //24'd4    : wdata_reg=pc + 64'd4;
 //    24'd4    : wdata_reg=EX_reg_pc + 64'd4;
-//    24'd47   : wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    24'd47   : wdata_reg=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
 //    24'd49   : wdata_reg=src_csr;
 //    24'd50   : wdata_reg=src_csr;
 //    24'd49   : wdata_reg=EX_reg_src_b;
@@ -764,7 +764,7 @@ always@(*) begin
     24'h1b000: operator_a={src1[31:0],{32{1'b0}}};
     24'h100  : operator_a=64'b0;
     24'h200  : operator_a=EX_reg_pc;
-    24'h300  : operator_a=EX_reg_pc;
+    24'h300  : operator_a=EX_reg_pc;          //branch  to do
     default  : operator_a=src1;
     endcase
 
@@ -803,6 +803,7 @@ always@(*) begin
     24'd43   : operator_b=imm;
     24'd47   : operator_b=imm;
 //    24'd50   : operator_b=src_csr;
+    24'd50   : operator_b=src2;
     default  : operator_b=src2;
     endcase
 
@@ -838,7 +839,7 @@ always@(*) begin
     24'd23   : mode=8'd6 ;
     24'd24   : mode=8'd4 ;
     24'd50   : mode=8'd6 ;
-    default  : mode=8'd0;
+    default  : mode=8'd0 ;
     endcase
 end
 

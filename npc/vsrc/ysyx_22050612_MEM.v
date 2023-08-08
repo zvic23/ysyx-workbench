@@ -246,7 +246,8 @@ always @(*) begin
     24'd24   : wdata_reg=aluoutput;
     24'd41   : wdata_reg=rdata_fix;
     24'd42   : wdata_reg=rdata_fix;
-    24'd47   : wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
+    //24'd47   : wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
+    24'd47   : wdata_reg=aluoutput;
 //    24'd49   : wdata_reg=src_csr;
 //    24'd50   : wdata_reg=src_csr;
     24'd49   : wdata_reg=MEM_reg_src2;

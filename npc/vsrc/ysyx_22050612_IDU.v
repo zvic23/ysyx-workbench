@@ -514,9 +514,26 @@ end
 */
 
 assign src_A = gpr[rs1];
-assign src_B = gpr[rs2];
+//assign src_B = gpr[rs2];
 
 always @(*) begin
+////src_A
+//    case (opcode)
+//    //ecall  mret
+//    24'h200000: src_A=mtvec   ;        
+//    24'h500000: src_A=mepc    ;
+//    default   : src_A=gpr[rs1];
+//    endcase 
+
+//src_B
+    case (opcode)
+    24'd49   : src_B=src_csr;
+    24'd50   : src_B=src_csr;
+    24'h200000:src_B=mtvec   ;        
+    24'h500000:src_B=mepc    ;
+    default  : src_B=gpr[rs2];
+    endcase 
+
 //imm
     case (opcode)
     24'h100  : imm=imm_U; 
