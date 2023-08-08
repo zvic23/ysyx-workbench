@@ -769,6 +769,15 @@ always@(*) begin
     24'h100  : operator_a=64'b0;
     24'h200  : operator_a=EX_reg_pc;
     24'h300  : operator_a=EX_reg_pc;          //branch  to do
+
+    //branching inst : calculate the address
+    24'd5    : operator_a=EX_reg_pc; 
+    24'd6    : operator_a=EX_reg_pc; 
+    24'd7    : operator_a=EX_reg_pc; 
+    24'd8    : operator_a=EX_reg_pc; 
+    24'd9    : operator_a=EX_reg_pc; 
+    24'd10   : operator_a=EX_reg_pc; 
+
     default  : operator_a=src1;
     endcase
 
@@ -787,7 +796,16 @@ always@(*) begin
     24'h400  : operator_b={{58{1'b0}},shamt};
     24'h800  : operator_b={{58{1'b0}},shamt};
     24'hc00  : operator_b={{58{1'b0}},shamt};
+
+    //branching inst : calculate the address
     24'd4    : operator_b=imm;
+    24'd5    : operator_b=imm; 
+    24'd6    : operator_b=imm; 
+    24'd7    : operator_b=imm; 
+    24'd8    : operator_b=imm; 
+    24'd9    : operator_b=imm; 
+    24'd10   : operator_b=imm; 
+
     24'd11   : operator_b=imm;
     24'd12   : operator_b=imm;
     24'd13   : operator_b=imm;
