@@ -116,9 +116,9 @@ assign reg_wr_value = MEM_reg_valid ? wdata_reg : 64'b0;
 
 
 //output
-assign valid_MEM_WB   = MEM_reg_valid;
-assign pc_MEM_WB   = MEM_reg_pc;
-assign inst_MEM_WB = MEM_reg_inst;
+assign valid_MEM_WB = (MEM_block==1'b0) ? MEM_reg_valid :  1'b0;
+assign pc_MEM_WB    = (MEM_block==1'b0) ? MEM_reg_pc    : 64'b0;
+assign inst_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_inst  : 32'b0;
 
 wire MEM_block;
 assign MEM_block = 1'b0;

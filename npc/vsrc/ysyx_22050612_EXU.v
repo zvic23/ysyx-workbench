@@ -175,9 +175,9 @@ assign imm  = EX_reg_valid ? EX_reg_imm  : 64'b0;
 
 
 //output
-assign valid_EX_MEM   = EX_reg_valid;
-assign pc_EX_MEM   = EX_reg_pc;
-assign inst_EX_MEM = EX_reg_inst;
+assign valid_EX_MEM = (EX_block==1'b0) ? EX_reg_valid :  1'b0;
+assign pc_EX_MEM    = (EX_block==1'b0) ? EX_reg_pc    : 64'b0;
+assign inst_EX_MEM  = (EX_block==1'b0) ? EX_reg_inst  : 32'b0;
 
 wire EX_block;
 assign EX_block = 1'b0;

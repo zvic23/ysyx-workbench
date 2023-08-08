@@ -65,9 +65,9 @@ always @(posedge clk) begin
 	end
 end
 
-assign valid_ID_EX= (ID_block==1'b0) ? ID_reg_valid : 1'b0;
-assign pc_ID_EX   = (ID_block==1'b0) ? ID_reg_pc    : 64'b0;
-assign inst_ID_EX = (ID_block==1'b0) ? ID_reg_inst  : 32'b0;
+assign valid_ID_EX = (ID_block==1'b0) ? ID_reg_valid :  1'b0;
+assign pc_ID_EX    = (ID_block==1'b0) ? ID_reg_pc    : 64'b0;
+assign inst_ID_EX  = (ID_block==1'b0) ? ID_reg_inst  : 32'b0;
 
 
 
