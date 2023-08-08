@@ -215,7 +215,7 @@ end
 
 
 always @(negedge clk) begin
-	$display("IF   pc:%x   inst:%x   valid:%d",pc,inst,valid_IF_ID);
+	//$display("IF   pc:%x   inst:%x   valid:%d",pc,inst,valid_IF_ID);
 end
 
 
