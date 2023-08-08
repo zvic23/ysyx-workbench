@@ -127,6 +127,18 @@ always @(posedge clk) begin
 	//	EX_reg_rd             <=  5'b0;
 	//	EX_reg_src2           <= 64'b0;
 	end
+	else if(!ready_ID_EX)begin
+		EX_reg_valid          <= EX_reg_valid ;
+		EX_reg_pc             <= EX_reg_pc    ;
+		EX_reg_inst           <= EX_reg_inst  ;
+		EX_reg_opcode         <= EX_reg_opcode;
+		EX_reg_src_a          <= EX_reg_src_a ;
+		EX_reg_src_b          <= EX_reg_src_b ;
+		EX_reg_imm            <= EX_reg_imm   ;
+	//	EX_reg_alu_mode       <= ALU_mode     ;
+	//	EX_reg_rd             <= rd           ;
+	//	EX_reg_src2           <= src2_in      ;
+	end
 	else begin
 		EX_reg_valid          <= valid_ID_EX;
 		EX_reg_pc             <= pc_ID_EX;

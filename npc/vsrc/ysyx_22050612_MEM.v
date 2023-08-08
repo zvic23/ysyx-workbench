@@ -80,6 +80,14 @@ always @(posedge clk) begin
 		MEM_reg_aluoutput      <= 64'b0;
 		MEM_reg_src2           <= 64'b0;
 	end
+	else if(!ready_EX_MEM)begin
+		MEM_reg_valid          <= MEM_reg_valid      ; 
+		MEM_reg_pc             <= MEM_reg_pc         ; 
+		MEM_reg_inst           <= MEM_reg_inst       ; 
+		MEM_reg_opcode         <= MEM_reg_opcode     ; 
+		MEM_reg_aluoutput      <= MEM_reg_aluoutput  ; 
+		MEM_reg_src2           <= MEM_reg_src2       ; 
+	end
 	else begin
 		MEM_reg_valid          <= valid_EX_MEM;
 		MEM_reg_pc             <= pc_EX_MEM;
