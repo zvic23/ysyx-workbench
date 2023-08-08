@@ -660,9 +660,9 @@ always @(*) begin
 //    24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc;
     24'd5   : dnpc=(EX_reg_src_a==EX_reg_src_b)?result_alu0:snpc;
     24'd6   : dnpc=(EX_reg_src_a!=EX_reg_src_b)?result_alu0:snpc;
-    24'd7   : dnpc=($signed(EX_reg_src_a)<$signed(EX_reg_src_b))?result_alu0:snpc;
+    24'd7   : dnpc=($signed(EX_reg_src_a) <$signed(EX_reg_src_b))?result_alu0:snpc;
     24'd8   : dnpc=($signed(EX_reg_src_a)>=$signed(EX_reg_src_b))?result_alu0:snpc;
-    24'd9   : dnpc=(EX_reg_src_a<EX_reg_src_b)?result_alu0:snpc         ;
+    24'd9   : dnpc=(EX_reg_src_a <EX_reg_src_b)?result_alu0:snpc         ;
     24'd10  : dnpc=(EX_reg_src_a>=EX_reg_src_b)?result_alu0:snpc        ;        //(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc
     24'h200000: dnpc=EX_reg_src_b                             ;        
     24'h500000: dnpc=EX_reg_src_b                             ;        
@@ -849,12 +849,20 @@ always@(*) begin
     24'h400  : mode=8'd8 ;
     24'h800  : mode=8'd9 ;
     24'hc00  : mode=8'd10;
-    24'd5    : mode=8'd1 ; 
-    24'd6    : mode=8'd1 ; 
-    24'd7    : mode=8'd1 ; 
-    24'd8    : mode=8'd1 ; 
-    24'd9    : mode=8'd1 ; 
-    24'd10   : mode=8'd1 ; 
+
+//    24'd5    : mode=8'd1 ;    //the mode for calculate the branch condition
+//    24'd6    : mode=8'd1 ; 
+//    24'd7    : mode=8'd1 ; 
+//    24'd8    : mode=8'd1 ; 
+//    24'd9    : mode=8'd1 ; 
+//    24'd10   : mode=8'd1 ; 
+    24'd5    : mode=8'd0 ; 
+    24'd6    : mode=8'd0 ; 
+    24'd7    : mode=8'd0 ; 
+    24'd8    : mode=8'd0 ; 
+    24'd9    : mode=8'd0 ; 
+    24'd10   : mode=8'd0 ; 
+
     24'd20   : mode=8'd2 ;
     24'd21   : mode=8'd3 ;
     24'd22   : mode=8'd7 ;
