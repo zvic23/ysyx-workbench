@@ -185,6 +185,8 @@ always@(*) begin
     			10'b101_1100011:  rs2_block_checking[1]= 1'd1   ;    //bge
     			10'b110_1100011:  rs2_block_checking[1]= 1'd1   ;    //bltu
     			10'b111_1100011:  rs2_block_checking[1]= 1'd1   ;    //bgeu
+		//	10'b001_1110011:  rs2_block_checking[1]= 1'd1   ;    //csrrw
+             	//	10'b010_1110011:  rs2_block_checking[1]= 1'd1   ;    //csrrs
 			default :         rs2_block_checking[1]= 1'd0   ;
 		endcase
 		case ({ID_reg_inst[31:25],ID_reg_inst[14:12],ID_reg_inst[6:0]})
