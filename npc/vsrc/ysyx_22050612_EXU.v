@@ -69,8 +69,8 @@ input [63:0] gpr[31:0],
 
 
 
-output EX_reg_valid,
-output [31:0]EX_reg_inst
+output reg EX_reg_valid,
+output reg [31:0]EX_reg_inst
 
 /*
 output reg arvalid,
