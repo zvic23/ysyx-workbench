@@ -12,19 +12,20 @@ input       reg_wr_wen,
 input [ 4:0]reg_wr_ID,
 input [63:0]reg_wr_value,
 
-output [63:0] gpr[31:0]
+output [63:0] gpr[31:0],
 
 
-
+output reg WB_reg_valid,
+output reg [31:0]WB_reg_inst
 );
 
 
 
 
 //*************************  pipeline ********************************
-reg       WB_reg_valid;
+//reg       WB_reg_valid;
 reg [63:0]WB_reg_pc   ;
-reg [31:0]WB_reg_inst ;
+//reg [31:0]WB_reg_inst ;
 reg       WB_reg_wen ;
 reg [ 4:0]WB_reg_id ;
 reg [63:0]WB_reg_wdata ;

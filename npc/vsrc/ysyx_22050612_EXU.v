@@ -70,7 +70,14 @@ input [63:0] gpr[31:0],
 
 
 output reg EX_reg_valid,
-output reg [31:0]EX_reg_inst
+output reg [31:0]EX_reg_inst,
+
+input MEM_reg_valid,
+input [31:0]MEM_reg_inst,
+
+input WB_reg_valid,
+input [31:0]WB_reg_inst
+
 
 /*
 output reg arvalid,

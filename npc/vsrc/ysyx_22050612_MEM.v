@@ -25,7 +25,11 @@ output [31:0]inst_MEM_WB,
 
 output       reg_wr_wen   ,
 output [ 4:0]reg_wr_ID    ,
-output [63:0]reg_wr_value 
+output [63:0]reg_wr_value ,
+
+
+output reg MEM_reg_valid,
+output reg [31:0]MEM_reg_inst
 
 
 /*
@@ -64,9 +68,9 @@ output exu_block
 
 
 //*************************  pipeline ********************************
-reg       MEM_reg_valid         ;
+//reg       MEM_reg_valid         ;
 reg [63:0]MEM_reg_pc            ;
-reg [31:0]MEM_reg_inst          ;
+//reg [31:0]MEM_reg_inst          ;
 reg [23:0]MEM_reg_opcode        ;
 reg [63:0]MEM_reg_aluoutput     ;
 reg [63:0]MEM_reg_src2          ;
