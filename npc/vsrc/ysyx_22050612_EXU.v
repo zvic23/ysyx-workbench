@@ -65,7 +65,12 @@ output wen_mepc,
 output wen_mcause,
 output wen_mstatus,
 
-input [63:0] gpr[31:0]
+input [63:0] gpr[31:0],
+
+
+
+output EX_reg_valid,
+output [31:0]EX_reg_inst
 
 /*
 output reg arvalid,
@@ -103,9 +108,9 @@ output exu_block
 
 
 //*************************  pipeline ********************************
-reg       EX_reg_valid         ;
+//reg       EX_reg_valid         ;
 reg [63:0]EX_reg_pc            ;
-reg [31:0]EX_reg_inst          ;
+//reg [31:0]EX_reg_inst          ;
 reg [23:0]EX_reg_opcode        ;
 reg [63:0]EX_reg_src_a;
 reg [63:0]EX_reg_src_b;
