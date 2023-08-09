@@ -152,13 +152,13 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 
 
 
-void built_in_program(){
-  *(uint32_t*)&pmem[0x00000000]=0x00100093; //gpr[1](ra)+gpr[0]1
-  *(uint32_t*)&pmem[0x00000004]=0x00208113; //gpr[2](sp)+gpr[1]2
-  *(uint32_t*)&pmem[0x00000008]=0x00310193; //gpr[3](gp)+gpr[2]3
-  *(uint32_t*)&pmem[0x0000000c]=0x00418213; //gpr[4](tp)+gpr[3]4
-  *(uint32_t*)&pmem[0x00000010]=0x00100073; //ebreak
-}
+//void built_in_program(){
+//  *(uint32_t*)&pmem[0x00000000]=0x00100093; //gpr[1](ra)+gpr[0]1
+//  *(uint32_t*)&pmem[0x00000004]=0x00208113; //gpr[2](sp)+gpr[1]2
+//  *(uint32_t*)&pmem[0x00000008]=0x00310193; //gpr[3](gp)+gpr[2]3
+//  *(uint32_t*)&pmem[0x0000000c]=0x00418213; //gpr[4](tp)+gpr[3]4
+//  *(uint32_t*)&pmem[0x00000010]=0x00100073; //ebreak
+//}
 
 //void built_in_program(){
 //  *(uint32_t*)&pmem[0x00000000]=0x00100093; //gpr[1](ra)+1
@@ -202,29 +202,29 @@ void built_in_program(){
 //  *(uint32_t*)&pmem[0x00000034]=0x00100073; //ebreak
 //}
 
-//void built_in_program(){        //check load interlock
-//  *(uint32_t*)&pmem[0x00000000]=0x00083083; //ld ra 0(a6)
-//  *(uint32_t*)&pmem[0x00000004]=0x00100133; //add sp, zero, ra
-//  *(uint32_t*)&pmem[0x00000008]=0x00518193; //gp = gp + 5
-//  *(uint32_t*)&pmem[0x0000000c]=0x00720213; //tp = tp + 7
-//					    //
-//  *(uint32_t*)&pmem[0x00000010]=0x00600593; //a1 = $0 + 6
-//  *(uint32_t*)&pmem[0x00000014]=0x00100013; //give $0 the "1",it equals invalid operation
-//  *(uint32_t*)&pmem[0x00000018]=0x00100013; //in order to give the gprs time to write
-//  *(uint32_t*)&pmem[0x0000001c]=0x00100013; //
-//					    //
-//  *(uint32_t*)&pmem[0x00000020]=0x021102b3; //t0 = ra * sp
-//  *(uint32_t*)&pmem[0x00000024]=0x02218333; //t1 = sp * gp
-//  *(uint32_t*)&pmem[0x00000028]=0x023203b3; //t2 = gp * tp
-//  *(uint32_t*)&pmem[0x0000002c]=0x02408433; //s0 = ra * tp
-//					    
-//  *(uint32_t*)&pmem[0x00000030]=0xfc1598e3; //beq ra a1
-//  //*(uint32_t*)&pmem[0x00000030]=0xfd1ff56f; //jal   80000000
-//  //*(uint32_t*)&pmem[0x00000030]=0xfe1ff56f; //jal   80000010
-//  //*(uint32_t*)&pmem[0x00000030]=0xff1ff56f; //jal   80000020
-//
-//  *(uint32_t*)&pmem[0x00000034]=0x00100073; //ebreak
-//}
+void built_in_program(){        //check load interlock
+  *(uint32_t*)&pmem[0x00000000]=0x00083083; //ld ra 0(a6)
+  *(uint32_t*)&pmem[0x00000004]=0x00100133; //add sp, zero, ra
+  *(uint32_t*)&pmem[0x00000008]=0x00518193; //gp = gp + 5
+  *(uint32_t*)&pmem[0x0000000c]=0x00720213; //tp = tp + 7
+					    //
+  *(uint32_t*)&pmem[0x00000010]=0x00600593; //a1 = $0 + 6
+  *(uint32_t*)&pmem[0x00000014]=0x00100013; //give $0 the "1",it equals invalid operation
+  *(uint32_t*)&pmem[0x00000018]=0x00100013; //in order to give the gprs time to write
+  *(uint32_t*)&pmem[0x0000001c]=0x00100013; //
+					    //
+  *(uint32_t*)&pmem[0x00000020]=0x021102b3; //t0 = ra * sp
+  *(uint32_t*)&pmem[0x00000024]=0x02218333; //t1 = sp * gp
+  *(uint32_t*)&pmem[0x00000028]=0x023203b3; //t2 = gp * tp
+  *(uint32_t*)&pmem[0x0000002c]=0x02408433; //s0 = ra * tp
+					    
+  *(uint32_t*)&pmem[0x00000030]=0xfc1598e3; //beq ra a1
+  //*(uint32_t*)&pmem[0x00000030]=0xfd1ff56f; //jal   80000000
+  //*(uint32_t*)&pmem[0x00000030]=0xfe1ff56f; //jal   80000010
+  //*(uint32_t*)&pmem[0x00000030]=0xff1ff56f; //jal   80000020
+
+  *(uint32_t*)&pmem[0x00000034]=0x00100073; //ebreak
+}
 
 
 
