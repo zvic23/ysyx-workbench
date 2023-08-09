@@ -202,7 +202,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 //  *(uint32_t*)&pmem[0x00000034]=0x00100073; //ebreak
 //}
 
-void built_in_program(){
+void built_in_program(){        //check load interlock
   *(uint32_t*)&pmem[0x00000000]=0x00083083; //ra = ra + 1
   *(uint32_t*)&pmem[0x00000004]=0x00108093; //sp = sp + 3
   *(uint32_t*)&pmem[0x00000008]=0x00518193; //gp = gp + 5
