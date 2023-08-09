@@ -167,12 +167,12 @@ always@(*) begin
 			10'b010_0000011:  EX_loading = 1'b1;  //lw
 			10'b100_0000011:  EX_loading = 1'b1;  //lbu
 			10'b101_0000011:  EX_loading = 1'b1;  //lhu
-			10'b000_0100011:  EX_loading = 1'b1;  //sb   
-			10'b001_0100011:  EX_loading = 1'b1;  //sh
-			10'b010_0100011:  EX_loading = 1'b1;  //sw
+//			10'b000_0100011:  EX_loading = 1'b1;  //sb   
+//			10'b001_0100011:  EX_loading = 1'b1;  //sh
+//			10'b010_0100011:  EX_loading = 1'b1;  //sw
 			10'b110_0000011:  EX_loading = 1'b1;  //lwu
 			10'b011_0000011:  EX_loading = 1'b1;  //ld
-			10'b011_0100011:  EX_loading = 1'b1;  //sd
+//			10'b011_0100011:  EX_loading = 1'b1;  //sd
 		        default :         EX_loading = 1'b0;
 		endcase
 	//end

@@ -29,8 +29,8 @@ output [63:0]reg_wr_value ,
 
 
 output reg MEM_reg_valid,
-output reg [31:0]MEM_reg_inst
-
+output reg [31:0]MEM_reg_inst,
+output reg [63:0]MEM_reg_aluoutput
 
 /*
 output reg arvalid,
@@ -72,7 +72,7 @@ output exu_block
 reg [63:0]MEM_reg_pc            ;
 //reg [31:0]MEM_reg_inst          ;
 reg [23:0]MEM_reg_opcode        ;
-reg [63:0]MEM_reg_aluoutput     ;
+//reg [63:0]MEM_reg_aluoutput     ;
 reg [63:0]MEM_reg_src2          ;
 
 always @(posedge clk) begin
