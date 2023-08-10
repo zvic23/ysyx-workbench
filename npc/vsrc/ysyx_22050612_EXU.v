@@ -865,12 +865,12 @@ always @(*) begin
 //    24'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+EX_reg_pc):snpc;
 //    24'd7   : dnpc=(result_alu0[63]==1)?(imm_B+EX_reg_pc):snpc;
 //    24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc;
-    24'd5   : dnpc=(EX_reg_src_a==EX_reg_src_b)?result_alu0:snpc;
-    24'd6   : dnpc=(EX_reg_src_a!=EX_reg_src_b)?result_alu0:snpc;
-    24'd7   : dnpc=($signed(EX_reg_src_a) <$signed(EX_reg_src_b))?result_alu0:snpc;
-    24'd8   : dnpc=($signed(EX_reg_src_a)>=$signed(EX_reg_src_b))?result_alu0:snpc;
-    24'd9   : dnpc=(EX_reg_src_a <EX_reg_src_b)?result_alu0:snpc         ;
-    24'd10  : dnpc=(EX_reg_src_a>=EX_reg_src_b)?result_alu0:snpc        ;        //(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc
+    24'd5   : dnpc=(src1==src2)?result_alu0:snpc;
+    24'd6   : dnpc=(src1!=src2)?result_alu0:snpc;
+    24'd7   : dnpc=($signed(src1) <$signed(src2))?result_alu0:snpc;
+    24'd8   : dnpc=($signed(src1)>=$signed(src2))?result_alu0:snpc;
+    24'd9   : dnpc=(src1 <src2)?result_alu0:snpc         ;
+    24'd10  : dnpc=(src1>=src2)?result_alu0:snpc        ;        //(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc
     24'h200000: dnpc=EX_reg_src_b                             ;        
     24'h500000: dnpc=EX_reg_src_b                             ;        
     default: dnpc=snpc;
