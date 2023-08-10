@@ -111,11 +111,50 @@ always @(*) begin
 		pc_next = dnpc;
 		pc_en   = 1'b1;
 	end
+	else if(inst_is_branch==2'b1 && minus_target_addr)begin
+		pc_next = pc+imm_B;
+		pc_en   = 1'b1;
+	end
+	else if(inst_is_branch==2'd2 && minus_target_addr)begin
+		pc_next = (pc+imm_B)&64'hfffffffffffffffe;
+		pc_en   = 1'b1;
+	end
 	else begin
 		pc_next = pc + 64'd4;
 		pc_en   = 1'b1;
 	end
 end
+
+reg [1:0]inst_is_branch;
+always @(*) begin
+	if(inst[6:0] == 7'b1101111)begin
+		inst_is_branch = 2'b1;                                 //jal
+	end
+	else if(inst == 32'b1110011)begin
+		inst_is_branch = 2'b1;                                 //ecall
+	end
+	else if(inst == 32'b00110000001000000000000001110011)begin
+		inst_is_branch = 2'b1;                                 //mret
+	end
+	else begin
+        	case ({inst[14:12],inst[6:0]})
+        	      10'b000_1100111: inst_is_branch = 2'd2;          //jalr
+        	      10'b000_1100011: inst_is_branch = 2'b1;          //beq
+        	      10'b001_1100011: inst_is_branch = 2'b1;          //bne
+        	      10'b100_1100011: inst_is_branch = 2'b1;          //blt
+        	      10'b101_1100011: inst_is_branch = 2'b1;          //bge
+        	      10'b110_1100011: inst_is_branch = 2'b1;          //bltu
+        	      10'b111_1100011: inst_is_branch = 2'b1;          //bgeu
+        	      default:         inst_is_branch = 2'b0; 
+        	endcase
+	end
+end
+
+wire minus_target_addr;
+assign minus_target_addr = inst[31];
+wire [63:0]imm_B;
+assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0}:{{51{1'b0}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0};
+
 
 assign valid_IF_ID = 1'b1;
 assign branch_flush = pc_update;
