@@ -407,8 +407,8 @@ assign inst_EX_MEM  = (EX_block==1'b0) ? EX_reg_inst  : 32'b0;
 
 
 assign opcode_EX_MEM = EX_reg_opcode;
-//assign src_B_EX_MEM = EX_reg_src_b;
-assign src_B_EX_MEM = src2;
+assign src_B_EX_MEM = EX_reg_src_b;
+//assign src_B_EX_MEM = src2;
 
 
 
