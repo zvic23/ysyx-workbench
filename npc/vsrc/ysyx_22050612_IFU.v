@@ -74,7 +74,29 @@ end
 //**************************************
 */
 
-
+/*
+reg  [63:0]pc_next;
+reg  pc_en;
+//assign pc_next = pc_update ? dnpc : pc+64'd4;
+always @(*) begin
+	if((branching!=4'b0) && pc_update)begin
+		pc_next = dnpc;
+		pc_en   = 1'b1;
+	end
+	else if(branching!=4'b0) begin
+		pc_next = pc;
+		pc_en   = 1'b0;
+	end
+	else if(ready_IF_ID == 1'b0)begin
+		pc_next = pc;
+		pc_en   = 1'b0;
+	end
+	else begin
+		pc_next = pc + 64'd4;
+		pc_en   = 1'b1;
+	end
+end
+*/
 reg  [63:0]pc_next;
 reg  pc_en;
 //assign pc_next = pc_update ? dnpc : pc+64'd4;
@@ -170,7 +192,8 @@ end
 
 //assign  valid_IF_ID = branching ? 1'b1 : 1'b0;
 
-reg [3:0]branching;
+wire [3:0]branching;
+assign branching[3] = 1'b0;
 
   always @(inst) begin
 	  case ({inst[14:12],inst[6:0]})
