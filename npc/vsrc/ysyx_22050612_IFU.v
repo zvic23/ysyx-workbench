@@ -117,6 +117,7 @@ always @(*) begin
 	end
 end
 
+assign valid_IF_ID = 1'b1;
 assign branch_flush = pc_update;
 assign pc_read =  pc;
 //assign pc_read = pc_update ? dnpc : pc;
