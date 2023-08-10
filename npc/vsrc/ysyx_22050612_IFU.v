@@ -192,7 +192,7 @@ end
 
 //assign  valid_IF_ID = branching ? 1'b1 : 1'b0;
 
-reg [3:0]branching;
+wire [3:0]branching;
 
   always @(inst) begin
 	  case ({inst[14:12],inst[6:0]})
