@@ -184,21 +184,31 @@ assign imm  = EX_reg_valid ? EX_reg_imm  : 64'b0;
 
 always@(*)begin
 	if(EX_reg_valid)begin
-		if(MEM_reg_valid&&(MEM_inst_hit!=4'b0))begin
-			src1 = rs1_EX_MEM_match ? MEM_reg_aluoutput : EX_reg_src_a;
-			src2 = (rs2_EX_MEM_match&&(EX_inst_hit!=4'b0))? MEM_reg_aluoutput : EX_reg_src_b;
+		if(MEM_reg_valid&&(MEM_inst_hit!=4'b0)&&rs1_EX_MEM_match)begin
+			src1 = MEM_reg_aluoutput;
 		end
-		else if(WB_reg_valid&&(WB_inst_hit!=4'b0))begin
-			src1 = rs1_EX_WB_match ? WB_reg_wdata : EX_reg_src_a;
-			src2 = (rs2_EX_WB_match&&(EX_inst_hit!=4'b0))? WB_reg_wdata : EX_reg_src_b;
+		else if(WB_reg_valid&&(WB_inst_hit!=4'b0)&&rs1_EX_WB_match)begin
+			src1 =  WB_reg_wdata;
 		end
 		else begin
 			src1 = EX_reg_src_a;
-			src2 = EX_reg_src_b;
 		end
 	end
 	else begin
 		src1 = 64'b0;
+	end
+	if(EX_reg_valid)begin
+		if(MEM_reg_valid&&(MEM_inst_hit!=4'b0)&&(EX_inst_hit!=4'b0)&&rs2_EX_MEM_match)begin
+			src2 =  MEM_reg_aluoutput;
+		end
+		else if(WB_reg_valid&&(WB_inst_hit!=4'b0)&&(EX_inst_hit!=4'b0)&&rs2_EX_WB_match)begin
+			src2 = WB_reg_wdata ;
+		end
+		else begin
+			src2 = EX_reg_src_b;
+		end
+	end
+	else begin
 		src2 = 64'b0;
 	end
 end
@@ -378,10 +388,6 @@ always@(*) begin
 		default:                 WB_inst_hit[3]=1'b0  ;                     
 	endcase
 end
-
-
-
-
 
 
 
