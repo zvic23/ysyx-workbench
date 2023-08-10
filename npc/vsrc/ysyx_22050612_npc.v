@@ -86,7 +86,7 @@ wire [63:0]pc_IF_ID  ;
 wire [31:0]inst_IF_ID;
 assign pc = pc_IF_ID;
 
-ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, gpr_busy, mtvec, mepc, mcause, mstatus, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ src_A,src_B, imm, rd, wen, opcode_ID_EX, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX);
+ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, gpr_busy, mtvec, mepc, mcause, mstatus, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ src_A,src_B, imm, rd, wen, opcode_ID_EX, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX , EX_reg_valid,EX_reg_inst);
 
 wire       valid_ID_EX  ;
 wire       ready_ID_EX  ;
@@ -99,17 +99,26 @@ wire [23:0]opcode_ID_EX;
 //wire [ 7:0]ALU_mode      ;
 //wire [ 4:0]rd            ;
 
-ysyx_22050612_EXU exu (clk,rst, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode_ID_EX,src_A,src_B,/*ALU_mode, src2, rd,*/ imm, dnpc,pc_update, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM, opcode_EX_MEM, ALUoutput_EX_MEM , src_B_EX_MEM,/*reg_wr_wen, reg_wr_ID, reg_wr_value, */wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus,wen_mtvec,wen_mepc,wen_mcause,wen_mstatus,gpr);
+
+wire       EX_reg_valid;
+wire [31:0]EX_reg_inst ;
+
+
+ysyx_22050612_EXU exu (clk,rst, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode_ID_EX,src_A,src_B,/*ALU_mode, src2, rd,*/ imm, dnpc,pc_update, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM, opcode_EX_MEM, ALUoutput_EX_MEM , src_B_EX_MEM,/*reg_wr_wen, reg_wr_ID, reg_wr_value, */wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus,wen_mtvec,wen_mepc,wen_mcause,wen_mstatus,gpr , EX_reg_valid,EX_reg_inst,  MEM_reg_valid, MEM_reg_inst, MEM_reg_aluoutput, WB_reg_valid, WB_reg_inst, WB_reg_wdata );
 
 wire       valid_EX_MEM  ;
 wire       ready_EX_MEM  ;
 wire [63:0]pc_EX_MEM  ;
 wire [31:0]inst_EX_MEM;
 wire [23:0]opcode_EX_MEM;
-wire [63:0]ALUoutput_EX_MEM  ;
 wire [63:0]src_B_EX_MEM  ;
+wire [63:0]ALUoutput_EX_MEM  ;
 
-ysyx_22050612_MEM mem (clk,rst, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM,opcode_EX_MEM, ALUoutput_EX_MEM, src_B_EX_MEM, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value );
+wire       MEM_reg_valid;
+wire [31:0]MEM_reg_inst ;
+wire [63:0]MEM_reg_aluoutput ;
+
+ysyx_22050612_MEM mem (clk,rst, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM,opcode_EX_MEM, ALUoutput_EX_MEM, src_B_EX_MEM, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value,  MEM_reg_valid, MEM_reg_inst, MEM_reg_aluoutput , WB_reg_valid, WB_reg_inst, WB_reg_wdata);
 
 
 wire       valid_MEM_WB  ;
@@ -120,7 +129,11 @@ wire       reg_wr_wen   ;
 wire [ 4:0]reg_wr_ID    ;
 wire [63:0]reg_wr_value ;
 
-ysyx_22050612_WBU wbu (clk,rst, valid_MEM_WB, pc_MEM_WB, inst_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr);
+wire       WB_reg_valid;
+wire [31:0]WB_reg_inst ;
+wire [63:0]WB_reg_wdata ;
+
+ysyx_22050612_WBU wbu (clk,rst, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr , WB_reg_valid, WB_reg_inst, WB_reg_wdata);
 
 
 
