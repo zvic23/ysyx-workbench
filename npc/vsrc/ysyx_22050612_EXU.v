@@ -439,7 +439,7 @@ always @(*) begin
         endcase
 
 	case (opcode)
-    24'd49   : wdata_mtvec=EX_reg_src_a;
+    24'd49   : wdata_mtvec=src1;
     default:   wdata_mtvec=64'b0;
         endcase
 //mepc control
@@ -451,7 +451,7 @@ always @(*) begin
         endcase
 
 	case (opcode)
-    24'd49     : wdata_mepc=EX_reg_src_a;
+    24'd49     : wdata_mepc=src1;
     24'd50     : wdata_mepc=result_alu0;
     24'h200000 : wdata_mepc=EX_reg_pc;
     default:   wdata_mepc=64'b0;
@@ -465,7 +465,7 @@ always @(*) begin
         endcase
 
 	case (opcode)
-    24'd49     : wdata_mcause=EX_reg_src_a;
+    24'd49     : wdata_mcause=src1;
     24'd50     : wdata_mcause=result_alu0;
     24'h200000 : wdata_mcause=64'hb;
     default:   wdata_mcause=64'b0;
@@ -478,7 +478,7 @@ always @(*) begin
         endcase
 
 	case (opcode)
-    24'd49     : wdata_mstatus=EX_reg_src_a;
+    24'd49     : wdata_mstatus=src1;
     24'd50     : wdata_mstatus=result_alu0;
     default:   wdata_mstatus=64'b0;
         endcase
