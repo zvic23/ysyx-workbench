@@ -99,7 +99,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
 	long long rdata_printf;
 	memcpy(&rdata_printf, &pmem[raddr_set-0x80000000], 8);
 	if(raddr >= CONFIG_MTRACE_START && raddr <= CONFIG_MTRACE_END){
-	  	printf("\33[1;34m""mtrace: read    addr:0x%llx(0x%llx)   data:0x%llx \n""\33[0m",\
+	  	printf("mtrace: read    addr:0x%llx(0x%llx)   data:0x%llx \n",\
 		raddr,raddr_set,rdata_printf);
 	} 
 #endif
@@ -143,7 +143,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
 
 #ifdef CONFIG_MTRACE			
 	if(waddr >= CONFIG_MTRACE_START && waddr <= CONFIG_MTRACE_END){
-	  	printf( "\33[1;32m""mtrace: write   addr:0x%llx(0x%llx)   data:0x%llx   wmask:%x     at pc=%lx    inst num=%ld\n""\33[0m",\
+	  	printf("mtrace: write   addr:0x%llx(0x%llx)   data:0x%llx   wmask:%x     at pc=%lx    inst num=%ld\n",\
 		waddr,waddr_set,wdata,wmask, cpu_gpr_set[32],g_nr_guest_inst);
 	} 
 #endif
