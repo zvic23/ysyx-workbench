@@ -189,8 +189,8 @@ always@(*)begin
 			src2 = (rs2_EX_MEM_match&&(EX_inst_hit!=4'b0))? MEM_reg_aluoutput : EX_reg_src_b;
 		end
 		else if(WB_reg_valid&&(WB_inst_hit!=4'b0))begin
-			src1 = rs1_EX_MEM_match ? WB_reg_wdata : EX_reg_src_a;
-			src2 = (rs2_EX_MEM_match&&(EX_inst_hit!=4'b0))? WB_reg_wdata : EX_reg_src_b;
+			src1 = rs1_EX_WB_match ? WB_reg_wdata : EX_reg_src_a;
+			src2 = (rs2_EX_WB_match&&(EX_inst_hit!=4'b0))? WB_reg_wdata : EX_reg_src_b;
 		end
 		else begin
 			src1 = EX_reg_src_a;
