@@ -118,7 +118,7 @@ wire       MEM_reg_valid;
 wire [31:0]MEM_reg_inst ;
 wire [63:0]MEM_reg_aluoutput ;
 
-ysyx_22050612_MEM mem (clk,rst, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM,opcode_EX_MEM, ALUoutput_EX_MEM, src_B_EX_MEM, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value,  MEM_reg_valid, MEM_reg_inst, MEM_reg_aluoutput );
+ysyx_22050612_MEM mem (clk,rst, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM,opcode_EX_MEM, ALUoutput_EX_MEM, src_B_EX_MEM, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value,  MEM_reg_valid, MEM_reg_inst, MEM_reg_aluoutput , WB_reg_valid, WB_reg_inst, WB_reg_wdata);
 
 
 wire       valid_MEM_WB  ;

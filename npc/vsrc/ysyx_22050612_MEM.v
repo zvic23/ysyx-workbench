@@ -30,7 +30,11 @@ output [63:0]reg_wr_value ,
 
 output reg MEM_reg_valid,
 output reg [31:0]MEM_reg_inst,
-output reg [63:0]MEM_reg_aluoutput
+output reg [63:0]MEM_reg_aluoutput,
+
+input WB_reg_valid,
+input [31:0]WB_reg_inst,
+input [63:0]WB_reg_wdata
 
 /*
 output reg arvalid,
@@ -111,8 +115,8 @@ assign opcode = MEM_reg_valid ? MEM_reg_opcode : 24'b0;
 wire [63:0]aluoutput;
 assign aluoutput = MEM_reg_valid ? MEM_reg_aluoutput : 64'b0;
 
-wire [63:0]src2;
-assign src2 = MEM_reg_valid ? MEM_reg_src2 : 64'b0;
+reg [63:0]src2;
+//assign src2 = MEM_reg_valid ? MEM_reg_src2 : 64'b0;
 
 assign reg_wr_wen   = MEM_reg_valid ? wen       : 1'b0;
 assign reg_wr_ID    = MEM_reg_valid ? MEM_reg_inst[11:7] : 5'b0;
@@ -127,6 +131,114 @@ assign inst_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_inst  : 32'b0;
 wire MEM_block;
 assign MEM_block = 1'b0;
 assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
+
+
+
+
+//load interlock
+
+always@(*)begin
+	if(MEM_reg_valid)begin
+		if(WB_reg_valid&&(MEM_inst_hit!=4'b0)&&(WB_inst_hit!=4'b0)&&rs2_MEM_WB_match)begin
+			src2 =  WB_reg_wdata;
+		end
+		else begin
+			src2 = MEM_reg_src2;
+		end
+	end
+	else begin
+		src2 = 64'b0;
+	end
+end
+
+wire rs2_MEM_WB_match;
+assign rs2_MEM_WB_match  =  WB_reg_inst[11:7] == MEM_reg_inst[24:20];
+
+wire [3:0]MEM_inst_hit;
+wire [3:0]WB_inst_hit;
+always@(*) begin
+//   EX/MEM
+	case ({MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
+    		10'b000_0100011:  MEM_inst_hit[0]= 1'b1  ;    //sb   
+    		10'b001_0100011:  MEM_inst_hit[0]= 1'b1  ;    //sh
+    		10'b010_0100011:  MEM_inst_hit[0]= 1'b1  ;    //sw
+    		10'b011_0100011:  MEM_inst_hit[0]= 1'b1  ;    //sd
+		default:          MEM_inst_hit[0]= 1'b0  ;                          
+	endcase
+
+
+//  MEM/WB
+	case ({WB_reg_inst[14:12],WB_reg_inst[6:0]})
+                10'b000_0000011:  WB_inst_hit[0]= 1'b1  ;     //lb
+                10'b001_0000011:  WB_inst_hit[0]= 1'b1  ;     //lh
+                10'b010_0000011:  WB_inst_hit[0]= 1'b1  ;     //lw
+                10'b100_0000011:  WB_inst_hit[0]= 1'b1  ;     //lbu
+                10'b101_0000011:  WB_inst_hit[0]= 1'b1  ;     //lhu
+		10'b000_0010011:  WB_inst_hit[0]= 1'b1  ;    //addi
+		10'b010_0010011:  WB_inst_hit[0]= 1'b1  ;    //slti
+		10'b011_0010011:  WB_inst_hit[0]= 1'b1  ;    //sltiu
+		10'b100_0010011:  WB_inst_hit[0]= 1'b1  ;    //xori
+		10'b110_0010011:  WB_inst_hit[0]= 1'b1  ;    //ori
+		10'b111_0010011:  WB_inst_hit[0]= 1'b1  ;    //andi
+		10'b110_0000011:  WB_inst_hit[0]= 1'b1  ;     //lwu
+                10'b011_0000011:  WB_inst_hit[0]= 1'b1  ;     //ld
+		10'b000_0011011:  WB_inst_hit[0]= 1'b1  ;    //addiw
+		10'b001_1110011:  WB_inst_hit[0]= 1'b1  ;    //csrrw
+		10'b010_1110011:  WB_inst_hit[0]= 1'b1  ;    //csrrs
+		default:          WB_inst_hit[0]= 1'b0  ;                          
+	endcase
+	case (WB_reg_inst[6:0])
+		7'b0110111:  WB_inst_hit[1]= 1'b1  ;    //lui
+		7'b0010111:  WB_inst_hit[1]= 1'b1  ;    //auipc
+		default:     WB_inst_hit[1]= 1'b0  ;                               
+	endcase
+	case ({WB_reg_inst[31:25],WB_reg_inst[14:12],WB_reg_inst[6:0]})
+                17'b0000000_000_0110011: WB_inst_hit[2]=1'b1  ;    //add
+                17'b0100000_000_0110011: WB_inst_hit[2]=1'b1  ;    //sub
+                17'b0000000_001_0110011: WB_inst_hit[2]=1'b1  ;    //sll
+                17'b0000000_010_0110011: WB_inst_hit[2]=1'b1  ;    //slt
+                17'b0000000_011_0110011: WB_inst_hit[2]=1'b1  ;    //sltu
+                17'b0000000_100_0110011: WB_inst_hit[2]=1'b1  ;    //xor
+                17'b0000000_101_0110011: WB_inst_hit[2]=1'b1  ;    //srl
+                17'b0000000_110_0110011: WB_inst_hit[2]=1'b1  ;    //or
+                17'b0000000_111_0110011: WB_inst_hit[2]=1'b1  ;    //and
+                17'b0000000_001_0011011: WB_inst_hit[2]=1'b1  ;    //slliw
+                17'b0000000_101_0011011: WB_inst_hit[2]=1'b1  ;    //srliw
+                17'b0100000_101_0011011: WB_inst_hit[2]=1'b1  ;    //sraiw
+                17'b0000000_000_0111011: WB_inst_hit[2]=1'b1  ;    //addw
+                17'b0100000_000_0111011: WB_inst_hit[2]=1'b1  ;    //subw
+                17'b0000000_001_0111011: WB_inst_hit[2]=1'b1  ;    //sllw
+                17'b0000000_101_0111011: WB_inst_hit[2]=1'b1  ;    //srlw
+                17'b0100000_101_0111011: WB_inst_hit[2]=1'b1  ;    //sraw
+                17'b0000001_000_0110011: WB_inst_hit[2]=1'b1  ;    //mul
+                17'b0000001_100_0110011: WB_inst_hit[2]=1'b1  ;    //div
+                17'b0000001_101_0110011: WB_inst_hit[2]=1'b1  ;    //divu
+                17'b0000001_111_0110011: WB_inst_hit[2]=1'b1  ;    //remu
+                17'b0000001_000_0111011: WB_inst_hit[2]=1'b1  ;    //mulw
+                17'b0000001_100_0111011: WB_inst_hit[2]=1'b1  ;    //divw
+                17'b0000001_101_0111011: WB_inst_hit[2]=1'b1  ;    //divuw
+                17'b0000001_110_0111011: WB_inst_hit[2]=1'b1  ;    //remw
+                17'b0000001_111_0111011: WB_inst_hit[2]=1'b1  ;    //remuw
+		default:                 WB_inst_hit[2]=1'b0  ;                     
+	endcase
+	case ({WB_reg_inst[31:26],WB_reg_inst[14:12],WB_reg_inst[6:0]})
+                 16'b000000_001_0010011: WB_inst_hit[3]=1'b1  ;       //slli
+                 16'b000000_101_0010011: WB_inst_hit[3]=1'b1  ;       //srli
+                 16'b010000_101_0010011: WB_inst_hit[3]=1'b1  ;       //srai
+		default:                 WB_inst_hit[3]=1'b0  ;                     
+	endcase
+end
+
+
+
+
+
+
+
+
+
+
+
 
 
 always @(negedge clk) begin
