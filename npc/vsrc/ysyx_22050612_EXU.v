@@ -235,12 +235,19 @@ always@(*) begin
 //   ID/EX
 	case ({EX_reg_inst[14:12],EX_reg_inst[6:0]})
     	//	10'b000_1100111:  EX_inst_hit[1]= 1'd1   ;    //jalr
+
     		10'b000_1100011:  EX_inst_hit[1]= 1'd1   ;    //beq
     		10'b001_1100011:  EX_inst_hit[1]= 1'd1   ;    //bne
     		10'b100_1100011:  EX_inst_hit[1]= 1'd1   ;    //blt
     		10'b101_1100011:  EX_inst_hit[1]= 1'd1   ;    //bge
     		10'b110_1100011:  EX_inst_hit[1]= 1'd1   ;    //bltu
     		10'b111_1100011:  EX_inst_hit[1]= 1'd1   ;    //bgeu
+	
+    10'b000_0100011:  EX_inst_hit[1]= 1'd1   ;     //sb   
+    10'b001_0100011:  EX_inst_hit[1]= 1'd1   ;     //sh
+    10'b010_0100011:  EX_inst_hit[1]= 1'd1   ;     //sw
+    10'b011_0100011:  EX_inst_hit[1]= 1'd1   ;     //sd
+
 	//	10'b001_1110011:  EX_inst_hit[1]= 1'd1   ;    //csrrw
         //	10'b010_1110011:  EX_inst_hit[1]= 1'd1   ;    //csrrs
 		default :         EX_inst_hit[1]= 1'd0   ;
