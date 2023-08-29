@@ -140,7 +140,7 @@ always @(*) begin
 //	end
 //	else begin
         	case ({inst[14:12],inst[6:0]})
-        //	      10'b000_1100111: inst_is_branch = 4'd2;          //jalr
+        	      10'b000_1100111: inst_is_branch = 4'd2;          //jalr
         	      10'b000_1100011: inst_is_branch = 4'd1;          //beq
         	      10'b001_1100011: inst_is_branch = 4'd1;          //bne
         	      10'b100_1100011: inst_is_branch = 4'd1;          //blt
