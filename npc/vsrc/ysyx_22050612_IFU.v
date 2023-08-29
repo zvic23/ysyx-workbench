@@ -113,14 +113,14 @@ always @(*) begin
 		pc_next = dnpc;
 		pc_en   = 1'b1;
 	end
-	else if(inst_is_branch==4'd1 && minus_target_addr)begin
-		pc_next = pc+imm_B;
-		pc_en   = 1'b1;
-	end
-	else if(inst_is_branch==4'd2 && minus_target_addr)begin
-		pc_next = pc+imm_J;
-		pc_en   = 1'b1;
-	end
+//	else if(inst_is_branch==4'd1 && minus_target_addr)begin
+//		pc_next = pc+imm_B;
+//		pc_en   = 1'b1;
+//	end
+//	else if(inst_is_branch==4'd2 && minus_target_addr)begin
+//		pc_next = pc+imm_J;
+//		pc_en   = 1'b1;
+//	end
 	else begin
 		pc_next = pc + 64'd4;
 		pc_en   = 1'b1;
