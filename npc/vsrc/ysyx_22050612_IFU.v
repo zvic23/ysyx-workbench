@@ -117,7 +117,7 @@ always @(*) begin
 		pc_next = pc+imm_B;
 		pc_en   = 1'b1;
 	end
-	else if(inst_is_branch==4'd2)begin
+	else if(inst_is_branch==4'd2 && minus_target_addr)begin
 		pc_next = pc+imm_J;
 		pc_en   = 1'b1;
 	end
@@ -129,16 +129,16 @@ end
 
 reg [3:0]inst_is_branch;
 always @(*) begin
-	if(inst[6:0] == 7'b1101111)begin
-		inst_is_branch = 4'd2;                                 //jal
-	end
+//	if(inst[6:0] == 7'b1101111)begin
+//		inst_is_branch = 4'd2;                                 //jal
+//	end
 //	else if(inst == 32'b1110011)begin
 //		//inst_is_branch = 4'd1;                                 //ecall
 //	end
 //	else if(inst == 32'b00110000001000000000000001110011)begin
 //		//inst_is_branch = 4'd1;                                 //mret
 //	end
-	else begin
+//	else begin
         	case ({inst[14:12],inst[6:0]})
         //	      10'b000_1100111: inst_is_branch = 4'd2;          //jalr
         	      10'b000_1100011: inst_is_branch = 4'd1;          //beq
@@ -149,7 +149,7 @@ always @(*) begin
         	      10'b111_1100011: inst_is_branch = 4'd1;          //bgeu
         	      default:         inst_is_branch = 4'd0; 
         	endcase
-	end
+//	end
 end
 
 wire minus_target_addr;
@@ -282,7 +282,7 @@ ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, pc_en);
 
 
 always @(negedge clk) begin
-	$display("IF   pc:%x   inst:%x   valid:%d",pc,inst,valid_IF_ID);
+	//$display("IF   pc:%x   inst:%x   valid:%d",pc,inst,valid_IF_ID);
 end
 
 
