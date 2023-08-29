@@ -118,9 +118,11 @@ void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S
 
 
 
+uint64_t g_nr_guest_inst = 0;
 int to_check = 0;
 void npc_complete_one_inst(){
 	to_check = 1;
+    	  g_nr_guest_inst ++;
 }
 
 
@@ -178,7 +180,6 @@ void one_cycle(){
   device_update();
 }
 
-uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
 
 void program_exec_statistics(){
@@ -214,7 +215,7 @@ void execute(int n){
 
 	  one_cycle();
 
-    	  g_nr_guest_inst ++;
+    	  //g_nr_guest_inst ++;
 	  if(itrace_si) itrace_printf_once();
 
 
