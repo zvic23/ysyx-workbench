@@ -188,8 +188,9 @@ void program_exec_statistics(){
   	 gettimeofday(&time_end,NULL);
   	 g_timer = (time_end.tv_sec*1000000)+time_end.tv_usec - time_init;
 	 printf(BLUE "host time spent = %ld us\n" NONE,g_timer);
-	   printf(BLUE "total guest cycle spent = %ld us\n" NONE,g_cycle);
+	   printf(BLUE "total guest cycle spent = %ld \n" NONE,g_cycle);
 	 printf(BLUE "total guest instructions = %ld \n" NONE,g_nr_guest_inst);
+	   printf(BLUE "guest ipc  = %ld \n" NONE,g_nr_guest_inst/g_cycle);
 	 printf(BLUE "simulation frequency = %ld inst/s\n" NONE,g_nr_guest_inst * 1000000 / g_timer);
 	 printf("execute has finished, please open npc again!\n");
 }
