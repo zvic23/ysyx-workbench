@@ -888,7 +888,7 @@ always @(*) begin
 //    endcase
 
     case (opcode)
-    //24'h300 : dnpc=result_alu0                         ;
+    24'h300 : dnpc=result_alu0                         ;
     24'd4   : dnpc={result_alu0[63:1],1'b0}            ;
 //    24'd5   : dnpc=(result_alu0==64'b0)?(imm_B+EX_reg_pc):snpc;
 //    24'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+EX_reg_pc):snpc;
