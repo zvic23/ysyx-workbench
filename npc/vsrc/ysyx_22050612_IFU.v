@@ -117,8 +117,8 @@ always @(*) begin
 		pc_next = pc+imm_B;
 		pc_en   = 1'b1;
 	end
-	else if(inst_is_branch==4'd2 )begin
-		pc_next = pc+imm_J+64'd4;
+	else if(inst_is_branch==4'd2)begin
+		pc_next = pc+imm_J;
 		pc_en   = 1'b1;
 	end
 	else begin
@@ -282,7 +282,7 @@ ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, pc_en);
 
 
 always @(negedge clk) begin
-	//$display("IF   pc:%x   inst:%x   valid:%d",pc,inst,valid_IF_ID);
+	$display("IF   pc:%x   inst:%x   valid:%d",pc,inst,valid_IF_ID);
 end
 
 
