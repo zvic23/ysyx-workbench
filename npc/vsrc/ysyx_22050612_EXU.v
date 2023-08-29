@@ -888,7 +888,7 @@ always @(*) begin
 //    endcase
 
     case (opcode)
-    24'h300 : dnpc=result_alu0                         ;
+    //24'h300 : dnpc=result_alu0                         ;
     24'd4   : dnpc={result_alu0[63:1],1'b0}            ;
 //    24'd5   : dnpc=(result_alu0==64'b0)?(imm_B+EX_reg_pc):snpc;
 //    24'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+EX_reg_pc):snpc;
@@ -906,7 +906,7 @@ always @(*) begin
     endcase
 
     case (opcode)
-    24'h300  : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+    //24'h300  : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
     //24'h300  : pc_update= EX_reg_valid ? (EX_reg_inst[31]==1'b0 ? 1'b1 : 1'b0) : 1'b0;
     24'd4    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
     24'd5    : pc_update= EX_reg_valid ? ( ((src1==src2&&EX_reg_inst[31]==0)||(src1!=src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
