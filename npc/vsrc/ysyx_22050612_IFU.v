@@ -118,7 +118,7 @@ always @(*) begin
 		pc_en   = 1'b1;
 	end
 	else if(inst_is_branch==4'd2 )begin
-		pc_next = pc+imm_J;
+		pc_next = pc+imm_J+64'd4;
 		pc_en   = 1'b1;
 	end
 	else begin
