@@ -181,12 +181,14 @@ void one_cycle(){
 }
 
 static uint64_t g_timer = 0; // unit: us
+static uint64_t g_cycle = 0; //  cycle
 
 void program_exec_statistics(){
   	 struct timeval time_end;                   //get the time when program end
   	 gettimeofday(&time_end,NULL);
   	 g_timer = (time_end.tv_sec*1000000)+time_end.tv_usec - time_init;
 	 printf(BLUE "host time spent = %ld us\n" NONE,g_timer);
+	   printf(BLUE "total guest cycle spent = %ld us\n" NONE,g_cycle);
 	 printf(BLUE "total guest instructions = %ld \n" NONE,g_nr_guest_inst);
 	 printf(BLUE "simulation frequency = %ld inst/s\n" NONE,g_nr_guest_inst * 1000000 / g_timer);
 	 printf("execute has finished, please open npc again!\n");
@@ -214,6 +216,7 @@ void execute(int n){
           }
 
 	  one_cycle();
+	  g_cycle++;
 
     	  //g_nr_guest_inst ++;
 	  if(itrace_si) itrace_printf_once();
