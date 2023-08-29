@@ -132,12 +132,12 @@ always @(*) begin
 	if(inst[6:0] == 7'b1101111)begin
 		inst_is_branch = 4'd2;                                 //jal
 	end
-	else if(inst == 32'b1110011)begin
-		//inst_is_branch = 4'd1;                                 //ecall
-	end
-	else if(inst == 32'b00110000001000000000000001110011)begin
-		//inst_is_branch = 4'd1;                                 //mret
-	end
+//	else if(inst == 32'b1110011)begin
+//		//inst_is_branch = 4'd1;                                 //ecall
+//	end
+//	else if(inst == 32'b00110000001000000000000001110011)begin
+//		//inst_is_branch = 4'd1;                                 //mret
+//	end
 	else begin
         	case ({inst[14:12],inst[6:0]})
         //	      10'b000_1100111: inst_is_branch = 4'd2;          //jalr
