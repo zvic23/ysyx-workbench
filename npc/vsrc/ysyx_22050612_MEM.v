@@ -158,7 +158,7 @@ always@(*)begin
 end
 
 wire rs2_MEM_WB_match;
-assign rs2_MEM_WB_match  =  WB_reg_inst[11:7] == MEM_reg_inst[24:20];
+assign rs2_MEM_WB_match  =  (WB_reg_inst[11:7] == MEM_reg_inst[24:20])&&(MEM_reg_inst[24:20]!=5'b0);
 
 wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
