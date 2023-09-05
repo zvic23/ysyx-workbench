@@ -22,8 +22,8 @@ output reg [63:0]WB_reg_wdata,
 
 output reg [63:0]WB_reg_pc,
 
-input [63:0]raddr,
-input [63:0]waddr
+input reg [63:0]raddr,
+input reg [63:0]waddr
 );
 
 
@@ -38,6 +38,10 @@ reg [ 4:0]WB_reg_id ;
 //reg [63:0]WB_reg_wdata ;
 //reg [23:0]WB_reg_opcode;
 
+
+reg [63:0]reg_raddr;
+reg [63:0]reg_waddr;
+
 always @(posedge clk) begin
 	if(rst) begin
 		WB_reg_valid <= 1'b0;
@@ -47,6 +51,9 @@ always @(posedge clk) begin
 		WB_reg_wen  <=  1'b0;
 		WB_reg_id   <=  5'b0;
 		WB_reg_wdata<= 64'b0;
+
+		reg_raddr <= 64'b0;
+		reg_waddr <= 64'b0;
 	end
 	else begin
 		WB_reg_valid <= valid_MEM_WB;
@@ -56,6 +63,9 @@ always @(posedge clk) begin
 		WB_reg_wen  <= reg_wr_wen   ;
 		WB_reg_id   <= reg_wr_ID    ;
 		WB_reg_wdata<= reg_wr_value ;
+
+		reg_raddr <= raddr;
+		reg_waddr <= waddr;
 	end
 end
 
@@ -79,9 +89,9 @@ end
 //********************************************************************
 
 
-always @(posedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
-	if(valid_MEM_WB)begin
-	case({inst_MEM_WB[14:12],inst_MEM_WB[6:0]})
+always @(negedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
+	if(WB_reg_valid)begin
+	case({WB_reg_inst[14:12],WB_reg_inst[6:0]})
     10'b000_0000011:   npc_loadstore(1, raddr, waddr);
     10'b001_0000011:   npc_loadstore(1, raddr, waddr);
     10'b010_0000011:   npc_loadstore(1, raddr, waddr);
