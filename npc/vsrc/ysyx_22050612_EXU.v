@@ -286,6 +286,7 @@ always@(*) begin
 
 //   EX/MEM
 	case ({MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
+    10'b000_1100111:  MEM_inst_hit[0]= 1'b1  ;    //jalr
 		10'b000_0010011:  MEM_inst_hit[0]= 1'b1  ;    //addi
 		10'b010_0010011:  MEM_inst_hit[0]= 1'b1  ;    //slti
 		10'b011_0010011:  MEM_inst_hit[0]= 1'b1  ;    //sltiu
@@ -300,6 +301,7 @@ always@(*) begin
 	case (MEM_reg_inst[6:0])
 		7'b0110111:  MEM_inst_hit[1]= 1'b1  ;    //lui
 		7'b0010111:  MEM_inst_hit[1]= 1'b1  ;    //auipc
+		    7'b1101111: MEM_inst_hit[1]= 1'b1  ;       //jal             //unlike the book, jal should add in, or "jal xx ret" will get wrong if the address be corrected at jal in IFU
 		default:     MEM_inst_hit[1]= 1'b0  ;                               
 	endcase
 	case ({MEM_reg_inst[31:25],MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
@@ -339,6 +341,7 @@ always@(*) begin
 	endcase
 //  MEM/WB
 	case ({WB_reg_inst[14:12],WB_reg_inst[6:0]})
+    10'b000_1100111:  WB_inst_hit[0]= 1'b1  ;    //jalr
                 10'b000_0000011:  WB_inst_hit[0]= 1'b1  ;     //lb
                 10'b001_0000011:  WB_inst_hit[0]= 1'b1  ;     //lh
                 10'b010_0000011:  WB_inst_hit[0]= 1'b1  ;     //lw
