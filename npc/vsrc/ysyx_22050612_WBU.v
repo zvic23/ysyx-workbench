@@ -92,17 +92,17 @@ end
 always @(negedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
 	if(WB_reg_valid)begin
 	case({WB_reg_inst[14:12],WB_reg_inst[6:0]})
-    10'b000_0000011:   npc_loadstore(1, raddr, waddr);
-    10'b001_0000011:   npc_loadstore(1, raddr, waddr);
-    10'b010_0000011:   npc_loadstore(1, raddr, waddr);
-    10'b100_0000011:   npc_loadstore(1, raddr, waddr);
-    10'b101_0000011:   npc_loadstore(1, raddr, waddr);
-    10'b000_0100011:   npc_loadstore(2, raddr, waddr);
-    10'b001_0100011:   npc_loadstore(2, raddr, waddr);
-    10'b010_0100011:   npc_loadstore(2, raddr, waddr);
-    10'b110_0000011:  npc_loadstore(1, raddr, waddr);
-    10'b011_0000011:  npc_loadstore(1, raddr, waddr);
-    10'b011_0100011:  npc_loadstore(2, raddr, waddr);
+    10'b000_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b001_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b010_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b100_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b101_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b000_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
+    10'b001_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
+    10'b010_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
+    10'b110_0000011:  npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b011_0000011:  npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b011_0100011:  npc_loadstore(2, reg_raddr, reg_waddr);
     default: npc_loadstore(0, 0, 0);
 	endcase
 end
