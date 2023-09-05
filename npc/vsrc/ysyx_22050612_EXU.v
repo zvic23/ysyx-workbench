@@ -286,6 +286,7 @@ always@(*) begin
 
 //   EX/MEM
 	case ({MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
+    10'b000_1100111:  WB_inst_hit[0]= 1'b1  ;    //jalr
 		10'b000_0010011:  MEM_inst_hit[0]= 1'b1  ;    //addi
 		10'b010_0010011:  MEM_inst_hit[0]= 1'b1  ;    //slti
 		10'b011_0010011:  MEM_inst_hit[0]= 1'b1  ;    //sltiu
