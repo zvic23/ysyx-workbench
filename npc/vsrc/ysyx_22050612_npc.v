@@ -8,7 +8,9 @@ input clk,
 input rst,
 
 //output [31:0]inst,
-output [63:0]pc
+output [63:0]pc,
+
+output [63:0]wb_pc
 
 );
 
@@ -30,8 +32,7 @@ wire [ 4:0]rs2;
 wire exu_block;
 
 
-assign pc = WB_reg_pc;
-
+assign wb_pc=WB_reg_pc;
 
 
 //***************    general register   ********************
@@ -85,6 +86,7 @@ wire       valid_IF_ID;
 wire       ready_IF_ID;
 wire [63:0]pc_IF_ID  ;
 wire [31:0]inst_IF_ID;
+assign pc = pc_IF_ID;
 
 wire branch_flush;
 
