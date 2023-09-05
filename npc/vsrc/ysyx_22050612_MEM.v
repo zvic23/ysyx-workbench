@@ -1,4 +1,4 @@
-import "DPI-C" function void npc_loadstore(int getinst, longint raddr, longint waddr);
+//import "DPI-C" function void npc_loadstore(int getinst, longint raddr, longint waddr);
 import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
 import "DPI-C" function void pmem_write(
@@ -34,7 +34,12 @@ output reg [63:0]MEM_reg_aluoutput,
 
 input WB_reg_valid,
 input [31:0]WB_reg_inst,
-input [63:0]WB_reg_wdata
+input [63:0]WB_reg_wdata,
+
+
+
+output [63:0]raddr_out,
+output [63:0]waddr_out
 
 /*
 output reg arvalid,
@@ -68,7 +73,8 @@ output exu_block
 
 );
 
-
+assign raddr_out = raddr;
+assign waddr_out = waddr;
 
 
 //*************************  pipeline ********************************
@@ -681,7 +687,7 @@ reg [15:0] rdata_2byte;
 
 
 
-
+/*
 always @(posedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
 	case(opcode)
     24'd11  : npc_loadstore(1, raddr, waddr);
@@ -698,7 +704,7 @@ always @(posedge clk) begin            //support mtrace, to give the csrc a sign
     default: npc_loadstore(0, 0, 0);
 	endcase
 end
-
+*/
 
 
 /*

@@ -1,4 +1,5 @@
 import "DPI-C" function void npc_complete_one_inst ();
+import "DPI-C" function void npc_loadstore(int getinst, longint raddr, longint waddr);
 
 module ysyx_22050612_WBU(
 input clk,
@@ -19,7 +20,10 @@ output reg WB_reg_valid,
 output reg [31:0]WB_reg_inst,
 output reg [63:0]WB_reg_wdata,
 
-output reg [63:0]WB_reg_pc
+output reg [63:0]WB_reg_pc,
+
+input [63:0]raddr,
+input [63:0]waddr
 );
 
 
@@ -73,6 +77,26 @@ always @(negedge clk) begin
 	end
 end
 //********************************************************************
+
+
+always @(posedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
+	if(valid_MEM_WB)begin
+	case({inst_MEM_WB[14:12],inst_MEM_WB[6:0]})
+    10'b000_0000011:   npc_loadstore(1, raddr, waddr);
+    10'b001_0000011:   npc_loadstore(1, raddr, waddr);
+    10'b010_0000011:   npc_loadstore(1, raddr, waddr);
+    10'b100_0000011:   npc_loadstore(1, raddr, waddr);
+    10'b101_0000011:   npc_loadstore(1, raddr, waddr);
+    10'b000_0100011:   npc_loadstore(2, raddr, waddr);
+    10'b001_0100011:   npc_loadstore(2, raddr, waddr);
+    10'b010_0100011:   npc_loadstore(2, raddr, waddr);
+    10'b110_0000011:  npc_loadstore(1, raddr, waddr);
+    10'b011_0000011:  npc_loadstore(1, raddr, waddr);
+    10'b011_0100011:  npc_loadstore(2, raddr, waddr);
+    default: npc_loadstore(0, 0, 0);
+	endcase
+end
+end
 
 
 
