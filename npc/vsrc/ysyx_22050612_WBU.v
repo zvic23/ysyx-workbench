@@ -17,7 +17,9 @@ output [63:0] gpr[31:0],
 
 output reg WB_reg_valid,
 output reg [31:0]WB_reg_inst,
-output reg [63:0]WB_reg_wdata
+output reg [63:0]WB_reg_wdata,
+
+output reg [63:0]WB_reg_pc
 );
 
 
@@ -25,7 +27,7 @@ output reg [63:0]WB_reg_wdata
 
 //*************************  pipeline ********************************
 //reg       WB_reg_valid;
-reg [63:0]WB_reg_pc   ;
+//reg [63:0]WB_reg_pc   ;
 //reg [31:0]WB_reg_inst ;
 reg       WB_reg_wen ;
 reg [ 4:0]WB_reg_id ;

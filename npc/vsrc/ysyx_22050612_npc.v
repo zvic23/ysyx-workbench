@@ -30,6 +30,7 @@ wire [ 4:0]rs2;
 wire exu_block;
 
 
+assign pc = WB_reg_pc;
 
 
 
@@ -84,7 +85,6 @@ wire       valid_IF_ID;
 wire       ready_IF_ID;
 wire [63:0]pc_IF_ID  ;
 wire [31:0]inst_IF_ID;
-assign pc = pc_IF_ID;
 
 wire branch_flush;
 
@@ -135,7 +135,9 @@ wire       WB_reg_valid;
 wire [31:0]WB_reg_inst ;
 wire [63:0]WB_reg_wdata ;
 
-ysyx_22050612_WBU wbu (clk,rst, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr , WB_reg_valid, WB_reg_inst, WB_reg_wdata);
+wire [63:0]WB_reg_pc ;
+
+ysyx_22050612_WBU wbu (clk,rst, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr , WB_reg_valid, WB_reg_inst, WB_reg_wdata, WB_reg_pc);
 
 
 
