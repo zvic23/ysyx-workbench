@@ -162,14 +162,14 @@ void one_cycle(){
   update_gpr_pc();
 
 #ifdef CONFIG_DIFFTEST
-/*
+
   if( load_store == 1){
 	  syn_gpr();
   }
   else {
   	  difftest_step();
   }
-  */
+  
   if(to_check){
 	  difftest_step();
 	  to_check = 0;
