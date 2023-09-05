@@ -42,7 +42,7 @@ void NDL_OpenCanvas(int *w, int *h) {
 
   canvas_w = *w; canvas_h = *h;
   if(screen_w<canvas_w || screen_h<canvas_h){
-	  printf("%d  %d canvas should not be larger than screen!!\n",screen_w,canvas_w);
+	  printf("%x  %x canvas should not be larger than screen!!\n",screen_w,canvas_w);
   }
   //assert(screen_w>=canvas_w && screen_h>=canvas_h);
 
