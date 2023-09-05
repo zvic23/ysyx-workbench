@@ -237,7 +237,7 @@ wire [3:0]EX_inst_hit;
 always@(*) begin
 //   ID/EX
 	case ({EX_reg_inst[14:12],EX_reg_inst[6:0]})
-    	//	10'b000_1100111:  EX_inst_hit[1]= 1'd1   ;    //jalr
+    		   10'b000_1100111:  EX_inst_hit[1]= 1'd1   ;    //jalr
 
     		10'b000_1100011:  EX_inst_hit[1]= 1'd1   ;    //beq
     		10'b001_1100011:  EX_inst_hit[1]= 1'd1   ;    //bne
