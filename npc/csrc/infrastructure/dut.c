@@ -105,7 +105,8 @@ void difftest_step() {
 
   for(int i=0;i<32;i++){
 	  if(ref_r[i] != cpu_gpr_set[i]){
-		  printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx   npc.pc:%lx  nemu.pc:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]    , cpu_gpr_set[32],ref_r[32]);
+		  printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx   npc.pc:%lx  nemu.pc:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]    , wb_pc,ref_r[32]);
+		  //printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx   npc.pc:%lx  nemu.pc:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]    , cpu_gpr_set[32],ref_r[32]);
 		  //printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]);
 		  npc_state = 3;
 		  return;
