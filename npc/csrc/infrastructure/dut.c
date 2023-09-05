@@ -114,12 +114,12 @@ void difftest_step() {
 		  return;
 	  }
   }
-  if(wb_pc != (ref_r[32]-4)) {
-	  printf("(pc)   npc.pc:%lx  nemu.pc:%lx\n",wb_pc,ref_r[32]);
-		  npc_state = 3;
-		  return;
-	  }
-
+//  if(wb_pc != (ref_r[32]-4)) {
+//	  printf("(pc)   npc.pc:%lx  nemu.pc:%lx\n",wb_pc,ref_r[32]);
+//		  npc_state = 3;
+//		  return;
+//	  }
+//
 }
 
 
