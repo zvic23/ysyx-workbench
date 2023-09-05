@@ -51,15 +51,17 @@ void dump_gpr() {
   printf("pc  = 0x%lx\n" , top->pc);  //zsl:I add this line to output pc
 }
 
+uint64_t wb_pc;
 uint64_t cpu_gpr_set[33];
 void update_gpr_pc(){
   for (int i = 0; i < 32; i++) {          //save the gpr and pc in a safe value
 	  cpu_gpr_set[i]=cpu_gpr[i];
   }
           cpu_gpr_set[32]=top->pc;
+
+wb_pc = top->wb_pc;
 }
 
-uint64_t wb_pc = top->wb_pc;
 
 
 uint64_t mtvec,mcause,mepc,mstatus;
