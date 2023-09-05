@@ -130,7 +130,7 @@ end
 reg [3:0]inst_is_branch;
 always @(*) begin
 	if(inst[6:0] == 7'b1101111)begin
-		inst_is_branch = 4'd2;                                 //jal
+		inst_is_branch = 4'd0;                                 //jal
 	end
 //	else if(inst == 32'b1110011)begin
 //		//inst_is_branch = 4'd1;                                 //ecall
