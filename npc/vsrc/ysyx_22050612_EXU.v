@@ -1132,7 +1132,7 @@ always@(*) begin
     24'd23   : mode=8'd6 ;
     24'd24   : mode=8'd4 ;
     24'd50   : mode=8'd6 ;
-    default  : mode=8'd1 ;
+    default  : mode=8'd0 ;
     endcase
 end
 
