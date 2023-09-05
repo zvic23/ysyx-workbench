@@ -169,11 +169,11 @@ void one_cycle(){
   else {
   	  difftest_step();
   }
-  
+ /* 
   if(to_check){
 	  difftest_step();
 	  to_check = 0;
-  }
+  }*/
 #endif
 
 
