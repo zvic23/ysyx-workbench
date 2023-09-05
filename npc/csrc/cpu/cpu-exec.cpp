@@ -56,9 +56,10 @@ void update_gpr_pc(){
   for (int i = 0; i < 32; i++) {          //save the gpr and pc in a safe value
 	  cpu_gpr_set[i]=cpu_gpr[i];
   }
-          cpu_gpr_set[32]=top->wb_pc;
-          //cpu_gpr_set[32]=top->pc;
+          cpu_gpr_set[32]=top->pc;
 }
+
+uint64_t wb_pc = top->wb_pc;
 
 
 uint64_t mtvec,mcause,mepc,mstatus;

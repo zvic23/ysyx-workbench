@@ -90,7 +90,7 @@ extern uint64_t mtvec;
 
 
 
-
+extern uint64_t wb_pc;
 
 extern const char *regs[];
 extern int npc_state;
