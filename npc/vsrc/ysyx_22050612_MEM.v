@@ -1,4 +1,4 @@
-import "DPI-C" function void npc_loadstore(int getinst, longint base, longint imm_I, longint imm_S);
+import "DPI-C" function void npc_loadstore(int getinst, longint raddr, longint waddr);
 import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
 import "DPI-C" function void pmem_write(
@@ -681,6 +681,23 @@ reg [15:0] rdata_2byte;
 
 
 
+
+always @(posedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
+	case(opcode)
+    24'd11  : npc_loadstore(1, raddr, waddr);
+    24'd12  : npc_loadstore(1, raddr, waddr);
+    24'd13  : npc_loadstore(1, raddr, waddr);
+    24'd14  : npc_loadstore(1, raddr, waddr);
+    24'd15  : npc_loadstore(1, raddr, waddr);
+    24'd16  : npc_loadstore(2, raddr, waddr);
+    24'd17  : npc_loadstore(2, raddr, waddr);
+    24'd18  : npc_loadstore(2, raddr, waddr);
+    24'd41  : npc_loadstore(1, raddr, waddr);
+    24'd42  : npc_loadstore(1, raddr, waddr);
+    24'd43  : npc_loadstore(2, raddr, waddr);
+    default: npc_loadstore(0, 0, 0);
+	endcase
+end
 
 
 

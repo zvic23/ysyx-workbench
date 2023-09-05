@@ -94,6 +94,22 @@ void read_inst(int npc_inst){
 
 
 int load_store = 0;
+void npc_loadstore(int getinst, long long raddr, long long waddr){
+	if(getinst == 1){
+		switch(raddr){
+		case 0xa0000048:
+		case 0xa0000060:{load_store = 1;break;}
+		default:   {load_store = 0;break;}
+		}
+	}else if(getinst == 2){
+		if(waddr==0xa00003f8 || waddr==0xa0000104 ||
+		(waddr>=0xa1000000&&waddr<0xa1000000+400*300*4))
+			load_store = 1;
+		else load_store = 0;
+	}else load_store = 0;
+
+}
+/*
 void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S){
 	if(getinst == 1){
 		switch(base + imm_I){
@@ -115,7 +131,7 @@ void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S
 		}
 	}
 }
-
+*/
 
 
 uint64_t g_nr_guest_inst = 0;
