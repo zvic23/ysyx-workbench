@@ -130,7 +130,11 @@ void difftest_step() {
 
 void syn_gpr(){
   if(detach_difftest == 1) return;
-  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
+  uint64_t cpu_gpr_set_old_pc[33];
+  memcpy(cpu_gpr_set_old_pc,cpu_gpr_set,256);
+  cpu_gpr_set_old_pc[32] = wb_pc;
+  ref_difftest_regcpy(&cpu_gpr_set_old_pc, DIFFTEST_TO_REF);
+  //ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
 }
 
 
