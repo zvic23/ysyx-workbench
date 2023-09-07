@@ -43,7 +43,9 @@ static int cmd_c(char *args){
 	return 0;
 }
 
+extern void program_exec_statistics();
 static int cmd_q(char *args) {
+		  program_exec_statistics();
   return -1;
 }
 

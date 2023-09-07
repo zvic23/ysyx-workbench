@@ -90,7 +90,7 @@ extern uint64_t mtvec;
 
 
 
-
+extern uint64_t wb_pc;
 
 extern const char *regs[];
 extern int npc_state;
@@ -98,19 +98,31 @@ extern int detach_difftest;
 void difftest_step() {
   if(detach_difftest == 1) return;
 
-  uint64_t ref_r[33];
+  uint64_t ref_r_old[33];
+  ref_difftest_regcpy(&ref_r_old, DIFFTEST_TO_DUT);
 
+  uint64_t ref_r[33];
   ref_difftest_exec(1);
   ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
 
+
+	  printf("(pc)   npc.pc:%lx  nemu.pc:%lx\n",wb_pc,ref_r_old[32]);
+
   for(int i=0;i<32;i++){
 	  if(ref_r[i] != cpu_gpr_set[i]){
-		  printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx   npc.pc:%lx  nemu.pc:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]    , cpu_gpr_set[32],ref_r[32]);
+		  printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx   npc.pc:%lx  nemu.pc:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]    , wb_pc,ref_r[32]);
+		  //printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx   npc.pc:%lx  nemu.pc:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]    , cpu_gpr_set[32],ref_r[32]);
 		  //printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]);
 		  npc_state = 3;
 		  return;
 	  }
   }
+  if(wb_pc != (ref_r_old[32])) {
+	  printf("(pc)   npc.pc:%lx  nemu.pc:%lx\n",wb_pc,ref_r_old[32]);
+		  npc_state = 3;
+		  return;
+	  }
+
 }
 
 
@@ -118,7 +130,11 @@ void difftest_step() {
 
 void syn_gpr(){
   if(detach_difftest == 1) return;
-  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
+  uint64_t cpu_gpr_set_old_pc[33];
+  memcpy(cpu_gpr_set_old_pc,cpu_gpr_set,256);
+  cpu_gpr_set_old_pc[32] = wb_pc+4;
+  ref_difftest_regcpy(&cpu_gpr_set_old_pc, DIFFTEST_TO_REF);
+  //ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
 }
 
 

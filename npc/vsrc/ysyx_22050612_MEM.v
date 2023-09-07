@@ -1,4 +1,4 @@
-import "DPI-C" function void npc_loadstore(int getinst, longint base, longint imm_I, longint imm_S);
+//import "DPI-C" function void npc_loadstore(int getinst, longint raddr, longint waddr);
 import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
 import "DPI-C" function void pmem_write(
@@ -34,7 +34,12 @@ output reg [63:0]MEM_reg_aluoutput,
 
 input WB_reg_valid,
 input [31:0]WB_reg_inst,
-input [63:0]WB_reg_wdata
+input [63:0]WB_reg_wdata,
+
+
+
+output [63:0]raddr_out,
+output [63:0]waddr_out
 
 /*
 output reg arvalid,
@@ -68,7 +73,8 @@ output exu_block
 
 );
 
-
+assign raddr_out = raddr;
+assign waddr_out = waddr;
 
 
 //*************************  pipeline ********************************
@@ -152,7 +158,7 @@ always@(*)begin
 end
 
 wire rs2_MEM_WB_match;
-assign rs2_MEM_WB_match  =  WB_reg_inst[11:7] == MEM_reg_inst[24:20];
+assign rs2_MEM_WB_match  =  (WB_reg_inst[11:7] == MEM_reg_inst[24:20])&&(MEM_reg_inst[24:20]!=5'b0);
 
 wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
@@ -169,6 +175,7 @@ always@(*) begin
 
 //  MEM/WB
 	case ({WB_reg_inst[14:12],WB_reg_inst[6:0]})
+//    10'b000_1100111:  WB_inst_hit[0]= 1'b1  ;    //jalr
                 10'b000_0000011:  WB_inst_hit[0]= 1'b1  ;     //lb
                 10'b001_0000011:  WB_inst_hit[0]= 1'b1  ;     //lh
                 10'b010_0000011:  WB_inst_hit[0]= 1'b1  ;     //lw
@@ -190,6 +197,7 @@ always@(*) begin
 	case (WB_reg_inst[6:0])
 		7'b0110111:  WB_inst_hit[1]= 1'b1  ;    //lui
 		7'b0010111:  WB_inst_hit[1]= 1'b1  ;    //auipc
+//		    7'b1101111: WB_inst_hit[1]= 1'b1  ;       //jal             //unlike the book, jal should add in, or "jal xx ret" will get wrong if the address be corrected at jal in IFU
 		default:     WB_inst_hit[1]= 1'b0  ;                               
 	endcase
 	case ({WB_reg_inst[31:25],WB_reg_inst[14:12],WB_reg_inst[6:0]})
@@ -679,7 +687,24 @@ reg [15:0] rdata_2byte;
 
 
 
-
+/*
+always @(posedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
+	case(opcode)
+    24'd11  : npc_loadstore(1, raddr, waddr);
+    24'd12  : npc_loadstore(1, raddr, waddr);
+    24'd13  : npc_loadstore(1, raddr, waddr);
+    24'd14  : npc_loadstore(1, raddr, waddr);
+    24'd15  : npc_loadstore(1, raddr, waddr);
+    24'd16  : npc_loadstore(2, raddr, waddr);
+    24'd17  : npc_loadstore(2, raddr, waddr);
+    24'd18  : npc_loadstore(2, raddr, waddr);
+    24'd41  : npc_loadstore(1, raddr, waddr);
+    24'd42  : npc_loadstore(1, raddr, waddr);
+    24'd43  : npc_loadstore(2, raddr, waddr);
+    default: npc_loadstore(0, 0, 0);
+	endcase
+end
+*/
 
 
 /*

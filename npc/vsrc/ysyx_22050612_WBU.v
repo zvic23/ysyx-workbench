@@ -1,4 +1,5 @@
 import "DPI-C" function void npc_complete_one_inst ();
+import "DPI-C" function void npc_loadstore(int getinst, longint raddr, longint waddr);
 
 module ysyx_22050612_WBU(
 input clk,
@@ -17,7 +18,12 @@ output [63:0] gpr[31:0],
 
 output reg WB_reg_valid,
 output reg [31:0]WB_reg_inst,
-output reg [63:0]WB_reg_wdata
+output reg [63:0]WB_reg_wdata,
+
+output reg [63:0]WB_reg_pc,
+
+input reg [63:0]raddr,
+input reg [63:0]waddr
 );
 
 
@@ -25,12 +31,16 @@ output reg [63:0]WB_reg_wdata
 
 //*************************  pipeline ********************************
 //reg       WB_reg_valid;
-reg [63:0]WB_reg_pc   ;
+//reg [63:0]WB_reg_pc   ;
 //reg [31:0]WB_reg_inst ;
 reg       WB_reg_wen ;
 reg [ 4:0]WB_reg_id ;
 //reg [63:0]WB_reg_wdata ;
 //reg [23:0]WB_reg_opcode;
+
+
+reg [63:0]reg_raddr;
+reg [63:0]reg_waddr;
 
 always @(posedge clk) begin
 	if(rst) begin
@@ -41,6 +51,9 @@ always @(posedge clk) begin
 		WB_reg_wen  <=  1'b0;
 		WB_reg_id   <=  5'b0;
 		WB_reg_wdata<= 64'b0;
+
+		reg_raddr <= 64'b0;
+		reg_waddr <= 64'b0;
 	end
 	else begin
 		WB_reg_valid <= valid_MEM_WB;
@@ -50,6 +63,9 @@ always @(posedge clk) begin
 		WB_reg_wen  <= reg_wr_wen   ;
 		WB_reg_id   <= reg_wr_ID    ;
 		WB_reg_wdata<= reg_wr_value ;
+
+		reg_raddr <= raddr;
+		reg_waddr <= waddr;
 	end
 end
 
@@ -71,6 +87,26 @@ always @(negedge clk) begin
 	end
 end
 //********************************************************************
+
+
+always @(negedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
+	if(WB_reg_valid)begin
+	case({WB_reg_inst[14:12],WB_reg_inst[6:0]})
+    10'b000_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b001_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b010_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b100_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b101_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b000_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
+    10'b001_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
+    10'b010_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
+    10'b110_0000011:  npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b011_0000011:  npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b011_0100011:  npc_loadstore(2, reg_raddr, reg_waddr);
+    default: npc_loadstore(0, 0, 0);
+	endcase
+end
+end
 
 
 

@@ -51,13 +51,17 @@ void dump_gpr() {
   printf("pc  = 0x%lx\n" , top->pc);  //zsl:I add this line to output pc
 }
 
+uint64_t wb_pc;
 uint64_t cpu_gpr_set[33];
 void update_gpr_pc(){
   for (int i = 0; i < 32; i++) {          //save the gpr and pc in a safe value
 	  cpu_gpr_set[i]=cpu_gpr[i];
   }
           cpu_gpr_set[32]=top->pc;
+
+wb_pc = top->wb_pc;
 }
+
 
 
 uint64_t mtvec,mcause,mepc,mstatus;
@@ -94,6 +98,22 @@ void read_inst(int npc_inst){
 
 
 int load_store = 0;
+void npc_loadstore(int getinst, long long raddr, long long waddr){
+	if(getinst == 1){
+		switch(raddr){
+		case 0xa0000048:
+		case 0xa0000060:{load_store = 1;break;}
+		default:   {load_store = 0;break;}
+		}
+	}else if(getinst == 2){
+		if(waddr==0xa00003f8 || waddr==0xa0000104 ||
+		(waddr>=0xa1000000&&waddr<0xa1000000+400*300*4))
+			load_store = 1;
+		else load_store = 0;
+	}else load_store = 0;
+
+}
+/*
 void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S){
 	if(getinst == 1){
 		switch(base + imm_I){
@@ -115,12 +135,14 @@ void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S
 		}
 	}
 }
+*/
 
 
-
+uint64_t g_nr_guest_inst = 0;
 int to_check = 0;
 void npc_complete_one_inst(){
 	to_check = 1;
+    	  g_nr_guest_inst ++;
 }
 
 
@@ -153,7 +175,13 @@ void one_cycle(){
   }
   */
   if(to_check){
-	  difftest_step();
+  if( load_store == 1){
+	  syn_gpr();
+  }
+  else {
+  	  difftest_step();
+  }
+	 // difftest_step();
 	  to_check = 0;
   }
 #endif
@@ -178,15 +206,17 @@ void one_cycle(){
   device_update();
 }
 
-uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
+static uint64_t g_cycle = 0; //  cycle
 
 void program_exec_statistics(){
   	 struct timeval time_end;                   //get the time when program end
   	 gettimeofday(&time_end,NULL);
   	 g_timer = (time_end.tv_sec*1000000)+time_end.tv_usec - time_init;
 	 printf(BLUE "host time spent = %ld us\n" NONE,g_timer);
+	   printf(BLUE "total guest cycle spent = %ld \n" NONE,g_cycle);
 	 printf(BLUE "total guest instructions = %ld \n" NONE,g_nr_guest_inst);
+	   printf(BLUE "guest ipc  = 0.%ld \n" NONE,g_nr_guest_inst*1000/g_cycle);
 	 printf(BLUE "simulation frequency = %ld inst/s\n" NONE,g_nr_guest_inst * 1000000 / g_timer);
 	 printf("execute has finished, please open npc again!\n");
 }
@@ -213,8 +243,9 @@ void execute(int n){
           }
 
 	  one_cycle();
+	  g_cycle++;
 
-    	  g_nr_guest_inst ++;
+    	  //g_nr_guest_inst ++;
 	  if(itrace_si) itrace_printf_once();
 
 

@@ -42,7 +42,9 @@ output [63:0]pc_ID_EX,
 output [31:0]inst_ID_EX,
 
 input EX_reg_valid,
-input [31:0]EX_reg_inst
+input [31:0]EX_reg_inst,
+
+input branch_flush
 );
 
 //*************************  pipeline ********************************
@@ -51,7 +53,7 @@ reg [63:0]ID_reg_pc   ;
 reg [31:0]ID_reg_inst ;
 
 always @(posedge clk) begin
-	if(rst) begin
+	if(rst || branch_flush) begin
 		ID_reg_valid <= 1'b0;
 		ID_reg_pc    <= 64'b0;
 		ID_reg_inst  <= 32'b0;

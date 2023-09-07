@@ -78,7 +78,10 @@ input [63:0]MEM_reg_aluoutput,
 
 input WB_reg_valid,
 input [31:0]WB_reg_inst,
-input [63:0]WB_reg_wdata
+input [63:0]WB_reg_wdata,
+
+
+input branch_flush
 
 
 /*
@@ -129,7 +132,7 @@ reg [63:0]EX_reg_imm;
 //reg [63:0]EX_reg_src2          ;
 
 always @(posedge clk) begin
-	if(rst) begin
+	if(rst || branch_flush) begin
 		EX_reg_valid          <=  1'b0;
 		EX_reg_pc             <= 64'b0;
 		EX_reg_inst           <= 32'b0;
@@ -223,10 +226,10 @@ wire rs1_EX_MEM_match;
 wire rs2_EX_MEM_match;
 wire rs1_EX_WB_match;
 wire rs2_EX_WB_match;
-assign rs1_EX_MEM_match = MEM_reg_inst[11:7] == EX_reg_inst[19:15];
-assign rs2_EX_MEM_match = MEM_reg_inst[11:7] == EX_reg_inst[24:20];
-assign rs1_EX_WB_match  =  WB_reg_inst[11:7] == EX_reg_inst[19:15];
-assign rs2_EX_WB_match  =  WB_reg_inst[11:7] == EX_reg_inst[24:20];
+assign rs1_EX_MEM_match = (MEM_reg_inst[11:7] == EX_reg_inst[19:15])&&(EX_reg_inst[19:15]!=5'b0);
+assign rs2_EX_MEM_match = (MEM_reg_inst[11:7] == EX_reg_inst[24:20])&&(EX_reg_inst[24:20]!=5'b0);
+assign rs1_EX_WB_match  = ( WB_reg_inst[11:7] == EX_reg_inst[19:15])&&(EX_reg_inst[19:15]!=5'b0);
+assign rs2_EX_WB_match  = ( WB_reg_inst[11:7] == EX_reg_inst[24:20])&&(EX_reg_inst[24:20]!=5'b0);
 
 wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
@@ -283,6 +286,7 @@ always@(*) begin
 
 //   EX/MEM
 	case ({MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
+//    10'b000_1100111:  MEM_inst_hit[0]= 1'b1  ;    //jalr
 		10'b000_0010011:  MEM_inst_hit[0]= 1'b1  ;    //addi
 		10'b010_0010011:  MEM_inst_hit[0]= 1'b1  ;    //slti
 		10'b011_0010011:  MEM_inst_hit[0]= 1'b1  ;    //sltiu
@@ -297,6 +301,7 @@ always@(*) begin
 	case (MEM_reg_inst[6:0])
 		7'b0110111:  MEM_inst_hit[1]= 1'b1  ;    //lui
 		7'b0010111:  MEM_inst_hit[1]= 1'b1  ;    //auipc
+//		    7'b1101111: MEM_inst_hit[1]= 1'b1  ;       //jal             //unlike the book, jal should add in, or "jal xx ret" will get wrong if the address be corrected at jal in IFU
 		default:     MEM_inst_hit[1]= 1'b0  ;                               
 	endcase
 	case ({MEM_reg_inst[31:25],MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
@@ -336,6 +341,7 @@ always@(*) begin
 	endcase
 //  MEM/WB
 	case ({WB_reg_inst[14:12],WB_reg_inst[6:0]})
+//    10'b000_1100111:  WB_inst_hit[0]= 1'b1  ;    //jalr
                 10'b000_0000011:  WB_inst_hit[0]= 1'b1  ;     //lb
                 10'b001_0000011:  WB_inst_hit[0]= 1'b1  ;     //lh
                 10'b010_0000011:  WB_inst_hit[0]= 1'b1  ;     //lw
@@ -357,6 +363,7 @@ always@(*) begin
 	case (WB_reg_inst[6:0])
 		7'b0110111:  WB_inst_hit[1]= 1'b1  ;    //lui
 		7'b0010111:  WB_inst_hit[1]= 1'b1  ;    //auipc
+		    7'b1101111: WB_inst_hit[1]= 1'b1  ;       //jal             //unlike the book, jal should add in, or "jal xx ret" will get wrong if the address be corrected at jal in IFU
 		default:     WB_inst_hit[1]= 1'b0  ;                               
 	endcase
 	case ({WB_reg_inst[31:25],WB_reg_inst[14:12],WB_reg_inst[6:0]})
@@ -413,7 +420,7 @@ assign src_B_EX_MEM = src2;
 
 
 always @(negedge clk) begin
-	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x %x",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , WB_reg_wdata,  EX_inst_hit, WB_inst_hit, rs1_EX_WB_match , rs2_EX_WB_match);
+	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x %x   dnpc:%x  opcode:%d\n",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , WB_reg_wdata,  EX_inst_hit, WB_inst_hit, rs1_EX_WB_match , rs2_EX_WB_match,dnpc,opcode);
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , MEM_reg_aluoutput,  EX_inst_hit, MEM_inst_hit, rs1_EX_MEM_match );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x",EX_reg_pc,EX_reg_inst,EX_reg_valid,EX_reg_src_a,EX_reg_src_b,EX_reg_imm);
 end
@@ -866,39 +873,84 @@ always @(*) begin
 //    default: dnpc=snpc;
 //    endcase
 
+//    case (opcode)            // this edition is for always predict not jump
+//    24'h300 : dnpc=result_alu0                         ;
+//    24'd4   : dnpc={result_alu0[63:1],1'b0}            ;
+////    24'd5   : dnpc=(result_alu0==64'b0)?(imm_B+EX_reg_pc):snpc;
+////    24'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+EX_reg_pc):snpc;
+////    24'd7   : dnpc=(result_alu0[63]==1)?(imm_B+EX_reg_pc):snpc;
+////    24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc;
+//    24'd5   : dnpc=(src1==src2)?result_alu0:snpc;
+//    24'd6   : dnpc=(src1!=src2)?result_alu0:snpc;
+//    24'd7   : dnpc=($signed(src1) <$signed(src2))?result_alu0:snpc;
+//    24'd8   : dnpc=($signed(src1)>=$signed(src2))?result_alu0:snpc;
+//    24'd9   : dnpc=(src1 <src2)?result_alu0:snpc         ;
+//    24'd10  : dnpc=(src1>=src2)?result_alu0:snpc        ;        //(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc
+//    24'h200000: dnpc=EX_reg_src_b                             ;        
+//    24'h500000: dnpc=EX_reg_src_b                             ;        
+//    default: dnpc=snpc;
+//    endcase
+
     case (opcode)
     24'h300 : dnpc=result_alu0                         ;
-    24'd4   : dnpc={result_alu0[63:1],1'b0}            ;
+    24'd4   : dnpc=result_alu0           ;
 //    24'd5   : dnpc=(result_alu0==64'b0)?(imm_B+EX_reg_pc):snpc;
 //    24'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+EX_reg_pc):snpc;
 //    24'd7   : dnpc=(result_alu0[63]==1)?(imm_B+EX_reg_pc):snpc;
 //    24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc;
-    24'd5   : dnpc=(src1==src2)?result_alu0:snpc;
-    24'd6   : dnpc=(src1!=src2)?result_alu0:snpc;
-    24'd7   : dnpc=($signed(src1) <$signed(src2))?result_alu0:snpc;
-    24'd8   : dnpc=($signed(src1)>=$signed(src2))?result_alu0:snpc;
-    24'd9   : dnpc=(src1 <src2)?result_alu0:snpc         ;
-    24'd10  : dnpc=(src1>=src2)?result_alu0:snpc        ;        //(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc
+    24'd5   : dnpc=(src1==src2&&EX_reg_inst[31]==0)?result_alu0:snpc;
+    24'd6   : dnpc=(src1!=src2&&EX_reg_inst[31]==0)?result_alu0:snpc;
+    24'd7   : dnpc=($signed(src1) <$signed(src2)&&EX_reg_inst[31]==0)?result_alu0:snpc;
+    24'd8   : dnpc=($signed(src1)>=$signed(src2)&&EX_reg_inst[31]==0)?result_alu0:snpc;
+    24'd9   : dnpc=(src1 <src2&&EX_reg_inst[31]==0)?result_alu0:snpc         ;
+    24'd10  : dnpc=(src1>=src2&&EX_reg_inst[31]==0)?result_alu0:snpc        ;        //(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc
     24'h200000: dnpc=EX_reg_src_b                             ;        
     24'h500000: dnpc=EX_reg_src_b                             ;        
     default: dnpc=snpc;
     endcase
 
-
-
     case (opcode)
-    24'h300  : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+    //24'h300  : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+    //24'h300  : pc_update= EX_reg_valid ? (EX_reg_inst[31]==1'b0 ? 1'b1 : 1'b0) : 1'b0;
     24'd4    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
-    24'd5    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
-    24'd6    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
-    24'd7    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
-    24'd8    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
-    24'd9    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
-    24'd10   : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+    24'd5    : pc_update= EX_reg_valid ? ( ((src1==src2&&EX_reg_inst[31]==0)||(src1!=src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
+    24'd6    : pc_update= EX_reg_valid ? ( ((src1!=src2&&EX_reg_inst[31]==0)||(src1==src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
+    24'd7    : pc_update= EX_reg_valid ? ( (($signed(src1) <$signed(src2)&&EX_reg_inst[31]==0)||($signed(src1)>=$signed(src2)&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
+    24'd8    : pc_update= EX_reg_valid ? ( (($signed(src1)>=$signed(src2)&&EX_reg_inst[31]==0)||($signed(src1) <$signed(src2)&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
+    24'd9    : pc_update= EX_reg_valid ? ( ((src1 <src2&&EX_reg_inst[31]==0)||(src1>=src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
+    24'd10   : pc_update= EX_reg_valid ? ( ((src1>=src2&&EX_reg_inst[31]==0)||(src1 <src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
     24'h200000: pc_update=EX_reg_valid ? 1'b1 : 1'b0;   
     24'h500000: pc_update=EX_reg_valid ? 1'b1 : 1'b0;             
     default: pc_update=1'b0;
     endcase
+
+//    case (opcode)    // this edition is for always predict not jump
+//    24'h300  : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+//    24'd4    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+//    24'd5    : pc_update= EX_reg_valid ? ((src1==src2)? 1'b1:1'b0) : 1'b0;
+//    24'd6    : pc_update= EX_reg_valid ? ((src1!=src2)? 1'b1:1'b0) : 1'b0;
+//    24'd7    : pc_update= EX_reg_valid ? (($signed(src1) <$signed(src2))? 1'b1:1'b0) : 1'b0;
+//    24'd8    : pc_update= EX_reg_valid ? (($signed(src1)>=$signed(src2))? 1'b1:1'b0) : 1'b0;
+//    24'd9    : pc_update= EX_reg_valid ? ((src1 <src2)? 1'b1:1'b0) : 1'b0;
+//    24'd10   : pc_update= EX_reg_valid ? ((src1>=src2)? 1'b1:1'b0) : 1'b0;
+//    24'h200000: pc_update=EX_reg_valid ? 1'b1 : 1'b0;   
+//    24'h500000: pc_update=EX_reg_valid ? 1'b1 : 1'b0;             
+//    default: pc_update=1'b0;
+//    endcase
+
+//    case (opcode)
+//    24'h300  : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+//    24'd4    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+//    24'd5    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+//    24'd6    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+//    24'd7    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+//    24'd8    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+//    24'd9    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+//    24'd10   : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
+//    24'h200000: pc_update=EX_reg_valid ? 1'b1 : 1'b0;   
+//    24'h500000: pc_update=EX_reg_valid ? 1'b1 : 1'b0;             
+//    default: pc_update=1'b0;
+//    endcase
 end
 
 
@@ -954,8 +1006,10 @@ always@(*) begin
 //    24'h100  : wdata_reg=EX_reg_imm;
 //    //24'h300  : wdata_reg=pc + 64'd4;
 //    24'h300  : wdata_reg=EX_reg_pc + 64'd4;
+    24'h300  : ALUoutput_EX_MEM=EX_reg_pc + 64'd4;
 //    //24'd4    : wdata_reg=pc + 64'd4;
 //    24'd4    : wdata_reg=EX_reg_pc + 64'd4;
+    24'd4    : ALUoutput_EX_MEM=EX_reg_pc + 64'd4;
     24'd47   : ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
 //    24'd49   : wdata_reg=src_csr;
 //    24'd50   : wdata_reg=src_csr;
