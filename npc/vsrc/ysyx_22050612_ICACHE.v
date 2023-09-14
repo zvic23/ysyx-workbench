@@ -71,8 +71,8 @@ wire [127:0]bwen;
 wire [5:0]addr_sram;
 wire [127:0]din;
 
-//assign addr_sram = ready_IF_ID ? index : addr_prev[9:4];
-assign addr_sram =  index;
+assign addr_sram = ready_IF_ID ? index : addr_prev[9:4];
+//assign addr_sram =  index;
 assign bwen = 128'h0;
 assign cen0 = ~(valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0);
 assign cen1 = ~(valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0);
@@ -91,27 +91,27 @@ S011HD1P_X32Y2D128_BW sram_i3(dout3, clk, cen3, wen, bwen, addr_sram, din);
 reg [3:0]way_hit_prev;
 reg [3:0]random_cnt;
 reg [127:0]line_mem_prev;
-reg [127:0]inst_prev;
+reg [31:0]inst_prev;
 always @(posedge clk) begin
 	if(rst) begin
 		way_hit_prev    <= 4'b0;
 		random_cnt      <= 4'b1;
 		line_mem_prev   <=128'b0;
 		ready           <= 1'b0;
-		inst_prev       <=128'b0;
+		inst_prev <= 32'b0;
 	end
 	else if(!ready_IF_ID) begin
 		way_hit_prev    <= way_hit_prev ;
 		random_cnt      <= random_cnt   ;
 		line_mem_prev   <= line_mem_prev;
 		ready           <= ready        ;
-		inst_prev       <= inst_prev  ;
+		inst_prev <= inst_prev;
 	end
 	else if(flush) begin
 		way_hit_prev    <= 4'b0;
 		line_mem_prev   <=128'b0;
 		ready           <= 1'b0;
-		inst_prev       <=128'b0;
+		inst_prev <= 32'b0;
 	end
 	else begin
 	     	way_hit_prev    <= way_hit;
@@ -119,13 +119,12 @@ always @(posedge clk) begin
 		random_cnt[3:1] <= random_cnt[2:0];
 		line_mem_prev   <= line_mem;
 		ready           <= valid;
-		inst_prev       <= dout  ;
+		inst_prev <= inst;
 	end
 end
 
 reg [127:0]dout;
 always @(*) begin
-	if(ready_IF_ID) begin
 	case(way_hit_prev)
 		4'b0001: dout = dout0;
 		4'b0010: dout = dout1;
@@ -133,13 +132,9 @@ always @(*) begin
 		4'b1000: dout = dout3;
 		default: dout = line_mem_prev;
 	endcase
-        end
-	else begin
-		dout = inst_prev;
-	end
 end
 
-assign inst = addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout[63:32] : (addr_prev[3:2]==2'b10 ? dout[95:64] : (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)));
+assign inst = ready_IF_ID ? (addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout[63:32] : (addr_prev[3:2]==2'b10 ? dout[95:64] : (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)))  ) :  inst_prev;
 
 wire [127:0]line_mem;
 always @(*) begin
