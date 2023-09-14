@@ -115,11 +115,11 @@ always @(*) begin
 		pc_en   = 1'b1;
 	end
 	else if(inst_is_branch==4'd1 && minus_target_addr)begin
-		pc_next = pc+imm_B;
+		pc_next = pc_prev+imm_B;
 		pc_en   = 1'b1;
 	end
 	else if(inst_is_branch==4'd2 )begin
-		pc_next = pc+imm_J;
+		pc_next = pc_prev+imm_J;
 		pc_en   = 1'b1;
 	end
 	else begin
@@ -188,7 +188,7 @@ assign inst = pc_read[2]?inst_mix[63:32] : inst_mix[31:0];
 
 wire cache_valid;
 wire cache_ready;
-assign cache_valid = 1'b1;
+assign cache_valid = ~(inst_is_branch != 4'b0);
 
 ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, cache_valid, branch_flush, inst, cache_ready);
 
