@@ -130,6 +130,7 @@ end
 
 reg [3:0]inst_is_branch;
 always @(*) begin
+	if(cache_ready == 1'b1) begin
 	if(inst[6:0] == 7'b1101111)begin
 		inst_is_branch = 4'd2;                                 //jal
 	end
@@ -151,6 +152,7 @@ always @(*) begin
         	      default:         inst_is_branch = 4'd0; 
         	endcase
 	end
+        end
 end
 
 wire minus_target_addr;
