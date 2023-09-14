@@ -71,7 +71,7 @@ wire [127:0]bwen;
 wire [5:0]addr_sram;
 wire [127:0]din;
 
-assign addr_sram = flush ? addr_prev[9:4] : index;
+assign addr_sram = ready_IF_ID ? index : addr_prev[9:4];
 assign bwen = 128'h0;
 assign cen0 = ~(valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0);
 assign cen1 = ~(valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0);
