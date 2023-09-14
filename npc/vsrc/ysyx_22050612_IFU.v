@@ -169,7 +169,7 @@ ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, pc_en);
 
 //************************  pipeline  ******************************
 always @(negedge clk) begin
-	//$display("IF   pc:%x   inst:%x   valid:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,pc_next,dnpc);
+	$display("IF   pc:%x   inst:%x   valid:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,pc_next,dnpc);
 end
 //*****************************************************************
 
