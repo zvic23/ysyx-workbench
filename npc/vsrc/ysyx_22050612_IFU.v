@@ -10,7 +10,7 @@ module ysyx_22050612_IFU (
    output reg valid_IF_ID,
    input ready_IF_ID,
    output reg [63:0]pc_prev,
-   //output [63:0]pc,
+   output [63:0]pc,
    input pc_update,
    output [31:0]inst,
 
@@ -101,7 +101,6 @@ always @(*) begin
 	end
 end
 */
-wire [63:0]pc;
 reg  [63:0]pc_next;
 reg  pc_en;
 //assign pc_next = pc_update ? dnpc : pc+64'd4;

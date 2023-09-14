@@ -80,13 +80,14 @@ ysyx_22050612_Reg #(64,64'ha00001800) mstatus_csr (clk, rst, wdata_mstatus, msta
 
 
 //**************        processor       *******************
-ysyx_22050612_IFU ifu (clk, rst, dnpc,valid_IF_ID, ready_IF_ID, pc_IF_ID, pc_update, inst_IF_ID , branch_flush);
+ysyx_22050612_IFU ifu (clk, rst, dnpc,valid_IF_ID, ready_IF_ID, pc_IF_ID, pc_ifu, pc_update, inst_IF_ID , branch_flush);
+wire [63:0]pc_ifu;
 
 wire       valid_IF_ID;
 wire       ready_IF_ID;
 wire [63:0]pc_IF_ID  ;
 wire [31:0]inst_IF_ID;
-assign pc = pc_IF_ID;
+assign pc = pc_ifu;
 
 wire branch_flush;
 
