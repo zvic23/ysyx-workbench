@@ -100,7 +100,7 @@ always @(posedge clk) begin
 	else if(!ready_IF_ID) begin
 		way_hit_prev    <= way_hit_prev ;
 		random_cnt      <= random_cnt   ;
-		line_mem_prev   <= line_mem;
+		line_mem_prev   <= line_mem_prev;
 		ready           <= ready        ;
 	end
 	else if(flush) begin
