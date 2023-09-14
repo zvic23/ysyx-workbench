@@ -27,7 +27,11 @@ reg [63:0]v1;
 reg [63:0]v2;
 reg [63:0]v3;
 
-
+//************************  pipeline  ******************************
+always @(negedge clk) begin
+	$display("icache   pc:%x   inst:%x   valid:%d   ",addr_prev,inst,valid,ready);
+end
+//*****************************************************************
 always @(posedge clk) begin
 	if(rst) begin
 		v0 <= 64'b0;
