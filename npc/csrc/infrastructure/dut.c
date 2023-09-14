@@ -101,6 +101,7 @@ void difftest_step() {
   uint64_t ref_r_old[33];
   ref_difftest_regcpy(&ref_r_old, DIFFTEST_TO_DUT);
 
+	  printf("(pc)   npc.pc:%lx  nemu.pc:%lx\n",wb_pc,ref_r_old[32]);
   uint64_t ref_r[33];
   ref_difftest_exec(1);
   ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
