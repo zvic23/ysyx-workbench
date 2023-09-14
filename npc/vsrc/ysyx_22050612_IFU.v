@@ -203,7 +203,9 @@ always @(posedge clk) begin
 	if(rst) begin
 		pc_prev <= 64'b0;
 	end
-
+	else if(!ready_IF_ID) begin
+		pc_prev <= pc_prev;
+	end
 	else if(branch_flush) begin
 		pc_prev <= 64'b0;
 	end
