@@ -122,7 +122,8 @@ always @(*) begin
 		4'b0010: dout = dout1;
 		4'b0100: dout = dout2;
 		4'b1000: dout = dout3;
-		default: dout = line_mem_prev;
+		4'b0000: dout = line_mem_prev;
+		default: dout = 128'b0;
 	endcase
 end
 
