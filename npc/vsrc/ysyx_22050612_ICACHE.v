@@ -33,8 +33,8 @@ reg [63:0]v3;
 always @(negedge clk) begin
 	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d",addr_prev,inst,valid,ready);
 	//$display("icache   %b   %b    %d  %d  %d  %d   ",way_hit,way_hit_prev,cen0,cen1,cen2,cen3);
-	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line_prev:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]);
-	//$display("icache   %b   %b    %d  %d  %d  %d   dout:%x  dout0:%x dout2:%x  wen:%x  line:%x",way_hit,way_hit_prev,cen0,cen1,cen2,cen3,dout,dout0,dout3,wen,line_mem);
+	$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line_prev:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]);
+	$display("icache   %b   %b    %d  %d  %d  %d   dout:%x  dout0:%x dout2:%x  wen:%x  line:%x",way_hit,way_hit_prev,cen0,cen1,cen2,cen3,dout,dout0,dout3,wen,line_mem);
 end
 //*****************************************************************
 always @(posedge clk) begin
@@ -72,8 +72,8 @@ wire [127:0]bwen;
 wire [5:0]addr_sram;
 wire [127:0]din;
 
-//assign addr_sram = ready_IF_ID ? index : addr_prev[9:4];
-assign addr_sram =  index;
+assign addr_sram = ready_IF_ID ? index : addr_prev[9:4];
+//assign addr_sram =  index;
 assign bwen = 128'h0;
 assign cen0 = ~(valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0);
 assign cen1 = ~(valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0);
