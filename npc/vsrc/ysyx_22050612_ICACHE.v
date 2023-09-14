@@ -31,7 +31,7 @@ reg [63:0]v3;
 //************************  pipeline  ******************************
 always @(negedge clk) begin
 	$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]);
-	$display("icache   %b   %b    %d  %d  %d  %d   dout:%x",way_hit,way_hit_prev,cen0,cen1,cen2,cen3,dout);
+	$display("icache   %b   %b    %d  %d  %d  %d   dout:%x  dout0:%x",way_hit,way_hit_prev,cen0,cen1,cen2,cen3,dout,dout0);
 end
 //*****************************************************************
 always @(posedge clk) begin
@@ -122,8 +122,7 @@ always @(*) begin
 		4'b0010: dout = dout1;
 		4'b0100: dout = dout2;
 		4'b1000: dout = dout3;
-		4'b0000: dout = line_mem_prev;
-		default: dout = 128'b0;
+		default: dout = line_mem_prev;
 	endcase
 end
 
