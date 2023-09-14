@@ -30,7 +30,7 @@ reg [63:0]v3;
 
 //************************  pipeline  ******************************
 always @(negedge clk) begin
-	$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line:%x  index:%x  index_prev:%x  offset:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr_prev[3:0]);
+	$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]);
 	$display("icache   %d       %d  %d  %d  %d ",way_hit,cen0,cen1,cen2,cen3);
 end
 //*****************************************************************
