@@ -85,7 +85,7 @@ always @(posedge clk) begin
 		line_mem_prev   <=128'b0;
 		ready           <= 1'b0;
 	end
-	else if(ready_IF_ID) begin
+	else if(!ready_IF_ID) begin
 		way_hit_prev    <= way_hit_prev ;
 		random_cnt      <= random_cnt   ;
 		line_mem_prev   <= line_mem_prev;
