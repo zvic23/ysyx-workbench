@@ -7,7 +7,7 @@ module ysyx_22050612_ICACHE (
 input clk,
 input rst,
 
-input [63:0]addr,
+input [63:0]addr_in,
 input [63:0]addr_prev,
 input valid,
 input flush,
@@ -17,7 +17,8 @@ output [31:0]inst,
 output reg ready
 
 );
-
+wire [63:0]addr;
+assign addr = ready_IF_ID ? addr_in : addr_prev;
 
 reg [53:0]tag0[63:0];
 reg [53:0]tag1[63:0];
@@ -33,7 +34,7 @@ always @(negedge clk) begin
 	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d",addr_prev,inst,valid,ready);
 	//$display("icache   %b   %b    %d  %d  %d  %d   ",way_hit,way_hit_prev,cen0,cen1,cen2,cen3);
 	$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line_prev:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]);
-	$display("icache   %b   %b    %d  %d  %d  %d   dout:%x  dout0:%x dout2:%x  wen:%x  line:%x   ready_id:%d",way_hit,way_hit_prev,cen0,cen1,cen2,cen3,dout,dout0,dout3,wen,line_mem,ready_IF_ID);
+	$display("icache   %b   %b    %d  %d  %d  %d   dout:%x  dout0:%x dout2:%x  wen:%x  line:%x",way_hit,way_hit_prev,cen0,cen1,cen2,cen3,dout,dout0,dout3,wen,line_mem);
 end
 //*****************************************************************
 always @(posedge clk) begin
@@ -91,27 +92,23 @@ S011HD1P_X32Y2D128_BW sram_i3(dout3, clk, cen3, wen, bwen, addr_sram, din);
 reg [3:0]way_hit_prev;
 reg [3:0]random_cnt;
 reg [127:0]line_mem_prev;
-reg [31:0]inst_prev;
 always @(posedge clk) begin
 	if(rst) begin
 		way_hit_prev    <= 4'b0;
 		random_cnt      <= 4'b1;
 		line_mem_prev   <=128'b0;
 		ready           <= 1'b0;
-		inst_prev <= 32'b0;
 	end
 	else if(!ready_IF_ID) begin
 		way_hit_prev    <= way_hit_prev ;
 		random_cnt      <= random_cnt   ;
 		line_mem_prev   <= line_mem_prev;
 		ready           <= ready        ;
-		inst_prev <= inst_prev;
 	end
 	else if(flush) begin
 		way_hit_prev    <= 4'b0;
 		line_mem_prev   <=128'b0;
 		ready           <= 1'b0;
-		inst_prev <= 32'b0;
 	end
 	else begin
 	     	way_hit_prev    <= way_hit;
@@ -119,7 +116,6 @@ always @(posedge clk) begin
 		random_cnt[3:1] <= random_cnt[2:0];
 		line_mem_prev   <= line_mem;
 		ready           <= valid;
-		inst_prev <= inst;
 	end
 end
 
@@ -134,7 +130,7 @@ always @(*) begin
 	endcase
 end
 
-assign inst = ready_IF_ID ? (addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout[63:32] : (addr_prev[3:2]==2'b10 ? dout[95:64] : (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)))  ) :  inst_prev;
+assign inst = addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout[63:32] : (addr_prev[3:2]==2'b10 ? dout[95:64] : (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)));
 
 wire [127:0]line_mem;
 always @(*) begin
