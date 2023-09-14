@@ -9,9 +9,9 @@ module ysyx_22050612_IFU (
    input [63:0]dnpc,
    output reg valid_IF_ID,
    input ready_IF_ID,
-   output [63:0]pc,
+   output reg [63:0]pc_prev,
+   //output [63:0]pc,
    input pc_update,
-   //output reg [31:0]inst, 
    output [31:0]inst,
 
    output branch_flush
@@ -101,6 +101,7 @@ always @(*) begin
 	end
 end
 */
+wire [63:0]pc;
 reg  [63:0]pc_next;
 reg  pc_en;
 //assign pc_next = pc_update ? dnpc : pc+64'd4;
@@ -159,135 +160,53 @@ assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11
 wire [63:0]imm_J;
 assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
 
-assign valid_IF_ID = 1'b1;
+assign valid_IF_ID = cache_ready;
+//assign valid_IF_ID = 1'b1;
 assign branch_flush = pc_update;
 assign pc_read =  pc;
-//assign pc_read = pc_update ? dnpc : pc;
 
 ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, pc_en);
-//ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc+64'd4, pc, 1'b1);
-
-//ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, pc_update);
-//ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, 1'b1);
-
-
 
 //************************  pipeline  ******************************
-//reg [1:0]if_current_state, if_next_state;
-//
-//localparam if_idle  = 2'b00;
-//localparam if_branch_id = 2'b01;        //the first cycle of getting the branch inst
-//localparam if_waiting_branch = 2'b11;        //waiting for processing
-//
-//always @(posedge clk) begin
-//	if(rst == 1'b1) if_current_state <= if_idle;
-//	else            if_current_state <= if_next_state;
-//end
-//
-//always @(*) begin
-//	case(if_current_state)
-//		if_idle: begin
-//			valid_IF_ID = 1'b1;
-//			if(inst[6:0] == 7'b1101111)begin
-//				if_next_state= ready_IF_ID ? if_branch_id :if_idle;    //jal
-//			end
-//			else if(inst == 32'b1110011)begin
-//				if_next_state= ready_IF_ID ? if_branch_id :if_idle;    //jal
-//			end
-//			else if(inst == 32'b00110000001000000000000001110011)begin
-//				if_next_state= ready_IF_ID ? if_branch_id :if_idle;    //jal
-//			end
-//			else begin
-//                 	  case ({inst[14:12],inst[6:0]})
-//                     10'b000_1100111:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //jalr
-//                     10'b000_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //beq
-//                     10'b001_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //bne
-//                     10'b100_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //blt
-//                     10'b101_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //bge
-//                     10'b110_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //bltu
-//                     10'b111_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //bgeu
-//                     default:          if_next_state= if_idle ;
-//                 	  endcase
-//		        end
-//                /* 
-//                 	  case (inst[6:0])
-//                         7'b1101111:   if_next_state= if_branch_id ;    //jal
-//                     default:          if_next_state= if_idle ;
-//                 	  endcase
-//			  */
-//		end
-//		if_branch_id: begin
-//			valid_IF_ID = 1'b0;
-//			if_next_state = pc_update ? if_idle : if_branch_id ;
-//		end
-//		/*
-//		if_waiting_branch: begin
-//			bvalid = 1'b0;
-//			bresp  = 2'b0;
-//			if_next_state = if_idle;
-//		end
-//		*/
-//		default: begin
-//			valid_IF_ID = 1'b1;
-//			if_next_state = if_idle;
-//		end
-//	endcase
-//end
-//
-//
-////assign  valid_IF_ID = branching ? 1'b1 : 1'b0;
-//
-//reg [3:0]branching;
-//
-//  always @(inst) begin
-//	  case ({inst[14:12],inst[6:0]})
-//    10'b000_1100111:  branching[0] = 1'b1 ;    //jalr
-//    10'b000_1100011:  branching[0] = 1'b1 ;    //beq
-//    10'b001_1100011:  branching[0] = 1'b1 ;    //bne
-//    10'b100_1100011:  branching[0] = 1'b1 ;    //blt
-//    10'b101_1100011:  branching[0] = 1'b1 ;    //bge
-//    10'b110_1100011:  branching[0] = 1'b1 ;    //bltu
-//    10'b111_1100011:  branching[0] = 1'b1 ;    //bgeu
-//    default:          branching[0] = 1'b0 ;
-//	  endcase
-//
-//	  case (inst)
-//    32'b1110011:   branching[2] = 1'b1 ;         //ecall
-//    32'b00110000001000000000000001110011:   branching[2] = 1'b1 ;         //mret
-//    default:  branching[2] = 1'b0 ; 
-//	  endcase
-//
-//
-//	  case (inst[6:0])
-//    7'b1101111: branching[1] = 1'b1 ;        //jal
-//    default:    branching[1] = 1'b0 ;
-//	  endcase
-//
-//  end
-///*
-//reg branch_processing;
-//always @(posedge clk) begin
-//	if(rst)begin
-//		branch_processing <= 1'b0;
-//	end
-//	else if (branching) begin
-//		branch_processing <= 1'b1;
-//	end
-//	else begin
-//
-//	end
-//end
-//*/
-//
-
-
 always @(negedge clk) begin
 	//$display("IF   pc:%x   inst:%x   valid:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,pc_next,dnpc);
 end
-
-
 //*****************************************************************
 
+wire [63:0]pc_read;
+/*
+wire [63:0]inst_mix;
+always @(*) begin
+  pmem_read_pc(pc_read, inst_mix);
+end
+//always @(*) begin
+//  pmem_read_pc(pc, inst_mix);
+//end
+//assign inst = pc[2]?inst_mix[63:32] : inst_mix[31:0];
+assign inst = pc_read[2]?inst_mix[63:32] : inst_mix[31:0];
+*/
+
+wire cache_valid;
+wire cache_ready;
+assign cache_valid = 1'b1;
+
+ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, cache_valid, branch_flush, inst, cache_ready);
+
+//reg [63:0]pc_prev;
+always @(posedge clk) begin
+	if(rst) begin
+		pc_prev <= 64'b0;
+	end
+	else begin
+		pc_prev <= pc;
+	end
+end
+
+
+
+always @(*) begin
+  read_inst(inst);
+end
 
 
 //Reg #(1,1'b0) pc0  (clk, rst,    clk, pc[ ], 1'b1);
@@ -298,25 +217,4 @@ end
 //Reg #(1,1'b0) pc4  (clk, rst, ~pc[ ], pc[ ], 1'b1);
 //Reg #(1,1'b0) pc5  (clk, rst, ~pc[ ], pc[ ], 1'b1);
 //Reg #(1,1'b0) pc6  (clk, rst, ~pc[ ], pc[ ], 1'b1);
-
-
-wire [63:0]pc_read;
-wire [63:0]inst_mix;
-always @(*) begin
-  pmem_read_pc(pc_read, inst_mix);
-end
-//always @(*) begin
-//  pmem_read_pc(pc, inst_mix);
-//end
-//assign inst = pc[2]?inst_mix[63:32] : inst_mix[31:0];
-assign inst = pc_read[2]?inst_mix[63:32] : inst_mix[31:0];
-
-
-
-
-always @(*) begin
-  read_inst(inst);
-end
-
-
 endmodule

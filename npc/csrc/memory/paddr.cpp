@@ -42,6 +42,22 @@ void host_write(uint64_t addr, int len, uint64_t data) {
 }
 
 
+extern "C" void pmem_read_icache_low64(long long raddr, long long *rdata) {
+  // 总是读取地址为`raddr & ~0xfull`的8字节返回给`rdata`
+  if(raddr>=0x80000000){
+  	long long raddr_set = raddr & ~0xfull;
+	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
+  }
+}
+
+extern "C" void pmem_read_icache_high64(long long raddr, long long *rdata) {
+  // 总是读取地址为`raddr & ~0xfull`的8字节返回给`rdata`
+  if(raddr>=0x80000000){
+  	long long raddr_set = raddr & ~0xfull;
+	raddr_set |= 0b1000ull;
+	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
+  }
+}
 
 extern Vysyx_22050612_npc* top;
 extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
