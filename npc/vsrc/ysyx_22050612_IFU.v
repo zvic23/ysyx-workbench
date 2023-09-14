@@ -194,7 +194,7 @@ assign inst = pc_read[2]?inst_mix[63:32] : inst_mix[31:0];
 
 wire cache_valid;
 wire cache_ready;
-assign cache_valid = ~(inst_is_branch == 4'b1 || ((inst_is_branch == 4'd2)&&(minus_target_addr==1'b1)));
+assign cache_valid = ~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1)));
 
 ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, cache_valid, branch_flush, inst, cache_ready);
 
