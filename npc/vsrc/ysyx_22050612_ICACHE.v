@@ -27,6 +27,7 @@ reg [63:0]v0;
 reg [63:0]v1;
 reg [63:0]v2;
 reg [63:0]v3;
+reg cen0_prev,cen1_prev,cen2_prev,cen3_prev;
 
 //************************  pipeline  ******************************
 always @(negedge clk) begin
@@ -42,6 +43,10 @@ always @(posedge clk) begin
 		v1 <= 64'b0;
 		v2 <= 64'b0;
 		v3 <= 64'b0;
+		cen0_prev <= 1'b0;
+		cen1_prev <= 1'b0;
+		cen2_prev <= 1'b0;
+		cen3_prev <= 1'b0;
 	end
 	else if(valid && way_hit==4'b0) begin
 		case(random_cnt)
@@ -51,6 +56,12 @@ always @(posedge clk) begin
 			4'b1000: begin v3[index] <= 1'b1; tag3[index] <= addr[63:10]; end
 			default: begin end
 		endcase
+	end
+	else begin
+		cen0_prev <= cen0;
+		cen1_prev <= cen1;
+		cen2_prev <= cen2;
+		cen3_prev <= cen3;
 	end
 end
 
@@ -66,25 +77,33 @@ assign way_hit[3] = v3[index] && (tag3[index] == addr[63:10]);
 
 wire [127:0]dout0, dout1, dout2, dout3;
 wire cen0, cen1, cen2, cen3;
+wire cen0in, cen1in, cen2in, cen3in;
 wire wen;
 wire [127:0]bwen;
 wire [5:0]addr_sram;
 wire [127:0]din;
 
 assign addr_sram = ready_IF_ID ? index : addr_prev[9:4];
+//assign addr_sram =  index;
 assign bwen = 128'h0;
 assign cen0 = ~(valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0);
 assign cen1 = ~(valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0);
 assign cen2 = ~(valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0);
 assign cen3 = ~(valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0);
-assign  wen = ~(valid && (way_hit == 4'b0));
+assign  wen = ~(valid && (way_hit == 4'b0) && !ready_IF_ID);
+//assign  wen = ~(valid && (way_hit == 4'b0));
 assign  din = line_mem;
 
+assign cen0in = ready_IF_ID ? cen0 : cen0_prev;
+assign cen1in = ready_IF_ID ? cen1 : cen1_prev;
+assign cen2in = ready_IF_ID ? cen2 : cen2_prev;
+assign cen3in = ready_IF_ID ? cen3 : cen3_prev;
 
-S011HD1P_X32Y2D128_BW sram_i0(dout0, clk, cen0, wen, bwen, addr_sram, din);
-S011HD1P_X32Y2D128_BW sram_i1(dout1, clk, cen1, wen, bwen, addr_sram, din);
-S011HD1P_X32Y2D128_BW sram_i2(dout2, clk, cen2, wen, bwen, addr_sram, din);
-S011HD1P_X32Y2D128_BW sram_i3(dout3, clk, cen3, wen, bwen, addr_sram, din);
+
+S011HD1P_X32Y2D128_BW sram_i0(dout0, clk, cen0in, wen, bwen, addr_sram, din);
+S011HD1P_X32Y2D128_BW sram_i1(dout1, clk, cen1in, wen, bwen, addr_sram, din);
+S011HD1P_X32Y2D128_BW sram_i2(dout2, clk, cen2in, wen, bwen, addr_sram, din);
+S011HD1P_X32Y2D128_BW sram_i3(dout3, clk, cen3in, wen, bwen, addr_sram, din);
 
 
 reg [3:0]way_hit_prev;
