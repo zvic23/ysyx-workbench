@@ -33,7 +33,7 @@ always @(negedge clk) begin
 	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d",addr_prev,inst,valid,ready);
 	//$display("icache   %b   %b    %d  %d  %d  %d   ",way_hit,way_hit_prev,cen0,cen1,cen2,cen3);
 	$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line_prev:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]);
-	$display("icache   %b   %b    %d  %d  %d  %d   dout:%x  dout0:%x dout2:%x  wen:%x  line:%x",way_hit,way_hit_prev,cen0,cen1,cen2,cen3,dout,dout0,dout3,wen,line_mem);
+	$display("icache   %b   %b    %d  %d  %d  %d   dout:%x  dout0:%x dout2:%x  wen:%x  line:%x   ready_id:%d",way_hit,way_hit_prev,cen0,cen1,cen2,cen3,dout,dout0,dout3,wen,line_mem,ready_IF_ID);
 end
 //*****************************************************************
 always @(posedge clk) begin
@@ -105,6 +105,7 @@ always @(posedge clk) begin
 		random_cnt      <= random_cnt   ;
 		line_mem_prev   <= line_mem_prev;
 		ready           <= ready        ;
+		inst_prev <= inst_prev;
 	end
 	else if(flush) begin
 		way_hit_prev    <= 4'b0;
