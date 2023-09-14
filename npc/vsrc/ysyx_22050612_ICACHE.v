@@ -117,7 +117,7 @@ end
 
 reg [127:0]dout;
 always @(*) begin
-	case(way_hit_prev)
+	case(way_hit)
 		4'b0001: dout = dout0;
 		4'b0010: dout = dout1;
 		4'b0100: dout = dout2;
