@@ -61,6 +61,7 @@ void init_difftest(long img_size, int port) {
   ref_difftest_memcpy(0x80000000,  pmem, img_size, DIFFTEST_TO_REF );
 free(resetmem);
   ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
+  printf("11111111    %lx\n",cpu_gpr_set[33]);
 
 }
 
@@ -98,11 +99,11 @@ extern int detach_difftest;
 void difftest_step() {
   if(detach_difftest == 1) return;
 
-  ref_difftest_exec(1);
   uint64_t ref_r_old[33];
   ref_difftest_regcpy(&ref_r_old, DIFFTEST_TO_DUT);
 
   uint64_t ref_r[33];
+  ref_difftest_exec(1);
   ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
 
 
