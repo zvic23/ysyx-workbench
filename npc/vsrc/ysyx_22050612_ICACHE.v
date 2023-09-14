@@ -11,6 +11,7 @@ input [63:0]addr,
 input [63:0]addr_prev,
 input valid,
 input flush,
+input ready_IF_ID,
 
 output [31:0]inst,
 output reg ready
@@ -83,6 +84,12 @@ always @(posedge clk) begin
 		random_cnt      <= 4'b1;
 		line_mem_prev   <=128'b0;
 		ready           <= 1'b0;
+	end
+	else if(ready_IF_ID) begin
+		way_hit_prev    <= way_hit_prev ;
+		random_cnt      <= random_cnt   ;
+		line_mem_prev   <= line_mem_prev;
+		ready           <= ready        ;
 	end
 	else if(flush) begin
 		way_hit_prev    <= 4'b0;
