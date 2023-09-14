@@ -29,7 +29,7 @@ reg [63:0]v3;
 
 //************************  pipeline  ******************************
 always @(negedge clk) begin
-	$display("icache   pc:%x   inst:%x   valid:%d   ",addr_prev,inst,valid,ready);
+	$display("icache   pc:%x   inst:%x   valid:%d   ready:%d",addr_prev,inst,valid,ready);
 end
 //*****************************************************************
 always @(posedge clk) begin
