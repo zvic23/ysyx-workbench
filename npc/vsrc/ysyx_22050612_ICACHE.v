@@ -105,7 +105,6 @@ always @(posedge clk) begin
 		random_cnt      <= random_cnt   ;
 		line_mem_prev   <= line_mem_prev;
 		ready           <= ready        ;
-		inst_prev <= inst_prev;
 	end
 	else if(flush) begin
 		way_hit_prev    <= 4'b0;
