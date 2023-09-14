@@ -131,11 +131,11 @@ end
 assign inst = addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout[63:32] : (addr_prev[3:2]==2'b10 ? dout[95:64] : (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)));
 
 wire [127:0]line_mem;
-always @(*) begin
-//	if(valid && (way_hit == 4'b0)) begin
+always @(negedge clk) begin
+	if(valid && (way_hit == 4'b0)) begin
 		pmem_read_icache_low64 (addr, line_mem[63:0]);
 		pmem_read_icache_high64(addr, line_mem[127:64]);
-//	end
+	end
 end
 
 
