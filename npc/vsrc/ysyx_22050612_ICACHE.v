@@ -43,10 +43,10 @@ always @(posedge clk) begin
 	end
 	else if(valid && way_hit==4'b0) begin
 		case(random_cnt)
-			4'b0001: begin v0[addr_prev[9:4]] <= 1'b1; tag0[addr_prev[9:4]] <= addr[63:10]; end 
-			4'b0010: begin v1[addr_prev[9:4]] <= 1'b1; tag1[addr_prev[9:4]] <= addr[63:10]; end
-			4'b0100: begin v2[addr_prev[9:4]] <= 1'b1; tag2[addr_prev[9:4]] <= addr[63:10]; end
-			4'b1000: begin v3[addr_prev[9:4]] <= 1'b1; tag3[addr_prev[9:4]] <= addr[63:10]; end
+			4'b0001: begin v0[index] <= 1'b1; tag0[index] <= addr[63:10]; end 
+			4'b0010: begin v1[index] <= 1'b1; tag1[index] <= addr[63:10]; end
+			4'b0100: begin v2[index] <= 1'b1; tag2[index] <= addr[63:10]; end
+			4'b1000: begin v3[index] <= 1'b1; tag3[index] <= addr[63:10]; end
 			default: begin end
 		endcase
 	end
