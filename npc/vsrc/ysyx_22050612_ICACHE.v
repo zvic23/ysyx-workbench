@@ -40,13 +40,19 @@ always @(negedge clk) begin
 end
 //*****************************************************************
 
-
+integer i;
 always @(posedge clk) begin
 	if(rst) begin
 		v0 <= 64'b0;
 		v1 <= 64'b0;
 		v2 <= 64'b0;
 		v3 <= 64'b0;
+		for(i=0;i<=63;i=i+1)begin
+			tag0[i] <= 54'b0;
+			tag1[i] <= 54'b0;
+			tag2[i] <= 54'b0;
+			tag3[i] <= 54'b0;
+		end
 	end
 	else if( (!cen0|!cen1|!cen2|!cen3)&&!wen  ) begin
 	//else if(valid && way_hit==4'b0 && ready_IF_ID) begin
