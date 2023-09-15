@@ -37,16 +37,13 @@ always @(negedge clk) begin
 end
 //*****************************************************************
 
-reg [31:0]inst_prev;
-reg dump;
+
 always @(posedge clk) begin
 	if(rst) begin
 		v0 <= 64'b0;
 		v1 <= 64'b0;
 		v2 <= 64'b0;
 		v3 <= 64'b0;
-		inst_prev <= 32'b0;
-		dump <= 1'b0;
 	end
 	else if(valid && way_hit==4'b0 && ready_IF_ID) begin
 		case(random_cnt)
@@ -56,18 +53,6 @@ always @(posedge clk) begin
 			4'b1000: begin v3[index] <= 1'b1; tag3[index] <= addr[63:10]; end
 			default: begin end
 		endcase
-	end
-	else if(!ready_IF_ID && !dump) begin
-		inst_prev <= inst;
-		dump <= 1'b1;
-	end
-	else if(!ready_IF_ID && dump) begin
-		inst_prev <= inst_prev;
-		dump <= 1'b1;
-	end
-	else if(ready_IF_ID && dump) begin
-		inst_prev <= 32'b0;
-		dump <= 1'b0;
 	end
 end
 
@@ -145,9 +130,10 @@ always @(*) begin
 	endcase
 end
 
+reg [31:0]inst_prev;
+reg dump;
 always @(posedge clk) begin
 	if(rst) begin
-
 		inst_prev <= 32'b0;
 		dump <= 1'b0;
 	end
