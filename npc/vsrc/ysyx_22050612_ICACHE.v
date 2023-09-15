@@ -48,7 +48,7 @@ always @(posedge clk) begin
 		inst_prev <= 32'b0;
 		dump <= 1'b0;
 	end
-	else if(valid && way_hit==4'b0) begin
+	else if(valid && way_hit==4'b0 && ready_IF_ID) begin
 		case(random_cnt)
 			4'b0001: begin v0[index] <= 1'b1; tag0[index] <= addr[63:10]; end 
 			4'b0010: begin v1[index] <= 1'b1; tag1[index] <= addr[63:10]; end
