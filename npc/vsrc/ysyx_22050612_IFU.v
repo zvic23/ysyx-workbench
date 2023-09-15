@@ -216,9 +216,9 @@ end
 
 
 
-//always @(*) begin
-//  read_inst(inst);
-//end
+always @(*) begin
+  read_inst(inst);
+end
 
 
 //Reg #(1,1'b0) pc0  (clk, rst,    clk, pc[ ], 1'b1);
