@@ -32,8 +32,8 @@ reg [63:0]v3;
 always @(negedge clk) begin
 	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d",addr_prev,inst,valid,ready);
 	//$display("icache   %b   %b    %d  %d  %d  %d   ",way_hit,way_hit_prev,cen0,cen1,cen2,cen3);
-	$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line_prev:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]);
-	$display("icache   %b   %b    %d  %d  %d  %d   dout:%x  dout0:%x dout1:%x dout2:%x dout3:%x  wen:%x  line:%x    dump:%d  ready_ifid:%d\ntag0:%x  tag1:%x  tag2:%x  tag3:%x\n",way_hit,way_hit_prev,cen0,cen1,cen2,cen3,dout,dout0,dout1,dout2,dout3,wen,line_mem   ,dump,ready_IF_ID,tag0[index],tag1[index],tag2[index],tag3[index],);
+	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line_prev:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]);
+	//$display("icache   %b   %b    %d  %d  %d  %d   dout:%x  dout0:%x dout1:%x dout2:%x dout3:%x  wen:%x  line:%x    dump:%d  ready_ifid:%d\ntag0:%x  tag1:%x  tag2:%x  tag3:%x\n",way_hit,way_hit_prev,cen0,cen1,cen2,cen3,dout,dout0,dout1,dout2,dout3,wen,line_mem   ,dump,ready_IF_ID,tag0[index],tag1[index],tag2[index],tag3[index],);
 end
 //*****************************************************************
 
@@ -45,7 +45,8 @@ always @(posedge clk) begin
 		v2 <= 64'b0;
 		v3 <= 64'b0;
 	end
-	else if(valid && way_hit==4'b0 && ready_IF_ID) begin
+	else if(wen) begin
+	//else if(valid && way_hit==4'b0 && ready_IF_ID) begin
 		case(random_cnt)
 			4'b0001: begin v0[index] <= 1'b1; tag0[index] <= addr[63:10]; end 
 			4'b0010: begin v1[index] <= 1'b1; tag1[index] <= addr[63:10]; end
