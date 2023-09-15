@@ -145,6 +145,26 @@ always @(*) begin
 	endcase
 end
 
+always @(posedge clk) begin
+	if(rst) begin
+
+		inst_prev <= 32'b0;
+		dump <= 1'b0;
+	end
+	else if(!ready_IF_ID && !dump) begin
+		inst_prev <= inst;
+		dump <= 1'b1;
+	end
+	else if(!ready_IF_ID && dump) begin
+		inst_prev <= inst_prev;
+		dump <= 1'b1;
+	end
+	else if(ready_IF_ID && dump) begin
+		inst_prev <= 32'b0;
+		dump <= 1'b0;
+	end
+end
+
 assign inst = !dump ? (  addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout[63:32] : (addr_prev[3:2]==2'b10 ? dout[95:64] : (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)))  ) :   inst_prev;
 
 wire [127:0]line_mem;
