@@ -7,7 +7,7 @@ module ysyx_22050612_ICACHE (
 input clk,
 input rst,
 
-input [63:0]addr,
+input [63:0]addr_in,
 input [63:0]addr_prev,
 input valid,
 input flush,
@@ -18,7 +18,8 @@ output reg ready
 
 );
 
-
+wire [63:0]addr;
+assign addr = ready_IF_ID ? addr_in : addr_prev;
 reg [53:0]tag0[63:0];
 reg [53:0]tag1[63:0];
 reg [53:0]tag2[63:0];
