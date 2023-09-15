@@ -175,7 +175,7 @@ ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, pc_en);
 
 //************************  pipeline  ******************************
 always @(negedge clk) begin
-	$display("IF   pc:%x   inst:%x   valid:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,pc_next,dnpc);
+	//$display("IF   pc:%x   inst:%x   valid:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,pc_next,dnpc);
 end
 //*****************************************************************
 
@@ -194,7 +194,7 @@ assign inst = pc_read[2]?inst_mix[63:32] : inst_mix[31:0];
 
 wire cache_valid;
 wire cache_ready;
-assign cache_valid = ~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1)));
+assign cache_valid = ready_IF_ID ? ~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))) : 1'b1;
 
 ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, cache_valid, branch_flush, ready_IF_ID, inst, cache_ready);
 
