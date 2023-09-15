@@ -93,7 +93,7 @@ void ebreak(int r){
 
 uint32_t inst;
 void read_inst(int npc_inst){
-	inst = npc_inst;
+	//inst = npc_inst;
 	printf("inst:%lx\n",inst);
 }
 
