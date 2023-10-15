@@ -31,6 +31,7 @@ reg [63:0]v3;
 
 //************************  pipeline  ******************************
 always @(negedge clk) begin
+	/*
 	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d",addr_prev,inst,valid,ready);
 	//$display("icache   %b   %b    %d  %d  %d  %d   ",way_hit,way_hit_prev,cen0,cen1,cen2,cen3);
 	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line_prev:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]);
@@ -46,6 +47,7 @@ if(addr>=64'h83005d30 &&  addr<=64'h83005d3c) begin
 	$display("0add:%x   icache   pc:%x   inst:%x   valid:%d   ready:%d   line_prev:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x",addr,addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]);
 	$display("icache   %b   %b    %d  %d  %d  %d   dout:%x  dout0:%x dout1:%x dout2:%x dout3:%x  wen:%x  line:%x    dump:%d  ready_ifid:%d\ntag0:%x  tag1:%x  tag2:%x  tag3:%x\n",way_hit,way_hit_prev,cen0,cen1,cen2,cen3,dout,dout0,dout1,dout2,dout3,wen,line_mem   ,dump,ready_IF_ID,tag0[index],tag1[index],tag2[index],tag3[index],);
 end
+*/
 end
 //*****************************************************************
 
@@ -71,7 +73,7 @@ always @(posedge clk) begin
 			4'b0010: begin v1[index] <= 1'b1; tag1[index] <= addr[63:10]; end
 			4'b0100: begin v2[index] <= 1'b1; tag2[index] <= addr[63:10]; end
 			4'b1000: begin v3[index] <= 1'b1; tag3[index] <= addr[63:10]; end
-			default: begin $display("woho!!!!!!!!!!!!!!!!!!!!!!!!\n\n");end
+			default: begin $display("icache all misses!!!!!!!!!!!!!!!!!!!!!!!!\n\n");end
 		endcase
 	end
 end
@@ -95,11 +97,11 @@ wire [127:0]din;
 
 assign addr_sram = index;
 assign bwen = 128'h0;
-assign cen0 = ( ready_IF_ID ?(  valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
-assign cen1 = ( ready_IF_ID ?(  valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
-assign cen2 = ( ready_IF_ID ?(  valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
-assign cen3 = ( ready_IF_ID ?(  valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
-assign  wen = ( ready_IF_ID ?(  valid && (way_hit == 4'b0)) : 1'b0)  ;
+assign cen0 = ~( ready_IF_ID ?(  valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
+assign cen1 = ~( ready_IF_ID ?(  valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
+assign cen2 = ~( ready_IF_ID ?(  valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
+assign cen3 = ~( ready_IF_ID ?(  valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
+assign  wen = ~( ready_IF_ID ?(  valid && (way_hit == 4'b0)) : 1'b0)  ;
 assign  din = line_mem;
 
 
