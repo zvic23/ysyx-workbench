@@ -238,7 +238,7 @@ void program_exec_statistics(){
 	   printf(BLUE "guest ipc  = 0.%ld \n" NONE,g_nr_guest_inst*1000/g_cycle);
 	 printf(BLUE "simulation frequency = %ld inst/s\n" NONE,g_nr_guest_inst * 1000000 / g_timer);
 
-           printf(GREEN "ICACHE hit rate : %ld    hit:%ld   miss:%ld\n" NONE,hits/(hits+miss),hits,miss);
+           printf(GREEN "ICACHE hit rate : %lld    hit:%lld   miss:%lld\n" NONE,hits*100/(hits+miss),hits,miss);
 
 	 printf("execute has finished, please open npc again!\n");
 }
