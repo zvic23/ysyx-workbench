@@ -227,6 +227,8 @@ static uint64_t g_timer = 0; // unit: us
 static uint64_t g_cycle = 0; //  cycle
 
 void program_exec_statistics(){
+           printf(GREEN "ICACHE hit rate : %lld%%    hit:%lld   miss:%lld\n" NONE,hits*100/(hits+miss),hits,miss);
+
   	 struct timeval time_end;                   //get the time when program end
   	 gettimeofday(&time_end,NULL);
   	 g_timer = (time_end.tv_sec*1000000)+time_end.tv_usec - time_init;
@@ -238,7 +240,6 @@ void program_exec_statistics(){
 	   printf(BLUE "guest ipc  = 0.%ld \n" NONE,g_nr_guest_inst*1000/g_cycle);
 	 printf(BLUE "simulation frequency = %ld inst/s\n" NONE,g_nr_guest_inst * 1000000 / g_timer);
 
-           printf(GREEN "ICACHE hit rate : %lld%%    hit:%lld   miss:%lld\n" NONE,hits*100/(hits+miss),hits,miss);
 
 	 printf("execute has finished, please open npc again!\n");
 }
