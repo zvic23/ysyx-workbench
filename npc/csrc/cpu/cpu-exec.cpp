@@ -206,6 +206,23 @@ void one_cycle(){
   device_update();
 }
 
+
+//ICACHE data collect
+long long hits = 0;
+long long miss = 0;
+
+void icache_data(int hit){
+	if(hit){
+		hits++;
+	}else{
+		miss++;
+	}
+}
+
+
+
+
+
 static uint64_t g_timer = 0; // unit: us
 static uint64_t g_cycle = 0; //  cycle
 
@@ -220,6 +237,9 @@ void program_exec_statistics(){
 	 printf(BLUE "total guest instructions = %ld \n" NONE,g_nr_guest_inst);
 	   printf(BLUE "guest ipc  = 0.%ld \n" NONE,g_nr_guest_inst*1000/g_cycle);
 	 printf(BLUE "simulation frequency = %ld inst/s\n" NONE,g_nr_guest_inst * 1000000 / g_timer);
+
+           printf(GREEN "ICACHE hit rate : %ld    hit:%ld   miss:%ld\n" NONE,hits/(hits+miss),hits,miss);
+
 	 printf("execute has finished, please open npc again!\n");
 }
 

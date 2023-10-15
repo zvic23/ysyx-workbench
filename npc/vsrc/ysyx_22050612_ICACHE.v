@@ -2,6 +2,7 @@ import "DPI-C" function void pmem_read_icache_low64(
   input longint raddr, output longint rdata);
 import "DPI-C" function void pmem_read_icache_high64(
   input longint raddr, output longint rdata);
+import "DPI-C" function void icache_data(int hit);
 
 module ysyx_22050612_ICACHE (
 input clk,
@@ -30,7 +31,6 @@ reg [63:0]v3;
 
 //************************  pipeline  ******************************
 always @(negedge clk) begin
-	/*
 	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d",addr_prev,inst,valid,ready);
 	//$display("icache   %b   %b    %d  %d  %d  %d   ",way_hit,way_hit_prev,cen0,cen1,cen2,cen3);
 	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line_prev:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]);
@@ -46,7 +46,6 @@ if(addr>=64'h83005d30 &&  addr<=64'h83005d3c) begin
 	$display("0add:%x   icache   pc:%x   inst:%x   valid:%d   ready:%d   line_prev:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x",addr,addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]);
 	$display("icache   %b   %b    %d  %d  %d  %d   dout:%x  dout0:%x dout1:%x dout2:%x dout3:%x  wen:%x  line:%x    dump:%d  ready_ifid:%d\ntag0:%x  tag1:%x  tag2:%x  tag3:%x\n",way_hit,way_hit_prev,cen0,cen1,cen2,cen3,dout,dout0,dout1,dout2,dout3,wen,line_mem   ,dump,ready_IF_ID,tag0[index],tag1[index],tag2[index],tag3[index],);
 end
-*/
 end
 //*****************************************************************
 
@@ -182,6 +181,16 @@ always @(*) begin
 //	end
 end
 
+always @(negedge clk) begin
+	if(valid) begin
+		if(way_hit != 4'b0) begin
+			icache_data(1);
+		end
+		else begin
+			icache_data(0);
+		end
+	end
+end
 
   
 endmodule
