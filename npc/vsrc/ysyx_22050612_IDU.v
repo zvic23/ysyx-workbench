@@ -47,11 +47,70 @@ input [31:0]EX_reg_inst,
 input branch_flush
 );
 
+
+assign ready_IF_ID = ~idu_fifo_alm_full;
+//assign ready_IF_ID = ID_block ? 1'b0 : ready_ID_EX;
+
+
+//*************************   FIFO    ********************************
+wire id_ready;
+assign id_ready = ID_block ? 1'b0 : ready_ID_EX;
+
+wire idu_fifo_wen;
+assign idu_fifo_wen = valid_IF_ID;
+
+wire idu_fifo_ren;
+assign idu_fifo_ren = id_ready;
+
+wire idu_fifo_rst;
+assign idu_fifo_rst = ~(rst || branch_flush);
+
+wire idu_fifo_alm_full;
+wire idu_fifo_full;
+wire idu_fifo_alm_empty;
+wire idu_fifo_empty;
+wire [31:0]idu_fifo_rdata_inst;
+wire [63:0]idu_fifo_rdata_pc;
+
+ysyx_22050612_FIFO #(32,16,12,2) idu_inst_fifo (clk, idu_fifo_rst, idu_fifo_wen, inst_IF_ID, idu_fifo_alm_full, idu_fifo_full, idu_fifo_ren, idu_fifo_rdata_inst, idu_fifo_alm_empty, idu_fifo_empty);
+ysyx_22050612_FIFO #(64,16,12,2) idu_pc_fifo (clk, idu_fifo_rst, idu_fifo_wen, pc_IF_ID, idu_fifo_alm_full, idu_fifo_full, idu_fifo_ren, idu_fifo_rdata_pc, idu_fifo_alm_empty, idu_fifo_empty);
+
+
+
+
 //*************************  pipeline ********************************
 reg       ID_reg_valid;
 reg [63:0]ID_reg_pc   ;
 reg [31:0]ID_reg_inst ;
 
+always @(posedge clk) begin
+	if(rst || branch_flush) begin
+		ID_reg_valid <= 1'b0;
+		ID_reg_pc    <= 64'b0;
+		ID_reg_inst  <= 32'b0;
+	end
+	else if(!id_ready)begin
+		ID_reg_valid <= ID_reg_valid;
+		ID_reg_pc    <= ID_reg_pc;
+		ID_reg_inst  <= ID_reg_inst ;
+	end
+	else if(idu_fifo_empty)begin
+		ID_reg_valid <= 1'b0;
+		ID_reg_pc    <= 64'b0;
+		ID_reg_inst  <= 32'b0;
+	end
+	else begin
+		ID_reg_valid <= 1'b1;
+		ID_reg_pc    <= idu_fifo_rdata_pc;
+		ID_reg_inst  <= idu_fifo_rdata_inst;
+	end
+end
+
+assign valid_ID_EX = (ID_block==1'b0) ? ID_reg_valid :  1'b0;
+assign pc_ID_EX    = (ID_block==1'b0) ? ID_reg_pc    : 64'b0;
+assign inst_ID_EX  = (ID_block==1'b0) ? ID_reg_inst  : 32'b0;
+
+/*
 always @(posedge clk) begin
 	if(rst || branch_flush) begin
 		ID_reg_valid <= 1'b0;
@@ -73,9 +132,7 @@ end
 assign valid_ID_EX = (ID_block==1'b0) ? ID_reg_valid :  1'b0;
 assign pc_ID_EX    = (ID_block==1'b0) ? ID_reg_pc    : 64'b0;
 assign inst_ID_EX  = (ID_block==1'b0) ? ID_reg_inst  : 32'b0;
-
-
-
+*/
 
 //reg wen;
 always @(*) begin
@@ -260,7 +317,6 @@ assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},
 
 wire ID_block;
 //assign ID_block = src1_conflict || src2_conflict;
-assign ready_IF_ID = ID_block ? 1'b0 : ready_ID_EX;
 
 
 
