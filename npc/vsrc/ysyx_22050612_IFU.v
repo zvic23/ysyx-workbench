@@ -222,6 +222,10 @@ always @(*) begin
 	if(valid_IF_ID) begin
   read_inst(inst);
   end
+  else begin
+
+  read_inst(32'b0);
+  end
 end
 
 
