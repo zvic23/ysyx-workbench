@@ -100,9 +100,13 @@ extern "C" void disassemble(char *str, int size, uint64_t pc, uint32_t code, int
 
   printf("1\n");
   std::string s;
+  printf("2\n");
   raw_string_ostream os(s);
+  printf("3\n");
   gIP->printInst(&inst, pc, "", *gSTI, os);
+  printf("4\n");
   int skip = s.find_first_not_of('\t');
+  printf("5\n");
   const char *p = s.c_str() + skip;
   printf("1\n");
   assert((int)s.length() - skip < size);
