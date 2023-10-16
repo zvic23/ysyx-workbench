@@ -15,9 +15,10 @@ char Queue[QUEUE_SIZE][128];
 static int QueueIn=0;
 static int QueueOut=0;
 
-char logbuf_once[600];
+char logbuf_once[128];
 
 void itrace(uint64_t pc , uint32_t inst_val){
+	printf("in\n");
   char logbuf[128];
   char *p = logbuf;
   p += snprintf(p, sizeof(logbuf), FMT_WORD ":", pc);
@@ -55,6 +56,7 @@ void itrace(uint64_t pc , uint32_t inst_val){
 	    }
             QueueIn = (QueueIn + 1) % QUEUE_SIZE;
     }
+	printf("out\n");
 }
 
 
