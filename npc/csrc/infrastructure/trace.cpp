@@ -15,7 +15,7 @@ char Queue[QUEUE_SIZE][128];
 static int QueueIn=0;
 static int QueueOut=0;
 
-char logbuf_once[128];
+char logbuf_once[600];
 
 void itrace(uint64_t pc , uint32_t inst_val){
   char logbuf[128];
