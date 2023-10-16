@@ -38,7 +38,7 @@ void itrace(uint64_t pc , uint32_t inst_val){
 
 	printf("in\n");
   void disassemble(char *str, int size, uint64_t pc, uint32_t code, int nbyte);
-	printf("in\n");
+	printf("in  ,  pc=%lx\n",pc);
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, inst_val, ilen);
 
