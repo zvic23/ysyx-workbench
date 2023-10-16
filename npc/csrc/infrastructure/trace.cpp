@@ -42,7 +42,6 @@ void itrace(uint64_t pc , uint32_t inst_val){
   strcpy(logbuf_once,logbuf);
 	//printf("logbug=%s\n",logbuf);
 //zsl:iringbuf implement*************
-/*
     if(QueueIn == (( QueueOut + QUEUE_SIZE) % QUEUE_SIZE)){
 	    for(int i=0;i<128;i++){
             	Queue[QueueIn][i] = logbuf[i];
@@ -56,7 +55,6 @@ void itrace(uint64_t pc , uint32_t inst_val){
 	    }
             QueueIn = (QueueIn + 1) % QUEUE_SIZE;
     }
-    */
 }
 
 
