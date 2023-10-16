@@ -219,7 +219,9 @@ end
 
 
 always @(*) begin
+	if(valid_IF_ID) begin
   read_inst(inst);
+  end
 end
 
 

@@ -18,7 +18,6 @@ static int QueueOut=0;
 char logbuf_once[128];
 
 void itrace(uint64_t pc , uint32_t inst_val){
-	printf("in\n");
   char logbuf[128];
   char *p = logbuf;
   p += snprintf(p, sizeof(logbuf), FMT_WORD ":", pc);
@@ -36,13 +35,10 @@ void itrace(uint64_t pc , uint32_t inst_val){
   memset(p, ' ', space_len);
   p += space_len;
 
-	printf("in\n");
   void disassemble(char *str, int size, uint64_t pc, uint32_t code, int nbyte);
-	printf("in  ,  pc=%lx  inst=%lx\n",pc,inst_val);
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, inst_val, ilen);
 
-	printf("in\n");
   strcpy(logbuf_once,logbuf);
 	//printf("logbug=%s\n",logbuf);
 //zsl:iringbuf implement*************
@@ -59,7 +55,6 @@ void itrace(uint64_t pc , uint32_t inst_val){
 	    }
             QueueIn = (QueueIn + 1) % QUEUE_SIZE;
     }
-	printf("out\n");
 }
 
 

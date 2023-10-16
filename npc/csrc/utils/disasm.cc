@@ -89,27 +89,18 @@ extern "C" void init_disasm(const char *triple) {
 
 extern "C" void disassemble(char *str, int size, uint64_t pc, uint32_t code, int nbyte) {
 
-  printf("1\n");
   uint8_t *code_addr = (uint8_t *)&code;               //zsl:compare the same part of nemu. I meet the memery wrong here, and I got a random messy code instead of the right inst by "ArrayRef". So I pass the whole inst in to avoid the memory wrong.
 
-  printf("1\n");
   MCInst inst;
   llvm::ArrayRef<uint8_t> arr(code_addr, nbyte);
   uint64_t dummy_size = 0;
   gDisassembler->getInstruction(inst, dummy_size, arr, pc, llvm::nulls());
 
-  printf("1\n");
   std::string s;
-  printf("2\n");
   raw_string_ostream os(s);
-  printf("3\n");
   gIP->printInst(&inst, pc, "", *gSTI, os);
-  printf("4\n");
   int skip = s.find_first_not_of('\t');
-  printf("5\n");
   const char *p = s.c_str() + skip;
-  printf("1\n");
   assert((int)s.length() - skip < size);
-  printf("1\n");
   strcpy(str, p);
 }
