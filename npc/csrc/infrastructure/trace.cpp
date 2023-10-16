@@ -41,6 +41,7 @@ void itrace(uint64_t pc , uint32_t inst_val){
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, inst_val, ilen);
 
+	printf("in\n");
   strcpy(logbuf_once,logbuf);
 	//printf("logbug=%s\n",logbuf);
 //zsl:iringbuf implement*************
