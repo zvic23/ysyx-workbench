@@ -73,7 +73,7 @@ always @(posedge clk) begin
 			4'b0010: begin v1[index] <= 1'b1; tag1[index] <= addr[63:10]; end
 			4'b0100: begin v2[index] <= 1'b1; tag2[index] <= addr[63:10]; end
 			4'b1000: begin v3[index] <= 1'b1; tag3[index] <= addr[63:10]; end
-			default: begin end
+			default: begin $display("icache all misses!!!!!!!!!!!!!!!!!!!!!!!!\n\n");end
 		endcase
 	end
 end
@@ -97,10 +97,10 @@ wire [127:0]din;
 
 assign addr_sram = index;
 assign bwen = 128'h0;
-assign cen0 = ~(  (valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0)|!flush) ;
-assign cen1 = ~(  (valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0)|!flush) ;
-assign cen2 = ~(  (valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0)|!flush) ;
-assign cen3 = ~(  (valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0)|!flush) ;
+assign cen0 = ~(  (valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0)&!flush) ;
+assign cen1 = ~(  (valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0)&!flush) ;
+assign cen2 = ~(  (valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0)&!flush) ;
+assign cen3 = ~(  (valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0)&!flush) ;
 //assign cen0 = ~( ready_IF_ID ?(  valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
 //assign cen1 = ~( ready_IF_ID ?(  valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
 //assign cen2 = ~( ready_IF_ID ?(  valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
