@@ -186,7 +186,7 @@ assign inst =  addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout
 
 reg [127:0]line_mem;
 always @(*) begin
-	if(valid && (way_hit == 4'b0)) begin
+	if(valid && (way_hit == 4'b0)&& ~flush) begin
 		pmem_read_icache_low64 (addr, line_mem[63:0]);
 		pmem_read_icache_high64(addr, line_mem[127:64]);
 	end
