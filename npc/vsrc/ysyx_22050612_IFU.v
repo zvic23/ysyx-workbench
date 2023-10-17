@@ -105,7 +105,15 @@ reg  [63:0]pc_next;
 reg  pc_en;
 //assign pc_next = pc_update ? dnpc : pc+64'd4;
 always @(*) begin
-	if(ready_IF_ID == 1'b0)begin
+	if(inst_is_branch==4'd1 && minus_target_addr && valid_IF_ID)begin
+		pc_next = pc_prev+imm_B;
+		pc_en   = 1'b1;
+	end
+	else if(inst_is_branch==4'd2 && valid_IF_ID)begin
+		pc_next = pc_prev+imm_J;
+		pc_en   = 1'b1;
+	end
+	else if(ready_IF_ID == 1'b0)begin
 		pc_next = pc;
 		pc_en   = 1'b0;
 	end
@@ -113,14 +121,7 @@ always @(*) begin
 		pc_next = dnpc;
 		pc_en   = 1'b1;
 	end
-	else if(inst_is_branch==4'd1 && minus_target_addr)begin
-		pc_next = pc_prev+imm_B;
-		pc_en   = 1'b1;
-	end
-	else if(inst_is_branch==4'd2 )begin
-		pc_next = pc_prev+imm_J;
-		pc_en   = 1'b1;
-	end
+
 	else begin
 		pc_next = pc + 64'd4;
 		pc_en   = 1'b1;
