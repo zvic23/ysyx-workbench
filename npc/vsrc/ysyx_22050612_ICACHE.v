@@ -150,10 +150,10 @@ end
 reg [127:0]dout;
 always @(*) begin
 	case(way_hit_prev)
-		4'b0001: dout = dout0;
-		4'b0010: dout = dout1;
-		4'b0100: dout = dout2;
-		4'b1000: dout = dout3;
+	//	4'b0001: dout = dout0;
+	//	4'b0010: dout = dout1;
+	//	4'b0100: dout = dout2;
+	//	4'b1000: dout = dout3;
 		default: dout = line_mem_prev;
 	endcase
 end
