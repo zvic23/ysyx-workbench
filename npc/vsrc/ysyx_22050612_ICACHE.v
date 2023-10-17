@@ -65,7 +65,7 @@ always @(posedge clk) begin
 			tag3[i] <= 54'b0;
 		end
 	end
-	else if( (!cen0||!cen1||!cen2||!cen3)&&!wen  ) begin
+	else if( !wen  ) begin
 	//else if(valid && way_hit==4'b0 && ready_IF_ID) begin
 		case({!cen3,!cen2,!cen1,!cen0})
 		//case(random_cnt)
@@ -97,15 +97,15 @@ wire [127:0]din;
 
 assign addr_sram = index;
 assign bwen = 128'h0;
-assign cen0 = ~(  (valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0)&!flush) ;
-assign cen1 = ~(  (valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0)&!flush) ;
-assign cen2 = ~(  (valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0)&!flush) ;
-assign cen3 = ~(  (valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0)&!flush) ;
+assign cen0 = ~(  valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign cen1 = ~(  valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign cen2 = ~(  valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign cen3 = ~(  valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0) ;
 //assign cen0 = ~( ready_IF_ID ?(  valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
 //assign cen1 = ~( ready_IF_ID ?(  valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
 //assign cen2 = ~( ready_IF_ID ?(  valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
 //assign cen3 = ~( ready_IF_ID ?(  valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
-assign  wen = ~(  valid && (way_hit == 4'b0)  && ~flush)   ;
+assign  wen = ~(  valid && (way_hit == 4'b0))   ;
 assign  din = line_mem;
 
 
@@ -184,17 +184,12 @@ end
 assign inst =  addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout[63:32] : (addr_prev[3:2]==2'b10 ? dout[95:64] : (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)))  ;
 //assign inst = !dump ? (  addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout[63:32] : (addr_prev[3:2]==2'b10 ? dout[95:64] : (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)))  ) :   inst_prev;
 
-reg [127:0]line_mem_in;
 wire [127:0]line_mem;
-assign line_mem = valid ? line_mem_in : 128'b0;
 always @(*) begin
-	if(valid && (way_hit == 4'b0)) begin
-		pmem_read_icache_low64 (addr, line_mem_in[63:0]);
-		pmem_read_icache_high64(addr, line_mem_in[127:64]);
-	end
-	else begin
-		line_mem_in = 128'b0;
-	end
+//	if(valid && (way_hit == 4'b0)) begin
+		pmem_read_icache_low64 (addr, line_mem[63:0]);
+		pmem_read_icache_high64(addr, line_mem[127:64]);
+//	end
 end
 
 always @(negedge clk) begin
