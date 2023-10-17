@@ -52,7 +52,7 @@ end
 //*****************************************************************
 
 integer i;
-always @(posedge clk) begin
+always @(posedge clk or posedge rst) begin
 	if(rst) begin
 		v0 <= 64'b0;
 		v1 <= 64'b0;
