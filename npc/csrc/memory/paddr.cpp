@@ -46,7 +46,7 @@ extern "C" void pmem_read_icache_low64(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0xfull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
 	  if((raddr & 0xf)!=0x0 && (raddr & 0xf)!=0x4 &&(raddr & 0xf)!=0x8 &&(raddr & 0xf)!=0xc )  {
-		  printf("pc wrong!!\n");
+		  printf("pc wrong!!\n\n\n");
 	  }
   	long long raddr_set = raddr & ~0xfull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
@@ -55,7 +55,9 @@ extern "C" void pmem_read_icache_low64(long long raddr, long long *rdata) {
 
 extern "C" void pmem_read_icache_high64(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0xfull`的8字节返回给`rdata`
-  if(raddr>=0x80000000){
+  if(raddr>=0x80000000){	  if((raddr & 0xf)!=0x0 && (raddr & 0xf)!=0x4 &&(raddr & 0xf)!=0x8 &&(raddr & 0xf)!=0xc )  {
+		  printf("pc wrong!!\n\n\n");
+	  }
   	long long raddr_set = raddr & ~0xfull;
 	raddr_set |= 0b1000ull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
