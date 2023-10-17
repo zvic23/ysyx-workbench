@@ -97,10 +97,10 @@ wire [127:0]din;
 
 assign addr_sram = index;
 assign bwen = 128'h0;
-assign cen0 = ~(  valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign cen1 = ~(  valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign cen2 = ~(  valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign cen3 = ~(  valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign cen0 = ~(  (valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0)|!flush) ;
+assign cen1 = ~(  (valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0)|!flush) ;
+assign cen2 = ~(  (valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0)|!flush) ;
+assign cen3 = ~(  (valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0)|!flush) ;
 //assign cen0 = ~( ready_IF_ID ?(  valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
 //assign cen1 = ~( ready_IF_ID ?(  valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
 //assign cen2 = ~( ready_IF_ID ?(  valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
@@ -150,10 +150,10 @@ end
 reg [127:0]dout;
 always @(*) begin
 	case(way_hit_prev)
-	//	4'b0001: dout = dout0;
-	//	4'b0010: dout = dout1;
-	//	4'b0100: dout = dout2;
-	//	4'b1000: dout = dout3;
+		4'b0001: dout = dout0;
+		4'b0010: dout = dout1;
+		4'b0100: dout = dout2;
+		4'b1000: dout = dout3;
 		default: dout = line_mem_prev;
 	endcase
 end
