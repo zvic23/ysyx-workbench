@@ -105,7 +105,7 @@ assign cen3 = ~(  valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1
 //assign cen1 = ~( ready_IF_ID ?(  valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
 //assign cen2 = ~( ready_IF_ID ?(  valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
 //assign cen3 = ~( ready_IF_ID ?(  valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
-assign  wen = ~(  valid && (way_hit == 4'b0))   ;
+assign  wen = ~(  valid && (way_hit == 4'b0)  && ~flush)   ;
 assign  din = line_mem;
 
 
