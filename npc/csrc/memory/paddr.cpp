@@ -51,6 +51,7 @@ extern "C" void pmem_read_icache_low64(long long raddr, long long *rdata) {
   	long long raddr_set = raddr & ~0xfull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
   }
+  else printf("pc  low!!\n");
 }
 
 extern "C" void pmem_read_icache_high64(long long raddr, long long *rdata) {
