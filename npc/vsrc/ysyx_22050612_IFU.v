@@ -1,4 +1,4 @@
-
+import "DPI-C" function void IFU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
 import "DPI-C" function void read_inst(int npc_inst);
 import "DPI-C" function void pmem_read_pc(
   input longint raddr, output longint rdata);
@@ -229,6 +229,9 @@ always @(*) begin
   end
 end
 
+always @(negedge clk)begin
+	IFU_state_trace(pc,{32'b0,inst}, 64'b0, 64'b0,64'b0,64'b0 );
+end
 
 //Reg #(1,1'b0) pc0  (clk, rst,    clk, pc[ ], 1'b1);
 //Reg #(1,1'b0) pc1  (clk, rst, ~pc[ ], pc[ ], 1'b1);
