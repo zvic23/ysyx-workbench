@@ -95,15 +95,10 @@ always @(posedge clk) begin
 		ID_reg_pc    <= ID_reg_pc;
 		ID_reg_inst  <= ID_reg_inst ;
 	end
-	else if(idu_fifo_empty && ~valid_IF_ID)begin
+	else if(idu_fifo_empty)begin
 		ID_reg_valid <= 1'b0;
 		ID_reg_pc    <= 64'b0;
 		ID_reg_inst  <= 32'b0;
-	end
-	else if(idu_fifo_empty && valid_IF_ID)begin
-		ID_reg_valid <= valid_IF_ID;
-		ID_reg_pc    <= pc_IF_ID;
-		ID_reg_inst  <= inst_IF_ID;
 	end
 	else begin
 		ID_reg_valid <= 1'b1;
