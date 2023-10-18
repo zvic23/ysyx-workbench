@@ -65,7 +65,7 @@ always @(posedge clk) begin
 			tag3[i] <= 54'b0;
 		end
 	end
-	else if( !wen  ) begin
+	else if( (!cen0|!cen1|!cen2|!cen3)&&!wen  ) begin
 	//else if(valid && way_hit==4'b0 && ready_IF_ID) begin
 		case({!cen3,!cen2,!cen1,!cen0})
 		//case(random_cnt)
