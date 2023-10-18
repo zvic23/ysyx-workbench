@@ -3,6 +3,8 @@ import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
 import "DPI-C" function void pmem_write(
   input longint waddr, input longint wdata, input byte wmask);
+import "DPI-C" function void MEM_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
+
 
 
 module ysyx_22050612_MEM(
@@ -250,6 +252,7 @@ end
 
 
 always @(negedge clk) begin
+	MEM_state_trace(MEM_reg_pc, {32'b0,MEM_reg_inst}, {63'b0,MEM_reg_valid}, 64'b0,64'b0,64'b0 );
 	//$display("MEM  pc:%x   inst:%x   valid:%x   aluout:%x   op_b:%x  wen:%x  wdata:%x  opcode:%x",MEM_reg_pc,MEM_reg_inst,MEM_reg_valid,MEM_reg_aluoutput,MEM_reg_src2   ,wen,wdata_reg,opcode);
 end
 //********************************************************************
