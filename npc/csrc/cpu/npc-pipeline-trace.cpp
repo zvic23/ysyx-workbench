@@ -32,7 +32,7 @@ void IFU_state_trace (long long a,long long b,long long c,long long d,long long 
 
 void pipeline_state_printf(){
 	for(int i=19;i>=0;i--){
-		printf("IFU:   pc:%llx  inst:%llx  valid:%d  ready:%d\n",A[i],B[i],C[i],D[i]);
+		printf("IFU:   pc:%llx  inst:%8llx  valid:%d  ready:%d\n",A[i],B[i],C[i],D[i]);
 	}
 
 }
