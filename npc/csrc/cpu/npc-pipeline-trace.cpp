@@ -50,8 +50,8 @@ void IDU_state_trace (long long a,long long b,long long c,long long d,long long 
 
 void pipeline_state_printf(){
 	for(int i=19;i>=0;i--){
-		printf("IFU:   pc:%llx  inst:%8llx  valid:%d  ready:%d\n",A[i],B[i],C[i],D[i]);
-		printf("IDU:   pc:%llx  inst:%8llx  valid:%d\n",A[i],B[i],C[i]);
+		printf("IFU:   pc:%llx  inst:%8llx  valid:%lld  ready:%lld\n",A[i],B[i],C[i],D[i]);
+		printf("IDU:   pc:%llx  inst:%8llx  valid:%lld\n",A1[i],B1[i],C1[i]);
 	}
 
 }
