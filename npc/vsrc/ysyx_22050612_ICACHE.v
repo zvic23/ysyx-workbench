@@ -16,7 +16,9 @@ input flush,
 input ready_IF_ID,
 
 output [31:0]inst,
-output reg ready
+output reg ready,
+
+input [63:0]waddr
 
 );
 
@@ -79,6 +81,14 @@ always @(posedge clk) begin
 			default: begin $display("icache all misses!!!!!!!!!!!!!!!!!!!!!!!!\n\n");end
 		endcase
 	end
+
+	if(waddr!=0) begin
+		if(tag0[waddr[9:4]] == waddr[63:10]) begin v0[waddr[9:4]] <= 1'b0; end
+		if(tag1[waddr[9:4]] == waddr[63:10]) begin v1[waddr[9:4]] <= 1'b0; end
+		if(tag2[waddr[9:4]] == waddr[63:10]) begin v2[waddr[9:4]] <= 1'b0; end
+		if(tag3[waddr[9:4]] == waddr[63:10]) begin v3[waddr[9:4]] <= 1'b0; end
+	end
+
 end
 
 wire [5:0]index;

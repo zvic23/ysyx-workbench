@@ -14,7 +14,9 @@ module ysyx_22050612_IFU (
    input pc_update,
    output [31:0]inst,
 
-   output branch_flush
+   output branch_flush,
+
+   input [63:0]waddr    //暂时加进来保证切换程序时icache能保持一致性，所以每次存指令后就更新icache
 
 /*
    output reg arvalid,
@@ -199,7 +201,7 @@ assign cache_valid = ready_IF_ID ? (~(inst_is_branch == 4'd2 || ((inst_is_branch
 //assign cache_valid = (~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))))&&ready_IF_ID;
 //assign cache_valid = ~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1)));
 
-ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, cache_valid, branch_flush, ready_IF_ID, inst, cache_ready);
+ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, cache_valid, branch_flush, ready_IF_ID, inst, cache_ready , waddr);
 
 //reg [63:0]pc_prev;
 always @(posedge clk) begin
