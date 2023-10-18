@@ -15,7 +15,7 @@ extern Vysyx_22050612_npc* top;
 
 long long A[20],B[20],C[20],D[20],E[20],F[20];
 void IFU_state_trace (long long a,long long b,long long c,long long d,long long e,long long f){
-	memcpy(&A[1],A,24);
+	memcpy(&A[1],A,32);
 	A[0] = a;
 
 }
