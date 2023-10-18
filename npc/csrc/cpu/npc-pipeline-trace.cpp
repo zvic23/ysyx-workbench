@@ -163,7 +163,7 @@ void ICACHE_state_trace (long long a,long long b,long long c,long long d,long lo
 void pipeline_state_printf(){
 	for(int i=19;i>=0;i--){
 		printf("IFU:   pc:%llx  inst:%08llx  valid:%lld  ready:%lld\n",A[i],B[i],C[i],D[i]);
-		printf("ICACHE:pc:%llx  inst:%08llx  valid:%lld  ready:%lld   line_mem_prev:%016llx%016llx  index:%llx  index_prev:%llx  \noffset:%llxi  offset_prev:%llx  way_hit:%llx  way_hit_perv:%llx  cen:%llb  wen:%lld  line_mem:%016llx%016llx \n",A5[i],B5[i],C5[i],D5[i],E5[i],F5[i],G5[i],H5[i]);
+		printf("ICACHE:pc:%llx  inst:%08llx  valid:%lld  ready:%lld   line_mem_prev:%016llx%016llx  index:%llx  index_prev:%llx\n",A5[i],B5[i],C5[i],D5[i],E5[i],F5[i],G5[i],H5[i]);
 		printf("offset:%llx  offset_prev:%llx  way_hit:%llx  way_hit_perv:%llx  cen:%llb  wen:%lld  line_mem:%016llx%016llx \n",I5[i],J5[i],K5[i],L5[i],M5[i],N5[i],O5[i],P5[i]);
 		printf("IDU:   pc:%llx  inst:%08llx  valid:%lld\n",A1[i],B1[i],C1[i]);
 		printf("EXU:   pc:%llx  inst:%08llx  valid:%lld\n",A2[i],B2[i],C2[i]);
