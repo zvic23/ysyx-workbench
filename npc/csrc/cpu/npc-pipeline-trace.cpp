@@ -19,7 +19,9 @@ void IFU_state_trace (long long a,long long b,long long c,long long d,long long 
 	memcpy(z,A,152);
 	memcpy(&A[1],z,152);
 	A[0] = a;
-
+	memcpy(z,B,152);
+	memcpy(&B[1],z,152);
+	B[0] = b;
 }
 
 void pipeline_state_printf(){
