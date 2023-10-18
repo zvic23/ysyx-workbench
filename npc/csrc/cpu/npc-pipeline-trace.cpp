@@ -12,7 +12,7 @@
 
 
 extern Vysyx_22050612_npc* top;
-
+#ifdef CONFIG_PIPELINETRACE
 long long A[20],B[20],C[20],D[20],E[20],F[20];
 void IFU_state_trace (long long a,long long b,long long c,long long d,long long e,long long f){
 	long long z[19];
@@ -174,3 +174,12 @@ void pipeline_state_printf(){
 	}
 
 }
+#else
+void IFU_state_trace (long long a,long long b,long long c,long long d,long long e,long long f){}
+void IDU_state_trace (long long a,long long b,long long c,long long d,long long e,long long f){}
+void EXU_state_trace (long long a,long long b,long long c,long long d,long long e,long long f){}
+void MEM_state_trace (long long a,long long b,long long c,long long d,long long e,long long f){}
+void WBU_state_trace (long long a,long long b,long long c,long long d,long long e,long long f){}
+void ICACHE_state_trace (long long a,long long b,long long c,long long d,long long e,long long f,long long g,long long h,long long i,long long j,long long k,long long l,long long m,long long n,long long o,long long p){}
+void pipeline_state_printf(){}
+#endif
