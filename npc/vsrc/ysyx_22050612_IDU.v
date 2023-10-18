@@ -58,7 +58,7 @@ wire id_ready;
 assign id_ready = ID_block ? 1'b0 : ready_ID_EX;
 
 wire idu_fifo_wen;
-assign idu_fifo_wen = valid_IF_ID;
+assign idu_fifo_wen = (idu_fifo_empty && id_ready) ? 1'b0 : valid_IF_ID;
 
 wire idu_fifo_ren;
 assign idu_fifo_ren = id_ready;
@@ -95,10 +95,15 @@ always @(posedge clk) begin
 		ID_reg_pc    <= ID_reg_pc;
 		ID_reg_inst  <= ID_reg_inst ;
 	end
-	else if(idu_fifo_empty)begin
+	else if(idu_fifo_empty && ~valid_IF_ID)begin
 		ID_reg_valid <= 1'b0;
 		ID_reg_pc    <= 64'b0;
 		ID_reg_inst  <= 32'b0;
+	end
+	else if(idu_fifo_empty && valid_IF_ID)begin
+		ID_reg_valid <= valid_IF_ID;
+		ID_reg_pc    <= pc_IF_ID;
+		ID_reg_inst  <= inst_IF_ID;
 	end
 	else begin
 		ID_reg_valid <= 1'b1;
