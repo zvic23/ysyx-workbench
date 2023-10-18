@@ -230,7 +230,7 @@ always @(*) begin
 end
 
 always @(negedge clk)begin
-	IFU_state_trace(pc,{32'b0,inst}, 64'b0, 64'b0,64'b0,64'b0 );
+	IFU_state_trace(pc, {32'b0,inst}, {63'b0,valid_IF_ID}, {63'b0,ready_IF_ID},64'b0,64'b0 );
 end
 
 //Reg #(1,1'b0) pc0  (clk, rst,    clk, pc[ ], 1'b1);

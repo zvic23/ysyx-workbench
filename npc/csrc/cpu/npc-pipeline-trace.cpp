@@ -22,11 +22,17 @@ void IFU_state_trace (long long a,long long b,long long c,long long d,long long 
 	memcpy(z,B,152);
 	memcpy(&B[1],z,152);
 	B[0] = b;
+	memcpy(z,C,152);
+	memcpy(&C[1],z,152);
+	C[0] = c;
+	memcpy(z,D,152);
+	memcpy(&D[1],z,152);
+	D[0] = d;
 }
 
 void pipeline_state_printf(){
 	for(int i=19;i>=0;i--){
-		printf("IFU:   pc:%llx  inst:%llx \n",A[i],B[i]);
+		printf("IFU:   pc:%llx  inst:%llx  valid:%d  ready:%d\n",A[i],B[i],C[i],D[i]);
 	}
 
 }
