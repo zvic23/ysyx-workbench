@@ -30,9 +30,28 @@ void IFU_state_trace (long long a,long long b,long long c,long long d,long long 
 	D[0] = d;
 }
 
+
+long long A1[20],B1[20],C1[20],D1[20],E1[20],F1[20];
+void IDU_state_trace (long long a,long long b,long long c,long long d,long long e,long long f){
+	long long z[19];
+	memcpy(z,A1,152);
+	memcpy(&A1[1],z,152);
+	A1[0] = a;
+	memcpy(z,B1,152);
+	memcpy(&B1[1],z,152);
+	B1[0] = b;
+	memcpy(z,C1,152);
+	memcpy(&C1[1],z,152);
+	C1[0] = c;
+	memcpy(z,D1,152);
+	memcpy(&D1[1],z,152);
+	D1[0] = d;
+}
+
 void pipeline_state_printf(){
 	for(int i=19;i>=0;i--){
 		printf("IFU:   pc:%llx  inst:%8llx  valid:%d  ready:%d\n",A[i],B[i],C[i],D[i]);
+		printf("IDU:   pc:%llx  inst:%8llx  valid:%d\n",A[i],B[i],C[i]);
 	}
 
 }
