@@ -19,3 +19,10 @@ void IFU_state_trace (long long a,long long b,long long c,long long d,long long 
 	A[0] = a;
 
 }
+
+void pipeline_state_printf(){
+	for(int i=19;i>=0;i--){
+		printf("IFU:   pc:%llx  inst:%llx \n",A[i],B[i]);
+	}
+
+}

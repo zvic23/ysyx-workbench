@@ -245,8 +245,7 @@ void program_exec_statistics(){
 }
 
 
-
-//int itrace_si = 0;
+extern void pipeline_state_printf();
 void execute(int n){
   for(uint64_t i=0;i<n;i++){
 	  if(npc_state == END || npc_state == QUIT){
@@ -259,6 +258,7 @@ void execute(int n){
           }
   	  else if(npc_state == ABORT){
   	  //else if(end == 2){
+	          pipeline_state_printf();
 		  printf(RED "ABORT\n" NONE);
 		  program_exec_statistics();
 		  iringbuf_output();
