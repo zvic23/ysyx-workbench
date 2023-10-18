@@ -151,11 +151,11 @@ void ICACHE_state_trace (long long a,long long b,long long c,long long d,long lo
 	memcpy(&J5[1],z,152);
 	J5[0] = j;
 	memcpy(z,K5,152);  memcpy(&K5[1],z,152);  K5[0] = k;
-	memcpy(z,L5,152);  memcpy(&L5[1],z,152);  K5[0] = l;
-	memcpy(z,M5,152);  memcpy(&M5[1],z,152);  K5[0] = m;
-	memcpy(z,N5,152);  memcpy(&N5[1],z,152);  K5[0] = n;
-	memcpy(z,O5,152);  memcpy(&O5[1],z,152);  K5[0] = o;
-	memcpy(z,P5,152);  memcpy(&P5[1],z,152);  K5[0] = p;
+	memcpy(z,L5,152);  memcpy(&L5[1],z,152);  L5[0] = l;
+	memcpy(z,M5,152);  memcpy(&M5[1],z,152);  M5[0] = m;
+	memcpy(z,N5,152);  memcpy(&N5[1],z,152);  N5[0] = n;
+	memcpy(z,O5,152);  memcpy(&O5[1],z,152);  O5[0] = o;
+	memcpy(z,P5,152);  memcpy(&P5[1],z,152);  P5[0] = p;
 	//memcpy(z,Q5,152);  memcpy(&Q5[1],z,152);  K5[0] = q;
 
 }
