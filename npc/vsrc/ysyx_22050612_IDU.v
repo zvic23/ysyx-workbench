@@ -58,7 +58,7 @@ wire id_ready;
 assign id_ready = ID_block ? 1'b0 : ready_ID_EX;
 
 wire idu_fifo_wen;
-assign idu_fifo_wen = (idu_fifo_empty && id_ready) ? 1'b0 : valid_IF_ID;
+assign idu_fifo_wen = valid_IF_ID;
 
 wire idu_fifo_ren;
 assign idu_fifo_ren = id_ready;
