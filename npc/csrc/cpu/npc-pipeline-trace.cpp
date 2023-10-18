@@ -120,10 +120,10 @@ void WBU_state_trace (long long a,long long b,long long c,long long d,long long 
 void pipeline_state_printf(){
 	for(int i=19;i>=0;i--){
 		printf("IFU:   pc:%llx  inst:%08llx  valid:%lld  ready:%lld\n",A[i],B[i],C[i],D[i]);
-		printf("IDU:   pc:%llx  inst:%8llx  valid:%lld\n",A1[i],B1[i],C1[i]);
-		printf("EXU:   pc:%llx  inst:%8llx  valid:%lld\n",A2[i],B2[i],C2[i]);
-		printf("MEM:   pc:%llx  inst:%8llx  valid:%lld\n",A3[i],B3[i],C3[i]);
-		printf("WBU:   pc:%llx  inst:%8llx  valid:%lld\n",A4[i],B4[i],C4[i]);
+		printf("IDU:   pc:%llx  inst:%08llx  valid:%lld\n",A1[i],B1[i],C1[i]);
+		printf("EXU:   pc:%llx  inst:%08llx  valid:%lld\n",A2[i],B2[i],C2[i]);
+		printf("MEM:   pc:%llx  inst:%08llx  valid:%lld\n",A3[i],B3[i],C3[i]);
+		printf("WBU:   pc:%llx  inst:%08llx  valid:%lld\n",A4[i],B4[i],C4[i]);
 
 		printf("\n");
 	}
