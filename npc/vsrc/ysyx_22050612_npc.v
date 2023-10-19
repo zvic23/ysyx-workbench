@@ -1,38 +1,32 @@
-//import "DPI-C" function void ebreak ();
 import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
 
-`define ysyx_22050612_rgsize 64
 
 module ysyx_22050612_npc(
 input clk,
 input rst,
 
-//output [31:0]inst,
 output [63:0]pc,
 
 output [63:0]wb_pc
 
 );
 
-wire [31:0]inst;
+assign wb_pc=WB_reg_pc;   //used by cpp file
+
+
+
 wire [63:0]dnpc;
 wire pc_update;
-
+/*
 wire [63:0]imm_I;
 wire [63:0]imm_U;
 wire [63:0]imm_J;
 wire [63:0]imm_B;
 wire [63:0]imm_S;
 wire [ 5:0]shamt;
-wire [ 4:0]rd;
 wire [ 4:0]rs1;
 wire [ 4:0]rs2;
-
-
-wire exu_block;
-
-
-assign wb_pc=WB_reg_pc;
+*/
 
 
 //***************    general register   ********************
@@ -46,21 +40,7 @@ assign gpr_rd  =  reg_wr_ID  ;
 assign gpr_wdata = reg_wr_value ;
 
 ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, gpr_wdata, gpr_rd, gpr_wen, gpr);
-//assign wen_fix = ( (rd != 5'b0)&&(exu_block == 1'b0) )?  wen : 1'b0;
 
-reg [31:0]gpr_busy;
-wire wen;
-always@(posedge clk) begin
-	if(rst) begin
-		gpr_busy <= 32'b0;
-	end
-	if(gpr_rd != 5'b0 && gpr_wen == 1'b1 ) begin
-		gpr_busy[gpr_rd] <= 1'b0;
-	end
-	if(rd != 5'b0 && wen == 1'b1 && ready_IF_ID == 1'b1 ) begin
-		gpr_busy[rd]     <= 1'b1;
-	end
-end
 
 
 
@@ -73,9 +53,9 @@ wire wen_mtvec,wen_mepc,wen_mcause,wen_mstatus;
 wire [63:0]src_csr;
 
 //control and status register
-ysyx_22050612_Reg #(64,64'h0) mtvec_csr           (clk, rst, wdata_mtvec  , mtvec  , wen_mtvec  );
-ysyx_22050612_Reg #(64,64'h0) mepc_csr            (clk, rst, wdata_mepc   , mepc   , wen_mepc   );
-ysyx_22050612_Reg #(64,64'h0) mcause_csr          (clk, rst, wdata_mcause , mcause , wen_mcause );
+ysyx_22050612_Reg #(64,64'h0)         mtvec_csr   (clk, rst, wdata_mtvec  , mtvec  , wen_mtvec  );
+ysyx_22050612_Reg #(64,64'h0)         mepc_csr    (clk, rst, wdata_mepc   , mepc   , wen_mepc   );
+ysyx_22050612_Reg #(64,64'h0)         mcause_csr  (clk, rst, wdata_mcause , mcause , wen_mcause );
 ysyx_22050612_Reg #(64,64'ha00001800) mstatus_csr (clk, rst, wdata_mstatus, mstatus, wen_mstatus);
 
 
@@ -91,7 +71,7 @@ assign pc = pc_ifu;
 
 wire branch_flush;
 
-ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, gpr_busy, mtvec, mepc, mcause, mstatus, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ src_A,src_B, imm, rd, wen, opcode_ID_EX, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX , EX_reg_valid,EX_reg_inst  , branch_flush);
+ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, mtvec, mepc, mcause, mstatus, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ src_A,src_B, imm, opcode_ID_EX, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX , EX_reg_valid,EX_reg_inst  , branch_flush);
 
 wire       valid_ID_EX  ;
 wire       ready_ID_EX  ;
@@ -262,10 +242,6 @@ ysyx_22050612_Arbiter arbiter (clk,rst,
 
 
 
-//always @(posedge clk) begin
-//  $display("%x",inst);
-//end
-
-initial set_gpr_ptr(gpr); 
+initial set_gpr_ptr(gpr);                   //to update the gpr in cpp file
 
 endmodule
