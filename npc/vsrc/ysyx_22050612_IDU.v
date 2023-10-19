@@ -161,7 +161,7 @@ wire rs1_waiting;
 wire rs2_waiting;
 //wire [3:0]rs2_block_checking;
 wire rs2_block_checking;
-assign rs2_block_checking = (ID_reg_inst[6:0] == 7'b1100111) || (ID_reg_inst[6:0] == 7'b1100011) || (ID_reg_inst[6:0] == 7'b0110011) || (ID_reg_inst[6:0] == 7'b0111011) || (ID_reg_inst[6:0] == 7'b1101111);
+assign rs2_block_checking = (ID_reg_inst[6:0] == 7'b1100111) || (ID_reg_inst[6:0] == 7'b1100011) || (ID_reg_inst[6:0] == 7'b0110011) || (ID_reg_inst[6:0] == 7'b0111011) || (ID_reg_inst[6:0] == 7'b1101111);  //include jal, load, jalr, branch, +-*/ and shift.
 
 assign rs1_waiting = EX_reg_inst[11:7] == ID_reg_inst[19:15];
 assign rs2_waiting = EX_reg_inst[11:7] == ID_reg_inst[24:20];
@@ -240,7 +240,7 @@ end
 
 
 
-wire [ 4:0]rd   ;
+//wire [ 4:0]rd   ;
 wire [ 4:0]rs1  ;
 wire [ 4:0]rs2  ;
 wire [63:0]imm_I;
@@ -248,13 +248,13 @@ wire [63:0]imm_U;
 wire [63:0]imm_J;
 wire [63:0]imm_B;
 wire [63:0]imm_S;
-wire [ 5:0]shamt;
+//wire [ 5:0]shamt;
 
 
-assign rd = inst[11: 7];
+//assign rd = inst[11: 7];
 assign rs1= inst[19:15];
 assign rs2= inst[24:20];
-assign shamt= inst[25:20];
+//assign shamt= inst[25:20];
 assign imm_I = (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]};
 assign imm_U = (inst[31]==1'b1)?{{32{1'b1}},inst[31:12],{12{1'b0}}}:{{32{1'b0}},inst[31:12],{12{1'b0}}};
 assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
@@ -488,6 +488,7 @@ end
 
 assign src_A = gpr[rs1];
 //assign src_B = gpr[rs2];
+//assign src_B = ID_reg_inst[6:0] == 7'b1110011 ? (ID_reg_inst[14:12] == 3'b0 ? 
 
 always @(*) begin
 ////src_A
@@ -623,20 +624,10 @@ end
 
 
 
-
-
-
 assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
 //always @(posedge clk) begin
 //	if(inst==32'h00100073) ebreak(1);
 //end
-
-
-
-
-//  always @(posedge clk) begin
-//    $display("%x,%d,%d",inst,opcode,rd);
-//  end
 
 
 endmodule
