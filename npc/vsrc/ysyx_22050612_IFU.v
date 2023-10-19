@@ -6,13 +6,13 @@ import "DPI-C" function void pmem_read_pc(
 module ysyx_22050612_IFU (
    input clk,
    input rst, 
-   input [63:0]dnpc,
    output reg valid_IF_ID,
    input ready_IF_ID,
    output reg [63:0]pc_prev,
    output [63:0]pc,
-   input pc_update,
    output [31:0]inst,
+   input pc_update,
+   input [63:0]dnpc,
 
    output branch_flush,
 

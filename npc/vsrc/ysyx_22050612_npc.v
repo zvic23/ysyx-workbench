@@ -11,12 +11,10 @@ output [63:0]wb_pc
 
 );
 
-assign wb_pc=WB_reg_pc;   //used by cpp file
+assign wb_pc=WB_reg_pc;   //used by cpp file for difftest
+assign pc = pc_ifu;       //used by cpp file for itrace
 
 
-
-wire [63:0]dnpc;
-wire pc_update;
 /*
 wire [63:0]imm_I;
 wire [63:0]imm_U;
@@ -60,16 +58,18 @@ ysyx_22050612_Reg #(64,64'ha00001800) mstatus_csr (clk, rst, wdata_mstatus, msta
 
 
 //**************        processor       *******************
-ysyx_22050612_IFU ifu (clk, rst, dnpc,valid_IF_ID, ready_IF_ID, pc_IF_ID, pc_ifu, pc_update, inst_IF_ID , branch_flush , waddr);
-wire [63:0]pc_ifu;
+ysyx_22050612_IFU ifu (clk, rst, valid_IF_ID, ready_IF_ID, pc_IF_ID, pc_ifu, inst_IF_ID, pc_update, dnpc,  branch_flush , waddr);
+wire [63:0]pc_ifu;      //used by cpp file
 
 wire       valid_IF_ID;
 wire       ready_IF_ID;
-wire [63:0]pc_IF_ID  ;
-wire [31:0]inst_IF_ID;
-assign pc = pc_ifu;
+wire [63:0]pc_IF_ID   ;
+wire [31:0]inst_IF_ID ;
 
-wire branch_flush;
+wire [63:0]dnpc;
+wire pc_update;       //these two come from exu
+
+wire branch_flush;    //if branch predict failed, clean IFU, ICACHE, IDU and EXU. it = pc_update now.
 
 ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, mtvec, mepc, mcause, mstatus, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ src_A,src_B, imm, opcode_ID_EX, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX , EX_reg_valid,EX_reg_inst  , branch_flush);
 
