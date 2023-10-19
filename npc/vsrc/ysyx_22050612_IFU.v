@@ -87,11 +87,11 @@ always @(*) begin
 		pc_next = dnpc;
 		pc_en   = 1'b1;
 	end
-	else if(inst_branch  && minus_target_addr && valid_IF_ID)begin
+	else if(inst_branch && minus_target_addr )begin
 		pc_next = pc_prev+imm_B;
 		pc_en   = 1'b1;
 	end
-	else if(inst_jal && valid_IF_ID)begin
+	else if(inst_jal )begin
 		pc_next = pc_prev+imm_J;
 		pc_en   = 1'b1;
 	end
@@ -104,68 +104,15 @@ always @(*) begin
 		pc_en   = 1'b1;
 	end
 end
-/*
-always @(*) begin
-	if(pc_update)begin
-		pc_next = dnpc;
-		pc_en   = 1'b1;
-	end
-	else if(inst_is_branch==4'd1 && minus_target_addr && valid_IF_ID)begin
-		pc_next = pc_prev+imm_B;
-		pc_en   = 1'b1;
-	end
-	else if(inst_is_branch==4'd2 && valid_IF_ID)begin
-		pc_next = pc_prev+imm_J;
-		pc_en   = 1'b1;
-	end
-	else if(ready_IF_ID == 1'b0)begin
-		pc_next = pc;
-		pc_en   = 1'b0;
-	end
-	else begin
-		pc_next = pc + 64'd4;
-		pc_en   = 1'b1;
-	end
-end
-*/
+
 wire inst_jal;
 assign inst_jal    = cache_ready ? (inst[6:0] == 7'b1101111) : 1'b0;
 wire inst_branch;
 assign inst_branch = cache_ready ? (inst[6:0] == 7'b1100011) : 1'b0;
+// jalr, ecall and mret are not included  because the target address of these inst
+// depend on register.
 
-/*
-reg [3:0]inst_is_branch;
-always @(*) begin
-	if(cache_ready == 1'b1) begin
 
-	if(inst[6:0] == 7'b1101111)begin
-		inst_is_branch = 4'd2;                                 //jal
-	end
-//	else if(inst == 32'b1110011)begin
-//		//inst_is_branch = 4'd1;                                 //ecall
-//	end
-//	else if(inst == 32'b00110000001000000000000001110011)begin
-//		//inst_is_branch = 4'd1;                                 //mret
-//	end
-	else begin
-        	case ({inst[14:12],inst[6:0]})
-        //	      10'b000_1100111: inst_is_branch = 4'd2;          //jalr
-        	      10'b000_1100011: inst_is_branch = 4'd1;          //beq
-        	      10'b001_1100011: inst_is_branch = 4'd1;          //bne
-        	      10'b100_1100011: inst_is_branch = 4'd1;          //blt
-        	      10'b101_1100011: inst_is_branch = 4'd1;          //bge
-        	      10'b110_1100011: inst_is_branch = 4'd1;          //bltu
-        	      10'b111_1100011: inst_is_branch = 4'd1;          //bgeu
-        	      default:         inst_is_branch = 4'd0; 
-        	endcase
-	end
-
-        end
-	else begin
-		inst_is_branch = 4'b0;
-	end
-end
-*/
 wire minus_target_addr;
 assign minus_target_addr = inst[31];
 wire [63:0]imm_B;
@@ -203,7 +150,7 @@ assign inst = pc_read[2]?inst_mix[63:32] : inst_mix[31:0];
 wire cache_valid;
 wire cache_ready;
 //assign cache_valid = ready_IF_ID ? ~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))) : 1'b1;
-assign cache_valid = ready_IF_ID ? (~(inst_jal || ((inst_branch )&&(minus_target_addr)))) : 1'b0;
+assign cache_valid = ready_IF_ID ? (~(inst_jal || (inst_branch &&minus_target_addr))) : 1'b0;
 //assign cache_valid = (~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))))&&ready_IF_ID;
 //assign cache_valid = ~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1)));
 
