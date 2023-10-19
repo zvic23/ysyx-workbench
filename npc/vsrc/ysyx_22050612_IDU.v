@@ -1,4 +1,3 @@
-//import "DPI-C" function void ebreak (int r);
 import "DPI-C" function void IDU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
 
 module ysyx_22050612_IDU(
@@ -36,6 +35,8 @@ output     valid_ID_EX,
 input      ready_ID_EX,
 output [63:0]pc_ID_EX,
 output [31:0]inst_ID_EX,
+
+
 
 input EX_reg_valid,
 input [31:0]EX_reg_inst,
@@ -154,7 +155,8 @@ end
 
 //load interlock
 
-reg EX_loading;
+wire EX_loading;
+assign EX_loading = EX_reg_inst[6:0] == 7'b0000011;
 wire rs1_waiting;
 wire rs2_waiting;
 wire [3:0]rs2_block_checking;
@@ -167,6 +169,7 @@ assign ID_block = ID_reg_valid && EX_reg_valid && EX_loading && (rs1_waiting ||(
 
 always@(*) begin
 	//if(EX_reg_valid)begin
+	/*
 		case ({EX_reg_inst[14:12],EX_reg_inst[6:0]})
 			10'b000_0000011:  EX_loading = 1'b1;  //lb
 			10'b001_0000011:  EX_loading = 1'b1;  //lh
@@ -181,6 +184,7 @@ always@(*) begin
 //			10'b011_0100011:  EX_loading = 1'b1;  //sd
 		        default :         EX_loading = 1'b0;
 		endcase
+		*/
 	//end
 	//if(ID_reg_valid)begin
 		case ({ID_reg_inst[14:12],ID_reg_inst[6:0]})
