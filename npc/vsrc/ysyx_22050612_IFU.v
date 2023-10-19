@@ -7,10 +7,11 @@ module ysyx_22050612_IFU (
    input clk,
    input rst, 
    output reg valid_IF_ID,
-   input ready_IF_ID,
+   input      ready_IF_ID,
    output reg [63:0]pc_prev,
    output [63:0]pc,
    output [31:0]inst,
+
    input pc_update,
    input [63:0]dnpc,
 
@@ -79,6 +80,12 @@ end
 */
 
 
+
+assign branch_flush = pc_update;
+assign valid_IF_ID = cache_ready;
+
+
+//**********************  pc  *****************************
 reg  [63:0]pc_next;
 reg  pc_en;
 
@@ -87,11 +94,11 @@ always @(*) begin
 		pc_next = dnpc;
 		pc_en   = 1'b1;
 	end
-	else if(inst_branch && minus_target_addr )begin
+	else if(inst_branch && minus_target_addr /*&& valid_IF_ID*/)begin
 		pc_next = pc_prev+imm_B;
 		pc_en   = 1'b1;
 	end
-	else if(inst_jal )begin
+	else if(inst_jal /*&& valid_IF_ID*/)begin
 		pc_next = pc_prev+imm_J;
 		pc_en   = 1'b1;
 	end
@@ -120,21 +127,8 @@ assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11
 wire [63:0]imm_J;
 assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
 
-assign valid_IF_ID = cache_ready;
-//assign valid_IF_ID = 1'b1;
-assign branch_flush = pc_update;
-assign pc_read =  pc;
 
 ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, pc_en);
-
-//************************  pipeline  ******************************
-always @(negedge clk) begin
-	IFU_state_trace(pc, {32'b0,inst}, {63'b0,valid_IF_ID}, {63'b0,ready_IF_ID},64'b0,64'b0 );
-	//$display("IF   pc:%x   inst:%x   valid:%d   ready:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,ready_IF_ID,pc_next,dnpc);
-end
-//*****************************************************************
-
-wire [63:0]pc_read;
 /*
 wire [63:0]inst_mix;
 always @(*) begin
@@ -147,12 +141,24 @@ end
 assign inst = pc_read[2]?inst_mix[63:32] : inst_mix[31:0];
 */
 
+//************************  pipeline  ******************************
+always @(negedge clk) begin
+	IFU_state_trace(pc, {32'b0,inst}, {63'b0,valid_IF_ID}, {63'b0,ready_IF_ID},64'b0,64'b0 );
+	//$display("IF   pc:%x   inst:%x   valid:%d   ready:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,ready_IF_ID,pc_next,dnpc);
+end
+//*****************************************************************
+
+
+
+
+//************************  icache   *******************************
+wire [63:0]pc_read;
+assign pc_read =  pc;
+
 wire cache_valid;
 wire cache_ready;
-//assign cache_valid = ready_IF_ID ? ~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))) : 1'b1;
-assign cache_valid = ready_IF_ID ? (~(inst_jal || (inst_branch &&minus_target_addr))) : 1'b0;
 //assign cache_valid = (~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))))&&ready_IF_ID;
-//assign cache_valid = ~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1)));
+assign cache_valid = ready_IF_ID ? (~(inst_jal || (inst_branch &&minus_target_addr))) : 1'b0;
 
 ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, cache_valid, branch_flush, ready_IF_ID, inst, cache_ready , waddr);
 
@@ -173,6 +179,10 @@ end
 
 
 
+
+
+
+//offer the inst in IFU to itace
 always @(*) begin
 	if(valid_IF_ID) begin
   		read_inst(inst);
@@ -182,15 +192,4 @@ always @(*) begin
   	end
 end
 
-always @(negedge clk)begin
-end
-
-//Reg #(1,1'b0) pc0  (clk, rst,    clk, pc[ ], 1'b1);
-//Reg #(1,1'b0) pc1  (clk, rst, ~pc[ ], pc[ ], 1'b1);
-//
-//Reg #(1,1'b0) pc2  (clk, rst,    clk, pc[ ], 1'b1);
-//Reg #(1,1'b0) pc3  (clk, rst, ~pc[ ], pc[ ], 1'b1);
-//Reg #(1,1'b0) pc4  (clk, rst, ~pc[ ], pc[ ], 1'b1);
-//Reg #(1,1'b0) pc5  (clk, rst, ~pc[ ], pc[ ], 1'b1);
-//Reg #(1,1'b0) pc6  (clk, rst, ~pc[ ], pc[ ], 1'b1);
 endmodule
