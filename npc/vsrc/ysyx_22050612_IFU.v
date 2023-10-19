@@ -182,6 +182,7 @@ ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, pc_en);
 
 //************************  pipeline  ******************************
 always @(negedge clk) begin
+	IFU_state_trace(pc, {32'b0,inst}, {63'b0,valid_IF_ID}, {63'b0,ready_IF_ID},64'b0,64'b0 );
 	//$display("IF   pc:%x   inst:%x   valid:%d   ready:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,ready_IF_ID,pc_next,dnpc);
 end
 //*****************************************************************
@@ -202,13 +203,12 @@ assign inst = pc_read[2]?inst_mix[63:32] : inst_mix[31:0];
 wire cache_valid;
 wire cache_ready;
 //assign cache_valid = ready_IF_ID ? ~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))) : 1'b1;
-assign cache_valid = ready_IF_ID ? (~(inst_jal || ((inst_branch )&&(minus_target_addr==1'b1)))) : 1'b0;
+assign cache_valid = ready_IF_ID ? (~(inst_jal || ((inst_branch )&&(minus_target_addr)))) : 1'b0;
 //assign cache_valid = (~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))))&&ready_IF_ID;
 //assign cache_valid = ~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1)));
 
 ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, cache_valid, branch_flush, ready_IF_ID, inst, cache_ready , waddr);
 
-//reg [63:0]pc_prev;
 always @(posedge clk) begin
 	if(rst) begin
 		pc_prev <= 64'b0;
@@ -228,16 +228,14 @@ end
 
 always @(*) begin
 	if(valid_IF_ID) begin
-  read_inst(inst);
-  end
-  else begin
-
-  read_inst(32'b0);
-  end
+  		read_inst(inst);
+  	end
+  	else begin
+  		read_inst(32'b0);
+  	end
 end
 
 always @(negedge clk)begin
-	IFU_state_trace(pc, {32'b0,inst}, {63'b0,valid_IF_ID}, {63'b0,ready_IF_ID},64'b0,64'b0 );
 end
 
 //Reg #(1,1'b0) pc0  (clk, rst,    clk, pc[ ], 1'b1);
