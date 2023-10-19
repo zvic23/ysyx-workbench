@@ -156,16 +156,18 @@ end
 //load interlock
 
 wire EX_loading;
-assign EX_loading = EX_reg_inst[6:0] == 7'b0000011;
+assign EX_loading = EX_reg_inst[6:0] == 7'b0000011;   //load inst
 wire rs1_waiting;
 wire rs2_waiting;
-wire [3:0]rs2_block_checking;
+//wire [3:0]rs2_block_checking;
+wire rs2_block_checking;
+assign rs2_block_checking = (ID_reg_inst[6:0] == 7'b1100111) || (ID_reg_inst[6:0] == 7'b1100011) || (ID_reg_inst[6:0] == 7'b0110011) || (ID_reg_inst[6:0] == 7'b0111011) || (ID_reg_inst[6:0] == 7'b1101111);
 
 assign rs1_waiting = EX_reg_inst[11:7] == ID_reg_inst[19:15];
 assign rs2_waiting = EX_reg_inst[11:7] == ID_reg_inst[24:20];
-assign rs2_block_checking[0] = ID_reg_valid ? (ID_reg_inst[6:0] == 7'b1101111) : 1'b0;
+//assign rs2_block_checking[0] = ID_reg_valid ? (ID_reg_inst[6:0] == 7'b1101111) : 1'b0;
 
-assign ID_block = ID_reg_valid && EX_reg_valid && EX_loading && (rs1_waiting ||(rs2_waiting && (rs2_block_checking!=4'b0)));
+assign ID_block = ID_reg_valid && EX_reg_valid && EX_loading && (rs1_waiting ||(rs2_waiting && (rs2_block_checking)));
 
 always@(*) begin
 	//if(EX_reg_valid)begin
@@ -187,6 +189,7 @@ always@(*) begin
 		*/
 	//end
 	//if(ID_reg_valid)begin
+	/*
 		case ({ID_reg_inst[14:12],ID_reg_inst[6:0]})
     			10'b000_1100111:  rs2_block_checking[1]= 1'd1   ;    //jalr
     			10'b000_1100011:  rs2_block_checking[1]= 1'd1   ;    //beq
@@ -226,6 +229,7 @@ always@(*) begin
 			default :                rs2_block_checking[2]= 1'd0  ;
 		endcase
 	//end
+	*/
 end
 
 
