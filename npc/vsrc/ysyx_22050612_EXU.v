@@ -29,7 +29,6 @@ input [ 4:0]rs1,
 input [ 4:0]rs2,
 */
 input [23:0]opcode_in,
-//input [23:0]opcode,
 input [63:0]src_A,
 input [63:0]src_B,
 input [63:0]imm_in,
@@ -38,10 +37,8 @@ input [63:0]imm_in,
 //input [ 4:0]rd,
 
 
-//input [63:0]pc,
 
 
-//output [63:0]dnpc,
 output reg [63:0]dnpc,
 output pc_update,
 
@@ -66,7 +63,7 @@ output wen_mepc,
 output wen_mcause,
 output wen_mstatus,
 
-input [63:0] gpr[31:0],
+input [63:0] gpr[31:0],    //only for ebreak control
 
 
 
