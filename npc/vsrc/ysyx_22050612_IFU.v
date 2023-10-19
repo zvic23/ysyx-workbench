@@ -79,33 +79,9 @@ end
 */
 
 
+reg  [63:0]pc_next;
+reg  pc_en;
 
-/*
-reg  [63:0]pc_next;
-reg  pc_en;
-//assign pc_next = pc_update ? dnpc : pc+64'd4;
-always @(*) begin
-	if((branching!=4'b0) && pc_update)begin
-		pc_next = dnpc;
-		pc_en   = 1'b1;
-	end
-	else if(branching!=4'b0) begin
-		pc_next = pc;
-		pc_en   = 1'b0;
-	end
-	else if(ready_IF_ID == 1'b0)begin
-		pc_next = pc;
-		pc_en   = 1'b0;
-	end
-	else begin
-		pc_next = pc + 64'd4;
-		pc_en   = 1'b1;
-	end
-end
-*/
-reg  [63:0]pc_next;
-reg  pc_en;
-//assign pc_next = pc_update ? dnpc : pc+64'd4;
 always @(*) begin
 	if(pc_update)begin
 		pc_next = dnpc;
@@ -131,7 +107,7 @@ end
 
 reg [3:0]inst_is_branch;
 always @(*) begin
-	if(cache_ready == 1'b1) begin
+//	if(cache_ready == 1'b1) begin
 
 	if(inst[6:0] == 7'b1101111)begin
 		inst_is_branch = 4'd2;                                 //jal
@@ -155,10 +131,10 @@ always @(*) begin
         	endcase
 	end
 
-        end
-	else begin
-		inst_is_branch = 4'b0;
-	end
+//        end
+//	else begin
+//		inst_is_branch = 4'b0;
+//	end
 end
 
 wire minus_target_addr;
