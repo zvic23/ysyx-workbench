@@ -87,6 +87,29 @@ always @(*) begin
 		pc_next = dnpc;
 		pc_en   = 1'b1;
 	end
+	else if(inst_branch  && minus_target_addr && valid_IF_ID)begin
+		pc_next = pc_prev+imm_B;
+		pc_en   = 1'b1;
+	end
+	else if(inst_jal && valid_IF_ID)begin
+		pc_next = pc_prev+imm_J;
+		pc_en   = 1'b1;
+	end
+	else if(ready_IF_ID == 1'b0)begin
+		pc_next = pc;
+		pc_en   = 1'b0;
+	end
+	else begin
+		pc_next = pc + 64'd4;
+		pc_en   = 1'b1;
+	end
+end
+/*
+always @(*) begin
+	if(pc_update)begin
+		pc_next = dnpc;
+		pc_en   = 1'b1;
+	end
 	else if(inst_is_branch==4'd1 && minus_target_addr && valid_IF_ID)begin
 		pc_next = pc_prev+imm_B;
 		pc_en   = 1'b1;
@@ -104,7 +127,13 @@ always @(*) begin
 		pc_en   = 1'b1;
 	end
 end
+*/
+wire inst_jal;
+assign inst_jal    = cache_ready ? (inst[6:0] == 7'b1101111) : 1'b0;
+wire inst_branch;
+assign inst_branch = cache_ready ? (inst[6:0] == 7'b1100011) : 1'b0;
 
+/*
 reg [3:0]inst_is_branch;
 always @(*) begin
 	if(cache_ready == 1'b1) begin
@@ -136,7 +165,7 @@ always @(*) begin
 		inst_is_branch = 4'b0;
 	end
 end
-
+*/
 wire minus_target_addr;
 assign minus_target_addr = inst[31];
 wire [63:0]imm_B;
@@ -173,7 +202,7 @@ assign inst = pc_read[2]?inst_mix[63:32] : inst_mix[31:0];
 wire cache_valid;
 wire cache_ready;
 //assign cache_valid = ready_IF_ID ? ~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))) : 1'b1;
-assign cache_valid = ready_IF_ID ? (~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1)))) : 1'b0;
+assign cache_valid = ready_IF_ID ? (~(inst_jal || ((inst_branch )&&(minus_target_addr==1'b1)))) : 1'b0;
 //assign cache_valid = (~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))))&&ready_IF_ID;
 //assign cache_valid = ~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1)));
 
