@@ -107,7 +107,7 @@ end
 
 
 always @(negedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
-	if(WB_reg_valid && ready_EX_MEM)begin
+	if(WB_reg_valid)begin
 	//if(WB_reg_valid)begin
 	case({WB_reg_inst[14:12],WB_reg_inst[6:0]})
     10'b000_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
