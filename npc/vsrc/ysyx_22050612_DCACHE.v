@@ -1,25 +1,19 @@
-import "DPI-C" function void pmem_read_icache_low64(
-  input longint raddr, output longint rdata);
-import "DPI-C" function void pmem_read_icache_high64(
-  input longint raddr, output longint rdata);
-import "DPI-C" function void icache_data(int hit);
-import "DPI-C" function void ICACHE_state_trace (longint a,longint b,longint c,longint d,longint e,longint f,longint g,longint h,longint i,longint j,longint k,longint l,longint m,longint n,longint o,longint p); //16 parameters
+//import "DPI-C" function void pmem_read_icache_low64(
+//  input longint raddr, output longint rdata);
+//import "DPI-C" function void pmem_read_icache_high64(
+//  input longint raddr, output longint rdata);
+//import "DPI-C" function void icache_data(int hit);
+//import "DPI-C" function void ICACHE_state_trace (longint a,longint b,longint c,longint d,longint e,longint f,longint g,longint h,longint i,longint j,longint k,longint l,longint m,longint n,longint o,longint p); //16 parameters
 
 module ysyx_22050612_DCACHE (
 input clk,
 input rst,
 
-input [63:0]addr,
-input [63:0]addr_prev,
 input valid,
-input flush,
-input ready_IF_ID,
-
-output [31:0]inst,
 output reg ready,
 
-input [63:0]waddr
-
+input [63:0]addr,
+output [63:0]dout
 );
 
 
@@ -34,8 +28,8 @@ reg [63:0]v3;
 
 //************************  pipeline  ******************************
 always @(negedge clk) begin
-	ICACHE_state_trace (addr_prev, {32'b0,inst}, {63'b0,valid}, {63'b0,ready}, line_mem_prev[127:64], line_mem_prev[63:0], {58'b0,index}, {58'b0,addr_prev[9:4]},
-	{60'b0,addr[3:0]}, {60'b0,addr_prev[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {63'b0,wen}, line_mem[127:64], line_mem[63:0]);
+	//ICACHE_state_trace (addr_prev, {32'b0,inst}, {63'b0,valid}, {63'b0,ready}, line_mem_prev[127:64], line_mem_prev[63:0], {58'b0,index}, {58'b0,addr_prev[9:4]},
+	//{60'b0,addr[3:0]}, {60'b0,addr_prev[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {63'b0,wen}, line_mem[127:64], line_mem[63:0]);
 	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d",addr_prev,inst,valid,ready);
 	//$display("icache   %b   %b    %d  %d  %d  %d   ",way_hit,way_hit_prev,cen0,cen1,cen2,cen3);
 	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line_prev:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]);
@@ -82,11 +76,11 @@ always @(posedge clk) begin
 		endcase
 	end
 
-	if(waddr!=0) begin
-		if(tag0[waddr[9:4]] == waddr[63:10]) begin v0[waddr[9:4]] <= 1'b0; end
-		if(tag1[waddr[9:4]] == waddr[63:10]) begin v1[waddr[9:4]] <= 1'b0; end
-		if(tag2[waddr[9:4]] == waddr[63:10]) begin v2[waddr[9:4]] <= 1'b0; end
-		if(tag3[waddr[9:4]] == waddr[63:10]) begin v3[waddr[9:4]] <= 1'b0; end
+	if(addr!=0) begin
+		if(tag0[addr[9:4]] == addr[63:10]) begin v0[addr[9:4]] <= 1'b0; end
+		if(tag1[addr[9:4]] == addr[63:10]) begin v1[addr[9:4]] <= 1'b0; end
+		if(tag2[addr[9:4]] == addr[63:10]) begin v2[addr[9:4]] <= 1'b0; end
+		if(tag3[addr[9:4]] == addr[63:10]) begin v3[addr[9:4]] <= 1'b0; end
 	end
 
 end
@@ -110,22 +104,18 @@ wire [127:0]din;
 
 assign addr_sram = index;
 assign bwen = 128'h0;
-assign cen0 = ~(  valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign cen1 = ~(  valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign cen2 = ~(  valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign cen3 = ~(  valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0) ;
-//assign cen0 = ~( ready_IF_ID ?(  valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
-//assign cen1 = ~( ready_IF_ID ?(  valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
-//assign cen2 = ~( ready_IF_ID ?(  valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
-//assign cen3 = ~( ready_IF_ID ?(  valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
-assign  wen = ~(  valid && (way_hit == 4'b0))   ;
+assign cen0 = ~( ( valid&&!ready) ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign cen1 = ~( ( valid&&!ready) ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign cen2 = ~( ( valid&&!ready) ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign cen3 = ~( ( valid&&!ready) ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign  wen = ~( ( valid&&!ready) && (way_hit == 4'b0))   ;
 assign  din = line_mem;
 
 
-S011HD1P_X32Y2D128_BW sram_i0(dout0, clk, cen0, wen, bwen, addr_sram, din);
-S011HD1P_X32Y2D128_BW sram_i1(dout1, clk, cen1, wen, bwen, addr_sram, din);
-S011HD1P_X32Y2D128_BW sram_i2(dout2, clk, cen2, wen, bwen, addr_sram, din);
-S011HD1P_X32Y2D128_BW sram_i3(dout3, clk, cen3, wen, bwen, addr_sram, din);
+S011HD1P_X32Y2D128_BW sram_d0(dout0, clk, cen0, wen, bwen, addr_sram, din);
+S011HD1P_X32Y2D128_BW sram_d1(dout1, clk, cen1, wen, bwen, addr_sram, din);
+S011HD1P_X32Y2D128_BW sram_d2(dout2, clk, cen2, wen, bwen, addr_sram, din);
+S011HD1P_X32Y2D128_BW sram_d3(dout3, clk, cen3, wen, bwen, addr_sram, din);
 
 
 reg [3:0]way_hit_prev;
@@ -146,65 +136,52 @@ always @(posedge clk) begin
 		ready           <= ready        ;
 	end
 	*/
+       /*
 	else if(flush) begin
 		way_hit_prev    <= 4'b0;
 		line_mem_prev   <=128'b0;
 		ready           <= 1'b0;
 	end
-	else begin
+	*/
+	else if(ready && valid) begin
 	     	way_hit_prev    <= way_hit;
 		random_cnt[0]   <= random_cnt[3];
 		random_cnt[3:1] <= random_cnt[2:0];
 		line_mem_prev   <= line_mem;
-		ready           <= valid;
+		ready           <= 1'b0;
+	end
+	else if(!ready && valid) begin
+	     	way_hit_prev    <= way_hit;
+		random_cnt[0]   <= random_cnt[3];
+		random_cnt[3:1] <= random_cnt[2:0];
+		line_mem_prev   <= line_mem;
+		ready           <= 1'b1;
 	end
 end
 
-reg [127:0]dout;
+reg [127:0]line_read;
 always @(*) begin
 	case(way_hit_prev)
-		4'b0001: dout = dout0;
-		4'b0010: dout = dout1;
-		4'b0100: dout = dout2;
-		4'b1000: dout = dout3;
-		default: dout = line_mem_prev;
+		4'b0001: line_read = dout0;
+		4'b0010: line_read = dout1;
+		4'b0100: line_read = dout2;
+		4'b1000: line_read = dout3;
+		default: line_read = line_mem_prev;
 	endcase
 end
 
-/*
-reg [31:0]inst_prev;
-reg dump;
-always @(posedge clk) begin
-	if(rst) begin
-		inst_prev <= 32'b0;
-		dump <= 1'b0;
-	end
-	else if(!ready_IF_ID && !dump) begin
-		inst_prev <= inst;
-		dump <= 1'b1;
-	end
-	else if(!ready_IF_ID && dump) begin
-		inst_prev <= inst_prev;
-		dump <= 1'b1;
-	end
-	else if(ready_IF_ID && dump) begin
-		inst_prev <= 32'b0;
-		dump <= 1'b0;
-	end
-end
-*/
 
-assign inst =  addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout[63:32] : (addr_prev[3:2]==2'b10 ? dout[95:64] : (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)))  ;
-//assign inst = !dump ? (  addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout[63:32] : (addr_prev[3:2]==2'b10 ? dout[95:64] : (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)))  ) :   inst_prev;
+
+assign dout =  addr[3] ?  line_read[127:64] : line_read[63:0] ;
+
 
 wire [127:0]line_mem;
 always @(*) begin
-//	if(valid && (way_hit == 4'b0)) begin
 		pmem_read_icache_low64 (addr, line_mem[63:0]);
 		pmem_read_icache_high64(addr, line_mem[127:64]);
-//	end
 end
 
+/*
 always @(negedge clk) begin
 	if(valid) begin
 		if(way_hit != 4'b0) begin
@@ -215,6 +192,6 @@ always @(negedge clk) begin
 		end
 	end
 end
-
+*/
   
 endmodule
