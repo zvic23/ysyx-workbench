@@ -60,17 +60,6 @@ always @(posedge clk) begin
 		reg_raddr <= 64'b0;
 		reg_waddr <= 64'b0;
 	end
-	else if(!ready_EX_MEM)begin
-		WB_reg_valid <= WB_reg_valid ; 
-		WB_reg_pc    <= WB_reg_pc    ;
-		WB_reg_inst  <= WB_reg_inst  ;
-		WB_reg_wen   <= WB_reg_wen   ;
-		WB_reg_id    <= WB_reg_id    ;
-		WB_reg_wdata <= WB_reg_wdata ;
-
-		reg_raddr <= reg_raddr;
-		reg_waddr <= reg_waddr;
-	end
 	else begin
 		WB_reg_valid <= valid_MEM_WB;
 		WB_reg_pc    <= pc_MEM_WB;
@@ -107,8 +96,7 @@ end
 
 
 always @(negedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
-	if(WB_reg_valid)begin
-	//if(WB_reg_valid)begin
+	if(WB_reg_valid && ready_EX_MEM)begin
 	case({WB_reg_inst[14:12],WB_reg_inst[6:0]})
     10'b000_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
     10'b001_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);

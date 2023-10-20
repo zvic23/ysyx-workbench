@@ -13,7 +13,10 @@ input valid,
 output reg ready,
 
 input [63:0]addr,
-output [63:0]dout
+output [63:0]dout,
+
+
+input [63:0]waddr
 );
 
 
@@ -76,11 +79,11 @@ always @(posedge clk) begin
 		endcase
 	end
 
-	if(addr!=0) begin
-		if(tag0[addr[9:4]] == addr[63:10]) begin v0[addr[9:4]] <= 1'b0; end
-		if(tag1[addr[9:4]] == addr[63:10]) begin v1[addr[9:4]] <= 1'b0; end
-		if(tag2[addr[9:4]] == addr[63:10]) begin v2[addr[9:4]] <= 1'b0; end
-		if(tag3[addr[9:4]] == addr[63:10]) begin v3[addr[9:4]] <= 1'b0; end
+	if(waddr!=0) begin
+		if(tag0[waddr[9:4]] == waddr[63:10]) begin v0[waddr[9:4]] <= 1'b0; end
+		if(tag1[waddr[9:4]] == waddr[63:10]) begin v1[waddr[9:4]] <= 1'b0; end
+		if(tag2[waddr[9:4]] == waddr[63:10]) begin v2[waddr[9:4]] <= 1'b0; end
+		if(tag3[waddr[9:4]] == waddr[63:10]) begin v3[waddr[9:4]] <= 1'b0; end
 	end
 
 end
