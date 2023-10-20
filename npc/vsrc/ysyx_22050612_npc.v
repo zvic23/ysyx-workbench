@@ -122,7 +122,7 @@ wire [63:0]WB_reg_pc ;
 wire [63:0]raddr;
 wire [63:0]waddr;
 
-ysyx_22050612_WBU wbu (clk,rst, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr , WB_reg_valid, WB_reg_inst, WB_reg_wdata, WB_reg_pc,  raddr,waddr   , ready_EX_MEM);
+ysyx_22050612_WBU wbu (clk,rst, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr , WB_reg_valid, WB_reg_inst, WB_reg_wdata, WB_reg_pc,  raddr,waddr);
 
 
 
