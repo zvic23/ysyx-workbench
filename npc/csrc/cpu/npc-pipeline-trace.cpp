@@ -1,6 +1,6 @@
 #include "verilated_dpi.h"            //zsl:for printf the gpr
 
-
+#include "../include/generated/autoconf.h"
 #include "verilated.h"
 //#include "verilated_vcd_c.h"
 #include "Vysyx_22050612_npc.h"
