@@ -82,7 +82,7 @@ end
 
 
 assign branch_flush = pc_update;
-assign valid_IF_ID = cache_ready;
+assign valid_IF_ID = icache_ready;
 
 
 //**********************  pc  *****************************
@@ -113,9 +113,9 @@ always @(*) begin
 end
 
 wire inst_jal;
-assign inst_jal    = cache_ready ? (inst[6:0] == 7'b1101111) : 1'b0;
+assign inst_jal    = icache_ready ? (inst[6:0] == 7'b1101111) : 1'b0;
 wire inst_branch;
-assign inst_branch = cache_ready ? (inst[6:0] == 7'b1100011) : 1'b0;
+assign inst_branch = icache_ready ? (inst[6:0] == 7'b1100011) : 1'b0;
 // jalr, ecall and mret are not included  because the target address of these inst
 // depend on register.
 
@@ -155,12 +155,12 @@ end
 wire [63:0]pc_read;
 assign pc_read =  pc;
 
-wire cache_valid;
-wire cache_ready;
-//assign cache_valid = (~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))))&&ready_IF_ID;
-assign cache_valid = ready_IF_ID ? (~(inst_jal || (inst_branch &&minus_target_addr))) : 1'b0;
+wire icache_valid;
+wire icache_ready;
+//assign icache_valid = (~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))))&&ready_IF_ID;
+assign icache_valid = ready_IF_ID ? (~(inst_jal || (inst_branch &&minus_target_addr))) : 1'b0;
 
-ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, cache_valid, branch_flush, ready_IF_ID, inst, cache_ready , waddr);
+ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, icache_valid, branch_flush, ready_IF_ID, inst, icache_ready , waddr);
 
 always @(posedge clk) begin
 	if(rst) begin

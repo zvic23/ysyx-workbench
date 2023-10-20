@@ -137,6 +137,7 @@ assign pc_MEM_WB    = (MEM_block==1'b0) ? MEM_reg_pc    : 64'b0;
 assign inst_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_inst  : 32'b0;
 
 wire MEM_block;
+//assign MEM_block = WB_reg_valid && (WB_reg_inst[6:0]==7'b0000011) ;
 assign MEM_block = 1'b0;
 assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
 
@@ -501,7 +502,6 @@ always @(*) begin
 end
 
 always @(*) begin
-	//$display("*  clk=%d",clk);
 	case(opcode)
     24'd11  : raddr=aluoutput;
     24'd12  : raddr=aluoutput;
@@ -524,9 +524,7 @@ always @(*) begin
 
 
 end
-//always @(posedge clk) begin
-//	$display("pose  clk=%d",clk);
-//end
+
 
 
 /*
@@ -644,23 +642,16 @@ end
 */
 
 
-//wire [7:0]wmask_1byte;
-//wire [63:0]wdata_1byte;
 reg [7:0]wmask_1byte;
 reg [63:0]wdata_1byte;
 
-//wire [7:0]wmask_2byte;
-//wire [63:0]wdata_2byte;
 reg [7:0]wmask_2byte;
 reg [63:0]wdata_2byte;
 
 
 
 reg [63:0] rdata;
-//wire [63:0] raddr;
-//wire [63:0] waddr;
-//wire [63:0] wdata;
-//wire [ 7:0] wmask;
+
 reg [63:0] raddr;
 reg [63:0] waddr;
 reg [63:0] wdata;
@@ -674,15 +665,12 @@ always @(*) begin
 end
 
 
-//wire [63:0] rdata_fix;
 reg [63:0] rdata_fix;
 
 
-//wire [7:0] rdata_1byte;
 reg [7:0] rdata_1byte;
 
 
-//wire [15:0] rdata_2byte;
 reg [15:0] rdata_2byte;
 
 
@@ -730,18 +718,9 @@ end
 */
 
 
-//always @(mtvec or mepc or mcause or mstatus) begin
-//       update_csr(mtvec,mcause,mepc,mstatus);	
-//end
 
 
 
 
-
-//  always @(posedge clk) begin
-//    $display("%d,%d,%d",rd,rs1,imm_I);
-//    $display("%d,%d,%d,%d",aluoutput,wdata_reg,wen,opcode);
-//    $display("%d,%d,%d",aluoutput,src1,imm_I);
-//  end
 
 endmodule
