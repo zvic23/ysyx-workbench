@@ -167,7 +167,7 @@ void pipeline_state_printf(){
 		printf("offset:%llx  offset_prev:%llx  way_hit:%llx  way_hit_prev:%llx  cen:%llb  wen:%lld  line_mem:%016llx%016llx \n",I5[i],J5[i],K5[i],L5[i],M5[i],N5[i],O5[i],P5[i]);
 		printf("IDU:   pc:%llx  inst:%08llx  valid:%lld\n",A1[i],B1[i],C1[i]);
 		printf("EXU:   pc:%llx  inst:%08llx  valid:%lld\n",A2[i],B2[i],C2[i]);
-		printf("MEM:   pc:%llx  inst:%08llx  valid:%lld   rdata:llx\n",A3[i],B3[i],C3[i],D3[i]);
+		printf("MEM:   pc:%llx  inst:%08llx  valid:%lld   rdata:%llx\n",A3[i],B3[i],C3[i],D3[i]);
 		printf("WBU:   pc:%llx  inst:%08llx  valid:%lld\n",A4[i],B4[i],C4[i]);
 
 		printf("\n");
