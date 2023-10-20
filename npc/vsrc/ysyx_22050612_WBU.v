@@ -99,7 +99,7 @@ always @(negedge clk) begin
 	WBU_state_trace(WB_reg_pc, {32'b0,WB_reg_inst}, {63'b0,WB_reg_valid}, 64'b0,64'b0,64'b0 );
 	//$display("WB   pc:%x   inst:%x   valid:%d  wen:%d  wdata:%x rd:%x",WB_reg_pc,WB_reg_inst,WB_reg_valid,WB_reg_wen,WB_reg_wdata,WB_reg_id);
 	//$display("WB   pc:%x   inst:%x   valid:%d  wen:%d  wdata:%x rd:%x\n",WB_reg_pc,WB_reg_inst,WB_reg_valid,reg_wr_wen,reg_wr_value,reg_wr_ID);
-	if(WB_reg_valid && !ready_EX_MEM) begin 
+	if(WB_reg_valid && ready_EX_MEM) begin 
 		npc_complete_one_inst();
 	end
 end
