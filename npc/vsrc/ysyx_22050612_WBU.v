@@ -60,6 +60,17 @@ always @(posedge clk) begin
 		reg_raddr <= 64'b0;
 		reg_waddr <= 64'b0;
 	end
+	else if(ready_EX_MEM) begin
+		WB_reg_valid <= WB_reg_valid; 
+		WB_reg_pc    <= WB_reg_pc    ;
+		WB_reg_inst  <= WB_reg_inst  ;
+		WB_reg_wen   <= WB_reg_wen   ;
+		WB_reg_id    <= WB_reg_id    ;
+		WB_reg_wdata <= WB_reg_wdata ;
+
+		reg_raddr <= reg_raddr;
+		reg_waddr <= reg_waddr;
+	end
 	else begin
 		WB_reg_valid <= valid_MEM_WB;
 		WB_reg_pc    <= pc_MEM_WB;
