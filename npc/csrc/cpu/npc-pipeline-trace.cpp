@@ -160,6 +160,51 @@ void ICACHE_state_trace (long long a,long long b,long long c,long long d,long lo
 
 }
 
+long long A6[20],B6[20],C6[20],D6[20],E6[20],F6[20],G6[20],H6[20],I6[20],J6[20],K6[20],L6[20],M6[20],N6[20],O6[20],P6[20];
+void DCACHE_state_trace (long long a,long long b,long long c,long long d,long long e,long long f,long long g,long long h,long long i,long long j,long long k,long long l,long long m,long long n,long long o,long long p){
+	long long z[19];
+	memcpy(z,A6,152);
+	memcpy(&A6[1],z,152);
+	A6[0] = a;
+	memcpy(z,B6,152);
+	memcpy(&B6[1],z,152);
+	B6[0] = b;
+	memcpy(z,C6,152);
+	memcpy(&C6[1],z,152);
+	C6[0] = c;
+	memcpy(z,D6,152);
+	memcpy(&D6[1],z,152);
+	D6[0] = d;
+	memcpy(z,E6,152);
+	memcpy(&E6[1],z,152);
+	E6[0] = e;
+	memcpy(z,F6,152);
+	memcpy(&F6[1],z,152);
+	F6[0] = f;
+	memcpy(z,G6,152);
+	memcpy(&G6[1],z,152);
+	G6[0] = g;
+	memcpy(z,H6,152);
+	memcpy(&H6[1],z,152);
+	H6[0] = h;
+	memcpy(z,I6,152);
+	memcpy(&I6[1],z,152);
+	I6[0] = i;
+	memcpy(z,J6,152);
+	memcpy(&J6[1],z,152);
+	J6[0] = j;
+	memcpy(z,K6,152);  memcpy(&K6[1],z,152);  K6[0] = k;
+	memcpy(z,L6,152);  memcpy(&L6[1],z,152);  L6[0] = l;
+	memcpy(z,M6,152);  memcpy(&M6[1],z,152);  M6[0] = m;
+	memcpy(z,N6,152);  memcpy(&N6[1],z,152);  N6[0] = n;
+	memcpy(z,O6,152);  memcpy(&O6[1],z,152);  O6[0] = o;
+	memcpy(z,P6,152);  memcpy(&P6[1],z,152);  P6[0] = p;
+	//memcpy(z,Q6,152);  memcpy(&Q6[1],z,152);  K6[0] = q;
+
+}
+
+
+
 void pipeline_state_printf(){
 	for(int i=19;i>=0;i--){
 		printf("IFU:   pc:%llx  inst:%08llx  valid:%lld  ready:%lld\n",A[i],B[i],C[i],D[i]);
@@ -168,6 +213,8 @@ void pipeline_state_printf(){
 		printf("IDU:   pc:%llx  inst:%08llx  valid:%lld\n",A1[i],B1[i],C1[i]);
 		printf("EXU:   pc:%llx  inst:%08llx  valid:%lld\n",A2[i],B2[i],C2[i]);
 		printf("MEM:   pc:%llx  inst:%08llx  valid:%lld   rdata:%llx  block:%llx\n",A3[i],B3[i],C3[i],D3[i],E3[i]);
+		printf("DCACHE:pc:%llx  dout:%08llx  valid:%lld  ready:%lld   line_mem_prev:%016llx%016llx  index:%llx  index_prev:%llx\n",A5[i],B5[i],C5[i],D5[i],E5[i],F5[i],G5[i],H5[i]);
+		printf("offset:%llx  offset_prev:%llx  way_hit:%llx  way_hit_prev:%llx  cen:%llb  wen:%lld  line_mem:%016llx%016llx \n",I5[i],J5[i],K5[i],L5[i],M5[i],N5[i],O5[i],P5[i]);
 		printf("WBU:   pc:%llx  inst:%08llx  valid:%lld\n",A4[i],B4[i],C4[i]);
 
 		printf("\n");
@@ -181,5 +228,6 @@ void EXU_state_trace (long long a,long long b,long long c,long long d,long long 
 void MEM_state_trace (long long a,long long b,long long c,long long d,long long e,long long f){}
 void WBU_state_trace (long long a,long long b,long long c,long long d,long long e,long long f){}
 void ICACHE_state_trace (long long a,long long b,long long c,long long d,long long e,long long f,long long g,long long h,long long i,long long j,long long k,long long l,long long m,long long n,long long o,long long p){}
+void DCACHE_state_trace (long long a,long long b,long long c,long long d,long long e,long long f,long long g,long long h,long long i,long long j,long long k,long long l,long long m,long long n,long long o,long long p){}
 void pipeline_state_printf(){}
 #endif
