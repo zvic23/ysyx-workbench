@@ -101,7 +101,7 @@ extern "C" void pmem_read_dcache_high64(long long raddr, long long *rdata) {
 	}
 	else if(raddr == 0xa0000060){                    //keyboard support
 
-     		memset(rdata,1,8);
+     		memset(rdata,2,8);
 		return;
 	}
   }
