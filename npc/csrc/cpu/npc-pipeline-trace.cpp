@@ -213,8 +213,8 @@ void pipeline_state_printf(){
 		printf("IDU:   pc:%llx  inst:%08llx  valid:%lld\n",A1[i],B1[i],C1[i]);
 		printf("EXU:   pc:%llx  inst:%08llx  valid:%lld\n",A2[i],B2[i],C2[i]);
 		printf("MEM:   pc:%llx  inst:%08llx  valid:%lld   rdata:%llx  block:%llx\n",A3[i],B3[i],C3[i],D3[i],E3[i]);
-		printf("DCACHE:pc:%llx  dout:%08llx  valid:%lld  ready:%lld   line_mem_prev:%016llx%016llx  index:%llx  index_prev:%llx\n",A5[i],B5[i],C5[i],D5[i],E5[i],F5[i],G5[i],H5[i]);
-		printf("offset:%llx  offset_prev:%llx  way_hit:%llx  way_hit_prev:%llx  cen:%llb  wen:%lld  line_mem:%016llx%016llx \n",I5[i],J5[i],K5[i],L5[i],M5[i],N5[i],O5[i],P5[i]);
+		printf("DCACHE:pc:%llx  dout:%08llx  valid:%lld  ready:%lld   line_mem_prev:%016llx%016llx  index:%llx  index_prev:%llx\n",A6[i],B6[i],C6[i],D6[i],E6[i],F6[i],G6[i],H6[i]);
+		printf("offset:%llx  offset_prev:%llx  way_hit:%llx  way_hit_prev:%llx  cen:%llb  wen:%lld  line_mem:%016llx%016llx \n",I6[i],J6[i],K6[i],L6[i],M6[i],N6[i],O6[i],P6[i]);
 		printf("WBU:   pc:%llx  inst:%08llx  valid:%lld\n",A4[i],B4[i],C4[i]);
 
 		printf("\n");
