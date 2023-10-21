@@ -59,6 +59,58 @@ extern "C" void pmem_read_icache_high64(long long raddr, long long *rdata) {
   }
 }
 
+int skip_difftest=0;
+
+extern uint64_t time_init;
+extern uint32_t i8042_data_io_handler();
+extern "C" void pmem_read_dcache_low64(long long raddr, long long *rdata) {
+  // 总是读取地址为`raddr & ~0xfull`的8字节返回给`rdata`
+
+  if(raddr>=0x80000000){
+	if(raddr == 0xa0000048){                         //rtc support
+		skip_difftest=1;
+		//printf("rtc     \n");
+		struct timeval time;
+		gettimeofday(&time,NULL);
+		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec - time_init;
+		//printf("time:%lx\n",time_rtc);
+		memcpy(rdata, &time_rtc, 8);
+		return;
+	}
+	else if(raddr == 0xa0000060){                    //keyboard support
+		skip_difftest=1;
+		//printf("key     \n");
+		uint64_t key = i8042_data_io_handler();
+		//if(key)printf("key = %lx\n",key);
+		memcpy(rdata, &key, 8);
+		return;
+	}
+  }
+  if(raddr>=0x80000000){
+  	long long raddr_set = raddr & ~0xfull;
+	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
+  }
+}
+
+extern "C" void pmem_read_dcache_high64(long long raddr, long long *rdata) {
+  // 总是读取地址为`raddr & ~0xfull`的8字节返回给`rdata`
+  if(raddr>=0x80000000){
+	if(raddr == 0xa0000048){                         //rtc support
+
+		return;
+	}
+	else if(raddr == 0xa0000060){                    //keyboard support
+
+		return;
+	}
+  }
+  if(raddr>=0x80000000){
+  	long long raddr_set = raddr & ~0xfull;
+	raddr_set |= 0b1000ull;
+	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
+  }
+}
+
 extern Vysyx_22050612_npc* top;
 extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
@@ -82,10 +134,10 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
   }
 }
 
-int skip_difftest=0;
-
-extern uint64_t time_init;
-extern uint32_t i8042_data_io_handler();
+//int skip_difftest=0;
+//
+//extern uint64_t time_init;
+//extern uint32_t i8042_data_io_handler();
 extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){

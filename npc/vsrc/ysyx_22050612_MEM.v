@@ -151,7 +151,7 @@ assign dcache_addr = raddr;
 wire [63:0]dcache_dout;
 assign rdata = dcache_dout;
 
-ysyx_22050612_DCACHE dcache (clk, rst, dcache_valid, dcache_ready, dcache_addr, dcache_dout);
+ysyx_22050612_DCACHE dcache (clk, rst, dcache_valid, dcache_ready, dcache_addr, dcache_dout  ,  waddr);
 
 
 
