@@ -1,7 +1,7 @@
-//import "DPI-C" function void pmem_read_icache_low64(
-//  input longint raddr, output longint rdata);
-//import "DPI-C" function void pmem_read_icache_high64(
-//  input longint raddr, output longint rdata);
+import "DPI-C" function void pmem_read_dcache_low64(
+  input longint raddr, output longint rdata);
+import "DPI-C" function void pmem_read_dcache_high64(
+  input longint raddr, output longint rdata);
 //import "DPI-C" function void icache_data(int hit);
 //import "DPI-C" function void ICACHE_state_trace (longint a,longint b,longint c,longint d,longint e,longint f,longint g,longint h,longint i,longint j,longint k,longint l,longint m,longint n,longint o,longint p); //16 parameters
 
@@ -67,15 +67,15 @@ always @(posedge clk) begin
 		end
 	end
 	else if( (!cen0|!cen1|!cen2|!cen3)&&!wen  ) begin
-	//else if(valid && way_hit==4'b0 && ready_IF_ID) begin
+	    if(addr >= 64'ha0000000) begin   //暂时用来维持设备和dcache的一致性
 		case({!cen3,!cen2,!cen1,!cen0})
-		//case(random_cnt)
 			4'b0001: begin v0[index] <= 1'b1; tag0[index] <= addr[63:10]; end 
 			4'b0010: begin v1[index] <= 1'b1; tag1[index] <= addr[63:10]; end
 			4'b0100: begin v2[index] <= 1'b1; tag2[index] <= addr[63:10]; end
 			4'b1000: begin v3[index] <= 1'b1; tag3[index] <= addr[63:10]; end
 			default: begin $display("icache all misses!!!!!!!!!!!!!!!!!!!!!!!!\n\n");end
 		endcase
+	    end
 	end
 
 	if(waddr!=0) begin
@@ -179,8 +179,8 @@ assign dout =  addr[3] ?  line_read[127:64] : line_read[63:0] ;
 
 wire [127:0]line_mem;
 always @(*) begin
-		pmem_read_icache_low64 (addr, line_mem[63:0]);
-		pmem_read_icache_high64(addr, line_mem[127:64]);
+		pmem_read_dcache_low64 (addr, line_mem[63:0]);
+		pmem_read_dcache_high64(addr, line_mem[127:64]);
 end
 
 /*
