@@ -68,7 +68,8 @@ extern "C" void pmem_read_dcache_low64(long long raddr, long long *rdata) {
 
   if(raddr>=0x80000000){
 	if(raddr == 0xa0000048){                         //rtc support
-return;
+     		memset(rdata,0,8);
+		return;
 	}
 	else if(raddr == 0xa0000060){                    //keyboard support
 		skip_difftest=1;
@@ -100,6 +101,7 @@ extern "C" void pmem_read_dcache_high64(long long raddr, long long *rdata) {
 	}
 	else if(raddr == 0xa0000060){                    //keyboard support
 
+     		memset(rdata,0,8);
 		return;
 	}
   }
