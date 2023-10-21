@@ -78,7 +78,8 @@ assign way_hit[1] = v1[index] && (tag1[index] == addr[63:10]);
 assign way_hit[2] = v2[index] && (tag2[index] == addr[63:10]);
 assign way_hit[3] = v3[index] && (tag3[index] == addr[63:10]);
 
-
+wire not_device;
+assign not_device = (addr <= 64'h8fffffff);    //暂时用来调整一致性
 
 wire [127:0]dout0, dout1, dout2, dout3;
 wire cen0, cen1, cen2, cen3;
@@ -89,11 +90,11 @@ wire [127:0]din;
 
 assign addr_sram = index;
 assign bwen = 128'h0;
-assign cen0 = ~( ( valid&&!ready) ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign cen1 = ~( ( valid&&!ready) ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign cen2 = ~( ( valid&&!ready) ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign cen3 = ~( ( valid&&!ready) ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign  wen = ~( ( valid&&!ready) && (way_hit == 4'b0))   ;
+assign cen0 = ~( ( valid&&!ready && not_device) ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign cen1 = ~( ( valid&&!ready && not_device) ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign cen2 = ~( ( valid&&!ready && not_device) ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign cen3 = ~( ( valid&&!ready && not_device) ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign  wen = ~( ( valid&&!ready && not_device) && (way_hit == 4'b0))   ;
 assign  din = line_mem;
 
 
