@@ -60,7 +60,7 @@ always @(posedge clk) begin
 		reg_raddr <= 64'b0;
 		reg_waddr <= 64'b0;
 	end
-	else if(ready_EX_MEM) begin
+	else if(!ready_EX_MEM) begin
 		WB_reg_valid <= WB_reg_valid; 
 		WB_reg_pc    <= WB_reg_pc    ;
 		WB_reg_inst  <= WB_reg_inst  ;
