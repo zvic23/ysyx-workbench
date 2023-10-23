@@ -470,7 +470,7 @@ always @(*) begin
     3'd4  : rdata_1byte=rdata[39:32];
     3'd5  : rdata_1byte=rdata[47:40];
     3'd6  : rdata_1byte=rdata[55:48];
-    3'd7  : rdata_1byte=rdata[63:56];
+//    3'd7  : rdata_1byte=rdata[63:56];
     default: rdata_1byte=8'b0;
 	endcase
 
