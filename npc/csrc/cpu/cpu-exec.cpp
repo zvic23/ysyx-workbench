@@ -206,24 +206,46 @@ void one_cycle(){
   device_update();
 }
 
+
+//ICACHE data collect
+long long hits = 0;
+long long miss = 0;
+
+void icache_data(int hit){
+	if(hit){
+		hits++;
+	}else{
+		miss++;
+	}
+}
+
+
+
+
+
 static uint64_t g_timer = 0; // unit: us
 static uint64_t g_cycle = 0; //  cycle
 
 void program_exec_statistics(){
+           printf(GREEN "ICACHE hit rate : %lld%%    hit:%lld   miss:%lld\n" NONE,hits*100/(hits+miss),hits,miss);
+
   	 struct timeval time_end;                   //get the time when program end
   	 gettimeofday(&time_end,NULL);
   	 g_timer = (time_end.tv_sec*1000000)+time_end.tv_usec - time_init;
 	 printf(BLUE "host time spent = %ld us\n" NONE,g_timer);
 	   printf(BLUE "total guest cycle spent = %ld \n" NONE,g_cycle);
+	   printf(BLUE "total guest cycle frequence = %ld Hz\n" NONE,g_cycle*1000000/g_timer);
+
 	 printf(BLUE "total guest instructions = %ld \n" NONE,g_nr_guest_inst);
 	   printf(BLUE "guest ipc  = 0.%ld \n" NONE,g_nr_guest_inst*1000/g_cycle);
 	 printf(BLUE "simulation frequency = %ld inst/s\n" NONE,g_nr_guest_inst * 1000000 / g_timer);
+
+
 	 printf("execute has finished, please open npc again!\n");
 }
 
 
-
-//int itrace_si = 0;
+extern void pipeline_state_printf();
 void execute(int n){
   for(uint64_t i=0;i<n;i++){
 	  if(npc_state == END || npc_state == QUIT){
@@ -236,6 +258,7 @@ void execute(int n){
           }
   	  else if(npc_state == ABORT){
   	  //else if(end == 2){
+	          pipeline_state_printf();
 		  printf(RED "ABORT\n" NONE);
 		  program_exec_statistics();
 		  iringbuf_output();

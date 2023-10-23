@@ -7,6 +7,7 @@ import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_regi
 //  input longint raddr, output longint rdata);
 //import "DPI-C" function void pmem_write(
 //  input longint waddr, input longint wdata, input byte wmask);
+import "DPI-C" function void EXU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
 
 
 module ysyx_22050612_EXU(
@@ -28,7 +29,6 @@ input [ 4:0]rs1,
 input [ 4:0]rs2,
 */
 input [23:0]opcode_in,
-//input [23:0]opcode,
 input [63:0]src_A,
 input [63:0]src_B,
 input [63:0]imm_in,
@@ -37,10 +37,8 @@ input [63:0]imm_in,
 //input [ 4:0]rd,
 
 
-//input [63:0]pc,
 
 
-//output [63:0]dnpc,
 output reg [63:0]dnpc,
 output pc_update,
 
@@ -65,7 +63,7 @@ output wen_mepc,
 output wen_mcause,
 output wen_mstatus,
 
-input [63:0] gpr[31:0],
+input [63:0] gpr[31:0],    //only for ebreak control
 
 
 
@@ -420,6 +418,7 @@ assign src_B_EX_MEM = src2;
 
 
 always @(negedge clk) begin
+	EXU_state_trace(EX_reg_pc, {32'b0,EX_reg_inst}, {63'b0,EX_reg_valid}, 64'b0,64'b0,64'b0 );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x %x   dnpc:%x  opcode:%d\n",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , WB_reg_wdata,  EX_inst_hit, WB_inst_hit, rs1_EX_WB_match , rs2_EX_WB_match,dnpc,opcode);
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , MEM_reg_aluoutput,  EX_inst_hit, MEM_inst_hit, rs1_EX_MEM_match );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x",EX_reg_pc,EX_reg_inst,EX_reg_valid,EX_reg_src_a,EX_reg_src_b,EX_reg_imm);
@@ -912,15 +911,15 @@ always @(*) begin
     case (opcode)
     //24'h300  : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
     //24'h300  : pc_update= EX_reg_valid ? (EX_reg_inst[31]==1'b0 ? 1'b1 : 1'b0) : 1'b0;
-    24'd4    : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
-    24'd5    : pc_update= EX_reg_valid ? ( ((src1==src2&&EX_reg_inst[31]==0)||(src1!=src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
-    24'd6    : pc_update= EX_reg_valid ? ( ((src1!=src2&&EX_reg_inst[31]==0)||(src1==src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
-    24'd7    : pc_update= EX_reg_valid ? ( (($signed(src1) <$signed(src2)&&EX_reg_inst[31]==0)||($signed(src1)>=$signed(src2)&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
-    24'd8    : pc_update= EX_reg_valid ? ( (($signed(src1)>=$signed(src2)&&EX_reg_inst[31]==0)||($signed(src1) <$signed(src2)&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
-    24'd9    : pc_update= EX_reg_valid ? ( ((src1 <src2&&EX_reg_inst[31]==0)||(src1>=src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
-    24'd10   : pc_update= EX_reg_valid ? ( ((src1>=src2&&EX_reg_inst[31]==0)||(src1 <src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
-    24'h200000: pc_update=EX_reg_valid ? 1'b1 : 1'b0;   
-    24'h500000: pc_update=EX_reg_valid ? 1'b1 : 1'b0;             
+    24'd4    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? 1'b1 : 1'b0;
+    24'd5    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( ((src1==src2&&EX_reg_inst[31]==0)||(src1!=src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
+    24'd6    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( ((src1!=src2&&EX_reg_inst[31]==0)||(src1==src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
+    24'd7    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( (($signed(src1) <$signed(src2)&&EX_reg_inst[31]==0)||($signed(src1)>=$signed(src2)&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
+    24'd8    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( (($signed(src1)>=$signed(src2)&&EX_reg_inst[31]==0)||($signed(src1) <$signed(src2)&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
+    24'd9    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( ((src1 <src2&&EX_reg_inst[31]==0)||(src1>=src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
+    24'd10   : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( ((src1>=src2&&EX_reg_inst[31]==0)||(src1 <src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
+    24'h200000: pc_update=(EX_reg_valid&&ready_EX_MEM) ? 1'b1 : 1'b0;   
+    24'h500000: pc_update=(EX_reg_valid&&ready_EX_MEM) ? 1'b1 : 1'b0;             
     default: pc_update=1'b0;
     endcase
 

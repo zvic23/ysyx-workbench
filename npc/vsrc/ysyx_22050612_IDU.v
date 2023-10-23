@@ -1,4 +1,4 @@
-//import "DPI-C" function void ebreak (int r);
+import "DPI-C" function void IDU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
 
 module ysyx_22050612_IDU(
 input clk,
@@ -8,8 +8,6 @@ input       valid_IF_ID,
 output      ready_IF_ID,
 input [63:0]pc_IF_ID  ,
 input [31:0]inst_IF_ID,
-//input [31:0]inst,
-input [31:0]gpr_busy,
 input [63:0]mtvec,
 input [63:0]mepc,
 input [63:0]mcause,
@@ -28,11 +26,8 @@ output [ 4:0]rs2,
 */
 output reg [63:0]src_A,
 output reg [63:0]src_B,
-output reg [63:0]imm,
+output reg [63:0]  imm,
 //output reg [ 7:0]ALU_mode,
-
-output     [ 4:0]rd,                //these two lines for board
-output     wen,
 
 
 output [23:0]opcode,
@@ -41,17 +36,83 @@ input      ready_ID_EX,
 output [63:0]pc_ID_EX,
 output [31:0]inst_ID_EX,
 
+
+
 input EX_reg_valid,
 input [31:0]EX_reg_inst,
 
 input branch_flush
 );
 
+
+assign ready_IF_ID = ~idu_fifo_alm_full;
+//assign ready_IF_ID = ID_block ? 1'b0 : ready_ID_EX;
+
+
+//*************************   FIFO    ********************************
+wire id_ready;
+assign id_ready = ID_block ? 1'b0 : ready_ID_EX;
+
+wire idu_fifo_wen;
+assign idu_fifo_wen = (idu_fifo_empty && id_ready) ? 1'b0 : valid_IF_ID;
+
+wire idu_fifo_ren;
+assign idu_fifo_ren = id_ready;
+
+wire idu_fifo_rst;
+assign idu_fifo_rst = ~(rst || branch_flush);
+
+wire idu_fifo_alm_full;
+wire idu_fifo_full;
+wire idu_fifo_alm_empty;
+wire idu_fifo_empty;
+wire [31:0]idu_fifo_rdata_inst;
+wire [63:0]idu_fifo_rdata_pc;
+
+ysyx_22050612_FIFO #(32,16,12,2) idu_inst_fifo (clk, idu_fifo_rst, idu_fifo_wen, inst_IF_ID, idu_fifo_alm_full, idu_fifo_full, idu_fifo_ren, idu_fifo_rdata_inst, idu_fifo_alm_empty, idu_fifo_empty);
+ysyx_22050612_FIFO #(64,16,12,2) idu_pc_fifo (clk, idu_fifo_rst, idu_fifo_wen, pc_IF_ID, idu_fifo_alm_full, idu_fifo_full, idu_fifo_ren, idu_fifo_rdata_pc, idu_fifo_alm_empty, idu_fifo_empty);
+
+
+
+
 //*************************  pipeline ********************************
 reg       ID_reg_valid;
 reg [63:0]ID_reg_pc   ;
 reg [31:0]ID_reg_inst ;
 
+always @(posedge clk) begin
+	if(rst || branch_flush) begin
+		ID_reg_valid <= 1'b0;
+		ID_reg_pc    <= 64'b0;
+		ID_reg_inst  <= 32'b0;
+	end
+	else if(!id_ready)begin
+		ID_reg_valid <= ID_reg_valid;
+		ID_reg_pc    <= ID_reg_pc;
+		ID_reg_inst  <= ID_reg_inst ;
+	end
+	else if(idu_fifo_empty && ~valid_IF_ID)begin
+		ID_reg_valid <= 1'b0;
+		ID_reg_pc    <= 64'b0;
+		ID_reg_inst  <= 32'b0;
+	end
+	else if(idu_fifo_empty && valid_IF_ID)begin
+		ID_reg_valid <= valid_IF_ID;
+		ID_reg_pc    <= pc_IF_ID;
+		ID_reg_inst  <= inst_IF_ID;
+	end
+	else begin
+		ID_reg_valid <= 1'b1;
+		ID_reg_pc    <= idu_fifo_rdata_pc;
+		ID_reg_inst  <= idu_fifo_rdata_inst;
+	end
+end
+
+assign valid_ID_EX = (ID_block==1'b0) ? ID_reg_valid :  1'b0;
+assign pc_ID_EX    = (ID_block==1'b0) ? ID_reg_pc    : 64'b0;
+assign inst_ID_EX  = (ID_block==1'b0) ? ID_reg_inst  : 32'b0;
+
+/*
 always @(posedge clk) begin
 	if(rst || branch_flush) begin
 		ID_reg_valid <= 1'b0;
@@ -73,66 +134,8 @@ end
 assign valid_ID_EX = (ID_block==1'b0) ? ID_reg_valid :  1'b0;
 assign pc_ID_EX    = (ID_block==1'b0) ? ID_reg_pc    : 64'b0;
 assign inst_ID_EX  = (ID_block==1'b0) ? ID_reg_inst  : 32'b0;
+*/
 
-
-
-
-//reg wen;
-always @(*) begin
-//gpr control
-	case (opcode)
-    24'h4000 : wen=1'b1;
-    24'h5000 : wen=1'b1;
-    24'h6000 : wen=1'b1;
-    24'h7000 : wen=1'b1;
-    24'h8000 : wen=1'b1;
-    24'h9000 : wen=1'b1;
-    24'h10000: wen=1'b1;
-    24'h12000: wen=1'b1;
-    24'h13000: wen=1'b1;
-    24'h14000: wen=1'b1;
-    24'h15000: wen=1'b1;
-    24'h16000: wen=1'b1;
-    24'h17000: wen=1'b1;
-    24'h18000: wen=1'b1;
-    24'h19000: wen=1'b1;
-    24'h1a000: wen=1'b1;
-    24'h1b000: wen=1'b1;
-    24'h1d000: wen=1'b1;
-    24'h21000: wen=1'b1;
-    24'h22000: wen=1'b1;
-    24'h24000: wen=1'b1;
-    24'h25000: wen=1'b1;
-    24'h26000: wen=1'b1;
-    24'h27000: wen=1'b1;
-    24'h28000: wen=1'b1;
-    24'h29000: wen=1'b1;
-    24'h100  : wen=1'b1;
-    24'h200  : wen=1'b1;
-    24'h300  : wen=1'b1;
-    24'h400  : wen=1'b1;
-    24'h800  : wen=1'b1;
-    24'hc00  : wen=1'b1;
-    24'd4    : wen=1'b1;
-    24'd11   : wen=1'b1;
-    24'd12   : wen=1'b1;
-    24'd13   : wen=1'b1;
-    24'd14   : wen=1'b1;
-    24'd15   : wen=1'b1;
-    24'd19   : wen=1'b1;
-    24'd20   : wen=1'b1;
-    24'd21   : wen=1'b1;
-    24'd22   : wen=1'b1;
-    24'd23   : wen=1'b1;
-    24'd24   : wen=1'b1;
-    24'd41   : wen=1'b1;
-    24'd42   : wen=1'b1;
-    24'd47   : wen=1'b1;
-    24'd49   : wen=1'b1;
-    24'd50   : wen=1'b1;
-    default:  wen=1'b0;
-        endcase
-end
 
 
 
@@ -145,24 +148,30 @@ assign inst = ID_reg_valid ? ID_reg_inst : 32'b0;
 
 always @(negedge clk) begin
 	//$display("ID   pc:%x   inst:%x   valid:%x",ID_reg_pc,ID_reg_inst,ID_reg_valid);
+	IDU_state_trace(ID_reg_pc, {32'b0,ID_reg_inst}, {63'b0,ID_reg_valid}, 64'b0,64'b0,64'b0 );
+
 end
 
 
 //load interlock
 
-reg EX_loading;
+wire EX_loading;
+assign EX_loading = EX_reg_inst[6:0] == 7'b0000011;   //load inst
 wire rs1_waiting;
 wire rs2_waiting;
-wire [3:0]rs2_block_checking;
+//wire [3:0]rs2_block_checking;
+wire rs2_block_checking;
+assign rs2_block_checking = (ID_reg_inst[6:0] == 7'b1100111) || (ID_reg_inst[6:0] == 7'b1100011) || (ID_reg_inst[6:0] == 7'b0110011) || (ID_reg_inst[6:0] == 7'b0111011) || (ID_reg_inst[6:0] == 7'b1101111);  //include jal, load, jalr, branch, +-*/ and shift.
 
 assign rs1_waiting = EX_reg_inst[11:7] == ID_reg_inst[19:15];
 assign rs2_waiting = EX_reg_inst[11:7] == ID_reg_inst[24:20];
-assign rs2_block_checking[0] = ID_reg_valid ? (ID_reg_inst[6:0] == 7'b1101111) : 1'b0;
+//assign rs2_block_checking[0] = ID_reg_valid ? (ID_reg_inst[6:0] == 7'b1101111) : 1'b0;
 
-assign ID_block = ID_reg_valid && EX_reg_valid && EX_loading && (rs1_waiting ||(rs2_waiting && (rs2_block_checking!=4'b0)));
+assign ID_block = ID_reg_valid && EX_reg_valid && EX_loading && (rs1_waiting ||(rs2_waiting && (rs2_block_checking)));
 
 always@(*) begin
 	//if(EX_reg_valid)begin
+	/*
 		case ({EX_reg_inst[14:12],EX_reg_inst[6:0]})
 			10'b000_0000011:  EX_loading = 1'b1;  //lb
 			10'b001_0000011:  EX_loading = 1'b1;  //lh
@@ -177,8 +186,10 @@ always@(*) begin
 //			10'b011_0100011:  EX_loading = 1'b1;  //sd
 		        default :         EX_loading = 1'b0;
 		endcase
+		*/
 	//end
 	//if(ID_reg_valid)begin
+	/*
 		case ({ID_reg_inst[14:12],ID_reg_inst[6:0]})
     			10'b000_1100111:  rs2_block_checking[1]= 1'd1   ;    //jalr
     			10'b000_1100011:  rs2_block_checking[1]= 1'd1   ;    //beq
@@ -218,6 +229,7 @@ always@(*) begin
 			default :                rs2_block_checking[2]= 1'd0  ;
 		endcase
 	//end
+	*/
 end
 
 
@@ -236,13 +248,13 @@ wire [63:0]imm_U;
 wire [63:0]imm_J;
 wire [63:0]imm_B;
 wire [63:0]imm_S;
-wire [ 5:0]shamt;
+//wire [ 5:0]shamt;
 
 
-assign rd = inst[11: 7];
+//assign rd = inst[11: 7];
 assign rs1= inst[19:15];
 assign rs2= inst[24:20];
-assign shamt= inst[25:20];
+//assign shamt= inst[25:20];
 assign imm_I = (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]};
 assign imm_U = (inst[31]==1'b1)?{{32{1'b1}},inst[31:12],{12{1'b0}}}:{{32{1'b0}},inst[31:12],{12{1'b0}}};
 assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
@@ -260,127 +272,8 @@ assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},
 
 wire ID_block;
 //assign ID_block = src1_conflict || src2_conflict;
-assign ready_IF_ID = ID_block ? 1'b0 : ready_ID_EX;
 
 
-
-reg src1_conflict;
-reg src2_conflict;
-
-always @(*) begin
-//The input of ALU
-    case (opcode)
-    24'h4000 : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h5000 : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h6000 : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h7000 : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h8000 : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h9000 : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h10000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h12000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h13000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h14000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h15000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h16000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h17000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h18000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h19000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h1a000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h1b000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-
-    24'h400  : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h800  : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'hc00  : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd4    : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd5    : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd6    : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd7    : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd8    : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd9    : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd10   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd11   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd12   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd13   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd14   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd15   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd16   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd17   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd18   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd19   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd20   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd21   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd22   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd23   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd24   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd41   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd42   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd43   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd47   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd49   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'd50   : src1_conflict = gpr_busy[rs1] == 1'b1; 
-
-//mul / div
-    24'h1d000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h21000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h22000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h24000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h25000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h26000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h27000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h28000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-    24'h29000: src1_conflict = gpr_busy[rs1] == 1'b1; 
-
-    default :  src1_conflict =  1'b0; 
-    endcase
-
-    case (opcode)
-    24'h4000 : src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'h5000 : src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'h6000 : src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'h7000 : src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'h8000 : src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'h9000 : src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'h10000: src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'h12000: src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'h13000: src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'h17000: src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'h18000: src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'h19000: src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'h1a000: src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'h1b000: src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'd5    : src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'd6    : src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'd7    : src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'd8    : src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'd9    : src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'd10   : src2_conflict = gpr_busy[rs2] == 1'b1;  
-
-
-//sd  sb  sh  sw have imm and two src, and the same time alu just use src1 and
-//imm, so it need to add src2 to check conflict
-    24'd16   : src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'd17   : src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'd18   : src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'd43   : src2_conflict = gpr_busy[rs2] == 1'b1; 
-
-
-
-//    24'd50   : src_B=src_csr;
-
-//mul / div
-    24'h1d000: src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'h21000: src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'h22000: src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'h24000: src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'h25000: src2_conflict = gpr_busy[rs2] == 1'b1; 
-    24'h26000: src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'h27000: src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'h28000: src2_conflict = gpr_busy[rs2] == 1'b1;  
-    24'h29000: src2_conflict = gpr_busy[rs2] == 1'b1;  
-
-    default :  src2_conflict =  1'b0;  
-    endcase
-end
 
 
 
@@ -595,6 +488,7 @@ end
 
 assign src_A = gpr[rs1];
 //assign src_B = gpr[rs2];
+//assign src_B = ID_reg_inst[6:0] == 7'b1110011 ? (ID_reg_inst[14:12] == 3'b0 ? 
 
 always @(*) begin
 ////src_A
@@ -730,20 +624,206 @@ end
 
 
 
-
-
-
 assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
 //always @(posedge clk) begin
 //	if(inst==32'h00100073) ebreak(1);
 //end
 
 
-
-
-//  always @(posedge clk) begin
-//    $display("%x,%d,%d",inst,opcode,rd);
-//  end
-
-
 endmodule
+
+
+/*
+reg src1_conflict;
+reg src2_conflict;
+
+always @(*) begin
+//The input of ALU
+    case (opcode)
+    24'h4000 : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h5000 : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h6000 : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h7000 : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h8000 : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h9000 : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h10000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h12000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h13000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h14000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h15000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h16000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h17000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h18000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h19000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h1a000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h1b000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+
+    24'h400  : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h800  : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'hc00  : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd4    : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd5    : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd6    : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd7    : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd8    : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd9    : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd10   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd11   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd12   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd13   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd14   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd15   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd16   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd17   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd18   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd19   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd20   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd21   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd22   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd23   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd24   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd41   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd42   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd43   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd47   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd49   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'd50   : src1_conflict = gpr_busy[rs1] == 1'b1; 
+
+//mul / div
+    24'h1d000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h21000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h22000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h24000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h25000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h26000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h27000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h28000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+    24'h29000: src1_conflict = gpr_busy[rs1] == 1'b1; 
+
+    default :  src1_conflict =  1'b0; 
+    endcase
+
+    case (opcode)
+    24'h4000 : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'h5000 : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'h6000 : src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'h7000 : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'h8000 : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'h9000 : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'h10000: src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'h12000: src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'h13000: src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'h17000: src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'h18000: src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'h19000: src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'h1a000: src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'h1b000: src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'd5    : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'd6    : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'd7    : src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'd8    : src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'd9    : src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'd10   : src2_conflict = gpr_busy[rs2] == 1'b1;  
+
+
+//sd  sb  sh  sw have imm and two src, and the same time alu just use src1 and
+//imm, so it need to add src2 to check conflict
+    24'd16   : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'd17   : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'd18   : src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'd43   : src2_conflict = gpr_busy[rs2] == 1'b1; 
+
+
+
+//    24'd50   : src_B=src_csr;
+
+//mul / div
+    24'h1d000: src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'h21000: src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'h22000: src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'h24000: src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'h25000: src2_conflict = gpr_busy[rs2] == 1'b1; 
+    24'h26000: src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'h27000: src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'h28000: src2_conflict = gpr_busy[rs2] == 1'b1;  
+    24'h29000: src2_conflict = gpr_busy[rs2] == 1'b1;  
+
+    default :  src2_conflict =  1'b0;  
+    endcase
+end
+*/
+
+/*
+//reg wen;
+always @(*) begin
+//gpr control
+	case (opcode)
+    24'h4000 : wen=1'b1;
+    24'h5000 : wen=1'b1;
+    24'h6000 : wen=1'b1;
+    24'h7000 : wen=1'b1;
+    24'h8000 : wen=1'b1;
+    24'h9000 : wen=1'b1;
+    24'h10000: wen=1'b1;
+    24'h12000: wen=1'b1;
+    24'h13000: wen=1'b1;
+    24'h14000: wen=1'b1;
+    24'h15000: wen=1'b1;
+    24'h16000: wen=1'b1;
+    24'h17000: wen=1'b1;
+    24'h18000: wen=1'b1;
+    24'h19000: wen=1'b1;
+    24'h1a000: wen=1'b1;
+    24'h1b000: wen=1'b1;
+    24'h1d000: wen=1'b1;
+    24'h21000: wen=1'b1;
+    24'h22000: wen=1'b1;
+    24'h24000: wen=1'b1;
+    24'h25000: wen=1'b1;
+    24'h26000: wen=1'b1;
+    24'h27000: wen=1'b1;
+    24'h28000: wen=1'b1;
+    24'h29000: wen=1'b1;
+    24'h100  : wen=1'b1;
+    24'h200  : wen=1'b1;
+    24'h300  : wen=1'b1;
+    24'h400  : wen=1'b1;
+    24'h800  : wen=1'b1;
+    24'hc00  : wen=1'b1;
+    24'd4    : wen=1'b1;
+    24'd11   : wen=1'b1;
+    24'd12   : wen=1'b1;
+    24'd13   : wen=1'b1;
+    24'd14   : wen=1'b1;
+    24'd15   : wen=1'b1;
+    24'd19   : wen=1'b1;
+    24'd20   : wen=1'b1;
+    24'd21   : wen=1'b1;
+    24'd22   : wen=1'b1;
+    24'd23   : wen=1'b1;
+    24'd24   : wen=1'b1;
+    24'd41   : wen=1'b1;
+    24'd42   : wen=1'b1;
+    24'd47   : wen=1'b1;
+    24'd49   : wen=1'b1;
+    24'd50   : wen=1'b1;
+    default:  wen=1'b0;
+        endcase
+end
+*/
+
+/*   npc  board
+reg [31:0]gpr_busy;
+wire wen;
+always@(posedge clk) begin
+	if(rst) begin
+		gpr_busy <= 32'b0;
+	end
+	if(gpr_rd != 5'b0 && gpr_wen == 1'b1 ) begin
+		gpr_busy[gpr_rd] <= 1'b0;
+	end
+	if(rd != 5'b0 && wen == 1'b1 && ready_IF_ID == 1'b1 ) begin
+		gpr_busy[rd]     <= 1'b1;
+	end
+end
+*/

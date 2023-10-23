@@ -3,6 +3,8 @@ import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
 import "DPI-C" function void pmem_write(
   input longint waddr, input longint wdata, input byte wmask);
+import "DPI-C" function void MEM_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
+
 
 
 module ysyx_22050612_MEM(
@@ -124,9 +126,9 @@ assign aluoutput = MEM_reg_valid ? MEM_reg_aluoutput : 64'b0;
 reg [63:0]src2;
 //assign src2 = MEM_reg_valid ? MEM_reg_src2 : 64'b0;
 
-assign reg_wr_wen   = MEM_reg_valid ? wen       : 1'b0;
-assign reg_wr_ID    = MEM_reg_valid ? MEM_reg_inst[11:7] : 5'b0;
-assign reg_wr_value = MEM_reg_valid ? wdata_reg : 64'b0;
+assign reg_wr_wen   = (MEM_reg_valid&&!MEM_block) ? wen       : 1'b0;
+assign reg_wr_ID    = (MEM_reg_valid&&!MEM_block) ? MEM_reg_inst[11:7] : 5'b0;
+assign reg_wr_value = (MEM_reg_valid&&!MEM_block) ? wdata_reg : 64'b0;
 
 
 //output
@@ -135,13 +137,26 @@ assign pc_MEM_WB    = (MEM_block==1'b0) ? MEM_reg_pc    : 64'b0;
 assign inst_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_inst  : 32'b0;
 
 wire MEM_block;
-assign MEM_block = 1'b0;
+assign MEM_block = MEM_reg_valid && (MEM_reg_inst[6:0]==7'b0000011) && !dcache_ready;
+//assign MEM_block = 1'b0;
 assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
 
 
+//**************  DCACHE  ******************************
+wire dcache_valid;
+wire dcache_ready;
+assign dcache_valid = MEM_reg_valid && (MEM_reg_inst[6:0]==7'b0000011);
+wire [63:0]dcache_addr;
+assign dcache_addr = raddr;
+wire [63:0]dcache_dout;
+assign rdata = dcache_dout;
+
+ysyx_22050612_DCACHE dcache (clk, rst, dcache_valid, dcache_ready, dcache_addr, dcache_dout  ,  waddr);
 
 
-//load interlock
+
+
+//**************    load interlock    ************************
 
 always@(*)begin
 	if(MEM_reg_valid)begin
@@ -250,6 +265,7 @@ end
 
 
 always @(negedge clk) begin
+	MEM_state_trace(MEM_reg_pc, {32'b0,MEM_reg_inst}, {63'b0,MEM_reg_valid}, rdata,reg_wr_value,64'b0 );
 	//$display("MEM  pc:%x   inst:%x   valid:%x   aluout:%x   op_b:%x  wen:%x  wdata:%x  opcode:%x",MEM_reg_pc,MEM_reg_inst,MEM_reg_valid,MEM_reg_aluoutput,MEM_reg_src2   ,wen,wdata_reg,opcode);
 end
 //********************************************************************
@@ -498,7 +514,6 @@ always @(*) begin
 end
 
 always @(*) begin
-	//$display("*  clk=%d",clk);
 	case(opcode)
     24'd11  : raddr=aluoutput;
     24'd12  : raddr=aluoutput;
@@ -521,9 +536,7 @@ always @(*) begin
 
 
 end
-//always @(posedge clk) begin
-//	$display("pose  clk=%d",clk);
-//end
+
 
 
 /*
@@ -641,23 +654,16 @@ end
 */
 
 
-//wire [7:0]wmask_1byte;
-//wire [63:0]wdata_1byte;
 reg [7:0]wmask_1byte;
 reg [63:0]wdata_1byte;
 
-//wire [7:0]wmask_2byte;
-//wire [63:0]wdata_2byte;
 reg [7:0]wmask_2byte;
 reg [63:0]wdata_2byte;
 
 
 
 reg [63:0] rdata;
-//wire [63:0] raddr;
-//wire [63:0] waddr;
-//wire [63:0] wdata;
-//wire [ 7:0] wmask;
+
 reg [63:0] raddr;
 reg [63:0] waddr;
 reg [63:0] wdata;
@@ -666,20 +672,17 @@ reg [ 7:0] wmask;
 
 
 always @(*) begin
-  pmem_read(raddr, rdata);
+  //pmem_read(raddr, rdata);
   pmem_write(waddr, wdata, wmask);
 end
 
 
-//wire [63:0] rdata_fix;
 reg [63:0] rdata_fix;
 
 
-//wire [7:0] rdata_1byte;
 reg [7:0] rdata_1byte;
 
 
-//wire [15:0] rdata_2byte;
 reg [15:0] rdata_2byte;
 
 
@@ -727,18 +730,9 @@ end
 */
 
 
-//always @(mtvec or mepc or mcause or mstatus) begin
-//       update_csr(mtvec,mcause,mepc,mstatus);	
-//end
 
 
 
 
-
-//  always @(posedge clk) begin
-//    $display("%d,%d,%d",rd,rs1,imm_I);
-//    $display("%d,%d,%d,%d",aluoutput,wdata_reg,wen,opcode);
-//    $display("%d,%d,%d",aluoutput,src1,imm_I);
-//  end
 
 endmodule

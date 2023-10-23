@@ -1,4 +1,4 @@
-
+import "DPI-C" function void IFU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
 import "DPI-C" function void read_inst(int npc_inst);
 import "DPI-C" function void pmem_read_pc(
   input longint raddr, output longint rdata);
@@ -6,15 +6,18 @@ import "DPI-C" function void pmem_read_pc(
 module ysyx_22050612_IFU (
    input clk,
    input rst, 
-   input [63:0]dnpc,
    output reg valid_IF_ID,
-   input ready_IF_ID,
+   input      ready_IF_ID,
+   output reg [63:0]pc_prev,
    output [63:0]pc,
-   input pc_update,
-   //output reg [31:0]inst, 
    output [31:0]inst,
 
-   output branch_flush
+   input pc_update,
+   input [63:0]dnpc,
+
+   output branch_flush,
+
+   input [63:0]waddr    //暂时加进来保证切换程序时icache能保持一致性，所以每次存指令后就更新icache
 
 /*
    output reg arvalid,
@@ -78,18 +81,26 @@ end
 
 
 
-/*
+assign branch_flush = pc_update;
+assign valid_IF_ID = icache_ready;
+
+
+//**********************  pc  *****************************
 reg  [63:0]pc_next;
 reg  pc_en;
-//assign pc_next = pc_update ? dnpc : pc+64'd4;
+
 always @(*) begin
-	if((branching!=4'b0) && pc_update)begin
+	if(pc_update)begin
 		pc_next = dnpc;
 		pc_en   = 1'b1;
 	end
-	else if(branching!=4'b0) begin
-		pc_next = pc;
-		pc_en   = 1'b0;
+	else if(inst_branch && minus_target_addr /*&& valid_IF_ID*/)begin
+		pc_next = pc_prev+imm_B;
+		pc_en   = 1'b1;
+	end
+	else if(inst_jal /*&& valid_IF_ID*/)begin
+		pc_next = pc_prev+imm_J;
+		pc_en   = 1'b1;
 	end
 	else if(ready_IF_ID == 1'b0)begin
 		pc_next = pc;
@@ -100,57 +111,14 @@ always @(*) begin
 		pc_en   = 1'b1;
 	end
 end
-*/
-reg  [63:0]pc_next;
-reg  pc_en;
-//assign pc_next = pc_update ? dnpc : pc+64'd4;
-always @(*) begin
-	if(ready_IF_ID == 1'b0)begin
-		pc_next = pc;
-		pc_en   = 1'b0;
-	end
-	else if(pc_update)begin
-		pc_next = dnpc;
-		pc_en   = 1'b1;
-	end
-	else if(inst_is_branch==4'd1 && minus_target_addr)begin
-		pc_next = pc+imm_B;
-		pc_en   = 1'b1;
-	end
-	else if(inst_is_branch==4'd2 )begin
-		pc_next = pc+imm_J;
-		pc_en   = 1'b1;
-	end
-	else begin
-		pc_next = pc + 64'd4;
-		pc_en   = 1'b1;
-	end
-end
 
-reg [3:0]inst_is_branch;
-always @(*) begin
-	if(inst[6:0] == 7'b1101111)begin
-		inst_is_branch = 4'd2;                                 //jal
-	end
-//	else if(inst == 32'b1110011)begin
-//		//inst_is_branch = 4'd1;                                 //ecall
-//	end
-//	else if(inst == 32'b00110000001000000000000001110011)begin
-//		//inst_is_branch = 4'd1;                                 //mret
-//	end
-	else begin
-        	case ({inst[14:12],inst[6:0]})
-        //	      10'b000_1100111: inst_is_branch = 4'd2;          //jalr
-        	      10'b000_1100011: inst_is_branch = 4'd1;          //beq
-        	      10'b001_1100011: inst_is_branch = 4'd1;          //bne
-        	      10'b100_1100011: inst_is_branch = 4'd1;          //blt
-        	      10'b101_1100011: inst_is_branch = 4'd1;          //bge
-        	      10'b110_1100011: inst_is_branch = 4'd1;          //bltu
-        	      10'b111_1100011: inst_is_branch = 4'd1;          //bgeu
-        	      default:         inst_is_branch = 4'd0; 
-        	endcase
-	end
-end
+wire inst_jal;
+assign inst_jal    = icache_ready ? (inst[6:0] == 7'b1101111) : 1'b0;
+wire inst_branch;
+assign inst_branch = icache_ready ? (inst[6:0] == 7'b1100011) : 1'b0;
+// jalr, ecall and mret are not included  because the target address of these inst
+// depend on register.
+
 
 wire minus_target_addr;
 assign minus_target_addr = inst[31];
@@ -159,148 +127,9 @@ assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11
 wire [63:0]imm_J;
 assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
 
-assign valid_IF_ID = 1'b1;
-assign branch_flush = pc_update;
-assign pc_read =  pc;
-//assign pc_read = pc_update ? dnpc : pc;
 
 ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, pc_en);
-//ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc+64'd4, pc, 1'b1);
-
-//ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, pc_update);
-//ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, dnpc, pc, 1'b1);
-
-
-
-//************************  pipeline  ******************************
-//reg [1:0]if_current_state, if_next_state;
-//
-//localparam if_idle  = 2'b00;
-//localparam if_branch_id = 2'b01;        //the first cycle of getting the branch inst
-//localparam if_waiting_branch = 2'b11;        //waiting for processing
-//
-//always @(posedge clk) begin
-//	if(rst == 1'b1) if_current_state <= if_idle;
-//	else            if_current_state <= if_next_state;
-//end
-//
-//always @(*) begin
-//	case(if_current_state)
-//		if_idle: begin
-//			valid_IF_ID = 1'b1;
-//			if(inst[6:0] == 7'b1101111)begin
-//				if_next_state= ready_IF_ID ? if_branch_id :if_idle;    //jal
-//			end
-//			else if(inst == 32'b1110011)begin
-//				if_next_state= ready_IF_ID ? if_branch_id :if_idle;    //jal
-//			end
-//			else if(inst == 32'b00110000001000000000000001110011)begin
-//				if_next_state= ready_IF_ID ? if_branch_id :if_idle;    //jal
-//			end
-//			else begin
-//                 	  case ({inst[14:12],inst[6:0]})
-//                     10'b000_1100111:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //jalr
-//                     10'b000_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //beq
-//                     10'b001_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //bne
-//                     10'b100_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //blt
-//                     10'b101_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //bge
-//                     10'b110_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //bltu
-//                     10'b111_1100011:  if_next_state= ready_IF_ID ? if_branch_id : if_idle;    //bgeu
-//                     default:          if_next_state= if_idle ;
-//                 	  endcase
-//		        end
-//                /* 
-//                 	  case (inst[6:0])
-//                         7'b1101111:   if_next_state= if_branch_id ;    //jal
-//                     default:          if_next_state= if_idle ;
-//                 	  endcase
-//			  */
-//		end
-//		if_branch_id: begin
-//			valid_IF_ID = 1'b0;
-//			if_next_state = pc_update ? if_idle : if_branch_id ;
-//		end
-//		/*
-//		if_waiting_branch: begin
-//			bvalid = 1'b0;
-//			bresp  = 2'b0;
-//			if_next_state = if_idle;
-//		end
-//		*/
-//		default: begin
-//			valid_IF_ID = 1'b1;
-//			if_next_state = if_idle;
-//		end
-//	endcase
-//end
-//
-//
-////assign  valid_IF_ID = branching ? 1'b1 : 1'b0;
-//
-//reg [3:0]branching;
-//
-//  always @(inst) begin
-//	  case ({inst[14:12],inst[6:0]})
-//    10'b000_1100111:  branching[0] = 1'b1 ;    //jalr
-//    10'b000_1100011:  branching[0] = 1'b1 ;    //beq
-//    10'b001_1100011:  branching[0] = 1'b1 ;    //bne
-//    10'b100_1100011:  branching[0] = 1'b1 ;    //blt
-//    10'b101_1100011:  branching[0] = 1'b1 ;    //bge
-//    10'b110_1100011:  branching[0] = 1'b1 ;    //bltu
-//    10'b111_1100011:  branching[0] = 1'b1 ;    //bgeu
-//    default:          branching[0] = 1'b0 ;
-//	  endcase
-//
-//	  case (inst)
-//    32'b1110011:   branching[2] = 1'b1 ;         //ecall
-//    32'b00110000001000000000000001110011:   branching[2] = 1'b1 ;         //mret
-//    default:  branching[2] = 1'b0 ; 
-//	  endcase
-//
-//
-//	  case (inst[6:0])
-//    7'b1101111: branching[1] = 1'b1 ;        //jal
-//    default:    branching[1] = 1'b0 ;
-//	  endcase
-//
-//  end
-///*
-//reg branch_processing;
-//always @(posedge clk) begin
-//	if(rst)begin
-//		branch_processing <= 1'b0;
-//	end
-//	else if (branching) begin
-//		branch_processing <= 1'b1;
-//	end
-//	else begin
-//
-//	end
-//end
-//*/
-//
-
-
-always @(negedge clk) begin
-	//$display("IF   pc:%x   inst:%x   valid:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,pc_next,dnpc);
-end
-
-
-//*****************************************************************
-
-
-
-//Reg #(1,1'b0) pc0  (clk, rst,    clk, pc[ ], 1'b1);
-//Reg #(1,1'b0) pc1  (clk, rst, ~pc[ ], pc[ ], 1'b1);
-//
-//Reg #(1,1'b0) pc2  (clk, rst,    clk, pc[ ], 1'b1);
-//Reg #(1,1'b0) pc3  (clk, rst, ~pc[ ], pc[ ], 1'b1);
-//Reg #(1,1'b0) pc4  (clk, rst, ~pc[ ], pc[ ], 1'b1);
-//Reg #(1,1'b0) pc5  (clk, rst, ~pc[ ], pc[ ], 1'b1);
-//Reg #(1,1'b0) pc6  (clk, rst, ~pc[ ], pc[ ], 1'b1);
-
-
-wire [63:0]pc_read;
+/*
 wire [63:0]inst_mix;
 always @(*) begin
   pmem_read_pc(pc_read, inst_mix);
@@ -310,13 +139,57 @@ end
 //end
 //assign inst = pc[2]?inst_mix[63:32] : inst_mix[31:0];
 assign inst = pc_read[2]?inst_mix[63:32] : inst_mix[31:0];
+*/
+
+//************************  pipeline  ******************************
+always @(negedge clk) begin
+	IFU_state_trace(pc, {32'b0,inst}, {63'b0,valid_IF_ID}, {63'b0,ready_IF_ID},64'b0,64'b0 );
+	//$display("IF   pc:%x   inst:%x   valid:%d   ready:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,ready_IF_ID,pc_next,dnpc);
+end
+//*****************************************************************
 
 
 
 
-always @(*) begin
-  read_inst(inst);
+//************************  icache   *******************************
+wire [63:0]pc_read;
+assign pc_read =  pc;
+
+wire icache_valid;
+wire icache_ready;
+//assign icache_valid = (~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))))&&ready_IF_ID;
+assign icache_valid = ready_IF_ID ? (~(inst_jal || (inst_branch &&minus_target_addr))) : 1'b0;
+
+ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, icache_valid, branch_flush, ready_IF_ID, inst, icache_ready , waddr);
+
+always @(posedge clk) begin
+	if(rst) begin
+		pc_prev <= 64'b0;
+	end
+	else if(!ready_IF_ID) begin
+		pc_prev <= pc_prev;
+	end
+	else if(branch_flush) begin
+		pc_prev <= 64'b0;
+	end
+	else begin
+		pc_prev <= pc;
+	end
 end
 
+
+
+
+
+
+//offer the inst in IFU to itace
+always @(*) begin
+	if(valid_IF_ID) begin
+  		read_inst(inst);
+  	end
+  	else begin
+  		read_inst(32'b0);
+  	end
+end
 
 endmodule

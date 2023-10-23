@@ -1,5 +1,8 @@
 import "DPI-C" function void npc_complete_one_inst ();
 import "DPI-C" function void npc_loadstore(int getinst, longint raddr, longint waddr);
+import "DPI-C" function void WBU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
+
+
 
 module ysyx_22050612_WBU(
 input clk,
@@ -23,7 +26,9 @@ output reg [63:0]WB_reg_wdata,
 output reg [63:0]WB_reg_pc,
 
 input reg [63:0]raddr,
-input reg [63:0]waddr
+input reg [63:0]waddr,
+
+input ready_EX_MEM
 );
 
 
@@ -55,6 +60,17 @@ always @(posedge clk) begin
 		reg_raddr <= 64'b0;
 		reg_waddr <= 64'b0;
 	end
+	else if(!ready_EX_MEM) begin
+		WB_reg_valid <= WB_reg_valid; 
+		WB_reg_pc    <= WB_reg_pc    ;
+		WB_reg_inst  <= WB_reg_inst  ;
+		WB_reg_wen   <= WB_reg_wen   ;
+		WB_reg_id    <= WB_reg_id    ;
+		WB_reg_wdata <= WB_reg_wdata ;
+
+		reg_raddr <= reg_raddr;
+		reg_waddr <= reg_waddr;
+	end
 	else begin
 		WB_reg_valid <= valid_MEM_WB;
 		WB_reg_pc    <= pc_MEM_WB;
@@ -80,9 +96,10 @@ assign ready_MEM_WB = 1'b1;
 
 
 always @(negedge clk) begin
+	WBU_state_trace(WB_reg_pc, {32'b0,WB_reg_inst}, {63'b0,WB_reg_valid}, 64'b0,64'b0,64'b0 );
 	//$display("WB   pc:%x   inst:%x   valid:%d  wen:%d  wdata:%x rd:%x",WB_reg_pc,WB_reg_inst,WB_reg_valid,WB_reg_wen,WB_reg_wdata,WB_reg_id);
 	//$display("WB   pc:%x   inst:%x   valid:%d  wen:%d  wdata:%x rd:%x\n",WB_reg_pc,WB_reg_inst,WB_reg_valid,reg_wr_wen,reg_wr_value,reg_wr_ID);
-	if(WB_reg_valid) begin 
+	if(WB_reg_valid && ready_EX_MEM) begin 
 		npc_complete_one_inst();
 	end
 end
@@ -90,7 +107,7 @@ end
 
 
 always @(negedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
-	if(WB_reg_valid)begin
+	if(WB_reg_valid&& ready_EX_MEM)begin
 	case({WB_reg_inst[14:12],WB_reg_inst[6:0]})
     10'b000_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
     10'b001_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
