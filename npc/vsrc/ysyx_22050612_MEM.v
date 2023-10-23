@@ -441,11 +441,11 @@ always @(*) begin
 
 	case(waddr[2:0])
     3'd0  : wdata_2byte={{48{1'b0}},src2[15:0]}; 
-    3'd1  : wdata_2byte={{40{1'b0}},src2[15:0],{ 8{1'b0}}};
+//    3'd1  : wdata_2byte={{40{1'b0}},src2[15:0],{ 8{1'b0}}};
     3'd2  : wdata_2byte={{32{1'b0}},src2[15:0],{16{1'b0}}};
-    3'd3  : wdata_2byte={{24{1'b0}},src2[15:0],{24{1'b0}}};
+//    3'd3  : wdata_2byte={{24{1'b0}},src2[15:0],{24{1'b0}}};
     3'd4  : wdata_2byte={{16{1'b0}},src2[15:0],{32{1'b0}}};
-    3'd5  : wdata_2byte={{ 8{1'b0}},src2[15:0],{40{1'b0}}};
+//    3'd5  : wdata_2byte={{ 8{1'b0}},src2[15:0],{40{1'b0}}};
     3'd6  : wdata_2byte={           src2[15:0],{48{1'b0}}};
     default:wdata_2byte=64'b0;
 	endcase
