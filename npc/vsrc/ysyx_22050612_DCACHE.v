@@ -50,7 +50,7 @@ always @(posedge clk) begin
 		end
 	end
 	else if( (!cen0|!cen1|!cen2|!cen3)&&!wen  ) begin
-	    if(addr <= 64'h8fffffff) begin   //暂时用来维持设备和dcache的一致性
+	    if(not_device) begin   //暂时用来维持设备和dcache的一致性
 		case({!cen3,!cen2,!cen1,!cen0})
 			4'b0001: begin v0[index] <= 1'b1; tag0[index] <= addr[63:10]; end 
 			4'b0010: begin v1[index] <= 1'b1; tag1[index] <= addr[63:10]; end
