@@ -452,11 +452,11 @@ always @(*) begin
 
 	case(waddr[2:0])
     3'd0  : wmask_2byte=8'h3 ; 
-    3'd1  : wmask_2byte=8'h6 ;
+//    3'd1  : wmask_2byte=8'h6 ;
     3'd2  : wmask_2byte=8'hc ;
-    3'd3  : wmask_2byte=8'h18;
+//    3'd3  : wmask_2byte=8'h18;
     3'd4  : wmask_2byte=8'h30; 
-    3'd5  : wmask_2byte=8'h60; 
+//    3'd5  : wmask_2byte=8'h60; 
     3'd6  : wmask_2byte=8'hc0;
     default:wmask_2byte=8'b0;
 	endcase
@@ -476,11 +476,11 @@ always @(*) begin
 
 	case(raddr[2:0])
     3'd0  : rdata_2byte=rdata[15: 0]; 
-    3'd1  : rdata_2byte=rdata[23: 8];
+//    3'd1  : rdata_2byte=rdata[23: 8];
     3'd2  : rdata_2byte=rdata[31:16];
-    3'd3  : rdata_2byte=rdata[39:24];
+//    3'd3  : rdata_2byte=rdata[39:24];
     3'd4  : rdata_2byte=rdata[47:32];
-    3'd5  : rdata_2byte=rdata[55:40];
+//    3'd5  : rdata_2byte=rdata[55:40];
     3'd6  : rdata_2byte=rdata[63:48];
     default:rdata_2byte=16'b0;
 	endcase
