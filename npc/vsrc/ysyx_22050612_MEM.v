@@ -137,7 +137,7 @@ assign pc_MEM_WB    = (MEM_block==1'b0) ? MEM_reg_pc    : 64'b0;
 assign inst_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_inst  : 32'b0;
 
 wire MEM_block;
-assign MEM_block = MEM_reg_valid && (MEM_reg_inst[6:0]==7'b0000011) && !dcache_ready;
+assign MEM_block = MEM_reg_valid && ((MEM_reg_inst[6:0]==7'b0000011)||(MEM_reg_inst[6:0]==7'b0100011)) && !dcache_ready;
 //assign MEM_block = 1'b0;
 assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
 
