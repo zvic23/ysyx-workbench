@@ -3,7 +3,7 @@ import "DPI-C" function void pmem_read_dcache_low64(
 import "DPI-C" function void pmem_read_dcache_high64(
   input longint raddr, output longint rdata);
 import "DPI-C" function void pmem_write_dcache_low64(
-  input longint raddr, input byte wren, input longint wdata, input longint wmask, output longint rdata);
+  input longint raddr, input wren, input longint wdata, input longint wmask, output longint rdata_low, output longint rdata_high);
 import "DPI-C" function void pmem_write_dcache_high64(
   input longint raddr, input byte wren, input longint wdata, input longint wmask, output longint rdata);
 //import "DPI-C" function void icache_data(int hit);
@@ -175,8 +175,8 @@ always @(*) begin
 		pmem_read_dcache_low64 (addr, line_mem[63:0]);
 		pmem_read_dcache_high64(addr, line_mem[127:64]);
 
-		pmem_write_dcache_low64 (addr, {7'b0,wren}, din, mask, line_mem_wr[63:0]);
-		pmem_write_dcache_high64(addr, {7'b0,wren}, din, mask, line_mem_wr[127:64]);
+		pmem_write_dcache_low64 (addr, wren, din, mask, line_mem_wr[63:0],line_mem_wr[127:64]);
+		//pmem_write_dcache_high64(addr, {7'b0,wren}, din, mask, line_mem_wr[127:64]);
 end
 
 /*
