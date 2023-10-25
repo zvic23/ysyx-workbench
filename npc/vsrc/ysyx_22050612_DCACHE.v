@@ -2,6 +2,10 @@ import "DPI-C" function void pmem_read_dcache_low64(
   input longint raddr, output longint rdata);
 import "DPI-C" function void pmem_read_dcache_high64(
   input longint raddr, output longint rdata);
+import "DPI-C" function void pmem_write_dcache_low64(
+  input longint raddr, input byte wren, input longint wdata, input longint wmask, output longint rdata);
+import "DPI-C" function void pmem_write_dcache_high64(
+  input longint raddr, input byte wren, input longint wdata, input longint wmask, output longint rdata);
 //import "DPI-C" function void icache_data(int hit);
 import "DPI-C" function void DCACHE_state_trace (longint a,longint b,longint c,longint d,longint e,longint f,longint g,longint h,longint i,longint j,longint k,longint l,longint m,longint n,longint o,longint p); //16 parameters
 
@@ -15,7 +19,9 @@ output reg ready,
 input [63:0]addr,
 output [63:0]dout,
 
-input [63:0]waddr
+input wren,
+input [63:0]din,
+input [63:0]mask
 );
 
 
@@ -60,14 +66,14 @@ always @(posedge clk) begin
 		endcase
 	    end
 	end
-
+/*
 	if(waddr!=0) begin
 		if(tag0[waddr[9:4]] == waddr[63:10]) begin v0[waddr[9:4]] <= 1'b0; end
 		if(tag1[waddr[9:4]] == waddr[63:10]) begin v1[waddr[9:4]] <= 1'b0; end
 		if(tag2[waddr[9:4]] == waddr[63:10]) begin v2[waddr[9:4]] <= 1'b0; end
 		if(tag3[waddr[9:4]] == waddr[63:10]) begin v3[waddr[9:4]] <= 1'b0; end
 	end
-
+*/
 end
 
 wire [5:0]index;
@@ -86,22 +92,21 @@ wire cen0, cen1, cen2, cen3;
 wire wen;
 wire [127:0]bwen;
 wire [5:0]addr_sram;
-wire [127:0]din;
+wire [127:0]din_sram;
 
 assign addr_sram = index;
-assign bwen = 128'h0;
-assign cen0 = ~( ( valid&&!ready && not_device) ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign cen1 = ~( ( valid&&!ready && not_device) ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign cen2 = ~( ( valid&&!ready && not_device) ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign cen3 = ~( ( valid&&!ready && not_device) ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign  wen = ~( ( valid&&!ready && not_device) && (way_hit == 4'b0))   ;
-assign  din = line_mem;
+assign cen0 = ~( (valid&&!ready && not_device) ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign cen1 = ~( (valid&&!ready && not_device) ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign cen2 = ~( (valid&&!ready && not_device) ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign cen3 = ~( (valid&&!ready && not_device) ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0) ;
+assign  wen = ~( (valid&&!ready && not_device) && (wren || (!wren&&way_hit == 4'b0)) )  ;
+assign  din_sram = wren ? (way_hit==4'b0 ? line_mem_wr:(addr[3] ? {din,64'b0}:{64'b0,din})) : line_mem;
+assign bwen = wren ? (way_hit==4'b0 ? 128'b0 : (addr[3] ? ~{mask,64'b0}:~{64'b0,mask})) : 128'b0;
 
-
-S011HD1P_X32Y2D128_BW sram_d0(dout0, clk, cen0, wen, bwen, addr_sram, din);
-S011HD1P_X32Y2D128_BW sram_d1(dout1, clk, cen1, wen, bwen, addr_sram, din);
-S011HD1P_X32Y2D128_BW sram_d2(dout2, clk, cen2, wen, bwen, addr_sram, din);
-S011HD1P_X32Y2D128_BW sram_d3(dout3, clk, cen3, wen, bwen, addr_sram, din);
+S011HD1P_X32Y2D128_BW sram_d0(dout0, clk, cen0, wen, bwen, addr_sram, din_sram);
+S011HD1P_X32Y2D128_BW sram_d1(dout1, clk, cen1, wen, bwen, addr_sram, din_sram);
+S011HD1P_X32Y2D128_BW sram_d2(dout2, clk, cen2, wen, bwen, addr_sram, din_sram);
+S011HD1P_X32Y2D128_BW sram_d3(dout3, clk, cen3, wen, bwen, addr_sram, din_sram);
 
 
 reg [3:0]way_hit_prev;
@@ -160,11 +165,18 @@ end
 
 assign dout =  addr[3] ?  line_read[127:64] : line_read[63:0] ;
 
+//wire [127:0]wr_miss_line;
+//assign wr_miss_line = 
+
 
 wire [127:0]line_mem;
+wire [127:0]line_mem_wr;
 always @(*) begin
 		pmem_read_dcache_low64 (addr, line_mem[63:0]);
 		pmem_read_dcache_high64(addr, line_mem[127:64]);
+
+		pmem_write_dcache_low64 (addr, {7'b0,wren}, din, mask, line_mem_wr[63:0]);
+		pmem_write_dcache_high64(addr, {7'b0,wren}, din, mask, line_mem_wr[127:64]);
 end
 
 /*

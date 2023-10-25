@@ -112,6 +112,90 @@ extern "C" void pmem_read_dcache_high64(long long raddr, long long *rdata) {
   }
 }
 
+
+
+
+
+extern int vgactl_port;
+extern uint8_t vmem[400*300*4];
+extern "C" void pmem_write_dcache_low64(long long waddr, char wren, long long wdata, long long wmask, long long *rdata) {
+  // 总是往地址为`waddr & ~0x7ull`的8字节按写掩码`wmask`写入`wdata`
+  // `wmask`中每比特表示`wdata`中1个字节的掩码,
+  // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
+  if(waddr>=0x80000000 && wren==1){
+	if(waddr == 0xa00003f8){                         //uart support
+		skip_difftest=1;
+		//printf("uart     \n");
+		putchar((char)wdata);
+		return;
+	}
+	else if(waddr == 0xa0000104){                    //vga ctl support
+		vgactl_port = 1;
+		return; 
+	}
+	else if(waddr >= 0xa1000000 && waddr < 0xa1000000+400*300*4){    //vga vmem support
+  		long long waddr_set = waddr & ~0x7ull;
+  		for(int i=0;i<8;i++){
+  		        if( (wmask>>(i*8))&0xff == 0xff){
+  		      		vmem[waddr_set-0xa1000000+i]=(uint8_t)(wdata>>(i*8));
+			}
+  		}
+		return;
+	}
+
+  	long long waddr_set = waddr & ~0x7ull;
+  	for(int i=0;i<8;i++){
+  	        if( (wmask>>(i*8))&0xff == 0xff){
+  	      		pmem[waddr_set-0x80000000+i]=(uint8_t)(wdata>>(i*8));
+		}
+  	}
+
+  	 waddr_set = waddr & ~0xfull;
+	memcpy(rdata, &pmem[waddr_set-0x80000000], 8);
+  }
+}
+
+
+extern "C" void pmem_write_dcache_high64(long long waddr, char wren, long long wdata, long long wmask, long long *rdata) {
+  // 总是往地址为`waddr & ~0x7ull`的8字节按写掩码`wmask`写入`wdata`
+  // `wmask`中每比特表示`wdata`中1个字节的掩码,
+  // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
+  if(waddr>=0x80000000 && wren==1){
+	if(waddr == 0xa00003f8){                         //uart support
+		return;
+	}
+	else if(waddr == 0xa0000104){                    //vga ctl support
+		return; 
+	}
+	else if(waddr >= 0xa1000000 && waddr < 0xa1000000+400*300*4){    //vga vmem support
+		return;
+	}
+/*
+  	long long waddr_set = waddr & ~0xfull;
+	waddr_set |= 0b1000ull;
+  	for(int i=0;i<8;i++){
+  	        if( (wmask>>(i*8))&0xff == 0xff){
+  	      		pmem[waddr_set-0x80000000+i]=(uint8_t)(wdata>>(i*8));
+		}
+  	}
+*/
+
+  	long long waddr_set = waddr & ~0xfull;
+	waddr_set |= 0b1000ull;
+	memcpy(rdata, &pmem[waddr_set-0x80000000], 8);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 extern Vysyx_22050612_npc* top;
 extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
@@ -175,8 +259,8 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   }
 }
 
-extern int vgactl_port;
-extern uint8_t vmem[400*300*4];
+//extern int vgactl_port;
+//extern uint8_t vmem[400*300*4];
 extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // 总是往地址为`waddr & ~0x7ull`的8字节按写掩码`wmask`写入`wdata`
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
