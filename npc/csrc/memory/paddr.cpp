@@ -181,10 +181,11 @@ extern "C" void pmem_write_dcache_high64(long long waddr, char wren, long long w
 		}
   	}
 */
-
+/*
   	long long waddr_set = waddr & ~0xfull;
 	waddr_set |= 0b1000ull;
 	memcpy(rdata, &pmem[waddr_set-0x80000000], 8);
+	*/
   }
 }
 
