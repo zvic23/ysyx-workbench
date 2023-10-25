@@ -145,7 +145,7 @@ assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
 //**************  DCACHE  ******************************
 wire dcache_valid;
 wire dcache_ready;
-assign dcache_valid = MEM_reg_valid && (MEM_reg_inst[6:0]==7'b0000011);
+assign dcache_valid = MEM_reg_valid && (MEM_reg_inst[6:0]==7'b0000011)&& (MEM_reg_inst[6:0]==7'b0100011);
 wire [63:0]dcache_addr;
 assign dcache_addr = dcache_wren ? waddr : raddr;
 wire [63:0]dcache_dout;
