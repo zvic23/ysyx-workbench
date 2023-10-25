@@ -171,7 +171,7 @@ assign dout =  addr[3] ?  line_read[127:64] : line_read[63:0] ;
 
 wire [127:0]line_mem;
 wire [127:0]line_mem_wr;
-always @(*) begin
+always @(negedge clk) begin
 		pmem_read_dcache_low64 (addr, line_mem[63:0]);
 		pmem_read_dcache_high64(addr, line_mem[127:64]);
 
