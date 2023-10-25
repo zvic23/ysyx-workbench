@@ -36,7 +36,7 @@ reg [63:0]v3;
 
 //************************  pipeline  ******************************
 always @(negedge clk) begin
-	DCACHE_state_trace (addr, dout, {63'b0,valid}, {63'b0,ready}, dout0[127:64], dout0[63:0], {58'b0,index}, {58'b0,addr[9:4]},
+	DCACHE_state_trace (addr, dout, {63'b0,valid}, {63'b0,ready}, line_mem_prev[127:64], line_mem_prev[63:0], {58'b0,index}, {58'b0,addr[9:4]},
 	{60'b0,addr[3:0]}, {60'b0,addr[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {63'b0,wen}, line_mem[127:64], line_mem[63:0]);
 end
 //*****************************************************************
@@ -99,7 +99,7 @@ assign cen0 = ~( (valid&&!ready && not_device) ? (way_hit[0] ? 1'b1 : (way_hit==
 assign cen1 = ~( (valid&&!ready && not_device) ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0) ;
 assign cen2 = ~( (valid&&!ready && not_device) ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0) ;
 assign cen3 = ~( (valid&&!ready && not_device) ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0) ;
-assign  wen = ~( (valid&&!ready && not_device) && (wren || (!wren&&way_hit == 4'b0)) )  ;
+assign  wen = ~( (valid&&!ready && not_device) && (wren || ((!wren)&&(way_hit == 4'b0))) )  ;
 assign  din_sram = wren ? (way_hit==4'b0 ? line_mem_wr:(addr[3] ? {din,64'b0}:{64'b0,din})) : line_mem;
 assign bwen = wren ? (way_hit==4'b0 ? 128'b0 : (addr[3] ? ~{mask,64'b0}:~{64'b0,mask})) : 128'b0;
 
