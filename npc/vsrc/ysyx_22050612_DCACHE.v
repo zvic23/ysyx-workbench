@@ -101,7 +101,7 @@ assign cen2 = ~( (valid&&!ready && not_device) ? (way_hit[2] ? 1'b1 : (way_hit==
 assign cen3 = ~( (valid&&!ready && not_device) ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0) ;
 assign  wen = ~( (valid&&!ready && not_device) && (wren || ((!wren)&&(way_hit == 4'b0))) )  ;
 assign  din_sram = wren ? (way_hit==4'b0 ? line_mem_wr:(addr[3] ? {din,64'b0}:{64'b0,din})) : line_mem;
-assign bwen = wren ? (way_hit==4'b0 ? 128'b0 : (addr[3] ? ~{mask,64'b0}:~{64'b0,mask})) : 128'b0;
+assign bwen = wren ? (way_hit==4'b0 ? 128'b0 : (addr[3] ? (~{mask,64'b0}):(~{64'b0,mask}))) : 128'b0;
 
 S011HD1P_X32Y2D128_BW sram_d0(dout0, clk, cen0, wen, bwen, addr_sram, din_sram);
 S011HD1P_X32Y2D128_BW sram_d1(dout1, clk, cen1, wen, bwen, addr_sram, din_sram);
