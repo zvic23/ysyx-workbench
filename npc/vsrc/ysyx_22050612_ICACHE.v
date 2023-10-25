@@ -2,7 +2,7 @@ import "DPI-C" function void pmem_read_icache_low64(
   input longint raddr, output longint rdata);
 import "DPI-C" function void pmem_read_icache_high64(
   input longint raddr, output longint rdata);
-import "DPI-C" function void icache_data(int hit);
+import "DPI-C" function void icache_collect(int hit);
 import "DPI-C" function void ICACHE_state_trace (longint a,longint b,longint c,longint d,longint e,longint f,longint g,longint h,longint i,longint j,longint k,longint l,longint m,longint n,longint o,longint p); //16 parameters
 
 module ysyx_22050612_ICACHE (
@@ -208,10 +208,10 @@ end
 always @(negedge clk) begin
 	if(valid) begin
 		if(way_hit != 4'b0) begin
-			icache_data(1);
+			icache_collect(1);
 		end
 		else begin
-			icache_data(0);
+			icache_collect(0);
 		end
 	end
 end

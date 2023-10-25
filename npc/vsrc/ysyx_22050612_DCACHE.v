@@ -6,7 +6,7 @@ import "DPI-C" function void pmem_write_dcache_low64(
   input longint raddr, input wren, input longint wdata, input longint wmask, output longint rdata_low, output longint rdata_high);
 import "DPI-C" function void pmem_write_dcache_high64(
   input longint raddr, input byte wren, input longint wdata, input longint wmask, output longint rdata);
-//import "DPI-C" function void icache_data(int hit);
+import "DPI-C" function void dcache_collect(int hit);
 import "DPI-C" function void DCACHE_state_trace (longint a,longint b,longint c,longint d,longint e,longint f,longint g,longint h,longint i,longint j,longint k,longint l,longint m,longint n,longint o,longint p); //16 parameters
 
 module ysyx_22050612_DCACHE (
@@ -180,17 +180,25 @@ always @(negedge clk) begin
 	end
 end
 
-/*
+
 always @(negedge clk) begin
-	if(valid) begin
+	if(valid&&!ready&&!wren) begin
 		if(way_hit != 4'b0) begin
-			icache_data(1);
+			dcache_collect(1);
 		end
 		else begin
-			icache_data(0);
+			dcache_collect(2);
+		end
+	end
+	else if(valid&&!ready&&wren) begin
+		if(way_hit != 4'b0) begin
+			dcache_collect(3);
+		end
+		else begin
+			dcache_collect(4);
 		end
 	end
 end
-*/
+
   
 endmodule
