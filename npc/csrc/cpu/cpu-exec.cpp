@@ -208,18 +208,37 @@ void one_cycle(){
 
 
 //ICACHE data collect
-long long hits = 0;
-long long miss = 0;
+long long icache_hit = 0;
+long long icache_miss = 0;
 
-void icache_data(int hit){
+void icache_collect(int hit){
 	if(hit){
-		hits++;
+		icache_hit++;
 	}else{
-		miss++;
+		icache_miss++;
 	}
 }
 
+//DCACHE data collect
+long long dcache_read_hit = 0;
+long long dcache_read_miss = 0;
+long long dcache_write_hit = 0;
+long long dcache_write_miss = 0;
 
+void dcache_collect(int hit){
+	if(hit==1){
+		dcache_read_hit++;
+	}
+	else if(hit==2){
+		dcache_read_miss++;
+	}
+	else if(hit==3){
+		dcache_write_hit++;
+	}
+	else if(hit==4){
+		dcache_write_miss++;
+	}
+}
 
 
 
@@ -227,7 +246,9 @@ static uint64_t g_timer = 0; // unit: us
 static uint64_t g_cycle = 0; //  cycle
 
 void program_exec_statistics(){
-           printf(GREEN "ICACHE hit rate : %lld%%    hit:%lld   miss:%lld\n" NONE,hits*100/(hits+miss),hits,miss);
+           printf(GREEN "ICACHE hit rate : %lld%%    hit:%lld   miss:%lld\n" NONE,icache_hit*100/(icache_hit+icache_miss),icache_hit,icache_miss);
+           printf(GREEN "DCACHE read  hit rate : %lld%%    hit:%lld   miss:%lld\n" NONE,dcache_read_hit*100/(dcache_read_hit+dcache_read_miss),dcache_read_hit,dcache_read_miss);
+           printf(GREEN "DCACHE write hit rate : %lld%%    hit:%lld   miss:%lld\n" NONE,dcache_write_hit*100/(dcache_write_hit+dcache_write_miss),dcache_write_hit,dcache_write_miss);
 
   	 struct timeval time_end;                   //get the time when program end
   	 gettimeofday(&time_end,NULL);

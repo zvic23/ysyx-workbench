@@ -137,7 +137,7 @@ assign pc_MEM_WB    = (MEM_block==1'b0) ? MEM_reg_pc    : 64'b0;
 assign inst_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_inst  : 32'b0;
 
 wire MEM_block;
-assign MEM_block = MEM_reg_valid && (MEM_reg_inst[6:0]==7'b0000011) && !dcache_ready;
+assign MEM_block = MEM_reg_valid && ((MEM_reg_inst[6:0]==7'b0000011)||(MEM_reg_inst[6:0]==7'b0100011)) && !dcache_ready;
 //assign MEM_block = 1'b0;
 assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
 
@@ -145,13 +145,21 @@ assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
 //**************  DCACHE  ******************************
 wire dcache_valid;
 wire dcache_ready;
-assign dcache_valid = MEM_reg_valid && (MEM_reg_inst[6:0]==7'b0000011);
+assign dcache_valid = MEM_reg_valid && ((MEM_reg_inst[6:0]==7'b0000011)||(MEM_reg_inst[6:0]==7'b0100011));
 wire [63:0]dcache_addr;
-assign dcache_addr = raddr;
+assign dcache_addr = dcache_wren ? waddr : raddr;
 wire [63:0]dcache_dout;
 assign rdata = dcache_dout;
+//wire [63:0]dcache_waddr;
+//assign dcache_waddr = waddr;
+wire dcache_wren;
+assign dcache_wren = waddr > 0;
+wire [63:0]dcache_din;
+assign dcache_din = wdata;
+wire [63:0]dcache_wmask;
+assign dcache_wmask = wmask_dcache;
 
-ysyx_22050612_DCACHE dcache (clk, rst, dcache_valid, dcache_ready, dcache_addr, dcache_dout  ,  waddr);
+ysyx_22050612_DCACHE dcache (clk, rst, dcache_valid, dcache_ready, dcache_addr, dcache_dout, dcache_wren, dcache_din, dcache_wmask);
 
 
 
@@ -414,6 +422,10 @@ end
 
 //memory
 
+reg [63:0]wmask_1b;
+reg [63:0]wmask_2b;
+reg [63:0]wmask_dcache;
+
 always @(*) begin
 	case(waddr[2:0])
     3'd0  : wdata_1byte={{56{1'b0}},src2[7:0]}; 
@@ -439,27 +451,53 @@ always @(*) begin
     default:wmask_1byte=8'b0;
 	endcase
 
+
+	case(waddr[2:0])
+    3'd0  : wmask_1b=64'hff ; 
+    3'd1  : wmask_1b=64'hff00;
+    3'd2  : wmask_1b=64'hff0000 ;
+    3'd3  : wmask_1b=64'hff000000 ;
+    3'd4  : wmask_1b=64'hff00000000; 
+    3'd5  : wmask_1b=64'hff0000000000; 
+    3'd6  : wmask_1b=64'hff000000000000; 
+    3'd7  : wmask_1b=64'hff00000000000000;
+    default:wmask_1b=64'b0;
+	endcase
+
 	case(waddr[2:0])
     3'd0  : wdata_2byte={{48{1'b0}},src2[15:0]}; 
-    3'd1  : wdata_2byte={{40{1'b0}},src2[15:0],{ 8{1'b0}}};
+//    3'd1  : wdata_2byte={{40{1'b0}},src2[15:0],{ 8{1'b0}}};
     3'd2  : wdata_2byte={{32{1'b0}},src2[15:0],{16{1'b0}}};
-    3'd3  : wdata_2byte={{24{1'b0}},src2[15:0],{24{1'b0}}};
+//    3'd3  : wdata_2byte={{24{1'b0}},src2[15:0],{24{1'b0}}};
     3'd4  : wdata_2byte={{16{1'b0}},src2[15:0],{32{1'b0}}};
-    3'd5  : wdata_2byte={{ 8{1'b0}},src2[15:0],{40{1'b0}}};
+//    3'd5  : wdata_2byte={{ 8{1'b0}},src2[15:0],{40{1'b0}}};
     3'd6  : wdata_2byte={           src2[15:0],{48{1'b0}}};
     default:wdata_2byte=64'b0;
 	endcase
 
 	case(waddr[2:0])
     3'd0  : wmask_2byte=8'h3 ; 
-    3'd1  : wmask_2byte=8'h6 ;
+//    3'd1  : wmask_2byte=8'h6 ;
     3'd2  : wmask_2byte=8'hc ;
-    3'd3  : wmask_2byte=8'h18;
+//    3'd3  : wmask_2byte=8'h18;
     3'd4  : wmask_2byte=8'h30; 
-    3'd5  : wmask_2byte=8'h60; 
+//    3'd5  : wmask_2byte=8'h60; 
     3'd6  : wmask_2byte=8'hc0;
     default:wmask_2byte=8'b0;
 	endcase
+
+	case(waddr[2:0])
+    3'd0  : wmask_2b=64'hffff ; 
+//    3'd1  : wmask_2byte=8'h6 ;
+    3'd2  : wmask_2b=64'hffff0000 ;
+//    3'd3  : wmask_2byte=8'h18;
+    3'd4  : wmask_2b=64'hffff00000000; 
+//    3'd5  : wmask_2byte=8'h60; 
+    3'd6  : wmask_2b=64'hffff000000000000;
+    default:wmask_2b=64'b0;
+	endcase
+
+
 
 
 	case(raddr[2:0])
@@ -476,11 +514,11 @@ always @(*) begin
 
 	case(raddr[2:0])
     3'd0  : rdata_2byte=rdata[15: 0]; 
-    3'd1  : rdata_2byte=rdata[23: 8];
+//    3'd1  : rdata_2byte=rdata[23: 8];
     3'd2  : rdata_2byte=rdata[31:16];
-    3'd3  : rdata_2byte=rdata[39:24];
+//    3'd3  : rdata_2byte=rdata[39:24];
     3'd4  : rdata_2byte=rdata[47:32];
-    3'd5  : rdata_2byte=rdata[55:40];
+//    3'd5  : rdata_2byte=rdata[55:40];
     3'd6  : rdata_2byte=rdata[63:48];
     default:rdata_2byte=16'b0;
 	endcase
@@ -499,6 +537,14 @@ always @(*) begin
     24'd18  : wmask=(waddr[2]? 8'b11110000:8'b00001111);
     24'd43  : wmask=8'hff;
     default: wmask=8'b0;
+	endcase
+
+	case(opcode)
+    24'd16  : wmask_dcache=wmask_1b;
+    24'd17  : wmask_dcache=wmask_2b;
+    24'd18  : wmask_dcache=(waddr[2]? 64'hffffffff00000000:64'hffffffff);
+    24'd43  : wmask_dcache=64'hffffffffffffffff;
+    default: wmask_dcache=64'b0;
 	endcase
 
 	case(opcode)
@@ -673,7 +719,7 @@ reg [ 7:0] wmask;
 
 always @(*) begin
   //pmem_read(raddr, rdata);
-  pmem_write(waddr, wdata, wmask);
+  //pmem_write(waddr, wdata, wmask);
 end
 
 
