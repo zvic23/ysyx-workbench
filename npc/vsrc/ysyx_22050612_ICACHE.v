@@ -63,12 +63,12 @@ always @(posedge clk) begin
 		v1 <= 64'b0;
 		v2 <= 64'b0;
 		v3 <= 64'b0;
-//		for(i=0;i<=63;i=i+1)begin
-//			tag0[i] <= 54'b0;
-//			tag1[i] <= 54'b0;
-//			tag2[i] <= 54'b0;
-//			tag3[i] <= 54'b0;
-//		end
+		for(i=0;i<=63;i=i+1)begin
+			tag0[i] <= 54'b0;
+			tag1[i] <= 54'b0;
+			tag2[i] <= 54'b0;
+			tag3[i] <= 54'b0;
+		end
 	end
 	else if(!wen) begin
 		case({!cen3,!cen2,!cen1,!cen0})
@@ -176,6 +176,29 @@ always @(*) begin
 		pmem_read_icache_high64(addr, line_mem[127:64]);
 //	end
 end
+
+
+
+//*******************   AXI-FULL    ***************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 always @(negedge clk) begin
 	if(valid) begin
