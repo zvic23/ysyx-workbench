@@ -63,17 +63,15 @@ always @(posedge clk) begin
 		v1 <= 64'b0;
 		v2 <= 64'b0;
 		v3 <= 64'b0;
-		for(i=0;i<=63;i=i+1)begin
-			tag0[i] <= 54'b0;
-			tag1[i] <= 54'b0;
-			tag2[i] <= 54'b0;
-			tag3[i] <= 54'b0;
-		end
+//		for(i=0;i<=63;i=i+1)begin
+//			tag0[i] <= 54'b0;
+//			tag1[i] <= 54'b0;
+//			tag2[i] <= 54'b0;
+//			tag3[i] <= 54'b0;
+//		end
 	end
-	else if( !wen  ) begin
-	//else if(valid && way_hit==4'b0 && ready_IF_ID) begin
+	else if(!wen) begin
 		case({!cen3,!cen2,!cen1,!cen0})
-		//case(random_cnt)
 			4'b0001: begin v0[index] <= 1'b1; tag0[index] <= addr[63:10]; end 
 			4'b0010: begin v1[index] <= 1'b1; tag1[index] <= addr[63:10]; end
 			4'b0100: begin v2[index] <= 1'b1; tag2[index] <= addr[63:10]; end
@@ -114,10 +112,6 @@ assign cen0 = ~(  valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1
 assign cen1 = ~(  valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0) ;
 assign cen2 = ~(  valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0) ;
 assign cen3 = ~(  valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0) ;
-//assign cen0 = ~( ready_IF_ID ?(  valid ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
-//assign cen1 = ~( ready_IF_ID ?(  valid ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
-//assign cen2 = ~( ready_IF_ID ?(  valid ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
-//assign cen3 = ~( ready_IF_ID ?(  valid ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0)  : 1'b0)  ;
 assign  wen = ~(  valid && (way_hit == 4'b0))   ;
 assign  din = line_mem;
 
@@ -171,31 +165,9 @@ always @(*) begin
 	endcase
 end
 
-/*
-reg [31:0]inst_prev;
-reg dump;
-always @(posedge clk) begin
-	if(rst) begin
-		inst_prev <= 32'b0;
-		dump <= 1'b0;
-	end
-	else if(!ready_IF_ID && !dump) begin
-		inst_prev <= inst;
-		dump <= 1'b1;
-	end
-	else if(!ready_IF_ID && dump) begin
-		inst_prev <= inst_prev;
-		dump <= 1'b1;
-	end
-	else if(ready_IF_ID && dump) begin
-		inst_prev <= 32'b0;
-		dump <= 1'b0;
-	end
-end
-*/
+
 
 assign inst =  addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout[63:32] : (addr_prev[3:2]==2'b10 ? dout[95:64] : (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)))  ;
-//assign inst = !dump ? (  addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout[63:32] : (addr_prev[3:2]==2'b10 ? dout[95:64] : (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)))  ) :   inst_prev;
 
 wire [127:0]line_mem;
 always @(*) begin
