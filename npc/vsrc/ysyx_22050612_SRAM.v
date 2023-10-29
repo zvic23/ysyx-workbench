@@ -17,7 +17,7 @@ module ysyx_22050612_SRAM(
    input  [2:0]arsize,
    input  [1:0]arburst,
    input  arvalid,
-   output arready,
+   output reg arready,
 
    output [31:0]rdata,
    output reg [1:0]rresp,
@@ -46,7 +46,6 @@ module ysyx_22050612_SRAM(
 
 
 //************** read  *******************
-assign arready = 1'b1;
 //assign arready = (read_current_state == read_send_rdata) ? 1'b0 : 1'b1;
 reg [1:0]read_current_state, read_next_state;
 
@@ -87,6 +86,7 @@ assign rdata = r_data[31:0];
 always @(read_current_state or arvalid) begin
 	case(read_current_state)
 		read_idle: begin
+			arready = 1'b1;
 			rvalid = 1'b0;
 			rresp  = 2'b0;
 			rlast  = 1'b0;
@@ -97,12 +97,14 @@ always @(read_current_state or arvalid) begin
   			pmem_read({{32{1'b0}},r_addr+r_count}, r_data);	
   			//if(clk)pmem_read({{32{1'b0}},r_addr+r_count*(a_size-1)}, r_data);	
 			//if(araddr==32'ha0000060 )$display("data:%x  araddr:%x  arvalid:%d  rvalid:%d clk:%d current_state:%d",rdata,araddr,arvalid,rvalid,clk,read_current_state);
+			arready = 1'b0;
 			rvalid = 1'b1;
 			rresp  = 2'b0;
 			rlast  = (r_countc == r_len) ? 1'b1 : 1'b0;
 			read_next_state = (r_countc == r_len) ? read_idle : read_send_rdata;
 		end
 		default: begin
+			arready = 1'b1;
 			rvalid = 1'b0;
 			rresp  = 2'b0;
 			rlast  = 1'b0;
