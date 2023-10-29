@@ -79,10 +79,10 @@ always @(posedge clk) begin
 	end
 	else if(!wen && rlast) begin
 		case({!cen3,!cen2,!cen1,!cen0})
-			4'b0001: begin v0[addr_prev[9:4]] <= 1'b1; tag0[addr_prev[9:4]] <= addr_prev[63:10]; end 
-			4'b0010: begin v1[addr_prev[9:4]] <= 1'b1; tag1[addr_prev[9:4]] <= addr_prev[63:10]; end
-			4'b0100: begin v2[addr_prev[9:4]] <= 1'b1; tag2[addr_prev[9:4]] <= addr_prev[63:10]; end
-			4'b1000: begin v3[addr_prev[9:4]] <= 1'b1; tag3[addr_prev[9:4]] <= addr_prev[63:10]; end
+			4'b0001: begin v0[addr_wr_sram[9:4]] <= 1'b1; tag0[addr_wr_sram[9:4]] <= addr_wr_sram[63:10]; end 
+			4'b0010: begin v1[addr_wr_sram[9:4]] <= 1'b1; tag1[addr_wr_sram[9:4]] <= addr_wr_sram[63:10]; end
+			4'b0100: begin v2[addr_wr_sram[9:4]] <= 1'b1; tag2[addr_wr_sram[9:4]] <= addr_wr_sram[63:10]; end
+			4'b1000: begin v3[addr_wr_sram[9:4]] <= 1'b1; tag3[addr_wr_sram[9:4]] <= addr_wr_sram[63:10]; end
 			default: begin end
 		endcase
 	end
@@ -134,6 +134,8 @@ wire [127:0]din;
 
 reg [3:0]wr_sram_count;
 reg [3:0]random_cnt;
+
+reg [63:0]addr_wr_sram;
 always @(posedge clk) begin
 	if(rst) begin
 		wr_sram_count      <= 4'b1;
@@ -148,6 +150,13 @@ always @(posedge clk) begin
 		wr_sram_count[0]   <= wr_sram_count[3];
 		wr_sram_count[3:1] <= wr_sram_count[2:0];
 		random_cnt         <= random_cnt;
+	end
+
+	if(rst) begin
+		addr_wr_sram       <= 64'b0;
+	end
+	else if(arvalid&&arready) begin
+		addr_wr_sram       <= addr;
 	end
 end
 
