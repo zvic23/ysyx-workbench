@@ -160,7 +160,7 @@ always @(posedge clk) begin
 	end
 end
 
-assign addr_sram = addr_wr_sram[9:4];
+assign addr_sram = icache_current_state==2'b0 ? index : addr_wr_sram[9:4];
 assign bwen[31 :0 ] = wr_sram_count[0] ? 32'b0 : 32'hffffffff; 
 assign bwen[63 :32] = wr_sram_count[1] ? 32'b0 : 32'hffffffff; 
 assign bwen[95 :64] = wr_sram_count[2] ? 32'b0 : 32'hffffffff; 
