@@ -137,7 +137,7 @@ reg [3:0]random_cnt;
 always @(posedge clk) begin
 	if(rst) begin
 		wr_sram_count      <= 4'b1;
-		random_cnt         <= 4'b1;
+		random_cnt         <= 4'hf;
 	end
 	if(icache_current_state==idle) begin
 		wr_sram_count      <= 4'b1;
@@ -147,6 +147,7 @@ always @(posedge clk) begin
 	else begin
 		wr_sram_count[0]   <= wr_sram_count[3];
 		wr_sram_count[3:1] <= wr_sram_count[2:0];
+		random_cnt         <= random_cnt;
 	end
 end
 
