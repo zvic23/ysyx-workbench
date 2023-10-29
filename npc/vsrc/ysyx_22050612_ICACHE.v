@@ -144,11 +144,13 @@ always @(posedge clk) begin
 		wr_sram_count      <= 4'b1;
 		random_cnt[0]      <= random_cnt[3];
 		random_cnt[3:1]    <= random_cnt[2:0];
+		$display("cnt:%d",random_cnt);
 	end
 	else begin
 		wr_sram_count[0]   <= wr_sram_count[3];
 		wr_sram_count[3:1] <= wr_sram_count[2:0];
 		random_cnt         <= random_cnt;
+		$display("cnt:%d",random_cnt);
 	end
 end
 
