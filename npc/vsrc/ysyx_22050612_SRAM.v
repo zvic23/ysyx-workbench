@@ -73,8 +73,7 @@ always @(posedge clk) begin
 		r_count <= 32'b0;
 		r_countc <= 8'b0;
 	end
-
-	if(read_current_state == read_send_rdata) begin
+	else if(read_current_state == read_send_rdata) begin
 		r_count <= r_count + 32'h4;
 		r_countc <= r_countc + 8'b1;
 	end
@@ -91,12 +90,10 @@ always @(read_current_state or arvalid) begin
 			rresp  = 2'b0;
 			rlast  = 1'b0;
 			read_next_state = (arvalid == 1'b1)? read_send_rdata : read_idle;
-			//if(araddr==32'ha0000060 )$display("**************************araddr:%x  arvalid:%d  rvalid:%d",araddr,arvalid,rvalid);
 		end
 		read_send_rdata: begin
   			pmem_read({{32{1'b0}},r_addr+r_count}, r_data);	
   			//if(clk)pmem_read({{32{1'b0}},r_addr+r_count*(a_size-1)}, r_data);	
-			//if(araddr==32'ha0000060 )$display("data:%x  araddr:%x  arvalid:%d  rvalid:%d clk:%d current_state:%d",rdata,araddr,arvalid,rvalid,clk,read_current_state);
 			arready = 1'b0;
 			rvalid = 1'b1;
 			rresp  = 2'b0;
