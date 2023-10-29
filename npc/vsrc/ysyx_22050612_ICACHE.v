@@ -186,7 +186,7 @@ always @(posedge clk) begin
 		line_mem_prev   <=128'b0;
 		ready           <= 1'b0;
 	end
-	else if(valid && way_hit!=4'b0)begin
+	else if(valid && way_hit!=4'b0 && icache_current_state==idle)begin
 	     	way_hit_prev    <= way_hit;
 		line_mem_prev   <= line_mem;
 		ready           <= 1'b1;
