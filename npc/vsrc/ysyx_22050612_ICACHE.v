@@ -147,7 +147,6 @@ always @(posedge clk) begin
 	else begin
 		wr_sram_count[0]   <= wr_sram_count[3];
 		wr_sram_count[3:1] <= wr_sram_count[2:0];
-		random_cnt         <= random_cnt;
 	end
 end
 
