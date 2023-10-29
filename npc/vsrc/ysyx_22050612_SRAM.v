@@ -46,7 +46,8 @@ module ysyx_22050612_SRAM(
 
 
 //************** read  *******************
-assign arready = (read_current_state == read_send_rdata) ? 1'b0 : 1'b1;
+assign arready = 1'b1;
+//assign arready = (read_current_state == read_send_rdata) ? 1'b0 : 1'b1;
 reg [1:0]read_current_state, read_next_state;
 
 localparam read_idle       = 2'b00;        //waiting for arvalid
