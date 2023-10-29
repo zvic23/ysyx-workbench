@@ -271,8 +271,8 @@ void execute(int n){
   for(uint64_t i=0;i<n;i++){
 	  if(npc_state == END || npc_state == QUIT){
 	  //if(end == 1){
-		  program_exec_statistics();
 	          pipeline_state_printf();
+		  program_exec_statistics();
 		  return;
 	  }
   	  else if(npc_state == STOP){
