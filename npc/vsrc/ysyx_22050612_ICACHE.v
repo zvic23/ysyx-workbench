@@ -161,10 +161,10 @@ always @(posedge clk) begin
 end
 
 assign addr_sram = index;
-assign bwen[31 :0 ] = wr_sram_count[0] ? 32'b0 : 32'hfffffffe; 
-assign bwen[63 :32] = wr_sram_count[1] ? 32'b0 : 32'hfffffffe; 
-assign bwen[95 :64] = wr_sram_count[2] ? 32'b0 : 32'hfffffffe; 
-assign bwen[127:96] = wr_sram_count[3] ? 32'b0 : 32'hfffffffe; 
+assign bwen[31 :0 ] = wr_sram_count[0] ? 32'b0 : 32'hfffffff0; 
+assign bwen[63 :32] = wr_sram_count[1] ? 32'b0 : 32'hfffffff0; 
+assign bwen[95 :64] = wr_sram_count[2] ? 32'b0 : 32'hfffffff0; 
+assign bwen[127:96] = wr_sram_count[3] ? 32'b0 : 32'hfffffff0; 
 assign din[31 :0 ]  = wr_sram_count[0] ? rdata : 32'b1; 
 assign din[63 :32]  = wr_sram_count[1] ? rdata : 32'b1; 
 assign din[95 :64]  = wr_sram_count[2] ? rdata : 32'b1; 
