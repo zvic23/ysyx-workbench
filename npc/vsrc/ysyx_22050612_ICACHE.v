@@ -135,7 +135,7 @@ wire [127:0]din;
 reg [3:0]wr_sram_count;
 reg [3:0]random_cnt;
 always @(posedge clk) begin
-	if(rst) begin
+	if(!rst) begin
 		wr_sram_count      <= 4'b1;
 		random_cnt         <= 4'hf;
 	end
