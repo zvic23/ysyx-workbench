@@ -36,7 +36,7 @@ reg [63:0]v3;
 //************************  pipeline  ******************************
 always @(negedge clk) begin
 	ICACHE_state_trace (addr_prev, {32'b0,inst}, {63'b0,valid}, {63'b0,ready}, line_mem_prev[127:64], line_mem_prev[63:0], {58'b0,index}, {58'b0,addr_prev[9:4]},
-	{60'b0,addr[3:0]}, {60'b0,addr_prev[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {60'b0,random_cnt}, {63'b0,arvalid}, {62'b0,icache_current_state});
+	{60'b0,addr[3:0]}, {60'b0,addr_prev[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {60'b0,random_cnt}, {60'b0,random_cnt}, {60'b0,random_cnt});
 	//ICACHE_state_trace (addr_prev, {32'b0,inst}, {63'b0,valid}, {63'b0,ready}, line_mem_prev[127:64], line_mem_prev[63:0], {58'b0,index}, {58'b0,addr_prev[9:4]},
 	//{60'b0,addr[3:0]}, {60'b0,addr_prev[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {63'b0,wen}, line_mem[127:64], line_mem[63:0]);
 
@@ -141,8 +141,8 @@ always @(posedge clk) begin
 	end
 	if(icache_current_state==idle) begin
 		wr_sram_count      <= 4'b1;
-		random_cnt[3:1]    <= random_cnt[2:0];
 		random_cnt[0]      <= random_cnt[3];
+		random_cnt[3:1]    <= random_cnt[2:0];
 	end
 	else begin
 		wr_sram_count[0]   <= wr_sram_count[3];
