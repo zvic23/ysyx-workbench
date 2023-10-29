@@ -222,10 +222,7 @@ extern "C" void pmem_read_pc(long long raddr, long long *rdata) {
   }
 }
 
-//int skip_difftest=0;
-//
-//extern uint64_t time_init;
-//extern uint32_t i8042_data_io_handler();
+
 extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   if(raddr>=0x80000000){
@@ -249,7 +246,8 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
 	}
 
 
-  	long long raddr_set = raddr & ~0x7ull;
+  	long long raddr_set = raddr & ~0x3ull;
+  	//long long raddr_set = raddr & ~0x7ull;
 	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
 #ifdef CONFIG_MTRACE	
 	long long rdata_printf;
@@ -262,8 +260,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   }
 }
 
-//extern int vgactl_port;
-//extern uint8_t vmem[400*300*4];
+
 extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // 总是往地址为`waddr & ~0x7ull`的8字节按写掩码`wmask`写入`wdata`
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
