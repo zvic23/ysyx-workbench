@@ -140,7 +140,7 @@ always @(posedge clk) begin
 		random_cnt         <= 4'b1;
 		$display("clear!!!!!!!!!!!!!!!!!!!!!!!!");
 	end
-	if(icache_current_state==idle) begin
+	else if(icache_current_state==idle) begin
 		wr_sram_count      <= 4'b1;
 		random_cnt[0]      <= random_cnt[3];
 		random_cnt[3:1]    <= random_cnt[2:0];
