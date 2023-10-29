@@ -161,14 +161,14 @@ always @(posedge clk) begin
 end
 
 assign addr_sram = index;
-assign bwen[31 :0 ] = wr_sram_count[0] ? 32'b0 : 32'hfffffff0; 
-assign bwen[63 :32] = wr_sram_count[1] ? 32'b0 : 32'hfffffff0; 
-assign bwen[95 :64] = wr_sram_count[2] ? 32'b0 : 32'hfffffff0; 
-assign bwen[127:96] = wr_sram_count[3] ? 32'b0 : 32'hfffffff0; 
-assign din[31 :0 ]  = wr_sram_count[0] ? rdata : 32'b1; 
-assign din[63 :32]  = wr_sram_count[1] ? rdata : 32'b1; 
-assign din[95 :64]  = wr_sram_count[2] ? rdata : 32'b1; 
-assign din[127:96]  = wr_sram_count[3] ? rdata : 32'b1; 
+assign bwen[31 :0 ] = wr_sram_count[0] ? 32'b0 : 32'hffffffff; 
+assign bwen[63 :32] = wr_sram_count[1] ? 32'b0 : 32'hffffffff; 
+assign bwen[95 :64] = wr_sram_count[2] ? 32'b0 : 32'hffffffff; 
+assign bwen[127:96] = wr_sram_count[3] ? 32'b0 : 32'hffffffff; 
+assign din[31 :0 ]  = wr_sram_count[0] ? rdata : 32'b0; 
+assign din[63 :32]  = wr_sram_count[1] ? rdata : 32'b0; 
+assign din[95 :64]  = wr_sram_count[2] ? rdata : 32'b0; 
+assign din[127:96]  = wr_sram_count[3] ? rdata : 32'b0; 
 assign cen0 = ~(  (icache_current_state==idle) ? (valid&&way_hit[0]) : (random_cnt[0]&&rvalid&&rready)      ) ;
 assign cen1 = ~(  (icache_current_state==idle) ? (valid&&way_hit[1]) : (random_cnt[1]&&rvalid&&rready)      ) ;
 assign cen2 = ~(  (icache_current_state==idle) ? (valid&&way_hit[2]) : (random_cnt[2]&&rvalid&&rready)      ) ;
