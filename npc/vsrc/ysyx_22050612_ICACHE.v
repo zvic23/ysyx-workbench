@@ -135,14 +135,14 @@ wire [127:0]din;
 reg [3:0]wr_sram_count;
 reg [3:0]random_cnt;
 always @(posedge clk) begin
-	if(!rst) begin
+	if(rst) begin
 		wr_sram_count      <= 4'b1;
-		random_cnt         <= 4'hf;
+		random_cnt         <= 4'b1;
 	end
 	if(icache_current_state==idle) begin
 		wr_sram_count      <= 4'b1;
-		random_cnt[0]      <= random_cnt[3];
 		random_cnt[3:1]    <= random_cnt[2:0];
+		random_cnt[0]      <= random_cnt[3];
 	end
 	else begin
 		wr_sram_count[0]   <= wr_sram_count[3];
