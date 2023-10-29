@@ -24,7 +24,6 @@ always @(posedge CLK) begin
         ram[A] <= (D & bwen) | (ram[A] & ~bwen);
     end
     Q <= cen && !wen ? ram[A] : {4{$random}};
-    $display("sram:%x   cen:%d",ram[6'hd],CEN);
 end
 
 endmodule
