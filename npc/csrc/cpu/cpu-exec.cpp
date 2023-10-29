@@ -276,6 +276,7 @@ void execute(int n){
 		  return;
 	  }
   	  else if(npc_state == STOP){
+	          pipeline_state_printf();
 		  return;
           }
   	  else if(npc_state == ABORT){
