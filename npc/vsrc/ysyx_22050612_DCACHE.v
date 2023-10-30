@@ -180,7 +180,7 @@ always @(posedge clk) begin
 		ready           <= 1'b1;
 	end
 */
-	else if(valid && way_hit!=4'b0 && !wren && dcache_current_state==idle)begin
+	else if(valid && way_hit!=4'b0 && !wren && dcache_current_state==idle && !ready)begin
 	     	way_hit_prev    <= way_hit;
 		line_mem_prev   <= line_mem;
 		ready           <= 1'b1;
