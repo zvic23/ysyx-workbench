@@ -2,8 +2,8 @@ CXXSRC += csrc/sdb/sdb.cpp csrc/sdb/expr.cpp csrc/sdb/watchpoint.cpp csrc/infras
 
 
 CXXSRC += csrc/utils/disasm.cc
-CXXFLAGS += $(shell llvm-config --cxxflags) -fPIE  -Wno-redefined
-LIBS += $(shell llvm-config --libs) -Wno-redefined
+CXXFLAGS += $(shell llvm-config --cxxflags) -fPIE  
+LIBS += $(shell llvm-config --libs)
 LIBS += -lreadline  -lSDL2main -lSDL2
 
 
@@ -12,7 +12,7 @@ all:
 	@echo "Write this Makefile by your self."
 
 sim:
-	verilator --cc --exe -Wno-REDEFMACRO --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp  $(CXXSRC) -CFLAGS "$(CXXFLAGS)" -LDFLAGS "$(LIBS)"  -Ivsrc/ #add -Wall later      and --trace if want to make wave
+	verilator --cc --exe -U__STDC_FORMAT_MACROS --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp  $(CXXSRC) -CFLAGS "$(CXXFLAGS)" -LDFLAGS "$(LIBS)"  -Ivsrc/ #add -Wall later      and --trace if want to make wave
 	
 	#verilator --cc --exe --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp --trace -Ivsrc/ #add -Wall later 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
