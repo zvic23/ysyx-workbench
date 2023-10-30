@@ -1,6 +1,11 @@
 #ifndef __TRACE_H__
 #define __TRACE_H__
 
+//#include <cstdint>
+//#include <cstdio>
+//#include <cstring>
+//#include <cinttypes>
+//#include <cassert>
 #include "ctype.h"
 
 extern "C" void init_disasm(const char *triple);
