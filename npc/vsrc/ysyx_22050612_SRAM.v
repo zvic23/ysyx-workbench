@@ -57,25 +57,22 @@ reg [31:0]r_addr;
 reg  [7:0]r_len;
 reg  [2:0]r_size;
 reg  [1:0]r_burst;
-reg [31:0]r_count;
-reg [ 7:0]r_countc;
+reg  [7:0]r_count;
 
 always @(posedge clk) begin
 	if(rst == 1'b1) read_current_state <= read_idle;
 	else            read_current_state <= read_next_state;
 
-	if(arvalid&&arready&&(read_current_state== read_idle)) begin
+	if(arvalid&&arready&&(read_current_state==read_idle)) begin
 		r_addr  <= araddr;
 		r_len   <= arlen;
 		r_size  <= arsize;
 		r_burst <= arburst;
 
-		r_count <= 32'b0;
-		r_countc <= 8'b0;
+		r_count <= 8'b0;
 	end
 	else if(read_current_state == read_send_rdata) begin
-		r_count <= r_count + 32'h4;
-		r_countc <= r_countc + 8'b1;
+		r_count <= r_count + 8'h1;
 	end
 end
 
@@ -92,13 +89,13 @@ always @(read_current_state or arvalid) begin
 			read_next_state = (arvalid == 1'b1)? read_send_rdata : read_idle;
 		end
 		read_send_rdata: begin
-  			pmem_read({{32{1'b0}},r_addr+r_count}, r_data);	
+  			pmem_read({{32{1'b0}},r_addr[31:4],r_count[1:0],{2{1'b0}}}, r_data);	
   			//if(clk)pmem_read({{32{1'b0}},r_addr+r_count*(a_size-1)}, r_data);	
 			arready = 1'b0;
 			rvalid = 1'b1;
 			rresp  = 2'b0;
-			rlast  = (r_countc == r_len) ? 1'b1 : 1'b0;
-			read_next_state = (r_countc == r_len) ? read_idle : read_send_rdata;
+			rlast  = (r_count == r_len) ? 1'b1 : 1'b0;
+			read_next_state = (r_count == r_len) ? read_idle : read_send_rdata;
 		end
 		default: begin
 			arready = 1'b1;

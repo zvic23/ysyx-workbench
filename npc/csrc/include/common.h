@@ -1,7 +1,8 @@
-#define GREEN "\33[1;32m"
-#define RED   "\33[1;31m"
-#define BLUE  "\33[1;34m"
-#define NONE  "\33[0m"                //zsl:offer color for printf
+#define GREEN  "\33[1;32m"
+#define RED    "\33[1;31m"
+#define BLUE   "\33[1;34m"
+#define YELLOW "\33[1;33m"
+#define NONE   "\33[0m"                //zsl:offer color for printf
 
 
 

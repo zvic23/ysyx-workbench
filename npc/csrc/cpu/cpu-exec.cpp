@@ -247,9 +247,9 @@ static uint64_t g_timer = 0; // unit: us
 static uint64_t g_cycle = 0; //  cycle
 
 void program_exec_statistics(){
-           printf(GREEN "ICACHE hit rate : %.4f%%    hit:%lld   miss:%lld\n" NONE,((float)icache_hit/(icache_hit+icache_miss))*100,icache_hit,icache_miss);
-           printf(GREEN "DCACHE read  hit rate : %.4f%%    hit:%lld   miss:%lld\n" NONE,((float)dcache_read_hit/(dcache_read_hit+dcache_read_miss))*100,dcache_read_hit,dcache_read_miss);
-           printf(GREEN "DCACHE write hit rate : %.4f%%    hit:%lld   miss:%lld\n" NONE,((float)dcache_write_hit/(dcache_write_hit+dcache_write_miss))*100,dcache_write_hit,dcache_write_miss);
+           printf(YELLOW "ICACHE hit rate : %.4f%%    hit:%lld   miss:%lld\n" NONE,((float)icache_hit/(icache_hit+icache_miss))*100,icache_hit,icache_miss);
+           printf(YELLOW "DCACHE read  hit rate : %.4f%%    hit:%lld   miss:%lld\n" NONE,((float)dcache_read_hit/(dcache_read_hit+dcache_read_miss))*100,dcache_read_hit,dcache_read_miss);
+           printf(YELLOW "DCACHE write hit rate : %.4f%%    hit:%lld   miss:%lld\n" NONE,((float)dcache_write_hit/(dcache_write_hit+dcache_write_miss))*100,dcache_write_hit,dcache_write_miss);
 
   	 struct timeval time_end;                   //get the time when program end
   	 gettimeofday(&time_end,NULL);

@@ -290,7 +290,7 @@ assign arburst = 2'b01;
 assign rready  = 1'b1;
 
 
-//state machine 
+//****************     icahce state machine   ***************
 reg [1:0]icache_current_state, icache_next_state;
 
 localparam idle       = 2'b00;        //
