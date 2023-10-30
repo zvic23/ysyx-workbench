@@ -262,7 +262,7 @@ wire rready;
 
 ysyx_22050612_SRAM  sram_ifu (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready);
 
-assign araddr  = {addr[31:4],4'b0};
+assign araddr  = {addr[31:6],6'b0};
 //assign arlen   = 8'b11;                                    //The real length is arlen + 1
 assign arlen   = 8'b1111;                                    //The real length is arlen + 1
 assign arsize  = 3'b101;

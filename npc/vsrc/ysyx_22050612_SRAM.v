@@ -89,7 +89,7 @@ always @(read_current_state or arvalid) begin
 			read_next_state = (arvalid == 1'b1)? read_send_rdata : read_idle;
 		end
 		read_send_rdata: begin
-  			pmem_read({{32{1'b0}},r_addr[31:4],r_count[1:0],{2{1'b0}}}, r_data);	
+  			pmem_read({{32{1'b0}},r_addr[31:6],r_count[3:0],{2{1'b0}}}, r_data);	
   			//if(clk)pmem_read({{32{1'b0}},r_addr+r_count*(a_size-1)}, r_data);	
 			arready = 1'b0;
 			rvalid = 1'b1;
