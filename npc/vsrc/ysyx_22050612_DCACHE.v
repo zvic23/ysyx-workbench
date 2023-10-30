@@ -123,7 +123,7 @@ end
 
 
 
-assign        addr_sram =  addr[9:4];
+assign        addr_sram =  dcache_current_state==2'b0 ? addr[9:4] : {addr[9:6],wr_sram_count[3:2]};
 assign     bwen[31 :0 ] = (wr_sram_count[1:0]==2'b00) ? 32'b0 : 32'hffffffff; 
 assign     bwen[63 :32] = (wr_sram_count[1:0]==2'b01) ? 32'b0 : 32'hffffffff; 
 assign     bwen[95 :64] = (wr_sram_count[1:0]==2'b10) ? 32'b0 : 32'hffffffff; 
