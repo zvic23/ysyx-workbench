@@ -1,8 +1,7 @@
 #ifndef __SDB_H__
 #define __SDB_H__
 
-//#include <cstdint>
-#include "ctype.h"
+#include <cstdint>
 
 void one_cycle();
 void execute(int n);
