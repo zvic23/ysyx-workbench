@@ -168,7 +168,7 @@ always @(posedge clk) begin
 		ready           <= ready        ;
 	end
 	*/
-       else if(valid && wren && dcache_current_state==idle)begin
+       else if(valid && wren && dcache_current_state==idle&& !ready)begin
 	     	way_hit_prev    <= 4'b0;
 		line_mem_prev   <= line_mem;
 		ready           <= 1'b1;
