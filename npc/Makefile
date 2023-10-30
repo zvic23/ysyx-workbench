@@ -2,8 +2,8 @@ CXXSRC += csrc/sdb/sdb.cpp csrc/sdb/expr.cpp csrc/sdb/watchpoint.cpp csrc/infras
 
 
 CXXSRC += csrc/utils/disasm.cc
-CXXFLAGS += $(shell llvm-config --cxxflags) -fPIE 
-LIBS += $(shell llvm-config --libs) -Wno-macro-redefined 
+CXXFLAGS += $(shell llvm-config --cxxflags) -fPIE  
+LIBS += $(shell llvm-config --libs)
 LIBS += -lreadline  -lSDL2main -lSDL2
 
 
