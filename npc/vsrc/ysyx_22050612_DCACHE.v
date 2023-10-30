@@ -301,6 +301,7 @@ always @(negedge clk) begin
 	if(valid && wren && dcache_current_state==idle)begin
 	//if(valid&&!ready)begin
 	        pmem_write(addr, din, {mask[56],mask[48],mask[40],mask[32],mask[24],mask[16],mask[8],mask[0]});
+		$display("addr:%x     din:%x    mask:%x",addr,din,mask);
 		//pmem_write_dcache_low64 (addr, wren, din, mask, line_mem_wr[63:0],line_mem_wr[127:64]);
 		//pmem_write_dcache_high64(addr, {7'b0,wren}, din, mask, line_mem_wr[127:64]);
 	end
