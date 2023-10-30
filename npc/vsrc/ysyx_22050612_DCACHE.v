@@ -291,8 +291,7 @@ wire [127:0]line_mem_wr;
 always @(negedge clk) begin
 		pmem_read_dcache_low64 (addr, line_mem[63:0]);
 		pmem_read_dcache_high64(addr, line_mem[127:64]);
-	if(valid&&dcache_current_state==2'b0)begin
-	//if(valid&&!ready)begin
+	if(valid&&!ready)begin
 		pmem_write_dcache_low64 (addr, wren, din, mask, line_mem_wr[63:0],line_mem_wr[127:64]);
 		//pmem_write_dcache_high64(addr, {7'b0,wren}, din, mask, line_mem_wr[127:64]);
 	end
