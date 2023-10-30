@@ -335,7 +335,7 @@ end
 
 
 always @(negedge clk) begin
-	if(valid) begin
+	if(valid&&icache_current_state==2'b0) begin
 		if(way_hit != 4'b0) begin
 			icache_collect(1);
 		end

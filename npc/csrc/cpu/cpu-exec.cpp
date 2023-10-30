@@ -216,6 +216,7 @@ void icache_collect(int hit){
 		icache_hit++;
 	}else{
 		icache_miss++;
+		icache_hit--;
 	}
 }
 
