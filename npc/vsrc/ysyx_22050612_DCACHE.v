@@ -43,7 +43,7 @@ reg [15:0]v2;
 reg [15:0]v3;
 //************************  pipeline  ******************************
 always @(negedge clk) begin
-	DCACHE_state_trace (addr, dout, {63'b0,valid}, {63'b0,ready}, line_mem_prev[127:64], line_mem_prev[63:0], {60'b0,index}, {58'b0,addr[9:4]},
+	DCACHE_state_trace (addr, dout, {63'b0,valid}, {63'b0,ready}, din_sram[127:64], din_sram[63:0], {60'b0,index}, {58'b0,addr[9:4]},
 	{60'b0,addr[3:0]}, {60'b0,addr[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {63'b0,wen}, line_mem[127:64], line_mem[63:0]);
 end
 //*****************************************************************
