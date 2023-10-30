@@ -106,6 +106,12 @@ always @(*) begin
 		pc_next = pc;
 		pc_en   = 1'b0;
 	end
+
+	else if(way_hit == 1'b0)begin
+		pc_next = pc;
+		pc_en   = 1'b0;
+	end
+
 	else begin
 		pc_next = pc + 64'd4;
 		pc_en   = 1'b1;
@@ -157,18 +163,24 @@ assign pc_read =  pc;
 
 wire icache_valid;
 wire icache_ready;
-//assign icache_valid = (~(inst_is_branch == 4'd2 || ((inst_is_branch == 4'd1)&&(minus_target_addr==1'b1))))&&ready_IF_ID;
-assign icache_valid = ready_IF_ID ? (~(inst_jal || (inst_branch &&minus_target_addr))) : 1'b0;
+assign icache_valid = ready_IF_ID && (~(inst_jal || (inst_branch &&minus_target_addr))) ;
+//assign icache_valid = ready_IF_ID ? (~(inst_jal || (inst_branch &&minus_target_addr))) : 1'b0;
 
-ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, icache_valid, branch_flush, ready_IF_ID, inst, icache_ready , waddr);
+wire way_hit;
+ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, icache_valid, branch_flush, ready_IF_ID, inst, icache_ready    , way_hit, waddr);
 
 always @(posedge clk) begin
 	if(rst) begin
 		pc_prev <= 64'b0;
 	end
-	else if(!ready_IF_ID) begin
+//	else if(!ready_IF_ID) begin
+//		pc_prev <= pc_prev;
+//	end
+/*
+	else if(!icache_ready) begin
 		pc_prev <= pc_prev;
 	end
+*/
 	else if(branch_flush) begin
 		pc_prev <= 64'b0;
 	end

@@ -1,8 +1,8 @@
 //import "DPI-C" function void npc_loadstore(int getinst, longint raddr, longint waddr);
-import "DPI-C" function void pmem_read(
-  input longint raddr, output longint rdata);
-import "DPI-C" function void pmem_write(
-  input longint waddr, input longint wdata, input byte wmask);
+//import "DPI-C" function void pmem_read(
+//  input longint raddr, output longint rdata);
+//import "DPI-C" function void pmem_write(
+//  input longint waddr, input longint wdata, input byte wmask);
 import "DPI-C" function void MEM_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
 
 
