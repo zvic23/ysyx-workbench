@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <cstdio>
 #include <cstring>
-#include <cinttypes>
+//#include <cinttypes>
 #include <cassert>
 
 extern "C" void init_disasm(const char *triple);
