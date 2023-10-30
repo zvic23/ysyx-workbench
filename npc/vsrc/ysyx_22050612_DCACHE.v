@@ -168,6 +168,11 @@ always @(posedge clk) begin
 		ready           <= ready        ;
 	end
 	*/
+        else if(valid && !wren  && dcache_current_state==idle &&!not_device)begin
+	     	way_hit_prev    <= 4'b0;
+		line_mem_prev   <= line_mem;
+		ready           <= 1'b1;
+	end
 	else if(valid && wren && dcache_current_state==idle)begin
 	     	way_hit_prev    <= 4'b0;
 		line_mem_prev   <= line_mem;
@@ -207,8 +212,8 @@ always @(*) begin
 		4'b0010: line_read = dout1;
 		4'b0100: line_read = dout2;
 		4'b1000: line_read = dout3;
-		default: line_read = 128'b0;
-		//default: line_read = line_mem_prev;
+		//default: line_read = 128'b0;
+		default: line_read = line_mem_prev;
 	endcase
 end
 
@@ -258,8 +263,8 @@ end
 always @(*) begin
 	case(dcache_current_state)
 		idle: begin
-			arvalid = valid && (way_hit==4'b0) && !wren;
-			dcache_next_state = (valid && (way_hit==4'b0) && !wren && arready) ? readmemory : idle;
+			arvalid = valid && (way_hit==4'b0) && !wren && not_device;
+			dcache_next_state = (valid && (way_hit==4'b0) && !wren && arready&& not_device) ? readmemory : idle;
 		end
 		readmemory: begin
 			arvalid = 1'b0;
