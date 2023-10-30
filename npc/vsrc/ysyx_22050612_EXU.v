@@ -912,7 +912,7 @@ always @(*) begin
     //24'h300  : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
     //24'h300  : pc_update= EX_reg_valid ? (EX_reg_inst[31]==1'b0 ? 1'b1 : 1'b0) : 1'b0;
     24'd4    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? 1'b1 : 1'b0;
-    24'd5    : pc_update=  1'b0;
+    24'd5    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( ((src1==src2&&EX_reg_inst[31]==0)||(src1!=src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
     24'd6    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( ((src1!=src2&&EX_reg_inst[31]==0)||(src1==src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
     24'd7    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( (($signed(src1) <$signed(src2)&&EX_reg_inst[31]==0)||($signed(src1)>=$signed(src2)&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
     24'd8    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( (($signed(src1)>=$signed(src2)&&EX_reg_inst[31]==0)||($signed(src1) <$signed(src2)&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
