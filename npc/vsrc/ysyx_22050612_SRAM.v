@@ -162,7 +162,7 @@ always @(posedge clk) begin
 	else            write_current_state <= write_next_state;
 
 	if(w_addr == 32'h80008fe8)begin
-	$display("sram: addr:%x, state:%b, wdata:%x, wstrb:%x   state:%b,data:%x,strb:%x\n",w_addr,write_current_state,wdata,wstrb, dc_state,dc_wdata,dc_wstrb);
+	$display("sram: addr:%x, state:%b, wdata:%x, wstrb:%x  awaddr:%x      state:%b,data:%x,strb:%x\n",w_addr,write_current_state,wdata,wstrb,   awaddr,      dc_state,dc_wdata,dc_wstrb);
 end
 
 end
