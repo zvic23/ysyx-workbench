@@ -46,7 +46,8 @@ module ysyx_22050612_SRAM(
 
    output reg [1:0]write_current_state,
    output [63:0]wwdata,
-   output [ 7:0]wwstrb
+   output [ 7:0]wwstrb,
+   input  [1:0]dc_state
    
 );
 assign wwdata = wdata;
@@ -157,7 +158,7 @@ always @(posedge clk) begin
 	else            write_current_state <= write_next_state;
 
 	if(w_addr == 32'h80008fe8)begin
-	$display("sram: addr:%x, state:%b, wdata:%x, wstrb:%x \n",w_addr,write_current_state,wdata,wstrb);
+	$display("sram: addr:%x, state:%b, wdata:%x, wstrb:%x   state:%b\n",w_addr,write_current_state,wdata,wstrb, dc_state);
 end
 
 end
