@@ -58,7 +58,7 @@ always @(posedge clk) begin
 			tag3[i] <= 22'b0;
 		end
 	end
-	else if( !wen && rlast  ) begin
+	else if( !wen && (rlast||wlast)  ) begin
 	    //if(not_device) begin   //暂时用来维持设备和dcache的一致性
 		case({!cen3,!cen2,!cen1,!cen0})
 			4'b0001: begin v0[index] <= 1'b1; tag0[index] <= addr[31:10]; end 
