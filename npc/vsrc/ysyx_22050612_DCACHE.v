@@ -39,7 +39,7 @@ always @(negedge clk) begin
 	{62'b0,dcache_current_state}, {60'b0,addr[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {63'b0,wen}, line_mem[127:64], line_mem[63:0]);
 	//{60'b0,addr[3:0]}, {60'b0,addr[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {63'b0,wen}, line_mem[127:64], line_mem[63:0]);
 	if(addr == 64'h80008fe8)begin
-	$display("addr:%x, state:%b, wren:%d, din:%x",addr,dcache_current_state,wren,din);
+	$display("addr:%x, state:%b, wren:%d, din:%x   state:%b",addr,dcache_current_state,wren,din  , w_state);
 end
 end
 //*****************************************************************
@@ -250,9 +250,9 @@ wire [1:0]bresp;
 wire bvalid;
 wire bready;
 
-
+wire [1:0]w_state;
 ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready,   
-	                                awaddr, awlen, awsize, awburst, awvalid, awready,    wdata, wstrb, wlast, wvalid, wready,   bresp, bvalid, bready);
+	                                awaddr, awlen, awsize, awburst, awvalid, awready,    wdata, wstrb, wlast, wvalid, wready,   bresp, bvalid, bready   , w_state);
 
 assign araddr  = {addr[31:6],6'b0};
 assign arlen   = 8'b111;                                    //The real length is arlen + 1

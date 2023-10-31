@@ -41,7 +41,10 @@ module ysyx_22050612_SRAM(
 
    output [1:0]bresp,
    output bvalid,
-   input bready
+   input bready,
+
+
+   output reg [1:0]write_current_state
    
 );
 
@@ -115,7 +118,8 @@ end
 
 
 //************** write *******************
-reg [1:0]write_current_state, write_next_state;
+reg [1:0] write_next_state;
+//reg [1:0]write_current_state, write_next_state;
 
 localparam write_idle  = 2'b00;
 localparam write_receive_wdata = 2'b01;        //receive wdata and write it to memory
