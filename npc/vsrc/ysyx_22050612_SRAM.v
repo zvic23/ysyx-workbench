@@ -150,7 +150,7 @@ always @(posedge clk) begin
 	else            write_current_state <= write_next_state;
 
 	if(w_addr == 32'h80008fe8)begin
-	$display("sram: addr:%x, state:%b, \n",w_addr,write_current_state);
+	$display("sram: addr:%x, state:%b, wdata:%x, wstrb:%x \n",w_addr,write_current_state,wdata,wstrb);
 end
 
 end
