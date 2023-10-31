@@ -117,8 +117,8 @@ end
 
 
 assign        addr_sram =  dcache_current_state==2'b0 ? addr[9:4] : {addr[9:6],wr_sram_count[2:1]};
-assign     bwen[63 :0 ] = (dcache_current_state==readmemory) ? ((wr_sram_count[0]==1'b0) ? 64'b0 : 64'hffffffffffffffff) : (!addr[3] ? mask : 64'hffffffffffffffff);
-assign     bwen[127:64] = (dcache_current_state==readmemory) ? ((wr_sram_count[0]==1'b1) ? 64'b0 : 64'hffffffffffffffff) : ( addr[3] ? mask : 64'hffffffffffffffff);
+assign     bwen[63 :0 ] = (dcache_current_state==readmemory) ? ((wr_sram_count[0]==1'b0) ? 64'b0 : 64'hffffffffffffffff) : (!addr[3] ? ~mask : 64'hffffffffffffffff);
+assign     bwen[127:64] = (dcache_current_state==readmemory) ? ((wr_sram_count[0]==1'b1) ? 64'b0 : 64'hffffffffffffffff) : ( addr[3] ? ~mask : 64'hffffffffffffffff);
 assign din_sram[63 :0 ] = (dcache_current_state==readmemory) ? ((wr_sram_count[0]==1'b0) ? rdata : 64'b0)                : (!addr[3] ? din  : 64'b0) ;
 assign din_sram[127:64] = (dcache_current_state==readmemory) ? ((wr_sram_count[0]==1'b1) ? rdata : 64'b0)                : ( addr[3] ? din  : 64'b0) ;
 assign cen0 = ~(  (dcache_current_state==idle) ? (valid&&way_hit[0]) : (random_cnt[0]&&rvalid&&rready)      ) ;
