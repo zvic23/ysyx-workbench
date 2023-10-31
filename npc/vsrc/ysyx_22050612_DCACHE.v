@@ -307,7 +307,7 @@ end
 
 
 always @(negedge clk) begin
-	if(valid&&!ready&&!wren) begin
+	if(valid&&!ready&&!wren&&dcache_current_state==2'b0) begin
 		if(way_hit != 4'b0) begin
 			dcache_collect(1);
 		end
@@ -315,7 +315,7 @@ always @(negedge clk) begin
 			dcache_collect(2);
 		end
 	end
-	else if(valid&&!ready&&wren) begin
+	else if(valid&&!ready&&wren&&dcache_current_state==2'b0) begin
 		if(way_hit != 4'b0) begin
 			dcache_collect(3);
 		end
