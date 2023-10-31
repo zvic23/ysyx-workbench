@@ -271,7 +271,7 @@ wire rready;
 
 //ysyx_22050612_SRAM  sram_ifu (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready);
 ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready,   
-	                                 32'b0,  8'b0,   3'b0,    2'b0,    1'b0,    ,    64'b0,  8'b0,  1'b0,   1'b0,   ,   , , 1'b0   , , , , 2'b0);
+	                                 32'b0,  8'b0,   3'b0,    2'b0,    1'b0,    ,    64'b0,  8'b0,  1'b0,   1'b0,   ,   , , 1'b0   , , , , 2'b0,64'b0,8'b0);
 
 assign araddr  = {addr[31:6],6'b0};
 assign arlen   = 8'b111;                                    //The real length is arlen + 1

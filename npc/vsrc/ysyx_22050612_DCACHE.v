@@ -254,7 +254,7 @@ wire [1:0]w_state;
 wire [63:0]w_wdata;
 wire [7:0]w_wstrb;
 ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready,   
-	                                awaddr, awlen, awsize, awburst, awvalid, awready,    wdata, wstrb, wlast, wvalid, wready,   bresp, bvalid, bready   , w_state,w_wdata,w_wstrb,dcache_current_state);
+	                                awaddr, awlen, awsize, awburst, awvalid, awready,    wdata, wstrb, wlast, wvalid, wready,   bresp, bvalid, bready   , w_state,w_wdata,w_wstrb,dcache_current_state,wdata,wstrb);
 
 assign araddr  = {addr[31:6],6'b0};
 assign arlen   = 8'b111;                                    //The real length is arlen + 1
