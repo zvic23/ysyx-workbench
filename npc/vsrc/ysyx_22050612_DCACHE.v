@@ -64,7 +64,7 @@ always @(posedge clk) begin
 		end
 	end
 	else if( !wen && rlast  ) begin
-	    if(not_device) begin   //暂时用来维持设备和dcache的一致性
+	    //if(not_device) begin   //暂时用来维持设备和dcache的一致性
 		case({!cen3,!cen2,!cen1,!cen0})
 			4'b0001: begin v0[index] <= 1'b1; tag0[index] <= addr[31:10]; end 
 			4'b0010: begin v1[index] <= 1'b1; tag1[index] <= addr[31:10]; end
@@ -72,7 +72,7 @@ always @(posedge clk) begin
 			4'b1000: begin v3[index] <= 1'b1; tag3[index] <= addr[31:10]; end
 			default: begin $display("dcache all misses!!!!!!!!!!!!!!!!!!!!!!!!\n\n");end
 		endcase
-	    end
+	    //end
 	end
 
 	if(addr!=0 && wren) begin
