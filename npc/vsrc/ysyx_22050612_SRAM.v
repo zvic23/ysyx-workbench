@@ -47,6 +47,7 @@ module ysyx_22050612_SRAM(
    output reg [1:0]write_current_state,
    output [63:0]wwdata,
    output [ 7:0]wwstrb,
+   output [31:0]wwaddr,
    input  [1:0]dc_state,
    input [63:0]dc_wdata,
    input [7:0]dc_wstrb
@@ -54,6 +55,7 @@ module ysyx_22050612_SRAM(
 );
 assign wwdata = wdata;
 assign wwstrb = wstrb;
+assign wwaddr = w_addr;
 
 
 
