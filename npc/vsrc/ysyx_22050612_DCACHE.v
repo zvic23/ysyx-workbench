@@ -25,14 +25,6 @@ input [63:0]mask
 );
 
 
-//reg [53:0]tag0[63:0];
-//reg [53:0]tag1[63:0];
-//reg [53:0]tag2[63:0];
-//reg [53:0]tag3[63:0];
-//reg [63:0]v0;
-//reg [63:0]v1;
-//reg [63:0]v2;
-//reg [63:0]v3;
 reg [21:0]tag0[15:0];
 reg [21:0]tag1[15:0];
 reg [21:0]tag2[15:0];
@@ -236,7 +228,6 @@ wire rready;
 ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready);
 
 assign araddr  = {addr[31:6],6'b0};
-//assign arlen   = 8'b11;                                    //The real length is arlen + 1
 assign arlen   = 8'b111;                                    //The real length is arlen + 1
 assign arsize  = 3'b110;
 assign arburst = 2'b01;

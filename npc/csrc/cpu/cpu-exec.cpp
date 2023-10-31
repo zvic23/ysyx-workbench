@@ -207,6 +207,18 @@ void one_cycle(){
 }
 
 
+//branch predict situation
+long long branch_predict_right = 0;
+long long branch_predict_wrong = 0;
+void branch_predict(int r){
+	if(r) branch_predict_right++;
+	else  branch_predict_wrong++;
+}
+
+
+
+
+
 //ICACHE data collect
 long long icache_hit = 0;
 long long icache_miss = 0;
@@ -247,6 +259,7 @@ static uint64_t g_timer = 0; // unit: us
 static uint64_t g_cycle = 0; //  cycle
 
 void program_exec_statistics(){
+           printf(YELLOW "branch predict rate : %.4f%%    hit:%lld   miss:%lld\n" NONE,((float)branch_predict_right/(branch_predict_right+branch_predict_wrong))*100,branch_predict_right,branch_predict_wrong);
            printf(YELLOW "ICACHE hit rate : %.4f%%    hit:%lld   miss:%lld\n" NONE,((float)icache_hit/(icache_hit+icache_miss))*100,icache_hit,icache_miss);
            printf(YELLOW "DCACHE read  hit rate : %.4f%%    hit:%lld   miss:%lld\n" NONE,((float)dcache_read_hit/(dcache_read_hit+dcache_read_miss))*100,dcache_read_hit,dcache_read_miss);
            printf(YELLOW "DCACHE write hit rate : %.4f%%    hit:%lld   miss:%lld\n" NONE,((float)dcache_write_hit/(dcache_write_hit+dcache_write_miss))*100,dcache_write_hit,dcache_write_miss);
