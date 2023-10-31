@@ -39,7 +39,7 @@ always @(negedge clk) begin
 	{62'b0,dcache_current_state}, {60'b0,addr[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {63'b0,wen}, line_mem[127:64], line_mem[63:0]);
 	//{60'b0,addr[3:0]}, {60'b0,addr[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {63'b0,wen}, line_mem[127:64], line_mem[63:0]);
 	if(addr == 64'h80008fe8)begin
-	$display("addr:%x, state:%b, wren:%d, din:%x   state:%b",addr,dcache_current_state,wren,din  , w_state);
+	$display("addr:%x, state:%b, wren:%d, din:%x   state:%b",addr,dcache_current_state,wren,wdata  , w_state);
 end
 end
 //*****************************************************************
