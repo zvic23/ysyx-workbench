@@ -66,14 +66,14 @@ always @(posedge clk) begin
 		endcase
 	    //end
 	end
-
+/*
 	if(addr!=0 && wren) begin
 		if(tag0[addr[9:6]] == addr[31:10]) begin v0[addr[9:6]] <= 1'b0; end
 		if(tag1[addr[9:6]] == addr[31:10]) begin v1[addr[9:6]] <= 1'b0; end
 		if(tag2[addr[9:6]] == addr[31:10]) begin v2[addr[9:6]] <= 1'b0; end
 		if(tag3[addr[9:6]] == addr[31:10]) begin v3[addr[9:6]] <= 1'b0; end
 	end
-
+*/
 end
 
 wire [3:0]index;
@@ -117,15 +117,15 @@ end
 
 
 assign        addr_sram =  dcache_current_state==2'b0 ? addr[9:4] : {addr[9:6],wr_sram_count[2:1]};
-assign     bwen[63 :0 ] = (wr_sram_count[0]==1'b0) ? 64'b0 : 64'hffffffffffffffff; 
-assign     bwen[127:64] = (wr_sram_count[0]==1'b1) ? 64'b0 : 64'hffffffffffffffff; 
-assign din_sram[63 :0 ] = (wr_sram_count[0]==1'b0) ? rdata : 64'b0; 
-assign din_sram[127:64] = (wr_sram_count[0]==1'b1) ? rdata : 64'b0; 
+assign     bwen[63 :0 ] = (dcache_current_state==readmemory) ? ((wr_sram_count[0]==1'b0) ? 64'b0 : 64'hffffffffffffffff) : (!addr[3] ? mask : 64'hffffffffffffffff);
+assign     bwen[127:64] = (dcache_current_state==readmemory) ? ((wr_sram_count[0]==1'b1) ? 64'b0 : 64'hffffffffffffffff) : ( addr[3] ? mask : 64'hffffffffffffffff);
+assign din_sram[63 :0 ] = (dcache_current_state==readmemory) ? ((wr_sram_count[0]==1'b0) ? rdata : 64'b0)                : (!addr[3] ? din  : 64'b0) ;
+assign din_sram[127:64] = (dcache_current_state==readmemory) ? ((wr_sram_count[0]==1'b1) ? rdata : 64'b0)                : ( addr[3] ? din  : 64'b0) ;
 assign cen0 = ~(  (dcache_current_state==idle) ? (valid&&way_hit[0]) : (random_cnt[0]&&rvalid&&rready)      ) ;
 assign cen1 = ~(  (dcache_current_state==idle) ? (valid&&way_hit[1]) : (random_cnt[1]&&rvalid&&rready)      ) ;
 assign cen2 = ~(  (dcache_current_state==idle) ? (valid&&way_hit[2]) : (random_cnt[2]&&rvalid&&rready)      ) ;
 assign cen3 = ~(  (dcache_current_state==idle) ? (valid&&way_hit[3]) : (random_cnt[3]&&rvalid&&rready)      ) ;
-assign  wen = ~(   dcache_current_state==readmemory && rvalid && rready            ) ;
+assign  wen = ~(  (dcache_current_state==readmemory && rvalid && rready) || (dcache_current_state==idle && wren && way_hit!=4'b0)        ) ;
 //assign addr_sram = index;
 //assign cen0 = ~( (valid&&!ready && not_device) ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0) ;
 //assign cen1 = ~( (valid&&!ready && not_device) ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0) ;
@@ -156,7 +156,7 @@ always @(posedge clk) begin
 		ready           <= ready        ;
 	end
 	*/
-       else if(valid && wren && dcache_current_state==idle&& !ready)begin
+        else if(valid && wren && dcache_current_state==idle&& !ready)begin
 	     	way_hit_prev    <= 4'b0;
 		line_mem_prev   <= line_mem;
 		ready           <= 1'b1;
@@ -224,8 +224,26 @@ wire rlast;
 wire rvalid;
 wire rready;
 
+wire [31:0]awaddr;
+wire [7:0]awlen;
+wire [2:0]awsize;
+wire [1:0]awburst;
+reg awvalid;
+wire awready;
+ 
+wire [63:0]wdata;
+wire [ 7:0]wstrb;
+wire wlast;
+wire wvalid;
+wire wready;
 
-ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready);
+wire [1:0]bresp;
+wire bvalid;
+wire bready;
+
+
+ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready,   
+	                                awaddr, awlen, awsize, awburst, awvalid, awready,    wdata, wstrb, wlast, wvalid, wready,   bresp, bvalid, bready);
 
 assign araddr  = {addr[31:6],6'b0};
 assign arlen   = 8'b111;                                    //The real length is arlen + 1
@@ -234,12 +252,25 @@ assign arburst = 2'b01;
 
 assign rready  = 1'b1;
 
+assign awaddr  = addr[31:0];
+assign awlen   = 8'b0;                                    //The real length is arlen + 1
+assign awsize  = 3'b110;
+assign awburst = 2'b01;
+
+assign wdata   = din;
+assign wstrb   = {mask[56],mask[48],mask[40],mask[32],mask[24],mask[16],mask[8],mask[0]};
+assign wlast   = (dcache_current_state==writememory) ? 1'b1 : 1'b0;
+assign wvalid  = (dcache_current_state==writememory) ? 1'b1 : 1'b0;
+
+assign bready  = 1'b1;
 
 //****************     dcahce state machine   ***************
 reg [1:0]dcache_current_state, dcache_next_state;
 
-localparam idle       = 2'b00;        //
-localparam readmemory = 2'b01;        //
+localparam idle        = 2'b00;        //
+localparam readmemory  = 2'b01;        //
+localparam writememory = 2'b10;        //
+localparam writeresp   = 2'b11;        //
 
 
 always @(posedge clk) begin
@@ -251,28 +282,31 @@ always @(*) begin
 	case(dcache_current_state)
 		idle: begin
 			arvalid = valid && (way_hit==4'b0) && !wren && not_device;
-			dcache_next_state = (valid && (way_hit==4'b0) && !wren && arready&& not_device) ? readmemory : idle;
+			awvalid = valid && wren && not_device;
+			dcache_next_state = (arvalid&&arready) ? readmemory : ((awvalid&&awready) ? writememory : idle);
 		end
 		readmemory: begin
 			arvalid = 1'b0;
+			awvalid = 1'b0;
 			dcache_next_state = rlast ? idle : readmemory;
+		end
+		writememory: begin
+			arvalid = 1'b0;
+			awvalid = 1'b0;
+			dcache_next_state = wlast ? writeresp : writememory;
+		end
+		writeresp: begin
+			arvalid = 1'b0;
+			awvalid = 1'b0;
+			dcache_next_state = (bvalid&&bready&&bresp==2'b0) ? idle : writeresp;
 		end
 		default: begin
 			arvalid = 1'b0;
+			awvalid = 1'b0;
 			dcache_next_state = idle;
 		end
 	endcase
 end
-
-
-
-
-
-
-
-
-
-
 
 
 

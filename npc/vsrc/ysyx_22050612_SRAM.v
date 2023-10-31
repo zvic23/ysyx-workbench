@@ -23,13 +23,13 @@ module ysyx_22050612_SRAM(
    output reg [1:0]rresp,
    output reg rlast,
    output reg rvalid,
-   input  rready
-/*
+   input  rready,
+
 //write
    input [31:0]awaddr,
    input [7:0]awlen,
    input [2:0]awsize,
-   input [1:0]arburst,
+   input [1:0]awburst,
    input awvalid,
    output awready,
 
@@ -39,10 +39,10 @@ module ysyx_22050612_SRAM(
    input wvalid,
    output wready,
 
-   output reg [1:0]bresp,
-   output reg bvalid,
+   output [1:0]bresp,
+   output bvalid,
    input bready
-   */
+   
 );
 
 
@@ -83,30 +83,28 @@ end
 reg [63:0]r_data;
 assign rdata = r_data;
 
-always @(read_current_state or arvalid) begin
+assign arready = read_current_state == read_idle;
+assign rlast  = (r_count == r_len) && (read_current_state == read_send_rdata);
+
+
+always @(*) begin
 	case(read_current_state)
 		read_idle: begin
-			arready = 1'b1;
 			rvalid = 1'b0;
 			rresp  = 2'b0;
-			rlast  = 1'b0;
 			read_next_state = (arvalid == 1'b1)? read_send_rdata : read_idle;
 		end
 		read_send_rdata: begin
   			pmem_read({{32{1'b0}},(r_addr[31:0]+r_count*8)}, r_data);	
   			//pmem_read({{32{1'b0}},r_addr[31:6],r_count[3:0],{2{1'b0}}}, r_data);	
   			//if(clk)pmem_read({{32{1'b0}},r_addr+r_count*(a_size-1)}, r_data);	
-			arready = 1'b0;
 			rvalid = 1'b1;
 			rresp  = 2'b0;
-			rlast  = (r_count == r_len) ? 1'b1 : 1'b0;
 			read_next_state = (r_count == r_len) ? read_idle : read_send_rdata;
 		end
 		default: begin
-			arready = 1'b1;
 			rvalid = 1'b0;
 			rresp  = 2'b0;
-			rlast  = 1'b0;
 			read_next_state = read_idle;
 		end
 	endcase
@@ -115,7 +113,7 @@ end
 
 
 
-/*
+
 //************** write *******************
 reg [1:0]write_current_state, write_next_state;
 
@@ -152,40 +150,32 @@ always @(posedge clk) begin
 	else            write_current_state <= write_next_state;
 end
 
+assign awready = write_current_state==write_idle;
+assign bresp   = 2'b0;
+assign bvalid  = write_current_state==write_w_rsp;
+
 always @(*) begin
 	case(write_current_state)
 		write_idle: begin
-			awready = 1'b1;
 			wready  = 1'b0;
-			bvalid = 1'b0;
-			bresp  = 2'b0;
 			write_next_state = (awvalid && awready) ? write_receive_wdata : write_idle;
 		end
 		write_receive_wdata: begin
 			pmem_write({{32{1'b0}},w_addr}, wdata, wstrb);
-			awready = 1'b0;
 			wready  = 1'b1;
-			bvalid = 1'b0;
-			bresp  = 2'b0;
 			write_next_state = (w_count == w_len) ? write_w_rsp : write_receive_wdata;
 		end
 		write_w_rsp: begin
-			awready = 1'b0;
 			wready  = 1'b0;
-			bvalid = 1'b1;
-			bresp  = 2'b0;
 			write_next_state = write_idle;
 		end
 		default: begin
-			awready = 1'b1;
 			wready  = 1'b0;
-			bvalid = 1'b0;
-			bresp  = 2'b0;
 			write_next_state = write_idle;
 		end
 	endcase
 end
-*/
+
 
 
 endmodule
