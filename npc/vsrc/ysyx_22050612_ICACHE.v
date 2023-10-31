@@ -141,21 +141,30 @@ always @(posedge clk) begin
 	end
 end
 
-assign addr_sram = icache_current_state==2'b0 ? addr[9:4] : {addr_wr_sram[9:6],wr_sram_count[3:2]};
-assign bwen[31 :0 ] = (wr_sram_count[1:0]==2'b00) ? 32'b0 : 32'hffffffff; 
-assign bwen[63 :32] = (wr_sram_count[1:0]==2'b01) ? 32'b0 : 32'hffffffff; 
-assign bwen[95 :64] = (wr_sram_count[1:0]==2'b10) ? 32'b0 : 32'hffffffff; 
-assign bwen[127:96] = (wr_sram_count[1:0]==2'b11) ? 32'b0 : 32'hffffffff; 
-assign  din[31 :0 ] = (wr_sram_count[1:0]==2'b00) ? rdata : 32'b0; 
-assign  din[63 :32] = (wr_sram_count[1:0]==2'b01) ? rdata : 32'b0; 
-assign  din[95 :64] = (wr_sram_count[1:0]==2'b10) ? rdata : 32'b0; 
-assign  din[127:96] = (wr_sram_count[1:0]==2'b11) ? rdata : 32'b0; 
+assign addr_sram = icache_current_state==2'b0 ? addr[9:4] : {addr_wr_sram[9:6],wr_sram_count[2:1]};
+assign bwen[63 :0 ] = (wr_sram_count[0]==1'b0) ? 64'b0 : ~64'h0; 
+assign bwen[127:64] = (wr_sram_count[0]==1'b1) ? 64'b0 : ~64'h0; 
+assign  din[63 :0 ] = (wr_sram_count[0]==1'b0) ? rdata : 64'b0; 
+assign  din[127:64] = (wr_sram_count[0]==1'b1) ? rdata : 64'b0; 
 assign cen0 = ~(  (icache_current_state==idle) ? (valid&&way_hit[0]) : (random_cnt[0]&&rvalid&&rready)      ) ;
 assign cen1 = ~(  (icache_current_state==idle) ? (valid&&way_hit[1]) : (random_cnt[1]&&rvalid&&rready)      ) ;
 assign cen2 = ~(  (icache_current_state==idle) ? (valid&&way_hit[2]) : (random_cnt[2]&&rvalid&&rready)      ) ;
 assign cen3 = ~(  (icache_current_state==idle) ? (valid&&way_hit[3]) : (random_cnt[3]&&rvalid&&rready)      ) ;
 assign  wen = ~(   icache_current_state==readmemory && rvalid && rready            ) ;
-
+//assign addr_sram = icache_current_state==2'b0 ? addr[9:4] : {addr_wr_sram[9:6],wr_sram_count[3:2]};
+//assign bwen[31 :0 ] = (wr_sram_count[1:0]==2'b00) ? 32'b0 : 32'hffffffff; 
+//assign bwen[63 :32] = (wr_sram_count[1:0]==2'b01) ? 32'b0 : 32'hffffffff; 
+//assign bwen[95 :64] = (wr_sram_count[1:0]==2'b10) ? 32'b0 : 32'hffffffff; 
+//assign bwen[127:96] = (wr_sram_count[1:0]==2'b11) ? 32'b0 : 32'hffffffff; 
+//assign  din[31 :0 ] = (wr_sram_count[1:0]==2'b00) ? rdata : 32'b0; 
+//assign  din[63 :32] = (wr_sram_count[1:0]==2'b01) ? rdata : 32'b0; 
+//assign  din[95 :64] = (wr_sram_count[1:0]==2'b10) ? rdata : 32'b0; 
+//assign  din[127:96] = (wr_sram_count[1:0]==2'b11) ? rdata : 32'b0; 
+//assign cen0 = ~(  (icache_current_state==idle) ? (valid&&way_hit[0]) : (random_cnt[0]&&rvalid&&rready)      ) ;
+//assign cen1 = ~(  (icache_current_state==idle) ? (valid&&way_hit[1]) : (random_cnt[1]&&rvalid&&rready)      ) ;
+//assign cen2 = ~(  (icache_current_state==idle) ? (valid&&way_hit[2]) : (random_cnt[2]&&rvalid&&rready)      ) ;
+//assign cen3 = ~(  (icache_current_state==idle) ? (valid&&way_hit[3]) : (random_cnt[3]&&rvalid&&rready)      ) ;
+//assign  wen = ~(   icache_current_state==readmemory && rvalid && rready            ) ;
 
 S011HD1P_X32Y2D128_BW sram_i0(dout0, clk, cen0, wen, bwen, addr_sram, din);
 S011HD1P_X32Y2D128_BW sram_i1(dout1, clk, cen1, wen, bwen, addr_sram, din);
@@ -253,7 +262,7 @@ wire [1:0]arburst;
 reg arvalid;
 wire arready;
 
-wire [31:0]rdata;
+wire [63:0]rdata;
 wire [1:0]rrsep;
 wire rlast;
 wire rvalid;
@@ -264,8 +273,8 @@ ysyx_22050612_SRAM  sram_ifu (clk, rst, araddr, arlen, arsize, arburst, arvalid,
 
 assign araddr  = {addr[31:6],6'b0};
 //assign arlen   = 8'b11;                                    //The real length is arlen + 1
-assign arlen   = 8'b1111;                                    //The real length is arlen + 1
-assign arsize  = 3'b101;
+assign arlen   = 8'b111;                                    //The real length is arlen + 1
+assign arsize  = 3'b110;                                     //64bits
 assign arburst = 2'b01;
 
 assign rready  = 1'b1;

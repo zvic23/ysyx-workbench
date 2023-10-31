@@ -19,7 +19,7 @@ module ysyx_22050612_SRAM(
    input  arvalid,
    output reg arready,
 
-   output [31:0]rdata,
+   output [63:0]rdata,
    output reg [1:0]rresp,
    output reg rlast,
    output reg rvalid,
@@ -81,7 +81,7 @@ always @(posedge clk) begin
 end
 
 reg [63:0]r_data;
-assign rdata = r_data[31:0];
+assign rdata = r_data;
 
 always @(read_current_state or arvalid) begin
 	case(read_current_state)
@@ -93,7 +93,8 @@ always @(read_current_state or arvalid) begin
 			read_next_state = (arvalid == 1'b1)? read_send_rdata : read_idle;
 		end
 		read_send_rdata: begin
-  			pmem_read({{32{1'b0}},r_addr[31:6],r_count[3:0],{2{1'b0}}}, r_data);	
+  			pmem_read({{32{1'b0}},(r_addr[31:0]+r_count*8)}, r_data);	
+  			//pmem_read({{32{1'b0}},r_addr[31:6],r_count[3:0],{2{1'b0}}}, r_data);	
   			//if(clk)pmem_read({{32{1'b0}},r_addr+r_count*(a_size-1)}, r_data);	
 			arready = 1'b0;
 			rvalid = 1'b1;
