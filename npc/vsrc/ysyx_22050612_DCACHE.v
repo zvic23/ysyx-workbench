@@ -294,7 +294,7 @@ always @(*) begin
 	case(dcache_current_state)
 		idle: begin
 			arvalid = valid && (way_hit==4'b0) && !wren && not_device;
-			awvalid = valid && wren && not_device;
+			awvalid = valid && wren && not_device &&!ready;
 			dcache_next_state = (arvalid&&arready) ? readmemory : ((awvalid&&awready) ? writememory : idle);
 		end
 		readmemory: begin
