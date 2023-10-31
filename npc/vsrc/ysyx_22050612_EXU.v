@@ -1219,6 +1219,7 @@ assign result_remuw0 = src1[31:0] % src2[31:0];
 
 
 always @(negedge clk) begin
+	if(ready_EX_MEM) begin
     case (opcode)
 	    24'd4    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
             24'd5    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
@@ -1232,6 +1233,7 @@ always @(negedge clk) begin
     default: begin end 
     endcase
     end
+end
 
 
 
