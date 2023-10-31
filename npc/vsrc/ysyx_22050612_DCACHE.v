@@ -111,7 +111,7 @@ always @(posedge clk) begin
 		random_cnt[0]      <= random_cnt[3];
 		random_cnt[3:1]    <= random_cnt[2:0];
 	end
-	else begin
+	else if(dcache_current_state==readmemory)begin
 		wr_sram_count      <= wr_sram_count+4'b1;
 		random_cnt         <= random_cnt;
 	end
@@ -264,6 +264,8 @@ assign arsize  = 3'b110;
 assign arburst = 2'b01;
 
 assign rready  = 1'b1;
+
+
 
 assign awaddr  = addr[31:0];
 assign awlen   = 8'b0;                                    //The real length is arlen + 1
