@@ -44,10 +44,13 @@ module ysyx_22050612_SRAM(
    input bready,
 
 
-   output reg [1:0]write_current_state
+   output reg [1:0]write_current_state,
+   output [63:0]wwdata,
+   output [ 7:0]wwstrb
    
 );
-
+assign wwdata = wdata;
+assign wwstrb = wstrb;
 
 
 
