@@ -162,7 +162,16 @@ always @(posedge clk) begin
 		line_mem_prev   <= line_mem;
 		ready           <= 1'b1;
 	end
-
+//	else if(valid && wren && dcache_current_state==idle&&!not_device&& !ready)begin
+//	     	way_hit_prev    <= 4'b0;
+//		line_mem_prev   <= line_mem;
+//		ready           <= 1'b1;
+//	end
+	else if(valid && wren && dcache_current_state==writeresp&& !ready)begin
+	     	way_hit_prev    <= 4'b0;
+		line_mem_prev   <= line_mem;
+		ready           <= 1'b1;
+	end
 	else if(valid && way_hit!=4'b0 && !wren && dcache_current_state==idle && !ready)begin
 	     	way_hit_prev    <= way_hit;
 		line_mem_prev   <= line_mem;
@@ -315,12 +324,14 @@ wire [127:0]line_mem_wr;
 always @(negedge clk) begin
 		pmem_read_dcache_low64 (addr, line_mem[63:0]);
 		pmem_read_dcache_high64(addr, line_mem[127:64]);
+		/*
 	if(valid && wren && dcache_current_state==idle &&!ready)begin
 	//if(valid&&!ready)begin
 	        pmem_write(addr, din, {mask[56],mask[48],mask[40],mask[32],mask[24],mask[16],mask[8],mask[0]});
 		//pmem_write_dcache_low64 (addr, wren, din, mask, line_mem_wr[63:0],line_mem_wr[127:64]);
 		//pmem_write_dcache_high64(addr, {7'b0,wren}, din, mask, line_mem_wr[127:64]);
 	end
+	*/
 end
 
 
