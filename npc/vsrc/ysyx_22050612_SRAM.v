@@ -41,21 +41,21 @@ module ysyx_22050612_SRAM(
 
    output [1:0]bresp,
    output bvalid,
-   input bready,
+   input bready
 
 
-   output reg [1:0]write_current_state,
-   output [63:0]wwdata,
-   output [ 7:0]wwstrb,
-   output [31:0]wwaddr,
-   input  [1:0]dc_state,
-   input [63:0]dc_wdata,
-   input [7:0]dc_wstrb
+//   output reg [1:0]write_current_state,
+//   output [63:0]wwdata,
+//   output [ 7:0]wwstrb,
+//   output [31:0]wwaddr,
+//   input  [1:0]dc_state,
+//   input [63:0]dc_wdata,
+//   input [7:0]dc_wstrb
    
 );
-assign wwdata = wdata;
-assign wwstrb = wstrb;
-assign wwaddr = w_addr;
+//assign wwdata = wdata;
+//assign wwstrb = wstrb;
+//assign wwaddr = w_addr;
 
 
 
@@ -126,8 +126,7 @@ end
 
 
 //************** write *******************
-reg [1:0] write_next_state;
-//reg [1:0]write_current_state, write_next_state;
+reg [1:0]write_current_state, write_next_state;
 
 localparam write_idle  = 2'b00;
 localparam write_receive_wdata = 2'b01;        //receive wdata and write it to memory
@@ -161,10 +160,9 @@ always @(posedge clk) begin
 	if(rst == 1'b1) write_current_state <= write_idle;
 	else            write_current_state <= write_next_state;
 
-	if(w_addr == 32'h80008fe8)begin
-	$display("sram: addr:%x, state:%b, wdata:%x, wstrb:%x  awaddr:%x      state:%b,data:%x,strb:%x\n",w_addr,write_current_state,wdata,wstrb,   awaddr,      dc_state,dc_wdata,dc_wstrb);
-end
-
+//	if(w_addr == 32'h80008fe8)begin
+//	$display("sram: addr:%x, state:%b, wdata:%x, wstrb:%x  awaddr:%x      state:%b,data:%x,strb:%x\n",w_addr,write_current_state,wdata,wstrb,   awaddr,      dc_state,dc_wdata,dc_wstrb);
+//        end
 end
 
 assign awready = write_current_state==write_idle;
