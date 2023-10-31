@@ -304,9 +304,9 @@ always @(*) begin
 			dcache_next_state = wlast ? writeresp : writememory;
 		end
 		writeresp: begin
-			arvalid = 1'b0;
+			arvalid = (bvalid&&bready&&bresp==2'b0&&way_hit==4'b0);
 			awvalid = 1'b0;
-			dcache_next_state = (bvalid&&bready&&bresp==2'b0) ? idle : writeresp;
+			dcache_next_state = (bvalid&&bready&&bresp==2'b0) ? ((way_hit==4'b0) ? readmemory : idle) : writeresp;
 		end
 		default: begin
 			arvalid = 1'b0;
