@@ -125,8 +125,8 @@ end
 
 
 assign        addr_sram =  dcache_current_state==2'b0 ? addr[9:4] : {addr[9:6],wr_sram_count[2:1]};
-assign     bwen[63 :0 ] = (wr_sram_count[0]==1'b0) ? 64'b0 : ~64'h0; 
-assign     bwen[127:64] = (wr_sram_count[0]==1'b1) ? 64'b0 : ~64'h0; 
+assign     bwen[63 :0 ] = (wr_sram_count[0]==1'b0) ? 64'b0 : 64'hffffffffffffffff; 
+assign     bwen[127:64] = (wr_sram_count[0]==1'b1) ? 64'b0 : 64'hffffffffffffffff; 
 assign din_sram[63 :0 ] = (wr_sram_count[0]==1'b0) ? rdata : 64'b0; 
 assign din_sram[127:64] = (wr_sram_count[0]==1'b1) ? rdata : 64'b0; 
 assign cen0 = ~(  (dcache_current_state==idle) ? (valid&&way_hit[0]) : (random_cnt[0]&&rvalid&&rready)      ) ;
@@ -237,8 +237,8 @@ ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid,
 
 assign araddr  = {addr[31:6],6'b0};
 //assign arlen   = 8'b11;                                    //The real length is arlen + 1
-assign arlen   = 8'b1111;                                    //The real length is arlen + 1
-assign arsize  = 3'b101;
+assign arlen   = 8'b111;                                    //The real length is arlen + 1
+assign arsize  = 3'b110;
 assign arburst = 2'b01;
 
 assign rready  = 1'b1;

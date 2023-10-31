@@ -142,8 +142,8 @@ always @(posedge clk) begin
 end
 
 assign addr_sram = icache_current_state==2'b0 ? addr[9:4] : {addr_wr_sram[9:6],wr_sram_count[2:1]};
-assign bwen[63 :0 ] = (wr_sram_count[0]==1'b0) ? 64'b0 : ~64'h0; 
-assign bwen[127:64] = (wr_sram_count[0]==1'b1) ? 64'b0 : ~64'h0; 
+assign bwen[63 :0 ] = (wr_sram_count[0]==1'b0) ? 64'b0 : 64'hffffffffffffffff; 
+assign bwen[127:64] = (wr_sram_count[0]==1'b1) ? 64'b0 : 64'hffffffffffffffff; 
 assign  din[63 :0 ] = (wr_sram_count[0]==1'b0) ? rdata : 64'b0; 
 assign  din[127:64] = (wr_sram_count[0]==1'b1) ? rdata : 64'b0; 
 assign cen0 = ~(  (icache_current_state==idle) ? (valid&&way_hit[0]) : (random_cnt[0]&&rvalid&&rready)      ) ;
