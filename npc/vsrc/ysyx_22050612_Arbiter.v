@@ -111,7 +111,7 @@ always @(posedge clk) begin
 	if(rst)  arbi_r_state <= r_idle;
 	else     arbi_r_state <= arbi_r_next_state;
 
-	$display("arbit:   arvalid_ifu:%x",arvalid_ifu);
+	$display("arbit:   arvalid_ifu:%x   state:%x",arvalid_ifu,arbi_r_state);
 end
 
 always @(*) begin
