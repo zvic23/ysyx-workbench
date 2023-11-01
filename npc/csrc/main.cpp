@@ -292,10 +292,11 @@ extern uint64_t img_size;
   gettimeofday(&time_first,NULL);
   time_init = (time_first.tv_sec*1000000)+time_first.tv_usec;
 
-
-  if(1) sdb_mainloop();
-  else execute(-1);
-
+#ifdef CONFIG_SDB
+   sdb_mainloop();
+#else
+   execute(-1);
+#endif
   while(0){
 
   }

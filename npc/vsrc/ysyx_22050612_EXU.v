@@ -8,6 +8,7 @@ import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_regi
 //import "DPI-C" function void pmem_write(
 //  input longint waddr, input longint wdata, input byte wmask);
 import "DPI-C" function void EXU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
+import "DPI-C" function void branch_predict(int r);
 
 
 module ysyx_22050612_EXU(
@@ -1217,299 +1218,22 @@ assign result_remuw0 = src1[31:0] % src2[31:0];
 
 
 
-
-
-//
-//
-////memory
-//
-//always @(*) begin
-//	case(waddr[2:0])
-//    3'd0  : wdata_1byte={{56{1'b0}},src2[7:0]}; 
-//    3'd1  : wdata_1byte={{48{1'b0}},src2[7:0],{ 8{1'b0}}};
-//    3'd2  : wdata_1byte={{40{1'b0}},src2[7:0],{16{1'b0}}};
-//    3'd3  : wdata_1byte={{32{1'b0}},src2[7:0],{24{1'b0}}};
-//    3'd4  : wdata_1byte={{24{1'b0}},src2[7:0],{32{1'b0}}};
-//    3'd5  : wdata_1byte={{16{1'b0}},src2[7:0],{40{1'b0}}};
-//    3'd6  : wdata_1byte={{ 8{1'b0}},src2[7:0],{48{1'b0}}};
-//    3'd7  : wdata_1byte={src2[7:0],{56{1'b0}}};
-//    default:wdata_1byte=64'b0;
-//	endcase
-//
-//	case(waddr[2:0])
-//    3'd0  : wmask_1byte=8'h1 ; 
-//    3'd1  : wmask_1byte=8'h2 ;
-//    3'd2  : wmask_1byte=8'h4 ;
-//    3'd3  : wmask_1byte=8'h8 ;
-//    3'd4  : wmask_1byte=8'h10; 
-//    3'd5  : wmask_1byte=8'h20; 
-//    3'd6  : wmask_1byte=8'h40; 
-//    3'd7  : wmask_1byte=8'h80;
-//    default:wmask_1byte=8'b0;
-//	endcase
-//
-//	case(waddr[2:0])
-//    3'd0  : wdata_2byte={{48{1'b0}},src2[15:0]}; 
-//    3'd1  : wdata_2byte={{40{1'b0}},src2[15:0],{ 8{1'b0}}};
-//    3'd2  : wdata_2byte={{32{1'b0}},src2[15:0],{16{1'b0}}};
-//    3'd3  : wdata_2byte={{24{1'b0}},src2[15:0],{24{1'b0}}};
-//    3'd4  : wdata_2byte={{16{1'b0}},src2[15:0],{32{1'b0}}};
-//    3'd5  : wdata_2byte={{ 8{1'b0}},src2[15:0],{40{1'b0}}};
-//    3'd6  : wdata_2byte={           src2[15:0],{48{1'b0}}};
-//    default:wdata_2byte=64'b0;
-//	endcase
-//
-//	case(waddr[2:0])
-//    3'd0  : wmask_2byte=8'h3 ; 
-//    3'd1  : wmask_2byte=8'h6 ;
-//    3'd2  : wmask_2byte=8'hc ;
-//    3'd3  : wmask_2byte=8'h18;
-//    3'd4  : wmask_2byte=8'h30; 
-//    3'd5  : wmask_2byte=8'h60; 
-//    3'd6  : wmask_2byte=8'hc0;
-//    default:wmask_2byte=8'b0;
-//	endcase
-//
-//
-//	case(raddr[2:0])
-//    3'd0  : rdata_1byte=rdata[ 7: 0]; 
-//    3'd1  : rdata_1byte=rdata[15: 8];
-//    3'd2  : rdata_1byte=rdata[23:16];
-//    3'd3  : rdata_1byte=rdata[31:24];
-//    3'd4  : rdata_1byte=rdata[39:32];
-//    3'd5  : rdata_1byte=rdata[47:40];
-//    3'd6  : rdata_1byte=rdata[55:48];
-//    3'd7  : rdata_1byte=rdata[63:56];
-//    default: rdata_1byte=8'b0;
-//	endcase
-//
-//	case(raddr[2:0])
-//    3'd0  : rdata_2byte=rdata[15: 0]; 
-//    3'd1  : rdata_2byte=rdata[23: 8];
-//    3'd2  : rdata_2byte=rdata[31:16];
-//    3'd3  : rdata_2byte=rdata[39:24];
-//    3'd4  : rdata_2byte=rdata[47:32];
-//    3'd5  : rdata_2byte=rdata[55:40];
-//    3'd6  : rdata_2byte=rdata[63:48];
-//    default:rdata_2byte=16'b0;
-//	endcase
-//
-//	case(opcode)
-//    24'd16  : wdata=wdata_1byte;
-//    24'd17  : wdata=wdata_2byte;
-//    24'd18  : wdata=(waddr[2]?{src2[31:0],{32{1'b0}}}:{{32{1'b0}},src2[31:0]});
-//    24'd43  : wdata=src2;
-//    default: wdata=64'b0;
-//	endcase
-//
-//	case(opcode)
-//    24'd16  : wmask=wmask_1byte;
-//    24'd17  : wmask=wmask_2byte;
-//    24'd18  : wmask=(waddr[2]? 8'b11110000:8'b00001111);
-//    24'd43  : wmask=8'hff;
-//    default: wmask=8'b0;
-//	endcase
-//
-//	case(opcode)
-//    24'd11  : rdata_fix=(rdata_1byte[7]?{{56{1'b1}},rdata_1byte}:{{56{1'b0}},rdata_1byte});
-//    24'd12  : rdata_fix=(rdata_2byte[15]?{{48{1'b1}},rdata_2byte}:{{48{1'b0}},rdata_2byte});
-//    24'd13  : rdata_fix=(raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]}));
-//    24'd14  : rdata_fix={{56{1'b0}},rdata_1byte};
-//    24'd15  : rdata_fix={{48{1'b0}},rdata_2byte};
-//    24'd41  : rdata_fix=raddr[2]?{{32{1'b0}},rdata[63:32]}:{{32{1'b0}},rdata[31:0]};
-//    24'd42  : rdata_fix=rdata;
-//    default: rdata_fix=64'b0;
-//	endcase
-//end
-//
-//always @(*) begin
-//	//$display("*  clk=%d",clk);
-//	case(opcode)
-//    24'd11  : raddr=result_alu0;
-//    24'd12  : raddr=result_alu0;
-//    24'd13  : raddr=result_alu0;
-//    24'd14  : raddr=result_alu0;
-//    24'd15  : raddr=result_alu0;
-//    24'd41  : raddr=result_alu0;
-//    24'd42  : raddr=result_alu0;
-//    default: raddr=64'b0;
-//	endcase
-//
-//	case(opcode)
-//    24'd16  : waddr=result_alu0;
-//    24'd17  : waddr=result_alu0;
-//    24'd18  : waddr=result_alu0;
-//    24'd43  : waddr=result_alu0;
-//    default: waddr=64'b0;
-//	endcase
-//
-//
-//
-//end
-////always @(posedge clk) begin
-////	$display("pose  clk=%d",clk);
-////end
-//
-//
-///*
-//always @(edge clk) begin
-//	//$display(" clk=%d    block=%d   waddr=%x   raddr=%x  ls=%d",clk,exu_block,waddr,raddr,exu_block_ls);
-//end
-////***********************   AXI   *********************
-//reg exu_block_ls;
-//assign exu_block = (((raddr!=64'b0)||(waddr!=64'b0))? 1'b1:1'b0) & exu_block_ls;
-//always @(posedge clk) begin
-//	if(rst == 1'b1)begin
-//		exu_block_ls <= 1'b1;
-//	end
-//	else if(rresp == 2'b0 && rvalid == 1'b1)begin
-//		//$display("unblock");
-//		exu_block_ls <= 1'b0;
-//	end
-//	else if(bresp == 2'b0 && bvalid == 1'b1)begin
-//		exu_block_ls <= 1'b0;
-//	end
-//	else begin
-//		exu_block_ls <= 1'b1;
-//	end
-//
-////	if(rst == 1'b1)begin
-////		exu_block_ls = 1'b0;
-////	end
-////	else if(rresp == 2'b0 && rvalid == 1'b1)begin
-////		exu_block_ls = 1'b0;
-////	end
-////	else if(bresp == 2'b0 && bvalid == 1'b1)begin
-////		exu_block_ls = 1'b0;
-////	end
-////	else if(raddr != 64'b0 || waddr != 64'b0)begin
-////		exu_block_ls = 1'b1;
-////	end
-////	else begin
-////		exu_block_ls = 1'b0;
-////	end
-//end
-//
-////***********************   read   *********************
-//
-//assign rready = 1'b1;
-//
-//always @(posedge clk) begin
-//	//$display("ifu:   arvalid = %d  arready = %d  \n",arvalid, arready);   
-//	if(rvalid == 1'b1 && rready == 1'b1)begin
-//		rdata <= rrdata;
-//		//inst_64 = rdata;
-//		//$display("inst:%x",inst);
-//		//$display("3\n");
-//	end
-////	else begin
-////		rdata <= 64'b0;
-////	end
-//end
-//
-//
-//always @(posedge clk) begin
-//	if(rst == 1'b1)begin
-//		arvalid <= 1'b0;
-//		araddr <= 32'h0;
-//	end
-//	else if(rvalid == 1'b0 && raddr != 64'h0 && opcode_lastcycle == 24'b0)begin
-//		arvalid <= 1'b1;
-//		araddr <= raddr[31:0];
-//	end
-//	else if(arvalid == 1'b1 && arready == 1'b1) begin
-//		arvalid <= 1'b0;
-//	end
-//end
-// 
-// 
-// 
-////***********************   write   *********************
-//assign bready = 1'b1;
-//reg [23:0]opcode_lastcycle;
-//
-//always @(posedge clk) begin
-//	opcode_lastcycle <= opcode;
-//	if(rst == 1'b1)begin
-//		awvalid <= 1'b0;
-//		awaddr <= 32'h0;
-//	end
-//	else if(bvalid == 1'b0 && waddr != 64'h0 && opcode_lastcycle == 24'b0)begin
-//		//$display("1");
-//		awvalid <= 1'b1;
-//		awaddr <= waddr[31:0];
-//	end
-//	else if(awvalid == 1'b1 && awready == 1'b1) begin
-//		//$display("2");
-//		awvalid <= 1'b0;
-//	end
-//
-//end
-//
-//always @(posedge clk) begin
-//	if(rst == 1'b1)begin
-//		wvalid <= 1'b0;
-//		wwdata <= 64'h0;
-//		wstrb <= 8'h0;
-//	end
-//	else if(bvalid == 1'b0 && waddr != 64'h0 && opcode_lastcycle == 24'b0)begin
-//		wvalid <= 1'b1;
-//		wwdata <= wdata;
-//		wstrb <= wmask;
-//	end
-//	else if(wvalid == 1'b1 && wready == 1'b1) begin
-//		wvalid <= 1'b0;
-//	end
-//end
-//
-////******************************************
-//*/
-//
-//
-////wire [7:0]wmask_1byte;
-////wire [63:0]wdata_1byte;
-//reg [7:0]wmask_1byte;
-//reg [63:0]wdata_1byte;
-//
-////wire [7:0]wmask_2byte;
-////wire [63:0]wdata_2byte;
-//reg [7:0]wmask_2byte;
-//reg [63:0]wdata_2byte;
-//
-//
-//
-//reg [63:0] rdata;
-////wire [63:0] raddr;
-////wire [63:0] waddr;
-////wire [63:0] wdata;
-////wire [ 7:0] wmask;
-//reg [63:0] raddr;
-//reg [63:0] waddr;
-//reg [63:0] wdata;
-//reg [ 7:0] wmask;
-//
-//
-//
-//always @(*) begin
-//  pmem_read(raddr, rdata);
-//  pmem_write(waddr, wdata, wmask);
-//end
-//
-//
-////wire [63:0] rdata_fix;
-//reg [63:0] rdata_fix;
-//
-//
-////wire [7:0] rdata_1byte;
-//reg [7:0] rdata_1byte;
-//
-//
-////wire [15:0] rdata_2byte;
-//reg [15:0] rdata_2byte;
-//
-//
-
-
+always @(negedge clk) begin
+	if(ready_EX_MEM) begin
+    case (opcode)
+	    24'd4    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
+            24'd5    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
+            24'd6    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
+            24'd7    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
+            24'd8    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
+            24'd9    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
+            24'd10   : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
+    //24'h200000: pc_update=(EX_reg_valid&&ready_EX_MEM) ? 1'b1 : 1'b0;   
+    //24'h500000: pc_update=(EX_reg_valid&&ready_EX_MEM) ? 1'b1 : 1'b0;             
+    default: begin end 
+    endcase
+    end
+end
 
 
 
@@ -1552,11 +1276,5 @@ end
 
 
 
-
-//  always @(posedge clk) begin
-//    $display("%d,%d,%d",rd,rs1,imm_I);
-//    $display("%d,%d,%d,%d",result_alu0,wdata_reg,wen,opcode);
-//    $display("%d,%d,%d",result_alu0,src1,imm_I);
-//  end
 
 endmodule
