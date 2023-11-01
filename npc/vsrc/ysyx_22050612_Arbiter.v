@@ -97,7 +97,9 @@ module ysyx_22050612_Arbiter(
 );
 
 
-
+always @(negedge clk) begin
+	$display("arbit:   arvalid_ifu:%x   rlast_ifu:%x  state:%x",arvalid_ifu,rlast,arbi_r_state);
+end
 
 //*********************    read    ********************
 reg [1:0]arbi_r_state, arbi_r_next_state;
@@ -110,8 +112,6 @@ localparam r_mem_trans   = 2'b10;
 always @(posedge clk) begin
 	if(rst)  arbi_r_state <= r_idle;
 	else     arbi_r_state <= arbi_r_next_state;
-
-	$display("arbit:   arvalid_ifu:%x   rlast_ifu:%x  state:%x",arvalid_ifu,rlast,arbi_r_state);
 end
 
 always @(*) begin
