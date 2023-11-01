@@ -71,7 +71,7 @@ reg [15:0]v3;
 //************************  pipeline  ******************************
 always @(negedge clk) begin
 	DCACHE_state_trace (addr, dout, {63'b0,valid}, {63'b0,ready}, din_sram[127:64], din_sram[63:0], {60'b0,index}, {58'b0,addr[9:4]},
-	{62'b0,dcache_current_state}, {60'b0,addr[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {63'b0,wen}, line_mem[127:64], line_mem[63:0]);
+	{61'b0,dcache_current_state}, {60'b0,addr[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {63'b0,wen}, line_mem[127:64], line_mem[63:0]);
 	//{60'b0,addr[3:0]}, {60'b0,addr[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {63'b0,wen}, line_mem[127:64], line_mem[63:0]);
 //	if(addr == 64'h80008fe8)begin
 //	$display("addr:%x, state:%b, wren:%d, din:%x   state:%b,wdata:%x,wstrb:%x,addr:%x",addr,dcache_current_state,wren,wdata  , w_state,w_wdata,w_wstrb,w_waddr);
@@ -154,7 +154,7 @@ end
 
 
 
-assign        addr_sram =  dcache_current_state==2'b0 ? addr[9:4] : {addr[9:6],wr_sram_count[2:1]};
+assign        addr_sram =  dcache_current_state==idle ? addr[9:4] : {addr[9:6],wr_sram_count[2:1]};
 assign     bwen[63 :0 ] = (dcache_current_state==readmemory) ? ((wr_sram_count[0]==1'b0) ? 64'b0 : 64'hffffffffffffffff) : (!addr[3] ? ~mask : 64'hffffffffffffffff);
 assign     bwen[127:64] = (dcache_current_state==readmemory) ? ((wr_sram_count[0]==1'b1) ? 64'b0 : 64'hffffffffffffffff) : ( addr[3] ? ~mask : 64'hffffffffffffffff);
 assign din_sram[63 :0 ] = (dcache_current_state==readmemory) ? ((wr_sram_count[0]==1'b0) ? rdata : 64'b0)                : (!addr[3] ? din  : 64'b0) ;
@@ -287,12 +287,13 @@ assign wvalid  = (dcache_current_state==writememory) ? 1'b1 : 1'b0;
 assign bready  = 1'b1;
 
 //****************     dcahce state machine   ***************
-reg [1:0]dcache_current_state, dcache_next_state;
+reg [2:0]dcache_current_state, dcache_next_state;
 
-localparam idle        = 2'b00;        //
-localparam readmemory  = 2'b01;        //
-localparam writememory = 2'b10;        //
-localparam writeresp   = 2'b11;        //
+localparam idle        = 3'b00;        //
+localparam readmemory  = 3'b01;        //
+localparam writememory = 3'b10;        //
+localparam writeresp   = 3'b11;        //
+localparam readquest   = 3'b110;        //
 
 
 always @(posedge clk) begin
@@ -320,7 +321,12 @@ always @(*) begin
 		writeresp: begin
 			arvalid = (bvalid&&bready&&bresp==2'b0&&way_hit==4'b0);
 			awvalid = 1'b0;
-			dcache_next_state = (bvalid&&bready&&bresp==2'b0) ? ((way_hit==4'b0) ? readmemory : idle) : writeresp;
+			dcache_next_state = (bvalid&&bready&&bresp==2'b0) ? ((way_hit==4'b0) ? ((arvalid&&arready) ? readmemory : readquest) : idle) : writeresp;
+		end
+		readquest: begin
+			arvalid = 1'b1;
+			awvalid = 1'b0;
+			dcache_next_state = (arvalid&&arready) ? readmemory : readquest;
 		end
 		default: begin
 			arvalid = 1'b0;
@@ -352,7 +358,7 @@ end
 
 
 always @(negedge clk) begin
-	if(valid&&!ready&&!wren&&dcache_current_state==2'b0) begin
+	if(valid&&!ready&&!wren&&dcache_current_state==idle) begin
 		if(way_hit != 4'b0) begin
 			dcache_collect(1);
 		end
@@ -360,7 +366,7 @@ always @(negedge clk) begin
 			dcache_collect(2);
 		end
 	end
-	else if(valid&&!ready&&wren&&dcache_current_state==2'b0) begin
+	else if(valid&&!ready&&wren&&dcache_current_state==idle) begin
 		if(way_hit != 4'b0) begin
 			dcache_collect(3);
 		end
