@@ -17,7 +17,24 @@ module ysyx_22050612_IFU (
 
    output branch_flush,
 
-   input [63:0]waddr    //暂时加进来保证切换程序时icache能保持一致性，所以每次存指令后就更新icache
+   input [63:0]waddr,   //暂时加进来保证切换程序时icache能保持一致性，所以每次存指令后就更新icache
+
+
+
+output [31:0]araddr_icache_axi,
+output [7:0]arlen_icache_axi,
+output [2:0]arsize_icache_axi,
+output [1:0]arburst_icache_axi,
+output     arvalid_icache_axi,
+input      arready_icache_axi,
+
+input [63:0]rdata_icache_axi,
+input [1:0]rrsep_icache_axi,
+input rlast_icache_axi,
+input rvalid_icache_axi,
+output rready_icache_axi
+
+
 
 /*
    output reg arvalid,
@@ -167,7 +184,8 @@ assign icache_valid = ready_IF_ID && (~(inst_jal || (inst_branch &&minus_target_
 //assign icache_valid = ready_IF_ID ? (~(inst_jal || (inst_branch &&minus_target_addr))) : 1'b0;
 
 wire way_hit;
-ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, icache_valid, branch_flush, ready_IF_ID, inst, icache_ready    , way_hit, waddr);
+ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, icache_valid, branch_flush, ready_IF_ID, inst, icache_ready    , way_hit, waddr,
+araddr_icache_axi, arlen_icache_axi, arsize_icache_axi, arburst_icache_axi, arvalid_icache_axi, arready_icache_axi, rdata_icache_axi, rrsep_icache_axi, rlast_icache_axi, rvalid_icache_axi, rready_icache_axi);
 
 always @(posedge clk) begin
 	if(rst) begin

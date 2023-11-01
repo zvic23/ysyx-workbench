@@ -21,7 +21,42 @@ output [63:0]dout,
 
 input wren,
 input [63:0]din,
-input [63:0]mask
+input [63:0]mask,
+
+
+
+output [31:0]araddr,
+output [7:0]arlen,
+output [2:0]arsize,
+output [1:0]arburst,
+output reg arvalid,
+input      arready,
+
+input [63:0]rdata,
+input [1:0]rrsep,
+input rlast,
+input rvalid,
+output rready,
+
+output [31:0]awaddr,
+output [7:0]awlen,
+output [2:0]awsize,
+output [1:0]awburst,
+output reg awvalid,
+input      awready,
+ 
+output [63:0]wdata,
+output [ 7:0]wstrb,
+output wlast,
+output wvalid,
+input wready,
+
+input [1:0]bresp,
+input bvalid,
+output bready
+
+
+
 );
 
 
@@ -220,42 +255,14 @@ assign dout =  addr[3] ?  line_read[127:64] : line_read[63:0] ;
 
 
 //*******************   AXI-FULL    ***********************
-wire [31:0]araddr;
-wire [7:0]arlen;
-wire [2:0]arsize;
-wire [1:0]arburst;
-reg arvalid;
-wire arready;
 
-wire [63:0]rdata;
-wire [1:0]rrsep;
-wire rlast;
-wire rvalid;
-wire rready;
 
-wire [31:0]awaddr;
-wire [7:0]awlen;
-wire [2:0]awsize;
-wire [1:0]awburst;
-reg awvalid;
-wire awready;
- 
-wire [63:0]wdata;
-wire [ 7:0]wstrb;
-wire wlast;
-wire wvalid;
-wire wready;
-
-wire [1:0]bresp;
-wire bvalid;
-wire bready;
-
-wire [1:0]w_state;
-wire [63:0]w_wdata;
-wire [7:0]w_wstrb;
-wire [31:0]w_waddr;
-ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready,   
-	                                awaddr, awlen, awsize, awburst, awvalid, awready,    wdata, wstrb, wlast, wvalid, wready,   bresp, bvalid, bready);
+//wire [1:0]w_state;
+//wire [63:0]w_wdata;
+//wire [7:0]w_wstrb;
+//wire [31:0]w_waddr;
+//ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready,   
+//	                                awaddr, awlen, awsize, awburst, awvalid, awready,    wdata, wstrb, wlast, wvalid, wready,   bresp, bvalid, bready);
 	                                //awaddr, awlen, awsize, awburst, awvalid, awready,    wdata, wstrb, wlast, wvalid, wready,   bresp, bvalid, bready   , w_state,w_wdata,w_wstrb,w_waddr,dcache_current_state,wdata,wstrb);
 
 assign araddr  = {addr[31:6],6'b0};

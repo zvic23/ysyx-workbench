@@ -19,7 +19,22 @@ output [31:0]inst,
 output reg ready,
 
 output way_hit_out,
-input [63:0]waddr
+input [63:0]waddr,
+
+
+
+output [31:0]araddr,
+output [7:0]arlen,
+output [2:0]arsize,
+output [1:0]arburst,
+output reg arvalid,
+input arready,
+
+input [63:0]rdata,
+input [1:0]rrsep,
+input rlast,
+input rvalid,
+output rready
 
 );
 
@@ -255,23 +270,24 @@ end
 
 
 //*******************   AXI-FULL    ***********************
-wire [31:0]araddr;
-wire [7:0]arlen;
-wire [2:0]arsize;
-wire [1:0]arburst;
-reg arvalid;
-wire arready;
-
-wire [63:0]rdata;
-wire [1:0]rrsep;
-wire rlast;
-wire rvalid;
-wire rready;
+//wire [31:0]araddr;
+//wire [7:0]arlen;
+//wire [2:0]arsize;
+//wire [1:0]arburst;
+//reg arvalid;
+//wire arready;
+//
+//wire [63:0]rdata;
+//wire [1:0]rrsep;
+//wire rlast;
+//wire rvalid;
+//wire rready;
 
 
 //ysyx_22050612_SRAM  sram_ifu (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready);
-ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready,   
-	                                 32'b0,  8'b0,   3'b0,    2'b0,    1'b0,    ,    64'b0,  8'b0,  1'b0,   1'b0,   ,   , , 1'b0);
+//ysyx_22050612_SRAM  sram_ifu (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready,   
+//	                                 32'b0,  8'b0,   3'b0,    2'b0,    1'b0,    ,    64'b0,  8'b0,  1'b0,   1'b0,   ,
+//				      	 , , 1'b0);
 	                                 //32'b0,  8'b0,   3'b0,    2'b0,    1'b0,    ,    64'b0,  8'b0,  1'b0,   1'b0,   ,   , , 1'b0   , , , , , 2'b0,64'b0,8'b0);
 
 assign araddr  = {addr[31:6],6'b0};
