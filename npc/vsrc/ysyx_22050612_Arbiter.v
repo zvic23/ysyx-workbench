@@ -122,11 +122,11 @@ always @(*) begin
 		end
 		r_ifu_trans: begin
 			arvalid = 1'b0;
-			arbi_r_next_state = rlast_ifu ? r_idle : r_ifu_trans;
+			arbi_r_next_state = rlast ? r_idle : r_ifu_trans;
 		end
 		r_mem_trans: begin
 			arvalid = 1'b0;
-			arbi_r_next_state = rlast_mem ? r_idle : r_mem_trans;
+			arbi_r_next_state = rlast ? r_idle : r_mem_trans;
 		end
 		default : begin
 			arvalid = 1'b0;
