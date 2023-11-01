@@ -167,7 +167,7 @@ assign inst = pc_read[2]?inst_mix[63:32] : inst_mix[31:0];
 //************************  pipeline  ******************************
 always @(negedge clk) begin
 	IFU_state_trace(pc, {32'b0,inst}, {63'b0,valid_IF_ID}, {63'b0,ready_IF_ID},64'b0,64'b0 );
-	//$display("IF   pc:%x   inst:%x   valid:%d   ready:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,ready_IF_ID,pc_next,dnpc);
+	$display("IF   pc:%x   inst:%x   valid:%d   ready:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,ready_IF_ID,pc_next,dnpc);
 end
 //*****************************************************************
 
