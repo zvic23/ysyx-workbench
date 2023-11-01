@@ -140,7 +140,7 @@ assign araddr   = (arbi_r_state==r_idle && arvalid_ifu) ? araddr_ifu  : ((arbi_r
 assign arlen    = (arbi_r_state==r_idle && arvalid_ifu) ? arlen_ifu   : ((arbi_r_state==r_idle && arvalid_mem) ? arlen_mem   :  8'b0);
 assign arsize   = (arbi_r_state==r_idle && arvalid_ifu) ? arsize_ifu  : ((arbi_r_state==r_idle && arvalid_mem) ? arsize_mem  :  3'b0);
 assign arburst  = (arbi_r_state==r_idle && arvalid_ifu) ? arburst_ifu : ((arbi_r_state==r_idle && arvalid_mem) ? arburst_mem :  2'b0);
-assign arready_ifu  = (arbi_r_state==r_idle && arvalid_ifu) ? arready :  1'b0;
+assign arready_ifu  = (arbi_r_state==r_idle ) ? arready :  1'b0;
 assign arready_mem  = (arbi_r_state==r_idle && !arvalid_ifu) ? arready :  1'b0;
 
 assign rdata_ifu  = (arbi_r_state==r_ifu_trans) ? rdata  : 64'b0;
