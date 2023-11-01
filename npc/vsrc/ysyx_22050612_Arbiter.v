@@ -110,6 +110,8 @@ localparam r_mem_trans   = 2'b10;
 always @(posedge clk) begin
 	if(rst)  arbi_r_state <= r_idle;
 	else     arbi_r_state <= arbi_r_next_state;
+
+	$display("arbit:   arvalid_ifu:%x",arvalid_ifu);
 end
 
 always @(*) begin
