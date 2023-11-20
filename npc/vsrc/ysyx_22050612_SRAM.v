@@ -57,8 +57,11 @@ module ysyx_22050612_SRAM(
 //assign wwstrb = wstrb;
 //assign wwaddr = w_addr;
 
-
-
+/*
+always @(negedge clk) begin
+	$display("sram:   arvalid:%x   rlen:%x  rlast:%x  state:%x",arvalid,awlen,rlast,read_current_state);
+end
+*/
 
 //************** read  *******************
 //assign arready = (read_current_state == read_send_rdata) ? 1'b0 : 1'b1;

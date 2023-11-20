@@ -19,7 +19,22 @@ output [31:0]inst,
 output reg ready,
 
 output way_hit_out,
-input [63:0]waddr
+input [63:0]waddr,
+
+
+
+output [31:0]araddr,
+output [7:0]arlen,
+output [2:0]arsize,
+output [1:0]arburst,
+output reg arvalid,
+input arready,
+
+input [63:0]rdata,
+input [1:0]rrsep,
+input rlast,
+input rvalid,
+output rready
 
 );
 
@@ -45,7 +60,7 @@ always @(negedge clk) begin
 
 	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d",addr_prev,inst,valid,ready);
 	//$display("icache   %b   %b    %d  %d  %d  %d   ",way_hit,way_hit_prev,cen0,cen1,cen2,cen3);
-	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line_prev:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x  din:%x  wen:%x  state:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]    ,din,wen,icache_current_state);
+	//$display("icache   pc:%x   inst:%x   valid:%d   ready:%d   line_prev:%x  index:%x  index_prev:%x  offset:%x  offset_prev:%x  din:%x  wen:%x  state:%x, arready:%x",addr_prev,inst,valid,ready,line_mem_prev,index,addr_prev[9:4],addr[3:0],addr_prev[3:0]    ,din,wen,icache_current_state,arready);
 	//$display("icache   %b   %b    %d  %d  %d  %d   dout:%x  dout0:%x dout1:%x dout2:%x dout3:%x  wen:%x  line:%x     ready_ifid:%d\ntag0:%x  tag1:%x  tag2:%x  tag3:%x\n",way_hit,way_hit_prev,cen0,cen1,cen2,cen3,dout,dout0,dout1,dout2,dout3,wen,line_mem   ,ready_IF_ID,tag0[index],tag1[index],tag2[index],tag3[index],);
 //	if(~(way_hit==4'b1||way_hit==4'd2||way_hit==4'd4||way_hit==4'd8||way_hit==4'd0))begin
 //		$display("woho!!!!!!!!!!!!!!!!!!!!!!!!\n\n");
@@ -255,23 +270,24 @@ end
 
 
 //*******************   AXI-FULL    ***********************
-wire [31:0]araddr;
-wire [7:0]arlen;
-wire [2:0]arsize;
-wire [1:0]arburst;
-reg arvalid;
-wire arready;
-
-wire [63:0]rdata;
-wire [1:0]rrsep;
-wire rlast;
-wire rvalid;
-wire rready;
+//wire [31:0]araddr;
+//wire [7:0]arlen;
+//wire [2:0]arsize;
+//wire [1:0]arburst;
+//reg arvalid;
+//wire arready;
+//
+//wire [63:0]rdata;
+//wire [1:0]rrsep;
+//wire rlast;
+//wire rvalid;
+//wire rready;
 
 
 //ysyx_22050612_SRAM  sram_ifu (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready);
-ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready,   
-	                                 32'b0,  8'b0,   3'b0,    2'b0,    1'b0,    ,    64'b0,  8'b0,  1'b0,   1'b0,   ,   , , 1'b0);
+//ysyx_22050612_SRAM  sram_ifu (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready,   
+//	                                 32'b0,  8'b0,   3'b0,    2'b0,    1'b0,    ,    64'b0,  8'b0,  1'b0,   1'b0,   ,
+//				      	 , , 1'b0);
 	                                 //32'b0,  8'b0,   3'b0,    2'b0,    1'b0,    ,    64'b0,  8'b0,  1'b0,   1'b0,   ,   , , 1'b0   , , , , , 2'b0,64'b0,8'b0);
 
 assign araddr  = {addr[31:6],6'b0};
