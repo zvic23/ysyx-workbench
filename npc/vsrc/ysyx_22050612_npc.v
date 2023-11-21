@@ -48,6 +48,9 @@ wire [127:0]result_r;
 assign result_r = mulcand * muler;
 //assign result_r = $signed(mulcand) * $signed(muler);
 always @(negedge clk)begin
+	if(result_r != {result_hi,result_lo}) begin
+		$display("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!\n");
+	end
 	$display("mulresult:%h%h",result_hi,result_lo);
 	$display("mulresu  :%h  ",result_r);
 end
