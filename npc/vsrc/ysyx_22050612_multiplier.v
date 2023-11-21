@@ -14,7 +14,8 @@ module ysyx_22050612_multiplier(
 );
 
 always @(posedge clk)begin
-	$display("mulresult_inaaaaaaaaaaaaa:%d  %d",result_hi,result_lo);
+	$display("aaaaaaaaaaaaa");
+	//$display("mulresult_inaaaaaaaaaaaaa:%d  %d",result_hi,result_lo);
 end
 
 
