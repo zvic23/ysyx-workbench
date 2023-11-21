@@ -33,7 +33,7 @@ ysyx_22050612_multiplier boothmul (clk, rst, mul_valid, flush, mulw, mul_signed,
 
 always @(negedge clk)begin
 	$display("mulresult:%d  %d",result_hi,result_lo);
-	//$display("clk:%d ",clk);
+	$display("clk:%d ",clk);
 end
 
 
