@@ -13,7 +13,7 @@ module ysyx_22050612_multiplier(
 	output [63:0]result_lo
 );
 
-always @(posedge clk)begin
+always @(negedge clk)begin
 	$display("aaaaaaaaaaaaa");
 	//$display("mulresult_inaaaaaaaaaaaaa:%d  %d",result_hi,result_lo);
 end
