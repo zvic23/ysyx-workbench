@@ -32,7 +32,7 @@ ysyx_22050612_multiplier boothmul (clk, rst, mul_valid, flush, mulw, mul_signed,
 always @(posedge clk)begin
 	if(rst) begin
 		mulcand <= 64'b0;
-		muler   <= 64'b0;
+		muler   <= 64'b1;
 	end
 	else begin
 		mulcand <= mulcand + 64'b1;
