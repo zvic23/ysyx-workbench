@@ -14,7 +14,7 @@ module ysyx_22050612_multiplier(
 );
 
 always @(negedge clk)begin
-	$display("aaaaaaaaaaaaa");
+	//$display("aaaaaaaaaaaaa");
 	$display("mulcand:%d  mulier:%d",multiplicand,multiplier);
 end
 
