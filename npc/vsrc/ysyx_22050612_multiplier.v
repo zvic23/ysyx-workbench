@@ -13,6 +13,11 @@ module ysyx_22050612_multiplier(
 	output [63:0]result_lo
 );
 
+always @(negedge clk)begin
+	$display("mulresult_in:%d  %d",result_hi,result_lo);
+end
+
+
 wire [65:0]mul_a;
 wire [65:0]mul_b;
 assign mul_a[31: 0] = mul_valid ? multiplicand[31:0] : 32'b0;
