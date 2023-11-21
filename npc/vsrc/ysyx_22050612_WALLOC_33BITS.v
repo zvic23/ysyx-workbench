@@ -4,7 +4,7 @@ module ysyx_22050612_WALLOC_33BITS(
     output [30:0] cout_group,
     output      cout,s
 );
-/* verilator lint_off UNOPT */
+
 wire [30:0]c;
 ///////////////first////////////////
 wire [10:0]first_s;
@@ -63,5 +63,5 @@ ysyx_22050612_CSA csa_8_1  (.in({seventh_s,cin[30:29]}), .cout(cout), .s(s) );
 
 ///////////////output///////////////
 assign cout_group = c;
-/* verilator lint_off UNOPT */
+
 endmodule

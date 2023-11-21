@@ -69,7 +69,9 @@ ysyx_22050612_PART_PRODUCT  part_product32 (mul_a[65:63],{{ 2{1'b0}},mul_b,{64{1
 
 
 wire [32:0] walloc_din [131:0];
+/* verilator lint_off UNOPTFLAT */
 wire [30:0] walloc_cgroup [131:1];
+/* verilator lint_on UNOPTFLAT */
 wire [30:0] walloc_cgroup1[131:1];
 wire [130:0] walloc_c;
 wire [131:0] walloc_s;
@@ -90,14 +92,8 @@ generate
 		ysyx_22050612_WALLOC_33BITS walloc_tree  (walloc_din[j],walloc_cgroup[j],walloc_cgroup[j+1],walloc_c[j],walloc_s[j] );
 	end
 endgenerate
-/*
-genvar k;
-generate
-	for(k=2;k<132;k=k+1) begin
-	       assign walloc_cgroup[k] = walloc_cgroup1[k];	
-	end
-endgenerate
-*/
+
+
 wire [131:0]result;
 assign result = walloc_s + {walloc_c,c[31]} + {{131{1'b0}},c[32]};
 
