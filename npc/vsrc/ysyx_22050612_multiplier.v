@@ -24,7 +24,7 @@ assign mul_a[31: 0] = mul_valid ? multiplicand[31:0] : 32'b0;
 assign mul_b[31: 0] = mul_valid ? multiplier  [31:0] : 32'b0;
 assign mul_a[63:32] = mul_valid ? (mulw ? {32{multiplicand[31]}} : multiplicand[63:32]) : 32'b0;
 assign mul_b[63:32] = mul_valid ? (mulw ? {32{multiplier  [31]}} : multiplier  [63:32]) : 32'b0;
-assign mul_a[65:64] = (mul_valid&&mul_signed!=2'b0) ? (mulw ? {2{multiplicand[31]}} : {2{multiplicand[63]}}) :  2'b0;
+assign mul_a[65:64] = (mul_valid&&mul_signed[0]) ? (mulw ? {2{multiplicand[31]}} : {2{multiplicand[63]}}) :  2'b0;
 assign mul_b[65:64] = (mul_valid&&mul_signed[1]) ? (mulw ? {2{multiplier  [31]}} : {2{multiplier  [63]}}) :  2'b0;
 
 wire [131:0]p00,p01,p02,p03,p04,p05,p06,p07,p08,p09,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28,p29,p30,p31,p32;
