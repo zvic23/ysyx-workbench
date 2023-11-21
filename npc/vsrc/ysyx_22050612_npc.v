@@ -41,7 +41,7 @@ always @(posedge clk)begin
 end
 
 always @(negedge clk)begin
-	$display("mulresult:%d  %d",result_hi,result_lo);
+	$display("mulresult:%h  %h",result_hi,result_lo);
 end
 
 
