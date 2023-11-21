@@ -35,16 +35,19 @@ always @(posedge clk)begin
 		muler   <= 64'b1;
 	end
 	else begin
-		mulcand <= mulcand + 64'b1;
-		//mulcand <= ~(mulcand + 64'b1);
-		muler   <= muler   + 64'b1;
+		mulcand[31:0]  <= $random;
+		muler  [31:0]  <= $random;
+		mulcand[63:32] <= $random;
+		muler  [63:32] <= $random;
+		//mulcand <= mulcand + 64'b1;
+		//muler   <= muler   + 64'b1;
 	end
 end
 
 wire [127:0]result_r;
 assign result_r = $signed(mulcand) * $signed(muler);
 always @(negedge clk)begin
-	$display("mulresult:%h %h",result_hi,result_lo);
+	$display("mulresult:%h%h",result_hi,result_lo);
 	$display("mulresu  :%h  ",result_r);
 end
 
