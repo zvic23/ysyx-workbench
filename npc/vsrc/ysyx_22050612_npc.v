@@ -11,6 +11,34 @@ output [63:0]wb_pc
 
 );
 
+
+wire flush;
+wire mul_ready;
+wire [63:0]result_hi;
+wire [63:0]result_lo;
+
+wire mul_valid;
+assign mul_valid = 1'b1;
+wire mulw;
+assign mulw = 1'b0;
+wire [1:0]mul_signed;
+assign mul_signed = 2'b0;
+wire [63:0]mulcand;
+wire [63:0]muler;
+
+assign mulcand = 64'd3;
+assign muler   = 64'd6;
+ysyx_22050612_multiplier boothmul (clk, rst, mul_valid, flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_valid, result_hi, result_lo);
+
+
+always @(negedge clk)begin
+	$display("mulresult:%d  %d",result_hi,result_lo);
+end
+
+
+
+
+
 assign wb_pc=WB_reg_pc;   //used by cpp file for difftest
 assign pc = pc_ifu;       //used by cpp file for itrace
 
