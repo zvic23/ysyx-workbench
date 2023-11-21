@@ -22,7 +22,7 @@ assign mul_valid = 1'b1;
 wire mulw;
 assign mulw = 1'b0;
 wire [1:0]mul_signed;
-assign mul_signed = 2'b0;
+assign mul_signed = 2'b11;
 reg [63:0]mulcand;
 reg [63:0]muler;
 
@@ -35,7 +35,7 @@ always @(posedge clk)begin
 		muler   <= 64'b1;
 	end
 	else begin
-		mulcand <= mulcand + 64'b1;
+		mulcand <= ~(mulcand + 64'b1);
 		muler   <= muler   + 64'b1;
 	end
 end
