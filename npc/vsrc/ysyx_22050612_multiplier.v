@@ -82,10 +82,10 @@ generate
 endgenerate
 
 
-//ysyx_22050612_WALLOC_33BITS walloc_tree0   (walloc_din[0],c[30:0],walloc_cgroup[1],walloc_c[0],walloc_s[0] );
-//ysyx_22050612_WALLOC_33BITS walloc_tree1   (walloc_din[1],walloc_cgroup1[1],walloc_cgroup2[1],walloc_c[1],walloc_s[1] );
-//ysyx_22050612_WALLOC_33BITS walloc_tree2   (walloc_din[2],walloc_cgroup2[1],,walloc_c[2],walloc_s[2] );
-//ysyx_22050612_WALLOC_33BITS walloc_tree131 (walloc_din[131],walloc_cgroup[131], , ,walloc_s[131] );
+ysyx_22050612_WALLOC_33BITS walloc_tree0   (walloc_din[0],c[30:0],walloc_cgroup[1],walloc_c[0],walloc_s[0] );
+ysyx_22050612_WALLOC_33BITS walloc_tree1   (walloc_din[1],walloc_cgroup1[1],walloc_cgroup2[1],walloc_c[1],walloc_s[1] );
+ysyx_22050612_WALLOC_33BITS walloc_tree2   (walloc_din[2],walloc_cgroup2[1],,walloc_c[2],walloc_s[2] );
+ysyx_22050612_WALLOC_33BITS walloc_tree131 (walloc_din[131],walloc_cgroup[131], , ,walloc_s[131] );
 
 genvar j;
 generate
