@@ -23,13 +23,22 @@ wire mulw;
 assign mulw = 1'b0;
 wire [1:0]mul_signed;
 assign mul_signed = 2'b0;
-wire [63:0]mulcand;
-wire [63:0]muler;
+reg [63:0]mulcand;
+reg [63:0]muler;
 
-assign mulcand = 64'd3;
-assign muler   = 64'd6;
 ysyx_22050612_multiplier boothmul (clk, rst, mul_valid, flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_valid, result_hi, result_lo);
 
+
+always @(posedge clk)begin
+	if(rst) begin
+		mulcand <= 64'b0;
+		muler   <= 64'b0;
+	end
+	else begin
+		mulcand <= mulcand + 64'b1;
+		muler   <= muler   + 64'b1;
+	end
+end
 
 always @(negedge clk)begin
 	$display("mulresult:%d  %d",result_hi,result_lo);
