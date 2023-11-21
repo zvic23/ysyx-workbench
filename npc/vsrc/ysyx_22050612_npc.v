@@ -51,6 +51,7 @@ always @(negedge clk)begin
 	if(result_r != {result_hi,result_lo}) begin
 		$display("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!\n");
 	end
+	//$display("mulcand:%h  mulier:%h",mulcand,muler);
 	//$display("mulresult:%h%h",result_hi,result_lo);
 	//$display("mulresu  :%h  ",result_r);
 end
