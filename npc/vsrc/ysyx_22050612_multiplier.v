@@ -87,9 +87,7 @@ ysyx_22050612_WALLOC_33BITS walloc_tree131 (walloc_din[131],walloc_cgroup[131], 
 genvar j;
 generate
 	for(j=1;j<131;j=j+1) begin: walloc_gen
-/* verilator lint_off UNOPT */
 		ysyx_22050612_WALLOC_33BITS walloc_tree  (walloc_din[j],walloc_cgroup[j],walloc_cgroup[j+1],walloc_c[j],walloc_s[j] );
-/* verilator lint_off UNOPT */
 	end
 endgenerate
 /*
