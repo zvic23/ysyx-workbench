@@ -41,9 +41,11 @@ always @(posedge clk)begin
 	end
 end
 
+wire [127:0]result_r;
+assign result_r = $signed(mulcand) * $signed(muler);
 always @(negedge clk)begin
 	$display("mulresult:%h %h",result_hi,result_lo);
-	$display("mulresu  :%h  ",$signed(mulcand) * $signed(muler));
+	$display("mulresu  :%h  ",result_r);
 end
 
 
