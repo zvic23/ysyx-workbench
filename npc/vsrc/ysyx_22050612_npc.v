@@ -42,7 +42,7 @@ end
 
 always @(negedge clk)begin
 	$display("mulresult:%h %h",result_hi,result_lo);
-	$display("mulresu  :%lh  ",$signed(mulcand) * $signed(muler));
+	$display("mulresu  :%128h  ",$signed(mulcand) * $signed(muler));
 end
 
 
