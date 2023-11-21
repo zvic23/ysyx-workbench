@@ -47,7 +47,8 @@ end
 wire [127:0]result_r;
 //assign result_r = mulcand * muler;
 //assign result_r = $signed(mulcand) * $signed(muler);
-assign result_r = $signed(mulcand) * muler;
+assign result_r = mulcand * $signed(muler);
+//assign result_r = $signed(mulcand) * muler;
 always @(negedge clk)begin
 	if(result_r != {result_hi,result_lo}) begin
 		$display("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!!!\n");
