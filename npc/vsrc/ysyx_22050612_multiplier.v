@@ -63,9 +63,7 @@ ysyx_22050612_PART_PRODUCT  part_product32 (mul_a[65:63],{{ 2{1'b0}},mul_b,{64{1
 
 
 wire [32:0] walloc_din [131:0];
-//wire [131:0] walloc_din [32:0];
 wire [30:0] walloc_cgroup [131:1];
-//wire [131:1] walloc_cgroup [30:0];
 wire [130:0] walloc_c;
 wire [131:0] walloc_s;
 genvar i;
@@ -75,9 +73,11 @@ generate
 	end
 endgenerate
 
-
+//wire [30:0]grp;
+//assign walloc_cgroup[2] = grp;
 ysyx_22050612_WALLOC_33BITS walloc_tree0   (walloc_din[0],c[30:0],walloc_cgroup[1],walloc_c[0],walloc_s[0] );
-//ysyx_22050612_WALLOC_33BITS walloc_tree1   (walloc_din[1],walloc_cgroup[1],walloc_cgroup[2],walloc_c[1],walloc_s[1] );
+//ysyx_22050612_WALLOC_33BITS walloc_tree1   (walloc_din[1],walloc_cgroup[1][30:0],grp[30:0],walloc_c[1],walloc_s[1] );
+//ysyx_22050612_WALLOC_33BITS walloc_tree2   (walloc_din[1],grp[30:0],,walloc_c[1],walloc_s[1] );
 ysyx_22050612_WALLOC_33BITS walloc_tree131 (walloc_din[131],walloc_cgroup[131], , ,walloc_s[131] );
 
 genvar j;
