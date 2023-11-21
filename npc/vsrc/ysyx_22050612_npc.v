@@ -35,7 +35,8 @@ always @(posedge clk)begin
 		muler   <= 64'b1;
 	end
 	else begin
-		mulcand <= ~(mulcand + 64'b1);
+		mulcand <= mulcand + 64'b1;
+		//mulcand <= ~(mulcand + 64'b1);
 		muler   <= muler   + 64'b1;
 	end
 end
