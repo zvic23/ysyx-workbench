@@ -41,7 +41,8 @@ always @(posedge clk)begin
 end
 
 always @(negedge clk)begin
-	$display("mulresult:%h  %h",result_hi,result_lo);
+	$display("mulresult:%h %h",result_hi,result_lo);
+	$display("mulresu  :%h  ",$signed(mulcand) * $signed(muler));
 end
 
 
