@@ -22,7 +22,7 @@ assign mul_valid = 1'b1;
 wire mulw;
 assign mulw = 1'b0;
 wire [1:0]mul_signed;
-assign mul_signed = 2'b11;
+assign mul_signed = 2'b00;
 reg [63:0]mulcand;
 reg [63:0]muler;
 
@@ -45,7 +45,8 @@ always @(posedge clk)begin
 end
 
 wire [127:0]result_r;
-assign result_r = $signed(mulcand) * $signed(muler);
+assign result_r = mulcand * muler;
+//assign result_r = $signed(mulcand) * $signed(muler);
 always @(negedge clk)begin
 	$display("mulresult:%h%h",result_hi,result_lo);
 	$display("mulresu  :%h  ",result_r);
