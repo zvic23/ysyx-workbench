@@ -13,10 +13,10 @@ module ysyx_22050612_multiplier(
 	output [63:0]result_lo
 );
 
-always @(negedge clk)begin
-	//$display("aaaaaaaaaaaaa");
-	//$display("mulresult_inaaaaaaaaaaaaa:%d  %d",result_hi,result_lo);
-end
+//always @(negedge clk)begin
+//	//$display("aaaaaaaaaaaaa");
+//	//$display("mulresult_inaaaaaaaaaaaaa:%d  %d",result_hi,result_lo);
+//end
 
 
 wire [65:0]mul_a;
