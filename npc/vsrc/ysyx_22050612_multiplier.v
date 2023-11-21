@@ -87,17 +87,19 @@ ysyx_22050612_WALLOC_33BITS walloc_tree131 (walloc_din[131],walloc_cgroup[131], 
 genvar j;
 generate
 	for(j=1;j<131;j=j+1) begin: walloc_gen
-		ysyx_22050612_WALLOC_33BITS walloc_tree  (walloc_din[j],walloc_cgroup[j],walloc_cgroup1[j+1],walloc_c[j],walloc_s[j] );
+/* verilator lint_off UNOPT */
+		ysyx_22050612_WALLOC_33BITS walloc_tree  (walloc_din[j],walloc_cgroup[j],walloc_cgroup[j+1],walloc_c[j],walloc_s[j] );
+/* verilator lint_off UNOPT */
 	end
 endgenerate
-
+/*
 genvar k;
 generate
 	for(k=2;k<132;k=k+1) begin
 	       assign walloc_cgroup[k] = walloc_cgroup1[k];	
 	end
 endgenerate
-
+*/
 wire [131:0]result;
 assign result = walloc_s + {walloc_c,c[31]} + {{131{1'b0}},c[32]};
 
