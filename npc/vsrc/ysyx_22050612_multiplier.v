@@ -14,6 +14,7 @@ module ysyx_22050612_multiplier(
 );
 
 always @(negedge clk)begin
+	$display("mulresult_inaaaaaaaaaaaaa");
 	$display("mulresult_inaaaaaaaaaaaaa:%d  %d",result_hi,result_lo);
 end
 
