@@ -31,7 +31,10 @@ assign muler   = 64'd6;
 ysyx_22050612_multiplier boothmul (clk, rst, mul_valid, flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_valid, result_hi, result_lo);
 
 
-
+always @(negedge clk)begin
+	$display("mulresult:%d  %d",result_hi,result_lo);
+	$display("clk:%d ",clk);
+end
 
 
 
