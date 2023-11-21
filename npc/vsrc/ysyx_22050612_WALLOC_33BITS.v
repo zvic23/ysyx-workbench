@@ -4,7 +4,7 @@ module ysyx_22050612_WALLOC_33BITS(
     output [30:0] cout_group,
     output      cout,s
 );
-
+/*
 wire [30:0]c;
 ///////////////first////////////////
 wire [10:0]first_s;
@@ -59,10 +59,9 @@ wire seventh_s;
 ysyx_22050612_CSA csa_7_1  (.in({sixth_s[1:0],cin[28]}), .cout(c[30]), .s(seventh_s) );
 
 ///////////////eighth///////////////
-wire eighth_s;
 ysyx_22050612_CSA csa_8_1  (.in({seventh_s,cin[30:29]}), .cout(cout), .s(s) );
 
 ///////////////output///////////////
 assign cout_group = c;
-
+*/
 endmodule
