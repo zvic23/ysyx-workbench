@@ -82,37 +82,6 @@ input [63:0]WB_reg_wdata,
 
 input branch_flush
 
-
-/*
-output reg arvalid,
-output [31:0]araddr,
-input arready,
-
-input reg rvalid,
-input [63:0]rrdata,
-input reg [1:0]rresp,
-output rready,
-
-output awvalid,
-output [31:0]awaddr,
-input awready,
-
-output wvalid,
-output [63:0]wwdata,
-output [7:0]wstrb,
-input wready,
-
-input [1:0]bresp,
-input bvalid,
-output bready,
-
-
-
-output exu_block
-*/
-
-
-
 );
 
 
@@ -216,7 +185,7 @@ always@(*)begin
 end
 
 wire EX_block;
-assign EX_block = 1'b0;
+assign EX_block = mul_valid && !mul_ready;
 assign ready_ID_EX = EX_block ? 1'b0 : ready_EX_MEM;
 
 
@@ -993,11 +962,13 @@ always@(*) begin
     24'h19000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
     24'h1a000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
     24'h1b000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
-    24'h1d000: ALUoutput_EX_MEM=result_mul0;
+    24'h1d000: ALUoutput_EX_MEM=result_lo;
+    //24'h1d000: ALUoutput_EX_MEM=result_mul0;
     24'h21000: ALUoutput_EX_MEM=result_div0;
     24'h22000: ALUoutput_EX_MEM=result_divu0;
     24'h24000: ALUoutput_EX_MEM=result_remu0;
-    24'h25000: ALUoutput_EX_MEM=(result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]}));
+    24'h25000: ALUoutput_EX_MEM=result_lo;
+    //24'h25000: ALUoutput_EX_MEM=(result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]}));
     24'h26000: ALUoutput_EX_MEM=(result_divw0[31]?({{32{1'b1}},result_divw0[31:0]}):({{32{1'b0}},result_divw0[31:0]}));
     24'h27000: ALUoutput_EX_MEM=(result_divuw0[31]?({{32{1'b1}},result_divuw0[31:0]}):({{32{1'b0}},result_divuw0[31:0]}));
     24'h28000: ALUoutput_EX_MEM=(result_remw0[31]?({{32{1'b1}},result_remw0[31:0]}):({{32{1'b0}},result_remw0[31:0]}));
@@ -1211,6 +1182,21 @@ wire[31:0] result_remuw0;
 assign result_remuw0 = src1[31:0] % src2[31:0];
 
 
+wire flush;
+assign flush = 1'b0;
+wire mul_ready;
+wire mul_out_valid;
+wire [63:0]result_hi;
+wire [63:0]result_lo;
+
+wire mul_valid;
+assign mul_valid = ((opcode == 24'h1d000)||(opcode == 24'h25000))&&ready_EX_MEM  ;
+wire mulw;
+assign mulw = (opcode == 24'h25000);
+wire [1:0]mul_signed;
+assign mul_signed = 2'b00;
+
+ysyx_22050612_multiplier boothmul (clk, rst, mul_valid, flush, mulw, mul_signed, src1, src2, mul_ready, mul_out_valid, result_hi, result_lo);
 
 
 

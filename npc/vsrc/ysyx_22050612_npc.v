@@ -11,7 +11,7 @@ output [63:0]wb_pc
 
 );
 
-
+/*
 wire flush;
 wire mul_ready;
 wire [63:0]result_hi;
@@ -76,7 +76,7 @@ always @(negedge clk)begin
 	$display("mulresu  :%d       %d",$signed(result_r), result_r[127]);
 end
 
-
+*/
 
 
 
@@ -84,16 +84,6 @@ assign wb_pc=WB_reg_pc;   //used by cpp file for difftest
 assign pc = pc_ifu;       //used by cpp file for itrace
 
 
-/*
-wire [63:0]imm_I;
-wire [63:0]imm_U;
-wire [63:0]imm_J;
-wire [63:0]imm_B;
-wire [63:0]imm_S;
-wire [ 5:0]shamt;
-wire [ 4:0]rs1;
-wire [ 4:0]rs2;
-*/
 
 
 //***************    general register   ********************
@@ -199,7 +189,7 @@ ysyx_22050612_WBU wbu (clk,rst, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_
 
 
 
-//************************  pipeline  ******************************
+//************************  AXI-FULL  ******************************
 wire [31:0]araddr_ifu;
 wire [7:0]arlen_ifu;
 wire [2:0]arsize_ifu;
