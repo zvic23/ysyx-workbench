@@ -185,7 +185,7 @@ always@(*)begin
 end
 
 wire EX_block;
-assign EX_block = mul_valid && !mul_ready;
+assign EX_block = mul_valid && !mul_out_valid;
 assign ready_ID_EX = EX_block ? 1'b0 : ready_EX_MEM;
 
 
