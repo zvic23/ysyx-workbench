@@ -74,7 +74,14 @@ reg mul_pipe1_valid;
 
 integer l;
 always @(posedge clk) begin
-	if(mul_valid && mul_ready) begin
+	if(rst || flush) begin
+		for(l=0;l<=32;l=l+1) begin
+			p_reg[l] <= 132'b0;
+		end
+		c_reg <= 33'b0;
+		mul_pipe1_valid <= 1'b0;
+	end
+	else if(mul_valid && mul_ready) begin
 		for(l=0;l<=32;l=l+1) begin
 			p_reg[l] <= p[l];
 		end
@@ -82,10 +89,6 @@ always @(posedge clk) begin
 		mul_pipe1_valid <= 1'b1;
 	end
 	else begin
-		for(l=0;l<=32;l=l+1) begin
-			p_reg[l] <= 132'b0;
-		end
-		c_reg <= 33'b0;
 		mul_pipe1_valid <= 1'b0;
 	end
 end
@@ -129,7 +132,14 @@ reg c32_reg;
 reg mul_pipe2_valid;
 
 always @(posedge clk) begin
-	if(mul_pipe1_valid) begin
+	if(rst || flush) begin
+		walloc_c_reg <= 131'b0;
+		walloc_s_reg <= 132'b0;
+		c31_reg      <= 1'b0;
+		c32_reg      <= 1'b0;
+		mul_pipe2_valid <= 1'b0;
+	end
+	else if(mul_pipe1_valid) begin
 		walloc_c_reg <= walloc_c;
 		walloc_s_reg <= walloc_s;
 		c31_reg      <= c_reg[31];
