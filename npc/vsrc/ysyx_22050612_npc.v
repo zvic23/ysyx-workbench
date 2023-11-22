@@ -71,7 +71,7 @@ always @(negedge clk)begin
 	//$display("mulresu  :%d       %d",result_r, result_r[127]);
 	
 	//$display("mulcand:%d  mulier:%d      %d %d",$signed(mulcand),muler,mulcand[63],muler[63]);
-	$display("mulcand:%d  mulier:%d      %d %d",mulcand,$signed(muler),mulcand[31],muler[31]);
+	$display("mulcand:%d  mulier:%d      %d %d",mulcand,$signed(muler[31:0]),mulcand[31],muler[31]);
 	$display("mulresult:%d       %d",$signed({result_hi,result_lo}),result_hi[63]);
 	$display("mulresu  :%d       %d",$signed(result_r), result_r[127]);
 end
