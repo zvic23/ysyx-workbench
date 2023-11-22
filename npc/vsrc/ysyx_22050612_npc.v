@@ -35,14 +35,14 @@ always @(posedge clk)begin
 		muler   <= 64'b1;
 	end
 	else begin
-		mulcand[31:0]  <= $random;
-		muler  [31:0]  <= $random;
-		mulcand[63:32] <= $random;
-		muler  [63:32] <= $random;
+		//mulcand[31:0]  <= $random;
+		//muler  [31:0]  <= $random;
+		//mulcand[63:32] <= $random;
+		//muler  [63:32] <= $random;
 		//mulcand <= 64'd4;
 		//muler   <= -(64'd6);
-		//mulcand <= mulcand + 64'b1;
-		//muler   <= muler   + 64'b1;
+		mulcand <= mulcand + 64'b1;
+		muler   <= (muler   + 64'b1);
 	end
 end
 
