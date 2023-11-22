@@ -132,7 +132,7 @@ generate
 endgenerate
 */
 
-/*
+
 ysyx_22050612_WALLOC_33BITS walloc_tree01  (walloc_din[ 01],walloc_cgroup_01,walloc_cgroup_02,walloc_c[ 01],walloc_s[ 01] );
 ysyx_22050612_WALLOC_33BITS walloc_tree02  (walloc_din[ 02],walloc_cgroup_02,walloc_cgroup_03,walloc_c[ 02],walloc_s[ 02] );
 ysyx_22050612_WALLOC_33BITS walloc_tree03  (walloc_din[ 03],walloc_cgroup_03,walloc_cgroup_04,walloc_c[ 03],walloc_s[ 03] );
@@ -264,7 +264,7 @@ ysyx_22050612_WALLOC_33BITS walloc_tree127  (walloc_din[127],walloc_cgroup_127,w
 ysyx_22050612_WALLOC_33BITS walloc_tree128  (walloc_din[128],walloc_cgroup_128,walloc_cgroup_129,walloc_c[128],walloc_s[128] );
 ysyx_22050612_WALLOC_33BITS walloc_tree129  (walloc_din[129],walloc_cgroup_129,walloc_cgroup_130,walloc_c[129],walloc_s[129] );
 ysyx_22050612_WALLOC_33BITS walloc_tree130  (walloc_din[130],walloc_cgroup_130,walloc_cgroup_131,walloc_c[130],walloc_s[130] );
-*/
+
 
 
 
