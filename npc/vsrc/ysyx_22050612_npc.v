@@ -22,7 +22,7 @@ assign mul_valid = 1'b1;
 wire mulw;
 assign mulw = 1'b1;
 wire [1:0]mul_signed;
-assign mul_signed = 2'b10;
+assign mul_signed = 2'b01;
 reg [63:0]mulcand;
 reg [63:0]muler;
 
@@ -31,8 +31,8 @@ ysyx_22050612_multiplier boothmul (clk, rst, mul_valid, flush, mulw, mul_signed,
 
 always @(posedge clk)begin
 	if(rst) begin
-		mulcand <= 64'b1;
-		muler   <= -64'b1;
+		mulcand <= -64'b1;
+		muler   <= 64'b1;
 	end
 	else begin
 		//mulcand[31:0]  <= $random;
@@ -41,8 +41,8 @@ always @(posedge clk)begin
 		//muler  [63:32] <= 32'b0;
 		//mulcand <= 64'd4;
 		//muler   <= -(64'd6);
-		mulcand <= mulcand + 64'b1;
-		muler   <= muler   - 64'd3;
+		mulcand <= mulcand - 64'd2;
+		muler   <= muler   + 64'd3;
 		mulcand[63:32] <= 32'b0;
 		muler  [63:32] <= 32'b0;
 	end
@@ -70,8 +70,8 @@ always @(negedge clk)begin
 	//$display("mulresult:%d       %d",{result_hi,result_lo},result_hi[63]);
 	//$display("mulresu  :%d       %d",result_r, result_r[127]);
 	
-	//$display("mulcand:%d  mulier:%d      %d %d",$signed(mulcand),muler,mulcand[63],muler[63]);
-	$display("mulcand:%d  mulier:%d      %d %d",mulcand,$signed(muler[31:0]),mulcand[31],muler[31]);
+	$display("mulcand:%d  mulier:%d      %d %d",$signed(mulcand[31:0]),muler,mulcand[63],muler[63]);
+	//$display("mulcand:%d  mulier:%d      %d %d",mulcand,$signed(muler),mulcand[31],muler[31]);
 	$display("mulresult:%d       %d",$signed({result_hi,result_lo}),result_hi[63]);
 	$display("mulresu  :%d       %d",$signed(result_r), result_r[127]);
 end
