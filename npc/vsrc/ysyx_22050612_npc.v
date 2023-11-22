@@ -42,7 +42,7 @@ always @(posedge clk)begin
 		//mulcand <= 64'd4;
 		//muler   <= -(64'd6);
 		mulcand <= mulcand + 64'b1;
-		muler   <= -(muler   + 64'b1);
+		muler   <= -(muler   + 64'd3);
 	end
 end
 
