@@ -22,7 +22,7 @@ assign mul_valid = 1'b1;
 wire mulw;
 assign mulw = 1'b0;
 wire [1:0]mul_signed;
-assign mul_signed = 2'b01;
+assign mul_signed = 2'b00;
 reg [63:0]mulcand;
 reg [63:0]muler;
 
@@ -37,8 +37,8 @@ always @(posedge clk)begin
 	else begin
 		mulcand[31:0]  <= $random;
 		muler  [31:0]  <= $random;
-		mulcand[63:32] <= $random;
-		muler  [63:32] <= $random;
+		mulcand[63:32] <= 32'b0;
+		muler  [63:32] <= 32'b0;
 		//mulcand <= 64'd4;
 		//muler   <= -(64'd6);
 		//mulcand <= mulcand + 64'b1;
@@ -49,22 +49,22 @@ end
 wire [127:0]result_r;
 //wire signed [127:0]result_r;
 
-//assign result_r = mulcand * muler;
+assign result_r = mulcand * muler;
 //assign result_r = $signed(mulcand) * $signed(muler);
 //assign result_r = mulcand * $signed(muler);
-assign result_r = $signed(mulcand) * muler;
+//assign result_r = $signed(mulcand) * muler;
 always @(negedge clk)begin
 	if(result_r != {result_hi,result_lo}) begin
 		$display("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 	end
-	//$display("mulcand:%h  mulier:%h      %d %d",mulcand,muler,mulcand[63],muler[63]);
-	//$display("mulresult:%d       %d",{result_hi,result_lo},result_hi[63]);
-	//$display("mulresu  :%d       %d",result_r, result_r[127]);
+	$display("mulcand:%h  mulier:%h      %d %d",mulcand,muler,mulcand[63],muler[63]);
+	$display("mulresult:%d       %d",{result_hi,result_lo},result_hi[63]);
+	$display("mulresu  :%d       %d",result_r, result_r[127]);
 	
-	$display("mulcand:%d  mulier:%d      %d %d",$signed(mulcand),muler,mulcand[63],muler[63]);
-	//$display("mulcand:%d  mulier:%d      %d %d",mulcand,$signed(muler),mulcand[63],muler[63]);
-	$display("mulresult:%d       %d",$signed({result_hi,result_lo}),result_hi[63]);
-	$display("mulresu  :%d       %d",$signed(result_r), result_r[127]);
+	//$display("mulcand:%d  mulier:%d      %d %d",$signed(mulcand),muler,mulcand[63],muler[63]);
+	////$display("mulcand:%d  mulier:%d      %d %d",mulcand,$signed(muler),mulcand[63],muler[63]);
+	//$display("mulresult:%d       %d",$signed({result_hi,result_lo}),result_hi[63]);
+	//$display("mulresu  :%d       %d",$signed(result_r), result_r[127]);
 end
 
 
