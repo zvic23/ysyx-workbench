@@ -71,7 +71,6 @@ wire [32:0] walloc_din [131:0];
 /* verilator lint_off UNOPTFLAT */
 wire [30:0] walloc_cgroup [131:1];
 /* verilator lint_on UNOPTFLAT */
-wire [30:0] walloc_cgroup1[131:1];
 wire [130:0] walloc_c;
 wire [131:0] walloc_s;
 genvar i;

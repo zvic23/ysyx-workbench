@@ -44,7 +44,9 @@ always @(posedge clk)begin
 	end
 end
 
-wire [127:0]result_r;
+//wire [127:0]result_r;
+wire signed [127:0]result_r;
+
 //assign result_r = mulcand * muler;
 //assign result_r = $signed(mulcand) * $signed(muler);
 assign result_r = mulcand * $signed(muler);
