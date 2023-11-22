@@ -72,18 +72,18 @@ reg [131:0]p_reg[32:0];
 reg [32:0]c_reg;
 reg mul_pipe1_valid;
 
-integer l1, l2;
+integer l;
 always @(posedge clk) begin
 	if(mul_valid && mul_ready) begin
-		for(l1=0;l1<=32;l1=l1+1) begin
-			p_reg[l1] <= p[l1];
+		for(l=0;l<=32;l=l+1) begin
+			p_reg[l] <= p[l];
 		end
 		c_reg <= c;
 		mul_pipe1_valid <= 1'b1;
 	end
 	else begin
-		for(l2=0;l2<=32;l2=l2+1) begin
-			p_reg[l2] <= 132'b0;
+		for(l=0;l<=32;l=l+1) begin
+			p_reg[l] <= 132'b0;
 		end
 		c_reg <= 33'b0;
 		mul_pipe1_valid <= 1'b0;
@@ -116,8 +116,8 @@ ysyx_22050612_WALLOC_33BITS walloc_tree131 (walloc_din[131],walloc_cgroup[131], 
 
 genvar j;
 generate
-	for(j=1;j<131;j=j+1) begin: walloc_gen
-		//ysyx_22050612_WALLOC_33BITS walloc_tree  (walloc_din[j],walloc_cgroup[j],walloc_cgroup[j+1],walloc_c[j],walloc_s[j] );
+	for(j=1;j<131;j=j+1) begin
+		ysyx_22050612_WALLOC_33BITS walloc_tree  (walloc_din[j],walloc_cgroup[j],walloc_cgroup[j+1],walloc_c[j],walloc_s[j] );
 	end
 endgenerate
 
