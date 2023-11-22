@@ -968,7 +968,7 @@ always@(*) begin
     24'h21000: ALUoutput_EX_MEM=result_div0;
     24'h22000: ALUoutput_EX_MEM=result_divu0;
     24'h24000: ALUoutput_EX_MEM=result_remu0;
-    24'h25000: ALUoutput_EX_MEM=result_lo;
+    24'h25000: ALUoutput_EX_MEM=(result_lo[31]?({{32{1'b1}},result_lo[31:0]}):({{32{1'b0}},result_lo[31:0]}));
     //24'h25000: ALUoutput_EX_MEM=(result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]}));
     24'h26000: ALUoutput_EX_MEM=(result_divw0[31]?({{32{1'b1}},result_divw0[31:0]}):({{32{1'b0}},result_divw0[31:0]}));
     24'h27000: ALUoutput_EX_MEM=(result_divuw0[31]?({{32{1'b1}},result_divuw0[31:0]}):({{32{1'b0}},result_divuw0[31:0]}));
