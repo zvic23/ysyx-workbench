@@ -57,9 +57,9 @@ always @(negedge clk)begin
 	if(result_r != {result_hi,result_lo}) begin
 		$display("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 	end
-	$display("mulcand:%h  mulier:%h      %d %d",mulcand,muler,mulcand[63],muler[63]);
-	$display("mulresult:%d       %d",{result_hi,result_lo},result_hi[63]);
-	$display("mulresu  :%d       %d",result_r, result_r[127]);
+	//$display("mulcand:%h  mulier:%h      %d %d",mulcand,muler,mulcand[63],muler[63]);
+	//$display("mulresult:%d       %d",{result_hi,result_lo},result_hi[63]);
+	//$display("mulresu  :%d       %d",result_r, result_r[127]);
 	
 	//$display("mulcand:%d  mulier:%d      %d %d",$signed(mulcand),muler,mulcand[63],muler[63]);
 	////$display("mulcand:%d  mulier:%d      %d %d",mulcand,$signed(muler),mulcand[63],muler[63]);
