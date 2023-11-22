@@ -22,7 +22,7 @@ assign mul_valid = 1'b1;
 wire mulw;
 assign mulw = 1'b1;
 wire [1:0]mul_signed;
-assign mul_signed = 2'b11;
+assign mul_signed = 2'b10;
 reg [63:0]mulcand;
 reg [63:0]muler;
 
@@ -50,10 +50,16 @@ wire [127:0]result_r;
 //wire signed [127:0]result_r;
 
 //assign result_r = mulcand * muler;
-assign result_r = $signed(mulcand[31:0]) * $signed(muler[31:0]);
+
+//assign result_r = $signed(mulcand[31:0]) * $signed(muler[31:0]);
 //assign result_r = $signed(mulcand) * $signed(muler);
+
+assign result_r = mulcand[31:0] * $signed(muler[31:0]);
 //assign result_r = mulcand * $signed(muler);
+
 //assign result_r = $signed(mulcand) * muler;
+
+
 always @(negedge clk)begin
 	if(result_r != {result_hi,result_lo}) begin
 		$display("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!!!\n");
