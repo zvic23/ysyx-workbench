@@ -35,16 +35,16 @@ always @(posedge clk)begin
 		muler   <= 64'b1;
 	end
 	else begin
-		//mulcand[31:0]  <= $random;
-		//muler  [31:0]  <= $random;
-		//mulcand[63:32] <= 32'b0;
-		//muler  [63:32] <= 32'b0;
-		//mulcand <= 64'd4;
-		//muler   <= -(64'd6);
-		mulcand <= mulcand - 64'd2;
-		muler   <= muler   + 64'd3;
+		mulcand[31:0]  <= $random;
+		muler  [31:0]  <= $random;
 		mulcand[63:32] <= 32'b0;
 		muler  [63:32] <= 32'b0;
+		//mulcand <= 64'd4;
+		//muler   <= -(64'd6);
+		//mulcand <= mulcand - 64'd2;
+		//muler   <= muler   + 64'd3;
+		//mulcand[63:32] <= 32'b0;
+		//muler  [63:32] <= 32'b0;
 	end
 end
 
@@ -70,8 +70,8 @@ always @(negedge clk)begin
 	//$display("mulresult:%d       %d",{result_hi,result_lo},result_hi[63]);
 	//$display("mulresu  :%d       %d",result_r, result_r[127]);
 	
-	$display("mulcand:%d  mulier:%d      %d %d",$signed(mulcand[31:0]),muler,mulcand[63],muler[63]);
-	//$display("mulcand:%d  mulier:%d      %d %d",mulcand,$signed(muler),mulcand[31],muler[31]);
+	$display("mulcand:%d  mulier:%d      %d %d",$signed(mulcand[31:0]),muler,mulcand[31],muler[31]);
+	//$display("mulcand:%d  mulier:%d      %d %d",mulcand,$signed(muler),mulcand[63],muler[63]);
 	$display("mulresult:%d       %d",$signed({result_hi,result_lo}),result_hi[63]);
 	$display("mulresu  :%d       %d",$signed(result_r), result_r[127]);
 end
