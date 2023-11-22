@@ -35,14 +35,14 @@ always @(posedge clk)begin
 		muler   <= 64'b1;
 	end
 	else begin
-		mulcand[31:0]  <= $random;
-		muler  [31:0]  <= $random;
-		mulcand[63:32] <= 32'b0;
-		muler  [63:32] <= 32'b0;
+		//mulcand[31:0]  <= $random;
+		//muler  [31:0]  <= $random;
+		//mulcand[63:32] <= 32'b0;
+		//muler  [63:32] <= 32'b0;
 		//mulcand <= 64'd4;
 		//muler   <= -(64'd6);
-		//mulcand <= mulcand - 64'd2;
-		//muler   <= muler   + 64'd3;
+		mulcand <= mulcand - 64'd2;
+		muler   <= muler   + 64'd3;
 		//mulcand[63:32] <= 32'b0;
 		//muler  [63:32] <= 32'b0;
 	end
@@ -56,9 +56,9 @@ wire [127:0]result_r;
 //assign result_r = $signed(mulcand[31:0]) * $signed(muler[31:0]);
 //assign result_r = $signed(mulcand) * $signed(muler);
 
-assign result_r = mulcand[31:0] * $signed(muler[31:0]);
+//** In verilator, "the signed * the unsigned" will be changed to "the unsigned * the unsigned", so it can not use the "*" to check the situation about "the signed * the unsigned" or "the unsigned * the signed".
+//assign result_r = mulcand[31:0] * $signed(muler[31:0]);
 //assign result_r = mulcand * $signed(muler);
-
 //assign result_r = $signed(mulcand) * muler;
 
 
@@ -70,7 +70,7 @@ always @(negedge clk)begin
 	//$display("mulresult:%d       %d",{result_hi,result_lo},result_hi[63]);
 	//$display("mulresu  :%d       %d",result_r, result_r[127]);
 	
-	$display("mulcand:%d  mulier:%d      %d %d",$signed(mulcand[31:0]),muler,mulcand[31],muler[31]);
+	$display("mulcand:%d  mulier:%d      %d %d",$signed(mulcand[63:0]),muler,mulcand[63],muler[63]);
 	//$display("mulcand:%d  mulier:%d      %d %d",mulcand,$signed(muler),mulcand[63],muler[63]);
 	$display("mulresult:%d       %d",$signed({result_hi,result_lo}),result_hi[63]);
 	$display("mulresu  :%d       %d",$signed(result_r), result_r[127]);
