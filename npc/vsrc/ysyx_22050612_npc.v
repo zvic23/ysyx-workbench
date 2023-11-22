@@ -50,7 +50,8 @@ wire [127:0]result_r;
 //wire signed [127:0]result_r;
 
 //assign result_r = mulcand * muler;
-assign result_r = $signed(mulcand) * $signed(muler);
+assign result_r = $signed(mulcand[31:0]) * $signed(muler[31:0]);
+//assign result_r = $signed(mulcand) * $signed(muler);
 //assign result_r = mulcand * $signed(muler);
 //assign result_r = $signed(mulcand) * muler;
 always @(negedge clk)begin
