@@ -1182,7 +1182,7 @@ assign result_divuw0 = src1[31:0] / src2[31:0];
 wire[31:0] result_remuw0;
 assign result_remuw0 = src1[31:0] % src2[31:0];
 
-/*
+
 wire flush;
 assign flush = 1'b0;
 wire mul_ready;
@@ -1196,8 +1196,8 @@ wire mulw;
 assign mulw = (opcode == 24'h25000);
 wire [1:0]mul_signed;
 assign mul_signed = 2'b00;
-*/
-//ysyx_22050612_multiplier boothmul (clk, rst, mul_valid, flush, mulw, mul_signed, src1, src2, mul_ready, mul_out_valid, result_hi, result_lo);
+
+ysyx_22050612_multiplier boothmul (clk, rst, mul_valid, flush, mulw, mul_signed, src1, src2, mul_ready, mul_out_valid, result_hi, result_lo);
 
 
 
