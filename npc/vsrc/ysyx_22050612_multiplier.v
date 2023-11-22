@@ -104,9 +104,7 @@ wire [30:0] walloc_cgroup_00,walloc_cgroup_01,walloc_cgroup_02,walloc_cgroup_03,
 
 
 
-/* verilator lint_off UNOPTFLAT */
-//wire [30:0] walloc_cgroup [131:1];
-/* verilator lint_on UNOPTFLAT */
+
 wire [130:0] walloc_c;
 wire [131:0] walloc_s;
 genvar i;
