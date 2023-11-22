@@ -286,9 +286,11 @@ void execute(int n){
 	  if(npc_state == END || npc_state == QUIT){
 	  //if(end == 1){
 		  program_exec_statistics();
+	          pipeline_state_printf();
 		  return;
 	  }
   	  else if(npc_state == STOP){
+	          pipeline_state_printf();
 		  return;
           }
   	  else if(npc_state == ABORT){
