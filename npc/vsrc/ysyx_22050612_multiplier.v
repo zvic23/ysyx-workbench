@@ -304,8 +304,8 @@ assign result = walloc_s_reg + {walloc_c_reg,c_reg[31]} + {{131{1'b0}},c32_reg};
 assign result_hi = result[127:64];
 assign result_lo = result[63:0];
 
-//assign mul_ready = ~(mul_pipe1_valid || mul_pipe2_valid);
-assign mul_ready = mul_pipe2_valid;
+assign mul_ready = ~(mul_pipe1_valid || mul_pipe2_valid);
+//assign mul_ready = mul_pipe2_valid;
 assign out_valid = mul_pipe2_valid;
 
 
