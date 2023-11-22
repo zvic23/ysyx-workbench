@@ -31,7 +31,7 @@ ysyx_22050612_multiplier boothmul (clk, rst, mul_valid, flush, mulw, mul_signed,
 
 always @(posedge clk)begin
 	if(rst) begin
-		mulcand <= 64'b0;
+		mulcand <= -(64'b1);
 		muler   <= 64'b1;
 	end
 	else begin
@@ -41,8 +41,8 @@ always @(posedge clk)begin
 		//muler  [63:32] <= $random;
 		//mulcand <= 64'd4;
 		//muler   <= -(64'd6);
-		mulcand <= mulcand + 64'b1;
-		muler   <= -(muler   + 64'd3);
+		mulcand <= mulcand - 64'b1;
+		muler   <= muler   + 64'd3;
 	end
 end
 
