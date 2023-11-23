@@ -100,7 +100,7 @@ always @(posedge clk) begin
 			4'b0010: begin v1[index] <= 1'b1; tag1[index] <= addr[31:10]; end
 			4'b0100: begin v2[index] <= 1'b1; tag2[index] <= addr[31:10]; end
 			4'b1000: begin v3[index] <= 1'b1; tag3[index] <= addr[31:10]; end
-			default: begin $display("dcache all misses!!!!!!!!!!!!!!!!!!!!!!!!\n\n");end
+			default: begin end
 		endcase
 	    //end
 	end
