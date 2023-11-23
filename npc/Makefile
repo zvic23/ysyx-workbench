@@ -2,7 +2,7 @@ CXXSRC += csrc/sdb/sdb.cpp csrc/sdb/expr.cpp csrc/sdb/watchpoint.cpp csrc/infras
 
 
 CXXSRC += csrc/utils/disasm.cc
-CXXFLAGS += -I/usr/lib/llvm-14/include -std=c++14   -fno-exceptions -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS  -D__STDC_LIMIT_MACROS -fPIE  -o2
+CXXFLAGS += -I/usr/lib/llvm-14/include -std=c++14   -fno-exceptions -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS  -D__STDC_LIMIT_MACROS -fPIE -O3 
 #CXXFLAGS += $(shell llvm-config --cxxflags) -fPIE  
 LIBS += $(shell llvm-config --libs)
 LIBS += -lreadline  -lSDL2main -lSDL2
