@@ -160,7 +160,7 @@ assign dcache_din = wdata;
 wire [63:0]dcache_wmask;
 assign dcache_wmask = wmask_dcache;
 
-ysyx_22050612_DCACHE dcache (clk, rst, dcache_valid, dcache_ready, dcache_addr, dcache_dout, dcache_wren, dcache_din, dcache_wmask,
+ysyx_22050612_DCACHE dcache (clk&& ((MEM_reg_inst[6:0]==7'b0000011)||(MEM_reg_inst[6:0]==7'b0100011)), rst, dcache_valid, dcache_ready, dcache_addr, dcache_dout, dcache_wren, dcache_din, dcache_wmask,
 araddr_dcache_axi, arlen_dcache_axi, arsize_dcache_axi, arburst_dcache_axi, arvalid_dcache_axi, arready_dcache_axi, rdata_dcache_axi, rrsep_dcache_axi, rlast_dcache_axi, rvalid_dcache_axi, rready_dcache_axi, awaddr_dcache_axi, awlen_dcache_axi, awsize_dcache_axi, awburst_dcache_axi, awvalid_dcache_axi, awready_dcache_axi,    wdata_dcache_axi, wstrb_dcache_axi, wlast_dcache_axi, wvalid_dcache_axi, wready_dcache_axi,   bresp_dcache_axi, bvalid_dcache_axi, bready_dcache_axi);
 
 
