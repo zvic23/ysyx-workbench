@@ -95,12 +95,12 @@ end
 
 
 
-
-
-
+/* verilator lint_off UNOPTFLAT */
+wire [30:0] walloc_cgroup [131:1];
+/* verilator lint_on  UNOPTFLAT */
 
 wire [32:0] walloc_din [131:0];
-wire [30:0] walloc_cgroup_00,walloc_cgroup_01,walloc_cgroup_02,walloc_cgroup_03,walloc_cgroup_04,walloc_cgroup_05,walloc_cgroup_06,walloc_cgroup_07,walloc_cgroup_08,walloc_cgroup_09,walloc_cgroup_10,walloc_cgroup_11,walloc_cgroup_12,walloc_cgroup_13,walloc_cgroup_14,walloc_cgroup_15,walloc_cgroup_16,walloc_cgroup_17,walloc_cgroup_18,walloc_cgroup_19,walloc_cgroup_20,walloc_cgroup_21,walloc_cgroup_22,walloc_cgroup_23,walloc_cgroup_24,walloc_cgroup_25,walloc_cgroup_26,walloc_cgroup_27,walloc_cgroup_28,walloc_cgroup_29,walloc_cgroup_30,walloc_cgroup_31,walloc_cgroup_32,walloc_cgroup_33,walloc_cgroup_34,walloc_cgroup_35,walloc_cgroup_36,walloc_cgroup_37,walloc_cgroup_38,walloc_cgroup_39,walloc_cgroup_40,walloc_cgroup_41,walloc_cgroup_42,walloc_cgroup_43,walloc_cgroup_44,walloc_cgroup_45,walloc_cgroup_46,walloc_cgroup_47,walloc_cgroup_48,walloc_cgroup_49,walloc_cgroup_50,walloc_cgroup_51,walloc_cgroup_52,walloc_cgroup_53,walloc_cgroup_54,walloc_cgroup_55,walloc_cgroup_56,walloc_cgroup_57,walloc_cgroup_58,walloc_cgroup_59,walloc_cgroup_60,walloc_cgroup_61,walloc_cgroup_62,walloc_cgroup_63,walloc_cgroup_64,walloc_cgroup_65,walloc_cgroup_66,walloc_cgroup_67,walloc_cgroup_68,walloc_cgroup_69,walloc_cgroup_70,walloc_cgroup_71,walloc_cgroup_72,walloc_cgroup_73,walloc_cgroup_74,walloc_cgroup_75,walloc_cgroup_76,walloc_cgroup_77,walloc_cgroup_78,walloc_cgroup_79,walloc_cgroup_80,walloc_cgroup_81,walloc_cgroup_82,walloc_cgroup_83,walloc_cgroup_84,walloc_cgroup_85,walloc_cgroup_86,walloc_cgroup_87,walloc_cgroup_88,walloc_cgroup_89,walloc_cgroup_90,walloc_cgroup_91,walloc_cgroup_92,walloc_cgroup_93,walloc_cgroup_94,walloc_cgroup_95,walloc_cgroup_96,walloc_cgroup_97,walloc_cgroup_98,walloc_cgroup_99,walloc_cgroup_100,walloc_cgroup_101,walloc_cgroup_102,walloc_cgroup_103,walloc_cgroup_104,walloc_cgroup_105,walloc_cgroup_106,walloc_cgroup_107,walloc_cgroup_108,walloc_cgroup_109,walloc_cgroup_110,walloc_cgroup_111,walloc_cgroup_112,walloc_cgroup_113,walloc_cgroup_114,walloc_cgroup_115,walloc_cgroup_116,walloc_cgroup_117,walloc_cgroup_118,walloc_cgroup_119,walloc_cgroup_120,walloc_cgroup_121,walloc_cgroup_122,walloc_cgroup_123,walloc_cgroup_124,walloc_cgroup_125,walloc_cgroup_126,walloc_cgroup_127,walloc_cgroup_128,walloc_cgroup_129,walloc_cgroup_130,walloc_cgroup_131;
+//wire [30:0] walloc_cgroup_00,walloc_cgroup_01,walloc_cgroup_02,walloc_cgroup_03,walloc_cgroup_04,walloc_cgroup_05,walloc_cgroup_06,walloc_cgroup_07,walloc_cgroup_08,walloc_cgroup_09,walloc_cgroup_10,walloc_cgroup_11,walloc_cgroup_12,walloc_cgroup_13,walloc_cgroup_14,walloc_cgroup_15,walloc_cgroup_16,walloc_cgroup_17,walloc_cgroup_18,walloc_cgroup_19,walloc_cgroup_20,walloc_cgroup_21,walloc_cgroup_22,walloc_cgroup_23,walloc_cgroup_24,walloc_cgroup_25,walloc_cgroup_26,walloc_cgroup_27,walloc_cgroup_28,walloc_cgroup_29,walloc_cgroup_30,walloc_cgroup_31,walloc_cgroup_32,walloc_cgroup_33,walloc_cgroup_34,walloc_cgroup_35,walloc_cgroup_36,walloc_cgroup_37,walloc_cgroup_38,walloc_cgroup_39,walloc_cgroup_40,walloc_cgroup_41,walloc_cgroup_42,walloc_cgroup_43,walloc_cgroup_44,walloc_cgroup_45,walloc_cgroup_46,walloc_cgroup_47,walloc_cgroup_48,walloc_cgroup_49,walloc_cgroup_50,walloc_cgroup_51,walloc_cgroup_52,walloc_cgroup_53,walloc_cgroup_54,walloc_cgroup_55,walloc_cgroup_56,walloc_cgroup_57,walloc_cgroup_58,walloc_cgroup_59,walloc_cgroup_60,walloc_cgroup_61,walloc_cgroup_62,walloc_cgroup_63,walloc_cgroup_64,walloc_cgroup_65,walloc_cgroup_66,walloc_cgroup_67,walloc_cgroup_68,walloc_cgroup_69,walloc_cgroup_70,walloc_cgroup_71,walloc_cgroup_72,walloc_cgroup_73,walloc_cgroup_74,walloc_cgroup_75,walloc_cgroup_76,walloc_cgroup_77,walloc_cgroup_78,walloc_cgroup_79,walloc_cgroup_80,walloc_cgroup_81,walloc_cgroup_82,walloc_cgroup_83,walloc_cgroup_84,walloc_cgroup_85,walloc_cgroup_86,walloc_cgroup_87,walloc_cgroup_88,walloc_cgroup_89,walloc_cgroup_90,walloc_cgroup_91,walloc_cgroup_92,walloc_cgroup_93,walloc_cgroup_94,walloc_cgroup_95,walloc_cgroup_96,walloc_cgroup_97,walloc_cgroup_98,walloc_cgroup_99,walloc_cgroup_100,walloc_cgroup_101,walloc_cgroup_102,walloc_cgroup_103,walloc_cgroup_104,walloc_cgroup_105,walloc_cgroup_106,walloc_cgroup_107,walloc_cgroup_108,walloc_cgroup_109,walloc_cgroup_110,walloc_cgroup_111,walloc_cgroup_112,walloc_cgroup_113,walloc_cgroup_114,walloc_cgroup_115,walloc_cgroup_116,walloc_cgroup_117,walloc_cgroup_118,walloc_cgroup_119,walloc_cgroup_120,walloc_cgroup_121,walloc_cgroup_122,walloc_cgroup_123,walloc_cgroup_124,walloc_cgroup_125,walloc_cgroup_126,walloc_cgroup_127,walloc_cgroup_128,walloc_cgroup_129,walloc_cgroup_130,walloc_cgroup_131;
 
 
 
@@ -116,21 +116,21 @@ generate
 endgenerate
 
 
-//ysyx_22050612_WALLOC_33BITS walloc_tree0   (walloc_din[0],c_reg[30:0],walloc_cgroup[1],walloc_c[0],walloc_s[0] );
-//ysyx_22050612_WALLOC_33BITS walloc_tree131 (walloc_din[131],walloc_cgroup[131], , ,walloc_s[131] );
-ysyx_22050612_WALLOC_33BITS walloc_tree0   (walloc_din[0],c_reg[30:0],walloc_cgroup_01,walloc_c[0],walloc_s[0] );
-ysyx_22050612_WALLOC_33BITS walloc_tree131 (walloc_din[131],walloc_cgroup_131, , ,walloc_s[131] );
+ysyx_22050612_WALLOC_33BITS walloc_tree0   (walloc_din[0],c_reg[30:0],walloc_cgroup[1],walloc_c[0],walloc_s[0] );
+ysyx_22050612_WALLOC_33BITS walloc_tree131 (walloc_din[131],walloc_cgroup[131], , ,walloc_s[131] );
+//ysyx_22050612_WALLOC_33BITS walloc_tree0   (walloc_din[0],c_reg[30:0],walloc_cgroup_01,walloc_c[0],walloc_s[0] );
+//ysyx_22050612_WALLOC_33BITS walloc_tree131 (walloc_din[131],walloc_cgroup_131, , ,walloc_s[131] );
 
-/*
+
 genvar j;
 generate
 	for(j=1;j<131;j=j+1) begin
 		ysyx_22050612_WALLOC_33BITS walloc_tree  (walloc_din[j],walloc_cgroup[j],walloc_cgroup[j+1],walloc_c[j],walloc_s[j] );
 	end
 endgenerate
-*/
 
 
+/*
 ysyx_22050612_WALLOC_33BITS walloc_tree01  (walloc_din[ 01],walloc_cgroup_01,walloc_cgroup_02,walloc_c[ 01],walloc_s[ 01] );
 ysyx_22050612_WALLOC_33BITS walloc_tree02  (walloc_din[ 02],walloc_cgroup_02,walloc_cgroup_03,walloc_c[ 02],walloc_s[ 02] );
 ysyx_22050612_WALLOC_33BITS walloc_tree03  (walloc_din[ 03],walloc_cgroup_03,walloc_cgroup_04,walloc_c[ 03],walloc_s[ 03] );
@@ -262,7 +262,7 @@ ysyx_22050612_WALLOC_33BITS walloc_tree127  (walloc_din[127],walloc_cgroup_127,w
 ysyx_22050612_WALLOC_33BITS walloc_tree128  (walloc_din[128],walloc_cgroup_128,walloc_cgroup_129,walloc_c[128],walloc_s[128] );
 ysyx_22050612_WALLOC_33BITS walloc_tree129  (walloc_din[129],walloc_cgroup_129,walloc_cgroup_130,walloc_c[129],walloc_s[129] );
 ysyx_22050612_WALLOC_33BITS walloc_tree130  (walloc_din[130],walloc_cgroup_130,walloc_cgroup_131,walloc_c[130],walloc_s[130] );
-
+*/
 
 
 
