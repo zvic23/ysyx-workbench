@@ -1197,7 +1197,14 @@ assign mulw = (opcode == 24'h25000);
 wire [1:0]mul_signed;
 assign mul_signed = 2'b00;
 
-ysyx_22050612_multiplier boothmul ((clk&&((opcode == 24'h1d000)||(opcode == 24'h25000))), rst, mul_valid, flush, mulw, mul_signed, src1, src2, mul_ready, mul_out_valid, result_hi, result_lo);      //the clk has been "&&" with "mul mulw" opcode to close the clock gating(gate), it can speed up the simulating.
+wire muling;
+assign muling = ((opcode == 24'h1d000)||(opcode == 24'h25000));
+wire [63:0]mulcand;
+wire [63:0]muler;
+assign mulcand = muling ? src1 : 64'b0;
+assign muler   = muling ? src2 : 64'b0;
+
+ysyx_22050612_multiplier boothmul ((clk&&((opcode == 24'h1d000)||(opcode == 24'h25000))), rst, mul_valid, flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_out_valid, result_hi, result_lo);      //the clk has been "&&" with "mul mulw" opcode to close the clock gating(gate), it can speed up the simulating.
 
 
 
