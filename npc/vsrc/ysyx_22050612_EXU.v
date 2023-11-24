@@ -969,15 +969,18 @@ always@(*) begin
     //24'h21000: ALUoutput_EX_MEM=result_div0;
     24'h22000: ALUoutput_EX_MEM=quotient;
     //24'h22000: ALUoutput_EX_MEM=result_divu0;
-    24'h24000: ALUoutput_EX_MEM=result_remu0;
+    24'h24000: ALUoutput_EX_MEM=remainder;
+    //24'h24000: ALUoutput_EX_MEM=result_remu0;
     24'h25000: ALUoutput_EX_MEM=(result_lo[31]?({{32{1'b1}},result_lo[31:0]}):({{32{1'b0}},result_lo[31:0]}));
     //24'h25000: ALUoutput_EX_MEM=(result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]}));
     24'h26000: ALUoutput_EX_MEM=(quotient[31]?({{32{1'b1}},quotient[31:0]}):({{32{1'b0}},quotient[31:0]}));
     //24'h26000: ALUoutput_EX_MEM=(result_divw0[31]?({{32{1'b1}},result_divw0[31:0]}):({{32{1'b0}},result_divw0[31:0]}));
     24'h27000: ALUoutput_EX_MEM=(quotient[31]?({{32{1'b1}},quotient[31:0]}):({{32{1'b0}},quotient[31:0]}));
     //24'h27000: ALUoutput_EX_MEM=(result_divuw0[31]?({{32{1'b1}},result_divuw0[31:0]}):({{32{1'b0}},result_divuw0[31:0]}));
-    24'h28000: ALUoutput_EX_MEM=(result_remw0[31]?({{32{1'b1}},result_remw0[31:0]}):({{32{1'b0}},result_remw0[31:0]}));
-    24'h29000: ALUoutput_EX_MEM=(result_remuw0[31]?({{32{1'b1}},result_remuw0[31:0]}):({{32{1'b0}},result_remuw0[31:0]}));
+    24'h28000: ALUoutput_EX_MEM=(remainder[31]?({{32{1'b1}},remainder[31:0]}):({{32{1'b0}},remainder[31:0]}));
+    //24'h28000: ALUoutput_EX_MEM=(result_remw0[31]?({{32{1'b1}},result_remw0[31:0]}):({{32{1'b0}},result_remw0[31:0]}));
+    24'h29000: ALUoutput_EX_MEM=(remainder[31]?({{32{1'b1}},remainder[31:0]}):({{32{1'b0}},remainder[31:0]}));
+    //24'h29000: ALUoutput_EX_MEM=(result_remuw0[31]?({{32{1'b1}},result_remuw0[31:0]}):({{32{1'b0}},result_remuw0[31:0]}));
 //    //24'h100  : wdata_reg=imm_U;
 //    24'h100  : wdata_reg=EX_reg_imm;
 //    //24'h300  : wdata_reg=pc + 64'd4;
@@ -1223,11 +1226,11 @@ wire [63:0]quotient;
 wire [63:0]remainder;
 
 wire div_valid;
-assign div_valid = ((opcode == 24'h21000)||(opcode == 24'h22000)||(opcode == 24'h26000)||(opcode == 24'h27000))&&ready_EX_MEM  ;
+assign div_valid = ((opcode == 24'h21000)||(opcode == 24'h22000)||(opcode == 24'h24000)||(opcode == 24'h26000)||(opcode == 24'h27000)||(opcode == 24'h28000)||(opcode == 24'h29000))&&ready_EX_MEM  ;
 wire divw;
-assign divw = (opcode == 24'h26000)||(opcode == 24'h27000);
+assign divw = (opcode == 24'h26000)||(opcode == 24'h27000)||(opcode == 24'h28000)||(opcode == 24'h29000);
 wire div_signed;
-assign div_signed = (opcode == 24'h21000)||(opcode == 24'h26000);
+assign div_signed = (opcode == 24'h21000)||(opcode == 24'h26000)||(opcode == 24'h28000);
 
 wire diving;
 assign diving = ((opcode == 24'h21000)||(opcode == 24'h22000)||(opcode == 24'h26000)||(opcode == 24'h27000));
