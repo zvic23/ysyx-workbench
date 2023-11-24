@@ -28,7 +28,6 @@ always @(posedge clk) begin
 		divw_reg               <= 1'b0;
 	end
 	else if(div_valid && div_ready) begin
-		$display("src1:%h   src2:%h",dividend,divisor);
 		if(divw) begin
 			quotient_signed_amend  <= div_signed&&(dividend[31]^divisor[31]) ? 1'b1 : 1'b0;
 			remainder_signed_amend <= div_signed&&dividend[31] ? 1'b1 : 1'b0;
