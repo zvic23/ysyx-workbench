@@ -57,7 +57,7 @@ always @(negedge clk)begin
 
 	
 	$display("mulcand:%d  mulier:%d      %d %d",$signed(dividend[63:0]),divisor,dividend[63],divisor[63]);
-	$display("mulresult:%d       %d",     $signed(quotient),  remainder);
+	$display("mulresult:%d       %d",     $signed(quotient),  $signed(remainder));
 	//$display("mulresult:%d       %d",     quotient,  remainder);
 
 end
