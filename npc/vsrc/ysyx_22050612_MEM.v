@@ -45,7 +45,7 @@ output [63:0]waddr_out,
 
 
 
-
+//AXI-full
 output [31:0]araddr_dcache_axi,
 output [7:0]arlen_dcache_axi,
 output [2:0]arsize_dcache_axi,
@@ -75,38 +75,6 @@ input wready_dcache_axi,
 input [1:0]bresp_dcache_axi,
 input bvalid_dcache_axi,
 output bready_dcache_axi
-
-
-
-/*
-output reg arvalid,
-output [31:0]araddr,
-input arready,
-
-input reg rvalid,
-input [63:0]rrdata,
-input reg [1:0]rresp,
-output rready,
-
-output awvalid,
-output [31:0]awaddr,
-input awready,
-
-output wvalid,
-output [63:0]wwdata,
-output [7:0]wstrb,
-input wready,
-
-input [1:0]bresp,
-input bvalid,
-output bready,
-
-
-
-output exu_block
-*/
-
-
 
 );
 
@@ -159,7 +127,6 @@ wire [63:0]aluoutput;
 assign aluoutput = MEM_reg_valid ? MEM_reg_aluoutput : 64'b0;
 
 reg [63:0]src2;
-//assign src2 = MEM_reg_valid ? MEM_reg_src2 : 64'b0;
 
 assign reg_wr_wen   = (MEM_reg_valid&&!MEM_block) ? wen       : 1'b0;
 assign reg_wr_ID    = (MEM_reg_valid&&!MEM_block) ? MEM_reg_inst[11:7] : 5'b0;
@@ -173,7 +140,6 @@ assign inst_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_inst  : 32'b0;
 
 wire MEM_block;
 assign MEM_block = MEM_reg_valid && ((MEM_reg_inst[6:0]==7'b0000011)||(MEM_reg_inst[6:0]==7'b0100011)) && !dcache_ready;
-//assign MEM_block = 1'b0;
 assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
 
 
