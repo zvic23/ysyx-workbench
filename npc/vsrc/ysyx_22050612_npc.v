@@ -11,6 +11,58 @@ output [63:0]wb_pc
 
 );
 
+
+wire flush;
+wire div_ready;
+wire div_result_valid;
+wire [63:0]quotient;
+wire [63:0]remainder;
+
+wire div_valid;
+assign div_valid = 1'b1;
+wire divw;
+assign divw = 1'b0;
+wire div_signed;
+assign div_signed = 1'b0;
+reg [63:0]dividend;
+reg [63:0]divisor;
+
+
+ysyx_22050612_divider dividerkk (clk, rst, div_valid, flush, divw, div_signed, dividend, divisor, div_ready, div_result_valid, quotient, remainder);
+
+
+always @(posedge clk)begin
+	if(rst) begin
+		dividend<= 64'd15;
+		divisor <= 64'd3;
+	end
+	else begin
+		//mulcand[31:0]  <= $random;
+		//muler  [31:0]  <= $random;
+		//mulcand[63:32] <= 32'b0;
+		//muler  [63:32] <= 32'b0;
+		//mulcand <= 64'd4;
+		//muler   <= -(64'd6);
+		//mulcand <= mulcand - 64'd2;
+		//muler   <= muler   + 64'd3;
+		//mulcand[63:32] <= 32'b0;
+		//muler  [63:32] <= 32'b0;
+	end
+end
+
+
+
+
+always @(negedge clk)begin
+
+	
+	$display("mulcand:%d  mulier:%d      %d %d",dividend[63:0],divisor,dividend[63],divisor[63]);
+	$display("mulresult:%d       %d",     quotient,  remainder);
+
+end
+
+
+
 /*
 wire flush;
 wire mul_ready;
