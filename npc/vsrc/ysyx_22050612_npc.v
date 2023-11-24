@@ -21,7 +21,7 @@ wire [63:0]remainder;
 wire div_valid;
 assign div_valid = 1'b1;
 wire divw;
-assign divw = 1'b0;
+assign divw = 1'b1;
 wire div_signed;
 assign div_signed = 1'b1;
 reg [63:0]dividend;

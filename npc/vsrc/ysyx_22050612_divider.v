@@ -26,9 +26,15 @@ always @(posedge clk) begin
 		divw_reg               <= 1'b0;
 	end
 	else if(div_valid && div_ready) begin
-		quotient_signed_amend  <= div_signed&&(dividend[63]^divisor[63]) ? 1'b1 : 1'b0;
-		remainder_signed_amend <= div_signed&&dividend[63] ? 1'b1 : 1'b0;
-		divw_reg               <= divw;
+		if(divw) begin
+			quotient_signed_amend  <= div_signed&&(dividend[31]^divisor[31]) ? 1'b1 : 1'b0;
+			remainder_signed_amend <= div_signed&&dividend[31] ? 1'b1 : 1'b0;
+		end
+		else begin
+			quotient_signed_amend  <= div_signed&&(dividend[63]^divisor[63]) ? 1'b1 : 1'b0;
+			remainder_signed_amend <= div_signed&&dividend[63] ? 1'b1 : 1'b0;
+		end
+		divw_reg <= divw;
 	end
 end
 
@@ -64,8 +70,10 @@ end
 
 wire [63:0]dividend_amend;
 wire [63:0]divisor_amend;
-assign dividend_amend = (div_signed&&dividend[63]) ? -dividend : dividend;
-assign divisor_amend  = (div_signed&& divisor[63]) ? -divisor  : divisor ;
+//assign dividend_amend = (div_signed&&dividend[63]) ? -dividend : dividend;
+//assign divisor_amend  = (div_signed&& divisor[63]) ? -divisor  : divisor ;
+assign dividend_amend = divw ? ((div_signed&&dividend[31]) ? {-dividend[31:0],32'b0} : {dividend[31:0],32'b0}) : ((div_signed&&dividend[63]) ? -dividend : dividend);
+assign divisor_amend  = divw ? ((div_signed&& divisor[31]) ? {32'b0,-divisor[31:0]} : {32'b0,divisor[31:0]}) : ((div_signed&& divisor[63]) ? -divisor  : divisor );
 
 reg [127:0] dividend_s;
 reg [63:0]  divisor_s;
@@ -82,14 +90,8 @@ always @(posedge clk) begin
 		s            <= 64'b0;
 	end
 	else if(div_valid && div_ready) begin
-		if(divw) begin
-			dividend_s  <= {64'b0,dividend_amend};
-			divisor_s   <= divisor_amend;
-		end
-		else begin
-			dividend_s  <= {64'b0,dividend_amend};
-			divisor_s   <= divisor_amend;
-		end
+		dividend_s  <= {64'b0,dividend_amend};
+		divisor_s   <= divisor_amend;
 		shift_times  <= 9'b0 ;
 		divider_working <= 1'b1;
 		s            <= 64'b0;
