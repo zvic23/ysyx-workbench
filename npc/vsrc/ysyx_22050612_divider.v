@@ -95,7 +95,7 @@ always @(posedge clk) begin
 		s            <= 64'b0;
 	end
 	else if(divider_working) begin
-		if(part_sub[32]) begin
+		if(part_sub[64]) begin
 			dividend_s[127:1] <= dividend_s[126:0];
 			s[63:1]     <= s[62:0];
 			s[0]        <= 1'b0;
