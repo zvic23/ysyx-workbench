@@ -10,7 +10,9 @@ module ysyx_22050612_divider(
 	output div_ready,
 	output out_valid,
 	output [63:0]quotient,
-	output [63:0]remainder
+	output [63:0]remainder,
+
+	output reg [8:0]shift_times
 );
 
 
@@ -77,7 +79,7 @@ assign divisor_amend  = divw ? ((div_signed&& divisor[31]) ? {32'b0,-divisor[31:
 
 reg [127:0] dividend_s;
 reg [63:0]  divisor_s;
-reg [8:0]   shift_times;
+//reg [8:0]   shift_times;
 reg divider_working;
 reg [63:0] s;
 
