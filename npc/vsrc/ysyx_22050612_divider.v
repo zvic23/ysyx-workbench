@@ -121,7 +121,7 @@ assign part_sub = dividend_s[127:63] - {1'b0,divisor_s};
 
 assign div_ready = ~divider_working;
 assign out_valid = divw_reg ? (shift_times == 9'd32) : (shift_times == 9'd64);
-assign quotient  = 64'b0;
+assign quotient  = out_valid ? (quotient_signed_amend ? -s : s) : 64'b0;
 assign remainder = out_valid ? (remainder_signed_amend ? -dividend_s[127:64] : dividend_s[127:64]) : 64'b0;
 
 
