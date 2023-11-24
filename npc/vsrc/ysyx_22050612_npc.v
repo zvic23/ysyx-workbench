@@ -34,7 +34,7 @@ ysyx_22050612_divider dividerkk (clk, rst, div_valid, flush, divw, div_signed, d
 always @(posedge clk)begin
 	if(rst) begin
 		dividend<= 64'd15;
-		divisor <= 64'd3;
+		divisor <= 64'd2;
 	end
 	else begin
 		//mulcand[31:0]  <= $random;
