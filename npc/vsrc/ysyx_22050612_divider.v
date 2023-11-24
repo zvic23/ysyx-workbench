@@ -91,13 +91,6 @@ always @(posedge clk) begin
 		divider_working <= 1'b0;
 		s            <= 64'b0;
 	end
-	else if(div_valid && div_ready) begin
-		dividend_s  <= {64'b0,dividend_amend};
-		divisor_s   <= divisor_amend;
-		shift_times  <= 9'b0 ;
-		divider_working <= 1'b1;
-		s            <= 64'b0;
-	end
 	else if(divider_working) begin
 		$display("in");
 		if(part_sub[64]) begin
@@ -113,6 +106,14 @@ always @(posedge clk) begin
 		end
 		shift_times <= shift_times + 1;
 	end
+	else if(div_valid && div_ready) begin
+		dividend_s  <= {64'b0,dividend_amend};
+		divisor_s   <= divisor_amend;
+		shift_times  <= 9'b0 ;
+		divider_working <= 1'b1;
+		s            <= 64'b0;
+	end
+
 end
 
 
