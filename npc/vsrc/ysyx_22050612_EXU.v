@@ -1233,7 +1233,7 @@ wire div_signed;
 assign div_signed = (opcode == 24'h21000)||(opcode == 24'h26000)||(opcode == 24'h28000);
 
 wire diving;
-assign diving = ((opcode == 24'h21000)||(opcode == 24'h22000)||(opcode == 24'h26000)||(opcode == 24'h27000));
+assign diving = ((opcode == 24'h21000)||(opcode == 24'h22000)||(opcode == 24'h24000)||(opcode == 24'h26000)||(opcode == 24'h27000)||(opcode == 24'h28000)||(opcode == 24'h29000));
 wire [63:0]dividend;
 wire [63:0]divisor ;
 assign dividend  = diving ? src1 : 64'b0;
