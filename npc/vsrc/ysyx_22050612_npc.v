@@ -23,7 +23,7 @@ assign div_valid = 1'b1;
 wire divw;
 assign divw = 1'b0;
 wire div_signed;
-assign div_signed = 1'b0;
+assign div_signed = 1'b1;
 reg [63:0]dividend;
 reg [63:0]divisor;
 
@@ -33,7 +33,7 @@ ysyx_22050612_divider dividerkk (clk, rst, div_valid, flush, divw, div_signed, d
 
 always @(posedge clk)begin
 	if(rst) begin
-		dividend<= 64'd15;
+		dividend<= -64'd15;
 		divisor <= 64'd2;
 	end
 	else begin
