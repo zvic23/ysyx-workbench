@@ -23,7 +23,7 @@ assign div_valid = 1'b1;
 wire divw;
 assign divw = 1'b0;
 wire div_signed;
-assign div_signed = 1'b1;
+assign div_signed = 1'b0;
 reg [63:0]dividend;
 reg [63:0]divisor;
 
@@ -37,8 +37,10 @@ always @(posedge clk)begin
 		divisor <= 64'd2;
 	end
 	else begin
-		//mulcand[31:0]  <= $random;
-		//muler  [31:0]  <= $random;
+		dividend[31:0]  <= $random;
+		divisor [31:0]  <= $random;
+		dividend[63:32]  <= $random;
+		divisor [63:32]  <= $random;
 		//mulcand[63:32] <= 32'b0;
 		//muler  [63:32] <= 32'b0;
 		//mulcand <= 64'd4;
@@ -51,13 +53,19 @@ always @(posedge clk)begin
 end
 
 
+wire [63:0]quotient_r;
+wire [63:0]remainder_r;
 
+assign quotient_r = dividend / divisor;
+assign remainder_r= dividend % divisor;
 
 always @(negedge clk)begin
+	if(quotient_r != quotient) $display("quo !!!!!!!!!!");
+	if(remainder_r!= remainder) $display("rem  !!!!!!!!!");
 
 	
-	$display("mulcand:%d  mulier:%d      %d %d",$signed(dividend[63:0]),divisor,dividend[63],divisor[63]);
-	$display("mulresult:%d       %d",     $signed(quotient),  $signed(remainder));
+	//$display("mulcand:%d  mulier:%d      %d %d",dividend[63:0],divisor,dividend[63],divisor[63]);
+	////$display("mulresult:%d       %d",     $signed(quotient),  $signed(remainder));
 	//$display("mulresult:%d       %d",     quotient,  remainder);
 
 end
