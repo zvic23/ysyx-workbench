@@ -11,7 +11,7 @@ output [63:0]wb_pc
 
 );
 
-
+/*
 wire flush;
 wire div_ready;
 wire div_result_valid;
@@ -69,7 +69,7 @@ always @(negedge clk)begin
 	//$display("mulresult:%d       %d",     quotient,  remainder);
 
 end
-
+*/
 
 
 /*

@@ -185,7 +185,7 @@ always@(*)begin
 end
 
 wire EX_block;
-assign EX_block = mul_valid && !mul_out_valid;
+assign EX_block = (mul_valid && !mul_out_valid) || (div_valid && !div_out_valid);
 //assign EX_block = 1'b0;
 assign ready_ID_EX = EX_block ? 1'b0 : ready_EX_MEM;
 
@@ -965,13 +965,17 @@ always@(*) begin
     24'h1b000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
     24'h1d000: ALUoutput_EX_MEM=result_lo;
     //24'h1d000: ALUoutput_EX_MEM=result_mul0;
-    24'h21000: ALUoutput_EX_MEM=result_div0;
-    24'h22000: ALUoutput_EX_MEM=result_divu0;
+    24'h21000: ALUoutput_EX_MEM=quotient;
+    //24'h21000: ALUoutput_EX_MEM=result_div0;
+    24'h22000: ALUoutput_EX_MEM=quotient;
+    //24'h22000: ALUoutput_EX_MEM=result_divu0;
     24'h24000: ALUoutput_EX_MEM=result_remu0;
     24'h25000: ALUoutput_EX_MEM=(result_lo[31]?({{32{1'b1}},result_lo[31:0]}):({{32{1'b0}},result_lo[31:0]}));
     //24'h25000: ALUoutput_EX_MEM=(result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]}));
-    24'h26000: ALUoutput_EX_MEM=(result_divw0[31]?({{32{1'b1}},result_divw0[31:0]}):({{32{1'b0}},result_divw0[31:0]}));
-    24'h27000: ALUoutput_EX_MEM=(result_divuw0[31]?({{32{1'b1}},result_divuw0[31:0]}):({{32{1'b0}},result_divuw0[31:0]}));
+    24'h26000: ALUoutput_EX_MEM=(quotient[31]?({{32{1'b1}},quotient[31:0]}):({{32{1'b0}},quotient[31:0]}));
+    //24'h26000: ALUoutput_EX_MEM=(result_divw0[31]?({{32{1'b1}},result_divw0[31:0]}):({{32{1'b0}},result_divw0[31:0]}));
+    24'h27000: ALUoutput_EX_MEM=(quotient[31]?({{32{1'b1}},quotient[31:0]}):({{32{1'b0}},quotient[31:0]}));
+    //24'h27000: ALUoutput_EX_MEM=(result_divuw0[31]?({{32{1'b1}},result_divuw0[31:0]}):({{32{1'b0}},result_divuw0[31:0]}));
     24'h28000: ALUoutput_EX_MEM=(result_remw0[31]?({{32{1'b1}},result_remw0[31:0]}):({{32{1'b0}},result_remw0[31:0]}));
     24'h29000: ALUoutput_EX_MEM=(result_remuw0[31]?({{32{1'b1}},result_remuw0[31:0]}):({{32{1'b0}},result_remuw0[31:0]}));
 //    //24'h100  : wdata_reg=imm_U;
@@ -1183,8 +1187,8 @@ wire[31:0] result_remuw0;
 assign result_remuw0 = src1[31:0] % src2[31:0];
 
 
-wire flush;
-assign flush = 1'b0;
+wire mul_flush;
+assign mul_flush = 1'b0;
 wire mul_ready;
 wire mul_out_valid;
 wire [63:0]result_hi;
@@ -1204,10 +1208,31 @@ wire [63:0]muler;
 assign mulcand = muling ? src1 : 64'b0;
 assign muler   = muling ? src2 : 64'b0;
 
-ysyx_22050612_multiplier boothmul ((clk&&((opcode == 24'h1d000)||(opcode == 24'h25000))), rst, mul_valid, flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_out_valid, result_hi, result_lo);      //the clk has been "&&" with "mul mulw" opcode to close the clock gating(gate), it can speed up the simulating.
+ysyx_22050612_multiplier boothmul ((clk&&((opcode == 24'h1d000)||(opcode == 24'h25000))), rst, mul_valid, mul_flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_out_valid, result_hi, result_lo);      //the clk has been "&&" with "mul mulw" opcode to close the clock gating(gate), it can speed up the simulating.
 
 
+wire div_flush;
+assign div_flush = 1'b0;
+wire div_ready;
+wire div_out_valid;
+wire [63:0]quotient;
+wire [63:0]remainder;
 
+wire div_valid;
+assign div_valid = ((opcode == 24'h21000)||(opcode == 24'h22000)||(opcode == 24'h26000)||(opcode == 24'h27000))&&ready_EX_MEM  ;
+wire divw;
+assign divw = (opcode == 24'h26000)||(opcode == 24'h27000);
+wire div_signed;
+assign div_signed = (opcode == 24'h21000)||(opcode == 24'h26000);
+
+wire diving;
+assign diving = ((opcode == 24'h21000)||(opcode == 24'h22000)||(opcode == 24'h26000)||(opcode == 24'h27000));
+wire [63:0]dividend;
+wire [63:0]divisor ;
+assign dividend  = diving ? src1 : 64'b0;
+assign divisor   = diving ? src2 : 64'b0;
+
+ysyx_22050612_divider boothdiv ((clk&&((opcode == 24'h1d000)||(opcode == 24'h25000))), rst, div_valid, div_flush, divw, div_signed, dividend, divisor, div_ready, div_out_valid, quotient, remainder);      //the clk has been "&&" with "div divw" opcode to close the clock gating(gate), it can speed up the sidivating.
 
 
 
