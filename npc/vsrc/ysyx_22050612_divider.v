@@ -16,17 +16,19 @@ module ysyx_22050612_divider(
 
 
 reg quotient_signed_amend ; 
-reg remainder_signed_amend; 
+reg remainder_signed_amend;
+reg divw_reg;
 
 always @(posedge clk) begin
 	if(rst || flush || out_valid) begin
 		quotient_signed_amend  <= 1'b0;
 		remainder_signed_amend <= 1'b0;
-
+		divw_reg               <= 1'b0;
 	end
 	else if(div_valid && div_ready) begin
 		quotient_signed_amend  <= div_signed&&(dividend[63]^divisor[63]) ? 1'b1 : 1'b0;
 		remainder_signed_amend <= div_signed&&dividend[63] ? 1'b1 : 1'b0;
+		divw_reg               <= divw;
 	end
 end
 
@@ -80,8 +82,14 @@ always @(posedge clk) begin
 		s            <= 64'b0;
 	end
 	else if(div_valid && div_ready) begin
-		dividend_s  <= {64'b0,dividend_amend};
-		divisor_s   <= divisor_amend;
+		if(divw) begin
+			dividend_s  <= {64'b0,dividend_amend};
+			divisor_s   <= divisor_amend;
+		end
+		else begin
+			dividend_s  <= {64'b0,dividend_amend};
+			divisor_s   <= divisor_amend;
+		end
 		shift_times  <= 9'b0 ;
 		divider_working <= 1'b1;
 		s            <= 64'b0;
@@ -108,7 +116,7 @@ assign part_sub = dividend_s[127:63] - {1'b0,divisor_s};
 
 
 assign div_ready = ~divider_working;
-assign out_valid = (shift_times == 9'd64);
+assign out_valid = divw_reg ? (shift_times == 9'd32) : (shift_times == 9'd64);
 assign quotient  = out_valid ? (quotient_signed_amend ? -s : s) : 64'b0;
 assign remainder = out_valid ? (remainder_signed_amend ? -dividend_s[127:64] : dividend_s[127:64]) : 64'b0;
 
