@@ -273,6 +273,7 @@ reg c32_reg;
 reg mul_pipe2_valid;
 
 always @(posedge clk) begin
+	$display("mul  !!!!");
 	if(rst || flush) begin
 		walloc_c_reg <= 131'b0;
 		walloc_s_reg <= 132'b0;
