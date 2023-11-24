@@ -20,8 +20,8 @@ end
 
 wire [65:0]mul_a;
 wire [65:0]mul_b;
-assign mul_a[31: 0] =  32'b0;
-assign mul_b[31: 0] = mul_valid ? multiplier  [31:0] : 32'b0;
+assign mul_a[31: 0] = mul_valid ? multiplicand[31:0] : 32'b0;
+assign mul_b[31: 0] = 32'b0;
 assign mul_a[63:32] = mul_valid ? (mulw ? (mul_signed[0] ? {32{multiplicand[31]}} : 32'b0) : multiplicand[63:32]) : 32'b0;
 assign mul_b[63:32] = mul_valid ? (mulw ? (mul_signed[1] ? {32{multiplier  [31]}} : 32'b0) : multiplier  [63:32]) : 32'b0;
 assign mul_a[65:64] = (mul_valid&&mul_signed[0]) ? (mulw ? {2{multiplicand[31]}} : {2{multiplicand[63]}}) :  2'b0;
