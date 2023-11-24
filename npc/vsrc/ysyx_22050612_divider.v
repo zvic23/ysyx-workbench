@@ -22,6 +22,7 @@ reg remainder_signed_amend;
 reg divw_reg;
 
 always @(posedge clk) begin
+	$display("div   !!!!");
 	if(rst || flush || out_valid) begin
 		quotient_signed_amend  <= 1'b0;
 		remainder_signed_amend <= 1'b0;
