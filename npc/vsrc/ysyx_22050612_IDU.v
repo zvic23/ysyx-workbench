@@ -140,7 +140,7 @@ assign ID_block = ID_reg_valid && EX_reg_valid && EX_loading && (rs1_waiting ||(
 
 //********************************************************************
 
-
+/*
 wire [ 4:0]rs1  ;
 wire [ 4:0]rs2  ;
 wire [63:0]imm_I;
@@ -157,13 +157,13 @@ assign imm_U = (inst[31]==1'b1)?{{32{1'b1}},inst[31:12],{12{1'b0}}}:{{32{1'b0}},
 assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
 assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0}:{{51{1'b0}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0};
 assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},inst[31:25],inst[11:7]};
-
+*/
 
 
 
 reg [63:0] src_csr;
 always @(*) begin
-    case (imm_I[11:0])
+    case (inst[31:20])
     12'h305: src_csr=mtvec;
     12'h341: src_csr=mepc;
     12'h342: src_csr=mcause;
@@ -175,7 +175,7 @@ end
 
  
 
-assign src_A = gpr[rs1];
+assign src_A = gpr[opcode_rs1];
 
 always @(*) begin
 ////src_A
@@ -192,7 +192,7 @@ always @(*) begin
     24'd50   : src_B=src_csr;
     24'h200000:src_B=mtvec   ;        
     24'h500000:src_B=mepc    ;
-    default  : src_B=gpr[rs2];
+    default  : src_B=gpr[opcode_rs2];
     endcase 
 end
 
