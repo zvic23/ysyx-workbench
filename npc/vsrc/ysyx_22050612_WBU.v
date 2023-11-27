@@ -11,6 +11,7 @@ input       valid_MEM_WB  ,
 output      ready_MEM_WB  ,
 input [63:0]pc_MEM_WB  ,
 input [31:0]inst_MEM_WB,
+input [ 4:0]rd_MEM_WB,
 
 input       reg_wr_wen,
 input [ 4:0]reg_wr_ID,

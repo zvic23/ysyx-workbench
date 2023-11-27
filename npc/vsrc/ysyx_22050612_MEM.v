@@ -16,6 +16,7 @@ input [63:0]pc_EX_MEM,
 input [31:0]inst_EX_MEM,
 input [23:0]opcode_in,
 input [14:0]opcode_type_EX_MEM,
+input [ 4:0]rd_EX_MEM,
 input [63:0]ALUoutput_in,
 input [63:0]src2_in,
 
@@ -25,6 +26,7 @@ output       valid_MEM_WB  ,
 input        ready_MEM_WB  ,
 output [63:0]pc_MEM_WB  ,
 output [31:0]inst_MEM_WB,
+output [ 4:0]rd_MEM_WB,
 
 output       reg_wr_wen   ,
 output [ 4:0]reg_wr_ID    ,
@@ -91,6 +93,7 @@ reg [23:0]MEM_reg_opcode        ;
 reg [14:0]MEM_reg_opcode_type        ;
 //reg [63:0]MEM_reg_aluoutput     ;
 reg [63:0]MEM_reg_src2          ;
+reg [ 4:0]MEM_reg_rd;
 
 always @(posedge clk) begin
 	if(rst) begin
@@ -101,6 +104,7 @@ always @(posedge clk) begin
 		MEM_reg_opcode_type         <= 15'b0;
 		MEM_reg_aluoutput      <= 64'b0;
 		MEM_reg_src2           <= 64'b0;
+		MEM_reg_rd           <=  5'b0;
 	end
 	else if(!ready_EX_MEM)begin
 		MEM_reg_valid          <= MEM_reg_valid      ; 
@@ -110,6 +114,7 @@ always @(posedge clk) begin
 		MEM_reg_opcode_type         <= MEM_reg_opcode_type     ; 
 		MEM_reg_aluoutput      <= MEM_reg_aluoutput  ; 
 		MEM_reg_src2           <= MEM_reg_src2       ; 
+		MEM_reg_rd           <= MEM_reg_rd       ; 
 	end
 	else begin
 		MEM_reg_valid          <= valid_EX_MEM;
@@ -119,6 +124,7 @@ always @(posedge clk) begin
 		MEM_reg_opcode_type         <= opcode_type_EX_MEM;
 		MEM_reg_aluoutput      <= ALUoutput_in;
 		MEM_reg_src2           <= src2_in       ;
+		MEM_reg_rd           <= rd_EX_MEM;
 	end
 end
 
