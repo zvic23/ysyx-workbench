@@ -133,79 +133,11 @@ assign rs2_block_checking = opcode_jal || opcode_jalr || opcode_branch || opcode
 
 assign rs1_waiting = EX_reg_inst[11:7] == ID_reg_inst[19:15];
 assign rs2_waiting = EX_reg_inst[11:7] == ID_reg_inst[24:20];
-//assign rs2_block_checking[0] = ID_reg_valid ? (ID_reg_inst[6:0] == 7'b1101111) : 1'b0;
 
+wire ID_block;
 assign ID_block = ID_reg_valid && EX_reg_valid && EX_loading && (rs1_waiting ||(rs2_waiting && (rs2_block_checking)));
 
-always@(*) begin
-	//if(EX_reg_valid)begin
-	/*
-		case ({EX_reg_inst[14:12],EX_reg_inst[6:0]})
-			10'b000_0000011:  EX_loading = 1'b1;  //lb
-			10'b001_0000011:  EX_loading = 1'b1;  //lh
-			10'b010_0000011:  EX_loading = 1'b1;  //lw
-			10'b100_0000011:  EX_loading = 1'b1;  //lbu
-			10'b101_0000011:  EX_loading = 1'b1;  //lhu
-//			10'b000_0100011:  EX_loading = 1'b1;  //sb   
-//			10'b001_0100011:  EX_loading = 1'b1;  //sh
-//			10'b010_0100011:  EX_loading = 1'b1;  //sw
-			10'b110_0000011:  EX_loading = 1'b1;  //lwu
-			10'b011_0000011:  EX_loading = 1'b1;  //ld
-//			10'b011_0100011:  EX_loading = 1'b1;  //sd
-		        default :         EX_loading = 1'b0;
-		endcase
-		*/
-	//end
-	//if(ID_reg_valid)begin
-	/*
-		case ({ID_reg_inst[14:12],ID_reg_inst[6:0]})
-    			10'b000_1100111:  rs2_block_checking[1]= 1'd1   ;    //jalr
-    			10'b000_1100011:  rs2_block_checking[1]= 1'd1   ;    //beq
-    			10'b001_1100011:  rs2_block_checking[1]= 1'd1   ;    //bne
-    			10'b100_1100011:  rs2_block_checking[1]= 1'd1   ;    //blt
-    			10'b101_1100011:  rs2_block_checking[1]= 1'd1   ;    //bge
-    			10'b110_1100011:  rs2_block_checking[1]= 1'd1   ;    //bltu
-    			10'b111_1100011:  rs2_block_checking[1]= 1'd1   ;    //bgeu
-		//	10'b001_1110011:  rs2_block_checking[1]= 1'd1   ;    //csrrw
-             	//	10'b010_1110011:  rs2_block_checking[1]= 1'd1   ;    //csrrs
-			default :         rs2_block_checking[1]= 1'd0   ;
-		endcase
-		case ({ID_reg_inst[31:25],ID_reg_inst[14:12],ID_reg_inst[6:0]})
-		        17'b0000000_000_0110011: rs2_block_checking[2]= 1'd1  ; //add
-		        17'b0100000_000_0110011: rs2_block_checking[2]= 1'd1  ; //sub
-		        17'b0000000_001_0110011: rs2_block_checking[2]= 1'd1  ; //sll
-		        17'b0000000_010_0110011: rs2_block_checking[2]= 1'd1  ; //slt
-		        17'b0000000_011_0110011: rs2_block_checking[2]= 1'd1  ; //sltu
-		        17'b0000000_100_0110011: rs2_block_checking[2]= 1'd1  ; //xor
-		        17'b0000000_101_0110011: rs2_block_checking[2]= 1'd1  ; //srl
-		        17'b0000000_110_0110011: rs2_block_checking[2]= 1'd1  ; //or
-		        17'b0000000_111_0110011: rs2_block_checking[2]= 1'd1  ; //and
-		        17'b0000000_000_0111011: rs2_block_checking[2]= 1'd1  ; //addw
-		        17'b0100000_000_0111011: rs2_block_checking[2]= 1'd1  ; //subw
-		        17'b0000000_001_0111011: rs2_block_checking[2]= 1'd1  ; //sllw
-		        17'b0000000_101_0111011: rs2_block_checking[2]= 1'd1  ; //srlw
-		        17'b0100000_101_0111011: rs2_block_checking[2]= 1'd1  ; //sraw
-		        17'b0000001_000_0110011: rs2_block_checking[2]= 1'd1  ; //mul
-		        17'b0000001_100_0110011: rs2_block_checking[2]= 1'd1  ; //div
-		        17'b0000001_101_0110011: rs2_block_checking[2]= 1'd1  ; //divu
-		        17'b0000001_111_0110011: rs2_block_checking[2]= 1'd1  ; //remu
-		        17'b0000001_000_0111011: rs2_block_checking[2]= 1'd1  ; //mulw
-		        17'b0000001_100_0111011: rs2_block_checking[2]= 1'd1  ; //divw
-		        17'b0000001_101_0111011: rs2_block_checking[2]= 1'd1  ; //divuw
-		        17'b0000001_110_0111011: rs2_block_checking[2]= 1'd1  ; //remw
-		        17'b0000001_111_0111011: rs2_block_checking[2]= 1'd1  ; //remuw
-			default :                rs2_block_checking[2]= 1'd0  ;
-		endcase
-	//end
-	*/
-end
-
-
 //********************************************************************
-
-
-
-
 
 
 //wire [ 4:0]rd   ;
@@ -229,21 +161,6 @@ assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[3
 assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0}:{{51{1'b0}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0};
 assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},inst[31:25],inst[11:7]};
 
-//wire [63:0]src1;
-//wire [63:0]src2;
-
-//assign src1=gpr[rs1];
-//assign src2=gpr[rs2];
-
-
-
-
-wire ID_block;
-
-
-
-
-
 
 
 
@@ -259,203 +176,9 @@ always @(*) begin
 
 end
 
-/*
-always @(*) begin
-//The input of ALU
-    case (opcode)
-    24'h4000 : src_A=src1;
-    24'h5000 : src_A=src1;
-    24'h6000 : src_A=src1;
-    24'h7000 : src_A=src1;
-    24'h8000 : src_A=src1;
-    24'h9000 : src_A=src1;
-    24'h10000: src_A=src1;
-    24'h12000: src_A=src1;
-    24'h13000: src_A=src1;
-    24'h14000: src_A={{32{1'b0}},src1[31:0]};
-    24'h15000: src_A={{32{1'b0}},src1[31:0]};
-    24'h16000: src_A={src1[31:0],{32{1'b0}}};
-    24'h17000: src_A=src1;
-    24'h18000: src_A=src1;
-    24'h19000: src_A=src1;
-    24'h1a000: src_A={src1[31:0],{32{1'b0}}};
-    24'h1b000: src_A={src1[31:0],{32{1'b0}}};
-    24'h100  : src_A=imm_U;                             //wdata_reg=imm_U
-    24'h200  : src_A=ID_reg_pc;
-    24'h300  : src_A=ID_reg_pc;
-    24'h400  : src_A=src1;
-    24'h800  : src_A=src1;
-    24'hc00  : src_A=src1;
-    24'd4    : src_A=src1;
-    24'd5    : src_A=src1;
-    24'd6    : src_A=src1;
-    24'd7    : src_A=src1;
-    24'd8    : src_A=src1;
-    24'd9    : src_A=src1;
-    24'd10   : src_A=src1;
-    24'd11   : src_A=src1;
-    24'd12   : src_A=src1;
-    24'd13   : src_A=src1;
-    24'd14   : src_A=src1;
-    24'd15   : src_A=src1;
-    24'd16   : src_A=src1;
-    24'd17   : src_A=src1;
-    24'd18   : src_A=src1;
-    24'd19   : src_A=src1;
-    24'd20   : src_A=src1;
-    24'd21   : src_A=src1;
-    24'd22   : src_A=src1;
-    24'd23   : src_A=src1;
-    24'd24   : src_A=src1;
-    24'd41   : src_A=src1;
-    24'd42   : src_A=src1;
-    24'd43   : src_A=src1;
-    24'd47   : src_A=src1;
-    24'd49   : src_A=src1;  //csrrw
-    24'd50   : src_A=src1;  //csrrs
-
-//mul / div
-    24'h1d000: src_A=src1;  //mul
-    24'h21000: src_A=src1;  //div
-    24'h22000: src_A=src1;  //divu
-    24'h24000: src_A=src1;  //remu
-    24'h25000: src_A=src1;  //mulw
-    24'h26000: src_A=src1;  //divw
-    24'h27000: src_A=src1;  //divuw
-    24'h28000: src_A=src1;  //remw
-    24'h29000: src_A=src1;  //remuw
-
-//ecall  mret
-    24'h200000: src_A=mtvec                             ;        
-    24'h500000: src_A=mepc                              ; 
-
-    default :  src_A=64'b0;
-    endcase
-
-    case (opcode)
-    24'h4000 : src_B=src2 ;
-    24'h5000 : src_B=src2 ;
-    24'h6000 : src_B={{58{1'b0}},src2[5:0]};
-    24'h7000 : src_B=src2 ;
-    24'h8000 : src_B=src2 ;
-    24'h9000 : src_B=src2 ;
-    24'h10000: src_B={{58{1'b0}},src2[5:0]};
-    24'h12000: src_B=src2 ;
-    24'h13000: src_B=src2 ;
-    24'h14000: src_B={{59{1'b0}},shamt[4:0]};
-    24'h15000: src_B={{59{1'b0}},shamt[4:0]};
-    24'h16000: src_B={{59{1'b0}},shamt[4:0]};
-    24'h17000: src_B=src2 ;
-    24'h18000: src_B=src2 ;
-    24'h19000: src_B={{59{1'b0}},src2[4:0]};
-    24'h1a000: src_B={{59{1'b0}},src2[4:0]};
-    24'h1b000: src_B={{59{1'b0}},src2[4:0]};
-    24'h200  : src_B=imm_U;
-    24'h300  : src_B=imm_J;
-    24'h400  : src_B={{58{1'b0}},shamt};
-    24'h800  : src_B={{58{1'b0}},shamt};
-    24'hc00  : src_B={{58{1'b0}},shamt};
-    24'd4    : src_B=imm_I;
-    24'd5    : src_B=src2 ;
-    24'd6    : src_B=src2 ;
-    24'd7    : src_B=src2 ;
-    24'd8    : src_B=src2 ;
-    24'd9    : src_B=src2 ;
-    24'd10   : src_B=src2 ;
-    24'd11   : src_B=imm_I;
-    24'd12   : src_B=imm_I;
-    24'd13   : src_B=imm_I;
-    24'd14   : src_B=imm_I;
-    24'd15   : src_B=imm_I;
-    24'd16   : src_B=imm_S;
-    24'd17   : src_B=imm_S;
-    24'd18   : src_B=imm_S;
-    24'd19   : src_B=imm_I;
-    24'd20   : src_B=imm_I;
-    24'd21   : src_B=imm_I;
-    24'd22   : src_B=imm_I;
-    24'd23   : src_B=imm_I;
-    24'd24   : src_B=imm_I;
-    24'd41   : src_B=imm_I;
-    24'd42   : src_B=imm_I;
-    24'd43   : src_B=imm_S;
-    24'd47   : src_B=imm_I;
-    24'd49   : src_B=src_csr;
-    24'd50   : src_B=src_csr;
-
-//mul / div
-    24'h1d000: src_B=src2;  //mul
-    24'h21000: src_B=src2;  //div
-    24'h22000: src_B=src2;  //divu
-    24'h24000: src_B=src2;  //remu
-    24'h25000: src_B=src2;  //mulw
-    24'h26000: src_B=src2;  //divw
-    24'h27000: src_B=src2;  //divuw
-    24'h28000: src_B=src2;  //remw
-    24'h29000: src_B=src2;  //remuw
-
-    default :  src_B=64'b0;
-    endcase
-
-
-    case(opcode)
-    24'h4000 : ALU_mode=8'd0 ; 
-    24'h5000 : ALU_mode=8'd1 ; 
-    24'h6000 : ALU_mode=8'd8 ; 
-    24'h7000 : ALU_mode=8'd2 ; 
-    24'h8000 : ALU_mode=8'd3 ; 
-    24'h9000 : ALU_mode=8'd7 ; 
-    24'h10000: ALU_mode=8'd9 ; 
-    24'h12000: ALU_mode=8'd6 ; 
-    24'h13000: ALU_mode=8'd4 ; 
-    24'h14000: ALU_mode=8'd8 ; 
-    24'h15000: ALU_mode=8'd9 ; 
-    24'h16000: ALU_mode=8'd10; 
-    24'h17000: ALU_mode=8'd0 ; 
-    24'h18000: ALU_mode=8'd1 ; 
-    24'h19000: ALU_mode=8'd8 ; 
-    24'h1a000: ALU_mode=8'd9 ; 
-    24'h1b000: ALU_mode=8'd10; 
-    24'h200  : ALU_mode=8'd0 ; 
-    24'h300  : ALU_mode=8'd0 ; 
-    24'h400  : ALU_mode=8'd8 ;
-    24'h800  : ALU_mode=8'd9 ;
-    24'hc00  : ALU_mode=8'd10;
-    24'd4    : ALU_mode=8'd0 ; 
-    24'd5    : ALU_mode=8'd1 ; 
-    24'd6    : ALU_mode=8'd1 ; 
-    24'd7    : ALU_mode=8'd1 ; 
-    24'd8    : ALU_mode=8'd1 ; 
-    24'd9    : ALU_mode=8'd1 ; 
-    24'd10   : ALU_mode=8'd1 ; 
-    24'd11   : ALU_mode=8'd0 ;
-    24'd12   : ALU_mode=8'd0 ;
-    24'd13   : ALU_mode=8'd0 ;
-    24'd14   : ALU_mode=8'd0 ;
-    24'd15   : ALU_mode=8'd0 ;
-    24'd16   : ALU_mode=8'd0 ;
-    24'd17   : ALU_mode=8'd0 ;
-    24'd18   : ALU_mode=8'd0 ;
-    24'd19   : ALU_mode=8'd0 ;
-    24'd20   : ALU_mode=8'd2 ;
-    24'd21   : ALU_mode=8'd3 ;
-    24'd22   : ALU_mode=8'd7 ;
-    24'd23   : ALU_mode=8'd6 ;
-    24'd24   : ALU_mode=8'd4 ;
-    24'd41   : ALU_mode=8'd0 ;
-    24'd42   : ALU_mode=8'd0 ;
-    24'd43   : ALU_mode=8'd0 ;
-    24'd47   : ALU_mode=8'd0 ;
-    24'd50   : ALU_mode=8'd6 ;
-    default :  ALU_mode=8'b0;
-    endcase
-
-end
-*/
+ 
 
 assign src_A = gpr[rs1];
-//assign src_B = gpr[rs2];
-//assign src_B = ID_reg_inst[6:0] == 7'b1110011 ? (ID_reg_inst[14:12] == 3'b0 ? 
 
 always @(*) begin
 ////src_A
@@ -496,10 +219,6 @@ always @(*) begin
     default  : imm=imm_I;
     endcase
 end
-
-
-
-
 
 
   always @(inst) begin

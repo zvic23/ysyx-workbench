@@ -202,15 +202,13 @@ wire [63:0]src_A;
 wire [63:0]src_B;
 wire [63:0]imm;
 wire [23:0]opcode_ID_EX;
-//wire [ 7:0]ALU_mode      ;
-//wire [ 4:0]rd            ;
 
 
 wire       EX_reg_valid;
 wire [31:0]EX_reg_inst ;
 
 
-ysyx_22050612_EXU exu (clk,rst, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX,/*imm_I,imm_U,imm_J,imm_B,imm_S,shamt,rd,rs1,rs2,*/opcode_ID_EX,src_A,src_B,/*ALU_mode, src2, rd,*/ imm, dnpc,pc_update, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM, opcode_EX_MEM, ALUoutput_EX_MEM , src_B_EX_MEM,/*reg_wr_wen, reg_wr_ID, reg_wr_value, */wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus,wen_mtvec,wen_mepc,wen_mcause,wen_mstatus,gpr , EX_reg_valid,EX_reg_inst,  MEM_reg_valid, MEM_reg_inst, MEM_reg_aluoutput, WB_reg_valid, WB_reg_inst, WB_reg_wdata  , branch_flush );
+ysyx_22050612_EXU exu (clk,rst, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX,opcode_ID_EX,src_A,src_B, imm, dnpc,pc_update, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM, opcode_EX_MEM, ALUoutput_EX_MEM , src_B_EX_MEM,wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus,wen_mtvec,wen_mepc,wen_mcause,wen_mstatus,gpr , EX_reg_valid,EX_reg_inst,  MEM_reg_valid, MEM_reg_inst, MEM_reg_aluoutput, WB_reg_valid, WB_reg_inst, WB_reg_wdata  , branch_flush );
 
 wire       valid_EX_MEM  ;
 wire       ready_EX_MEM  ;
@@ -346,118 +344,11 @@ ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid,
 
 //*****************************************************************
 
+
+
 //************************  pipeline  ******************************
 
-always @(negedge clk) begin
-	//$display("busy %x",gpr_busy);
-end
-
 //*****************************************************************
-
-
-
-
-
-
-/*
-//*******************  axi  *******************************
-wire arvalid_pc      ;  
-wire [31:0]araddr_pc ;  
-wire arready_pc      ;  
-wire rvalid_pc       ;   
-wire [63:0]rdata_pc  ; 
-wire [1:0]rresp_pc   ;
-wire rready_pc       ;
-
-wire awvalid_pc      ;  
-wire [31:0]awaddr_pc ; 
-wire awready_pc      ; 
-wire wvalid_pc       ;    
-wire [63:0]wdata_pc  ;  
-wire [7:0]wstrb_pc  ;  
-wire wready_pc       ;      
-wire [1:0]bresp_pc   ; 
-wire bvalid_pc       ;   
-wire bready_pc       ;   
-
-
-wire arvalid_lsu      ;  
-wire [31:0]araddr_lsu ;  
-wire arready_lsu      ;  
-wire rvalid_lsu       ;   
-wire [63:0]rdata_lsu  ; 
-wire [1:0]rresp_lsu   ;
-wire rready_lsu       ;
-wire awvalid_lsu      ;  
-wire [31:0]awaddr_lsu ; 
-wire awready_lsu      ; 
-wire wvalid_lsu       ;    
-wire [63:0]wdata_lsu  ;  
-wire [7:0]wstrb_lsu  ;  
-wire wready_lsu       ;      
-wire [1:0]bresp_lsu   ; 
-wire bvalid_lsu       ;   
-wire bready_lsu       ;   
-
-
-wire arvalid      ;  
-wire [31:0]araddr ;  
-wire arready      ;  
-wire rvalid       ;   
-wire [63:0]rdata  ; 
-wire [1:0]rresp   ;
-wire rready       ;
-wire awvalid      ;  
-wire [31:0]awaddr ; 
-wire awready      ; 
-wire wvalid       ;    
-wire [63:0]wdata  ;  
-wire [7:0]wstrb   ;  
-wire wready       ;      
-wire [1:0]bresp   ; 
-wire bvalid       ;   
-wire bready       ;  
-
-
-
-//ysyx_22050612_SRAM sram_pc (clk,rst,arvalid_pc,araddr_pc,arready_pc,rvalid_pc,rdata_pc,rresp_pc,rready_pc, 1'b0, 32'b0,  , 1'b0, 64'b0, 8'b0, , , , 1'b0);
-//ysyx_22050612_SRAM sram_pc (clk,rst,arvalid_pc,araddr_pc,arready_pc,rvalid_pc,rdata_pc,rresp_pc,rready_pc,awvalid_pc,awaddr_pc,awready_pc,wvalid_pc,wdata_pc,wstrb_pc,wready_pc,bresp_pc,bvalid_pc,bready_pc);
-
-//ysyx_22050612_SRAM sram (clk,rst,arvalid_lsu,araddr_lsu,arready_lsu,rvalid_lsu,rdata_lsu,rresp_lsu,rready_lsu,awvalid_lsu,awaddr_lsu,awready_lsu,wvalid_lsu,wdata_lsu,wstrb_lsu,wready_lsu,bresp_lsu,bvalid_lsu,bready_lsu);
-ysyx_22050612_SRAM sram (clk,rst,arvalid,araddr,arready,rvalid,rdata,rresp,rready,awvalid,awaddr,awready,wvalid,wdata,wstrb,wready,bresp,bvalid,bready);
-
-ysyx_22050612_Arbiter arbiter (clk,rst,
-	arvalid_pc,arvalid_lsu,arvalid,
-	araddr_pc,araddr_lsu,araddr,
-	arready_pc,arready_lsu,arready,
-	rvalid_pc,rvalid_lsu,rvalid,
-	rdata_pc,rdata_lsu,rdata,
-	rresp_pc,rresp_lsu,rresp,
-	rready_pc,rready_lsu,rready,
-	awvalid_pc,awvalid_lsu,awvalid,
-	awaddr_pc,awaddr_lsu,awaddr,
-	awready_pc,awready_lsu,awready,
-	wvalid_pc,wvalid_lsu,wvalid,
-	wdata_pc,wdata_lsu,wdata,
-	wstrb_pc,wstrb_lsu,wstrb,
-	wready_pc,wready_lsu,wready,
-	bresp_pc,bresp_lsu,bresp,
-	bvalid_pc,bvalid_lsu,bvalid,
-	bready_pc,bready_lsu,bready);
-//	1'b0,awvalid_lsu,awvalid,
-//	32'b0,awaddr_lsu,awaddr,
-//	1'b0,awready_lsu,awready,
-//	1'b0,wvalid_lsu,wvalid,
-//	64'b0,wdata_lsu,wdata,
-//	8'b0,wstrb_lsu,wstrb,
-//	1'b0,wready_lsu,wready,
-//	2'b0,bresp_lsu,bresp,
-//	1'b0,bvalid_lsu,bvalid,
-//	1'b0,bready_lsu,bready);
-
-//************************************************************
-*/
-
 
 
 initial set_gpr_ptr(gpr);                   //to update the gpr in cpp file
