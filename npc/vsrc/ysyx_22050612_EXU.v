@@ -132,12 +132,14 @@ end
 wire [63:0]pc;
 wire [31:0]inst;
 wire [23:0]opcode;
+wire [13:0]opcode_type;
 reg [63:0]src1;
 reg [63:0]src2;
 wire [63:0]imm;
 assign pc   = EX_reg_valid ? EX_reg_pc   : 64'b0;
 assign inst = EX_reg_valid ? EX_reg_inst : 32'b0;
 assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
+assign opcode_type = EX_reg_valid ? EX_reg_opcode_type : 14'b0;
 assign imm  = EX_reg_valid ? EX_reg_imm  : 64'b0;
 
 always@(*)begin
@@ -191,7 +193,7 @@ wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
 wire [3:0]EX_inst_hit;
 wire exu_using_rs2;
-assign exu_using_rs2 = EX_reg_opcode_type[4] || EX_reg_opcode_type[6] || EX_reg_opcode_type[8] || EX_reg_opcode_type[10];
+assign exu_using_rs2 = opcode_type[4] || opcode_type[6] || opcode_type[8] || opcode_type[10];
 always@(*) begin
 	/*
 //   ID/EX
