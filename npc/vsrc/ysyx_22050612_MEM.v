@@ -155,7 +155,7 @@ assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
 //**************  DCACHE  ******************************
 wire dcache_valid;
 wire dcache_ready;
-assign dcache_valid = MEM_reg_valid && ((MEM_reg_inst[6:0]==7'b0000011)||(MEM_reg_inst[6:0]==7'b0100011));
+assign dcache_valid = (opcode_type[5]||opcode_type[6]);
 wire [63:0]dcache_addr;
 assign dcache_addr = dcache_wren ? waddr : raddr;
 wire [63:0]dcache_dout;
@@ -411,30 +411,13 @@ always @(*) begin
 	endcase
 end
 
-always @(*) begin
-	case(opcode)
-    24'd11  : raddr=aluoutput;
-    24'd12  : raddr=aluoutput;
-    24'd13  : raddr=aluoutput;
-    24'd14  : raddr=aluoutput;
-    24'd15  : raddr=aluoutput;
-    24'd41  : raddr=aluoutput;
-    24'd42  : raddr=aluoutput;
-    default: raddr=64'b0;
-	endcase
-
-	case(opcode)
-    24'd16  : waddr=aluoutput;
-    24'd17  : waddr=aluoutput;
-    24'd18  : waddr=aluoutput;
-    24'd43  : waddr=aluoutput;
-    default: waddr=64'b0;
-	endcase
 
 
 
-end
-
+wire [63:0] raddr;
+wire [63:0] waddr;
+assign raddr = opcode_type[5] ? aluoutput : 64'b0;
+assign waddr = opcode_type[6] ? aluoutput : 64'b0;
 
 
 reg [7:0]wmask_1byte;
@@ -447,18 +430,16 @@ reg [63:0]wdata_2byte;
 
 reg [63:0] rdata;
 
-reg [63:0] raddr;
-reg [63:0] waddr;
 reg [63:0] wdata;
 reg [ 7:0] wmask;
 
 
-
+/*
 always @(*) begin
-  //pmem_read(raddr, rdata);
-  //pmem_write(waddr, wdata, wmask);
+  pmem_read(raddr, rdata);
+  pmem_write(waddr, wdata, wmask);
 end
-
+*/
 
 reg [63:0] rdata_fix;
 
