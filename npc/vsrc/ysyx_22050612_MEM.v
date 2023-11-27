@@ -416,7 +416,7 @@ end
 
 wire [63:0] raddr;
 wire [63:0] waddr;
-assign raddr = opcode_type[5] ? aluoutput : 64'b0;
+assign raddr =  aluoutput ;
 assign waddr = opcode_type[6] ? aluoutput : 64'b0;
 
 
