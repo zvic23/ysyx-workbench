@@ -244,7 +244,6 @@ assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},
 
 
 wire ID_block;
-//assign ID_block = src1_conflict || src2_conflict;
 
 
 
