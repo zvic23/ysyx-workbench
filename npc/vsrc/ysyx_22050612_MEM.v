@@ -178,7 +178,7 @@ araddr_dcache_axi, arlen_dcache_axi, arsize_dcache_axi, arburst_dcache_axi, arva
 
 always@(*)begin
 	if(MEM_reg_valid)begin
-		if(WB_reg_valid&&(MEM_inst_hit!=4'b0)&&(WB_inst_hit!=4'b0)&&rs2_MEM_WB_match)begin
+		if(WB_reg_valid&&mem_storing &&(WB_inst_hit!=4'b0)&&rs2_MEM_WB_match)begin
 			src2 =  WB_reg_wdata;
 		end
 		else begin
@@ -192,20 +192,12 @@ end
 
 wire rs2_MEM_WB_match;
 assign rs2_MEM_WB_match  =  (WB_reg_inst[11:7] == MEM_reg_inst[24:20])&&(MEM_reg_inst[24:20]!=5'b0);
+wire mem_storing;
+assign mem_storing = opcode_type[6];
 
 wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
 always@(*) begin
-//   EX/MEM
-	case ({MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
-    		10'b000_0100011:  MEM_inst_hit[0]= 1'b1  ;    //sb   
-    		10'b001_0100011:  MEM_inst_hit[0]= 1'b1  ;    //sh
-    		10'b010_0100011:  MEM_inst_hit[0]= 1'b1  ;    //sw
-    		10'b011_0100011:  MEM_inst_hit[0]= 1'b1  ;    //sd
-		default:          MEM_inst_hit[0]= 1'b0  ;                          
-	endcase
-
-
 //  MEM/WB
 	case ({WB_reg_inst[14:12],WB_reg_inst[6:0]})
 //    10'b000_1100111:  WB_inst_hit[0]= 1'b1  ;    //jalr
@@ -275,13 +267,6 @@ end
 
 
 
-
-
-
-
-
-
-
 always @(negedge clk) begin
 	MEM_state_trace(MEM_reg_pc, {32'b0,MEM_reg_inst}, {63'b0,MEM_reg_valid}, rdata,reg_wr_value,64'b0 );
 	//$display("MEM  pc:%x   inst:%x   valid:%x   aluout:%x   op_b:%x  wen:%x  wdata:%x  opcode:%x",MEM_reg_pc,MEM_reg_inst,MEM_reg_valid,MEM_reg_aluoutput,MEM_reg_src2   ,wen,wdata_reg,opcode);
@@ -295,87 +280,6 @@ wire wen;
 assign wen = opcode_type[0]||opcode_type[1]||opcode_type[2]||opcode_type[3]||opcode_type[5]||opcode_type[7]||opcode_type[8]||opcode_type[9]||opcode_type[10]||opcode_type[11];
 wire [63:0]wdata_reg;
 assign wdata_reg = opcode_type[5] ? rdata_fix : (opcode_type[11] ? MEM_reg_src2 : aluoutput);
-/*
-always @(*) begin
-//gpr control
-	case (opcode)
-    24'h4000 : wdata_reg=aluoutput;
-    24'h5000 : wdata_reg=aluoutput;
-    24'h6000 : wdata_reg=aluoutput;
-    24'h7000 : wdata_reg=aluoutput;
-    24'h8000 : wdata_reg=aluoutput;
-    24'h9000 : wdata_reg=aluoutput;
-    24'h10000: wdata_reg=aluoutput;
-    24'h12000: wdata_reg=aluoutput;
-    24'h13000: wdata_reg=aluoutput;
-//    24'h14000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
-//    24'h15000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
-//    24'h16000: wdata_reg=(aluoutput[63]?({{32{1'b1}},aluoutput[63:32]}):({{32{1'b0}},aluoutput[63:32]}));
-//    24'h17000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
-//    24'h18000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
-//    24'h19000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
-//    24'h1a000: wdata_reg=(aluoutput[63]?({{32{1'b1}},aluoutput[63:32]}):({{32{1'b0}},aluoutput[63:32]}));
-//    24'h1b000: wdata_reg=(aluoutput[63]?({{32{1'b1}},aluoutput[63:32]}):({{32{1'b0}},aluoutput[63:32]}));
-    24'h14000: wdata_reg=aluoutput;
-    24'h15000: wdata_reg=aluoutput;
-    24'h16000: wdata_reg=aluoutput;
-    24'h17000: wdata_reg=aluoutput;
-    24'h18000: wdata_reg=aluoutput;
-    24'h19000: wdata_reg=aluoutput;
-    24'h1a000: wdata_reg=aluoutput;
-    24'h1b000: wdata_reg=aluoutput;
-
-    24'h1d000: wdata_reg=aluoutput;
-    24'h21000: wdata_reg=aluoutput;
-    24'h22000: wdata_reg=aluoutput;
-    24'h24000: wdata_reg=aluoutput;
-//    24'h25000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
-//    24'h26000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
-//    24'h27000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
-//    24'h28000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
-//    24'h29000: wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
-    24'h25000: wdata_reg=aluoutput;
-    24'h26000: wdata_reg=aluoutput;
-    24'h27000: wdata_reg=aluoutput;
-    24'h28000: wdata_reg=aluoutput;
-    24'h29000: wdata_reg=aluoutput;
-
-    //24'h100  : wdata_reg=imm_U;
-    24'h100  : wdata_reg=aluoutput;
-    24'h200  : wdata_reg=aluoutput;
-    //24'h300  : wdata_reg=pc + 64'd4;
-    24'h300  : wdata_reg=MEM_reg_pc + 64'd4;
-    24'h400  : wdata_reg=aluoutput;
-    24'h800  : wdata_reg=aluoutput;
-    24'hc00  : wdata_reg=aluoutput;
-    //24'd4    : wdata_reg=pc + 64'd4;
-    24'd4    : wdata_reg=MEM_reg_pc + 64'd4;
-    24'd11   : wdata_reg=rdata_fix;
-    24'd12   : wdata_reg=rdata_fix;
-    24'd13   : wdata_reg=rdata_fix;
-    24'd14   : wdata_reg=rdata_fix;
-    24'd15   : wdata_reg=rdata_fix;
-    24'd19   : wdata_reg=aluoutput;
-    24'd20   : wdata_reg=aluoutput;
-    24'd21   : wdata_reg=aluoutput;
-    24'd22   : wdata_reg=aluoutput;
-    24'd23   : wdata_reg=aluoutput;
-    24'd24   : wdata_reg=aluoutput;
-    24'd41   : wdata_reg=rdata_fix;
-    24'd42   : wdata_reg=rdata_fix;
-    //24'd47   : wdata_reg=(aluoutput[31]?({{32{1'b1}},aluoutput[31:0]}):({{32{1'b0}},aluoutput[31:0]}));
-    24'd47   : wdata_reg=aluoutput;
-//    24'd49   : wdata_reg=src_csr;
-//    24'd50   : wdata_reg=src_csr;
-    24'd49   : wdata_reg=MEM_reg_src2;
-    24'd50   : wdata_reg=MEM_reg_src2;
-    default  : wdata_reg=64'b0;
-	endcase
-end
-*/
-
-
-
 
 
 

@@ -192,59 +192,9 @@ assign rs2_EX_WB_match  = ( WB_reg_inst[11:7] == EX_reg_inst[24:20])&&(EX_reg_in
 
 wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
-wire [3:0]EX_inst_hit;
 wire exu_using_rs2;
 assign exu_using_rs2 = opcode_type[4] || opcode_type[6] || opcode_type[8] || opcode_type[10];
 always@(*) begin
-	/*
-//   ID/EX
-	case ({EX_reg_inst[14:12],EX_reg_inst[6:0]})
-    	//	10'b000_1100111:  EX_inst_hit[1]= 1'd1   ;    //jalr
-
-    		10'b000_1100011:  EX_inst_hit[1]= 1'd1   ;    //beq
-    		10'b001_1100011:  EX_inst_hit[1]= 1'd1   ;    //bne
-    		10'b100_1100011:  EX_inst_hit[1]= 1'd1   ;    //blt
-    		10'b101_1100011:  EX_inst_hit[1]= 1'd1   ;    //bge
-    		10'b110_1100011:  EX_inst_hit[1]= 1'd1   ;    //bltu
-    		10'b111_1100011:  EX_inst_hit[1]= 1'd1   ;    //bgeu
-	
-    10'b000_0100011:  EX_inst_hit[1]= 1'd1   ;     //sb   
-    10'b001_0100011:  EX_inst_hit[1]= 1'd1   ;     //sh
-    10'b010_0100011:  EX_inst_hit[1]= 1'd1   ;     //sw
-    10'b011_0100011:  EX_inst_hit[1]= 1'd1   ;     //sd
-
-	//	10'b001_1110011:  EX_inst_hit[1]= 1'd1   ;    //csrrw
-        //	10'b010_1110011:  EX_inst_hit[1]= 1'd1   ;    //csrrs
-		default :         EX_inst_hit[1]= 1'd0   ;
-	endcase
-	case ({EX_reg_inst[31:25],EX_reg_inst[14:12],EX_reg_inst[6:0]})
-	        17'b0000000_000_0110011: EX_inst_hit[2]= 1'd1  ; //add
-	        17'b0100000_000_0110011: EX_inst_hit[2]= 1'd1  ; //sub
-	        17'b0000000_001_0110011: EX_inst_hit[2]= 1'd1  ; //sll
-	        17'b0000000_010_0110011: EX_inst_hit[2]= 1'd1  ; //slt
-	        17'b0000000_011_0110011: EX_inst_hit[2]= 1'd1  ; //sltu
-	        17'b0000000_100_0110011: EX_inst_hit[2]= 1'd1  ; //xor
-	        17'b0000000_101_0110011: EX_inst_hit[2]= 1'd1  ; //srl
-	        17'b0000000_110_0110011: EX_inst_hit[2]= 1'd1  ; //or
-	        17'b0000000_111_0110011: EX_inst_hit[2]= 1'd1  ; //and
-	        17'b0000000_000_0111011: EX_inst_hit[2]= 1'd1  ; //addw
-	        17'b0100000_000_0111011: EX_inst_hit[2]= 1'd1  ; //subw
-	        17'b0000000_001_0111011: EX_inst_hit[2]= 1'd1  ; //sllw
-	        17'b0000000_101_0111011: EX_inst_hit[2]= 1'd1  ; //srlw
-	        17'b0100000_101_0111011: EX_inst_hit[2]= 1'd1  ; //sraw
-	        17'b0000001_000_0110011: EX_inst_hit[2]= 1'd1  ; //mul
-	        17'b0000001_100_0110011: EX_inst_hit[2]= 1'd1  ; //div
-	        17'b0000001_101_0110011: EX_inst_hit[2]= 1'd1  ; //divu
-	        17'b0000001_111_0110011: EX_inst_hit[2]= 1'd1  ; //remu
-	        17'b0000001_000_0111011: EX_inst_hit[2]= 1'd1  ; //mulw
-	        17'b0000001_100_0111011: EX_inst_hit[2]= 1'd1  ; //divw
-	        17'b0000001_101_0111011: EX_inst_hit[2]= 1'd1  ; //divuw
-	        17'b0000001_110_0111011: EX_inst_hit[2]= 1'd1  ; //remw
-	        17'b0000001_111_0111011: EX_inst_hit[2]= 1'd1  ; //remuw
-		default :                EX_inst_hit[2]= 1'd0  ;
-	endcase
-*/
-
 
 //   EX/MEM
 	case ({MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
