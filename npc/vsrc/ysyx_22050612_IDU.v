@@ -130,7 +130,6 @@ wire rs1_waiting;
 wire rs2_waiting;
 wire rs2_block_checking;
 assign rs2_block_checking = opcode_jal || opcode_jalr || opcode_branch || opcode_cpt_r || opcode_cpt_rw;  //include jal, jalr, branch, +-*/ and shift.
-//assign rs2_block_checking = (ID_reg_inst[6:0] == 7'b1100111) || (ID_reg_inst[6:0] == 7'b1100011) || (ID_reg_inst[6:0] == 7'b0110011) || (ID_reg_inst[6:0] == 7'b0111011) || (ID_reg_inst[6:0] == 7'b1101111);  //include jal, load, jalr, branch, +-*/ and shift.
 
 assign rs1_waiting = EX_reg_inst[11:7] == ID_reg_inst[19:15];
 assign rs2_waiting = EX_reg_inst[11:7] == ID_reg_inst[24:20];
@@ -139,26 +138,6 @@ wire ID_block;
 assign ID_block = ID_reg_valid && EX_reg_valid && EX_loading && (rs1_waiting ||(rs2_waiting && (rs2_block_checking)));
 
 //********************************************************************
-
-/*
-wire [ 4:0]rs1  ;
-wire [ 4:0]rs2  ;
-wire [63:0]imm_I;
-wire [63:0]imm_U;
-wire [63:0]imm_J;
-wire [63:0]imm_B;
-wire [63:0]imm_S;
-
-
-assign rs1= inst[19:15];
-assign rs2= inst[24:20];
-assign imm_I = (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]};
-assign imm_U = (inst[31]==1'b1)?{{32{1'b1}},inst[31:12],{12{1'b0}}}:{{32{1'b0}},inst[31:12],{12{1'b0}}};
-assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
-assign imm_B = (inst[31]==1'b1)?{{51{1'b1}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0}:{{51{1'b0}},inst[31],inst[7],inst[30:25],inst[11:8],1'b0};
-assign imm_S = (inst[31]==1'b1)?{{52{1'b1}},inst[31:25],inst[11:7]}:{{52{1'b0}},inst[31:25],inst[11:7]};
-*/
-
 
 
 reg [63:0] src_csr;
@@ -176,25 +155,7 @@ end
  
 
 assign src_A = gpr[opcode_rs1];
-
-always @(*) begin
-////src_A
-//    case (opcode)
-//    //ecall  mret
-//    24'h200000: src_A=mtvec   ;        
-//    24'h500000: src_A=mepc    ;
-//    default   : src_A=gpr[rs1];
-//    endcase 
-
-//src_B
-    case (opcode)
-    24'd49   : src_B=src_csr;
-    24'd50   : src_B=src_csr;
-    24'h200000:src_B=mtvec   ;        
-    24'h500000:src_B=mepc    ;
-    default  : src_B=gpr[opcode_rs2];
-    endcase 
-end
+assign src_B = opcode_csr ? src_csr : (opcode_ecall ? mtvec : (opcode_mret ? mepc : gpr[opcode_rs2]));
 
 
   always @(inst) begin
