@@ -841,22 +841,7 @@ always @(negedge clk) begin
 		else branch_predict(1);
 	end
 end
-/*
-    case (opcode)
-	    24'd4    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
-            24'd5    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
-            24'd6    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
-            24'd7    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
-            24'd8    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
-            24'd9    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
-            24'd10   : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
-    //24'h200000: pc_update=(EX_reg_valid&&ready_EX_MEM) ? 1'b1 : 1'b0;   
-    //24'h500000: pc_update=(EX_reg_valid&&ready_EX_MEM) ? 1'b1 : 1'b0;             
-    default: begin end 
-    endcase
-    end
-end
-*/
+
 
 
 
