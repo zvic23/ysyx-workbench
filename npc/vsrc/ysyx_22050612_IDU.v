@@ -350,12 +350,12 @@ assign opcode_auipc  = inst[6:0] == 7'b0010111;
 assign opcode_load   = inst[6:0] == 7'b0000011;
 assign opcode_store  = inst[6:0] == 7'b0011011;
 assign opcode_branch = inst[6:0] == 7'b1100011;
-assign opcode_jal    = inst[6:0] == 7'b1101111;
+assign opcode_jal    = inst[6:0] == 7'b1101111;    //5
 assign opcode_jalr   = inst[6:0] == 7'b1100111;
 assign opcode_cpt_r  = inst[6:0] == 7'b0110011;
 assign opcode_cpt_i  = inst[6:0] == 7'b0010011;
 assign opcode_cpt_iw = inst[6:0] == 7'b0011011;
-assign opcode_cpt_rw = inst[6:0] == 7'b0111011;
+assign opcode_cpt_rw = inst[6:0] == 7'b0111011;    //10
 assign opcode_csr    = inst[6:0] == 7'b1110011;
 
 
@@ -363,7 +363,7 @@ assign opcode_ebreak = inst == 32'h00100073;
 assign opcode_ecall  = inst == 32'b1110011;
 
 
-assign opcode_type = {opcode_lui,opcode_auipc  ,opcode_load   ,opcode_store  ,opcode_branch ,opcode_jal    ,opcode_jalr   ,opcode_cpt_r  ,opcode_cpt_i  ,opcode_cpt_iw ,opcode_cpt_rw ,opcode_csr    ,opcode_ebreak ,opcode_ecall  };
+assign opcode_type = {opcode_lui, opcode_auipc, opcode_load, opcode_store, opcode_branch, opcode_jal, opcode_jalr, opcode_cpt_r, opcode_cpt_i, opcode_cpt_iw, opcode_cpt_rw, opcode_csr, opcode_ebreak, opcode_ecall  };
 
 
 
