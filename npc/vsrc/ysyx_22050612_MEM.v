@@ -293,7 +293,9 @@ end
 
 wire wen;
 assign wen = opcode_type[0]||opcode_type[1]||opcode_type[2]||opcode_type[3]||opcode_type[5]||opcode_type[7]||opcode_type[8]||opcode_type[9]||opcode_type[10]||opcode_type[11];
-reg [63:0]wdata_reg;
+wire [63:0]wdata_reg;
+assign wdata_reg = opcode_type[6] ? rdata_fix : aluoutput;
+/*
 always @(*) begin
 //gpr control
 	case (opcode)
@@ -370,7 +372,7 @@ always @(*) begin
     default  : wdata_reg=64'b0;
 	endcase
 end
-
+*/
 
 
 
