@@ -389,15 +389,6 @@ end
 
 
 
-reg [63:0]wdata_reg;
-reg wen;
-
-
-
-//reg [63:0]wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus;
-//reg wen_mtvec,wen_mepc,wen_mcause,wen_mstatus;
-
-
 always @(*) begin
 //mtvec control
   	case (opcode)
@@ -615,19 +606,12 @@ always@(*) begin
     //24'h28000: ALUoutput_EX_MEM=(result_remw0[31]?({{32{1'b1}},result_remw0[31:0]}):({{32{1'b0}},result_remw0[31:0]}));
     24'h29000: ALUoutput_EX_MEM=(remainder[31]?({{32{1'b1}},remainder[31:0]}):({{32{1'b0}},remainder[31:0]}));
     //24'h29000: ALUoutput_EX_MEM=(result_remuw0[31]?({{32{1'b1}},result_remuw0[31:0]}):({{32{1'b0}},result_remuw0[31:0]}));
-//    //24'h100  : wdata_reg=imm_U;
-//    24'h100  : wdata_reg=EX_reg_imm;
-//    //24'h300  : wdata_reg=pc + 64'd4;
-//    24'h300  : wdata_reg=EX_reg_pc + 64'd4;
+
     24'h300  : ALUoutput_EX_MEM=EX_reg_pc + 64'd4;
-//    //24'd4    : wdata_reg=pc + 64'd4;
-//    24'd4    : wdata_reg=EX_reg_pc + 64'd4;
+
     24'd4    : ALUoutput_EX_MEM=EX_reg_pc + 64'd4;
     24'd47   : ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-//    24'd49   : wdata_reg=src_csr;
-//    24'd50   : wdata_reg=src_csr;
-//    24'd49   : wdata_reg=EX_reg_src_b;
-//    24'd50   : wdata_reg=EX_reg_src_b;
+
     default  : ALUoutput_EX_MEM=result_alu0;
 	endcase
 
