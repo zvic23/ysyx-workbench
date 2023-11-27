@@ -192,7 +192,7 @@ wire pc_update;       //these two come from exu
 
 wire branch_flush;    //if branch predict failed, clean IFU, ICACHE, IDU and EXU. it = pc_update now.
 
-ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, mtvec, mepc, mcause, mstatus, /*imm_I,imm_U,imm_J,imm_B,imm_S,shamt, rd, rs1, rs2,*/ src_A,src_B, imm, opcode_ID_EX, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX , EX_reg_valid,EX_reg_inst  , branch_flush);
+ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, mtvec, mepc, mcause, mstatus, /*shamt, rd, rs1, rs2,*/ src_A,src_B, imm, opcode_ID_EX, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX , EX_reg_valid,EX_reg_inst  , branch_flush);
 
 wire       valid_ID_EX  ;
 wire       ready_ID_EX  ;

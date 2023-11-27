@@ -14,11 +14,7 @@ input [63:0]mcause,
 input [63:0]mstatus,
 
 /*
-output [63:0]imm_I,
-output [63:0]imm_U,
-output [63:0]imm_J,
-output [63:0]imm_B,
-output [63:0]imm_S,
+
 output [ 5:0]shamt,
 output [ 4:0]rd,
 output [ 4:0]rs1,
@@ -27,7 +23,6 @@ output [ 4:0]rs2,
 output reg [63:0]src_A,
 output reg [63:0]src_B,
 output reg [63:0]  imm,
-//output reg [ 7:0]ALU_mode,
 
 
 output [23:0]opcode,
@@ -602,7 +597,7 @@ assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
 //end
 
 
-
+wire [63:0]opcode_imm   ;
 wire [4:0]opcode_rs1    ;
 wire [4:0]opcode_rs2    ;
 wire [4:0]opcode_rd     ;
@@ -623,6 +618,7 @@ wire opcode_ebreak ;
 wire opcode_ecall  ;
 
 
+assign opcode_imm    = imm;
 
 assign opcode_rs1    = inst[19:15];
 assign opcode_rs2    = inst[24:20];
