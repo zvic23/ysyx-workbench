@@ -202,7 +202,7 @@ wire [63:0]src_A;
 wire [63:0]src_B;
 wire [63:0]imm;
 wire [23:0]opcode_ID_EX;
-wire [13:0]opcode_type_ID_EX;
+wire [14:0]opcode_type_ID_EX;
 
 
 wire       EX_reg_valid;

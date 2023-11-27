@@ -26,7 +26,7 @@ output [63:0]  imm,
 
 
 output [23:0]opcode,
-output [13:0]opcode_type,
+output [14:0]opcode_type,
 output     valid_ID_EX,
 input      ready_ID_EX,
 output [63:0]pc_ID_EX,
@@ -141,7 +141,6 @@ assign ID_block = ID_reg_valid && EX_reg_valid && EX_loading && (rs1_waiting ||(
 //********************************************************************
 
 
-//wire [ 4:0]rd   ;
 wire [ 4:0]rs1  ;
 wire [ 4:0]rs2  ;
 wire [63:0]imm_I;
@@ -149,13 +148,10 @@ wire [63:0]imm_U;
 wire [63:0]imm_J;
 wire [63:0]imm_B;
 wire [63:0]imm_S;
-//wire [ 5:0]shamt;
 
 
-//assign rd = inst[11: 7];
 assign rs1= inst[19:15];
 assign rs2= inst[24:20];
-//assign shamt= inst[25:20];
 assign imm_I = (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]};
 assign imm_U = (inst[31]==1'b1)?{{32{1'b1}},inst[31:12],{12{1'b0}}}:{{32{1'b0}},inst[31:12],{12{1'b0}}};
 assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}:{{43{1'b0}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0};
@@ -198,29 +194,6 @@ always @(*) begin
     24'h500000:src_B=mepc    ;
     default  : src_B=gpr[rs2];
     endcase 
-
-//imm
-/*
-    case (opcode)
-    24'h100  : imm=imm_U; 
-    24'h200  : imm=imm_U;
-    24'h300  : imm=imm_J;
-    24'd16   : imm=imm_S;
-    24'd17   : imm=imm_S;
-    24'd18   : imm=imm_S;
-    24'd43   : imm=imm_S;
-
-    //24'd4    : imm=imm_B;
-    24'd5    : imm=imm_B;
-    24'd6    : imm=imm_B;
-    24'd7    : imm=imm_B;
-    24'd8    : imm=imm_B;
-    24'd9    : imm=imm_B;
-    24'd10   : imm=imm_B;
-
-    default  : imm=imm_I;
-    endcase
-    */
 end
 
 
@@ -338,6 +311,7 @@ wire opcode_cpt_rw ;
 wire opcode_csr    ;
 wire opcode_ebreak ;
 wire opcode_ecall  ;
+wire opcode_mret   ;
 
 assign imm = opcode_imm;
 assign opcode_imm[0]     = opcode_store ? inst[7] : ((opcode_branch||opcode_auipc||opcode_lui||opcode_jal) ? 1'b0 : inst[20]);
@@ -371,9 +345,11 @@ assign opcode_csr    = inst[6:0] == 7'b1110011;
 
 assign opcode_ebreak = inst == 32'h00100073;
 assign opcode_ecall  = inst == 32'b1110011;
+assign opcode_mret   = inst == 32'b00110000001000000000000001110011;
 
 
 assign opcode_type = {
+opcode_mret   ,
 opcode_ecall  ,
 opcode_ebreak ,
 opcode_csr    ,

@@ -19,7 +19,7 @@ input [ 4:0]rs1,
 input [ 4:0]rs2,
 */
 input [23:0]opcode_in,
-input [13:0]opcode_type_ID_EX,
+input [14:0]opcode_type_ID_EX,
 input [63:0]src_A,
 input [63:0]src_B,
 input [63:0]imm_in,
@@ -79,7 +79,7 @@ input branch_flush
 reg [63:0]EX_reg_pc            ;
 //reg [31:0]EX_reg_inst          ;
 reg [23:0]EX_reg_opcode        ;
-reg [13:0]EX_reg_opcode_type     ;
+reg [14:0]EX_reg_opcode_type     ;
 reg [63:0]EX_reg_src_a;
 reg [63:0]EX_reg_src_b;
 reg [63:0]EX_reg_imm;
@@ -93,7 +93,7 @@ always @(posedge clk) begin
 		EX_reg_pc             <= 64'b0;
 		EX_reg_inst           <= 32'b0;
 		EX_reg_opcode         <= 24'b0;
-		EX_reg_opcode_type         <= 14'b0;
+		EX_reg_opcode_type         <= 15'b0;
 		EX_reg_src_a          <= 64'b0;
 		EX_reg_src_b          <= 64'b0;
 		EX_reg_imm            <= 64'b0;
@@ -132,14 +132,14 @@ end
 wire [63:0]pc;
 wire [31:0]inst;
 wire [23:0]opcode;
-wire [13:0]opcode_type;
+wire [14:0]opcode_type;
 reg [63:0]src1;
 reg [63:0]src2;
 wire [63:0]imm;
 assign pc   = EX_reg_valid ? EX_reg_pc   : 64'b0;
 assign inst = EX_reg_valid ? EX_reg_inst : 32'b0;
 assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
-assign opcode_type = EX_reg_valid ? EX_reg_opcode_type : 14'b0;
+assign opcode_type = EX_reg_valid ? EX_reg_opcode_type : 15'b0;
 assign imm  = EX_reg_valid ? EX_reg_imm  : 64'b0;
 
 always@(*)begin
@@ -381,7 +381,7 @@ assign src_B_EX_MEM = src2;
 
 
 always @(negedge clk) begin
-	EXU_state_trace(EX_reg_pc, {32'b0,EX_reg_inst}, {63'b0,EX_reg_valid}, src1,src2,{{50{1'b0}},EX_reg_opcode_type} );
+	EXU_state_trace(EX_reg_pc, {32'b0,EX_reg_inst}, {63'b0,EX_reg_valid}, src1,src2,{{49{1'b0}},EX_reg_opcode_type} );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x %x   dnpc:%x  opcode:%d\n",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , WB_reg_wdata,  EX_inst_hit, WB_inst_hit, rs1_EX_WB_match , rs2_EX_WB_match,dnpc,opcode);
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , MEM_reg_aluoutput,  EX_inst_hit, MEM_inst_hit, rs1_EX_MEM_match );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x",EX_reg_pc,EX_reg_inst,EX_reg_valid,EX_reg_src_a,EX_reg_src_b,EX_reg_imm);
