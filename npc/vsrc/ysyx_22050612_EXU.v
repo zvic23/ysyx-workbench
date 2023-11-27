@@ -1211,7 +1211,7 @@ wire [63:0]muler;
 assign mulcand = muling ? src1 : 64'b0;
 assign muler   = muling ? src2 : 64'b0;
 
-ysyx_22050612_multiplier boothmul ((clk&&((opcode == 24'h1d000)||(opcode == 24'h25000))), rst, mul_valid, mul_flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_out_valid, result_hi, result_lo);      //the clk has been "&&" with "mul mulw" opcode to close the clock gating(gate), it can speed up the simulating.
+//ysyx_22050612_multiplier boothmul ((clk&&((opcode == 24'h1d000)||(opcode == 24'h25000))), rst, mul_valid, mul_flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_out_valid, result_hi, result_lo);      //the clk has been "&&" with "mul mulw" opcode to close the clock gating(gate), it can speed up the simulating.
 
 
 
@@ -1239,7 +1239,7 @@ wire [63:0]divisor ;
 assign dividend  = diving ? src1 : 64'b0;
 assign divisor   = diving ? src2 : 64'b0;
 
-ysyx_22050612_divider boothdiv ((clk), rst, div_valid, div_flush, divw, div_signed, dividend, divisor, div_ready, div_out_valid, quotient, remainder,stimes);      //the clk has been "&&" with "div divw" opcode to close the clock gating(gate), it can speed up the sidivating.
+//ysyx_22050612_divider boothdiv ((clk), rst, div_valid, div_flush, divw, div_signed, dividend, divisor, div_ready, div_out_valid, quotient, remainder,stimes);      //the clk has been "&&" with "div divw" opcode to close the clock gating(gate), it can speed up the sidivating.
 
 
 
