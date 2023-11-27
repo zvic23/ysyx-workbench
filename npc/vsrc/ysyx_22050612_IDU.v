@@ -26,6 +26,7 @@ output reg [63:0]  imm,
 
 
 output [23:0]opcode,
+output [13:0]opcode_type,
 output     valid_ID_EX,
 input      ready_ID_EX,
 output [63:0]pc_ID_EX,
@@ -360,6 +361,10 @@ assign opcode_csr    = inst[6:0] == 7'b1110011;
 
 assign opcode_ebreak = inst == 32'h00100073;
 assign opcode_ecall  = inst == 32'b1110011;
+
+
+assign opcode_type = {opcode_lui,opcode_auipc  ,opcode_load   ,opcode_store  ,opcode_branch ,opcode_jal    ,opcode_jalr   ,opcode_cpt_r  ,opcode_cpt_i  ,opcode_cpt_iw ,opcode_cpt_rw ,opcode_csr    ,opcode_ebreak ,opcode_ecall  };
+
 
 
 endmodule

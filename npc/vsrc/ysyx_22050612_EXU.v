@@ -19,6 +19,7 @@ input [ 4:0]rs1,
 input [ 4:0]rs2,
 */
 input [23:0]opcode_in,
+input [13:0]opcode_type_ID_EX,
 input [63:0]src_A,
 input [63:0]src_B,
 input [63:0]imm_in,
@@ -78,6 +79,7 @@ input branch_flush
 reg [63:0]EX_reg_pc            ;
 //reg [31:0]EX_reg_inst          ;
 reg [23:0]EX_reg_opcode        ;
+reg [13:0]EX_reg_opcode_type     ;
 reg [63:0]EX_reg_src_a;
 reg [63:0]EX_reg_src_b;
 reg [63:0]EX_reg_imm;
@@ -91,6 +93,7 @@ always @(posedge clk) begin
 		EX_reg_pc             <= 64'b0;
 		EX_reg_inst           <= 32'b0;
 		EX_reg_opcode         <= 24'b0;
+		EX_reg_opcode_type         <= 14'b0;
 		EX_reg_src_a          <= 64'b0;
 		EX_reg_src_b          <= 64'b0;
 		EX_reg_imm            <= 64'b0;
@@ -103,6 +106,7 @@ always @(posedge clk) begin
 		EX_reg_pc             <= EX_reg_pc    ;
 		EX_reg_inst           <= EX_reg_inst  ;
 		EX_reg_opcode         <= EX_reg_opcode;
+		EX_reg_opcode_type         <= EX_reg_opcode_type;
 		EX_reg_src_a          <= EX_reg_src_a ;
 		EX_reg_src_b          <= EX_reg_src_b ;
 		EX_reg_imm            <= EX_reg_imm   ;
@@ -115,6 +119,7 @@ always @(posedge clk) begin
 		EX_reg_pc             <= pc_ID_EX;
 		EX_reg_inst           <= inst_ID_EX;
 		EX_reg_opcode         <= opcode_in;
+		EX_reg_opcode_type         <= opcode_type_ID_EX;
 		EX_reg_src_a          <= src_A;
 		EX_reg_src_b          <= src_B;
 		EX_reg_imm            <= imm_in;
@@ -185,6 +190,7 @@ assign rs2_EX_WB_match  = ( WB_reg_inst[11:7] == EX_reg_inst[24:20])&&(EX_reg_in
 wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
 wire [3:0]EX_inst_hit;
+//wire exu_using_rs2 = 
 always@(*) begin
 //   ID/EX
 	case ({EX_reg_inst[14:12],EX_reg_inst[6:0]})
@@ -870,26 +876,6 @@ always @(posedge clk) begin
 	else if (opcode[7]==1'b1 && gpr[10]!=64'b0) ebreak(1);
 end
 
-
-
-/*
-always @(posedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
-	case(opcode)
-    24'd11  : npc_loadstore(1, src1, imm_I, imm_S);
-    24'd12  : npc_loadstore(1, src1, imm_I, imm_S);
-    24'd13  : npc_loadstore(1, src1, imm_I, imm_S);
-    24'd14  : npc_loadstore(1, src1, imm_I, imm_S);
-    24'd15  : npc_loadstore(1, src1, imm_I, imm_S);
-    24'd16  : npc_loadstore(2, src1, imm_I, imm_S);
-    24'd17  : npc_loadstore(2, src1, imm_I, imm_S);
-    24'd18  : npc_loadstore(2, src1, imm_I, imm_S);
-    24'd41  : npc_loadstore(1, src1, imm_I, imm_S);
-    24'd42  : npc_loadstore(1, src1, imm_I, imm_S);
-    24'd43  : npc_loadstore(2, src1, imm_I, imm_S);
-    default: npc_loadstore(0, 0, 0, 0);
-	endcase
-end
-*/
 
 
 //always @(mtvec or mepc or mcause or mstatus) begin
