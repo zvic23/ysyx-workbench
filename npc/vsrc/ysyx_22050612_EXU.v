@@ -478,7 +478,7 @@ always @(*) begin
 //    24'h500000: dnpc=EX_reg_src_b                             ;        
 //    default: dnpc=snpc;
 //    endcase
-/*
+
     case (opcode)
     24'h300 : dnpc=result_alu0                         ;
     24'd4   : dnpc=result_alu0           ;
@@ -496,7 +496,7 @@ always @(*) begin
     24'h500000: dnpc=EX_reg_src_b                             ;        
     default: dnpc=snpc;
     endcase
-*/
+
     case (opcode)
     //24'h300  : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
     //24'h300  : pc_update= EX_reg_valid ? (EX_reg_inst[31]==1'b0 ? 1'b1 : 1'b0) : 1'b0;
@@ -541,7 +541,18 @@ always @(*) begin
 //    endcase
 end
 
-assign dnpc = (opcode_type[13]||opcode_type[14]) ? EX_reg_src_b : result_alu0;
+
+
+//pc
+wire [63:0] snpc;
+assign snpc = EX_reg_pc + 64'd4;
+
+
+
+
+
+
+
 
 
 //aluoutput
