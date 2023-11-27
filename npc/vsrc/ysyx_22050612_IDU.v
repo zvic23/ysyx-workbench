@@ -133,8 +133,8 @@ assign EX_loading = EX_reg_inst[6:0] == 7'b0000011;   //load inst
 wire rs1_waiting;
 wire rs2_waiting;
 wire rs2_block_checking;
-//assign rs2_block_checking = opcode_jal || opcode_jalr || opcode_load || opcode_cpt_r || opcode_cpt_rw;  //include jal, jalr, branch, +-*/ and shift.
-assign rs2_block_checking = (ID_reg_inst[6:0] == 7'b1100111) || (ID_reg_inst[6:0] == 7'b1100011) || (ID_reg_inst[6:0] == 7'b0110011) || (ID_reg_inst[6:0] == 7'b0111011) || (ID_reg_inst[6:0] == 7'b1101111);  //include jal, load, jalr, branch, +-*/ and shift.
+assign rs2_block_checking = opcode_jal || opcode_jalr || opcode_load || opcode_cpt_r || opcode_cpt_rw;  //include jal, jalr, branch, +-*/ and shift.
+//assign rs2_block_checking = (ID_reg_inst[6:0] == 7'b1100111) || (ID_reg_inst[6:0] == 7'b1100011) || (ID_reg_inst[6:0] == 7'b0110011) || (ID_reg_inst[6:0] == 7'b0111011) || (ID_reg_inst[6:0] == 7'b1101111);  //include jal, load, jalr, branch, +-*/ and shift.
 
 assign rs1_waiting = EX_reg_inst[11:7] == ID_reg_inst[19:15];
 assign rs2_waiting = EX_reg_inst[11:7] == ID_reg_inst[24:20];
