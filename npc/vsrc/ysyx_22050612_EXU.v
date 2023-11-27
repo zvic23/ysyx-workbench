@@ -197,10 +197,10 @@ wire rs1_EX_MEM_match;
 wire rs2_EX_MEM_match;
 wire rs1_EX_WB_match;
 wire rs2_EX_WB_match;
-assign rs1_EX_MEM_match = (MEM_reg_inst[11:7] == EX_reg_inst[19:15])&&(EX_reg_inst[19:15]!=5'b0);
-assign rs2_EX_MEM_match = (MEM_reg_inst[11:7] == EX_reg_inst[24:20])&&(EX_reg_inst[24:20]!=5'b0);
-assign rs1_EX_WB_match  = ( WB_reg_inst[11:7] == EX_reg_inst[19:15])&&(EX_reg_inst[19:15]!=5'b0);
-assign rs2_EX_WB_match  = ( WB_reg_inst[11:7] == EX_reg_inst[24:20])&&(EX_reg_inst[24:20]!=5'b0);
+assign rs1_EX_MEM_match = (MEM_reg_inst[11:7] == EX_reg_rs1)&&(EX_reg_rs1!=5'b0);
+assign rs2_EX_MEM_match = (MEM_reg_inst[11:7] == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
+assign rs1_EX_WB_match  = ( WB_reg_inst[11:7] == EX_reg_rs1)&&(EX_reg_rs1!=5'b0);
+assign rs2_EX_WB_match  = ( WB_reg_inst[11:7] == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
 
 wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
