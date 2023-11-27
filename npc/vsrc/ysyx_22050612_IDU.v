@@ -20,8 +20,8 @@ output [ 4:0]rd,
 output [ 4:0]rs1,
 output [ 4:0]rs2,
 */
-output reg [63:0]src_A,
-output reg [63:0]src_B,
+output [63:0]src_A,
+output [63:0]src_B,
 output [63:0]  imm,
 
 
@@ -253,6 +253,7 @@ assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
 //end
 
 
+wire opcode_wen;
 wire [63:0]opcode_imm   ;
 wire [4:0]opcode_rs1    ;
 wire [4:0]opcode_rs2    ;
@@ -274,6 +275,8 @@ wire opcode_ebreak ;
 wire opcode_ecall  ;
 wire opcode_mret   ;
 
+
+assign opcode_wen = opcode_lui||opcode_auipc||opcode_load||opcode_jal||opcode_jalr||opcode_cpt_r||opcode_cpt_i||opcode_cpt_iw||opcode_cpt_rw||opcode_csr;
 assign imm = opcode_imm;
 assign opcode_imm[0]     = opcode_store ? inst[7] : ((opcode_branch||opcode_auipc||opcode_lui||opcode_jal) ? 1'b0 : inst[20]);
 assign opcode_imm[4:1]   = (opcode_store||opcode_branch) ? inst[11:8] : ((opcode_auipc||opcode_lui) ? 4'b0 : inst[24:21]);

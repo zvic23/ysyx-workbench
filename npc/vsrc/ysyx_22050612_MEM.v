@@ -15,6 +15,7 @@ output      ready_EX_MEM,
 input [63:0]pc_EX_MEM,
 input [31:0]inst_EX_MEM,
 input [23:0]opcode_in,
+input [14:0]opcode_type_EX_MEM,
 input [63:0]ALUoutput_in,
 input [63:0]src2_in,
 
@@ -87,6 +88,7 @@ assign waddr_out = waddr;
 reg [63:0]MEM_reg_pc            ;
 //reg [31:0]MEM_reg_inst          ;
 reg [23:0]MEM_reg_opcode        ;
+reg [14:0]MEM_reg_opcode_type        ;
 //reg [63:0]MEM_reg_aluoutput     ;
 reg [63:0]MEM_reg_src2          ;
 
@@ -96,6 +98,7 @@ always @(posedge clk) begin
 		MEM_reg_pc             <= 64'b0;
 		MEM_reg_inst           <= 32'b0;
 		MEM_reg_opcode         <= 24'b0;
+		MEM_reg_opcode_type         <= 15'b0;
 		MEM_reg_aluoutput      <= 64'b0;
 		MEM_reg_src2           <= 64'b0;
 	end
@@ -104,6 +107,7 @@ always @(posedge clk) begin
 		MEM_reg_pc             <= MEM_reg_pc         ; 
 		MEM_reg_inst           <= MEM_reg_inst       ; 
 		MEM_reg_opcode         <= MEM_reg_opcode     ; 
+		MEM_reg_opcode_type         <= MEM_reg_opcode_type     ; 
 		MEM_reg_aluoutput      <= MEM_reg_aluoutput  ; 
 		MEM_reg_src2           <= MEM_reg_src2       ; 
 	end
@@ -112,6 +116,7 @@ always @(posedge clk) begin
 		MEM_reg_pc             <= pc_EX_MEM;
 		MEM_reg_inst           <= inst_EX_MEM;
 		MEM_reg_opcode         <= opcode_in;
+		MEM_reg_opcode_type         <= opcode_type_EX_MEM;
 		MEM_reg_aluoutput      <= ALUoutput_in;
 		MEM_reg_src2           <= src2_in       ;
 	end
@@ -125,6 +130,9 @@ assign opcode = MEM_reg_valid ? MEM_reg_opcode : 24'b0;
 
 wire [63:0]aluoutput;
 assign aluoutput = MEM_reg_valid ? MEM_reg_aluoutput : 64'b0;
+
+wire [14:0]opcode_type;
+assign opcode_type = MEM_reg_valid ? MEM_reg_opcode_type : 15'b0;
 
 reg [63:0]src2;
 
@@ -283,10 +291,12 @@ end
 
 
 
-reg wen;
+wire wen;
+assign wen = opcode_type[0]||opcode_type[1]||opcode_type[2]||opcode_type[3]||opcode_type[5]||opcode_type[7]||opcode_type[8]||opcode_type[9]||opcode_type[10]||opcode_type[11];
 reg [63:0]wdata_reg;
 always @(*) begin
 //gpr control
+/*
 	case (opcode)
     24'h4000 : wen=1'b1;
     24'h5000 : wen=1'b1;
@@ -339,7 +349,7 @@ always @(*) begin
     24'd50   : wen=1'b1;
     default:  wen=1'b0;
         endcase
-
+*/
 
 	case (opcode)
     24'h4000 : wdata_reg=aluoutput;
