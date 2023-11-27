@@ -480,26 +480,20 @@ always @(*) begin
 //    endcase
 
     case (opcode)
-    24'h300 : dnpc=result_alu0                         ;
-    24'd4   : dnpc=result_alu0           ;
-//    24'd5   : dnpc=(result_alu0==64'b0)?(imm_B+EX_reg_pc):snpc;
-//    24'd6   : dnpc=(result_alu0!=64'b0)?(imm_B+EX_reg_pc):snpc;
-//    24'd7   : dnpc=(result_alu0[63]==1)?(imm_B+EX_reg_pc):snpc;
-//    24'd8   : dnpc=(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc;
-    24'd5   : dnpc=(src1==src2&&EX_reg_inst[31]==0)?result_alu0:snpc;
-    24'd6   : dnpc=(src1!=src2&&EX_reg_inst[31]==0)?result_alu0:snpc;
-    24'd7   : dnpc=($signed(src1) <$signed(src2)&&EX_reg_inst[31]==0)?result_alu0:snpc;
-    24'd8   : dnpc=($signed(src1)>=$signed(src2)&&EX_reg_inst[31]==0)?result_alu0:snpc;
-    24'd9   : dnpc=(src1 <src2&&EX_reg_inst[31]==0)?result_alu0:snpc         ;
-    24'd10  : dnpc=(src1>=src2&&EX_reg_inst[31]==0)?result_alu0:snpc        ;        //(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc
+    24'h300 : dnpc=jnpc                         ;
+    24'd4   : dnpc=jnpc           ;
+    24'd5   : dnpc=(src1==src2&&EX_reg_inst[31]==0)?jnpc:snpc;
+    24'd6   : dnpc=(src1!=src2&&EX_reg_inst[31]==0)?jnpc:snpc;
+    24'd7   : dnpc=($signed(src1) <$signed(src2)&&EX_reg_inst[31]==0)?jnpc:snpc;
+    24'd8   : dnpc=($signed(src1)>=$signed(src2)&&EX_reg_inst[31]==0)?jnpc:snpc;
+    24'd9   : dnpc=(src1 <src2&&EX_reg_inst[31]==0)?jnpc:snpc         ;
+    24'd10  : dnpc=(src1>=src2&&EX_reg_inst[31]==0)?jnpc:snpc        ;        //(jnpc[63]==0)?(imm_B+EX_reg_pc):snpc
     24'h200000: dnpc=EX_reg_src_b                             ;        
     24'h500000: dnpc=EX_reg_src_b                             ;        
     default: dnpc=snpc;
     endcase
 
     case (opcode)
-    //24'h300  : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
-    //24'h300  : pc_update= EX_reg_valid ? (EX_reg_inst[31]==1'b0 ? 1'b1 : 1'b0) : 1'b0;
     24'd4    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? 1'b1 : 1'b0;
     24'd5    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( ((src1==src2&&EX_reg_inst[31]==0)||(src1!=src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
     24'd6    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( ((src1!=src2&&EX_reg_inst[31]==0)||(src1==src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
@@ -546,6 +540,8 @@ end
 //pc
 wire [63:0] snpc;
 assign snpc = EX_reg_pc + 64'd4;
+wire [63:0] jnpc;
+assign jnpc = EX_reg_pc + imm;
 
 
 
