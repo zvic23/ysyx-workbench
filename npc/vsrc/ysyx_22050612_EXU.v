@@ -156,10 +156,10 @@ always@(*)begin
 		src1 = 64'b0;
 	end
 	if(EX_reg_valid)begin
-		if(MEM_reg_valid&&(MEM_inst_hit!=4'b0)&&(EX_inst_hit!=4'b0)&&rs2_EX_MEM_match)begin
+		if(MEM_reg_valid&&(MEM_inst_hit!=4'b0)&&exu_using_rs2&&rs2_EX_MEM_match)begin
 			src2 =  MEM_reg_aluoutput;
 		end
-		else if(WB_reg_valid&&(WB_inst_hit!=4'b0)&&(EX_inst_hit!=4'b0)&&rs2_EX_WB_match)begin
+		else if(WB_reg_valid&&(WB_inst_hit!=4'b0)&&exu_using_rs2&&rs2_EX_WB_match)begin
 			src2 = WB_reg_wdata ;
 		end
 		else begin
@@ -190,7 +190,8 @@ assign rs2_EX_WB_match  = ( WB_reg_inst[11:7] == EX_reg_inst[24:20])&&(EX_reg_in
 wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
 wire [3:0]EX_inst_hit;
-//wire exu_using_rs2 = 
+wire exu_using_rs2;
+assign exu_using_rs2 = EX_reg_opcode_type[3] || EX_reg_opcode_type[4] || EX_reg_opcode_type[7] || EX_reg_opcode_type[10];
 always@(*) begin
 //   ID/EX
 	case ({EX_reg_inst[14:12],EX_reg_inst[6:0]})
