@@ -132,9 +132,9 @@ wire EX_loading;
 assign EX_loading = EX_reg_inst[6:0] == 7'b0000011;   //load inst
 wire rs1_waiting;
 wire rs2_waiting;
-//wire [3:0]rs2_block_checking;
 wire rs2_block_checking;
-assign rs2_block_checking = (ID_reg_inst[6:0] == 7'b1100111) || (ID_reg_inst[6:0] == 7'b1100011) || (ID_reg_inst[6:0] == 7'b0110011) || (ID_reg_inst[6:0] == 7'b0111011) || (ID_reg_inst[6:0] == 7'b1101111);  //include jal, load, jalr, branch, +-*/ and shift.
+assign rs2_block_checking = opcode_jal || opcode_jalr || opcode_load || opcode_cpt_r || opcode_cpt_rw;  //include jal, jalr, branch, +-*/ and shift.
+//assign rs2_block_checking = (ID_reg_inst[6:0] == 7'b1100111) || (ID_reg_inst[6:0] == 7'b1100011) || (ID_reg_inst[6:0] == 7'b0110011) || (ID_reg_inst[6:0] == 7'b0111011) || (ID_reg_inst[6:0] == 7'b1101111);  //include jal, load, jalr, branch, +-*/ and shift.
 
 assign rs1_waiting = EX_reg_inst[11:7] == ID_reg_inst[19:15];
 assign rs2_waiting = EX_reg_inst[11:7] == ID_reg_inst[24:20];
@@ -601,6 +601,46 @@ assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
 //always @(posedge clk) begin
 //	if(inst==32'h00100073) ebreak(1);
 //end
+
+
+
+wire [2:0]opcode_funct3 ;
+wire opcode_lui    ;
+wire opcode_auipc  ;
+wire opcode_load   ;
+wire opcode_store  ;
+wire opcode_branch ;
+wire opcode_jal    ;
+wire opcode_jalr   ;
+wire opcode_cpt_r  ;
+wire opcode_cpt_i  ;
+wire opcode_cpt_iw ;
+wire opcode_cpt_rw ;
+wire opcode_csr    ;
+wire opcode_ebreak ;
+wire opcode_ecall  ;
+
+
+
+
+assign opcode_funct3 = inst[14:12];
+
+assign opcode_lui    = inst[6:0] == 7'b0110111;
+assign opcode_auipc  = inst[6:0] == 7'b0010111;
+assign opcode_load   = inst[6:0] == 7'b0000011;
+assign opcode_store  = inst[6:0] == 7'b0011011;
+assign opcode_branch = inst[6:0] == 7'b1100011;
+assign opcode_jal    = inst[6:0] == 7'b1101111;
+assign opcode_jalr   = inst[6:0] == 7'b1100111;
+assign opcode_cpt_r  = inst[6:0] == 7'b0110011;
+assign opcode_cpt_i  = inst[6:0] == 7'b0010011;
+assign opcode_cpt_iw = inst[6:0] == 7'b0011011;
+assign opcode_cpt_rw = inst[6:0] == 7'b0111011;
+assign opcode_csr    = inst[6:0] == 7'b1110011;
+
+
+assign opcode_ebreak = inst == 32'h00100073;
+assign opcode_ecall  = inst == 32'b1110011;
 
 
 endmodule
