@@ -348,7 +348,7 @@ assign opcode_funct3 = inst[14:12];
 assign opcode_lui    = inst[6:0] == 7'b0110111;
 assign opcode_auipc  = inst[6:0] == 7'b0010111;
 assign opcode_load   = inst[6:0] == 7'b0000011;
-assign opcode_store  = inst[6:0] == 7'b0011011;
+assign opcode_store  = inst[6:0] == 7'b0100011;
 assign opcode_branch = inst[6:0] == 7'b1100011;
 assign opcode_jal    = inst[6:0] == 7'b1101111;
 assign opcode_jalr   = inst[6:0] == 7'b1100111;
