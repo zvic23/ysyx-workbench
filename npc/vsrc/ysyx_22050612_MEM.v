@@ -147,7 +147,8 @@ assign pc_MEM_WB    = (MEM_block==1'b0) ? MEM_reg_pc    : 64'b0;
 assign inst_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_inst  : 32'b0;
 
 wire MEM_block;
-assign MEM_block = MEM_reg_valid && ((MEM_reg_inst[6:0]==7'b0000011)||(MEM_reg_inst[6:0]==7'b0100011)) && !dcache_ready;
+assign MEM_block = (opcode_type[5]||opcode_type[6]) && !dcache_ready;
+//assign MEM_block = MEM_reg_valid && ((MEM_reg_inst[6:0]==7'b0000011)||(MEM_reg_inst[6:0]==7'b0100011)) && !dcache_ready;
 assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
 
 
@@ -329,33 +330,24 @@ always @(*) begin
 
 	case(waddr[2:0])
     3'd0  : wdata_2byte={{48{1'b0}},src2[15:0]}; 
-//    3'd1  : wdata_2byte={{40{1'b0}},src2[15:0],{ 8{1'b0}}};
     3'd2  : wdata_2byte={{32{1'b0}},src2[15:0],{16{1'b0}}};
-//    3'd3  : wdata_2byte={{24{1'b0}},src2[15:0],{24{1'b0}}};
     3'd4  : wdata_2byte={{16{1'b0}},src2[15:0],{32{1'b0}}};
-//    3'd5  : wdata_2byte={{ 8{1'b0}},src2[15:0],{40{1'b0}}};
     3'd6  : wdata_2byte={           src2[15:0],{48{1'b0}}};
     default:wdata_2byte=64'b0;
 	endcase
 
 	case(waddr[2:0])
     3'd0  : wmask_2byte=8'h3 ; 
-//    3'd1  : wmask_2byte=8'h6 ;
     3'd2  : wmask_2byte=8'hc ;
-//    3'd3  : wmask_2byte=8'h18;
     3'd4  : wmask_2byte=8'h30; 
-//    3'd5  : wmask_2byte=8'h60; 
     3'd6  : wmask_2byte=8'hc0;
     default:wmask_2byte=8'b0;
 	endcase
 
 	case(waddr[2:0])
     3'd0  : wmask_2b=64'hffff ; 
-//    3'd1  : wmask_2byte=8'h6 ;
     3'd2  : wmask_2b=64'hffff0000 ;
-//    3'd3  : wmask_2byte=8'h18;
     3'd4  : wmask_2b=64'hffff00000000; 
-//    3'd5  : wmask_2byte=8'h60; 
     3'd6  : wmask_2b=64'hffff000000000000;
     default:wmask_2b=64'b0;
 	endcase
@@ -377,11 +369,8 @@ always @(*) begin
 
 	case(raddr[2:0])
     3'd0  : rdata_2byte=rdata[15: 0]; 
-//    3'd1  : rdata_2byte=rdata[23: 8];
     3'd2  : rdata_2byte=rdata[31:16];
-//    3'd3  : rdata_2byte=rdata[39:24];
     3'd4  : rdata_2byte=rdata[47:32];
-//    3'd5  : rdata_2byte=rdata[55:40];
     3'd6  : rdata_2byte=rdata[63:48];
     default:rdata_2byte=16'b0;
 	endcase
