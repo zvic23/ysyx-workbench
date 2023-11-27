@@ -156,10 +156,10 @@ always@(*)begin
 		src1 = 64'b0;
 	end
 	if(EX_reg_valid)begin
-		if(MEM_reg_valid&&(MEM_inst_hit!=4'b0)&&exu_using_rs2&&rs2_EX_MEM_match)begin
+		if(MEM_reg_valid&&(MEM_inst_hit!=4'b0)&&(EX_inst_hit!=4'b0)&&rs2_EX_MEM_match)begin
 			src2 =  MEM_reg_aluoutput;
 		end
-		else if(WB_reg_valid&&(WB_inst_hit!=4'b0)&&exu_using_rs2&&rs2_EX_WB_match)begin
+		else if(WB_reg_valid&&(WB_inst_hit!=4'b0)&&(EX_inst_hit!=4'b0)&&rs2_EX_WB_match)begin
 			src2 = WB_reg_wdata ;
 		end
 		else begin
