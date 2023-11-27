@@ -256,11 +256,6 @@ always@(*) begin
 //   EX/MEM
 	case ({MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
 //    10'b000_1100111:  MEM_inst_hit[0]= 1'b1  ;    //jalr
-             10'b000_0000011:  MEM_inst_hit[0]= 1'b1  ;     //lb
-                10'b001_0000011:  MEM_inst_hit[0]= 1'b1  ;     //lh
-                10'b010_0000011:  MEM_inst_hit[0]= 1'b1  ;     //lw
-                10'b100_0000011:  MEM_inst_hit[0]= 1'b1  ;     //lbu
-                10'b101_0000011:  MEM_inst_hit[0]= 1'b1  ;     //lhu
 		10'b000_0010011:  MEM_inst_hit[0]= 1'b1  ;    //addi
 		10'b010_0010011:  MEM_inst_hit[0]= 1'b1  ;    //slti
 		10'b011_0010011:  MEM_inst_hit[0]= 1'b1  ;    //sltiu
@@ -394,7 +389,7 @@ assign src_B_EX_MEM = src2;
 
 
 always @(negedge clk) begin
-	EXU_state_trace(EX_reg_pc, {32'b0,EX_reg_inst}, {63'b0,EX_reg_valid}, src1,src2,{{60{1'b0}},EX_block,div_valid,div_ready,div_out_valid} );
+	EXU_state_trace(EX_reg_pc, {32'b0,EX_reg_inst}, {63'b0,EX_reg_valid}, MEM_reg_aluoutput,WB_reg_wdata,{{60{1'b0}},EX_block,div_valid,div_ready,div_out_valid} );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x %x   dnpc:%x  opcode:%d\n",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , WB_reg_wdata,  EX_inst_hit, WB_inst_hit, rs1_EX_WB_match , rs2_EX_WB_match,dnpc,opcode);
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , MEM_reg_aluoutput,  EX_inst_hit, MEM_inst_hit, rs1_EX_MEM_match );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x",EX_reg_pc,EX_reg_inst,EX_reg_valid,EX_reg_src_a,EX_reg_src_b,EX_reg_imm);
