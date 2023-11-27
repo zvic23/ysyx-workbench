@@ -193,6 +193,7 @@ wire [3:0]EX_inst_hit;
 wire exu_using_rs2;
 assign exu_using_rs2 = EX_reg_opcode_type[4] || EX_reg_opcode_type[6] || EX_reg_opcode_type[8] || EX_reg_opcode_type[10];
 always@(*) begin
+	/*
 //   ID/EX
 	case ({EX_reg_inst[14:12],EX_reg_inst[6:0]})
     	//	10'b000_1100111:  EX_inst_hit[1]= 1'd1   ;    //jalr
@@ -239,7 +240,7 @@ always@(*) begin
 	        17'b0000001_111_0111011: EX_inst_hit[2]= 1'd1  ; //remuw
 		default :                EX_inst_hit[2]= 1'd0  ;
 	endcase
-
+*/
 
 
 //   EX/MEM
