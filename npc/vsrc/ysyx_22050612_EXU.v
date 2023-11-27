@@ -156,10 +156,10 @@ always@(*)begin
 		src1 = 64'b0;
 	end
 	if(EX_reg_valid)begin
-		if(MEM_reg_valid&&(MEM_inst_hit!=4'b0)&&(EX_inst_hit!=4'b0)&&rs2_EX_MEM_match)begin
+		if(MEM_reg_valid&&(MEM_inst_hit!=4'b0)&&exu_using_rs2&&rs2_EX_MEM_match)begin
 			src2 =  MEM_reg_aluoutput;
 		end
-		else if(WB_reg_valid&&(WB_inst_hit!=4'b0)&&(EX_inst_hit!=4'b0)&&rs2_EX_WB_match)begin
+		else if(WB_reg_valid&&(WB_inst_hit!=4'b0)&&exu_using_rs2&&rs2_EX_WB_match)begin
 			src2 = WB_reg_wdata ;
 		end
 		else begin
@@ -191,7 +191,7 @@ wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
 wire [3:0]EX_inst_hit;
 wire exu_using_rs2;
-assign exu_using_rs2 = EX_reg_opcode_type[3] || EX_reg_opcode_type[4] || EX_reg_opcode_type[7] || EX_reg_opcode_type[10];
+assign exu_using_rs2 = EX_reg_opcode_type[4] || EX_reg_opcode_type[6] || EX_reg_opcode_type[8] || EX_reg_opcode_type[10];
 always@(*) begin
 //   ID/EX
 	case ({EX_reg_inst[14:12],EX_reg_inst[6:0]})
@@ -378,7 +378,7 @@ assign src_B_EX_MEM = src2;
 
 
 always @(negedge clk) begin
-	EXU_state_trace(EX_reg_pc, {32'b0,EX_reg_inst}, {63'b0,EX_reg_valid}, src1,src2,{{60{1'b0}},EX_block,div_valid,div_ready,div_out_valid} );
+	EXU_state_trace(EX_reg_pc, {32'b0,EX_reg_inst}, {63'b0,EX_reg_valid}, src1,src2,{{50{1'b0}},EX_reg_opcode_type} );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x %x   dnpc:%x  opcode:%d\n",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , WB_reg_wdata,  EX_inst_hit, WB_inst_hit, rs1_EX_WB_match , rs2_EX_WB_match,dnpc,opcode);
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , MEM_reg_aluoutput,  EX_inst_hit, MEM_inst_hit, rs1_EX_MEM_match );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x",EX_reg_pc,EX_reg_inst,EX_reg_valid,EX_reg_src_a,EX_reg_src_b,EX_reg_imm);
