@@ -836,7 +836,7 @@ ysyx_22050612_divider boothdiv ((clk), rst, div_valid, div_flush, divw, div_sign
 
 
 always @(negedge clk) begin
-	if(ready_EX_MEM && opcode_type[4]) begin
+	if(ready_ID_EX && opcode_type[4]) begin
 		if(pc_update) branch_predict(0);
 		else branch_predict(1);
 	end
