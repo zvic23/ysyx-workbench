@@ -20,6 +20,9 @@ input [ 4:0]rs2,
 */
 input [23:0]opcode_in,
 input [14:0]opcode_type_ID_EX,
+input [ 4:0]rd_ID_EX,
+input [ 4:0]rs1_ID_EX,
+input [ 4:0]rs2_ID_EX,
 input [63:0]src_A,
 input [63:0]src_B,
 input [63:0]imm_in,
@@ -81,6 +84,9 @@ reg [63:0]EX_reg_pc            ;
 //reg [31:0]EX_reg_inst          ;
 reg [23:0]EX_reg_opcode        ;
 reg [14:0]EX_reg_opcode_type     ;
+reg [ 4:0]EX_reg_rd;
+reg [ 4:0]EX_reg_rs1;
+reg [ 4:0]EX_reg_rs2;
 reg [63:0]EX_reg_src_a;
 reg [63:0]EX_reg_src_b;
 reg [63:0]EX_reg_imm;
@@ -99,7 +105,9 @@ always @(posedge clk) begin
 		EX_reg_src_b          <= 64'b0;
 		EX_reg_imm            <= 64'b0;
 	//	EX_reg_alu_mode       <=  8'b0;
-	//	EX_reg_rd             <=  5'b0;
+		EX_reg_rd             <=  5'b0;
+		EX_reg_rs1            <=  5'b0;
+		EX_reg_rs2            <=  5'b0;
 	//	EX_reg_src2           <= 64'b0;
 	end
 	else if(!ready_ID_EX)begin
@@ -112,7 +120,9 @@ always @(posedge clk) begin
 		EX_reg_src_b          <= EX_reg_src_b ;
 		EX_reg_imm            <= EX_reg_imm   ;
 	//	EX_reg_alu_mode       <= ALU_mode     ;
-	//	EX_reg_rd             <= rd           ;
+		EX_reg_rd             <= EX_reg_rd           ;
+		EX_reg_rs1            <= EX_reg_rs1;
+		EX_reg_rs2            <= EX_reg_rs2;
 	//	EX_reg_src2           <= src2_in      ;
 	end
 	else begin
@@ -125,7 +135,9 @@ always @(posedge clk) begin
 		EX_reg_src_b          <= src_B;
 		EX_reg_imm            <= imm_in;
 	//	EX_reg_alu_mode       <= ALU_mode      ;
-	//	EX_reg_rd             <= rd            ;
+		EX_reg_rd             <= rd_ID_EX           ;
+		EX_reg_rs1            <= rs1_ID_EX;
+		EX_reg_rs2            <= rs2_ID_EX;
 	//	EX_reg_src2           <= src2_in       ;
 	end
 end

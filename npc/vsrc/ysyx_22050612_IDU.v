@@ -16,10 +16,10 @@ input [63:0]mstatus,
 /*
 
 output [ 5:0]shamt,
-output [ 4:0]rd,
-output [ 4:0]rs1,
-output [ 4:0]rs2,
 */
+output [ 4:0]opcode_rd,
+output [ 4:0]opcode_rs1,
+output [ 4:0]opcode_rs2,
 output [63:0]src_A,
 output [63:0]src_B,
 output [63:0]  imm,
@@ -255,9 +255,6 @@ assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
 
 wire opcode_wen;
 wire [63:0]opcode_imm   ;
-wire [4:0]opcode_rs1    ;
-wire [4:0]opcode_rs2    ;
-wire [4:0]opcode_rd     ;
 wire [2:0]opcode_funct3 ;
 wire opcode_lui    ;
 wire opcode_auipc  ;
