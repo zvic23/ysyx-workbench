@@ -191,7 +191,7 @@ wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
 wire [3:0]EX_inst_hit;
 wire exu_using_rs2;
-assign exu_using_rs2 = EX_reg_opcode_type[3] || EX_reg_opcode_type[4] || EX_reg_opcode_type[7] || EX_reg_opcode_type[10];
+assign exu_using_rs2 = EX_reg_opcode_type[4] || EX_reg_opcode_type[6] || EX_reg_opcode_type[8] || EX_reg_opcode_type[10];
 always@(*) begin
 //   ID/EX
 	case ({EX_reg_inst[14:12],EX_reg_inst[6:0]})
