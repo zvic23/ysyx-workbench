@@ -1127,40 +1127,11 @@ reg [63:0]operator_a;
 reg [63:0]operator_b;
 wire [63:0]result_alu0;
 
-//ysyx_22050612_Adder #(64) add0 (addend_a,addend_b,sum_add0);
 ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
 //ysyx_22050612_ALU alu0 (EX_reg_alu_mode,EX_reg_src_a,EX_reg_src_b,result_alu0);
 
 
-//multipulicatin and division
-/*
-wire[63:0] result_mul0;
-assign result_mul0 = EX_reg_src_a[63:0] * EX_reg_src_b[63:0];
 
-wire[63:0] result_div0;
-assign result_div0 = EX_reg_src_a[63:0] / EX_reg_src_b[63:0];
-
-wire[63:0] result_divu0;
-assign result_divu0 = EX_reg_src_a[63:0] / EX_reg_src_b[63:0];
-
-wire[63:0] result_remu0;
-assign result_remu0 = EX_reg_src_a[63:0] % EX_reg_src_b[63:0];
-
-wire[63:0] result_mulw0;
-assign result_mulw0 = EX_reg_src_a[31:0] * EX_reg_src_b[31:0];
-
-wire[31:0] result_divw0;
-assign result_divw0 = $signed(EX_reg_src_a[31:0]) / $signed(EX_reg_src_b[31:0]);
-
-wire[31:0] result_remw0;
-assign result_remw0 = $signed(EX_reg_src_a[31:0]) % $signed(EX_reg_src_b[31:0]);
-
-wire[31:0] result_divuw0;
-assign result_divuw0 = EX_reg_src_a[31:0] / EX_reg_src_b[31:0];
-
-wire[31:0] result_remuw0;
-assign result_remuw0 = EX_reg_src_a[31:0] % EX_reg_src_b[31:0];
-*/
 //multipulicatin and division
 wire[63:0] result_mul0;
 assign result_mul0 = src1[63:0] * src2[63:0];

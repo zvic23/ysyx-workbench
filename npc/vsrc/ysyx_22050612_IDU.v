@@ -603,6 +603,9 @@ assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
 
 
 
+wire [4:0]opcode_rs1    ;
+wire [4:0]opcode_rs2    ;
+wire [4:0]opcode_rd     ;
 wire [2:0]opcode_funct3 ;
 wire opcode_lui    ;
 wire opcode_auipc  ;
@@ -621,7 +624,9 @@ wire opcode_ecall  ;
 
 
 
-
+assign opcode_rs1    = inst[19:15];
+assign opcode_rs2    = inst[24:20];
+assign opcode_rd     = inst[11: 7];
 assign opcode_funct3 = inst[14:12];
 
 assign opcode_lui    = inst[6:0] == 7'b0110111;
