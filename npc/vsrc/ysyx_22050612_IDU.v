@@ -155,26 +155,7 @@ end
  
 
 assign src_A = gpr[opcode_rs1];
-//assign src_B = opcode_csr ? src_csr : (opcode_ecall ? mtvec : (opcode_mret ? mepc : gpr[opcode_rs2]));
-
-always @(*) begin
-////src_A
-//    case (opcode)
-//    //ecall  mret
-//    24'h200000: src_A=mtvec   ;        
-//    24'h500000: src_A=mepc    ;
-//    default   : src_A=gpr[rs1];
-//    endcase 
-
-//src_B
-    case (opcode)
-    24'd49   : src_B=src_csr;
-    24'd50   : src_B=src_csr;
-    24'h200000:src_B=mtvec   ;        
-    24'h500000:src_B=mepc    ;
-    default  : src_B=gpr[opcode_rs2];
-    endcase 
-end
+assign src_B = opcode_csr ? src_csr : (opcode_ecall ? mtvec : (opcode_mret ? mepc : gpr[opcode_rs2]));
 
 
   always @(inst) begin
@@ -320,7 +301,7 @@ assign opcode_cpt_r  = inst[6:0] == 7'b0110011;
 assign opcode_cpt_i  = inst[6:0] == 7'b0010011;
 assign opcode_cpt_iw = inst[6:0] == 7'b0011011;
 assign opcode_cpt_rw = inst[6:0] == 7'b0111011;
-assign opcode_csr    = inst[6:0] == 7'b1110011;
+assign opcode_csr    = inst[6:0] == 7'b1110011 && inst[14:12] != 3'b0;
 
 
 assign opcode_ebreak = inst == 32'h00100073;
