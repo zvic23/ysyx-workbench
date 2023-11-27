@@ -22,7 +22,7 @@ output [ 4:0]rs2,
 */
 output reg [63:0]src_A,
 output reg [63:0]src_B,
-output reg [63:0]  imm,
+output [63:0]  imm,
 
 
 output [23:0]opcode,
