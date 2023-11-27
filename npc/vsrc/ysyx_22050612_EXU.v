@@ -375,7 +375,6 @@ assign inst_EX_MEM  = (EX_block==1'b0) ? EX_reg_inst  : 32'b0;
 
 
 assign opcode_EX_MEM = EX_reg_opcode;
-//assign src_B_EX_MEM = EX_reg_src_b;
 assign src_B_EX_MEM = src2;
 
 
@@ -442,17 +441,6 @@ always @(*) begin
     24'd50     : wdata_mstatus=result_alu0;
     default:   wdata_mstatus=64'b0;
         endcase
-//src_csr
-/*
-  	case (EX_reg_inst[31:20])
-    12'h305: src_csr=mtvec;
-    12'h341: src_csr=mepc;
-    12'h342: src_csr=mcause;
-    12'h300: src_csr=mstatus;
-    default:   src_csr=64'b0;
-
-        endcase
-	*/
 end
 
 
@@ -490,7 +478,7 @@ always @(*) begin
 //    24'h500000: dnpc=EX_reg_src_b                             ;        
 //    default: dnpc=snpc;
 //    endcase
-
+/*
     case (opcode)
     24'h300 : dnpc=result_alu0                         ;
     24'd4   : dnpc=result_alu0           ;
@@ -508,7 +496,7 @@ always @(*) begin
     24'h500000: dnpc=EX_reg_src_b                             ;        
     default: dnpc=snpc;
     endcase
-
+*/
     case (opcode)
     //24'h300  : pc_update= EX_reg_valid ? 1'b1 : 1'b0;
     //24'h300  : pc_update= EX_reg_valid ? (EX_reg_inst[31]==1'b0 ? 1'b1 : 1'b0) : 1'b0;
@@ -553,19 +541,7 @@ always @(*) begin
 //    endcase
 end
 
-
-
-//pc
-wire [63:0] snpc;
-assign snpc = EX_reg_pc + 64'd4;
-//wire [63:0]imm_B;
-//assign imm_B = (EX_reg_inst[31]==1'b1)?{{51{1'b1}},EX_reg_inst[31],EX_reg_inst[7],EX_reg_inst[30:25],EX_reg_inst[11:8],1'b0}:{{51{1'b0}},EX_reg_inst[31],EX_reg_inst[7],EX_reg_inst[30:25],EX_reg_inst[11:8],1'b0};
-
-
-
-
-
-
+assign dnpc = (opcode_type[13]||opcode_type[14]) ? EX_reg_src_b : result_alu0;
 
 
 //aluoutput
@@ -748,7 +724,6 @@ reg [63:0]operator_b;
 wire [63:0]result_alu0;
 
 ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
-//ysyx_22050612_ALU alu0 (EX_reg_alu_mode,EX_reg_src_a,EX_reg_src_b,result_alu0);
 
 
 
