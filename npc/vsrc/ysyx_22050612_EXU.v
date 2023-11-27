@@ -1,5 +1,5 @@
 import "DPI-C" function void ebreak (int r);
-import "DPI-C" function void update_csr(longint mtvec_npc, longint mcause_npc, longint mepc_npc, longint mstatus_npc);
+//import "DPI-C" function void update_csr(longint mtvec_npc, longint mcause_npc, longint mepc_npc, longint mstatus_npc);
 import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
 import "DPI-C" function void EXU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
 import "DPI-C" function void branch_predict(int r);
@@ -843,30 +843,13 @@ always @(negedge clk) begin
 end
 
 
-
-
 always @(posedge clk) begin
 //	if (opcode[9:8]==2'd3) ftrace_check(pc[63:0],dnpc[63:0], 1, 0, 1);
 //	else if (opcode[6:0]==7'd4) ftrace_check(pc[63:0],dnpc[63:0], {{27{1'b0}},rd}, {{27{1'b0}},rs1}, imm_I[63:0]);
 
 
-
 	if (opcode_type[12] && gpr[10]==64'b0) ebreak(0);
 	else if (opcode_type[12] && gpr[10]!=64'b0) ebreak(1);
-/*
-	if (opcode[7]==1'b1 && gpr[10]==64'b0) ebreak(0);
-	else if (opcode[7]==1'b1 && gpr[10]!=64'b0) ebreak(1);
-	*/
 end
-
-
-
-//always @(mtvec or mepc or mcause or mstatus) begin
-//       update_csr(mtvec,mcause,mepc,mstatus);	
-//end
-
-
-
-
 
 endmodule

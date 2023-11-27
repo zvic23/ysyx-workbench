@@ -1,5 +1,5 @@
 import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
-
+import "DPI-C" function void update_csr(longint mtvec_npc, longint mcause_npc, longint mepc_npc, longint mstatus_npc);
 
 module ysyx_22050612_npc(
 input clk,
@@ -353,5 +353,9 @@ ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid,
 
 
 initial set_gpr_ptr(gpr);                   //to update the gpr in cpp file
+
+//always @(mtvec or mepc or mcause or mstatus) begin
+//       update_csr(mtvec,mcause,mepc,mstatus);	
+//end
 
 endmodule

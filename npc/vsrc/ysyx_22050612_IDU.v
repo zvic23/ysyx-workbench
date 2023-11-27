@@ -200,6 +200,7 @@ always @(*) begin
     endcase 
 
 //imm
+/*
     case (opcode)
     24'h100  : imm=imm_U; 
     24'h200  : imm=imm_U;
@@ -219,6 +220,7 @@ always @(*) begin
 
     default  : imm=imm_I;
     endcase
+    */
 end
 
 
@@ -337,8 +339,16 @@ wire opcode_csr    ;
 wire opcode_ebreak ;
 wire opcode_ecall  ;
 
-
-assign opcode_imm    = imm;
+assign imm = opcode_imm;
+assign opcode_imm[0]     = opcode_store ? inst[7] : ((opcode_branch||opcode_auipc||opcode_lui||opcode_jal) ? 1'b0 : inst[20]);
+assign opcode_imm[4:1]   = (opcode_store||opcode_branch) ? inst[11:8] : ((opcode_auipc||opcode_lui) ? 4'b0 : inst[24:21]);
+assign opcode_imm[10:5]  = (opcode_auipc||opcode_lui) ? 6'b0 : inst[30:25];
+assign opcode_imm[11]    = opcode_branch ? inst[7] : ((opcode_auipc||opcode_lui) ? 1'b0 : (opcode_jal ? inst[20] : inst[31]));
+assign opcode_imm[12]    = opcode_branch ? inst[31] : ((opcode_auipc||opcode_lui||opcode_jal) ? inst[12] : inst[11]);
+assign opcode_imm[19:13] = (opcode_auipc||opcode_lui||opcode_jal) ? inst[19:13] : {7{inst[31]}};
+assign opcode_imm[20]    = (opcode_auipc||opcode_lui) ? inst[20] : inst[31];
+assign opcode_imm[31:21] = (opcode_auipc||opcode_lui) ? inst[31:21] : {11{inst[31]}};
+assign opcode_imm[63:32] = {32{inst[31]}};
 
 assign opcode_rs1    = inst[19:15];
 assign opcode_rs2    = inst[24:20];
