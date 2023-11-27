@@ -836,7 +836,12 @@ ysyx_22050612_divider boothdiv ((clk), rst, div_valid, div_flush, divw, div_sign
 
 
 always @(negedge clk) begin
-	if(ready_EX_MEM) begin
+	if(ready_EX_MEM && opcode_type[4]) begin
+		if(pc_update) branch_predict(0);
+		else branch_predict(1);
+	end
+end
+/*
     case (opcode)
 	    24'd4    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
             24'd5    : begin if(pc_update) branch_predict(0); else branch_predict(1); end 
@@ -851,17 +856,22 @@ always @(negedge clk) begin
     endcase
     end
 end
+*/
 
 
-
-//initial set_gpr_ptr(gpr);  
 
 always @(posedge clk) begin
 //	if (opcode[9:8]==2'd3) ftrace_check(pc[63:0],dnpc[63:0], 1, 0, 1);
 //	else if (opcode[6:0]==7'd4) ftrace_check(pc[63:0],dnpc[63:0], {{27{1'b0}},rd}, {{27{1'b0}},rs1}, imm_I[63:0]);
 
+
+
+	if (opcode_type[12] && gpr[10]==64'b0) ebreak(0);
+	else if (opcode_type[12] && gpr[10]!=64'b0) ebreak(1);
+/*
 	if (opcode[7]==1'b1 && gpr[10]==64'b0) ebreak(0);
 	else if (opcode[7]==1'b1 && gpr[10]!=64'b0) ebreak(1);
+	*/
 end
 
 
