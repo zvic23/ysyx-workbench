@@ -185,8 +185,8 @@ always@(*)begin
 end
 
 wire EX_block;
-assign EX_block = (mul_valid && !mul_out_valid) || (div_valid && !div_out_valid);
-//assign EX_block = 1'b0;
+//assign EX_block = (mul_valid && !mul_out_valid) || (div_valid && !div_out_valid);
+assign EX_block = 1'b0;
 assign ready_ID_EX = EX_block ? 1'b0 : ready_EX_MEM;
 
 
@@ -964,23 +964,23 @@ always@(*) begin
     24'h1a000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
     24'h1b000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
     24'h1d000: ALUoutput_EX_MEM=result_lo;
-    //24'h1d000: ALUoutput_EX_MEM=result_mul0;
-    24'h21000: ALUoutput_EX_MEM=quotient;
-    //24'h21000: ALUoutput_EX_MEM=result_div0;
-    24'h22000: ALUoutput_EX_MEM=quotient;
-    //24'h22000: ALUoutput_EX_MEM=result_divu0;
-    24'h24000: ALUoutput_EX_MEM=remainder;
-    //24'h24000: ALUoutput_EX_MEM=result_remu0;
-    24'h25000: ALUoutput_EX_MEM=(result_lo[31]?({{32{1'b1}},result_lo[31:0]}):({{32{1'b0}},result_lo[31:0]}));
-    //24'h25000: ALUoutput_EX_MEM=(result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]}));
-    24'h26000: ALUoutput_EX_MEM=(quotient[31]?({{32{1'b1}},quotient[31:0]}):({{32{1'b0}},quotient[31:0]}));
-    //24'h26000: ALUoutput_EX_MEM=(result_divw0[31]?({{32{1'b1}},result_divw0[31:0]}):({{32{1'b0}},result_divw0[31:0]}));
-    24'h27000: ALUoutput_EX_MEM=(quotient[31]?({{32{1'b1}},quotient[31:0]}):({{32{1'b0}},quotient[31:0]}));
-    //24'h27000: ALUoutput_EX_MEM=(result_divuw0[31]?({{32{1'b1}},result_divuw0[31:0]}):({{32{1'b0}},result_divuw0[31:0]}));
-    24'h28000: ALUoutput_EX_MEM=(remainder[31]?({{32{1'b1}},remainder[31:0]}):({{32{1'b0}},remainder[31:0]}));
-    //24'h28000: ALUoutput_EX_MEM=(result_remw0[31]?({{32{1'b1}},result_remw0[31:0]}):({{32{1'b0}},result_remw0[31:0]}));
-    24'h29000: ALUoutput_EX_MEM=(remainder[31]?({{32{1'b1}},remainder[31:0]}):({{32{1'b0}},remainder[31:0]}));
-    //24'h29000: ALUoutput_EX_MEM=(result_remuw0[31]?({{32{1'b1}},result_remuw0[31:0]}):({{32{1'b0}},result_remuw0[31:0]}));
+    24'h1d000: ALUoutput_EX_MEM=result_mul0;
+    //24'h21000: ALUoutput_EX_MEM=quotient;
+    24'h21000: ALUoutput_EX_MEM=result_div0;
+    //24'h22000: ALUoutput_EX_MEM=quotient;
+    24'h22000: ALUoutput_EX_MEM=result_divu0;
+    //24'h24000: ALUoutput_EX_MEM=remainder;
+    24'h24000: ALUoutput_EX_MEM=result_remu0;
+    //24'h25000: ALUoutput_EX_MEM=(result_lo[31]?({{32{1'b1}},result_lo[31:0]}):({{32{1'b0}},result_lo[31:0]}));
+    24'h25000: ALUoutput_EX_MEM=(result_mulw0[31]?({{32{1'b1}},result_mulw0[31:0]}):({{32{1'b0}},result_mulw0[31:0]}));
+    //24'h26000: ALUoutput_EX_MEM=(quotient[31]?({{32{1'b1}},quotient[31:0]}):({{32{1'b0}},quotient[31:0]}));
+    24'h26000: ALUoutput_EX_MEM=(result_divw0[31]?({{32{1'b1}},result_divw0[31:0]}):({{32{1'b0}},result_divw0[31:0]}));
+    //24'h27000: ALUoutput_EX_MEM=(quotient[31]?({{32{1'b1}},quotient[31:0]}):({{32{1'b0}},quotient[31:0]}));
+    24'h27000: ALUoutput_EX_MEM=(result_divuw0[31]?({{32{1'b1}},result_divuw0[31:0]}):({{32{1'b0}},result_divuw0[31:0]}));
+    //24'h28000: ALUoutput_EX_MEM=(remainder[31]?({{32{1'b1}},remainder[31:0]}):({{32{1'b0}},remainder[31:0]}));
+    24'h28000: ALUoutput_EX_MEM=(result_remw0[31]?({{32{1'b1}},result_remw0[31:0]}):({{32{1'b0}},result_remw0[31:0]}));
+    //24'h29000: ALUoutput_EX_MEM=(remainder[31]?({{32{1'b1}},remainder[31:0]}):({{32{1'b0}},remainder[31:0]}));
+    24'h29000: ALUoutput_EX_MEM=(result_remuw0[31]?({{32{1'b1}},result_remuw0[31:0]}):({{32{1'b0}},result_remuw0[31:0]}));
 //    //24'h100  : wdata_reg=imm_U;
 //    24'h100  : wdata_reg=EX_reg_imm;
 //    //24'h300  : wdata_reg=pc + 64'd4;
