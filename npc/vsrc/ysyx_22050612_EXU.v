@@ -163,38 +163,7 @@ assign imm  = EX_reg_valid ? EX_reg_imm  : 64'b0;
 
 assign src1 = EX_reg_valid ? ((mem_writing_gpr&&rs1_EX_MEM_match) ? MEM_reg_aluoutput : ((wbu_writing_gpr&&rs1_EX_WB_match) ? WB_reg_wdata : EX_reg_src_a )) : 64'b0;
 assign src2 = EX_reg_valid ? ((mem_writing_gpr&&exu_using_rs2&&rs2_EX_MEM_match) ? MEM_reg_aluoutput : ((wbu_writing_gpr&&exu_using_rs2&&rs2_EX_WB_match) ? WB_reg_wdata : EX_reg_src_b )) : 64'b0;
-/*
-always@(*)begin
-	if(EX_reg_valid)begin
-		if(mem_writing_gpr&&rs1_EX_MEM_match)begin
-			src1 = MEM_reg_aluoutput;
-		end
-		else if(wbu_writing_gpr&&rs1_EX_WB_match)begin
-			src1 =  WB_reg_wdata;
-		end
-		else begin
-			src1 = EX_reg_src_a;
-		end
-	end
-	else begin
-		src1 = 64'b0;
-	end
-	if(EX_reg_valid)begin
-		if(mem_writing_gpr&&exu_using_rs2&&rs2_EX_MEM_match)begin
-			src2 =  MEM_reg_aluoutput;
-		end
-		else if(wbu_writing_gpr&&exu_using_rs2&&rs2_EX_WB_match)begin
-			src2 = WB_reg_wdata ;
-		end
-		else begin
-			src2 = EX_reg_src_b;
-		end
-	end
-	else begin
-		src2 = 64'b0;
-	end
-end
-*/
+
 
 wire EX_block;
 assign EX_block = (mul_valid && !mul_out_valid) || (div_valid && !div_out_valid);

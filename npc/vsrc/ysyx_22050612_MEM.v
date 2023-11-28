@@ -148,7 +148,7 @@ assign aluoutput = MEM_reg_valid ? MEM_reg_aluoutput : 64'b0;
 wire [14:0]opcode_type;
 assign opcode_type = MEM_reg_valid ? MEM_reg_opcode_type : 15'b0;
 
-reg [63:0]src2;
+wire [63:0]src2;
 
 assign reg_wr_wen   = (MEM_reg_valid&&!MEM_block) ? wen       : 1'b0;
 assign reg_wr_ID    = (MEM_reg_valid&&!MEM_block) ? MEM_reg_inst[11:7] : 5'b0;
@@ -191,7 +191,8 @@ araddr_dcache_axi, arlen_dcache_axi, arsize_dcache_axi, arburst_dcache_axi, arva
 
 
 //**************    load interlock    ************************
-
+assign src2 = MEM_reg_valid ? ((mem_storing &&wbu_writing_gpr&&rs2_MEM_WB_match) ? WB_reg_wdata : MEM_reg_src2 ) : 64'b0;
+/*
 always@(*)begin
 	if(MEM_reg_valid)begin
 		if(mem_storing &&wbu_writing_gpr&&rs2_MEM_WB_match)begin
@@ -205,6 +206,7 @@ always@(*)begin
 		src2 = 64'b0;
 	end
 end
+*/
 
 wire rs2_MEM_WB_match;
 assign rs2_MEM_WB_match  =  (wbu_rd == MEM_reg_inst[24:20])&&(MEM_reg_inst[24:20]!=5'b0);
