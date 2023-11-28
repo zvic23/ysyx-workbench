@@ -150,8 +150,8 @@ wire [63:0]pc;
 wire [31:0]inst;
 wire [23:0]opcode;
 wire [14:0]opcode_type;
-reg [63:0]src1;
-reg [63:0]src2;
+wire [63:0]src1;
+wire [63:0]src2;
 wire [63:0]imm;
 assign pc   = EX_reg_valid ? EX_reg_pc   : 64'b0;
 assign inst = EX_reg_valid ? EX_reg_inst : 32'b0;
@@ -159,6 +159,11 @@ assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
 assign opcode_type = EX_reg_valid ? EX_reg_opcode_type : 15'b0;
 assign imm  = EX_reg_valid ? EX_reg_imm  : 64'b0;
 
+
+
+assign src1 = EX_reg_valid ? ((mem_writing_gpr&&rs1_EX_MEM_match) ? MEM_reg_aluoutput : ((wbu_writing_gpr&&rs1_EX_WB_match) ? WB_reg_wdata : EX_reg_src_a )) : 64'b0;
+assign src2 = EX_reg_valid ? ((mem_writing_gpr&&exu_using_rs2&&rs2_EX_MEM_match) ? MEM_reg_aluoutput : ((wbu_writing_gpr&&exu_using_rs2&&rs2_EX_WB_match) ? WB_reg_wdata : EX_reg_src_b )) : 64'b0;
+/*
 always@(*)begin
 	if(EX_reg_valid)begin
 		if(mem_writing_gpr&&rs1_EX_MEM_match)begin
@@ -189,6 +194,7 @@ always@(*)begin
 		src2 = 64'b0;
 	end
 end
+*/
 
 wire EX_block;
 assign EX_block = (mul_valid && !mul_out_valid) || (div_valid && !div_out_valid);
