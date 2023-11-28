@@ -18,7 +18,7 @@ wire [63:0]srl_result;
 wire [63:0]sra_result;
 
 wire [63:0]B_negetive;
-assign B_negetive= (mode==8'd1 || mode==8'd2)? -B :B;
+assign B_negetive= (mode==8'd1 || mode==8'd2 || mode==8'd3)? -B :B;
 assign add_sub_result = A + B_negetive;
 assign slt_result = (add_sub_result[63])? 64'b1:64'b0;
 //assign slt_result = ($signed(A) < $signed(B))? 64'b1:64'b0;
