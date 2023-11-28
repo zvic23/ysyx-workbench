@@ -36,7 +36,7 @@ input ready_EX_MEM
 );
 
 
-assign wbu_writing_gpr = WB_reg_valid && (WB_reg_opcode_type[0] || WB_reg_opcode_type[1] || WB_reg_opcode_type[5] || WB_reg_opcode_type[7] || WB_reg_opcode_type[8] || WB_reg_opcode_type[9] || WB_reg_opcode_type[10] || WB_reg_opcode_type[11]);
+assign wbu_writing_gpr = WB_reg_valid && (WB_reg_opcode_type[0] || WB_reg_opcode_type[1] || WB_reg_opcode_type[2] || WB_reg_opcode_type[5] || WB_reg_opcode_type[7] || WB_reg_opcode_type[8] || WB_reg_opcode_type[9] || WB_reg_opcode_type[10] || WB_reg_opcode_type[11]);
 assign wbu_rd = WB_reg_id;
 
 //*************************  pipeline ********************************
