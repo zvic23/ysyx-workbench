@@ -62,8 +62,10 @@ input [63:0] gpr[31:0],    //only for ebreak control
 output reg EX_reg_valid,
 output reg [31:0]EX_reg_inst,
 
-input MEM_reg_valid,
-input [31:0]MEM_reg_inst,
+//input MEM_reg_valid,
+//input [31:0]MEM_reg_inst,
+input mem_writing_gpr,
+input [4:0]mem_rd,
 input [63:0]MEM_reg_aluoutput,
 
 //input WB_reg_valid,
@@ -159,7 +161,7 @@ assign imm  = EX_reg_valid ? EX_reg_imm  : 64'b0;
 
 always@(*)begin
 	if(EX_reg_valid)begin
-		if(MEM_reg_valid&&(MEM_inst_hit!=4'b0)&&rs1_EX_MEM_match)begin
+		if(mem_writing_gpr&&rs1_EX_MEM_match)begin
 			src1 = MEM_reg_aluoutput;
 		end
 		else if(wbu_writing_gpr&&rs1_EX_WB_match)begin
@@ -173,7 +175,7 @@ always@(*)begin
 		src1 = 64'b0;
 	end
 	if(EX_reg_valid)begin
-		if(MEM_reg_valid&&(MEM_inst_hit!=4'b0)&&exu_using_rs2&&rs2_EX_MEM_match)begin
+		if(mem_writing_gpr&&exu_using_rs2&&rs2_EX_MEM_match)begin
 			src2 =  MEM_reg_aluoutput;
 		end
 		else if(wbu_writing_gpr&&exu_using_rs2&&rs2_EX_WB_match)begin
@@ -199,8 +201,8 @@ wire rs1_EX_MEM_match;
 wire rs2_EX_MEM_match;
 wire rs1_EX_WB_match;
 wire rs2_EX_WB_match;
-assign rs1_EX_MEM_match = (MEM_reg_inst[11:7] == EX_reg_rs1)&&(EX_reg_rs1!=5'b0);
-assign rs2_EX_MEM_match = (MEM_reg_inst[11:7] == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
+assign rs1_EX_MEM_match = ( mem_rd == EX_reg_rs1)&&(EX_reg_rs1!=5'b0);
+assign rs2_EX_MEM_match = ( mem_rd == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
 assign rs1_EX_WB_match  = ( wbu_rd == EX_reg_rs1)&&(EX_reg_rs1!=5'b0);
 assign rs2_EX_WB_match  = ( wbu_rd == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
 
@@ -209,10 +211,10 @@ wire [3:0]WB_inst_hit;
 wire exu_using_rs2;
 assign exu_using_rs2 = opcode_type[4] || opcode_type[6] || opcode_type[8] || opcode_type[10];
 always@(*) begin
-
+/*
 //   EX/MEM
 	case ({MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
-    10'b000_1100111:  MEM_inst_hit[0]= 1'b1  ;    //jalr
+//    10'b000_1100111:  MEM_inst_hit[0]= 1'b1  ;    //jalr
 		10'b000_0010011:  MEM_inst_hit[0]= 1'b1  ;    //addi
 		10'b010_0010011:  MEM_inst_hit[0]= 1'b1  ;    //slti
 		10'b011_0010011:  MEM_inst_hit[0]= 1'b1  ;    //sltiu
@@ -227,7 +229,7 @@ always@(*) begin
 	case (MEM_reg_inst[6:0])
 		7'b0110111:  MEM_inst_hit[1]= 1'b1  ;    //lui
 		7'b0010111:  MEM_inst_hit[1]= 1'b1  ;    //auipc
-		    7'b1101111: MEM_inst_hit[1]= 1'b1  ;       //jal             //unlike the book, jal should add in, or "jal xx ret" will get wrong if the address be corrected at jal in IFU
+//		    7'b1101111: MEM_inst_hit[1]= 1'b1  ;       //jal             //unlike the book, jal should add in, or "jal xx ret" will get wrong if the address be corrected at jal in IFU
 		default:     MEM_inst_hit[1]= 1'b0  ;                               
 	endcase
 	case ({MEM_reg_inst[31:25],MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
@@ -265,6 +267,7 @@ always@(*) begin
                  16'b010000_101_0010011: MEM_inst_hit[3]=1'b1  ;       //srai
 		default:                 MEM_inst_hit[3]=1'b0  ;                     
 	endcase
+	*/
 	/*
 //  MEM/WB
 	case ({WB_reg_inst[14:12],WB_reg_inst[6:0]})

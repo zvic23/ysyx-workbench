@@ -34,8 +34,10 @@ output [ 4:0]reg_wr_ID    ,
 output [63:0]reg_wr_value ,
 
 
-output reg MEM_reg_valid,
-output reg [31:0]MEM_reg_inst,
+//output reg MEM_reg_valid,
+//output reg [31:0]MEM_reg_inst,
+output mem_writing_gpr,
+output [4:0]mem_rd,
 output reg [63:0]MEM_reg_aluoutput,
 
 //input WB_reg_valid,
@@ -88,10 +90,13 @@ assign raddr_out = raddr;
 assign waddr_out = waddr;
 
 
+assign mem_writing_gpr = MEM_reg_valid && (MEM_reg_opcode_type[0] || MEM_reg_opcode_type[1] || MEM_reg_opcode_type[2] || MEM_reg_opcode_type[5] || MEM_reg_opcode_type[7] || MEM_reg_opcode_type[8] || MEM_reg_opcode_type[9] || MEM_reg_opcode_type[10] || MEM_reg_opcode_type[11]);
+assign mem_rd = MEM_reg_rd;
+
 //*************************  pipeline ********************************
-//reg       MEM_reg_valid         ;
+reg       MEM_reg_valid         ;
+reg [31:0]MEM_reg_inst          ;
 reg [63:0]MEM_reg_pc            ;
-//reg [31:0]MEM_reg_inst          ;
 reg [23:0]MEM_reg_opcode        ;
 reg [14:0]MEM_reg_opcode_type        ;
 //reg [63:0]MEM_reg_aluoutput     ;
