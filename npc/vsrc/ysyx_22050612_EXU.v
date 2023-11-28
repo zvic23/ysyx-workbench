@@ -199,7 +199,7 @@ assign rd_EX_MEM = EX_reg_rd;
 assign src_B_EX_MEM = src2;
 
 
-/*
+
 always @(negedge clk) begin
 	EXU_state_trace(EX_reg_pc, {32'b0,EX_reg_inst}, {63'b0,EX_reg_valid}, src1,src2,{{63{1'b0}},wbu_writing_gpr} );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x %x   dnpc:%x  opcode:%d\n",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , WB_reg_wdata,  EX_inst_hit, WB_inst_hit, rs1_EX_WB_match , rs2_EX_WB_match,dnpc,opcode);
@@ -208,7 +208,7 @@ always @(negedge clk) begin
 end
 //********************************************************************
 
-*/
+
 
 
 always @(*) begin
@@ -305,9 +305,7 @@ assign snpc = EX_reg_pc + 64'd4;
 wire [63:0]address_add_src1;
 wire [63:0]address_add_src2;
 wire [63:0]address_add_result;
-
 assign address_add_result = address_add_src1 + address_add_src2;
-
 assign address_add_src1 = EX_reg_opcode_type[4] ? EX_reg_pc : src1;  //branch: pc     jalr:src1
 assign address_add_src2 = imm;
 
