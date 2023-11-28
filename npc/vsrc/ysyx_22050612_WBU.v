@@ -21,8 +21,8 @@ input [63:0]reg_wr_value,
 output [63:0] gpr[31:0],
 
 
-output reg WB_reg_valid,
-output reg [31:0]WB_reg_inst,
+//output reg WB_reg_valid,
+//output reg [31:0]WB_reg_inst,
 output wbu_writing_gpr,
 output [4:0]wbu_rd,
 output reg [63:0]WB_reg_wdata,
@@ -40,8 +40,8 @@ assign wbu_writing_gpr = WB_reg_valid && (WB_reg_opcode_type[0] || WB_reg_opcode
 assign wbu_rd = WB_reg_id;
 
 //*************************  pipeline ********************************
-//reg       WB_reg_valid;
-//reg [31:0]WB_reg_inst ;
+reg       WB_reg_valid;
+reg [31:0]WB_reg_inst ;
 //reg [63:0]WB_reg_pc   ;
 reg       WB_reg_wen ;
 reg [ 4:0]WB_reg_id ;

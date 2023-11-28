@@ -38,8 +38,10 @@ output reg MEM_reg_valid,
 output reg [31:0]MEM_reg_inst,
 output reg [63:0]MEM_reg_aluoutput,
 
-input WB_reg_valid,
-input [31:0]WB_reg_inst,
+//input WB_reg_valid,
+//input [31:0]WB_reg_inst,
+input wbu_writing_gpr,
+input [4:0]wbu_rd,
 input [63:0]WB_reg_wdata,
 
 
@@ -187,7 +189,7 @@ araddr_dcache_axi, arlen_dcache_axi, arsize_dcache_axi, arburst_dcache_axi, arva
 
 always@(*)begin
 	if(MEM_reg_valid)begin
-		if(WB_reg_valid&&mem_storing &&(WB_inst_hit!=4'b0)&&rs2_MEM_WB_match)begin
+		if(mem_storing &&wbu_writing_gpr&&rs2_MEM_WB_match)begin
 			src2 =  WB_reg_wdata;
 		end
 		else begin
@@ -200,10 +202,10 @@ always@(*)begin
 end
 
 wire rs2_MEM_WB_match;
-assign rs2_MEM_WB_match  =  (WB_reg_inst[11:7] == MEM_reg_inst[24:20])&&(MEM_reg_inst[24:20]!=5'b0);
+assign rs2_MEM_WB_match  =  (wbu_rd == MEM_reg_inst[24:20])&&(MEM_reg_inst[24:20]!=5'b0);
 wire mem_storing;
 assign mem_storing = opcode_type[6];
-
+/*
 wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
 always@(*) begin
@@ -270,7 +272,7 @@ always@(*) begin
 		default:                 WB_inst_hit[3]=1'b0  ;                     
 	endcase
 end
-
+*/
 
 
 
