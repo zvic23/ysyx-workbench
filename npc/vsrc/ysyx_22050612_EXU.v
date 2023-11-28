@@ -66,8 +66,10 @@ input MEM_reg_valid,
 input [31:0]MEM_reg_inst,
 input [63:0]MEM_reg_aluoutput,
 
-input WB_reg_valid,
-input [31:0]WB_reg_inst,
+//input WB_reg_valid,
+//input [31:0]WB_reg_inst,
+input wbu_writing_gpr,
+input [4:0]wbu_rd,
 input [63:0]WB_reg_wdata,
 
 
@@ -160,7 +162,7 @@ always@(*)begin
 		if(MEM_reg_valid&&(MEM_inst_hit!=4'b0)&&rs1_EX_MEM_match)begin
 			src1 = MEM_reg_aluoutput;
 		end
-		else if(WB_reg_valid&&(WB_inst_hit!=4'b0)&&rs1_EX_WB_match)begin
+		else if(wbu_writing_gpr&&rs1_EX_WB_match)begin
 			src1 =  WB_reg_wdata;
 		end
 		else begin
@@ -174,7 +176,7 @@ always@(*)begin
 		if(MEM_reg_valid&&(MEM_inst_hit!=4'b0)&&exu_using_rs2&&rs2_EX_MEM_match)begin
 			src2 =  MEM_reg_aluoutput;
 		end
-		else if(WB_reg_valid&&(WB_inst_hit!=4'b0)&&exu_using_rs2&&rs2_EX_WB_match)begin
+		else if(wbu_writing_gpr&&exu_using_rs2&&rs2_EX_WB_match)begin
 			src2 = WB_reg_wdata ;
 		end
 		else begin
@@ -199,8 +201,8 @@ wire rs1_EX_WB_match;
 wire rs2_EX_WB_match;
 assign rs1_EX_MEM_match = (MEM_reg_inst[11:7] == EX_reg_rs1)&&(EX_reg_rs1!=5'b0);
 assign rs2_EX_MEM_match = (MEM_reg_inst[11:7] == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
-assign rs1_EX_WB_match  = ( WB_reg_inst[11:7] == EX_reg_rs1)&&(EX_reg_rs1!=5'b0);
-assign rs2_EX_WB_match  = ( WB_reg_inst[11:7] == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
+assign rs1_EX_WB_match  = ( wbu_rd == EX_reg_rs1)&&(EX_reg_rs1!=5'b0);
+assign rs2_EX_WB_match  = ( wbu_rd == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
 
 wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
@@ -263,6 +265,7 @@ always@(*) begin
                  16'b010000_101_0010011: MEM_inst_hit[3]=1'b1  ;       //srai
 		default:                 MEM_inst_hit[3]=1'b0  ;                     
 	endcase
+	/*
 //  MEM/WB
 	case ({WB_reg_inst[14:12],WB_reg_inst[6:0]})
 //    10'b000_1100111:  WB_inst_hit[0]= 1'b1  ;    //jalr
@@ -325,6 +328,7 @@ always@(*) begin
                  16'b010000_101_0010011: WB_inst_hit[3]=1'b1  ;       //srai
 		default:                 WB_inst_hit[3]=1'b0  ;                     
 	endcase
+	*/
 end
 
 
