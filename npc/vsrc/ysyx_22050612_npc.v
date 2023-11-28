@@ -212,7 +212,7 @@ wire       EX_reg_valid;
 wire [31:0]EX_reg_inst ;
 
 
-ysyx_22050612_EXU exu (clk,rst, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX,opcode_ID_EX, opcode_type_ID_EX,rd_ID_EX, rs1_ID_EX, rs2_ID_EX,src_A,src_B, imm, dnpc,pc_update, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM, opcode_EX_MEM,opcode_type_EX_MEM,rd_EX_MEM, ALUoutput_EX_MEM , src_B_EX_MEM,wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus,wen_mtvec,wen_mepc,wen_mcause,wen_mstatus,gpr , EX_reg_valid,EX_reg_inst,  MEM_reg_valid, MEM_reg_inst, MEM_reg_aluoutput,/* WB_reg_valid, WB_reg_inst,*/ wbu_writing_gpr, wbu_rd, WB_reg_wdata  , branch_flush );
+ysyx_22050612_EXU exu (clk,rst, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX,opcode_ID_EX, opcode_type_ID_EX,rd_ID_EX, rs1_ID_EX, rs2_ID_EX,src_A,src_B, imm, dnpc,pc_update, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM, opcode_EX_MEM,opcode_type_EX_MEM,rd_EX_MEM, ALUoutput_EX_MEM , src_B_EX_MEM,wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus,wen_mtvec,wen_mepc,wen_mcause,wen_mstatus,gpr , EX_reg_valid,EX_reg_inst,  MEM_reg_valid, MEM_reg_inst, MEM_reg_aluoutput, WB_reg_valid, WB_reg_inst, WB_reg_wdata  , branch_flush );
 
 wire       valid_EX_MEM  ;
 wire       ready_EX_MEM  ;
