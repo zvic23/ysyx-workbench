@@ -26,8 +26,7 @@ input [ 4:0]rs2_ID_EX,
 input [63:0]src_A,
 input [63:0]src_B,
 input [63:0]imm_in,
-//input [63:0]src2_in,
-//input [ 4:0]rd,
+
 
 
 
@@ -185,132 +184,7 @@ wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
 wire exu_using_rs2;
 assign exu_using_rs2 = opcode_type[4] || opcode_type[6] || opcode_type[8] || opcode_type[10];
-always@(*) begin
-/*
-//   EX/MEM
-	case ({MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
-//    10'b000_1100111:  MEM_inst_hit[0]= 1'b1  ;    //jalr
-		10'b000_0010011:  MEM_inst_hit[0]= 1'b1  ;    //addi
-		10'b010_0010011:  MEM_inst_hit[0]= 1'b1  ;    //slti
-		10'b011_0010011:  MEM_inst_hit[0]= 1'b1  ;    //sltiu
-		10'b100_0010011:  MEM_inst_hit[0]= 1'b1  ;    //xori
-		10'b110_0010011:  MEM_inst_hit[0]= 1'b1  ;    //ori
-		10'b111_0010011:  MEM_inst_hit[0]= 1'b1  ;    //andi
-		10'b000_0011011:  MEM_inst_hit[0]= 1'b1  ;    //addiw
-		10'b001_1110011:  MEM_inst_hit[0]= 1'b1  ;    //csrrw
-		10'b010_1110011:  MEM_inst_hit[0]= 1'b1  ;    //csrrs
-		default:          MEM_inst_hit[0]= 1'b0  ;                          
-	endcase
-	case (MEM_reg_inst[6:0])
-		7'b0110111:  MEM_inst_hit[1]= 1'b1  ;    //lui
-		7'b0010111:  MEM_inst_hit[1]= 1'b1  ;    //auipc
-//		    7'b1101111: MEM_inst_hit[1]= 1'b1  ;       //jal             //unlike the book, jal should add in, or "jal xx ret" will get wrong if the address be corrected at jal in IFU
-		default:     MEM_inst_hit[1]= 1'b0  ;                               
-	endcase
-	case ({MEM_reg_inst[31:25],MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
-                17'b0000000_000_0110011: MEM_inst_hit[2]=1'b1  ;    //add
-                17'b0100000_000_0110011: MEM_inst_hit[2]=1'b1  ;    //sub
-                17'b0000000_001_0110011: MEM_inst_hit[2]=1'b1  ;    //sll
-                17'b0000000_010_0110011: MEM_inst_hit[2]=1'b1  ;    //slt
-                17'b0000000_011_0110011: MEM_inst_hit[2]=1'b1  ;    //sltu
-                17'b0000000_100_0110011: MEM_inst_hit[2]=1'b1  ;    //xor
-                17'b0000000_101_0110011: MEM_inst_hit[2]=1'b1  ;    //srl
-                17'b0000000_110_0110011: MEM_inst_hit[2]=1'b1  ;    //or
-                17'b0000000_111_0110011: MEM_inst_hit[2]=1'b1  ;    //and
-                17'b0000000_001_0011011: MEM_inst_hit[2]=1'b1  ;    //slliw
-                17'b0000000_101_0011011: MEM_inst_hit[2]=1'b1  ;    //srliw
-                17'b0100000_101_0011011: MEM_inst_hit[2]=1'b1  ;    //sraiw
-                17'b0000000_000_0111011: MEM_inst_hit[2]=1'b1  ;    //addw
-                17'b0100000_000_0111011: MEM_inst_hit[2]=1'b1  ;    //subw
-                17'b0000000_001_0111011: MEM_inst_hit[2]=1'b1  ;    //sllw
-                17'b0000000_101_0111011: MEM_inst_hit[2]=1'b1  ;    //srlw
-                17'b0100000_101_0111011: MEM_inst_hit[2]=1'b1  ;    //sraw
-                17'b0000001_000_0110011: MEM_inst_hit[2]=1'b1  ;    //mul
-                17'b0000001_100_0110011: MEM_inst_hit[2]=1'b1  ;    //div
-                17'b0000001_101_0110011: MEM_inst_hit[2]=1'b1  ;    //divu
-                17'b0000001_111_0110011: MEM_inst_hit[2]=1'b1  ;    //remu
-                17'b0000001_000_0111011: MEM_inst_hit[2]=1'b1  ;    //mulw
-                17'b0000001_100_0111011: MEM_inst_hit[2]=1'b1  ;    //divw
-                17'b0000001_101_0111011: MEM_inst_hit[2]=1'b1  ;    //divuw
-                17'b0000001_110_0111011: MEM_inst_hit[2]=1'b1  ;    //remw
-                17'b0000001_111_0111011: MEM_inst_hit[2]=1'b1  ;    //remuw
-		default:                 MEM_inst_hit[2]=1'b0  ;                     
-	endcase
-	case ({MEM_reg_inst[31:26],MEM_reg_inst[14:12],MEM_reg_inst[6:0]})
-                 16'b000000_001_0010011: MEM_inst_hit[3]=1'b1  ;       //slli
-                 16'b000000_101_0010011: MEM_inst_hit[3]=1'b1  ;       //srli
-                 16'b010000_101_0010011: MEM_inst_hit[3]=1'b1  ;       //srai
-		default:                 MEM_inst_hit[3]=1'b0  ;                     
-	endcase
-	*/
-	/*
-//  MEM/WB
-	case ({WB_reg_inst[14:12],WB_reg_inst[6:0]})
-//    10'b000_1100111:  WB_inst_hit[0]= 1'b1  ;    //jalr
-                10'b000_0000011:  WB_inst_hit[0]= 1'b1  ;     //lb
-                10'b001_0000011:  WB_inst_hit[0]= 1'b1  ;     //lh
-                10'b010_0000011:  WB_inst_hit[0]= 1'b1  ;     //lw
-                10'b100_0000011:  WB_inst_hit[0]= 1'b1  ;     //lbu
-                10'b101_0000011:  WB_inst_hit[0]= 1'b1  ;     //lhu
-		10'b000_0010011:  WB_inst_hit[0]= 1'b1  ;    //addi
-		10'b010_0010011:  WB_inst_hit[0]= 1'b1  ;    //slti
-		10'b011_0010011:  WB_inst_hit[0]= 1'b1  ;    //sltiu
-		10'b100_0010011:  WB_inst_hit[0]= 1'b1  ;    //xori
-		10'b110_0010011:  WB_inst_hit[0]= 1'b1  ;    //ori
-		10'b111_0010011:  WB_inst_hit[0]= 1'b1  ;    //andi
-		10'b110_0000011:  WB_inst_hit[0]= 1'b1  ;     //lwu
-                10'b011_0000011:  WB_inst_hit[0]= 1'b1  ;     //ld
-		10'b000_0011011:  WB_inst_hit[0]= 1'b1  ;    //addiw
-		10'b001_1110011:  WB_inst_hit[0]= 1'b1  ;    //csrrw
-		10'b010_1110011:  WB_inst_hit[0]= 1'b1  ;    //csrrs
-		default:          WB_inst_hit[0]= 1'b0  ;                          
-	endcase
-	case (WB_reg_inst[6:0])
-		7'b0110111:  WB_inst_hit[1]= 1'b1  ;    //lui
-		7'b0010111:  WB_inst_hit[1]= 1'b1  ;    //auipc
-		    7'b1101111: WB_inst_hit[1]= 1'b1  ;       //jal             //unlike the book, jal should add in, or "jal xx ret" will get wrong if the address be corrected at jal in IFU
-		default:     WB_inst_hit[1]= 1'b0  ;                               
-	endcase
-	case ({WB_reg_inst[31:25],WB_reg_inst[14:12],WB_reg_inst[6:0]})
-                17'b0000000_000_0110011: WB_inst_hit[2]=1'b1  ;    //add
-                17'b0100000_000_0110011: WB_inst_hit[2]=1'b1  ;    //sub
-                17'b0000000_001_0110011: WB_inst_hit[2]=1'b1  ;    //sll
-                17'b0000000_010_0110011: WB_inst_hit[2]=1'b1  ;    //slt
-                17'b0000000_011_0110011: WB_inst_hit[2]=1'b1  ;    //sltu
-                17'b0000000_100_0110011: WB_inst_hit[2]=1'b1  ;    //xor
-                17'b0000000_101_0110011: WB_inst_hit[2]=1'b1  ;    //srl
-                17'b0000000_110_0110011: WB_inst_hit[2]=1'b1  ;    //or
-                17'b0000000_111_0110011: WB_inst_hit[2]=1'b1  ;    //and
-                17'b0000000_001_0011011: WB_inst_hit[2]=1'b1  ;    //slliw
-                17'b0000000_101_0011011: WB_inst_hit[2]=1'b1  ;    //srliw
-                17'b0100000_101_0011011: WB_inst_hit[2]=1'b1  ;    //sraiw
-                17'b0000000_000_0111011: WB_inst_hit[2]=1'b1  ;    //addw
-                17'b0100000_000_0111011: WB_inst_hit[2]=1'b1  ;    //subw
-                17'b0000000_001_0111011: WB_inst_hit[2]=1'b1  ;    //sllw
-                17'b0000000_101_0111011: WB_inst_hit[2]=1'b1  ;    //srlw
-                17'b0100000_101_0111011: WB_inst_hit[2]=1'b1  ;    //sraw
-                17'b0000001_000_0110011: WB_inst_hit[2]=1'b1  ;    //mul
-                17'b0000001_100_0110011: WB_inst_hit[2]=1'b1  ;    //div
-                17'b0000001_101_0110011: WB_inst_hit[2]=1'b1  ;    //divu
-                17'b0000001_111_0110011: WB_inst_hit[2]=1'b1  ;    //remu
-                17'b0000001_000_0111011: WB_inst_hit[2]=1'b1  ;    //mulw
-                17'b0000001_100_0111011: WB_inst_hit[2]=1'b1  ;    //divw
-                17'b0000001_101_0111011: WB_inst_hit[2]=1'b1  ;    //divuw
-                17'b0000001_110_0111011: WB_inst_hit[2]=1'b1  ;    //remw
-                17'b0000001_111_0111011: WB_inst_hit[2]=1'b1  ;    //remuw
-		default:                 WB_inst_hit[2]=1'b0  ;                     
-	endcase
-	case ({WB_reg_inst[31:26],WB_reg_inst[14:12],WB_reg_inst[6:0]})
-                 16'b000000_001_0010011: WB_inst_hit[3]=1'b1  ;       //slli
-                 16'b000000_101_0010011: WB_inst_hit[3]=1'b1  ;       //srli
-                 16'b010000_101_0010011: WB_inst_hit[3]=1'b1  ;       //srai
-		default:                 WB_inst_hit[3]=1'b0  ;                     
-	endcase
-	*/
-end
-
-
-
+                      
 
 
 //output
@@ -325,7 +199,7 @@ assign rd_EX_MEM = EX_reg_rd;
 assign src_B_EX_MEM = src2;
 
 
-
+/*
 always @(negedge clk) begin
 	EXU_state_trace(EX_reg_pc, {32'b0,EX_reg_inst}, {63'b0,EX_reg_valid}, src1,src2,{{63{1'b0}},wbu_writing_gpr} );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x %x   dnpc:%x  opcode:%d\n",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , WB_reg_wdata,  EX_inst_hit, WB_inst_hit, rs1_EX_WB_match , rs2_EX_WB_match,dnpc,opcode);
@@ -334,7 +208,7 @@ always @(negedge clk) begin
 end
 //********************************************************************
 
-
+*/
 
 
 always @(*) begin
@@ -396,14 +270,13 @@ end
 always @(*) begin
 
     case (opcode)
-    24'h300 : dnpc=result_alu0                         ;
-    24'd4   : dnpc=result_alu0           ;
-    24'd5   : dnpc=(src1==src2&&EX_reg_inst[31]==0)?result_alu0:snpc;
-    24'd6   : dnpc=(src1!=src2&&EX_reg_inst[31]==0)?result_alu0:snpc;
-    24'd7   : dnpc=($signed(src1) <$signed(src2)&&EX_reg_inst[31]==0)?result_alu0:snpc;
-    24'd8   : dnpc=($signed(src1)>=$signed(src2)&&EX_reg_inst[31]==0)?result_alu0:snpc;
-    24'd9   : dnpc=(src1 <src2&&EX_reg_inst[31]==0)?result_alu0:snpc         ;
-    24'd10  : dnpc=(src1>=src2&&EX_reg_inst[31]==0)?result_alu0:snpc        ;        //(result_alu0[63]==0)?(imm_B+EX_reg_pc):snpc
+    24'd4   : dnpc=address_add_result           ;
+    24'd5   : dnpc=(src1==src2&&EX_reg_inst[31]==0)?address_add_result:snpc;
+    24'd6   : dnpc=(src1!=src2&&EX_reg_inst[31]==0)?address_add_result:snpc;
+    24'd7   : dnpc=($signed(src1) <$signed(src2)&&EX_reg_inst[31]==0)?address_add_result:snpc;
+    24'd8   : dnpc=($signed(src1)>=$signed(src2)&&EX_reg_inst[31]==0)?address_add_result:snpc;
+    24'd9   : dnpc=(src1 <src2&&EX_reg_inst[31]==0)?address_add_result:snpc         ;
+    24'd10  : dnpc=(src1>=src2&&EX_reg_inst[31]==0)?address_add_result:snpc        ;        //(address_add_result[63]==0)?(imm_B+EX_reg_pc):snpc
     24'h200000: dnpc=EX_reg_src_b                             ;        
     24'h500000: dnpc=EX_reg_src_b                             ;        
     default: dnpc=snpc;
@@ -425,16 +298,18 @@ end
 
 
 
-//pc
+//dnpc
 wire [63:0] snpc;
 assign snpc = EX_reg_pc + 64'd4;
-wire [63:0] jnpc;
-assign jnpc = EX_reg_pc + imm;
 
+wire [63:0]address_add_src1;
+wire [63:0]address_add_src2;
+wire [63:0]address_add_result;
 
+assign address_add_result = address_add_src1 + address_add_src2;
 
-
-
+assign address_add_src1 = EX_reg_opcode_type[4] ? EX_reg_pc : src1;  //branch: pc     jalr:src1
+assign address_add_src2 = imm;
 
 
 

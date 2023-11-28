@@ -192,21 +192,7 @@ araddr_dcache_axi, arlen_dcache_axi, arsize_dcache_axi, arburst_dcache_axi, arva
 
 //**************    load interlock    ************************
 assign src2 = MEM_reg_valid ? ((mem_storing &&wbu_writing_gpr&&rs2_MEM_WB_match) ? WB_reg_wdata : MEM_reg_src2 ) : 64'b0;
-/*
-always@(*)begin
-	if(MEM_reg_valid)begin
-		if(mem_storing &&wbu_writing_gpr&&rs2_MEM_WB_match)begin
-			src2 =  WB_reg_wdata;
-		end
-		else begin
-			src2 = MEM_reg_src2;
-		end
-	end
-	else begin
-		src2 = 64'b0;
-	end
-end
-*/
+
 
 wire rs2_MEM_WB_match;
 assign rs2_MEM_WB_match  =  (wbu_rd == MEM_reg_inst[24:20])&&(MEM_reg_inst[24:20]!=5'b0);
