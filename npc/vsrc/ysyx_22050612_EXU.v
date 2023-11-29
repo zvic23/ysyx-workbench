@@ -331,6 +331,12 @@ assign address_add_src2 = imm;
 
 
 //aluoutput
+wire [63:0]result_cpt;
+assign result_cpt = multipling ? result_lo : (dividing ? (opcode_funct3[1] ? remainder : quotient) : result_alu0);
+assign ALUoutput_EX_MEM = (opcode_funct3==3'b101&&(opcode_type[9]||opcode_type[10])) ? (result_cpt[63]?({{32{1'b1}},result_cpt[63:32]}):({{32{1'b0}},result_cpt[63:32]})) :
+	                  ((opcode_type[9]||opcode_type[10]) ?  (result_cpt[31]?({{32{1'b1}},result_cpt[31:0]}):({{32{1'b0}},result_cpt[31:0]}))       
+			  : result_cpt); 
+/*
 always@(*) begin
 	case (opcode)
     24'h14000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
@@ -372,36 +378,27 @@ always@(*) begin
 	endcase
 
 end
-
+*/
 
 
 
 //alu
 wire [5:0]shamt;
 assign shamt = imm[5:0];
-//assign shamt = inst[25:20];
 
-assign operator_a = opcode_type[0] ? 64'b0 : ((opcode_type[1]||opcode_type[2]||opcode_type[3]) ? EX_reg_pc : 
-			             ((opcode_funct3==3'b101&&(opcode_type[9]||opcode_type[10])) ? {src1[31:0],32'b0} : src1 ) );
+assign operator_a = opcode_type[0] ? 64'b0 :     //lui
+	           ((opcode_type[1]||opcode_type[2]||opcode_type[3]) ? EX_reg_pc :        //auipc   jal   jalr
+	           ((opcode_funct3==3'b101&&(opcode_type[9]||opcode_type[10])) ? {src1[31:0],32'b0} : src1 ) );
 			     //(opcode_funct3==3'b101&&(opcode_type[9]||opcode_type[10]) is the 32bits src1 right shift
 
-assign operator_b = (opcode_type[2]||opcode_type[3]) ? 64'h4 : 
+assign operator_b = (opcode_type[2]||opcode_type[3]) ? 64'h4 :       //jal  jalr
 	           ((opcode_type[8]&&(opcode_funct3==3'b1||opcode_funct3==3'b101)) ? {{58{1'b0}},src2[5:0]} :
  	           ((opcode_type[10]&&(opcode_funct3==3'b1||opcode_funct3==3'b101)) ? {{59{1'b0}},src2[4:0]} : 
 	 	   ((opcode_type[7]&&(opcode_funct3==3'b1||opcode_funct3==3'b101)) ? {{58{1'b0}},shamt} :    
-	 	   ((opcode_type[9]&&(opcode_funct3==3'b1||opcode_funct3==3'b101)) ? {{59{1'b0}},shamt[4:0]} :    
+	 	   ((opcode_type[9]&&(opcode_funct3==3'b1||opcode_funct3==3'b101)) ? {{59{1'b0}},shamt[4:0]} :   //shift 
 	           ((opcode_type[0]||opcode_type[1]||opcode_type[5]||opcode_type[6]||opcode_type[7]||opcode_type[9]) ? imm : src2 )))));
+	           //imm:    lui  auipc  load   store  cpt_i  cpt_iw
 
-/*
-assign mode = opcode_type[4] ? 8'd1 ?
-	     ((opcode_type[11]&&opcode_funct==3'b010) ? 8'd6 :
-	     (((opcode_type[8]||opcode_type[9]||opcode_type[10])&&imm[10]) ?      
-	     ((opcode_funct==3'b000) ? 8'd1 : 
-	     : 8'd0);
-
-assign mode_with_30bit_1 = (opcode_funct3==3'b0) ? 8'd1 :
-	                  ((opcode_funct3==3'b101) ? 8'd10 : 8'd0);
-*/
 
 wire alu_add;
 wire alu_sub;
@@ -497,7 +494,7 @@ always@(*) begin
     default  : operator_b=src2;
     endcase
 */
-
+/*
     case(opcode)
     24'h5000 : mode=8'd1 ; 
     24'h6000 : mode=8'd8 ; 
@@ -534,12 +531,13 @@ always@(*) begin
     24'd50   : mode=8'd6 ;
     default  : mode=8'd0 ;
     endcase
+    */
 end
 
 //alu
-reg [7:0] mode;
-reg [63:0]operator_a;
-reg [63:0]operator_b;
+//reg [7:0] mode;
+wire [63:0]operator_a;
+wire [63:0]operator_b;
 wire [63:0]result_alu0;
 
 ysyx_22050612_ALU alu0 (alu_mode,operator_a,operator_b,result_alu0);
@@ -589,12 +587,12 @@ assign mulw = opcode_type[10];
 wire [1:0]mul_signed;
 assign mul_signed = 2'b00;
 
-wire muling;
-assign muling = (opcode_type[8]||opcode_type[10])&&imm[5]&&~opcode_funct3[2];
+wire multipling;
+assign multipling = (opcode_type[8]||opcode_type[10])&&imm[5]&&~opcode_funct3[2];
 wire [63:0]mulcand;
 wire [63:0]muler;
-assign mulcand = muling ? src1 : 64'b0;
-assign muler   = muling ? src2 : 64'b0;
+assign mulcand = multipling ? src1 : 64'b0;
+assign muler   = multipling ? src2 : 64'b0;
 
 ysyx_22050612_multiplier boothmul ((clk&&((opcode_type[8]||opcode_type[10])&&imm[5]&&~opcode_funct3[2])), rst, mul_valid, mul_flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_out_valid, result_hi, result_lo);      
 //the clk has been "&&" with "mul mulw" opcode to close the clock gating(gate), it can speed up the simulating.
@@ -618,12 +616,12 @@ assign divw = opcode_type[10];
 wire div_signed;
 assign div_signed = ~opcode_funct3[0];
 
-wire diving;
-assign diving = (opcode_type[8]||opcode_type[10])&&imm[5]&&opcode_funct3[2];
+wire dividing;
+assign dividing = (opcode_type[8]||opcode_type[10])&&imm[5]&&opcode_funct3[2];
 wire [63:0]dividend;
 wire [63:0]divisor ;
-assign dividend  = diving ? src1 : 64'b0;
-assign divisor   = diving ? src2 : 64'b0;
+assign dividend  = dividing ? src1 : 64'b0;
+assign divisor   = dividing ? src2 : 64'b0;
 
 ysyx_22050612_divider boothdiv ((clk), rst, div_valid, div_flush, divw, div_signed, dividend, divisor, div_ready, div_out_valid, quotient, remainder,stimes);     
 //the clk has been "&&" with "div divw" opcode to close the clock gating(gate), it can speed up the sidivating.
