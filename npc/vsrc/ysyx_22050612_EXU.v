@@ -333,10 +333,10 @@ assign address_add_src2 = imm;
 //aluoutput
 wire [63:0]result_cpt;
 assign result_cpt = multipling ? result_lo : (dividing ? (opcode_funct3[1] ? remainder : quotient) : result_alu0);
-assign ALUoutput_EX_MEM = (opcode_funct3==3'b101&&(opcode_type[9]||opcode_type[10])) ? (result_cpt[63]?({{32{1'b1}},result_cpt[63:32]}):({{32{1'b0}},result_cpt[63:32]})) :
-	                  ((opcode_type[9]||opcode_type[10]) ?  (result_cpt[31]?({{32{1'b1}},result_cpt[31:0]}):({{32{1'b0}},result_cpt[31:0]}))       
-			  : result_cpt); 
-/*
+//assign ALUoutput_EX_MEM = (opcode_funct3==3'b101&&(opcode_type[9]||opcode_type[10])) ? (result_cpt[63]?({{32{1'b1}},result_cpt[63:32]}):({{32{1'b0}},result_cpt[63:32]})) :
+//	                  ((opcode_type[9]||opcode_type[10]) ?  (result_cpt[31]?({{32{1'b1}},result_cpt[31:0]}):({{32{1'b0}},result_cpt[31:0]}))       
+//			  : result_cpt); 
+
 always@(*) begin
 	case (opcode)
     24'h14000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
@@ -378,7 +378,7 @@ always@(*) begin
 	endcase
 
 end
-*/
+
 
 
 
