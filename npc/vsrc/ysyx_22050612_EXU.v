@@ -216,8 +216,15 @@ end
 //********************************************************************
 
 
-
-
+assign wen_mtvec     = opcode_funct3==3'b1&&opcode_type[11]&&imm[11:0]==12'h305;
+assign wdata_mtvec   = opcode_funct3==3'b1&&opcode_type[11] ? src1 : 64'b0;
+assign wen_mepc      = (opcode_type[11]&&imm[11:0]==12'h341) || opcode_type[13];
+assign wdata_mepc    = (opcode_funct3==3'b1&&opcode_type[11]) ? src1 : ((opcode_funct3==3'b10&&opcode_type[11]) ? result_alu0 : EX_reg_pc );
+assign wen_mcause    = (opcode_type[11]&&imm[11:0]==12'h342) || opcode_type[13];
+assign wdata_mcause  = (opcode_funct3==3'b1&&opcode_type[11]) ? src1 : ((opcode_funct3==3'b10&&opcode_type[11]) ? result_alu0 : 64'hb );
+assign wen_mstatus   = (opcode_type[11]&&imm[11:0]==12'h342);
+assign wdata_mstatus = (opcode_funct3==3'b1&&opcode_type[11]) ? src1 : result_alu0;
+/*
 always @(*) begin
 //mtvec control
   	case (opcode)
@@ -270,7 +277,7 @@ always @(*) begin
     default:   wdata_mstatus=64'b0;
         endcase
 end
-
+*/
 
 
 //dnpc
