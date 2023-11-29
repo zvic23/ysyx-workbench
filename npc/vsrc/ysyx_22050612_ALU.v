@@ -47,34 +47,4 @@ ysyx_22050612_MuxKey #(10, 8, 64) alu_result_select (Z , mode,{
       });
 
 
-//reg [63:0]C;
-//
-//always @(mode or A or B)begin
-//	Z = 0;
-//	if(mode == 8'b1)begin
-//		Z = A + B;
-//	end
-//	else if(mode == 8'd2 || mode == 8'd9)begin
-//		C = ~B + 64'b1;
-//		Z = A + C;
-//	end
-//	else if(mode == 8'd3)begin
-//		Z = ~A;
-//	end
-//	else if(mode == 8'd4)begin
-//		Z = A & B;
-//	end
-//	else if(mode == 8'd5)begin
-//		Z = A | B;
-//	end
-//	else if(mode == 8'd6)begin
-//		Z = A ^ B;
-//	end
-//	else if(mode == 8'd7)begin
-//		Z = A << B;
-//	end
-//	else if(mode == 8'd8)begin
-//		Z = A >> B;
-//	end
-//end
 endmodule

@@ -375,7 +375,8 @@ end
 
 //alu
 wire [5:0]shamt;
-assign shamt = inst[25:20];
+assign shamt = imm[5:0];
+//assign shamt = inst[25:20];
 
 always@(*) begin
 //alu
@@ -540,16 +541,13 @@ wire [63:0]result_lo;
 
 wire mul_valid;
 assign mul_valid = ((opcode_type[8]||opcode_type[10])&&imm[5]&&~opcode_funct3[2])&&ready_EX_MEM  ;
-//assign mul_valid = ((opcode == 24'h1d000)||(opcode == 24'h25000))&&ready_EX_MEM  ;
 wire mulw;
 assign mulw = opcode_type[10];
-//assign mulw = (opcode == 24'h25000);
 wire [1:0]mul_signed;
 assign mul_signed = 2'b00;
 
 wire muling;
 assign muling = (opcode_type[8]||opcode_type[10])&&imm[5]&&~opcode_funct3[2];
-//assign muling = ((opcode == 24'h1d000)||(opcode == 24'h25000));
 wire [63:0]mulcand;
 wire [63:0]muler;
 assign mulcand = muling ? src1 : 64'b0;
@@ -571,7 +569,6 @@ wire [63:0]remainder;
 
 wire div_valid;
 assign div_valid = ((opcode_type[8]||opcode_type[10])&&imm[5]&&opcode_funct3[2])&&ready_EX_MEM  ;
-//assign div_valid = ((opcode == 24'h21000)||(opcode == 24'h22000)||(opcode == 24'h24000)||(opcode == 24'h26000)||(opcode == 24'h27000)||(opcode == 24'h28000)||(opcode == 24'h29000))&&ready_EX_MEM  ;
 wire divw;
 assign divw = opcode_type[10];
 wire div_signed;
@@ -579,7 +576,6 @@ assign div_signed = ~opcode_funct3[0];
 
 wire diving;
 assign diving = (opcode_type[8]||opcode_type[10])&&imm[5]&&opcode_funct3[2];
-//assign diving = ((opcode == 24'h21000)||(opcode == 24'h22000)||(opcode == 24'h24000)||(opcode == 24'h26000)||(opcode == 24'h27000)||(opcode == 24'h28000)||(opcode == 24'h29000));
 wire [63:0]dividend;
 wire [63:0]divisor ;
 assign dividend  = diving ? src1 : 64'b0;
