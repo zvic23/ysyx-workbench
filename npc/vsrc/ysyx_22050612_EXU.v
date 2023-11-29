@@ -334,7 +334,8 @@ assign address_add_src2 = imm;
 always@(*) begin
 	case (opcode)
     24'h14000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    24'h15000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    //24'h15000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    24'h15000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
     24'h16000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
     24'h17000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
     24'h18000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
@@ -382,7 +383,8 @@ always@(*) begin
 //alu
     case (opcode)
     24'h14000: operator_a={{32{1'b0}},src1[31:0]};
-    24'h15000: operator_a={{32{1'b0}},src1[31:0]};
+    //24'h15000: operator_a={{32{1'b0}},src1[31:0]};
+    24'h15000: operator_a={src1[31:0],{32{1'b0}}};
     24'h16000: operator_a={src1[31:0],{32{1'b0}}};
     24'h1a000: operator_a={src1[31:0],{32{1'b0}}};
     24'h1b000: operator_a={src1[31:0],{32{1'b0}}};
