@@ -20,6 +20,7 @@ input [ 4:0]rs2,
 */
 input [23:0]opcode_in,
 input [14:0]opcode_type_ID_EX,
+input [ 2:0]opcode_funct3_ID_EX,
 input [ 4:0]rd_ID_EX,
 input [ 4:0]rs1_ID_EX,
 input [ 4:0]rs2_ID_EX,
@@ -87,6 +88,7 @@ reg [63:0]EX_reg_pc            ;
 //reg [31:0]EX_reg_inst          ;
 reg [23:0]EX_reg_opcode        ;
 reg [14:0]EX_reg_opcode_type     ;
+reg [ 2:0]EX_reg_opcode_funct3     ;
 reg [ 4:0]EX_reg_rd;
 reg [ 4:0]EX_reg_rs1;
 reg [ 4:0]EX_reg_rs2;
@@ -104,6 +106,7 @@ always @(posedge clk) begin
 		EX_reg_inst           <= 32'b0;
 		EX_reg_opcode         <= 24'b0;
 		EX_reg_opcode_type         <= 15'b0;
+		EX_reg_opcode_funct3         <= 3'b0;
 		EX_reg_src_a          <= 64'b0;
 		EX_reg_src_b          <= 64'b0;
 		EX_reg_imm            <= 64'b0;
@@ -119,6 +122,7 @@ always @(posedge clk) begin
 		EX_reg_inst           <= EX_reg_inst  ;
 		EX_reg_opcode         <= EX_reg_opcode;
 		EX_reg_opcode_type         <= EX_reg_opcode_type;
+		EX_reg_opcode_funct3         <= EX_reg_opcode_funct3;
 		EX_reg_src_a          <= EX_reg_src_a ;
 		EX_reg_src_b          <= EX_reg_src_b ;
 		EX_reg_imm            <= EX_reg_imm   ;
@@ -134,6 +138,7 @@ always @(posedge clk) begin
 		EX_reg_inst           <= inst_ID_EX;
 		EX_reg_opcode         <= opcode_in;
 		EX_reg_opcode_type         <= opcode_type_ID_EX;
+		EX_reg_opcode_funct3         <= opcode_funct3_ID_EX;
 		EX_reg_src_a          <= src_A;
 		EX_reg_src_b          <= src_B;
 		EX_reg_imm            <= imm_in;
@@ -149,6 +154,7 @@ wire [63:0]pc;
 wire [31:0]inst;
 wire [23:0]opcode;
 wire [14:0]opcode_type;
+wire [ 2:0]opcode_funct3;
 wire [63:0]src1;
 wire [63:0]src2;
 wire [63:0]imm;
@@ -156,6 +162,7 @@ assign pc   = EX_reg_valid ? EX_reg_pc   : 64'b0;
 assign inst = EX_reg_valid ? EX_reg_inst : 32'b0;
 assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
 assign opcode_type = EX_reg_valid ? EX_reg_opcode_type : 15'b0;
+assign opcode_funct3 = EX_reg_valid ?  EX_reg_opcode_funct3: 3'b0;
 assign imm  = EX_reg_valid ? EX_reg_imm  : 64'b0;
 
 
@@ -296,7 +303,15 @@ always @(*) begin
     endcase
 end
 
+wire branch_condition;
+assign branch_condition = (opcode_funct3==3'h0) ? ((result_alu0==64'b0&&imm[12]==1'b0) || (result_alu0!=64'b0&&imm[12]==1'b1)) :
+	                 ((opcode_funct3==3'h1) ? ((result_alu0!=64'b0&&imm[12]==1'b0) || (result_alu0==64'b0&&imm[12]==1'b1)) :
+                         ((opcode_funct3==3'h4) ? ((result_alu0[63]==1'b1&&imm[12]==1'b0) || (result_alu0[63]==1'b0&&imm[12]==1'b1)) :
+			 ((opcode_funct3==3'h5) ? ((result_alu0[63]==1'b0&&imm[12]==1'b0) || (result_alu0[63]==1'b1&&imm[12]==1'b1)) :
+                         ((opcode_funct3==3'h6) ? ((((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b0) || (~((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b1)) :
+                         ((opcode_funct3==3'h7) ? ((~((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b0) || (((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b1)) : 1'b0 )))));
 
+//assign pc_update = (EX_reg_valid&&ready_EX_MEM) ? ((EX_reg_opcode_type[3]||EX_reg_opcode_type[13]||EX_reg_opcode_type[14]) ? 1'b1 :  ) : 1'b0;
 
 //dnpc
 wire [63:0] snpc;
@@ -372,12 +387,12 @@ always@(*) begin
     24'h300  : operator_a=EX_reg_pc;          //branch  to do
 
     //branching inst : calculate the address
-    24'd5    : operator_a=EX_reg_pc; 
-    24'd6    : operator_a=EX_reg_pc; 
-    24'd7    : operator_a=EX_reg_pc; 
-    24'd8    : operator_a=EX_reg_pc; 
-    24'd9    : operator_a=EX_reg_pc; 
-    24'd10   : operator_a=EX_reg_pc; 
+    //24'd5    : operator_a=EX_reg_pc; 
+    //24'd6    : operator_a=EX_reg_pc; 
+    //24'd7    : operator_a=EX_reg_pc; 
+    //24'd8    : operator_a=EX_reg_pc; 
+    //24'd9    : operator_a=EX_reg_pc; 
+    //24'd10   : operator_a=EX_reg_pc; 
 
     default  : operator_a=src1;
     endcase
@@ -400,12 +415,12 @@ always@(*) begin
 
     24'd4    : operator_b=imm;
     //branching inst : calculate the address
-    24'd5    : operator_b=imm; 
-    24'd6    : operator_b=imm; 
-    24'd7    : operator_b=imm; 
-    24'd8    : operator_b=imm; 
-    24'd9    : operator_b=imm; 
-    24'd10   : operator_b=imm; 
+    //24'd5    : operator_b=imm; 
+    //24'd6    : operator_b=imm; 
+    //24'd7    : operator_b=imm; 
+    //24'd8    : operator_b=imm; 
+    //24'd9    : operator_b=imm; 
+    //24'd10   : operator_b=imm; 
 
     24'd11   : operator_b=imm;
     24'd12   : operator_b=imm;
@@ -457,12 +472,12 @@ always@(*) begin
 //    24'd8    : mode=8'd1 ; 
 //    24'd9    : mode=8'd1 ; 
 //    24'd10   : mode=8'd1 ; 
-    24'd5    : mode=8'd0 ; 
-    24'd6    : mode=8'd0 ; 
-    24'd7    : mode=8'd0 ; 
-    24'd8    : mode=8'd0 ; 
-    24'd9    : mode=8'd0 ; 
-    24'd10   : mode=8'd0 ; 
+    24'd5    : mode=8'd1 ; 
+    24'd6    : mode=8'd1 ; 
+    24'd7    : mode=8'd1 ; 
+    24'd8    : mode=8'd1 ; 
+    24'd9    : mode=8'd1 ; 
+    24'd10   : mode=8'd1 ; 
 
     24'd20   : mode=8'd2 ;
     24'd21   : mode=8'd3 ;

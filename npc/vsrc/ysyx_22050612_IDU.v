@@ -27,6 +27,7 @@ output [63:0]  imm,
 
 output [23:0]opcode,
 output [14:0]opcode_type,
+output [2:0]opcode_funct3,
 output     valid_ID_EX,
 input      ready_ID_EX,
 output [63:0]pc_ID_EX,
@@ -255,7 +256,7 @@ assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
 
 wire opcode_wen;
 wire [63:0]opcode_imm   ;
-wire [2:0]opcode_funct3 ;
+//wire [2:0]opcode_funct3 ;
 wire opcode_lui    ;
 wire opcode_auipc  ;
 wire opcode_load   ;
