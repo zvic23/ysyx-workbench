@@ -419,6 +419,7 @@ always@(*) begin
     default  : operator_a=src1;
     endcase
 */
+/*
     case (opcode)
     24'h6000 : operator_b={{58{1'b0}},src2[5:0]};
     24'h10000: operator_b={{58{1'b0}},src2[5:0]};
@@ -460,7 +461,7 @@ always@(*) begin
     24'd50   : operator_b=src2;
     default  : operator_b=src2;
     endcase
-
+*/
 
     case(opcode)
     24'h5000 : mode=8'd1 ; 
