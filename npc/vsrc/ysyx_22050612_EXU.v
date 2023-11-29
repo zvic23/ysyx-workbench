@@ -333,7 +333,7 @@ assign address_add_src2 = imm;
 //aluoutput
 wire [63:0]result_cpt;
 assign result_cpt = multipling ? result_lo : (dividing ? (opcode_funct3[1] ? remainder : quotient) : result_alu0);
-assign ALUoutput_EX_MEM = (opcode_funct3==3'b101&&(opcode_type[9]||opcode_type[10])) ? (result_cpt[63]?({{32{1'b1}},result_cpt[63:32]}):({{32{1'b0}},result_cpt[63:32]})) :
+assign ALUoutput_EX_MEM = (opcode_funct3==3'b101&&~imm[5]&&(opcode_type[9]||opcode_type[10])) ? (result_cpt[63]?({{32{1'b1}},result_cpt[63:32]}):({{32{1'b0}},result_cpt[63:32]})) :
 	                  ((opcode_type[9]||opcode_type[10]) ?  (result_cpt[31]?({{32{1'b1}},result_cpt[31:0]}):({{32{1'b0}},result_cpt[31:0]}))       
 			  : result_cpt); 
 /*
@@ -388,7 +388,7 @@ assign shamt = imm[5:0];
 
 assign operator_a = opcode_type[0] ? 64'b0 :     //lui
 	           ((opcode_type[1]||opcode_type[2]||opcode_type[3]) ? EX_reg_pc :        //auipc   jal   jalr
-	           ((opcode_funct3==3'b101&&(opcode_type[9]||opcode_type[10])) ? {src1[31:0],32'b0} : src1 ) );
+	           ((opcode_funct3==3'b101&&~imm[5]&&(opcode_type[9]||opcode_type[10])) ? {src1[31:0],32'b0} : src1 ) );
 			     //(opcode_funct3==3'b101&&(opcode_type[9]||opcode_type[10]) is the 32bits src1 right shift
 
 assign operator_b = (opcode_type[2]||opcode_type[3]) ? 64'h4 :       //jal  jalr
