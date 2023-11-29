@@ -389,7 +389,7 @@ assign operator_b = (opcode_type[2]||opcode_type[3]) ? 64'h4 :
  	           ((opcode_type[10]&&(opcode_funct3==3'b1||opcode_funct3==3'b101)) ? {{59{1'b0}},src2[4:0]} : 
 	 	   ((opcode_type[7]&&(opcode_funct3==3'b1||opcode_funct3==3'b101)) ? {{58{1'b0}},shamt} :    
 	 	   ((opcode_type[9]&&(opcode_funct3==3'b1||opcode_funct3==3'b101)) ? {{59{1'b0}},shamt[4:0]} :    
-	           ((opcode_type[5]||opcode_type[6]||opcode_type[7]||opcode_type[9]) ? imm : src2 )))));
+	           ((opcode_type[0]||opcode_type[1]||opcode_type[5]||opcode_type[6]||opcode_type[7]||opcode_type[9]) ? imm : src2 )))));
 
 
 always@(*) begin
@@ -419,7 +419,6 @@ always@(*) begin
     default  : operator_a=src1;
     endcase
 */
-/*
     case (opcode)
     24'h6000 : operator_b={{58{1'b0}},src2[5:0]};
     24'h10000: operator_b={{58{1'b0}},src2[5:0]};
@@ -461,7 +460,7 @@ always@(*) begin
     24'd50   : operator_b=src2;
     default  : operator_b=src2;
     endcase
-*/
+
 
     case(opcode)
     24'h5000 : mode=8'd1 ; 
