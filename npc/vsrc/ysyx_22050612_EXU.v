@@ -362,9 +362,10 @@ always@(*) begin
     24'h29000: ALUoutput_EX_MEM=(remainder[31]?({{32{1'b1}},remainder[31:0]}):({{32{1'b0}},remainder[31:0]}));
     //24'h29000: ALUoutput_EX_MEM=(result_remuw0[31]?({{32{1'b1}},result_remuw0[31:0]}):({{32{1'b0}},result_remuw0[31:0]}));
 
-    24'h300  : ALUoutput_EX_MEM=EX_reg_pc + 64'd4;
-
-    24'd4    : ALUoutput_EX_MEM=EX_reg_pc + 64'd4;
+    //24'h300  : ALUoutput_EX_MEM=EX_reg_pc + 64'd4;
+    //24'd4    : ALUoutput_EX_MEM=EX_reg_pc + 64'd4;
+    24'h300  : ALUoutput_EX_MEM=result_alu0;
+    24'd4    : ALUoutput_EX_MEM=result_alu0;
     24'd47   : ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
 
     default  : ALUoutput_EX_MEM=result_alu0;
@@ -393,6 +394,7 @@ always@(*) begin
     24'h100  : operator_a=64'b0;
     24'h200  : operator_a=EX_reg_pc;
     24'h300  : operator_a=EX_reg_pc;          //branch  to do
+    24'h4    : operator_a=EX_reg_pc;          
 
     //branching inst : calculate the address
     //24'd5    : operator_a=EX_reg_pc; 
@@ -416,7 +418,9 @@ always@(*) begin
     24'h1b000: operator_b={{59{1'b0}},src2[4:0]};
     24'h100  : operator_b=imm;
     24'h200  : operator_b=imm;
-    24'h300  : operator_b=imm;
+    24'h300  : operator_b=64'd4;
+    24'h4    : operator_b=64'd4;
+    //24'h300  : operator_b=imm;
     24'h400  : operator_b={{58{1'b0}},shamt};
     24'h800  : operator_b={{58{1'b0}},shamt};
     24'hc00  : operator_b={{58{1'b0}},shamt};
