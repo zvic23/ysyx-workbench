@@ -288,7 +288,7 @@ always @(*) begin
     24'h500000: dnpc=EX_reg_src_b                             ;        
     default: dnpc=snpc;
     endcase
-
+/*
     case (opcode)
     24'd4    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? 1'b1 : 1'b0;
     24'd5    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( ((src1==src2&&EX_reg_inst[31]==0)||(src1!=src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
@@ -301,6 +301,7 @@ always @(*) begin
     24'h500000: pc_update=(EX_reg_valid&&ready_EX_MEM) ? 1'b1 : 1'b0;             
     default: pc_update=1'b0;
     endcase
+    */
 end
 
 wire branch_condition;
@@ -311,7 +312,7 @@ assign branch_condition = (opcode_funct3==3'h0) ? ((result_alu0==64'b0&&imm[12]=
                          ((opcode_funct3==3'h6) ? ((((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b0) || (~((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b1)) :
                          ((opcode_funct3==3'h7) ? ((~((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b0) || (((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b1)) : 1'b0 )))));
 
-//assign pc_update = (EX_reg_valid&&ready_EX_MEM) ? ((EX_reg_opcode_type[3]||EX_reg_opcode_type[13]||EX_reg_opcode_type[14]) ? 1'b1 :  ) : 1'b0;
+assign pc_update = (EX_reg_valid&&ready_EX_MEM) ? ((EX_reg_opcode_type[3]||EX_reg_opcode_type[13]||EX_reg_opcode_type[14]) ? 1'b1 : ((EX_reg_opcode_type[4]&&branch_condition) ? 1'b1 : 1'b0)) : 1'b0;
 
 //dnpc
 wire [63:0] snpc;
