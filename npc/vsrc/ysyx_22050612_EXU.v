@@ -423,7 +423,7 @@ assign alu_and  = (opcode_type[7]||opcode_type[8])&&opcode_funct3==3'b111;
 assign alu_or   = (opcode_type[7]||opcode_type[8])&&opcode_funct3==3'b110;
 assign alu_xor  = (opcode_type[7]||opcode_type[8])&&opcode_funct3==3'b100;
 assign alu_sll  = (opcode_type[7]||opcode_type[8]||opcode_type[9]||opcode_type[10])&&opcode_funct3==3'b001;
-assign alu_srl  = (opcode_type[7]||opcode_type[8]||opcode_type[9]||opcode_type[10])&&opcode_funct3==3'b101;
+assign alu_srl  = (opcode_type[7]||opcode_type[8]||opcode_type[9]||opcode_type[10])&&opcode_funct3==3'b101&&~imm[10];
 assign alu_sra  = (opcode_type[7]||opcode_type[8]||opcode_type[9]||opcode_type[10])&&opcode_funct3==3'b101&&imm[10];
 
 
@@ -542,7 +542,7 @@ reg [63:0]operator_a;
 reg [63:0]operator_b;
 wire [63:0]result_alu0;
 
-ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
+ysyx_22050612_ALU alu0 (alu_mode,operator_a,operator_b,result_alu0);
 
 
 

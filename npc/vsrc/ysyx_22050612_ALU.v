@@ -1,5 +1,5 @@
 module ysyx_22050612_ALU (
-	input [7:0]mode,
+	input [9:0]mode,
 	input [63:0]A,
 	input [63:0]B,
 	output[63:0]Z
@@ -18,7 +18,7 @@ wire [63:0]srl_result;
 wire [63:0]sra_result;
 
 wire [63:0]B_negetive;
-assign B_negetive= (mode==8'd1 || mode==8'd2 || mode==8'd3)? -B :B;
+assign B_negetive= (mode==10'h2 || mode==10'h4 || mode==10'h8)? -B :B;
 assign add_sub_result = A + B_negetive;
 assign slt_result = (add_sub_result[63])? 64'b1:64'b0;
 //assign slt_result = ($signed(A) < $signed(B))? 64'b1:64'b0;
@@ -33,48 +33,18 @@ assign or_result = (A | B);
 assign xor_result = (A ^ B);
 
 
-ysyx_22050612_MuxKey #(10, 8, 64) alu_result_select (Z , mode,{
-	8'd0 , add_sub_result,
-	8'd1 , add_sub_result,
-	8'd2 , slt_result,
-	8'd3 , sltu_result,
-	8'd4 , and_result,
-	8'd6 , or_result,
-	8'd7 , xor_result,
-	8'd8 , sll_result,
-	8'd9 , srl_result,
-	8'd10, sra_result
+ysyx_22050612_MuxKey #(10, 12, 64) alu_result_select (Z , {2'b0,mode},{
+	12'h1  , add_sub_result,
+	12'h2  , add_sub_result,
+	12'h4  , slt_result,
+	12'h8  , sltu_result,
+	12'h10 , and_result,
+	12'h20 , or_result,
+	12'h40 , xor_result,
+	12'h80 , sll_result,
+	12'h100, srl_result,
+	12'h200, sra_result
       });
 
 
-//reg [63:0]C;
-//
-//always @(mode or A or B)begin
-//	Z = 0;
-//	if(mode == 8'b1)begin
-//		Z = A + B;
-//	end
-//	else if(mode == 8'd2 || mode == 8'd9)begin
-//		C = ~B + 64'b1;
-//		Z = A + C;
-//	end
-//	else if(mode == 8'd3)begin
-//		Z = ~A;
-//	end
-//	else if(mode == 8'd4)begin
-//		Z = A & B;
-//	end
-//	else if(mode == 8'd5)begin
-//		Z = A | B;
-//	end
-//	else if(mode == 8'd6)begin
-//		Z = A ^ B;
-//	end
-//	else if(mode == 8'd7)begin
-//		Z = A << B;
-//	end
-//	else if(mode == 8'd8)begin
-//		Z = A >> B;
-//	end
-//end
 endmodule
