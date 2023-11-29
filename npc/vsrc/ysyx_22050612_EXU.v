@@ -313,7 +313,9 @@ assign branch_condition = (opcode_funct3==3'h0) ? ((result_alu0==64'b0&&imm[12]=
                          ((opcode_funct3==3'h6) ? ((((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b0) || (~((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b1)) :
                          ((opcode_funct3==3'h7) ? ((~((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b0) || (((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b1)) : 1'b0 )))));
 
+
 assign pc_update = (EX_reg_valid&&ready_EX_MEM) ? ((EX_reg_opcode_type[3]||EX_reg_opcode_type[13]||EX_reg_opcode_type[14]) ? 1'b1 : ((EX_reg_opcode_type[4]&&branch_condition) ? 1'b1 : 1'b0)) : 1'b0;
+
 assign dnpc      = (EX_reg_opcode_type[13]||EX_reg_opcode_type[14]) ? EX_reg_src_b : ((EX_reg_opcode_type[3]||(EX_reg_opcode_type[4]&&~imm[12])) ? address_add_result : snpc );
 
 //dnpc
@@ -333,7 +335,7 @@ assign address_add_src2 = imm;
 //aluoutput
 wire [63:0]result_cpt;
 assign result_cpt = multipling ? result_lo : (dividing ? (opcode_funct3[1] ? remainder : quotient) : result_alu0);
-assign ALUoutput_EX_MEM = (opcode_funct3==3'b101&&~imm[5]&&(opcode_type[9]||opcode_type[10])) ? (result_cpt[63]?({{32{1'b1}},result_cpt[63:32]}):({{32{1'b0}},result_cpt[63:32]})) :
+assign ALUoutput_EX_MEM = word_right_shift  ? (result_cpt[63]?({{32{1'b1}},result_cpt[63:32]}):({{32{1'b0}},result_cpt[63:32]})) :
 	                  ((opcode_type[9]||opcode_type[10]) ?  (result_cpt[31]?({{32{1'b1}},result_cpt[31:0]}):({{32{1'b0}},result_cpt[31:0]}))       
 			  : result_cpt); 
 /*
@@ -388,7 +390,7 @@ assign shamt = imm[5:0];
 
 assign operator_a = opcode_type[0] ? 64'b0 :     //lui
 	           ((opcode_type[1]||opcode_type[2]||opcode_type[3]) ? EX_reg_pc :        //auipc   jal   jalr
-	           ((opcode_funct3==3'b101&&~imm[5]&&(opcode_type[9]||opcode_type[10])) ? {src1[31:0],32'b0} : src1 ) );
+	           (word_right_shift ? {src1[31:0],32'b0} : src1 ) );
 			     //(opcode_funct3==3'b101&&(opcode_type[9]||opcode_type[10]) is the 32bits src1 right shift
 
 assign operator_b = (opcode_type[2]||opcode_type[3]) ? 64'h4 :       //jal  jalr
@@ -422,6 +424,8 @@ assign alu_xor  = (opcode_type[7]||opcode_type[8])&&opcode_funct3==3'b100;
 assign alu_sll  = (opcode_type[7]||opcode_type[8]||opcode_type[9]||opcode_type[10])&&opcode_funct3==3'b001;
 assign alu_srl  = (opcode_type[7]||opcode_type[8]||opcode_type[9]||opcode_type[10])&&opcode_funct3==3'b101&&~imm[10];
 assign alu_sra  = (opcode_type[7]||opcode_type[8]||opcode_type[9]||opcode_type[10])&&opcode_funct3==3'b101&&imm[10];
+
+wire word_right_shift = opcode_funct3==3'b101&&~imm[5]&&(opcode_type[9]||opcode_type[10]);
 
 
 always@(*) begin
