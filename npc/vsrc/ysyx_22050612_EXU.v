@@ -381,10 +381,12 @@ wire [5:0]shamt;
 assign shamt = imm[5:0];
 //assign shamt = inst[25:20];
 
-//assign operator_a = opcode_type[0] ? 64'b0 : ((opcode_type[1]||opcode_type[2]||opcode_type[3]) ? EX_reg_pc : ( ))
+assign operator_a = opcode_type[0] ? 64'b0 : ((opcode_type[1]||opcode_type[2]||opcode_type[3]) ? EX_reg_pc : 
+			             ((opcode_funct3==3'b101&&(opcode_type[9]||opcode_type[10])) ? {src1[31:0],32'b0} : src1 ) );
 
 always@(*) begin
 //alu
+/*
     case (opcode)
     //24'h14000: operator_a={{32{1'b0}},src1[31:0]};
     //24'h14000: operator_a={src1[31:0],{32{1'b0}}};
@@ -408,7 +410,7 @@ always@(*) begin
 
     default  : operator_a=src1;
     endcase
-
+*/
     case (opcode)
     24'h6000 : operator_b={{58{1'b0}},src2[5:0]};
     24'h10000: operator_b={{58{1'b0}},src2[5:0]};
