@@ -333,8 +333,8 @@ assign address_add_src2 = imm;
 //aluoutput
 always@(*) begin
 	case (opcode)
-    //24'h14000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    24'h14000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
+    24'h14000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    //24'h14000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
     //24'h15000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
     24'h15000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
     24'h16000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
@@ -381,11 +381,13 @@ wire [5:0]shamt;
 assign shamt = imm[5:0];
 //assign shamt = inst[25:20];
 
+//assign operator_a = opcode_type[0] ? 64'b0 : ((opcode_type[1]||opcode_type[2]||opcode_type[3]) ? EX_reg_pc : ( ))
+
 always@(*) begin
 //alu
     case (opcode)
     //24'h14000: operator_a={{32{1'b0}},src1[31:0]};
-    24'h14000: operator_a={src1[31:0],{32{1'b0}}};
+    //24'h14000: operator_a={src1[31:0],{32{1'b0}}};
     //24'h15000: operator_a={{32{1'b0}},src1[31:0]};
     24'h15000: operator_a={src1[31:0],{32{1'b0}}};
     24'h16000: operator_a={src1[31:0],{32{1'b0}}};
