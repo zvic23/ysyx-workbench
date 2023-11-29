@@ -542,7 +542,7 @@ reg [63:0]operator_a;
 reg [63:0]operator_b;
 wire [63:0]result_alu0;
 
-ysyx_22050612_ALU alu0 (alu_mode,operator_a,operator_b,result_alu0);
+ysyx_22050612_ALU alu0 (mode,operator_a,operator_b,result_alu0);
 
 
 
