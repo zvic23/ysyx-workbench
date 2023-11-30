@@ -280,19 +280,40 @@ assign wmask_64    = {{8{wmask[7]}},{8{wmask[6]}},{8{wmask[5]}},{8{wmask[4]}},{8
 
 
 
+assign rdata_1byte = (waddr[2:0] == 3'd0) ? rdata[ 7: 0] :
+                     (waddr[2:0] == 3'd1) ? rdata[15: 8] :
+                     (waddr[2:0] == 3'd2) ? rdata[23:16] :
+                     (waddr[2:0] == 3'd3) ? rdata[31:24] :
+                     (waddr[2:0] == 3'd4) ? rdata[39:32] :
+                     (waddr[2:0] == 3'd5) ? rdata[47:40] :
+                     (waddr[2:0] == 3'd6) ? rdata[55:48] :
+                     (waddr[2:0] == 3'd7) ? rdata[63:56] :
+                     8'b0;
+assign rdata_2byte = (waddr[2:0] == 3'd0) ? rdata[15: 0] :
+                     (waddr[2:0] == 3'd2) ? rdata[31:16] :
+                     (waddr[2:0] == 3'd4) ? rdata[47:32] :
+                     (waddr[2:0] == 3'd6) ? rdata[63:48] :
+                     16'b0;
 
 
-
+assign rdata_fix   = (opcode_funct3 == 3'b000) ? (rdata_1byte[7]?{{56{1'b1}},rdata_1byte}:{{56{1'b0}},rdata_1byte})  : 
+                     (opcode_funct3 == 3'b001) ? (rdata_2byte[15]?{{48{1'b1}},rdata_2byte}:{{48{1'b0}},rdata_2byte})  :
+                     (opcode_funct3 == 3'b010) ? (raddr[2]?(rdata[63]?{{32{1'b1}},rdata[63:32]}:{{32{1'b0}},rdata[63:32]}):(rdata[31]?{{32{1'b1}},rdata[31:0]}:{{32{1'b0}},rdata[31:0]})) : 
+                     (opcode_funct3 == 3'b100) ? {{56{1'b0}},rdata_1byte} :
+                     (opcode_funct3 == 3'b101) ? {{48{1'b0}},rdata_2byte} :
+                     (opcode_funct3 == 3'b110) ? raddr[2]?{{32{1'b0}},rdata[63:32]}:{{32{1'b0}},rdata[31:0]} :
+                     (opcode_funct3 == 3'b011) ? rdata :
+                     64'b0;
 
 
 //memory
-
+/*
 reg [63:0]wmask_1b;
 reg [63:0]wmask_2b;
 reg [63:0]wmask_dcache;
 
 always @(*) begin
-	/*
+	
 	case(waddr[2:0])
     3'd0  : wdata_1byte={{56{1'b0}},src2[7:0]}; 
     3'd1  : wdata_1byte={{48{1'b0}},src2[7:0],{ 8{1'b0}}};
@@ -304,8 +325,7 @@ always @(*) begin
     3'd7  : wdata_1byte={src2[7:0],{56{1'b0}}};
     default:wdata_1byte=64'b0;
 	endcase
-*/
-/*
+
 	case(waddr[2:0])
     3'd0  : wmask_1byte=8'h1 ; 
     3'd1  : wmask_1byte=8'h2 ;
@@ -317,8 +337,7 @@ always @(*) begin
     3'd7  : wmask_1byte=8'h80;
     default:wmask_1byte=8'b0;
 	endcase
-*/
-/*
+
 	case(waddr[2:0])
     3'd0  : wmask_1b=64'hff ; 
     3'd1  : wmask_1b=64'hff00;
@@ -330,8 +349,7 @@ always @(*) begin
     3'd7  : wmask_1b=64'hff00000000000000;
     default:wmask_1b=64'b0;
 	endcase
-*/
-/*
+
 	case(waddr[2:0])
     3'd0  : wdata_2byte={{48{1'b0}},src2[15:0]}; 
     3'd2  : wdata_2byte={{32{1'b0}},src2[15:0],{16{1'b0}}};
@@ -355,7 +373,7 @@ always @(*) begin
     3'd6  : wmask_2b=64'hffff000000000000;
     default:wmask_2b=64'b0;
 	endcase
-*/
+
 
 
 
@@ -378,7 +396,7 @@ always @(*) begin
     3'd6  : rdata_2byte=rdata[63:48];
     default:rdata_2byte=16'b0;
 	endcase
-/*
+
 	case(opcode)
     24'd16  : wdata=wdata_1byte;
     24'd17  : wdata=wdata_2byte;
@@ -402,7 +420,7 @@ always @(*) begin
     24'd43  : wmask_dcache=64'hffffffffffffffff;
     default: wmask_dcache=64'b0;
 	endcase
-*/
+
 	case(opcode)
     24'd11  : rdata_fix=(rdata_1byte[7]?{{56{1'b1}},rdata_1byte}:{{56{1'b0}},rdata_1byte});
     24'd12  : rdata_fix=(rdata_2byte[15]?{{48{1'b1}},rdata_2byte}:{{48{1'b0}},rdata_2byte});
@@ -414,7 +432,7 @@ always @(*) begin
     default: rdata_fix=64'b0;
 	endcase
 end
-
+*/
 
 
 
@@ -423,16 +441,16 @@ wire [63:0] waddr;
 assign raddr = opcode_type[5] ? aluoutput : 64'b0;
 assign waddr = opcode_type[6] ? aluoutput : 64'b0;
 
-reg [7:0]wmask_1byte;
-reg [63:0]wdata_1byte;
-reg [7:0]wmask_2byte;
-reg [63:0]wdata_2byte;
-reg [63:0] rdata;
-reg [63:0] wdata;
-reg [ 7:0] wmask;
-reg [63:0] rdata_fix;
-reg [7:0] rdata_1byte;
-reg [15:0] rdata_2byte;
+wire [7:0]wmask_1byte;
+wire [63:0]wdata_1byte;
+wire [7:0]wmask_2byte;
+wire [63:0]wdata_2byte;
+wire [63:0] rdata;
+wire [63:0] wdata;
+wire [ 7:0] wmask;
+wire [63:0] rdata_fix;
+wire [7:0] rdata_1byte;
+wire [15:0] rdata_2byte;
 
 
 /*
