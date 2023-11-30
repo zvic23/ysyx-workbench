@@ -274,8 +274,8 @@ assign wmask       = (opcode_funct3 == 3'b000) ? wmask_1byte  :
                      (opcode_funct3 == 3'b011) ? 8'hff :
                      8'b0;
 wire [63:0]wmask_64;
-assign wmask_64    = {{8{wmask[7]}},{8{wmask[6]}},{8{wmask[5]}},{8{wmask[4]}},{8{wmask[3]}},
-                      {8{wmask[2]}},{8{wmask[1]}},{8{wmask[0]}}};
+assign wmask_64    = {{8{wmask[7]}},{8{wmask[6]}},{8{wmask[5]}},{8{wmask[4]}},
+	              {8{wmask[3]}},{8{wmask[2]}},{8{wmask[1]}},{8{wmask[0]}}};
 
 
 
