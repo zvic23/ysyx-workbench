@@ -12,12 +12,7 @@ input       valid_ID_EX,
 output      ready_ID_EX,
 input [63:0]pc_ID_EX,
 input [31:0]inst_ID_EX,
-/*
-input [ 5:0]shamt,
-input [ 4:0]rd,
-input [ 4:0]rs1,
-input [ 4:0]rs2,
-*/
+
 input [23:0]opcode_in,
 input [14:0]opcode_type_ID_EX,
 input [ 2:0]opcode_funct3_ID_EX,
@@ -42,6 +37,7 @@ output [31:0]inst_EX_MEM,
 output [23:0]opcode_EX_MEM,
 output [14:0]opcode_type_EX_MEM,
 output [ 4:0]rd_EX_MEM,
+output [ 4:0]rs2_EX_MEM,
 output [63:0]ALUoutput_EX_MEM,
 output [63:0]src_B_EX_MEM,
 
@@ -204,6 +200,7 @@ assign opcode_EX_MEM = EX_reg_opcode;
 assign opcode_type_EX_MEM = EX_reg_opcode_type;
 assign rd_EX_MEM = EX_reg_rd;
 assign src_B_EX_MEM = src2;
+assign rs2_EX_MEM = EX_reg_rs2;
 
 
 
