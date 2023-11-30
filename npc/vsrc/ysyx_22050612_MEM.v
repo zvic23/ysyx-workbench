@@ -228,6 +228,28 @@ assign wen = opcode_type[0]||opcode_type[1]||opcode_type[2]||opcode_type[3]||opc
 wire [63:0]wdata_reg;
 assign wdata_reg = opcode_type[5] ? rdata_fix : (opcode_type[11] ? MEM_reg_src2 : aluoutput);
 
+
+
+
+
+wire [63:0] raddr;
+wire [63:0] waddr;
+assign raddr = opcode_type[5] ? aluoutput : 64'b0;
+assign waddr = opcode_type[6] ? aluoutput : 64'b0;
+
+wire [7:0]wmask_1byte;
+wire [63:0]wdata_1byte;
+wire [7:0]wmask_2byte;
+wire [63:0]wdata_2byte;
+wire [63:0] rdata;
+wire [63:0] wdata;
+wire [ 7:0] wmask;
+wire [63:0] rdata_fix;
+wire [7:0] rdata_1byte;
+wire [15:0] rdata_2byte;
+
+
+
 assign wdata_1byte = (waddr[2:0] == 3'd0) ? {56'b0, src2[7:0]} :
                      (waddr[2:0] == 3'd1) ? {48'b0, src2[7:0], 8'b0} :
                      (waddr[2:0] == 3'd2) ? {40'b0, src2[7:0], 16'b0} :
@@ -436,21 +458,7 @@ end
 
 
 
-wire [63:0] raddr;
-wire [63:0] waddr;
-assign raddr = opcode_type[5] ? aluoutput : 64'b0;
-assign waddr = opcode_type[6] ? aluoutput : 64'b0;
 
-wire [7:0]wmask_1byte;
-wire [63:0]wdata_1byte;
-wire [7:0]wmask_2byte;
-wire [63:0]wdata_2byte;
-wire [63:0] rdata;
-wire [63:0] wdata;
-wire [ 7:0] wmask;
-wire [63:0] rdata_fix;
-wire [7:0] rdata_1byte;
-wire [15:0] rdata_2byte;
 
 
 /*
