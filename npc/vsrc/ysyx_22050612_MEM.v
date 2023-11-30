@@ -280,19 +280,19 @@ assign wmask_64    = {{8{wmask[7]}},{8{wmask[6]}},{8{wmask[5]}},{8{wmask[4]}},
 
 
 
-assign rdata_1byte = (waddr[2:0] == 3'd0) ? rdata[ 7: 0] :
-                     (waddr[2:0] == 3'd1) ? rdata[15: 8] :
-                     (waddr[2:0] == 3'd2) ? rdata[23:16] :
-                     (waddr[2:0] == 3'd3) ? rdata[31:24] :
-                     (waddr[2:0] == 3'd4) ? rdata[39:32] :
-                     (waddr[2:0] == 3'd5) ? rdata[47:40] :
-                     (waddr[2:0] == 3'd6) ? rdata[55:48] :
-                     (waddr[2:0] == 3'd7) ? rdata[63:56] :
+assign rdata_1byte = (raddr[2:0] == 3'd0) ? rdata[ 7: 0] :
+                     (raddr[2:0] == 3'd1) ? rdata[15: 8] :
+                     (raddr[2:0] == 3'd2) ? rdata[23:16] :
+                     (raddr[2:0] == 3'd3) ? rdata[31:24] :
+                     (raddr[2:0] == 3'd4) ? rdata[39:32] :
+                     (raddr[2:0] == 3'd5) ? rdata[47:40] :
+                     (raddr[2:0] == 3'd6) ? rdata[55:48] :
+                     (raddr[2:0] == 3'd7) ? rdata[63:56] :
                      8'b0;
-assign rdata_2byte = (waddr[2:0] == 3'd0) ? rdata[15: 0] :
-                     (waddr[2:0] == 3'd2) ? rdata[31:16] :
-                     (waddr[2:0] == 3'd4) ? rdata[47:32] :
-                     (waddr[2:0] == 3'd6) ? rdata[63:48] :
+assign rdata_2byte = (raddr[2:0] == 3'd0) ? rdata[15: 0] :
+                     (raddr[2:0] == 3'd2) ? rdata[31:16] :
+                     (raddr[2:0] == 3'd4) ? rdata[47:32] :
+                     (raddr[2:0] == 3'd6) ? rdata[63:48] :
                      16'b0;
 
 
