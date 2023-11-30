@@ -230,6 +230,15 @@ assign wdata_1byte = (waddr[2:0] == 3'd0) ? {56'b0, src2[7:0]} :
                      (waddr[2:0] == 3'd7) ? {src2[7:0], 56'b0} :
                      64'b0;
 
+assign wmask_1byte = (waddr[2:0] == 3'd0) ? 8'h1 : 
+                     (waddr[2:0] == 3'd1) ? 8'h2 : 
+                     (waddr[2:0] == 3'd2) ? 8'h4 : 
+                     (waddr[2:0] == 3'd3) ? 8'h8 : 
+                     (waddr[2:0] == 3'd4) ? 8'h10: 
+                     (waddr[2:0] == 3'd5) ? 8'h20: 
+                     (waddr[2:0] == 3'd6) ? 8'h40: 
+                     (waddr[2:0] == 3'd7) ? 8'h80: 
+                     8'b0;
 //memory
 
 reg [63:0]wmask_1b;
@@ -250,6 +259,7 @@ always @(*) begin
     default:wdata_1byte=64'b0;
 	endcase
 */
+/*
 	case(waddr[2:0])
     3'd0  : wmask_1byte=8'h1 ; 
     3'd1  : wmask_1byte=8'h2 ;
@@ -261,7 +271,7 @@ always @(*) begin
     3'd7  : wmask_1byte=8'h80;
     default:wmask_1byte=8'b0;
 	endcase
-
+*/
 
 	case(waddr[2:0])
     3'd0  : wmask_1b=64'hff ; 
