@@ -36,6 +36,7 @@ output [63:0]pc_EX_MEM  ,
 output [31:0]inst_EX_MEM,
 output [23:0]opcode_EX_MEM,
 output [14:0]opcode_type_EX_MEM,
+output [ 2:0]opcode_funct3_EX_MEM,
 output [ 4:0]rd_EX_MEM,
 output [ 4:0]rs2_EX_MEM,
 output [63:0]ALUoutput_EX_MEM,
@@ -198,6 +199,7 @@ assign inst_EX_MEM  = (EX_block==1'b0) ? EX_reg_inst  : 32'b0;
 
 assign opcode_EX_MEM = EX_reg_opcode;
 assign opcode_type_EX_MEM = EX_reg_opcode_type;
+assign opcode_funct3_EX_MEM = EX_reg_opcode_funct3;
 assign rd_EX_MEM = EX_reg_rd;
 assign src_B_EX_MEM = src2;
 assign rs2_EX_MEM = EX_reg_rs2;

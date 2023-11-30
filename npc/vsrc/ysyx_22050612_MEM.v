@@ -16,6 +16,7 @@ input [63:0]pc_EX_MEM,
 input [31:0]inst_EX_MEM,
 input [23:0]opcode_in,
 input [14:0]opcode_type_EX_MEM,
+input [ 2:0]opcode_funct3_EX_MEM,
 input [ 4:0]rd_EX_MEM,
 input [ 4:0]rs2_EX_MEM,
 input [63:0]ALUoutput_in,
@@ -100,6 +101,7 @@ reg [31:0]MEM_reg_inst          ;
 reg [63:0]MEM_reg_pc            ;
 reg [23:0]MEM_reg_opcode        ;
 reg [14:0]MEM_reg_opcode_type        ;
+reg [ 2:0]MEM_reg_opcode_funct3        ;
 //reg [63:0]MEM_reg_aluoutput     ;
 reg [63:0]MEM_reg_src2          ;
 reg [ 4:0]MEM_reg_rd;
@@ -112,6 +114,7 @@ always @(posedge clk) begin
 		MEM_reg_inst           <= 32'b0;
 		MEM_reg_opcode         <= 24'b0;
 		MEM_reg_opcode_type         <= 15'b0;
+		MEM_reg_opcode_funct3         <= 3'b0;
 		MEM_reg_aluoutput      <= 64'b0;
 		MEM_reg_src2           <= 64'b0;
 		MEM_reg_rd           <=  5'b0;
@@ -123,6 +126,7 @@ always @(posedge clk) begin
 		MEM_reg_inst           <= MEM_reg_inst       ; 
 		MEM_reg_opcode         <= MEM_reg_opcode     ; 
 		MEM_reg_opcode_type         <= MEM_reg_opcode_type     ; 
+		MEM_reg_opcode_funct3         <= MEM_reg_opcode_funct3;
 		MEM_reg_aluoutput      <= MEM_reg_aluoutput  ; 
 		MEM_reg_src2           <= MEM_reg_src2       ; 
 		MEM_reg_rd           <= MEM_reg_rd       ; 
@@ -134,6 +138,7 @@ always @(posedge clk) begin
 		MEM_reg_inst           <= inst_EX_MEM;
 		MEM_reg_opcode         <= opcode_in;
 		MEM_reg_opcode_type         <= opcode_type_EX_MEM;
+		MEM_reg_opcode_funct3         <= opcode_funct3_EX_MEM;
 		MEM_reg_aluoutput      <= ALUoutput_in;
 		MEM_reg_src2           <= src2_in       ;
 		MEM_reg_rd           <= rd_EX_MEM;
@@ -152,6 +157,9 @@ assign aluoutput = MEM_reg_valid ? MEM_reg_aluoutput : 64'b0;
 
 wire [14:0]opcode_type;
 assign opcode_type = MEM_reg_valid ? MEM_reg_opcode_type : 15'b0;
+
+wire [ 2:0]opcode_funct3;
+assign opcode_funct3 = MEM_reg_valid ? MEM_reg_opcode_funct3 : 3'b0;
 
 wire [63:0]src2;
 
@@ -187,7 +195,7 @@ assign dcache_wren = opcode_type[6];
 wire [63:0]dcache_din;
 assign dcache_din = wdata;
 wire [63:0]dcache_wmask;
-assign dcache_wmask = wmask_dcache;
+assign dcache_wmask = wmask_64;
 
 ysyx_22050612_DCACHE dcache (clk, rst, dcache_valid, dcache_ready, dcache_addr, dcache_dout, dcache_wren, dcache_din, dcache_wmask,
 araddr_dcache_axi, arlen_dcache_axi, arsize_dcache_axi, arburst_dcache_axi, arvalid_dcache_axi, arready_dcache_axi, rdata_dcache_axi, rrsep_dcache_axi, rlast_dcache_axi, rvalid_dcache_axi, rready_dcache_axi, awaddr_dcache_axi, awlen_dcache_axi, awsize_dcache_axi, awburst_dcache_axi, awvalid_dcache_axi, awready_dcache_axi,    wdata_dcache_axi, wstrb_dcache_axi, wlast_dcache_axi, wvalid_dcache_axi, wready_dcache_axi,   bresp_dcache_axi, bvalid_dcache_axi, bready_dcache_axi);
@@ -239,6 +247,44 @@ assign wmask_1byte = (waddr[2:0] == 3'd0) ? 8'h1 :
                      (waddr[2:0] == 3'd6) ? 8'h40: 
                      (waddr[2:0] == 3'd7) ? 8'h80: 
                      8'b0;
+//wire [63:0]wmask_1byte_64;
+//assign  wmask_1byte_64 = {{8{wmask_1byte[7]}},{8{wmask_1byte[6]}},{8{wmask_1byte[5]}},{8{wmask_1byte[4]}},{8{wmask_1byte[3]}},
+//                       {8{wmask_1byte[2]}},{8{wmask_1byte[1]}},{8{wmask_1byte[0]}}};
+
+assign wdata_2byte = (waddr[2:0] == 3'd0) ? {{48{1'b0}},src2[15:0]} : 
+                     (waddr[2:0] == 3'd2) ? {{32{1'b0}},src2[15:0],{16{1'b0}}} :
+                     (waddr[2:0] == 3'd4) ? {{16{1'b0}},src2[15:0],{32{1'b0}}} :
+                     (waddr[2:0] == 3'd6) ? {           src2[15:0],{48{1'b0}}} :
+                     64'b0;
+
+assign wmask_2byte = (waddr[2:0] == 3'd0) ? 8'h3  : 
+                     (waddr[2:0] == 3'd2) ? 8'hc  :
+                     (waddr[2:0] == 3'd4) ? 8'h30 : 
+                     (waddr[2:0] == 3'd6) ? 8'hc0 :
+                     8'b0;
+
+assign wdata       = (opcode_funct3 == 3'b000) ? wdata_1byte  : 
+                     (opcode_funct3 == 3'b001) ? wdata_2byte  :
+                     (opcode_funct3 == 3'b010) ? (waddr[2]?{src2[31:0],{32{1'b0}}}:{{32{1'b0}},src2[31:0]}) : 
+                     (opcode_funct3 == 3'b011) ? src2 :
+                     64'b0;
+assign wmask       = (opcode_funct3 == 3'b000) ? wmask_1byte  : 
+                     (opcode_funct3 == 3'b001) ? wmask_2byte  :
+                     (opcode_funct3 == 3'b010) ? (waddr[2]? 8'b11110000:8'b00001111) : 
+                     (opcode_funct3 == 3'b011) ? 8'hff :
+                     8'b0;
+wire [63:0]wmask_64;
+assign wmask_64    = {{8{wmask[7]}},{8{wmask[6]}},{8{wmask[5]}},{8{wmask[4]}},{8{wmask[3]}},
+                      {8{wmask[2]}},{8{wmask[1]}},{8{wmask[0]}}};
+
+
+
+
+
+
+
+
+
 //memory
 
 reg [63:0]wmask_1b;
@@ -272,7 +318,7 @@ always @(*) begin
     default:wmask_1byte=8'b0;
 	endcase
 */
-
+/*
 	case(waddr[2:0])
     3'd0  : wmask_1b=64'hff ; 
     3'd1  : wmask_1b=64'hff00;
@@ -284,7 +330,8 @@ always @(*) begin
     3'd7  : wmask_1b=64'hff00000000000000;
     default:wmask_1b=64'b0;
 	endcase
-
+*/
+/*
 	case(waddr[2:0])
     3'd0  : wdata_2byte={{48{1'b0}},src2[15:0]}; 
     3'd2  : wdata_2byte={{32{1'b0}},src2[15:0],{16{1'b0}}};
@@ -308,7 +355,7 @@ always @(*) begin
     3'd6  : wmask_2b=64'hffff000000000000;
     default:wmask_2b=64'b0;
 	endcase
-
+*/
 
 
 
@@ -331,7 +378,7 @@ always @(*) begin
     3'd6  : rdata_2byte=rdata[63:48];
     default:rdata_2byte=16'b0;
 	endcase
-
+/*
 	case(opcode)
     24'd16  : wdata=wdata_1byte;
     24'd17  : wdata=wdata_2byte;
@@ -355,7 +402,7 @@ always @(*) begin
     24'd43  : wmask_dcache=64'hffffffffffffffff;
     default: wmask_dcache=64'b0;
 	endcase
-
+*/
 	case(opcode)
     24'd11  : rdata_fix=(rdata_1byte[7]?{{56{1'b1}},rdata_1byte}:{{56{1'b0}},rdata_1byte});
     24'd12  : rdata_fix=(rdata_2byte[15]?{{48{1'b1}},rdata_2byte}:{{48{1'b0}},rdata_2byte});
@@ -376,19 +423,16 @@ wire [63:0] waddr;
 assign raddr = opcode_type[5] ? aluoutput : 64'b0;
 assign waddr = opcode_type[6] ? aluoutput : 64'b0;
 
-
 reg [7:0]wmask_1byte;
 reg [63:0]wdata_1byte;
-
 reg [7:0]wmask_2byte;
 reg [63:0]wdata_2byte;
-
-
-
 reg [63:0] rdata;
-
 reg [63:0] wdata;
 reg [ 7:0] wmask;
+reg [63:0] rdata_fix;
+reg [7:0] rdata_1byte;
+reg [15:0] rdata_2byte;
 
 
 /*
@@ -397,16 +441,5 @@ always @(*) begin
   pmem_write(waddr, wdata, wmask);
 end
 */
-
-reg [63:0] rdata_fix;
-
-
-reg [7:0] rdata_1byte;
-
-
-reg [15:0] rdata_2byte;
-
-
-
 
 endmodule
