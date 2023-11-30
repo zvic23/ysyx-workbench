@@ -156,7 +156,7 @@ assign opcode_type = MEM_reg_valid ? MEM_reg_opcode_type : 15'b0;
 wire [63:0]src2;
 
 assign reg_wr_wen   = (MEM_reg_valid&&!MEM_block) ? wen       : 1'b0;
-assign reg_wr_ID    = (MEM_reg_valid&&!MEM_block) ? MEM_reg_inst[11:7] : 5'b0;
+assign reg_wr_ID    = (MEM_reg_valid&&!MEM_block) ? MEM_reg_rd : 5'b0;
 assign reg_wr_value = (MEM_reg_valid&&!MEM_block) ? wdata_reg : 64'b0;
 
 
@@ -220,7 +220,15 @@ assign wen = opcode_type[0]||opcode_type[1]||opcode_type[2]||opcode_type[3]||opc
 wire [63:0]wdata_reg;
 assign wdata_reg = opcode_type[5] ? rdata_fix : (opcode_type[11] ? MEM_reg_src2 : aluoutput);
 
-
+assign wdata_1byte = (waddr[2:0] == 3'd0) ? {56'b0, src2[7:0]} :
+                     (waddr[2:0] == 3'd1) ? {48'b0, src2[7:0], 8'b0} :
+                     (waddr[2:0] == 3'd2) ? {40'b0, src2[7:0], 16'b0} :
+                     (waddr[2:0] == 3'd3) ? {32'b0, src2[7:0], 24'b0} :
+                     (waddr[2:0] == 3'd4) ? {24'b0, src2[7:0], 32'b0} :
+                     (waddr[2:0] == 3'd5) ? {16'b0, src2[7:0], 40'b0} :
+                     (waddr[2:0] == 3'd6) ? {8'b0, src2[7:0], 48'b0} :
+                     (waddr[2:0] == 3'd7) ? {src2[7:0], 56'b0} :
+                     64'b0;
 
 //memory
 
@@ -229,6 +237,7 @@ reg [63:0]wmask_2b;
 reg [63:0]wmask_dcache;
 
 always @(*) begin
+	/*
 	case(waddr[2:0])
     3'd0  : wdata_1byte={{56{1'b0}},src2[7:0]}; 
     3'd1  : wdata_1byte={{48{1'b0}},src2[7:0],{ 8{1'b0}}};
@@ -240,7 +249,7 @@ always @(*) begin
     3'd7  : wdata_1byte={src2[7:0],{56{1'b0}}};
     default:wdata_1byte=64'b0;
 	endcase
-
+*/
 	case(waddr[2:0])
     3'd0  : wmask_1byte=8'h1 ; 
     3'd1  : wmask_1byte=8'h2 ;
