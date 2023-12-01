@@ -32,7 +32,7 @@ wire [131:0]p[32:0];
 wire [32:0]c;
 //wire c00,c01,c02,c03,c04,c05,c06,c07,c08,c09,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32;
 
-/*
+
 ysyx_22050612_PART_PRODUCT  part_product00 ({mul_a[1:0],1'b0}, {{66{mul_b[65]}},mul_b}           , p[00], c[ 0]);
 ysyx_22050612_PART_PRODUCT  part_product01 (mul_a[ 3: 1]     , {{64{mul_b[65]}},mul_b,{ 2{1'b0}}}, p[01], c[ 1]);
 ysyx_22050612_PART_PRODUCT  part_product02 (mul_a[ 5: 3]     , {{62{mul_b[65]}},mul_b,{ 4{1'b0}}}, p[02], c[ 2]);
@@ -66,7 +66,7 @@ ysyx_22050612_PART_PRODUCT  part_product29 (mul_a[59:57]     , {{ 8{mul_b[65]}},
 ysyx_22050612_PART_PRODUCT  part_product30 (mul_a[61:59]     , {{ 6{mul_b[65]}},mul_b,{60{1'b0}}}, p[30], c[30]);
 ysyx_22050612_PART_PRODUCT  part_product31 (mul_a[63:61]     , {{ 4{mul_b[65]}},mul_b,{62{1'b0}}}, p[31], c[31]);
 ysyx_22050612_PART_PRODUCT  part_product32 (mul_a[65:63]     , {{ 2{mul_b[65]}},mul_b,{64{1'b0}}}, p[32], c[32]);
-*/
+
 
 reg [131:0]p_reg[32:0];
 reg [32:0]c_reg;

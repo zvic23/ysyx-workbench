@@ -604,7 +604,7 @@ wire [63:0]muler;
 assign mulcand = multipling ? src1 : 64'b0;
 assign muler   = multipling ? src2 : 64'b0;
 
-ysyx_22050612_multiplier boothmul ((clk&&multipling), rst, mul_valid, mul_flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_out_valid, result_hi, result_lo);      
+//ysyx_22050612_multiplier boothmul ((clk&&multipling), rst, mul_valid, mul_flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_out_valid, result_hi, result_lo);      
 //the clk has been "&&" with "mul mulw" opcode to close the clock gating(gate), it can speed up the simulating.
 
 
