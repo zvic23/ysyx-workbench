@@ -104,14 +104,6 @@ always @(posedge clk) begin
 		endcase
 	    //end
 	end
-/*
-	if(addr!=0 && wren) begin
-		if(tag0[addr[9:6]] == addr[31:10]) begin v0[addr[9:6]] <= 1'b0; end
-		if(tag1[addr[9:6]] == addr[31:10]) begin v1[addr[9:6]] <= 1'b0; end
-		if(tag2[addr[9:6]] == addr[31:10]) begin v2[addr[9:6]] <= 1'b0; end
-		if(tag3[addr[9:6]] == addr[31:10]) begin v3[addr[9:6]] <= 1'b0; end
-	end
-*/
 end
 
 wire [3:0]index;
@@ -186,15 +178,6 @@ always @(posedge clk) begin
 		line_mem_prev   <=128'b0;
 		ready           <= 1'b0;
 	end
-	/*
-	else if(!ready_IF_ID) begin
-		way_hit_prev    <= way_hit_prev ;
-		random_cnt      <= random_cnt   ;
-		line_mem_prev   <= line_mem_prev;
-		ready           <= ready        ;
-	end
-	*/
-
         else if(valid && dcache_current_state==idle &&!not_device && !ready)begin    //device
 	     	way_hit_prev    <= 4'b0;
 		line_mem_prev   <= line_mem;
@@ -221,20 +204,6 @@ always @(posedge clk) begin
 		ready           <= 1'b0;
 	end
 
-
-
-       /*
-	else if(ready && valid) begin
-	     	way_hit_prev    <= way_hit;
-		line_mem_prev   <= line_mem;
-		ready           <= 1'b0;
-	end
-	else if(!ready && valid) begin
-	     	way_hit_prev    <= way_hit;
-		line_mem_prev   <= line_mem;
-		ready           <= 1'b1;
-	end
-	*/
 end
 
 reg [127:0]line_read;
