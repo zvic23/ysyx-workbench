@@ -22,8 +22,8 @@ wire [131:0]x_sub;
 assign x_sub = x<<1;
 
 assign p = sel_negative ? ~x : 
-	   sel_positive ? ~x_sub :
-	   sel_double_negative ? x :
+	   sel_positive ? x :
+	   sel_double_negative ? ~x_sub :
 	   sel_double_positive ? x_sub : 132'b0;
 //assign p = ~(~({132{sel_negative}} & ~x) & ~({132{sel_double_negative}} & ~x_sub) & ~({132{sel_positive}} & x ) & ~({132{sel_double_positive}} &  x_sub));
 assign c = (sel_negative || sel_double_negative);
