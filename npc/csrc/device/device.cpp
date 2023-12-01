@@ -13,7 +13,7 @@ void device_update() {
 		gettimeofday(&time,NULL);
 		uint64_t time_rtc = (time.tv_sec*1000000)+time.tv_usec;
 		uint64_t now = time_rtc;
-  if (now - last < 1000000 / TIMER_HZ) {
+  if (now - last < 50000000 / TIMER_HZ) {
   //if (now - last < 200000 ) {
     return;
   }
