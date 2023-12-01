@@ -1,3 +1,5 @@
+`define use_walloc 1
+
 module ysyx_22050612_multiplier(
 	input clk,
 	input rst,
@@ -13,7 +15,7 @@ module ysyx_22050612_multiplier(
 	output [63:0]result_lo
 );
 
-
+`ifdef use_walloc
 wire [65:0]mul_a;
 wire [65:0]mul_b;
 assign mul_a[31: 0] = mul_valid ? multiplicand[31:0] : 32'b0;
@@ -301,6 +303,12 @@ assign result_lo = result[63:0];
 assign mul_ready = ~(mul_pipe1_valid || mul_pipe2_valid);
 //assign mul_ready = mul_pipe2_valid;
 assign out_valid = mul_pipe2_valid;
+
+`else
+
+
+`endif
+
 
 
 endmodule
