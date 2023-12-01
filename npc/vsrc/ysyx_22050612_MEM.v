@@ -176,7 +176,6 @@ assign opcode_type_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_opcode_type : 15'b0;
 
 wire MEM_block;
 assign MEM_block = (opcode_type[5]||opcode_type[6]) && !dcache_ready;
-//assign MEM_block = MEM_reg_valid && ((MEM_reg_inst[6:0]==7'b0000011)||(MEM_reg_inst[6:0]==7'b0100011)) && !dcache_ready;
 assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
 
 
@@ -269,9 +268,6 @@ assign wmask_1byte = (waddr[2:0] == 3'd0) ? 8'h1 :
                      (waddr[2:0] == 3'd6) ? 8'h40: 
                      (waddr[2:0] == 3'd7) ? 8'h80: 
                      8'b0;
-//wire [63:0]wmask_1byte_64;
-//assign  wmask_1byte_64 = {{8{wmask_1byte[7]}},{8{wmask_1byte[6]}},{8{wmask_1byte[5]}},{8{wmask_1byte[4]}},{8{wmask_1byte[3]}},
-//                       {8{wmask_1byte[2]}},{8{wmask_1byte[1]}},{8{wmask_1byte[0]}}};
 
 assign wdata_2byte = (waddr[2:0] == 3'd0) ? {{48{1'b0}},src2[15:0]} : 
                      (waddr[2:0] == 3'd2) ? {{32{1'b0}},src2[15:0],{16{1'b0}}} :
