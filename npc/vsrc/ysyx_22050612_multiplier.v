@@ -1,4 +1,4 @@
-`define use_walloc 1
+`define use_walloc 0
 
 module ysyx_22050612_multiplier(
 	input clk,
