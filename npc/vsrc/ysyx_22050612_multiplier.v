@@ -13,10 +13,6 @@ module ysyx_22050612_multiplier(
 	output [63:0]result_lo
 );
 
-always @(negedge clk)begin
-	//$display("mulcand:%h  mulier:%h",multiplicand,multiplier);
-end
-
 
 wire [65:0]mul_a;
 wire [65:0]mul_b;
