@@ -591,7 +591,7 @@ wire [63:0]result_hi;
 wire [63:0]result_lo;
 
 wire mul_valid;
-assign mul_valid = ((opcode_type[8]||opcode_type[10])&&imm[5]&&~opcode_funct3[2])&&ready_EX_MEM  ;
+assign mul_valid = multipling&&ready_EX_MEM  ;
 wire mulw;
 assign mulw = opcode_type[10];
 wire [1:0]mul_signed;
@@ -604,7 +604,7 @@ wire [63:0]muler;
 assign mulcand = multipling ? src1 : 64'b0;
 assign muler   = multipling ? src2 : 64'b0;
 
-ysyx_22050612_multiplier boothmul ((clk&&((opcode_type[8]||opcode_type[10])&&imm[5]&&~opcode_funct3[2])), rst, mul_valid, mul_flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_out_valid, result_hi, result_lo);      
+ysyx_22050612_multiplier boothmul ((clk&&multipling), rst, mul_valid, mul_flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_out_valid, result_hi, result_lo);      
 //the clk has been "&&" with "mul mulw" opcode to close the clock gating(gate), it can speed up the simulating.
 
 
@@ -620,7 +620,7 @@ wire [63:0]quotient;
 wire [63:0]remainder;
 
 wire div_valid;
-assign div_valid = ((opcode_type[8]||opcode_type[10])&&imm[5]&&opcode_funct3[2])&&ready_EX_MEM  ;
+assign div_valid = dividing&&ready_EX_MEM  ;
 wire divw;
 assign divw = opcode_type[10];
 wire div_signed;
