@@ -207,7 +207,7 @@ assign rs2_EX_MEM = EX_reg_rs2;
 
 
 always @(negedge clk) begin
-	EXU_state_trace(EX_reg_pc, {32'b0,EX_reg_inst}, {63'b0,EX_reg_valid}, src1,src2,{60'b0,EX_block,mul_valid,mul_ready,mul_out_valid} );
+	EXU_state_trace(EX_reg_pc, {32'b0,EX_reg_inst}, {63'b0,EX_reg_valid}, src1,result_lo,{60'b0,EX_block,mul_valid,mul_ready,mul_out_valid} );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x %x   dnpc:%x  opcode:%d\n",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , WB_reg_wdata,  EX_inst_hit, WB_inst_hit, rs1_EX_WB_match , rs2_EX_WB_match,dnpc,opcode);
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , MEM_reg_aluoutput,  EX_inst_hit, MEM_inst_hit, rs1_EX_MEM_match );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x",EX_reg_pc,EX_reg_inst,EX_reg_valid,EX_reg_src_a,EX_reg_src_b,EX_reg_imm);
@@ -605,7 +605,7 @@ assign mulcand = multipling ? src1 : 64'b0;
 assign muler   = multipling ? src2 : 64'b0;
 
 ysyx_22050612_multiplier boothmul ((clk), rst, mul_valid, mul_flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_out_valid, result_hi, result_lo);      
-//the clk has been "&&" with "mul mulw" opcode to close the clock gating(gate), it can speed up the simulating.
+//the clk has been "&&" with "multipling" opcode to close the clock gating(gate), it can speed up the simulating.
 
 
 
