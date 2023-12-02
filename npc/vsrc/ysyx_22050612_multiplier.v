@@ -14,7 +14,7 @@ module ysyx_22050612_multiplier(
 	output [63:0]result_hi,
 	output [63:0]result_lo,
 
-	output reg [8:0]shift_times
+	output reg [129:0] multiplicand_shift
 );
 
 `ifdef use_walloc
@@ -319,9 +319,9 @@ assign multiplier_amend   = mulw ? ((mul_signed[0]&&multiplier[63]) ? {multiplie
 	                           ((mul_signed[0]&&multiplier[31]) ? {32'b0,multiplier[31],multiplier[31:0]} : {33'b0,multiplier[31:0]});
 
 
-reg [129:0] multiplicand_shift;
+//reg [129:0] multiplicand_shift;
 reg [64:0] multiplier_shift;
-//reg [8:0]shift_times;
+reg [8:0]shift_times;
 reg mulw_reg;
 reg mul_working;
 reg [129:0] result;
