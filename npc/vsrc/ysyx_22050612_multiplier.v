@@ -1,4 +1,4 @@
-`define use_walloc
+`define use_walloc 1
 
 module ysyx_22050612_multiplier(
 	input clk,
@@ -353,8 +353,8 @@ end
 
 assign mul_ready = ~mul_working;
 assign out_valid = mulw_reg ? (shift_times == 9'd33) : (shift_times == 9'd65);
-//assign result_hi = result[127:64];
-//assign result_lo = result[63:0];
+assign result_hi = result[127:64];
+assign result_lo = result[63:0];
 /*
 always @(negedge clk) begin
 	if(mul_working) begin
