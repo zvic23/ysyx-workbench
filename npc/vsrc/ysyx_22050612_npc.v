@@ -11,136 +11,6 @@ output [63:0]wb_pc
 
 );
 
-/*
-wire flush;
-wire div_ready;
-wire div_result_valid;
-wire [63:0]quotient;
-wire [63:0]remainder;
-
-wire div_valid;
-assign div_valid = 1'b1;
-wire divw;
-assign divw = 1'b1;
-wire div_signed;
-assign div_signed = 1'b1;
-reg [63:0]dividend;
-reg [63:0]divisor;
-
-
-ysyx_22050612_divider dividerkk (clk, rst, div_valid, flush, divw, div_signed, dividend, divisor, div_ready, div_result_valid, quotient, remainder);
-
-
-always @(posedge clk)begin
-	if(rst) begin
-		dividend<= -64'd15;
-		divisor <= -64'd2;
-	end
-	else begin
-		//dividend[31:0]  <= $random;
-		//divisor [31:0]  <= $random;
-		//dividend[63:32]  <= $random;
-		//divisor [63:32]  <= $random;
-		//mulcand[63:32] <= 32'b0;
-		//muler  [63:32] <= 32'b0;
-		//mulcand <= 64'd4;
-		//muler   <= -(64'd6);
-		//mulcand <= mulcand - 64'd2;
-		//muler   <= muler   + 64'd3;
-		//mulcand[63:32] <= 32'b0;
-		//muler  [63:32] <= 32'b0;
-	end
-end
-
-
-wire [63:0]quotient_r;
-wire [63:0]remainder_r;
-
-assign quotient_r = dividend / divisor;
-assign remainder_r= dividend % divisor;
-
-always @(negedge clk)begin
-	//if(quotient_r != quotient) $display("quo !!!!!!!!!!");
-	//if(remainder_r!= remainder) $display("rem  !!!!!!!!!");
-
-	
-	$display("mulcand:%d  mulier:%d      %d %d",$signed(dividend[63:0]),$signed(divisor),dividend[63],divisor[63]);
-	$display("mulresult:%d       %d",     $signed(quotient),  $signed(remainder));
-	//$display("mulresult:%d       %d",     quotient,  remainder);
-
-end
-*/
-
-
-/*
-wire flush;
-wire mul_ready;
-wire [63:0]result_hi;
-wire [63:0]result_lo;
-
-wire mul_valid;
-assign mul_valid = 1'b1;
-wire mulw;
-assign mulw = 1'b1;
-wire [1:0]mul_signed;
-assign mul_signed = 2'b01;
-reg [63:0]mulcand;
-reg [63:0]muler;
-
-ysyx_22050612_multiplier boothmul (clk, rst, mul_valid, flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_valid, result_hi, result_lo);
-
-
-always @(posedge clk)begin
-	if(rst) begin
-		mulcand <= -64'b1;
-		muler   <= 64'b1;
-	end
-	else begin
-		//mulcand[31:0]  <= $random;
-		//muler  [31:0]  <= $random;
-		//mulcand[63:32] <= 32'b0;
-		//muler  [63:32] <= 32'b0;
-		//mulcand <= 64'd4;
-		//muler   <= -(64'd6);
-		mulcand <= mulcand - 64'd2;
-		muler   <= muler   + 64'd3;
-		//mulcand[63:32] <= 32'b0;
-		//muler  [63:32] <= 32'b0;
-	end
-end
-
-wire [127:0]result_r;
-//wire signed [127:0]result_r;
-
-//assign result_r = mulcand * muler;
-
-//assign result_r = $signed(mulcand[31:0]) * $signed(muler[31:0]);
-//assign result_r = $signed(mulcand) * $signed(muler);
-
-//** In verilator, "the signed * the unsigned" will be changed to "the unsigned * the unsigned", so it can not use the "*" to check the situation about "the signed * the unsigned" or "the unsigned * the signed".
-//assign result_r = mulcand[31:0] * $signed(muler[31:0]);
-//assign result_r = mulcand * $signed(muler);
-//assign result_r = $signed(mulcand) * muler;
-
-
-always @(negedge clk)begin
-	if(result_r != {result_hi,result_lo}) begin
-		$display("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!!!\n");
-	end
-	//$display("mulcand:%h  mulier:%h      %d %d",mulcand,muler,mulcand[63],muler[63]);
-	//$display("mulresult:%d       %d",{result_hi,result_lo},result_hi[63]);
-	//$display("mulresu  :%d       %d",result_r, result_r[127]);
-	
-	$display("mulcand:%d  mulier:%d      %d %d",$signed(mulcand[63:0]),muler,mulcand[63],muler[63]);
-	//$display("mulcand:%d  mulier:%d      %d %d",mulcand,$signed(muler),mulcand[63],muler[63]);
-	$display("mulresult:%d       %d",$signed({result_hi,result_lo}),result_hi[63]);
-	$display("mulresu  :%d       %d",$signed(result_r), result_r[127]);
-end
-
-*/
-
-
-
 assign wb_pc=WB_reg_pc;   //used by cpp file for difftest
 assign pc = pc_ifu;       //used by cpp file for itrace
 
@@ -213,7 +83,7 @@ wire       EX_reg_valid;
 wire [31:0]EX_reg_inst ;
 
 
-ysyx_22050612_EXU exu (clk,rst, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX,opcode_ID_EX, opcode_type_ID_EX,opcode_funct3_ID_EX,rd_ID_EX, rs1_ID_EX, rs2_ID_EX,src_A,src_B, imm, dnpc,pc_update, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM, opcode_EX_MEM,opcode_type_EX_MEM,opcode_funct3_EX_MEM, rd_EX_MEM, rs2_EX_MEM, ALUoutput_EX_MEM , src_B_EX_MEM,wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus,wen_mtvec,wen_mepc,wen_mcause,wen_mstatus,gpr , EX_reg_valid,EX_reg_inst, /* MEM_reg_valid, MEM_reg_inst,*/ mem_writing_gpr, mem_rd,MEM_reg_aluoutput,/* WB_reg_valid, WB_reg_inst,*/ wbu_writing_gpr, wbu_rd, WB_reg_wdata  , branch_flush );
+ysyx_22050612_EXU exu (clk,rst, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX,opcode_ID_EX, opcode_type_ID_EX,opcode_funct3_ID_EX,rd_ID_EX, rs1_ID_EX, rs2_ID_EX,src_A,src_B, imm, dnpc,pc_update, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM, opcode_EX_MEM,opcode_type_EX_MEM,opcode_funct3_EX_MEM, rd_EX_MEM, rs2_EX_MEM, ALUoutput_EX_MEM , src_B_EX_MEM,wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus,wen_mtvec,wen_mepc,wen_mcause,wen_mstatus,gpr , EX_reg_valid,EX_reg_inst, mem_writing_gpr, mem_rd,MEM_reg_aluoutput, wbu_writing_gpr, wbu_rd, WB_reg_wdata  , branch_flush );
 
 wire       valid_EX_MEM  ;
 wire       ready_EX_MEM  ;
@@ -233,7 +103,7 @@ wire mem_writing_gpr;
 wire [4:0]mem_rd;
 wire [63:0]MEM_reg_aluoutput ;
 
-ysyx_22050612_MEM mem (clk,rst, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM,opcode_EX_MEM,opcode_type_EX_MEM, opcode_funct3_EX_MEM, rd_EX_MEM, rs2_EX_MEM, ALUoutput_EX_MEM, src_B_EX_MEM, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB,opcode_type_MEM_WB, rd_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, /* MEM_reg_valid, MEM_reg_inst,*/ mem_writing_gpr, mem_rd, MEM_reg_aluoutput ,/* WB_reg_valid, WB_reg_inst,*/ wbu_writing_gpr, wbu_rd, WB_reg_wdata,   raddr,waddr,
+ysyx_22050612_MEM mem (clk,rst, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM,opcode_EX_MEM,opcode_type_EX_MEM, opcode_funct3_EX_MEM, rd_EX_MEM, rs2_EX_MEM, ALUoutput_EX_MEM, src_B_EX_MEM, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB,opcode_type_MEM_WB, rd_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value,  mem_writing_gpr, mem_rd, MEM_reg_aluoutput ,/* WB_reg_valid, WB_reg_inst,*/ wbu_writing_gpr, wbu_rd, WB_reg_wdata,   raddr,waddr,
 araddr_mem, arlen_mem, arsize_mem, arburst_mem, arvalid_mem, arready_mem, rdata_mem, rresp_mem, rlast_mem, rvalid_mem, rready_mem, awaddr_mem, awlen_mem, awsize_mem, awburst_mem, awvalid_mem, awready_mem,    wdata_mem, wstrb_mem, wlast_mem, wvalid_mem, wready_mem,   bresp_mem, bvalid_mem, bready_mem);
 
 
@@ -247,8 +117,7 @@ wire       reg_wr_wen   ;
 wire [ 4:0]reg_wr_ID    ;
 wire [63:0]reg_wr_value ;
 
-//wire       WB_reg_valid;
-//wire [31:0]WB_reg_inst ;
+
 wire wbu_writing_gpr;
 wire [4:0]wbu_rd;
 wire [63:0]WB_reg_wdata ;
@@ -257,7 +126,7 @@ wire [63:0]WB_reg_pc ;
 wire [63:0]raddr;
 wire [63:0]waddr;
 
-ysyx_22050612_WBU wbu (clk,rst, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB,opcode_type_MEM_WB, rd_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr ,/* WB_reg_valid, WB_reg_inst,*/ wbu_writing_gpr, wbu_rd, WB_reg_wdata, WB_reg_pc,  raddr,waddr   ,  ready_EX_MEM);
+ysyx_22050612_WBU wbu (clk,rst, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB,opcode_type_MEM_WB, rd_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value, gpr , wbu_writing_gpr, wbu_rd, WB_reg_wdata, WB_reg_pc,  raddr,waddr   ,  ready_EX_MEM);
 
 
 
@@ -360,16 +229,10 @@ ysyx_22050612_SRAM  sram_mem (clk, rst, araddr, arlen, arsize, arburst, arvalid,
 //*****************************************************************
 
 
-
-//************************  pipeline  ******************************
-
-//*****************************************************************
-
-
 initial set_gpr_ptr(gpr);                   //to update the gpr in cpp file
 
-//always @(mtvec or mepc or mcause or mstatus) begin
-//       update_csr(mtvec,mcause,mepc,mstatus);	
-//end
+always @(mtvec or mepc or mcause or mstatus) begin
+       update_csr(mtvec,mcause,mepc,mstatus);	
+end
 
 endmodule
