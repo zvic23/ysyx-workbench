@@ -5,7 +5,8 @@ import "DPI-C" function void pmem_read_pc(
 
 module ysyx_22050612_IFU (
    input clk,
-   input rst, 
+   input rst,
+
    output reg valid_IF_ID,
    input      ready_IF_ID,
    output reg [63:0]pc_prev,
@@ -13,93 +14,31 @@ module ysyx_22050612_IFU (
    output [31:0]inst,
 
    input pc_update,
-   input [63:0]dnpc,
+   input [63:0]dnpc,      //refresh pc
 
-   output branch_flush,
+   output branch_flush,   //clean the IFU, icache, IDU and EXU if the branch predict fail.
 
-   input [63:0]waddr,   //暂时加进来保证切换程序时icache能保持一致性，所以每次存指令后就更新icache
-
-
-
-output [31:0]araddr_icache_axi,
-output [7:0]arlen_icache_axi,
-output [2:0]arsize_icache_axi,
-output [1:0]arburst_icache_axi,
-output     arvalid_icache_axi,
-input      arready_icache_axi,
-
-input [63:0]rdata_icache_axi,
-input [1:0]rrsep_icache_axi,
-input rlast_icache_axi,
-input rvalid_icache_axi,
-output rready_icache_axi
+   input [63:0]waddr,     //暂时加进来保证切换程序时icache能保持一致性，所以每次存指令后就更新icache
 
 
-
-/*
-   output reg arvalid,
-   output reg [31:0]araddr,
-   input arready,
-
-   input reg rvalid,
-   input [63:0]rdata,
-   input [1:0]rresp,
-   output rready,
-
-   input exu_block
-*/
+   //***  axi_full signal from icache ***//
+   output [31:0]araddr_icache_axi,
+   output [7:0]arlen_icache_axi,
+   output [2:0]arsize_icache_axi,
+   output [1:0]arburst_icache_axi,
+   output     arvalid_icache_axi,
+   input      arready_icache_axi,
+   
+   input [63:0]rdata_icache_axi,
+   input [1:0]rrsep_icache_axi,
+   input rlast_icache_axi,
+   input rvalid_icache_axi,
+   output rready_icache_axi
 
 );
 
-/*
-//****************  AXI  ************************
-reg [63:0]inst_64;
-
-assign rready = 1'b1;
-
-always @(posedge clk) begin
-	//$display("ifu:   arvalid = %d  arready = %d  \n",arvalid, arready);   
-
-	if(rvalid == 1'b1 && rready == 1'b1)begin
-		inst <= araddr[2]?rdata[63:32] : rdata[31:0];
-		//inst_64 = rdata;
-		//$display("inst:%x",inst);
-		//$display("3\n");
-	end
-	else if(arvalid == 1'b1 && arready == 1'b1 ) begin
-		inst <= 32'b0;
-	end
-end
-
-
-
-always @(edge clk) begin
-	if(rst == 1'b1 && clk == 1'b0)begin
-		arvalid <= 1'b1;
-		araddr <= 32'h80000000;
-	end
-	//else if(rvalid == 1'b0 && exu_block == 1'b0 && clk == 1'b0 )begin
-	else if(pc_update == 1'b1 && clk == 1'b0 )begin
-		arvalid <= 1'b1;
-		araddr <= dnpc[31:0];
-	//$display("block = %d ",exu_block);
-	//$display("1\n");
-	//$display("%d   \n",arvalid);
-	end
-	else if(arvalid == 1'b1 && arready == 1'b1 && clk == 1'b1) begin
-		arvalid <= 1'b0;
-	end
-//	else if(rvalid == 1'b1 && clk == 1'b0) begin
-//		arvalid <= 1'b0;
-//	end
-end
-//**************************************
-*/
-
-
-
 assign branch_flush = pc_update;
-assign valid_IF_ID = icache_ready;
+assign valid_IF_ID = icache_ready;     //if the icache have a inst ready, valid_IF_ID is high to send inst to IDU.
 
 
 //**********************  pc  *****************************
@@ -111,11 +50,11 @@ always @(*) begin
 		pc_next = dnpc;
 		pc_en   = 1'b1;
 	end
-	else if(inst_branch && minus_target_addr /*&& valid_IF_ID*/)begin
+	else if(inst_branch && minus_target_addr)begin
 		pc_next = pc_prev+imm_B;
 		pc_en   = 1'b1;
 	end
-	else if(inst_jal /*&& valid_IF_ID*/)begin
+	else if(inst_jal)begin
 		pc_next = pc_prev+imm_J;
 		pc_en   = 1'b1;
 	end

@@ -58,11 +58,11 @@ wire [63:0]pc_IF_ID   ;
 wire [31:0]inst_IF_ID ;
 
 wire [63:0]dnpc;
-wire pc_update;       //these two come from exu
+wire pc_update;       //these two come from exu to correct pc for wrong branch predict and jalr
 
 wire branch_flush;    //if branch predict failed, clean IFU, ICACHE, IDU and EXU. it = pc_update now.
 
-ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, mtvec, mepc, mcause, mstatus, /*shamt,*/ rd_ID_EX, rs1_ID_EX, rs2_ID_EX, src_A,src_B, imm, opcode_ID_EX, opcode_type_ID_EX, opcode_funct3_ID_EX, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX , EX_reg_valid,EX_reg_inst  , branch_flush);
+ysyx_22050612_IDU idu (clk, rst, gpr, valid_IF_ID, ready_IF_ID, pc_IF_ID, inst_IF_ID, mtvec, mepc, mcause, mstatus, rd_ID_EX, rs1_ID_EX, rs2_ID_EX, src_A,src_B, imm, opcode_ID_EX, opcode_type_ID_EX, opcode_funct3_ID_EX, valid_ID_EX, ready_ID_EX, pc_ID_EX, inst_ID_EX , EX_reg_valid,EX_reg_inst  , branch_flush);
 
 wire       valid_ID_EX  ;
 wire       ready_ID_EX  ;
@@ -103,9 +103,9 @@ wire mem_writing_gpr;
 wire [4:0]mem_rd;
 wire [63:0]MEM_reg_aluoutput ;
 
-ysyx_22050612_MEM mem (clk,rst, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM,opcode_EX_MEM,opcode_type_EX_MEM, opcode_funct3_EX_MEM, rd_EX_MEM, rs2_EX_MEM, ALUoutput_EX_MEM, src_B_EX_MEM, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB,opcode_type_MEM_WB, rd_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value,  mem_writing_gpr, mem_rd, MEM_reg_aluoutput ,/* WB_reg_valid, WB_reg_inst,*/ wbu_writing_gpr, wbu_rd, WB_reg_wdata,   raddr,waddr,
-araddr_mem, arlen_mem, arsize_mem, arburst_mem, arvalid_mem, arready_mem, rdata_mem, rresp_mem, rlast_mem, rvalid_mem, rready_mem, awaddr_mem, awlen_mem, awsize_mem, awburst_mem, awvalid_mem, awready_mem,    wdata_mem, wstrb_mem, wlast_mem, wvalid_mem, wready_mem,   bresp_mem, bvalid_mem, bready_mem);
-
+ysyx_22050612_MEM mem (clk,rst, valid_EX_MEM, ready_EX_MEM, pc_EX_MEM, inst_EX_MEM,opcode_EX_MEM,opcode_type_EX_MEM, opcode_funct3_EX_MEM, rd_EX_MEM, rs2_EX_MEM, ALUoutput_EX_MEM, src_B_EX_MEM, valid_MEM_WB, ready_MEM_WB, pc_MEM_WB, inst_MEM_WB,opcode_type_MEM_WB, rd_MEM_WB, reg_wr_wen, reg_wr_ID, reg_wr_value,  mem_writing_gpr, mem_rd, MEM_reg_aluoutput ,/* WB_reg_valid, WB_reg_inst,*/ wbu_writing_gpr, wbu_rd, WB_reg_wdata,   raddr,waddr,//
+araddr_mem, arlen_mem, arsize_mem, arburst_mem, arvalid_mem, arready_mem, rdata_mem, rresp_mem, rlast_mem, rvalid_mem, rready_mem, awaddr_mem, awlen_mem, awsize_mem, awburst_mem, awvalid_mem, awready_mem,    wdata_mem, wstrb_mem, wlast_mem, wvalid_mem, wready_mem,   bresp_mem, bvalid_mem, bready_mem);                                                                                                                                             //
+                                                                                                                                                                                                                                                                                                                                                                                                                                                           //
 
 wire       valid_MEM_WB  ;
 wire       ready_MEM_WB  ;
