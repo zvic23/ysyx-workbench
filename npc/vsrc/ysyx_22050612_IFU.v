@@ -73,7 +73,7 @@ assign inst_jal    = icache_ready ? (inst[6:0] == 7'b1101111) : 1'b0;
 wire inst_branch;
 assign inst_branch = icache_ready ? (inst[6:0] == 7'b1100011) : 1'b0;
 // jalr, ecall and mret are not included  because the target address of these inst
-// depend on register.
+// depend on register. 
 
 
 wire minus_target_addr;
@@ -85,54 +85,28 @@ assign imm_J = (inst[31]==1'b1)?{{43{1'b1}},inst[31],inst[19:12],inst[20],inst[3
 
 
 ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, pc_en);
-/*
-wire [63:0]inst_mix;
-always @(*) begin
-  pmem_read_pc(pc_read, inst_mix);
-end
-//always @(*) begin
-//  pmem_read_pc(pc, inst_mix);
-//end
-//assign inst = pc[2]?inst_mix[63:32] : inst_mix[31:0];
-assign inst = pc_read[2]?inst_mix[63:32] : inst_mix[31:0];
-*/
 
-//************************  pipeline  ******************************
+
+//************************  pipeline trace  ******************************
 always @(negedge clk) begin
 	IFU_state_trace(pc, {32'b0,inst}, {63'b0,valid_IF_ID}, {63'b0,ready_IF_ID},64'b0,64'b0 );
 	//$display("IF   pc:%x   inst:%x   valid:%d   ready:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,ready_IF_ID,pc_next,dnpc);
 end
-//*****************************************************************
-
-
 
 
 //************************  icache   *******************************
-wire [63:0]pc_read;
-assign pc_read =  pc;
-
 wire icache_valid;
 wire icache_ready;
 assign icache_valid = ready_IF_ID && (~(inst_jal || (inst_branch &&minus_target_addr))) ;
-//assign icache_valid = ready_IF_ID ? (~(inst_jal || (inst_branch &&minus_target_addr))) : 1'b0;
 
 wire way_hit;
-ysyx_22050612_ICACHE icache (clk, rst, pc_read, pc_prev, icache_valid, branch_flush, ready_IF_ID, inst, icache_ready    , way_hit, waddr,
+ysyx_22050612_ICACHE icache (clk, rst, pc, pc_prev, icache_valid, branch_flush, ready_IF_ID, inst, icache_ready , way_hit, waddr,
 araddr_icache_axi, arlen_icache_axi, arsize_icache_axi, arburst_icache_axi, arvalid_icache_axi, arready_icache_axi, rdata_icache_axi, rrsep_icache_axi, rlast_icache_axi, rvalid_icache_axi, rready_icache_axi);
 
+
+
 always @(posedge clk) begin
-	if(rst) begin
-		pc_prev <= 64'b0;
-	end
-//	else if(!ready_IF_ID) begin
-//		pc_prev <= pc_prev;
-//	end
-/*
-	else if(!icache_ready) begin
-		pc_prev <= pc_prev;
-	end
-*/
-	else if(branch_flush) begin
+	if(rst || branch_flush) begin
 		pc_prev <= 64'b0;
 	end
 	else begin
@@ -142,10 +116,7 @@ end
 
 
 
-
-
-
-//offer the inst in IFU to itace
+//offer the inst in IFU to itrace
 always @(*) begin
 	if(valid_IF_ID) begin
   		read_inst(inst);
