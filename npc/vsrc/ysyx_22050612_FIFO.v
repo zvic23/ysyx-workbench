@@ -27,13 +27,8 @@ reg [$clog2(DEPTH)     : 0] dcount_rg       ;        // Data counter
       
 logic                         wren_s          ;        // Write Enable signal generated iff FIFO is not full
 logic                         rden_s          ;        // Read Enable signal generated iff FIFO is not empty
-logic                         full_s          ;        // Full signal
-logic                         empty_s         ;        // Empty signal
 
 
-/*-------------------------------------------------------------------------------------------------------------------------------
-   Synchronous logic to write to and read from FIFO
--------------------------------------------------------------------------------------------------------------------------------*/
 always @ (posedge clk) begin
 
    if (rst) begin     
@@ -94,17 +89,13 @@ end
    Continuous Assignments
 -------------------------------------------------------------------------------------------------------------------------------*/
 
-// Full and Empty internal
-assign full_s      = (dcount_rg == DEPTH) ? 1'b1 : 0 ;
-assign empty_s     = (dcount_rg == 0    ) ? 1'b1 : 0 ;
+assign full      = (dcount_rg == DEPTH) ? 1'b1 : 0 ;
+assign empty     = (dcount_rg == 0    ) ? 1'b1 : 0 ;
 
 // Write and Read Enables internal
-assign wren_s      = wren_in & !full_s                ;  
-assign rden_s      = rden_in & !empty_s               ;
+assign wren_s      = wren_in & !full                ;  
+assign rden_s      = rden_in & !empty               ;
 
-// Full and Empty to output
-assign full      = full_s                          ;
-assign empty     = empty_s                         ;
 
 // Almost-full and Almost Empty to output
 assign almost_full  = (dcount_rg > UPP_TH) ? 1'b1 : 0 ;
