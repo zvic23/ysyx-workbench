@@ -116,6 +116,8 @@ end
 
 
 
+
+
 //offer the inst in IFU to itrace
 always @(*) begin
 	if(valid_IF_ID) begin

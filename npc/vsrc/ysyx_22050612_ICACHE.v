@@ -18,11 +18,10 @@ input ready_IF_ID,
 output [31:0]inst,
 output reg ready,
 
-output way_hit_out,
-input [63:0]waddr,
+output way_hit_out,     //output the info about miss
+input [63:0]waddr,      //waddr comes from MEM, and it's uesd to maintain icache and dcache consistency
 
-
-
+//***  axi_full signal from icache ***//
 output [31:0]araddr,
 output [7:0]arlen,
 output [2:0]arsize,
@@ -35,20 +34,10 @@ input [1:0]rrsep,
 input rlast,
 input rvalid,
 output rready
-
 );
 
 
-reg [21:0]tag0[15:0];
-reg [21:0]tag1[15:0];
-reg [21:0]tag2[15:0];
-reg [21:0]tag3[15:0];
-reg [15:0]v0;
-reg [15:0]v1;
-reg [15:0]v2;
-reg [15:0]v3;
-
-//************************  pipeline  ******************************
+//************************  pipeline trace ******************************
 always @(negedge clk) begin
 	ICACHE_state_trace (addr_prev, {32'b0,inst}, {63'b0,valid}, {63'b0,ready}, line_mem_prev[127:64], line_mem_prev[63:0], {60'b0,index}, {58'b0,addr_prev[9:4]},
 	{60'b0,addr[3:0]}, {60'b0,addr_prev[3:0]}, {60'b0,way_hit}, {60'b0,way_hit_prev}, {60'b0,cen3,cen2,cen1,cen0}, {60'b0,random_cnt}, {63'b0,arvalid}, {62'b0,icache_current_state});
@@ -77,6 +66,16 @@ end
 */
 end
 //*****************************************************************
+
+
+reg [21:0]tag0[15:0];
+reg [21:0]tag1[15:0];
+reg [21:0]tag2[15:0];
+reg [21:0]tag3[15:0];
+reg [15:0]v0;
+reg [15:0]v1;
+reg [15:0]v2;
+reg [15:0]v3;
 
 integer i;
 always @(posedge clk) begin
@@ -156,7 +155,7 @@ always @(posedge clk) begin
 	end
 end
 
-assign addr_sram = icache_current_state==2'b0 ? addr[9:4] : {addr_wr_sram[9:6],wr_sram_count[2:1]};
+assign addr_sram = icache_current_state==idle ? addr[9:4] : {addr_wr_sram[9:6],wr_sram_count[2:1]};
 assign bwen[63 :0 ] = (wr_sram_count[0]==1'b0) ? 64'b0 : 64'hffffffffffffffff; 
 assign bwen[127:64] = (wr_sram_count[0]==1'b1) ? 64'b0 : 64'hffffffffffffffff; 
 assign  din[63 :0 ] = (wr_sram_count[0]==1'b0) ? rdata : 64'b0; 
