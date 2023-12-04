@@ -1,34 +1,29 @@
 module ysyx_22050612_FIFO #(
-                   parameter DATA_W           = 4      ,        // Data width
-                   parameter DEPTH            = 8      ,        // Depth of FIFO                   
-                   parameter UPP_TH           = 4      ,        // Upper threshold to generate Almost-full
-                   parameter LOW_TH           = 2               // Lower threshold to generate Almost-empty
-                )
+parameter DATA_W           = 4      ,        // Data width
+parameter DEPTH            = 8      ,        // Depth of FIFO                   
+parameter UPP_TH           = 4      ,        // Upper threshold to generate Almost-full
+parameter LOW_TH           = 2               // Lower threshold to generate Almost-empty
+)
+(
+input                   clk         ,        // Clock
+input                   rst        ,         // Active-low Synchronous Reset
 
-                (
-                   input                   clk         ,        // Clock
-                   input                   rstn        ,        // Active-low Synchronous Reset
-                   
-                   input                   i_wren      ,        // Write Enable
-                   input  [DATA_W - 1 : 0] i_wrdata    ,        // Write-data
-                   output                  o_alm_full  ,        // Almost-full signal
-                   output                  o_full      ,        // Full signal
+input                   wren_in      ,        // Write Enable
+input  [DATA_W - 1 : 0] wrdata_in    ,        // Write-data
+output                  almost_full  ,        // Almost-full signal
+output                  full      ,           // Full signal
 
-                   input                   i_rden      ,        // Read Enable
-                   output [DATA_W - 1 : 0] o_rddata    ,        // Read-data
-                   output                  o_alm_empty ,        // Almost-empty signal
-                   output                  o_empty              // Empty signal
-                );
+input                   rden_in      ,        // Read Enable
+output [DATA_W - 1 : 0] rddata_in    ,        // Read-data
+output                  almost_empty ,        // Almost-empty signal
+output                  empty                 // Empty signal
+);
 
 
-/*-------------------------------------------------------------------------------------------------------------------------------
-   Internal Registers/Signals
--------------------------------------------------------------------------------------------------------------------------------*/
-
-logic [DATA_W - 1        : 0] data_rg [DEPTH] ;        // Data array
-logic [$clog2(DEPTH) - 1 : 0] wrptr_rg        ;        // Write pointer
-logic [$clog2(DEPTH) - 1 : 0] rdptr_rg        ;        // Read pointer
-logic [$clog2(DEPTH)     : 0] dcount_rg       ;        // Data counter
+reg [DATA_W - 1        : 0] data_rg [DEPTH] ;        // Data array
+reg [$clog2(DEPTH) - 1 : 0] wrptr_rg        ;        // Write pointer
+reg [$clog2(DEPTH) - 1 : 0] rdptr_rg        ;        // Read pointer
+reg [$clog2(DEPTH)     : 0] dcount_rg       ;        // Data counter
       
 logic                         wren_s          ;        // Write Enable signal generated iff FIFO is not full
 logic                         rden_s          ;        // Read Enable signal generated iff FIFO is not empty
@@ -41,7 +36,7 @@ logic                         empty_s         ;        // Empty signal
 -------------------------------------------------------------------------------------------------------------------------------*/
 always @ (posedge clk) begin
 
-   if (!rstn) begin     
+   if (rst) begin     
           
       data_rg   <= '{default: '0} ;
       wrptr_rg  <= 0              ;
@@ -57,7 +52,7 @@ always @ (posedge clk) begin
       /* FIFO write logic */            
       if (wren_s) begin                          
          
-         data_rg [wrptr_rg] <= i_wrdata ;        // Data written to FIFO
+         data_rg [wrptr_rg] <= wrdata_in ;        // Data written to FIFO
 
          if (wrptr_rg == 15) begin
             wrptr_rg <= 0               ;        // Reset write pointer  
@@ -104,19 +99,19 @@ assign full_s      = (dcount_rg == DEPTH) ? 1'b1 : 0 ;
 assign empty_s     = (dcount_rg == 0    ) ? 1'b1 : 0 ;
 
 // Write and Read Enables internal
-assign wren_s      = i_wren & !full_s                ;  
-assign rden_s      = i_rden & !empty_s               ;
+assign wren_s      = wren_in & !full_s                ;  
+assign rden_s      = rden_in & !empty_s               ;
 
 // Full and Empty to output
-assign o_full      = full_s                          ;
-assign o_empty     = empty_s                         ;
+assign full      = full_s                          ;
+assign empty     = empty_s                         ;
 
 // Almost-full and Almost Empty to output
-assign o_alm_full  = (dcount_rg > UPP_TH) ? 1'b1 : 0 ;
-assign o_alm_empty = (dcount_rg < LOW_TH) ? 1'b1 : 0 ;
+assign almost_full  = (dcount_rg > UPP_TH) ? 1'b1 : 0 ;
+assign almost_empty = (dcount_rg < LOW_TH) ? 1'b1 : 0 ;
 
 // Read-data to output
-assign o_rddata    = data_rg [rdptr_rg]              ;   
+assign rddata_in    = data_rg [rdptr_rg]              ;   
 
 
 endmodule

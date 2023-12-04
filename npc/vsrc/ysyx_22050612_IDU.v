@@ -57,7 +57,7 @@ wire idu_fifo_ren;
 assign idu_fifo_ren = id_ready;
 
 wire idu_fifo_rst;
-assign idu_fifo_rst = ~(rst || branch_flush);
+assign idu_fifo_rst = rst || branch_flush;
 
 wire idu_fifo_alm_full;
 wire idu_fifo_full;
