@@ -13,7 +13,10 @@ input [63:0]mepc,
 input [63:0]mcause,
 input [63:0]mstatus,
 
+/*
 
+output [ 5:0]shamt,
+*/
 output [ 4:0]opcode_rd,
 output [ 4:0]opcode_rs1,
 output [ 4:0]opcode_rs2,
@@ -22,7 +25,7 @@ output [63:0]src_B,
 output [63:0]  imm,
 
 
-//output [23:0]opcode,
+output [23:0]opcode,
 output [14:0]opcode_type,
 output [2:0]opcode_funct3,
 output     valid_ID_EX,
@@ -30,10 +33,10 @@ input      ready_ID_EX,
 output [63:0]pc_ID_EX,
 output [31:0]inst_ID_EX,
 
-input ex_loading,
-input [4:0]ex_rd,
 
 
+input EX_reg_valid,
+input [31:0]EX_reg_inst,
 
 input branch_flush
 );
@@ -122,16 +125,18 @@ end
 
 //load interlock
 
+wire EX_loading;
+assign EX_loading = EX_reg_inst[6:0] == 7'b0000011;   //load inst
 wire rs1_waiting;
 wire rs2_waiting;
 wire rs2_block_checking;
 assign rs2_block_checking = opcode_jal || opcode_jalr || opcode_branch || opcode_cpt_r || opcode_cpt_rw;  //include jal, jalr, branch, +-*/ and shift.
 
-assign rs1_waiting = ex_rd == opcode_rd;
-assign rs2_waiting = ex_rd == opcode_rd;
+assign rs1_waiting = EX_reg_inst[11:7] == ID_reg_inst[19:15];
+assign rs2_waiting = EX_reg_inst[11:7] == ID_reg_inst[24:20];
 
 wire ID_block;
-assign ID_block = ID_reg_valid && ex_loading && (rs1_waiting ||(rs2_waiting && (rs2_block_checking)));
+assign ID_block = ID_reg_valid && EX_reg_valid && EX_loading && (rs1_waiting ||(rs2_waiting && (rs2_block_checking)));
 
 //********************************************************************
 
@@ -153,7 +158,7 @@ end
 assign src_A = gpr[opcode_rs1];
 assign src_B = opcode_csr ? src_csr : (opcode_ecall ? mtvec : (opcode_mret ? mepc : gpr[opcode_rs2]));
 
-/*
+
   always @(inst) begin
 	  case ({inst[14:12],inst[6:0]})
     10'b000_1100111:  opcode[6:0]= 7'd4   ;    //jalr
@@ -247,7 +252,7 @@ assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
 //always @(posedge clk) begin
 //	if(inst==32'h00100073) ebreak(1);
 //end
-*/
+
 
 wire opcode_wen;
 wire [63:0]opcode_imm   ;
