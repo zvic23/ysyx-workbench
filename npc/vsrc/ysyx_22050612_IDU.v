@@ -40,7 +40,9 @@ input branch_flush
 
 
 assign ready_IF_ID = ~idu_fifo_alm_full;
-//assign ready_IF_ID = ID_block ? 1'b0 : ready_ID_EX;
+//It is the alm-full set ready_if_id, so that it can reserve some space for
+//the inst comes from icache. Because icache can't hold on inst if fifo is
+//full.
 
 
 //*************************   FIFO    ********************************
@@ -48,7 +50,8 @@ wire id_ready;
 assign id_ready = ID_block ? 1'b0 : ready_ID_EX;
 
 wire idu_fifo_wen;
-assign idu_fifo_wen = (idu_fifo_empty && id_ready) ? 1'b0 : valid_IF_ID;
+assign idu_fifo_wen = (idu_fifo_empty && id_ready) ? 1'b0 : valid_IF_ID;  
+//If fifo emtpy and idu ready, the inst go straight in idu instead of fifo.
 
 wire idu_fifo_ren;
 assign idu_fifo_ren = id_ready;
@@ -85,12 +88,14 @@ always @(posedge clk) begin
 		ID_reg_pc    <= ID_reg_pc;
 		ID_reg_inst  <= ID_reg_inst ;
 	end
+	/*
 	else if(idu_fifo_empty && ~valid_IF_ID)begin
 		ID_reg_valid <= 1'b0;
 		ID_reg_pc    <= 64'b0;
 		ID_reg_inst  <= 32'b0;
 	end
-	else if(idu_fifo_empty && valid_IF_ID)begin
+	*/
+	else if(idu_fifo_empty/* && valid_IF_ID*/)begin
 		ID_reg_valid <= valid_IF_ID;
 		ID_reg_pc    <= pc_IF_ID;
 		ID_reg_inst  <= inst_IF_ID;
