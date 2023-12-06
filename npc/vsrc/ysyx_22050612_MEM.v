@@ -14,7 +14,7 @@ input       valid_EX_MEM,
 output      ready_EX_MEM,
 input [63:0]pc_EX_MEM,
 input [31:0]inst_EX_MEM,
-input [23:0]opcode_in,
+//input [23:0]opcode_in,
 input [14:0]opcode_type_EX_MEM,
 input [ 2:0]opcode_funct3_EX_MEM,
 input [ 4:0]rd_EX_MEM,
@@ -99,7 +99,7 @@ assign mem_rd = MEM_reg_rd;
 reg       MEM_reg_valid         ;
 reg [31:0]MEM_reg_inst          ;
 reg [63:0]MEM_reg_pc            ;
-reg [23:0]MEM_reg_opcode        ;
+//reg [23:0]MEM_reg_opcode        ;
 reg [14:0]MEM_reg_opcode_type        ;
 reg [ 2:0]MEM_reg_opcode_funct3        ;
 //reg [63:0]MEM_reg_aluoutput     ;
@@ -112,7 +112,7 @@ always @(posedge clk) begin
 		MEM_reg_valid          <=  1'b0;
 		MEM_reg_pc             <= 64'b0;
 		MEM_reg_inst           <= 32'b0;
-		MEM_reg_opcode         <= 24'b0;
+		//MEM_reg_opcode         <= 24'b0;
 		MEM_reg_opcode_type         <= 15'b0;
 		MEM_reg_opcode_funct3         <= 3'b0;
 		MEM_reg_aluoutput      <= 64'b0;
@@ -124,7 +124,7 @@ always @(posedge clk) begin
 		MEM_reg_valid          <= MEM_reg_valid      ; 
 		MEM_reg_pc             <= MEM_reg_pc         ; 
 		MEM_reg_inst           <= MEM_reg_inst       ; 
-		MEM_reg_opcode         <= MEM_reg_opcode     ; 
+		//MEM_reg_opcode         <= MEM_reg_opcode     ; 
 		MEM_reg_opcode_type         <= MEM_reg_opcode_type     ; 
 		MEM_reg_opcode_funct3         <= MEM_reg_opcode_funct3;
 		MEM_reg_aluoutput      <= MEM_reg_aluoutput  ; 
@@ -136,7 +136,7 @@ always @(posedge clk) begin
 		MEM_reg_valid          <= valid_EX_MEM;
 		MEM_reg_pc             <= pc_EX_MEM;
 		MEM_reg_inst           <= inst_EX_MEM;
-		MEM_reg_opcode         <= opcode_in;
+		//MEM_reg_opcode         <= opcode_in;
 		MEM_reg_opcode_type         <= opcode_type_EX_MEM;
 		MEM_reg_opcode_funct3         <= opcode_funct3_EX_MEM;
 		MEM_reg_aluoutput      <= ALUoutput_in;
@@ -149,8 +149,8 @@ end
 wire [31:0]inst;
 assign inst = MEM_reg_valid ? MEM_reg_inst : 32'b0;
 
-wire [23:0]opcode;
-assign opcode = MEM_reg_valid ? MEM_reg_opcode : 24'b0;
+//wire [23:0]opcode;
+//assign opcode = MEM_reg_valid ? MEM_reg_opcode : 24'b0;
 
 wire [63:0]aluoutput;
 assign aluoutput = MEM_reg_valid ? MEM_reg_aluoutput : 64'b0;
@@ -214,7 +214,7 @@ assign mem_storing = opcode_type[6];
 
 
 always @(negedge clk) begin
-	MEM_state_trace(MEM_reg_pc, {32'b0,MEM_reg_inst}, {63'b0,MEM_reg_valid}, rdata,reg_wr_value,64'b0 );
+	MEM_state_trace(MEM_reg_pc, {32'b0,MEM_reg_inst}, {63'b0,MEM_reg_valid}, dcache_dout,reg_wr_value,64'b0 );
 	//$display("MEM  pc:%x   inst:%x   valid:%x   aluout:%x   op_b:%x  wen:%x  wdata:%x  opcode:%x",MEM_reg_pc,MEM_reg_inst,MEM_reg_valid,MEM_reg_aluoutput,MEM_reg_src2   ,wen,wdata_reg,opcode);
 end
 //********************************************************************
