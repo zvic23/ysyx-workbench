@@ -175,12 +175,11 @@ S011HD1P_X32Y2D128_BW sram_i3(dout3, clk, cen3, wen, bwen, addr_sram, din);
 reg [3:0]way_hit_prev;
 reg [127:0]line_mem_prev;
 always @(posedge clk) begin
-	if(rst || flush) begin
+	if(rst || flush) begin               //rst or flush should clean the record
 		way_hit_prev    <= 4'b0;
 		line_mem_prev   <=128'b0;
 		ready           <= 1'b0;
 	end
-
 	else if(valid && way_hit!=4'b0 && icache_current_state==idle)begin
 	     	way_hit_prev    <= way_hit;
 		line_mem_prev   <= line_mem;
@@ -192,36 +191,7 @@ always @(posedge clk) begin
 		ready           <= 1'b0;
 	end
 end
-/*
-always @(posedge clk) begin
-	if(rst) begin
-		way_hit_prev    <= 4'b0;
-		random_cnt      <= 4'b1;
-		line_mem_prev   <=128'b0;
-		ready           <= 1'b0;
-	end
-	else if(icache_current_state == 2'b1 && flush) begin
-	end
-	else if() begin
-		way_hit_prev    <= way_hit_prev ;
-		random_cnt      <= random_cnt   ;
-		line_mem_prev   <= line_mem_prev;
-		ready           <= ready        ;
-	end
-	else if(flush) begin
-		way_hit_prev    <= 4'b0;
-		line_mem_prev   <=128'b0;
-		ready           <= 1'b0;
-	end
-	else begin
-	     	way_hit_prev    <= way_hit;
-		random_cnt[0]   <= random_cnt[3];
-		random_cnt[3:1] <= random_cnt[2:0];
-		line_mem_prev   <= line_mem;
-		ready           <= valid;
-	end
-end
-*/
+
 reg [127:0]dout;
 always @(*) begin
 	case(way_hit_prev)
@@ -234,7 +204,10 @@ always @(*) begin
 	endcase
 end
 
-assign inst =  addr_prev[3:2]==2'b0 ? dout[31:0] : (addr_prev[3:2]==2'b01 ? dout[63:32] : (addr_prev[3:2]==2'b10 ? dout[95:64] : (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)))  ;
+assign inst =  addr_prev[3:2]==2'b00 ? dout[31: 0] : 
+	      (addr_prev[3:2]==2'b01 ? dout[63:32] : 
+	      (addr_prev[3:2]==2'b10 ? dout[95:64] : 
+	      (addr_prev[3:2]==2'b11 ? dout[127:96] : 32'b0)));
 
 
 
@@ -264,8 +237,6 @@ end
 //wire rvalid;
 //wire rready;
 
-
-//ysyx_22050612_SRAM  sram_ifu (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready);
 //ysyx_22050612_SRAM  sram_ifu (clk, rst, araddr, arlen, arsize, arburst, arvalid, arready,    rdata, rrsep, rlast, rvalid, rready,   
 //	                                 32'b0,  8'b0,   3'b0,    2'b0,    1'b0,    ,    64'b0,  8'b0,  1'b0,   1'b0,   ,
 //				      	 , , 1'b0);
@@ -273,7 +244,7 @@ end
 
 assign araddr  = {addr[31:6],6'b0};
 assign arlen   = 8'b111;                                    //The real length is arlen + 1
-assign arsize  = 3'b110;                                     //64bits
+assign arsize  = 3'b110;                                    //64bits
 assign arburst = 2'b01;
 
 assign rready  = 1'b1;
@@ -283,8 +254,7 @@ assign rready  = 1'b1;
 reg [1:0]icache_current_state, icache_next_state;
 
 localparam idle       = 2'b00;        //
-localparam readmemory = 2'b01;        //
-//localparam readsram   = 2'b11;        //
+localparam readmemory = 2'b01;        //reading memory
 
 
 always @(posedge clk) begin
@@ -302,12 +272,6 @@ always @(*) begin
 			arvalid = 1'b0;
 			icache_next_state = rlast ? idle : readmemory;
 		end
-		/*
-		readsram: begin
-			arvalid = 1'b0;
-			icache_next_state = rlast ? readsram : readmemory;
-		end
-		*/
 		default: begin
 			arvalid = 1'b0;
 			icache_next_state = idle;
@@ -322,7 +286,7 @@ end
 
 
 
-
+//collect the information of icache
 always @(negedge clk) begin
 	if(valid&&icache_current_state==2'b0) begin
 		if(way_hit != 4'b0) begin
