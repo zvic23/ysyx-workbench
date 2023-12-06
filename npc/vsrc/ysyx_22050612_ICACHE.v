@@ -253,8 +253,8 @@ assign rready  = 1'b1;
 //****************     icahce state machine   ***************
 reg [1:0]icache_current_state, icache_next_state;
 
-localparam idle       = 2'b00;        //
-localparam readmemory = 2'b01;        //reading memory
+localparam idle       = 2'b00;        //normal state for hit sram
+localparam readmemory = 2'b01;        //reading memory and write it in sram
 
 
 always @(posedge clk) begin

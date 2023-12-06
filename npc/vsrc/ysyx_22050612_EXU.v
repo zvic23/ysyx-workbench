@@ -1,5 +1,4 @@
 import "DPI-C" function void ebreak (int r);
-//import "DPI-C" function void update_csr(longint mtvec_npc, longint mcause_npc, longint mepc_npc, longint mstatus_npc);
 import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
 import "DPI-C" function void EXU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
 import "DPI-C" function void branch_predict(int r);
@@ -13,7 +12,7 @@ output      ready_ID_EX,
 input [63:0]pc_ID_EX,
 input [31:0]inst_ID_EX,
 
-input [23:0]opcode_in,
+//input [23:0]opcode_in,
 input [14:0]opcode_type_ID_EX,
 input [ 2:0]opcode_funct3_ID_EX,
 input [ 4:0]rd_ID_EX,
@@ -34,7 +33,7 @@ output       valid_EX_MEM  ,
 input        ready_EX_MEM  ,
 output [63:0]pc_EX_MEM  ,
 output [31:0]inst_EX_MEM,
-output [23:0]opcode_EX_MEM,
+//output [23:0]opcode_EX_MEM,
 output [14:0]opcode_type_EX_MEM,
 output [ 2:0]opcode_funct3_EX_MEM,
 output [ 4:0]rd_EX_MEM,
@@ -55,18 +54,15 @@ output wen_mstatus,
 input [63:0] gpr[31:0],    //only for ebreak control
 
 
+output ex_loading,
+output [4:0]ex_rd,
 
-output reg EX_reg_valid,
-output reg [31:0]EX_reg_inst,
 
-//input MEM_reg_valid,
-//input [31:0]MEM_reg_inst,
 input mem_writing_gpr,
 input [4:0]mem_rd,
 input [63:0]MEM_reg_aluoutput,
 
-//input WB_reg_valid,
-//input [31:0]WB_reg_inst,
+
 input wbu_writing_gpr,
 input [4:0]wbu_rd,
 input [63:0]WB_reg_wdata,
@@ -80,10 +76,10 @@ input branch_flush
 
 
 //*************************  pipeline ********************************
-//reg       EX_reg_valid         ;
+reg       EX_reg_valid         ;
 reg [63:0]EX_reg_pc            ;
-//reg [31:0]EX_reg_inst          ;
-reg [23:0]EX_reg_opcode        ;
+reg [31:0]EX_reg_inst          ;
+//reg [23:0]EX_reg_opcode        ;
 reg [14:0]EX_reg_opcode_type     ;
 reg [ 2:0]EX_reg_opcode_funct3     ;
 reg [ 4:0]EX_reg_rd;
@@ -101,7 +97,7 @@ always @(posedge clk) begin
 		EX_reg_valid          <=  1'b0;
 		EX_reg_pc             <= 64'b0;
 		EX_reg_inst           <= 32'b0;
-		EX_reg_opcode         <= 24'b0;
+	//	EX_reg_opcode         <= 24'b0;
 		EX_reg_opcode_type         <= 15'b0;
 		EX_reg_opcode_funct3         <= 3'b0;
 		EX_reg_src_a          <= 64'b0;
@@ -117,7 +113,7 @@ always @(posedge clk) begin
 		EX_reg_valid          <= EX_reg_valid ;
 		EX_reg_pc             <= EX_reg_pc    ;
 		EX_reg_inst           <= EX_reg_inst  ;
-		EX_reg_opcode         <= EX_reg_opcode;
+	//	EX_reg_opcode         <= EX_reg_opcode;
 		EX_reg_opcode_type         <= EX_reg_opcode_type;
 		EX_reg_opcode_funct3         <= EX_reg_opcode_funct3;
 		EX_reg_src_a          <= EX_reg_src_a ;
@@ -133,7 +129,7 @@ always @(posedge clk) begin
 		EX_reg_valid          <= valid_ID_EX;
 		EX_reg_pc             <= pc_ID_EX;
 		EX_reg_inst           <= inst_ID_EX;
-		EX_reg_opcode         <= opcode_in;
+	//	EX_reg_opcode         <= opcode_in;
 		EX_reg_opcode_type         <= opcode_type_ID_EX;
 		EX_reg_opcode_funct3         <= opcode_funct3_ID_EX;
 		EX_reg_src_a          <= src_A;
@@ -157,7 +153,7 @@ wire [63:0]src2;
 wire [63:0]imm;
 assign pc   = EX_reg_valid ? EX_reg_pc   : 64'b0;
 assign inst = EX_reg_valid ? EX_reg_inst : 32'b0;
-assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
+//assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
 assign opcode_type = EX_reg_valid ? EX_reg_opcode_type : 15'b0;
 assign opcode_funct3 = EX_reg_valid ?  EX_reg_opcode_funct3: 3'b0;
 assign imm  = EX_reg_valid ? EX_reg_imm  : 64'b0;
@@ -196,8 +192,10 @@ assign valid_EX_MEM = (EX_block==1'b0) ? EX_reg_valid :  1'b0;
 assign pc_EX_MEM    = (EX_block==1'b0) ? EX_reg_pc    : 64'b0;
 assign inst_EX_MEM  = (EX_block==1'b0) ? EX_reg_inst  : 32'b0;
 
+assign ex_loading = opcode_type[5];
+assign ex_rd      = EX_reg_valid ? EX_reg_rd : 5'b0;
 
-assign opcode_EX_MEM = EX_reg_opcode;
+//assign opcode_EX_MEM = EX_reg_opcode;
 assign opcode_type_EX_MEM = EX_reg_opcode_type;
 assign opcode_funct3_EX_MEM = EX_reg_opcode_funct3;
 assign rd_EX_MEM = EX_reg_rd;
