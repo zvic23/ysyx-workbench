@@ -158,6 +158,7 @@ assign imm  = EX_reg_valid ? EX_reg_imm  : 64'b0;
 assign src1 = EX_reg_valid ? ((mem_writing_gpr&&rs1_ex_rd_mem_match) ? MEM_reg_aluoutput : 
 	                     ((wbu_writing_gpr&&rs1_ex_rd_wb_match)  ? WB_reg_wdata : 
 			                                               EX_reg_src_a )) : 64'b0;
+
 assign src2 = EX_reg_valid ? ((mem_writing_gpr&&exu_using_rs2&&rs2_ex_rd_mem_match) ? MEM_reg_aluoutput : 
 	                     ((wbu_writing_gpr&&exu_using_rs2&&rs2_ex_rd_wb_match)  ? WB_reg_wdata : 
 			                                                              EX_reg_src_b )) : 64'b0;
@@ -193,6 +194,7 @@ assign inst_EX_MEM  = (EX_block==1'b0) ? EX_reg_inst  : 32'b0;
 
 assign ex_loading = opcode_type[5];
 assign ex_rd      = EX_reg_valid ? EX_reg_rd : 5'b0;
+//used by idu for testing load interload
 
 //assign opcode_EX_MEM = EX_reg_opcode;
 assign opcode_type_EX_MEM = EX_reg_opcode_type;
@@ -308,13 +310,16 @@ always @(*) begin
     */
 end
 
+wire src1_lessthan_src2;
+assign src1_lessthan_src2 = (~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63]));
+
 wire branch_condition;
 assign branch_condition = (opcode_funct3==3'h0) ? ((result_alu0==64'b0&&imm[12]==1'b0) || (result_alu0!=64'b0&&imm[12]==1'b1)) :
 	                 ((opcode_funct3==3'h1) ? ((result_alu0!=64'b0&&imm[12]==1'b0) || (result_alu0==64'b0&&imm[12]==1'b1)) :
                          ((opcode_funct3==3'h4) ? ((result_alu0[63]==1'b1&&imm[12]==1'b0) || (result_alu0[63]==1'b0&&imm[12]==1'b1)) :
 			 ((opcode_funct3==3'h5) ? ((result_alu0[63]==1'b0&&imm[12]==1'b0) || (result_alu0[63]==1'b1&&imm[12]==1'b1)) :
-                         ((opcode_funct3==3'h6) ? ((((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b0) || (~((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b1)) :
-                         ((opcode_funct3==3'h7) ? ((~((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b0) || (((~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63])))&&imm[12]==1'b1)) : 1'b0 )))));
+                         ((opcode_funct3==3'h6) ? ((src1_lessthan_src2&&imm[12]==1'b0) || (~src1_lessthan_src2&&imm[12]==1'b1)) :
+                         ((opcode_funct3==3'h7) ? ((~src1_lessthan_src2&&imm[12]==1'b0) || (src1_lessthan_src2&&imm[12]==1'b1)) : 1'b0 )))));
 
 
 assign pc_update = (EX_reg_valid&&ready_EX_MEM) ? ((EX_reg_opcode_type[3]||EX_reg_opcode_type[13]||EX_reg_opcode_type[14]) ? 1'b1 : ((EX_reg_opcode_type[4]&&branch_condition) ? 1'b1 : 1'b0)) : 1'b0;
