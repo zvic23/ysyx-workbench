@@ -89,8 +89,6 @@ reg [63:0]EX_reg_src_a;
 reg [63:0]EX_reg_src_b;
 reg [63:0]EX_reg_imm;
 //reg [ 7:0]EX_reg_alu_mode      ;
-//reg [ 4:0]EX_reg_rd            ;
-//reg [63:0]EX_reg_src2          ;
 
 always @(posedge clk) begin
 	if(rst || branch_flush) begin
@@ -107,7 +105,6 @@ always @(posedge clk) begin
 		EX_reg_rd             <=  5'b0;
 		EX_reg_rs1            <=  5'b0;
 		EX_reg_rs2            <=  5'b0;
-	//	EX_reg_src2           <= 64'b0;
 	end
 	else if(!ready_ID_EX)begin
 		EX_reg_valid          <= EX_reg_valid ;
@@ -123,7 +120,6 @@ always @(posedge clk) begin
 		EX_reg_rd             <= EX_reg_rd           ;
 		EX_reg_rs1            <= EX_reg_rs1;
 		EX_reg_rs2            <= EX_reg_rs2;
-	//	EX_reg_src2           <= src2_in      ;
 	end
 	else begin
 		EX_reg_valid          <= valid_ID_EX;
@@ -139,20 +135,19 @@ always @(posedge clk) begin
 		EX_reg_rd             <= rd_ID_EX           ;
 		EX_reg_rs1            <= rs1_ID_EX;
 		EX_reg_rs2            <= rs2_ID_EX;
-	//	EX_reg_src2           <= src2_in       ;
 	end
 end
 
 wire [63:0]pc;
-wire [31:0]inst;
-wire [23:0]opcode;
+//wire [31:0]inst;
+//wire [23:0]opcode;
 wire [14:0]opcode_type;
 wire [ 2:0]opcode_funct3;
 wire [63:0]src1;
 wire [63:0]src2;
 wire [63:0]imm;
 assign pc   = EX_reg_valid ? EX_reg_pc   : 64'b0;
-assign inst = EX_reg_valid ? EX_reg_inst : 32'b0;
+//assign inst = EX_reg_valid ? EX_reg_inst : 32'b0;
 //assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
 assign opcode_type = EX_reg_valid ? EX_reg_opcode_type : 15'b0;
 assign opcode_funct3 = EX_reg_valid ?  EX_reg_opcode_funct3: 3'b0;
@@ -160,8 +155,12 @@ assign imm  = EX_reg_valid ? EX_reg_imm  : 64'b0;
 
 
 
-assign src1 = EX_reg_valid ? ((mem_writing_gpr&&rs1_EX_MEM_match) ? MEM_reg_aluoutput : ((wbu_writing_gpr&&rs1_EX_WB_match) ? WB_reg_wdata : EX_reg_src_a )) : 64'b0;
-assign src2 = EX_reg_valid ? ((mem_writing_gpr&&exu_using_rs2&&rs2_EX_MEM_match) ? MEM_reg_aluoutput : ((wbu_writing_gpr&&exu_using_rs2&&rs2_EX_WB_match) ? WB_reg_wdata : EX_reg_src_b )) : 64'b0;
+assign src1 = EX_reg_valid ? ((mem_writing_gpr&&rs1_ex_rd_mem_match) ? MEM_reg_aluoutput : 
+	                     ((wbu_writing_gpr&&rs1_ex_rd_wb_match)  ? WB_reg_wdata : 
+			                                               EX_reg_src_a )) : 64'b0;
+assign src2 = EX_reg_valid ? ((mem_writing_gpr&&exu_using_rs2&&rs2_ex_rd_mem_match) ? MEM_reg_aluoutput : 
+	                     ((wbu_writing_gpr&&exu_using_rs2&&rs2_ex_rd_wb_match)  ? WB_reg_wdata : 
+			                                                              EX_reg_src_b )) : 64'b0;
 
 
 wire EX_block;
@@ -171,14 +170,14 @@ assign ready_ID_EX = EX_block ? 1'b0 : ready_EX_MEM;
 
 
 //load interlock
-wire rs1_EX_MEM_match;
-wire rs2_EX_MEM_match;
-wire rs1_EX_WB_match;
-wire rs2_EX_WB_match;
-assign rs1_EX_MEM_match = ( mem_rd == EX_reg_rs1)&&(EX_reg_rs1!=5'b0);
-assign rs2_EX_MEM_match = ( mem_rd == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
-assign rs1_EX_WB_match  = ( wbu_rd == EX_reg_rs1)&&(EX_reg_rs1!=5'b0);
-assign rs2_EX_WB_match  = ( wbu_rd == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
+wire rs1_ex_rd_mem_match;
+wire rs2_ex_rd_mem_match;
+wire rs1_ex_rd_wb_match;
+wire rs2_ex_rd_wb_match;
+assign rs1_ex_rd_mem_match = ( mem_rd == EX_reg_rs1)&&(EX_reg_rs1!=5'b0);
+assign rs2_ex_rd_mem_match = ( mem_rd == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
+assign rs1_ex_rd_wb_match  = ( wbu_rd == EX_reg_rs1)&&(EX_reg_rs1!=5'b0);
+assign rs2_ex_rd_wb_match  = ( wbu_rd == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
 
 wire [3:0]MEM_inst_hit;
 wire [3:0]WB_inst_hit;
@@ -206,8 +205,8 @@ assign rs2_EX_MEM = EX_reg_rs2;
 
 always @(negedge clk) begin
 	EXU_state_trace(EX_reg_pc, {32'b0,EX_reg_inst}, {63'b0,EX_reg_valid}, src1,src2,{60'b0,EX_block,mul_valid,mul_ready,mul_out_valid} );
-	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x %x   dnpc:%x  opcode:%d\n",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , WB_reg_wdata,  EX_inst_hit, WB_inst_hit, rs1_EX_WB_match , rs2_EX_WB_match,dnpc,opcode);
-	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , MEM_reg_aluoutput,  EX_inst_hit, MEM_inst_hit, rs1_EX_MEM_match );
+	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x %x   dnpc:%x  opcode:%d\n",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , WB_reg_wdata,  EX_inst_hit, WB_inst_hit, rs1_ex_rd_wb_match , rs2_ex_rd_wb_match,dnpc,opcode);
+	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x , aluoutput:%x  %x %x %x",EX_reg_pc,EX_reg_inst,EX_reg_valid,src1,src2,EX_reg_imm , MEM_reg_aluoutput,  EX_inst_hit, MEM_inst_hit, rs1_ex_rd_mem_match );
 	//$display("EX   pc:%x   inst:%x   valid:%x   op_a:%x   op_b:%x  imm:%x",EX_reg_pc,EX_reg_inst,EX_reg_valid,EX_reg_src_a,EX_reg_src_b,EX_reg_imm);
 end
 //********************************************************************

@@ -127,17 +127,17 @@ end
 
 //*************************    load interlock    ********************************
 
-wire rs1_waiting;
-wire rs2_waiting;
-wire rs2_block_checking;
-assign rs2_block_checking = opcode_jal || opcode_jalr || opcode_branch || opcode_cpt_r || opcode_cpt_rw;  
+wire rs1_id_rd_ex_match;
+wire rs2_id_rd_ex_match;
+wire idu_using_rs2;
+assign idu_using_rs2 = opcode_jal || opcode_jalr || opcode_branch || opcode_cpt_r || opcode_cpt_rw;  
 //include jal, jalr, branch, cpt_r(w).
 
-assign rs1_waiting = ex_rd == opcode_rs1;
-assign rs2_waiting = ex_rd == opcode_rs2;
+assign rs1_id_rd_ex_match = ex_rd == opcode_rs1;
+assign rs2_id_rd_ex_match = ex_rd == opcode_rs2;
 
 wire ID_block;
-assign ID_block = ID_reg_valid && ex_loading && (rs1_waiting ||(rs2_waiting && (rs2_block_checking)));
+assign ID_block = ID_reg_valid && ex_loading && (rs1_id_rd_ex_match ||(rs2_id_rd_ex_match && idu_using_rs2));
 
 //********************************************************************
 
