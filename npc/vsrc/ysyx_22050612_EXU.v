@@ -217,11 +217,11 @@ end
 assign wen_mtvec     = opcode_funct3==3'b1&&opcode_type[11]&&imm[11:0]==12'h305;
 assign wdata_mtvec   = opcode_funct3==3'b1&&opcode_type[11] ? src1 : 64'b0;
 assign wen_mepc      = (opcode_type[11]&&imm[11:0]==12'h341) || opcode_type[13];
-assign wdata_mepc    = (opcode_funct3==3'b1&&opcode_type[11]) ? src1 : ((opcode_funct3==3'b10&&opcode_type[11]) ? result_alu0 : EX_reg_pc );
+assign wdata_mepc    = (opcode_funct3==3'b1&&opcode_type[11]) ? src1 : ((opcode_funct3==3'b10&&opcode_type[11]) ? alu_result : EX_reg_pc );
 assign wen_mcause    = (opcode_type[11]&&imm[11:0]==12'h342) || opcode_type[13];
-assign wdata_mcause  = (opcode_funct3==3'b1&&opcode_type[11]) ? src1 : ((opcode_funct3==3'b10&&opcode_type[11]) ? result_alu0 : 64'hb );
+assign wdata_mcause  = (opcode_funct3==3'b1&&opcode_type[11]) ? src1 : ((opcode_funct3==3'b10&&opcode_type[11]) ? alu_result : 64'hb );
 assign wen_mstatus   = (opcode_type[11]&&imm[11:0]==12'h300);
-assign wdata_mstatus = (opcode_funct3==3'b1&&opcode_type[11]) ? src1 : result_alu0;
+assign wdata_mstatus = (opcode_funct3==3'b1&&opcode_type[11]) ? src1 : alu_result;
 /*
 always @(*) begin
 //mtvec control
@@ -244,7 +244,7 @@ always @(*) begin
 
 	case (opcode)
     24'd49     : wdata_mepc=src1;
-    24'd50     : wdata_mepc=result_alu0;
+    24'd50     : wdata_mepc=alu_result;
     24'h200000 : wdata_mepc=EX_reg_pc;
     default:   wdata_mepc=64'b0;
         endcase
@@ -258,7 +258,7 @@ always @(*) begin
 
 	case (opcode)
     24'd49     : wdata_mcause=src1;
-    24'd50     : wdata_mcause=result_alu0;
+    24'd50     : wdata_mcause=alu_result;
     24'h200000 : wdata_mcause=64'hb;
     default:   wdata_mcause=64'b0;
         endcase
@@ -271,7 +271,7 @@ always @(*) begin
 
 	case (opcode)
     24'd49     : wdata_mstatus=src1;
-    24'd50     : wdata_mstatus=result_alu0;
+    24'd50     : wdata_mstatus=alu_result;
     default:   wdata_mstatus=64'b0;
         endcase
 end
@@ -311,20 +311,22 @@ always @(*) begin
 end
 
 wire src1_lessthan_src2;
-assign src1_lessthan_src2 = (~src1[63] & src2[63]) | (result_alu0[63] & (src1[63]==src2[63]));
+assign src1_lessthan_src2 = (~src1[63] & src2[63]) | (alu_result[63] & (src1[63]==src2[63]));
 
 wire branch_condition;
-assign branch_condition = (opcode_funct3==3'h0) ? ((result_alu0==64'b0&&imm[12]==1'b0) || (result_alu0!=64'b0&&imm[12]==1'b1)) :
-	                 ((opcode_funct3==3'h1) ? ((result_alu0!=64'b0&&imm[12]==1'b0) || (result_alu0==64'b0&&imm[12]==1'b1)) :
-                         ((opcode_funct3==3'h4) ? ((result_alu0[63]==1'b1&&imm[12]==1'b0) || (result_alu0[63]==1'b0&&imm[12]==1'b1)) :
-			 ((opcode_funct3==3'h5) ? ((result_alu0[63]==1'b0&&imm[12]==1'b0) || (result_alu0[63]==1'b1&&imm[12]==1'b1)) :
+assign branch_condition = (opcode_funct3==3'h0) ? ((alu_result==64'b0&&imm[12]==1'b0) || (alu_result!=64'b0&&imm[12]==1'b1)) :
+	                 ((opcode_funct3==3'h1) ? ((alu_result!=64'b0&&imm[12]==1'b0) || (alu_result==64'b0&&imm[12]==1'b1)) :
+                         ((opcode_funct3==3'h4) ? ((alu_result[63]==1'b1&&imm[12]==1'b0) || (alu_result[63]==1'b0&&imm[12]==1'b1)) :
+			 ((opcode_funct3==3'h5) ? ((alu_result[63]==1'b0&&imm[12]==1'b0) || (alu_result[63]==1'b1&&imm[12]==1'b1)) :
                          ((opcode_funct3==3'h6) ? ((src1_lessthan_src2&&imm[12]==1'b0) || (~src1_lessthan_src2&&imm[12]==1'b1)) :
                          ((opcode_funct3==3'h7) ? ((~src1_lessthan_src2&&imm[12]==1'b0) || (src1_lessthan_src2&&imm[12]==1'b1)) : 1'b0 )))));
 
 
-assign pc_update = (EX_reg_valid&&ready_EX_MEM) ? ((EX_reg_opcode_type[3]||EX_reg_opcode_type[13]||EX_reg_opcode_type[14]) ? 1'b1 : ((EX_reg_opcode_type[4]&&branch_condition) ? 1'b1 : 1'b0)) : 1'b0;
+assign pc_update = (EX_reg_valid&&ready_EX_MEM) ? ((EX_reg_opcode_type[3]||EX_reg_opcode_type[13]||EX_reg_opcode_type[14]) ? 1'b1 : 
+	                                          ((EX_reg_opcode_type[4]&&branch_condition)                               ? 1'b1 : 1'b0)) : 1'b0;
 
-assign dnpc      = (EX_reg_opcode_type[13]||EX_reg_opcode_type[14]) ? EX_reg_src_b : ((EX_reg_opcode_type[3]||(EX_reg_opcode_type[4]&&~imm[12])) ? address_add_result : snpc );
+assign dnpc      = (EX_reg_opcode_type[13]||EX_reg_opcode_type[14]) ? EX_reg_src_b : 
+	           ((EX_reg_opcode_type[3]||(EX_reg_opcode_type[4]&&~imm[12])) ? address_add_result : snpc );
 
 //dnpc
 wire [63:0] snpc;
@@ -342,23 +344,23 @@ assign address_add_src2 = imm;
 
 //aluoutput
 wire [63:0]result_cpt;
-assign result_cpt = multipling ? result_lo : (dividing ? (opcode_funct3[1] ? remainder : quotient) : result_alu0);
-assign ALUoutput_EX_MEM = word_right_shift  ? (result_cpt[63]?({{32{1'b1}},result_cpt[63:32]}):({{32{1'b0}},result_cpt[63:32]})) :
-	                  ((opcode_type[9]||opcode_type[10]) ?  (result_cpt[31]?({{32{1'b1}},result_cpt[31:0]}):({{32{1'b0}},result_cpt[31:0]}))       
+assign result_cpt = multipling ? result_lo : (dividing ? (opcode_funct3[1] ? remainder : quotient) : alu_result);
+assign ALUoutput_EX_MEM = word_right_shift  ? (result_cpt[63]?({{32{1'b1}},result_cpt[63:32]}):({{32{1'b0}},result_cpt[63:32]})) :              //32bit data right shift
+	                 ((opcode_type[9]||opcode_type[10]) ?  (result_cpt[31]?({{32{1'b1}},result_cpt[31:0]}):({{32{1'b0}},result_cpt[31:0]})) //32bit data compute      
 			  : result_cpt); 
 /*
 always@(*) begin
 	case (opcode)
-    24'h14000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    //24'h14000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
-    //24'h15000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    24'h15000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
-    24'h16000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
-    24'h17000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    24'h18000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    24'h19000: ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
-    24'h1a000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
-    24'h1b000: ALUoutput_EX_MEM=(result_alu0[63]?({{32{1'b1}},result_alu0[63:32]}):({{32{1'b0}},result_alu0[63:32]}));
+    24'h14000: ALUoutput_EX_MEM=(alu_result[31]?({{32{1'b1}},alu_result[31:0]}):({{32{1'b0}},alu_result[31:0]}));
+    //24'h14000: ALUoutput_EX_MEM=(alu_result[63]?({{32{1'b1}},alu_result[63:32]}):({{32{1'b0}},alu_result[63:32]}));
+    //24'h15000: ALUoutput_EX_MEM=(alu_result[31]?({{32{1'b1}},alu_result[31:0]}):({{32{1'b0}},alu_result[31:0]}));
+    24'h15000: ALUoutput_EX_MEM=(alu_result[63]?({{32{1'b1}},alu_result[63:32]}):({{32{1'b0}},alu_result[63:32]}));
+    24'h16000: ALUoutput_EX_MEM=(alu_result[63]?({{32{1'b1}},alu_result[63:32]}):({{32{1'b0}},alu_result[63:32]}));
+    24'h17000: ALUoutput_EX_MEM=(alu_result[31]?({{32{1'b1}},alu_result[31:0]}):({{32{1'b0}},alu_result[31:0]}));
+    24'h18000: ALUoutput_EX_MEM=(alu_result[31]?({{32{1'b1}},alu_result[31:0]}):({{32{1'b0}},alu_result[31:0]}));
+    24'h19000: ALUoutput_EX_MEM=(alu_result[31]?({{32{1'b1}},alu_result[31:0]}):({{32{1'b0}},alu_result[31:0]}));
+    24'h1a000: ALUoutput_EX_MEM=(alu_result[63]?({{32{1'b1}},alu_result[63:32]}):({{32{1'b0}},alu_result[63:32]}));
+    24'h1b000: ALUoutput_EX_MEM=(alu_result[63]?({{32{1'b1}},alu_result[63:32]}):({{32{1'b0}},alu_result[63:32]}));
     24'h1d000: ALUoutput_EX_MEM=result_lo;
     //24'h1d000: ALUoutput_EX_MEM=result_mul0;
     24'h21000: ALUoutput_EX_MEM=quotient;
@@ -380,11 +382,11 @@ always@(*) begin
 
     //24'h300  : ALUoutput_EX_MEM=EX_reg_pc + 64'd4;
     //24'd4    : ALUoutput_EX_MEM=EX_reg_pc + 64'd4;
-    24'h300  : ALUoutput_EX_MEM=result_alu0;
-    24'd4    : ALUoutput_EX_MEM=result_alu0;
-    24'd47   : ALUoutput_EX_MEM=(result_alu0[31]?({{32{1'b1}},result_alu0[31:0]}):({{32{1'b0}},result_alu0[31:0]}));
+    24'h300  : ALUoutput_EX_MEM=alu_result;
+    24'd4    : ALUoutput_EX_MEM=alu_result;
+    24'd47   : ALUoutput_EX_MEM=(alu_result[31]?({{32{1'b1}},alu_result[31:0]}):({{32{1'b0}},alu_result[31:0]}));
 
-    default  : ALUoutput_EX_MEM=result_alu0;
+    default  : ALUoutput_EX_MEM=alu_result;
 	endcase
 
 end
@@ -392,16 +394,17 @@ end
 
 
 
-//alu
+//*************************    alu    *********************************
 wire [5:0]shamt;
-assign shamt = imm[5:0];
+assign shamt = imm[5:0];   
+//Those insts which have not imm can use imm to indicate shamt because idu offer 'imm_I' in imm for such insts.
 
-assign operator_a = opcode_type[0] ? 64'b0 :     //lui
+assign alu_operator_a = opcode_type[0] ? 64'b0 :                                              //lui
 	           ((opcode_type[1]||opcode_type[2]||opcode_type[3]) ? EX_reg_pc :        //auipc   jal   jalr
 	           (word_right_shift ? {src1[31:0],32'b0} : src1 ) );
 			     //(opcode_funct3==3'b101&&(opcode_type[9]||opcode_type[10]) is the 32bits src1 right shift
 
-assign operator_b = (opcode_type[2]||opcode_type[3]) ? 64'h4 :       //jal  jalr
+assign alu_operator_b = (opcode_type[2]||opcode_type[3]) ? 64'h4 :                            //jal  jalr
 	           ((opcode_type[8]&&(opcode_funct3==3'b1||opcode_funct3==3'b101)) ? {{58{1'b0}},src2[5:0]} :
  	           ((opcode_type[10]&&(opcode_funct3==3'b1||opcode_funct3==3'b101)) ? {{59{1'b0}},src2[4:0]} : 
 	 	   ((opcode_type[7]&&(opcode_funct3==3'b1||opcode_funct3==3'b101)) ? {{58{1'b0}},shamt} :    
@@ -440,70 +443,70 @@ always@(*) begin
 //alu
 /*
     case (opcode)
-    //24'h14000: operator_a={{32{1'b0}},src1[31:0]};
-    //24'h14000: operator_a={src1[31:0],{32{1'b0}}};
-    //24'h15000: operator_a={{32{1'b0}},src1[31:0]};
-    24'h15000: operator_a={src1[31:0],{32{1'b0}}};
-    24'h16000: operator_a={src1[31:0],{32{1'b0}}};
-    24'h1a000: operator_a={src1[31:0],{32{1'b0}}};
-    24'h1b000: operator_a={src1[31:0],{32{1'b0}}};
-    24'h100  : operator_a=64'b0;
-    24'h200  : operator_a=EX_reg_pc;
-    24'h300  : operator_a=EX_reg_pc;          //branch  to do
-    24'h4    : operator_a=EX_reg_pc;          
+    //24'h14000: alu_operator_a={{32{1'b0}},src1[31:0]};
+    //24'h14000: alu_operator_a={src1[31:0],{32{1'b0}}};
+    //24'h15000: alu_operator_a={{32{1'b0}},src1[31:0]};
+    24'h15000: alu_operator_a={src1[31:0],{32{1'b0}}};
+    24'h16000: alu_operator_a={src1[31:0],{32{1'b0}}};
+    24'h1a000: alu_operator_a={src1[31:0],{32{1'b0}}};
+    24'h1b000: alu_operator_a={src1[31:0],{32{1'b0}}};
+    24'h100  : alu_operator_a=64'b0;
+    24'h200  : alu_operator_a=EX_reg_pc;
+    24'h300  : alu_operator_a=EX_reg_pc;          //branch  to do
+    24'h4    : alu_operator_a=EX_reg_pc;          
 
     //branching inst : calculate the address
-    //24'd5    : operator_a=EX_reg_pc; 
-    //24'd6    : operator_a=EX_reg_pc; 
-    //24'd7    : operator_a=EX_reg_pc; 
-    //24'd8    : operator_a=EX_reg_pc; 
-    //24'd9    : operator_a=EX_reg_pc; 
-    //24'd10   : operator_a=EX_reg_pc; 
+    //24'd5    : alu_operator_a=EX_reg_pc; 
+    //24'd6    : alu_operator_a=EX_reg_pc; 
+    //24'd7    : alu_operator_a=EX_reg_pc; 
+    //24'd8    : alu_operator_a=EX_reg_pc; 
+    //24'd9    : alu_operator_a=EX_reg_pc; 
+    //24'd10   : alu_operator_a=EX_reg_pc; 
 
-    default  : operator_a=src1;
+    default  : alu_operator_a=src1;
     endcase
 */
 /*
     case (opcode)
-    24'h6000 : operator_b={{58{1'b0}},src2[5:0]};
-    24'h10000: operator_b={{58{1'b0}},src2[5:0]};
-    24'h14000: operator_b={{59{1'b0}},shamt[4:0]};
-    24'h15000: operator_b={{59{1'b0}},shamt[4:0]};
-    24'h16000: operator_b={{59{1'b0}},shamt[4:0]};
-    24'h19000: operator_b={{59{1'b0}},src2[4:0]};
-    24'h1a000: operator_b={{59{1'b0}},src2[4:0]};
-    24'h1b000: operator_b={{59{1'b0}},src2[4:0]};
-    24'h100  : operator_b=imm;
-    24'h200  : operator_b=imm;
-    24'h300  : operator_b=64'd4;
-    24'h4    : operator_b=64'd4;
-    //24'h300  : operator_b=imm;
-    24'h400  : operator_b={{58{1'b0}},shamt};
-    24'h800  : operator_b={{58{1'b0}},shamt};
-    24'hc00  : operator_b={{58{1'b0}},shamt};
+    24'h6000 : alu_operator_b={{58{1'b0}},src2[5:0]};
+    24'h10000: alu_operator_b={{58{1'b0}},src2[5:0]};
+    24'h14000: alu_operator_b={{59{1'b0}},shamt[4:0]};
+    24'h15000: alu_operator_b={{59{1'b0}},shamt[4:0]};
+    24'h16000: alu_operator_b={{59{1'b0}},shamt[4:0]};
+    24'h19000: alu_operator_b={{59{1'b0}},src2[4:0]};
+    24'h1a000: alu_operator_b={{59{1'b0}},src2[4:0]};
+    24'h1b000: alu_operator_b={{59{1'b0}},src2[4:0]};
+    24'h100  : alu_operator_b=imm;
+    24'h200  : alu_operator_b=imm;
+    24'h300  : alu_operator_b=64'd4;
+    24'h4    : alu_operator_b=64'd4;
+    //24'h300  : alu_operator_b=imm;
+    24'h400  : alu_operator_b={{58{1'b0}},shamt};
+    24'h800  : alu_operator_b={{58{1'b0}},shamt};
+    24'hc00  : alu_operator_b={{58{1'b0}},shamt};
 
 
-    24'd11   : operator_b=imm;
-    24'd12   : operator_b=imm;
-    24'd13   : operator_b=imm;
-    24'd14   : operator_b=imm;
-    24'd15   : operator_b=imm;
-    24'd16   : operator_b=imm;
-    24'd17   : operator_b=imm;
-    24'd18   : operator_b=imm;
-    24'd19   : operator_b=imm;
-    24'd20   : operator_b=imm;
-    24'd21   : operator_b=imm;
-    24'd22   : operator_b=imm;
-    24'd23   : operator_b=imm;
-    24'd24   : operator_b=imm;
-    24'd41   : operator_b=imm;
-    24'd42   : operator_b=imm;
-    24'd43   : operator_b=imm;
-    24'd47   : operator_b=imm;
-//    24'd50   : operator_b=src_csr;
-    24'd50   : operator_b=src2;
-    default  : operator_b=src2;
+    24'd11   : alu_operator_b=imm;
+    24'd12   : alu_operator_b=imm;
+    24'd13   : alu_operator_b=imm;
+    24'd14   : alu_operator_b=imm;
+    24'd15   : alu_operator_b=imm;
+    24'd16   : alu_operator_b=imm;
+    24'd17   : alu_operator_b=imm;
+    24'd18   : alu_operator_b=imm;
+    24'd19   : alu_operator_b=imm;
+    24'd20   : alu_operator_b=imm;
+    24'd21   : alu_operator_b=imm;
+    24'd22   : alu_operator_b=imm;
+    24'd23   : alu_operator_b=imm;
+    24'd24   : alu_operator_b=imm;
+    24'd41   : alu_operator_b=imm;
+    24'd42   : alu_operator_b=imm;
+    24'd43   : alu_operator_b=imm;
+    24'd47   : alu_operator_b=imm;
+//    24'd50   : alu_operator_b=src_csr;
+    24'd50   : alu_operator_b=src2;
+    default  : alu_operator_b=src2;
     endcase
 */
 /*
@@ -548,11 +551,11 @@ end
 
 //alu
 //reg [7:0] mode;
-wire [63:0]operator_a;
-wire [63:0]operator_b;
-wire [63:0]result_alu0;
+wire [63:0]alu_operator_a;
+wire [63:0]alu_operator_b;
+wire [63:0]alu_result;
 
-ysyx_22050612_ALU alu0 (alu_mode,operator_a,operator_b,result_alu0);
+ysyx_22050612_ALU alu0 (alu_mode,alu_operator_a,alu_operator_b,alu_result);
 
 
 
