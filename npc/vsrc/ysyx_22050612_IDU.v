@@ -125,12 +125,13 @@ always @(negedge clk) begin
 end
 
 
-//load interlock
+//*************************    load interlock    ********************************
 
 wire rs1_waiting;
 wire rs2_waiting;
 wire rs2_block_checking;
-assign rs2_block_checking = opcode_jal || opcode_jalr || opcode_branch || opcode_cpt_r || opcode_cpt_rw;  //include jal, jalr, branch, +-*/ and shift.
+assign rs2_block_checking = opcode_jal || opcode_jalr || opcode_branch || opcode_cpt_r || opcode_cpt_rw;  
+//include jal, jalr, branch, cpt_r(w).
 
 assign rs1_waiting = ex_rd == opcode_rs1;
 assign rs2_waiting = ex_rd == opcode_rs2;
@@ -156,7 +157,9 @@ end
  
 
 assign src_A = gpr[opcode_rs1];
-assign src_B = opcode_csr ? src_csr : (opcode_ecall ? mtvec : (opcode_mret ? mepc : gpr[opcode_rs2]));
+assign src_B = opcode_csr   ? src_csr : 
+	      (opcode_ecall ? mtvec   : 
+	      (opcode_mret  ? mepc    : gpr[opcode_rs2]));
 
 /*
   always @(inst) begin
