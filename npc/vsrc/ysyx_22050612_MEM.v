@@ -31,9 +31,9 @@ output [31:0]inst_MEM_WB,
 output [14:0]opcode_type_MEM_WB,
 output [ 4:0]rd_MEM_WB,
 
-output       reg_wr_wen   ,
-output [ 4:0]reg_wr_rd    ,
-output [63:0]reg_wr_value ,
+output       gpr_wr_wen   ,
+output [ 4:0]gpr_wr_rd    ,
+output [63:0]gpr_wr_value ,
 
 
 //interlock
@@ -161,9 +161,9 @@ assign opcode_funct3 = MEM_reg_valid ? MEM_reg_opcode_funct3 : 3'b0;
 
 wire [63:0]src2;
 
-assign reg_wr_wen   = (MEM_reg_valid&&!MEM_block) ? wen       : 1'b0;
-assign reg_wr_rd    = (MEM_reg_valid&&!MEM_block) ? MEM_reg_rd : 5'b0;
-assign reg_wr_value = (MEM_reg_valid&&!MEM_block) ? wdata_reg : 64'b0;
+assign gpr_wr_wen   = (MEM_reg_valid&&!MEM_block) ? wen       : 1'b0;
+assign gpr_wr_rd    = (MEM_reg_valid&&!MEM_block) ? MEM_reg_rd : 5'b0;
+assign gpr_wr_value = (MEM_reg_valid&&!MEM_block) ? wdata_reg : 64'b0;
 
 
 //output
@@ -212,7 +212,7 @@ assign mem_storing = opcode_type[6];
 
 
 always @(negedge clk) begin
-	MEM_state_trace(MEM_reg_pc, {32'b0,MEM_reg_inst}, {63'b0,MEM_reg_valid}, dcache_dout,reg_wr_value,64'b0 );
+	MEM_state_trace(MEM_reg_pc, {32'b0,MEM_reg_inst}, {63'b0,MEM_reg_valid}, dcache_dout,gpr_wr_value,64'b0 );
 	//$display("MEM  pc:%x   inst:%x   valid:%x   aluout:%x   op_b:%x  wen:%x  wdata:%x  opcode:%x",MEM_reg_pc,MEM_reg_inst,MEM_reg_valid,MEM_reg_aluoutput,MEM_reg_src2   ,wen,wdata_reg,opcode);
 end
 //********************************************************************
