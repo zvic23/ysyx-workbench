@@ -550,7 +550,6 @@ always@(*) begin
 end
 
 //alu
-//reg [7:0] mode;
 wire [63:0]alu_operator_a;
 wire [63:0]alu_operator_b;
 wire [63:0]alu_result;
@@ -560,6 +559,7 @@ ysyx_22050612_ALU alu0 (alu_mode,alu_operator_a,alu_operator_b,alu_result);
 
 
 //multipulicatin and division
+/*
 wire[63:0] result_mul0;
 assign result_mul0 = src1[63:0] * src2[63:0];
 
@@ -586,7 +586,7 @@ assign result_divuw0 = src1[31:0] / src2[31:0];
 
 wire[31:0] result_remuw0;
 assign result_remuw0 = src1[31:0] % src2[31:0];
-
+*/
 
 wire mul_flush;
 assign mul_flush = 1'b0;
@@ -596,7 +596,7 @@ wire [63:0]result_hi;
 wire [63:0]result_lo;
 
 wire mul_valid;
-assign mul_valid = multipling&&ready_EX_MEM  ;
+assign mul_valid = multipling && ready_EX_MEM  ;
 wire mulw;
 assign mulw = opcode_type[10];
 wire [1:0]mul_signed;
@@ -604,17 +604,16 @@ assign mul_signed = 2'b00;
 
 wire multipling;
 assign multipling = (opcode_type[8]||opcode_type[10])&&imm[5]&&~opcode_funct3[2];
-wire [63:0]mulcand;
-wire [63:0]muler;
-assign mulcand = multipling ? src1 : 64'b0;
-assign muler   = multipling ? src2 : 64'b0;
+wire [63:0]multiplicand;
+wire [63:0]multiplier;
+assign multiplicand = multipling ? src1 : 64'b0;
+assign multiplier   = multipling ? src2 : 64'b0;
 
-ysyx_22050612_multiplier boothmul ((clk), rst, mul_valid, mul_flush, mulw, mul_signed, mulcand, muler, mul_ready, mul_out_valid, result_hi, result_lo);      
+ysyx_22050612_multiplier boothmul ((clk), rst, mul_valid, mul_flush, mulw, mul_signed, multiplicand, multiplier, mul_ready, mul_out_valid, result_hi, result_lo);      
 //the clk has been "&&" with "multipling" opcode to close the clock gating(gate), it can speed up the simulating.
 
 
 
-wire [8:0]stimes;
 
 
 wire div_flush;
@@ -638,7 +637,7 @@ wire [63:0]divisor ;
 assign dividend  = dividing ? src1 : 64'b0;
 assign divisor   = dividing ? src2 : 64'b0;
 
-ysyx_22050612_divider boothdiv ((clk), rst, div_valid, div_flush, divw, div_signed, dividend, divisor, div_ready, div_out_valid, quotient, remainder,stimes);     
+ysyx_22050612_divider boothdiv ((clk), rst, div_valid, div_flush, divw, div_signed, dividend, divisor, div_ready, div_out_valid, quotient, remainder);     
 //the clk has been "&&" with "div divw" opcode to close the clock gating(gate), it can speed up the sidivating.
 
 
