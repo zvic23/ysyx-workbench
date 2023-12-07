@@ -32,18 +32,16 @@ output [14:0]opcode_type_MEM_WB,
 output [ 4:0]rd_MEM_WB,
 
 output       reg_wr_wen   ,
-output [ 4:0]reg_wr_ID    ,
+output [ 4:0]reg_wr_rd    ,
 output [63:0]reg_wr_value ,
 
 
-//output reg MEM_reg_valid,
-//output reg [31:0]MEM_reg_inst,
+//interlock
 output mem_writing_gpr,
 output [4:0]mem_rd,
 output reg [63:0]MEM_reg_aluoutput,
 
-//input WB_reg_valid,
-//input [31:0]WB_reg_inst,
+
 input wbu_writing_gpr,
 input [4:0]wbu_rd,
 input [63:0]WB_reg_wdata,
@@ -51,11 +49,11 @@ input [63:0]WB_reg_wdata,
 
 
 output [63:0]raddr_out,
-output [63:0]waddr_out,
+output [63:0]waddr_out,  //used by cpp file for difftest to overlook the clock operating memory
 
 
 
-//AXI-full
+//AXI-full signals from dcache
 output [31:0]araddr_dcache_axi,
 output [7:0]arlen_dcache_axi,
 output [2:0]arsize_dcache_axi,
@@ -164,7 +162,7 @@ assign opcode_funct3 = MEM_reg_valid ? MEM_reg_opcode_funct3 : 3'b0;
 wire [63:0]src2;
 
 assign reg_wr_wen   = (MEM_reg_valid&&!MEM_block) ? wen       : 1'b0;
-assign reg_wr_ID    = (MEM_reg_valid&&!MEM_block) ? MEM_reg_rd : 5'b0;
+assign reg_wr_rd    = (MEM_reg_valid&&!MEM_block) ? MEM_reg_rd : 5'b0;
 assign reg_wr_value = (MEM_reg_valid&&!MEM_block) ? wdata_reg : 64'b0;
 
 

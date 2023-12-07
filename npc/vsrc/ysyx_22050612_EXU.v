@@ -624,7 +624,7 @@ wire [63:0]quotient;
 wire [63:0]remainder;
 
 wire div_valid;
-assign div_valid = dividing&&ready_EX_MEM  ;
+assign div_valid = dividing && ready_EX_MEM  ;
 wire divw;
 assign divw = opcode_type[10];
 wire div_signed;
@@ -638,7 +638,7 @@ assign dividend  = dividing ? src1 : 64'b0;
 assign divisor   = dividing ? src2 : 64'b0;
 
 ysyx_22050612_divider boothdiv ((clk), rst, div_valid, div_flush, divw, div_signed, dividend, divisor, div_ready, div_out_valid, quotient, remainder);     
-//the clk has been "&&" with "div divw" opcode to close the clock gating(gate), it can speed up the sidivating.
+//the clk has been "&&" with "dividing" opcode to close the clock gating(gate), it can speed up the sidivating.
 
 
 
