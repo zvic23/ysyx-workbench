@@ -173,7 +173,7 @@ assign inst_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_inst  : 32'b0;
 assign opcode_type_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_opcode_type : 15'b0;
 
 wire MEM_block;
-assign MEM_block = (opcode_type[5]||opcode_type[6]) && !dcache_ready;
+assign MEM_block = dcache_valid && !dcache_ready;
 assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
 
 
@@ -201,11 +201,11 @@ araddr_dcache_axi, arlen_dcache_axi, arsize_dcache_axi, arburst_dcache_axi, arva
 
 
 //**************    load interlock    ************************
-assign src2 = MEM_reg_valid ? ((mem_storing &&wbu_writing_gpr&&rs2_MEM_WB_match) ? WB_reg_wdata : MEM_reg_src2 ) : 64'b0;
+assign src2 = MEM_reg_valid ? ((mem_storing &&wbu_writing_gpr&&rs2_mem_rd_wb_match) ? WB_reg_wdata : MEM_reg_src2 ) : 64'b0;
 
 
-wire rs2_MEM_WB_match;
-assign rs2_MEM_WB_match  =  (wbu_rd == MEM_reg_rs2)&&(MEM_reg_rs2!=5'b0);
+wire rs2_mem_rd_wb_match;
+assign rs2_mem_rd_wb_match  =  (wbu_rd == MEM_reg_rs2)&&(MEM_reg_rs2 != 5'b0);
 wire mem_storing;
 assign mem_storing = opcode_type[6];
 
@@ -223,7 +223,8 @@ end
 wire wen;
 assign wen = opcode_type[0]||opcode_type[1]||opcode_type[2]||opcode_type[3]||opcode_type[5]||opcode_type[7]||opcode_type[8]||opcode_type[9]||opcode_type[10]||opcode_type[11];
 wire [63:0]wdata_reg;
-assign wdata_reg = opcode_type[5] ? rdata_fix : (opcode_type[11] ? MEM_reg_src2 : aluoutput);
+assign wdata_reg = opcode_type[5]  ? rdata_fix : 
+	          (opcode_type[11] ? MEM_reg_src2 : aluoutput);
 
 
 

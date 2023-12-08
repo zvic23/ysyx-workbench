@@ -26,9 +26,7 @@ assign mul_a[65:64] = (mul_valid&&mul_signed[0]) ? (mulw ? {2{multiplicand[31]}}
 assign mul_b[65:64] = (mul_valid&&mul_signed[1]) ? (mulw ? {2{multiplier  [31]}} : {2{multiplier  [63]}}) :  2'b0;
 
 wire [131:0]p[32:0];
-//wire [131:0]p00,p01,p02,p03,p04,p05,p06,p07,p08,p09,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28,p29,p30,p31,p32;
 wire [32:0]c;
-//wire c00,c01,c02,c03,c04,c05,c06,c07,c08,c09,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32;
 
 
 ysyx_22050612_PART_PRODUCT  part_product00 ({mul_a[1:0],1'b0}, {{66{mul_b[65]}},mul_b}           , p[00], c[ 0]);
@@ -301,7 +299,6 @@ assign result_hi = result[127:64];
 assign result_lo = result[63:0];
 
 assign mul_ready = ~(mul_pipe1_valid || mul_pipe2_valid);
-//assign mul_ready = mul_pipe2_valid;
 assign out_valid = mul_pipe2_valid;
 
 `else
@@ -355,13 +352,7 @@ assign mul_ready = ~mul_working;
 assign out_valid = mulw_reg ? (shift_times == 9'd33) : (shift_times == 9'd65);
 assign result_hi = result[127:64];
 assign result_lo = result[63:0];
-/*
-always @(negedge clk) begin
-	if(mul_working) begin
-		$display("1:%h      2:%h     result:%h",multiplicand_shift,multiplier_shift,result);
-	end
-end
-*/
+
 `endif
 
 

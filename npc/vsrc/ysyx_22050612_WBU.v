@@ -126,9 +126,9 @@ always @(negedge clk) begin            //support mtrace, to give the csrc a sign
     10'b000_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
     10'b001_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
     10'b010_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
-    10'b110_0000011:  npc_loadstore(1, reg_raddr, reg_waddr);
-    10'b011_0000011:  npc_loadstore(1, reg_raddr, reg_waddr);
-    10'b011_0100011:  npc_loadstore(2, reg_raddr, reg_waddr);
+    10'b110_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b011_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+    10'b011_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
     default: npc_loadstore(0, 0, 0);
 	endcase
 end
