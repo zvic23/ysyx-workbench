@@ -355,6 +355,9 @@ assign result_lo = result[63:0];
 
 
 always @(negedge clk) begin
+	if(mul_valid&&mul_ready) begin
+$display("a:%x   b:%x",multiplicand,multiplier);
+end
 	$display("shift:%d",shift_times);
 
 end
