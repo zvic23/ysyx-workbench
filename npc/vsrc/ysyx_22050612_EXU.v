@@ -600,7 +600,7 @@ assign mul_valid = multipling && ready_EX_MEM  ;
 wire mulw;
 assign mulw = opcode_type[10];
 wire [1:0]mul_signed;
-assign mul_signed = 2'b00;
+assign mul_signed = 2'b11;
 
 wire multipling;
 assign multipling = (opcode_type[8]||opcode_type[10])&&imm[5]&&~opcode_funct3[2];
