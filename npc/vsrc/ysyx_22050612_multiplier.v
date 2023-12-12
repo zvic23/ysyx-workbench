@@ -308,9 +308,9 @@ assign out_valid = mul_pipe2_valid;
 
 wire [64:0]multiplicand_amend;
 wire [64:0]multiplier_amend;
-assign multiplicand_amend = !mulw ? ((mul_signed[0]&&multiplicand[63]) ? {multiplicand[63],multiplicand} : {1'b0,multiplicand}) : 
+assign multiplicand_amend = mulw ? ((mul_signed[0]&&multiplicand[63]) ? {multiplicand[63],multiplicand} : {1'b0,multiplicand}) : 
 	                           ((mul_signed[0]&&multiplicand[31]) ? {32'b0,multiplicand[31],multiplicand[31:0]} : {33'b0,multiplicand[31:0]});
-assign multiplier_amend   = !mulw ? ((mul_signed[0]&&multiplier[63]) ? {multiplier[63],multiplier} : {1'b0,multiplier}) : 
+assign multiplier_amend   = mulw ? ((mul_signed[0]&&multiplier[63]) ? {multiplier[63],multiplier} : {1'b0,multiplier}) : 
 	                           ((mul_signed[0]&&multiplier[31]) ? {32'b0,multiplier[31],multiplier[31:0]} : {33'b0,multiplier[31:0]});
 
 
@@ -352,16 +352,6 @@ assign mul_ready = ~mul_working;
 assign out_valid = mulw_reg ? (shift_times == 9'd33) : (shift_times == 9'd65);
 assign result_hi = result[127:64];
 assign result_lo = result[63:0];
-
-
-always @(negedge clk) begin
-	if(mul_valid&&mul_ready) begin
-$display("a:%x   b:%x",multiplicand,multiplier);
-end
-	$display("shift:%d",shift_times);
-
-end
-
 
 `endif
 
