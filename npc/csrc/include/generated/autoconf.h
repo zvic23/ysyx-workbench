@@ -4,4 +4,3 @@
  * NPC Configuration Menu
  *
  */
-#define CONFIG_SDB 1
