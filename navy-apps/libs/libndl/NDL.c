@@ -12,7 +12,7 @@ uint32_t NDL_GetTicks() {
   struct timeval tv;
   //struct timezone tz;
   gettimeofday(&tv, NULL);
-  return tv.tv_usec/1000;
+  return tv.tv_usec/1000+tv.tv_sec*1000;
   //return 0;
 }
 
