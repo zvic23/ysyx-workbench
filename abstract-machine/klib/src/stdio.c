@@ -29,7 +29,7 @@ int printf(const char *fmt, ...) {
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='c'){
 		  char *s = va_arg(ap, char *);
-			  out[j] = *s;
+			  out[j++] = *s;
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
