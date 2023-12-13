@@ -18,8 +18,6 @@
 #include <device/mmio.h>
 #include <isa.h>
 
-
-
 #if   defined(CONFIG_PMEM_MALLOC)
 static uint8_t *pmem = NULL;                         
 //(the old idea)zsl:about difftest of npc. This CONFIG_PMEM_MALLOC means what?   and I can copy the content of "else" to exchange the "NULL" line so that I can fix the bug I met in the difftest of npc    (init_mem function has two lines annotated, I add the "//".)
