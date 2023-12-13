@@ -42,7 +42,6 @@ int printf(const char *fmt, ...) {
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -61,7 +60,6 @@ int printf(const char *fmt, ...) {
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -80,7 +78,6 @@ int printf(const char *fmt, ...) {
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -99,7 +96,6 @@ int printf(const char *fmt, ...) {
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -118,7 +114,6 @@ int printf(const char *fmt, ...) {
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -137,7 +132,6 @@ int printf(const char *fmt, ...) {
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
