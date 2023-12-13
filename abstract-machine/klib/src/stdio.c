@@ -27,6 +27,11 @@ int printf(const char *fmt, ...) {
 		  }
 		  i=i+2;
 	  }
+	  else if(fmt[i]=='%' && fmt[i+1]=='c'){
+		  char *s = va_arg(ap, char *);
+			  out[j] = *s;
+		  i=i+2;
+	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
 		  uint64_t number = va_arg(ap, int);
 		  int base = 10;
