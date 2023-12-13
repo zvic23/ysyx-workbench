@@ -183,6 +183,12 @@ int sprintf(char *out, const char *fmt, ...) {
 		  }
 		  i=i+2;
 	  }
+	  else if(fmt[i]=='%' && fmt[i+1]=='c'){
+		  char c  = (int)va_arg(ap, int);
+			  out[j] = c;
+			  j++;
+		  i=i+2;
+	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
 		  uint64_t number = va_arg(ap, int);
 		  int base = 10;
@@ -321,6 +327,12 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {  //the check of size(n
 			  out[j] = s[k];
 			  j++;
 		  }
+		  i=i+2;
+	  }
+	  else if(fmt[i]=='%' && fmt[i+1]=='c'){
+		  char c  = (int)va_arg(ap, int);
+			  out[j] = c;
+			  j++;
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
