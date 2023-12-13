@@ -9,7 +9,7 @@
 
 
 //const char digits[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const char digits[] = "0123456789abcdefghijklmnopqrstuvwsyz";
+const char digits[] = "0123456789abcdefghijklmnopqrstuvwsyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 int printf(const char *fmt, ...) {
   char out[65536];
 
