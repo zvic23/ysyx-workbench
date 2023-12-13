@@ -28,8 +28,9 @@ int printf(const char *fmt, ...) {
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='c'){
-		  char *s = va_arg(ap, char *);
-			  out[j++] = s[0];
+		  char c  = (int)va_arg(ap, int);
+			  out[j] = c;
+			  j++;
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
