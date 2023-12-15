@@ -75,7 +75,7 @@ int printf(const char *fmt, ...) {
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='x'){
-		  uint32_t number = va_arg(ap, int);
+		  uint64_t number = va_arg(ap, int);
 		  int base = 16;
 		  char buff[30];
 		  char *a=buff;
@@ -231,7 +231,7 @@ int sprintf(char *out, const char *fmt, ...) {
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='x'){
-		  uint32_t number = va_arg(ap, int);
+		  uint64_t number = va_arg(ap, int);
 		  int base = 16;
 		  char buff[30];
 		  char *a=buff;
@@ -377,7 +377,7 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {  //the check of size(n
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='x'){
-		  uint32_t number = va_arg(ap, int);
+		  uint64_t number = va_arg(ap, int);
 		  int base = 16;
 		  char buff[30];
 		  char *a=buff;
