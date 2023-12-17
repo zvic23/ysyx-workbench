@@ -35,11 +35,15 @@ void *malloc(size_t size) {
   // On native, malloc() will be called during initializaion of C runtime.
   // Therefore do not call panic() here, else it will yield a dead recursion:
   //   panic() -> putchar() -> (glibc) -> malloc() -> panic()
+
+#if defined(__ISA_NATIVE__)
+  //Area heap = RANGE(&_heap_start, PMEM_END);
+  Area heap = RANGE(&_heap_start, PMEM_END);
+#endif
   if(init_malloc == 0){
   addr = (void *)ROUNDUP(heap.start, 8);
   init_malloc = 1;
   }
-  while(heap.start == 0){};
   size = (size_t)ROUNDUP(size, 8);
   char *old = addr;
   addr += size;
