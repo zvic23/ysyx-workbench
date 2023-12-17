@@ -28,7 +28,7 @@ int atoi(const char* nptr) {
   }
   return x;
 }
-extern char _heap_start;
+//extern char _heap_start;
   static char *addr;
   static int init_malloc=0;
 void *malloc(size_t size) {
@@ -37,8 +37,10 @@ void *malloc(size_t size) {
   //   panic() -> putchar() -> (glibc) -> malloc() -> panic()
 
 #if defined(__ISA_NATIVE__)
+	static uint8_t hmem[0x10000000];
   //Area heap = RANGE(&_heap_start, PMEM_END);
-  Area heap = RANGE(&_heap_start, PMEM_END);
+  //heap.start = (void *)&_heap_start;
+  heap.start = (void *)hmem;
 #endif
   if(init_malloc == 0){
   addr = (void *)ROUNDUP(heap.start, 8);
@@ -47,7 +49,7 @@ void *malloc(size_t size) {
   size = (size_t)ROUNDUP(size, 8);
   char *old = addr;
   addr += size;
-  assert((uintptr_t)heap.start <= (uintptr_t)addr && (uintptr_t)addr < (uintptr_t)heap.end);
+  //assert((uintptr_t)heap.start <= (uintptr_t)addr && (uintptr_t)addr < (uintptr_t)heap.end);
   for (uint64_t *p = (uint64_t *)old; p != (uint64_t *)addr; p ++) {
     *p = 0;
   }
