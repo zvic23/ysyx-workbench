@@ -28,7 +28,7 @@ int atoi(const char* nptr) {
   }
   return x;
 }
-
+extern char _heap_start;
   static char *addr;
   static int init_malloc=0;
 void *malloc(size_t size) {
