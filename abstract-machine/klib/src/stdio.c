@@ -5,7 +5,7 @@
 
 #include <limits.h>
 
-#if !defined(__ISA_NATIVE__) 
+#if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 
 //const char digits[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
