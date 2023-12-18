@@ -87,12 +87,6 @@ static int cmd_x(char *args){
     char *position = strtok(pst, " ");
     //printf("%d and %d\n",atoi(n),atoi(position));
 
-    long  a = atol(pst);
-    long sum=0;
-   //for (int i=0;i<8;i++){
-   //  sum = sum+(a%10)*pow(16,i);
-   //  a = a/10;
-   //} 
    struct figure result = evaluation(pst);
 
    printf("%lx\n",result.value);
@@ -106,7 +100,6 @@ return 0;
 }
 
 static int cmd_p(char *args){
-  //char *arg = strtok(NULL, " ");
   struct figure result = evaluation(args); 
   char sign = '0';
   if(result.sign == 1){sign = '-';}

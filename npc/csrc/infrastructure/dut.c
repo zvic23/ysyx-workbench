@@ -54,7 +54,6 @@ void init_difftest(long img_size, int port) {
 
   ref_difftest_init(port);
 
-  //uint8_t resetmem[0x4fffffff];
   uint8_t *resetmem = (uint8_t*)malloc(0x7ffffff);
   memset(resetmem, 0, 0x7ffffff);
   ref_difftest_memcpy(0x80000000,  resetmem, 0x7ffffff, DIFFTEST_TO_REF );
@@ -66,7 +65,6 @@ free(resetmem);
 
 
 void syn_state_to_ref(){    //zsl:i add this function
-//  CPU_state csr_buf;
   uint64_t csr_buf[33];
 extern uint64_t mepc,mcause,mstatus;
 extern uint64_t mtvec;
@@ -112,7 +110,6 @@ void difftest_step() {
 	  if(ref_r[i] != cpu_gpr_set[i]){
 		  printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx   npc.pc:%lx  nemu.pc:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]    , wb_pc,ref_r[32]);
 		  //printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx   npc.pc:%lx  nemu.pc:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]    , cpu_gpr_set[32],ref_r[32]);
-		  //printf("(%s) npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",regs[i],i,cpu_gpr_set[i],i,ref_r[i]);
 		  npc_state = 3;
 		  return;
 	  }
@@ -134,7 +131,6 @@ void syn_gpr(){
   memcpy(cpu_gpr_set_old_pc,cpu_gpr_set,256);
   cpu_gpr_set_old_pc[32] = wb_pc+4;
   ref_difftest_regcpy(&cpu_gpr_set_old_pc, DIFFTEST_TO_REF);
-  //ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
 }
 
 
@@ -144,39 +140,4 @@ void difftest_step() {}
 void syn_state_to_ref(){} 
 void syn_gpr(){}
 #endif
-
-
-
-
-
-
-/*
-uint64_t cpu_gpr_ref[33];
-
-void cmpreg(){
-  printf("in\n");
-  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
-  printf("out\n");
-}
-
-
-void cmpreg_0(){
- // printf("in\n");
-  ref_difftest_regcpy(&cpu_gpr_ref, DIFFTEST_TO_DUT);
- // for (int i = 0; i < 32; i++) {
- //   printf("nemu.gpr=%lx\n" ,cpu_gpr_ref[i]);
- // }
-
- //   printf("nemu.pc=%lx\n" ,cpu_gpr_ref[32]);
- // printf("out\n");
-
-  for(int i=0;i<33;i++){
-	printf("npc.gpr[%d]:%lx     nemu.gpr[%d]:%lx\n",i,cpu_gpr_set[i],i,cpu_gpr_ref[i]);
-  }
-}
-
-void ref_diff_exec(uint64_t n){
- ref_difftest_exec(n);
-} 
-*/
 
