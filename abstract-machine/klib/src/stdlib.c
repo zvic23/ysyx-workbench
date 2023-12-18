@@ -2,7 +2,7 @@
 #include <klib.h>
 #include <klib-macros.h>
 
-#if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
+#if !defined(__ISA_NATIVE__)
 static unsigned long int next = 1;
 
 int rand(void) {
@@ -35,10 +35,6 @@ void *malloc(size_t size) {
   // On native, malloc() will be called during initializaion of C runtime.
   // Therefore do not call panic() here, else it will yield a dead recursion:
   //   panic() -> putchar() -> (glibc) -> malloc() -> panic()
-#if defined(__ISA_NATIVE__)
-void* heap_start = sbrk(0);
-heap.start = heap_start;
-#endif
   if(init_malloc == 0){
   addr = (void *)ROUNDUP(heap.start, 8);
   init_malloc = 1;
