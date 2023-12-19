@@ -177,6 +177,7 @@ static int decode_exec(Decode *s) {
 //	if(BITS(src1,31,31)!=BITS(src2,31,31))quotient=(quotient^0xffffffff)+1;//|0x80000000;
 //	R(dest) = SEXT(quotient,32));               //!!!!!have doubt and to be optimizied 
 						    
+  INSTPAT("0000001 ????? ????? 110 ????? 01100 11", rem    , R, sword_t src1_d=src1;sword_t src2_d=src2;sword_t remainder=src1_d%src2_d;R(dest)=remainder);   
   INSTPAT("0000001 ????? ????? 110 ????? 01110 11", remw   , R, sword_t src1_32s=BITS(src1,31,0)<<32;sword_t src2_32s=BITS(src2,31,0)<<32;sword_t remainder=src1_32s%src2_32s;R(dest) = SEXT(remainder>>32,32)); 
 //  INSTPAT("0000001 ????? ????? 110 ????? 01110 11", remw   , R, word_t src1_32=BITS(src1,31,0);word_t src2_32=BITS(src2,31,0);word_t remainder=0;word_t src1_32_cpl=(src1_32^0xffffffff)+1; word_t src2_32_cpl=(src2_32^0xffffffff)+1; 
 //	if(BITS(src1,31,31)==BITS(src2,31,31)&&BITS(src1,31,31)==0)remainder=src1_32%src2_32;
