@@ -8,9 +8,9 @@ Context* __am_irq_handle(Context *c) {
   if (user_handler) {
     Event ev = {0};
     switch (c->mcause) {
-      case 0xb: ev.event = EVENT_SYSCALL; break;
-      //case 0xb: ev.event = EVENT_YIELD; break;
-      default: ev.event = EVENT_ERROR; break;
+      //case 0xb: ev.event = EVENT_SYSCALL; break;
+	    case 0xb: {ev.event = EVENT_YIELD;printf("cause:%x",c->mcause); break;}
+      default: {ev.event = EVENT_ERROR;printf("cause:%x",c->mcause); break;}
     }
 
     c = user_handler(ev, c);
@@ -37,8 +37,8 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
 }
 
 void yield() {
-  asm volatile("li a0, 0");
-  //asm volatile("li a7, -1; ecall");
+  //asm volatile("li a0, 0");
+  asm volatile("li a7, -1; ecall");
 }
 
 bool ienabled() {
