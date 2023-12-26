@@ -70,6 +70,7 @@ int _write(int fd, void *buf, size_t count) {
 }
 
 void *_sbrk(intptr_t increment) {
+  return (void *)-1;
 	  //char buf0[20];
 	  //sprintf(buf0 , "%lx\n", increment);
 	  //_write(1,buf0,17);
@@ -79,7 +80,7 @@ void *_sbrk(intptr_t increment) {
   	  intptr_t program_break_old = program_break;
    	  if(program_break+increment > 0x90000000)program_break += 0;
 	  else program_break += increment;
-	  return (void *)-1;
+	  return (void *)program_break_old;
   } 
   else return (void *)-1;
   //return (void *)-1;
