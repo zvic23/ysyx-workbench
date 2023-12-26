@@ -79,7 +79,7 @@ void *_sbrk(intptr_t increment) {
   	  intptr_t program_break_old = program_break;
    	  if(program_break+increment > 0x90000000)program_break += 0;
 	  else program_break += increment;
-	  return (void *)program_break_old;
+	  return (void *)-1;
   } 
   else return (void *)-1;
   //return (void *)-1;
