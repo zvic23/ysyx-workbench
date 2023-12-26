@@ -70,7 +70,6 @@ int _write(int fd, void *buf, size_t count) {
 }
 
 void *_sbrk(intptr_t increment) {
-  return (void *)-1;
 	  //char buf0[20];
 	  //sprintf(buf0 , "%lx\n", increment);
 	  //_write(1,buf0,17);
