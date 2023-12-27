@@ -17,24 +17,24 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
-  char buf_cache[100];
-  int fp = open("/dev/events", "r+");
-  int succ = read(fp, buf_cache, 40);
-  //if(succ)printf("succ=%d\n",succ);
-  if(succ) {
-  	  strncpy(buf, buf_cache, len);
-	  return 1;
-  }
-  else return 0;
-
-
-//  char buf_cache[65535];
-//  FILE *fp = fopen("/dev/events", "r+");
-//  int succ = fscanf(fp, "%[^\n]", buf_cache);
-//  fclose(fp);
-//  strncpy(buf, buf_cache, len);
-//  if(succ!=-1) return 1;
+//  char buf_cache[100];
+//  int fp = open("/dev/events", "r+");
+//  int succ = read(fp, buf_cache, 40);
+//  //if(succ)printf("succ=%d\n",succ);
+//  if(succ) {
+//  	  strncpy(buf, buf_cache, len);
+//	  return 1;
+//  }
 //  else return 0;
+
+
+  char buf_cache[65535];
+  FILE *fp = fopen("/dev/events", "r+");
+  int succ = fscanf(fp, "%[^\n]", buf_cache);
+  fclose(fp);
+  strncpy(buf, buf_cache, len);
+  if(succ!=-1) return 1;
+  else return 0;
 }
 
 static int canvas_w = 0, canvas_h = 0;
