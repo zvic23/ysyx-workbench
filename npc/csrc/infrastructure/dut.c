@@ -27,6 +27,7 @@ static bool is_skip_ref = false;
 static int skip_dut_nr_inst = 0;
 
 
+extern uint64_t wb_pc;
 
 void init_difftest(long img_size, int port) {
   char ref_so_file[100]="/home/zsl/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so";
@@ -83,13 +84,16 @@ extern uint64_t mtvec;
   //ref_difftest_exec(4);
 
   ref_difftest_memcpy(0x80000000, pmem, 0x7ffffff, DIFFTEST_TO_REF);
-  ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
+  //ref_difftest_regcpy(&cpu_gpr_set, DIFFTEST_TO_REF);
+  uint64_t cpu_gpr_set_old_pc[33];
+  memcpy(cpu_gpr_set_old_pc,cpu_gpr_set,256);
+  cpu_gpr_set_old_pc[32] = wb_pc+4;
+  ref_difftest_regcpy(&cpu_gpr_set_old_pc, DIFFTEST_TO_REF);
 }
 
 
 
 
-extern uint64_t wb_pc;
 
 extern const char *regs[];
 extern int npc_state;
