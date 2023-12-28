@@ -31,6 +31,7 @@ wire [32:0]c;
 
 ysyx_22050612_PART_PRODUCT  part_product00 ({mul_a[1:0],1'b0}, {{66{mul_b[65]}},mul_b}           , p[00], c[ 0]);
 ysyx_22050612_PART_PRODUCT  part_product01 (mul_a[ 3: 1]     , {{64{mul_b[65]}},mul_b,{ 2{1'b0}}}, p[01], c[ 1]);
+ysyx_22050612_PART_PRODUCT  part_product02 (mul_a[ 5: 3]     , {{62{mul_b[65]}},mul_b,{ 4{1'b0}}}, p[02], c[ 2]);
 ysyx_22050612_PART_PRODUCT  part_product03 (mul_a[ 7: 5]     , {{60{mul_b[65]}},mul_b,{ 6{1'b0}}}, p[03], c[ 3]);
 ysyx_22050612_PART_PRODUCT  part_product04 (mul_a[ 9: 7]     , {{58{mul_b[65]}},mul_b,{ 8{1'b0}}}, p[04], c[ 4]);
 ysyx_22050612_PART_PRODUCT  part_product05 (mul_a[11: 9]     , {{56{mul_b[65]}},mul_b,{10{1'b0}}}, p[05], c[ 5]);
