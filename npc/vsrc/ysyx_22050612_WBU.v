@@ -1,7 +1,7 @@
 import "DPI-C" function void npc_complete_one_inst ();
 import "DPI-C" function void npc_loadstore(int getinst, longint raddr, longint waddr);
 import "DPI-C" function void WBU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
-
+import "DPI-C" function void read_inst(int npc_inst);
 
 
 module ysyx_22050612_WBU(
@@ -21,8 +21,7 @@ input [63:0]reg_wr_value,
 output [63:0] gpr[31:0],
 
 
-//output reg WB_reg_valid,
-//output reg [31:0]WB_reg_inst,
+
 output wbu_writing_gpr,
 output [4:0]wbu_rd,
 output reg [63:0]WB_reg_wdata,
@@ -46,7 +45,6 @@ reg [31:0]WB_reg_inst ;
 reg       WB_reg_wen ;
 reg [ 4:0]WB_reg_id ;
 //reg [63:0]WB_reg_wdata ;
-//reg [23:0]WB_reg_opcode;
 reg [14:0]WB_reg_opcode_type;
 
 
@@ -58,7 +56,6 @@ always @(posedge clk) begin
 		WB_reg_valid <= 1'b0;
 		WB_reg_pc    <= 64'b0;
 		WB_reg_inst  <= 32'b0;
-//		WB_reg_opcode<= 24'b0;
 		WB_reg_opcode_type <= 15'b0;
 		WB_reg_wen  <=  1'b0;
 		WB_reg_id   <=  5'b0;
@@ -84,7 +81,6 @@ always @(posedge clk) begin
 		WB_reg_pc    <= pc_MEM_WB;
 		WB_reg_inst  <= inst_MEM_WB;
 		WB_reg_opcode_type <= opcode_type_MEM_WB;
-//		WB_reg_opcode<= opcode_in;
 		WB_reg_wen  <= reg_wr_wen   ;
 		WB_reg_id   <= reg_wr_ID    ;
 		WB_reg_wdata<= reg_wr_value ;
@@ -94,8 +90,8 @@ always @(posedge clk) begin
 	end
 end
 
-//wire [31:0]inst;
-//assign inst = WB_reg_valid ? WB_reg_inst : 32'b0;
+wire [31:0]inst;
+assign inst = WB_reg_valid ? WB_reg_inst : 32'b0;
 
 //wire [23:0]opcode;
 //assign opcode = WB_reg_valid ? WB_reg_opcode : 24'b0;
@@ -110,6 +106,10 @@ always @(negedge clk) begin
 	//$display("WB   pc:%x   inst:%x   valid:%d  wen:%d  wdata:%x rd:%x\n",WB_reg_pc,WB_reg_inst,WB_reg_valid,reg_wr_wen,reg_wr_value,reg_wr_ID);
 	if(WB_reg_valid && ready_EX_MEM) begin 
 		npc_complete_one_inst();
+		read_inst(inst);
+	end
+	else begin
+		read_inst(32'b0);
 	end
 end
 //********************************************************************

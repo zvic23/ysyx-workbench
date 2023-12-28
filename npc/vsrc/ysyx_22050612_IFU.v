@@ -1,5 +1,5 @@
 import "DPI-C" function void IFU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
-import "DPI-C" function void read_inst(int npc_inst);
+//import "DPI-C" function void read_inst(int npc_inst);
 import "DPI-C" function void pmem_read_pc(
   input longint raddr, output longint rdata);
 
@@ -18,7 +18,7 @@ module ysyx_22050612_IFU (
 
    output branch_flush,   //clean the IFU, icache, IDU and EXU if the branch predict fail.
 
-   input [63:0]waddr,     //暂时加进来保证切换程序时icache能保持一致性，所以每次存指令后就更新icache
+   input [63:0]waddr,     
 
 
    //***  axi_full signal from icache ***//
@@ -117,7 +117,7 @@ end
 
 
 
-
+/*
 //offer the inst in IFU to itrace
 always @(*) begin
 	if(valid_IF_ID) begin
@@ -127,5 +127,5 @@ always @(*) begin
   		read_inst(32'b0);
   	end
 end
-
+*/
 endmodule

@@ -38,7 +38,6 @@ void do_lseek(Context *c) {
   c->GPRx = fs_lseek(c->GPR2, c->GPR3, c->GPR4);
 }
 
-//extern void naive_uload(PCB *pcb, const char *filename);
 void do_execve(Context *c) {
   naive_uload(NULL, (const char*)c->GPR2);
 }
@@ -50,7 +49,6 @@ void do_gettimeofday(Context *c) {
   else if(c->GPR2 == 1) {
 	  c->GPRx = io_read(AM_TIMER_UPTIME).us / 1000000;
   }
-  //c->GPRx = gettimeofday((timeval*)c->GPR2, (timezone*)c->GPR3);
 }
 
 void do_syscall(Context *c) {
