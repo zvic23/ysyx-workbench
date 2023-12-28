@@ -79,7 +79,7 @@ extern uint64_t mtvec;
   buf[3]=0x34169073;     //  0x341 01101 001 00000 1110011    0x34169073
   ref_difftest_memcpy(0x80000000, buf, 16, DIFFTEST_TO_REF);
   ref_difftest_regcpy(&csr_buf, DIFFTEST_TO_REF);
-  ref_difftest_exec(15);
+  ref_difftest_exec(10);
   //ref_difftest_exec(4);
 
   ref_difftest_memcpy(0x80000000, pmem, 0x7ffffff, DIFFTEST_TO_REF);
