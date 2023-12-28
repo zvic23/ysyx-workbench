@@ -28,6 +28,7 @@ void SDL_Delay(uint32_t ms) {
 	while(next - first < ms);
 	//static int time = 0;
 	//printf("time : %d       ms:%d \n",time++,ms);
+	//printf("last : %d       ms:%d \n",next - first,ms);
 	//printf("delay sdl not implement!\n");
 	//assert(0);
 }

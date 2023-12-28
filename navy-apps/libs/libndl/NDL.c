@@ -66,30 +66,12 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {  //pixels is c
 	  lseek(fp,(x_mid+x+screen_w*(i+y+y_mid))*4,SEEK_SET);
 	  write(fp,&pixels[canvas_w*(i+y)+x],w*4);
   }
-  //write(fp,pixel_buf,screen_w*screen_h*4);
-  //write(fp,pixels,screen_w*screen_h*4);
-
-
-//	  lseek(fp,0,SEEK_SET);
-//  write(fp,pixels,screen_w*screen_h*4);
-
-//  close(fp);             //!!! this line is important. if use this line, the nslider working in native will not change the image. Maybe once close the fb in native, it can not be opened again.
-
 
 //	printf("x_mid=%d,y_mid=%d\n",x_mid,y_mid);
 //	printf("x_canvas=%d,y_canvas=%d\n",canvas_w,canvas_h);
 //	printf("x_screen=%d,y_screen=%d\n",screen_w,screen_h);
 //	printf("x=%d,y=%d,w=%d,h=%d\n",x,y,w,h);
 
-
-//  int x_mid=(screen_w-canvas_w)/2;
-//  int y_mid=(screen_h-canvas_h)/2;
-//  int fp = open("/dev/fb", "r+");
-//  for(int i=0;i<h;i++){
-//	  lseek(fp,x_mid+x+screen_w*(i+y_mid),SEEK_SET);
-//	  write(fp,&pixels[w*i],w);
-//  }
-//  close(fp);
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {
