@@ -126,7 +126,6 @@ void npc_complete_one_inst(){
 int itrace_si = 0;
 uint64_t skip_old = 0;
 void one_cycle(){
-  itrace(top->wb_pc, inst);
   //itrace(top->pc, inst);
 
   top->clk = 1;
@@ -137,6 +136,7 @@ void one_cycle(){
 
   update_gpr_pc();
 
+  if(inst)itrace(top->wb_pc, inst);
 #ifdef CONFIG_DIFFTEST
   if(difftest_check){
 	  if( load_store == 1){
