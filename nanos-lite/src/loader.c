@@ -40,7 +40,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   fs_read(fd, ident, 16);
   //ramdisk_read(ident, 0, 16);
   //printf("ident:");
-  for(int k=0;k<16;k++)//printf("%x ",ident[k]);
+  //for(int k=0;k<16;k++)printf("%x ",ident[k]);
   //printf("\n");
   assert(*(uint64_t *)ident == 0x00010102464c457f && *(uint64_t *)&ident[8] == 0x0);
 
