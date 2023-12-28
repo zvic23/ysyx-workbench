@@ -20,7 +20,6 @@ SDL_Surface* IMG_Load(const char *filename) {
   int size = ftell(fp);
  // printf("The image is %s, size = %ld\n", filename, size);
 
-  //unsigned char img_buf[size];
   unsigned char *img_buf;
   img_buf = (unsigned char *)malloc(size);
   fseek(fp, 0, SEEK_SET);
