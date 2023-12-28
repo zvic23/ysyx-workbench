@@ -72,14 +72,14 @@ extern uint64_t mtvec;
   csr_buf[12] = mstatus;  csr_buf[13] = mepc;
   csr_buf[32] = 0x80000000;
   //printf("csr: %lx  %lx  %lx  %lx\n",mtvec,mcause,mstatus,mepc);
-  uint32_t buf[9];
+  uint32_t buf[4];
   buf[0]=0x30551073;     //  0x305 01010 001 00000 1110011    0x30551073
   buf[1]=0x34259073;     //  0x342 01011 001 00000 1110011    0x34259073
   buf[2]=0x30061073;     //  0x300 01100 001 00000 1110011    0x30061073
   buf[3]=0x34169073;     //  0x341 01101 001 00000 1110011    0x34169073
   ref_difftest_memcpy(0x80000000, buf, 16, DIFFTEST_TO_REF);
   ref_difftest_regcpy(&csr_buf, DIFFTEST_TO_REF);
-  ref_difftest_exec(9);
+  ref_difftest_exec(15);
   //ref_difftest_exec(4);
 
   ref_difftest_memcpy(0x80000000, pmem, 0x7ffffff, DIFFTEST_TO_REF);
