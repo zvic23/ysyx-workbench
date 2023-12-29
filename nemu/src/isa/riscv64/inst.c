@@ -35,7 +35,7 @@ enum {
 #define immU() do { *imm = SEXT(BITS(i, 31, 12), 20) << 12; } while(0)
 #define immS() do { *imm = (SEXT(BITS(i, 31, 25), 7) << 5) | BITS(i, 11, 7); } while(0)
 
-#define immJ() do { *imm = SEXT(((BITS(i, 31, 31) << 20)|(BITS(i, 19, 12) << 12)|(BITS(i, 20, 20) << 11)|(BITS(i, 30, 21) << 1)),21); } while(0)       //zsl: inst:jal uses this type
+#define immJ() do { *imm = SEXT(((BITS(i, 31, 31) << 20)|(BITS(i, 19, 12) << 12)|(BITS(i, 20, 20) << 11)|(BITS(i, 30, 21) << 1)),21); } while(0) 
 #define immB() do { *imm = SEXT(((BITS(i, 31, 31) << 12)|(BITS(i, 7,  7 ) << 11)|(BITS(i, 30, 25) << 5 )|(BITS(i, 11, 8 ) << 1)),13); } while(0) 
 
 static void decode_operand(Decode *s, int *dest, word_t *src1, word_t *src2, word_t *imm, int type) {
@@ -147,11 +147,10 @@ static int decode_exec(Decode *s) {
 
   INSTPAT("??????? ????? ????? 001 ????? 01000 11", sh     , S, Mw(src1 + imm, 2, src2));
   INSTPAT("010000? ????? ????? 101 ????? 00100 11", srai   , I, word_t shamt= BITS(imm, 5, 0); sword_t src1_s=(sword_t)src1; R(dest)=src1_s >> shamt);
-  //INSTPAT("010000? ????? ????? 101 ????? 00100 11", srai   , I, word_t shamt=imm & 0x000000000000003f;word_t src1_s=src1>>shamt;word_t mask_t = 0xffffffffffffffff;mask_t=mask_t<<(64-shamt);assert(shamt!=0);R(dest)=(BITS(src1,63,63)==1)?(mask_t|src1_s):src1_s);  
-  //word_t shamt=BITS(imm,5,0)     (BITS(0xffffffffffffffff,shamt-1,0)<<(64-shamt))      sword_t src1_sign = *(sword_t*)&src1;R(dest)=(src1_sign >> shamt));        //     !!!!!!!!have doubt 
-  INSTPAT("??????? ????? ????? 100 ????? 00000 11", lbu    , I, R(dest) = Mr(src1 + imm, 1));  //!!!!!bitnum have doubt
+
+  INSTPAT("??????? ????? ????? 100 ????? 00000 11", lbu    , I, R(dest) = Mr(src1 + imm, 1));  
   INSTPAT("??????? ????? ????? 111 ????? 00100 11", andi   , I, R(dest) = src1 & imm);
-  INSTPAT("0000000 ????? ????? 001 ????? 01110 11", sllw   , R, R(dest) = SEXT(BITS(src1 << BITS(src2, 4, 0),31,0),32));  //!!!!!!!!have doubt
+  INSTPAT("0000000 ????? ????? 001 ????? 01110 11", sllw   , R, R(dest) = SEXT(BITS(src1 << BITS(src2, 4, 0),31,0),32));  
   INSTPAT("0000000 ????? ????? 111 ????? 01100 11", and    , R, R(dest) = src1 & src2);
   INSTPAT("0000000 ????? ????? 011 ????? 01100 11", sltu   , R, R(dest) = (src1<src2)?1:0);
   INSTPAT("??????? ????? ????? 100 ????? 00100 11", xori   , I, R(dest) = src1 ^ imm);
@@ -161,42 +160,18 @@ static int decode_exec(Decode *s) {
   INSTPAT("000000? ????? ????? 001 ????? 00100 11", slli   , I, R(dest) = src1 << BITS(imm, 5, 0));
   INSTPAT("000000? ????? ????? 101 ????? 00100 11", srli   , I, R(dest) = src1 >> BITS(imm, 5, 0));
   INSTPAT("??????? ????? ????? 101 ????? 11000 11", bge    , B, sword_t src1_s=src1; sword_t src2_s=src2; s->dnpc = (src1_s>=src2_s)?(s->pc+imm):s->dnpc);
-//  INSTPAT("??????? ????? ????? 101 ????? 11000 11", bge    , B, word_t match=0;//src1=0x0000000000000000;src2=0x8000000000000001;	
-//	if(BITS(src1,63,63)==BITS(src2,63,63))match=(src1>=src2)?1:0;
-//	if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==0)?1:0;
-//	s->dnpc = (match)?(s->pc+imm):s->dnpc);     //!!!!!have doubt and to be optimized
+
   INSTPAT("??????? ????? ????? 010 ????? 01000 11", sw     , S, Mw(src1 + imm, 4, src2));
 
   INSTPAT("0000001 ????? ????? 000 ????? 01110 11", mulw   , R, R(dest) = SEXT(BITS(BITS(src1,31,0)*BITS(src2,31,0),31,0),32));
   INSTPAT("0000001 ????? ????? 100 ????? 01110 11", divw   , R,	sword_t src1_32s=BITS(src1,31,0)<<32;sword_t src2_32s=BITS(src2,31,0)<<32;sword_t quotient=src1_32s/src2_32s;R(dest) = SEXT(quotient,32)); 
-//  INSTPAT("0000001 ????? ????? 100 ????? 01110 11", divw   , R,	word_t src1_32=BITS(src1,31,0);word_t src2_32=BITS(src2,31,0);word_t quotient=0;word_t src1_32_cpl=(src1_32^0xffffffff)+1; word_t src2_32_cpl=(src2_32^0xffffffff)+1; 
-//	if(BITS(src1,31,31)==BITS(src2,31,31)&&BITS(src1,31,31)==0)quotient=src1_32/src2_32;
-//	if(BITS(src1,31,31)==BITS(src2,31,31)&&BITS(src1,31,31)==1)quotient=src1_32_cpl/src2_32_cpl;
-//	if(BITS(src1,31,31)!=BITS(src2,31,31)&&BITS(src1,31,31)==0)quotient=src1_32/src2_32_cpl;
-//	if(BITS(src1,31,31)!=BITS(src2,31,31)&&BITS(src1,31,31)==1)quotient=src1_32_cpl/src2_32;
-//	if(BITS(src1,31,31)!=BITS(src2,31,31))quotient=(quotient^0xffffffff)+1;//|0x80000000;
-//	R(dest) = SEXT(quotient,32));               //!!!!!have doubt and to be optimizied 
 						    
   INSTPAT("0000001 ????? ????? 110 ????? 01100 11", rem    , R, sword_t src1_d=src1;sword_t src2_d=src2;sword_t remainder=src1_d%src2_d;R(dest)=remainder);   
   INSTPAT("0000001 ????? ????? 110 ????? 01110 11", remw   , R, sword_t src1_32s=BITS(src1,31,0)<<32;sword_t src2_32s=BITS(src2,31,0)<<32;sword_t remainder=src1_32s%src2_32s;R(dest) = SEXT(remainder>>32,32)); 
-//  INSTPAT("0000001 ????? ????? 110 ????? 01110 11", remw   , R, word_t src1_32=BITS(src1,31,0);word_t src2_32=BITS(src2,31,0);word_t remainder=0;word_t src1_32_cpl=(src1_32^0xffffffff)+1; word_t src2_32_cpl=(src2_32^0xffffffff)+1; 
-//	if(BITS(src1,31,31)==BITS(src2,31,31)&&BITS(src1,31,31)==0)remainder=src1_32%src2_32;
-//	if(BITS(src1,31,31)==BITS(src2,31,31)&&BITS(src1,31,31)==1)remainder=src1_32_cpl%src2_32_cpl;
-//	if(BITS(src1,31,31)!=BITS(src2,31,31)&&BITS(src1,31,31)==0)remainder=src1_32%src2_32_cpl;
-//	if(BITS(src1,31,31)!=BITS(src2,31,31)&&BITS(src1,31,31)==1)remainder=src1_32_cpl%src2_32;
-//	if(BITS(src1,31,31)!=BITS(src2,31,31))remainder=(remainder^0xffffffff)+1;//|0x80000000;
-//	R(dest) = SEXT(remainder,32));               //!!!!!have doubt and to be optimizied    this inst is copy-paste
 						     
   INSTPAT("??????? ????? ????? 100 ????? 11000 11", blt    , B, sword_t src1_s=src1; sword_t src2_s=src2; s->dnpc = (src1_s<src2_s)?(s->pc+imm):s->dnpc);
-//  INSTPAT("??????? ????? ????? 100 ????? 11000 11", blt    , B, word_t match=0;
-//	if(BITS(src1,63,63)==BITS(src2,63,63))match=(src1<src2)?1:0;
-//	if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==1)?1:0;
-//	s->dnpc = (match)?(s->pc+imm):s->dnpc);     //!!!!!have doubt and to be optimized
+
   INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, sword_t src1_s=src1; sword_t src2_s=src2;R(dest) = (src1_s<src2_s)?1:0);
-//  INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, word_t match=0;
-//	if(BITS(src1,63,63)==BITS(src2,63,63))match=(src1<src2)?1:0;
-//	if(BITS(src1,63,63)!=BITS(src2,63,63))match=(BITS(src1,63,63)==1)?1:0;
-//	R(dest) = (match)?1:0);     //!!!!!to be optimized
 
   INSTPAT("??????? ????? ????? 001 ????? 00000 11", lh     , I, R(dest) = SEXT(Mr(src1 + imm, 2),16));
   INSTPAT("??????? ????? ????? 101 ????? 00000 11", lhu    , I, R(dest) = Mr(src1 + imm, 2));
@@ -204,9 +179,6 @@ static int decode_exec(Decode *s) {
 
   INSTPAT("0000000 ????? ????? 001 ????? 00110 11", slliw  , I, R(dest) = SEXT(BITS(src1 << BITS(imm, 4, 0),31,0),32));
   INSTPAT("0100000 ????? ????? 101 ????? 00110 11", sraiw  , I, sword_t src1_32s=BITS(src1,31,0)<<32;  word_t shamt=BITS(imm,4,0);R(dest)=SEXT(BITS(src1_32s>>shamt,63,32),32));
-//  INSTPAT("0100000 ????? ????? 101 ????? 00110 11", sraiw  , I, word_t shamt=BITS(imm,4,0);word_t src1_s=BITS(src1,31,0)>>shamt;
-//	R(dest)=(BITS(src1,31,31)==1)?((BITS(0xffffffff,shamt-1,0)<<(32-shamt))|src1_s):src1_s;
-//	R(dest)=SEXT(R(dest),32));  //!!!!!!!have doubt 
 
   INSTPAT("0000001 ????? ????? 000 ????? 01100 11", mul    , R, R(dest) = src1 * src2);
 
@@ -214,13 +186,11 @@ static int decode_exec(Decode *s) {
   
   INSTPAT("0000000 ????? ????? 101 ????? 00110 11", srliw  , I, R(dest) = BITS(src1, 31, 0) >> BITS(imm, 4, 0));
   INSTPAT("0100000 ????? ????? 101 ????? 01110 11", sraw   , R, sword_t src1_32s=BITS(src1,31,0)<<32;  word_t shamt=BITS(src2,4,0);R(dest)=SEXT(BITS(src1_32s>>shamt,63,32),32));
-//  INSTPAT("0100000 ????? ????? 101 ????? 01110 11", sraw   , R, word_t shamt=BITS(src2,4,0);word_t src1_s=BITS(src1,31,0)>>shamt;
-//	R(dest)=(BITS(src1,31,31)==1)?((BITS(0xffffffff,shamt-1,0)<<(32-shamt))|src1_s):src1_s;
-//	R(dest)=SEXT(R(dest),32));  //!!!!!!!have doubt 
+
   INSTPAT("0000000 ????? ????? 101 ????? 01110 11", srlw   , R, R(dest) = BITS(src1, 31, 0) >> BITS(src2,4, 0));
   INSTPAT("??????? ????? ????? 110 ????? 11000 11", bltu   , B, s->dnpc = (src1 < src2)?(s->pc+imm):s->dnpc);
 
-  INSTPAT("??????? ????? ????? 111 ????? 11000 11", bgeu   , B, s->dnpc = (src1>=src2)?(s->pc+imm):s->dnpc);     //!!!!!have doubt and to be optimized   zsl:there is something wrong in bge and bgeu
+  INSTPAT("??????? ????? ????? 111 ????? 11000 11", bgeu   , B, s->dnpc = (src1>=src2)?(s->pc+imm):s->dnpc);  
   
   INSTPAT("0000001 ????? ????? 111 ????? 01100 11", remu   , R, R(dest) = src1 % src2);
   INSTPAT("0000001 ????? ????? 101 ????? 01100 11", divu   , R,	R(dest) = src1 / src2); 
@@ -231,11 +201,10 @@ static int decode_exec(Decode *s) {
   INSTPAT("??????? ????? ????? 110 ????? 00100 11", ori    , I, R(dest) = src1 | imm);
   INSTPAT("??????? ????? ????? 000 ????? 00000 11", lb     , I, R(dest) = SEXT(Mr(src1 + imm, 1),8)); 
   INSTPAT("0000001 ????? ????? 101 ????? 01110 11", divuw  , R,	word_t src1_32=BITS(src1,31,0);word_t src2_32=BITS(src2,31,0);word_t quotient=src1_32 / src2_32;
-	R(dest) = SEXT(quotient,32));               //!!!!!have doubt and to be optimizied 
+	R(dest) = SEXT(quotient,32));               
   INSTPAT("??????? ????? ????? 010 ????? 00100 11", slti   , I, R(dest) = ((sword_t)src1<(sword_t)imm)?1:0);   
   INSTPAT("0000001 ????? ????? 111 ????? 01110 11", remuw  , R, word_t src1_32=BITS(src1,31,0);word_t src2_32=BITS(src2,31,0);word_t remainder= src1_32 % src2_32;
-	R(dest) = SEXT(remainder,32));               //!!!!!have doubt and to be optimizied    this inst is copy-paste
-
+	R(dest) = SEXT(remainder,32));               
 
   INSTPAT("??????? ????? ????? 001 ????? 11100 11", csrrw  , I, if(BITS(imm,11,0)==0x305)R(dest)=mtvec;if(BITS(imm,11,0)==0x305)mtvec=src1; 
 		  if(BITS(imm,11,0)==0x342)R(dest)=mcause;if(BITS(imm,11,0)==0x342)mcause=src1;
