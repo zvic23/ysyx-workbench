@@ -162,7 +162,6 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){
   		fseek(fp_ftrace, i*24, SEEK_CUR);
 	  	a= fread(&k, 4, 1, fp_ftrace);
   		assert(a == 1);
-		//functab[j].name = &str[k];
 		strcpy(functab[j].name , &str[k]);
   		fseek(fp_ftrace, 4, SEEK_CUR);
 	  	a= fread(&k, 8, 1, fp_ftrace);
@@ -191,7 +190,6 @@ void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register
 
 	for(int i=0;i<500;i++){
 		if(functab[i].addr_start<=dnpc && dnpc<=functab[i].addr_end){
-			//dest_func = functab[i].name;
 			strcpy(dest_func,functab[i].name);
 			//printf("now at %s\n",functab[i].name);
 			break;
@@ -208,7 +206,6 @@ void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register
 	else{
 		for(int i=0;i<500;i++){
 			if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
-			//	src_func = functab[i].name;
 				strcpy(src_func,functab[i].name);
 				//printf("now at %s\n",functab[i].name);
 				break;
