@@ -314,7 +314,7 @@ int sprintf(char *out, const char *fmt, ...) {
   //panic("Not implemented");
 }
 
-int snprintf(char *out, size_t n, const char *fmt, ...) {  //the check of size(n) is not fully completed
+int snprintf(char *out, size_t n, const char *fmt, ...) {  
   uint64_t i = 0;
   uint64_t j = 0;
   va_list ap;
