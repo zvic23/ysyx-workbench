@@ -115,7 +115,7 @@ assign way_hit[2] = v2[index] && (tag2[index] == addr[31:10]);
 assign way_hit[3] = v3[index] && (tag3[index] == addr[31:10]);
 
 wire not_device;
-assign not_device = (addr <= 64'h8fffffff);    //暂时用来调整一致性
+assign not_device = (addr <= 64'h8fffffff);   
 
 wire [127:0]dout0, dout1, dout2, dout3;
 wire cen0, cen1, cen2, cen3;
@@ -237,7 +237,7 @@ assign rready  = 1'b1;
 
 
 assign awaddr  = addr[31:0];
-assign awlen   = 8'b0;                                    //The real length is arlen + 1
+assign awlen   = 8'b0;                                    //The real length is awlen + 1
 assign awsize  = 3'b110;
 assign awburst = 2'b01;
 
@@ -310,7 +310,6 @@ always @(negedge clk) begin
 		pmem_read_dcache_high64(addr, line_mem[127:64]);
 		
 	if(valid && wren && dcache_current_state==idle &&!ready && !not_device)begin
-	//if(valid&&!ready)begin
 	        pmem_write(addr, din, {mask[56],mask[48],mask[40],mask[32],mask[24],mask[16],mask[8],mask[0]});
 		//pmem_write_dcache_low64 (addr, wren, din, mask, line_mem_wr[63:0],line_mem_wr[127:64]);
 		//pmem_write_dcache_high64(addr, {7'b0,wren}, din, mask, line_mem_wr[127:64]);

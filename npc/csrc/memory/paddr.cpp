@@ -80,10 +80,7 @@ extern "C" void pmem_read_dcache_low64(long long raddr, long long *rdata) {
 		return;
 	}
   }
-  if(raddr>=0x80000000){
-  	long long raddr_set = raddr & ~0xfull;
-	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
-  }
+
 }
 
 extern "C" void pmem_read_dcache_high64(long long raddr, long long *rdata) {
@@ -105,11 +102,7 @@ extern "C" void pmem_read_dcache_high64(long long raddr, long long *rdata) {
 		return;
 	}
   }
-  if(raddr>=0x80000000){
-  	long long raddr_set = raddr & ~0xfull;
-	raddr_set |= 0b1000ull;
-	memcpy(rdata, &pmem[raddr_set-0x80000000], 8);
-  }
+
 }
 
 
