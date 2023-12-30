@@ -93,7 +93,7 @@ always @(posedge clk) begin
 			tag3[i] <= 22'b0;
 		end
 	end
-	else if( !wen && (rlast||wlast) &&not_device ) begin
+	else if( !wen && (rlast||wlast) && not_device ) begin
 		case({!cen3,!cen2,!cen1,!cen0})
 			4'b0001: begin v0[index] <= 1'b1; tag0[index] <= addr[31:10]; end 
 			4'b0010: begin v1[index] <= 1'b1; tag1[index] <= addr[31:10]; end
@@ -204,7 +204,6 @@ always @(*) begin
 		4'b0010: line_read = dout1;
 		4'b0100: line_read = dout2;
 		4'b1000: line_read = dout3;
-		//default: line_read = 128'b0;
 		default: line_read = line_mem_prev;
 	endcase
 end
@@ -308,7 +307,6 @@ always @(negedge clk) begin
 		pmem_read_dcache_high64(addr, line_mem[127:64]);
 		
 	if(valid && wren && dcache_current_state==idle &&!ready && !not_device)begin
-	//if(valid&&!ready)begin
 	        pmem_write(addr, din, {mask[56],mask[48],mask[40],mask[32],mask[24],mask[16],mask[8],mask[0]});
 		//pmem_write_dcache_low64 (addr, wren, din, mask, line_mem_wr[63:0],line_mem_wr[127:64]);
 		//pmem_write_dcache_high64(addr, {7'b0,wren}, din, mask, line_mem_wr[127:64]);

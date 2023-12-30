@@ -12,7 +12,6 @@ output      ready_ID_EX,
 input [63:0]pc_ID_EX,
 input [31:0]inst_ID_EX,
 
-//input [23:0]opcode_in,
 input [14:0]opcode_type_ID_EX,
 input [ 2:0]opcode_funct3_ID_EX,
 input [ 4:0]rd_ID_EX,
@@ -33,7 +32,6 @@ output       valid_EX_MEM  ,
 input        ready_EX_MEM  ,
 output [63:0]pc_EX_MEM  ,
 output [31:0]inst_EX_MEM,
-//output [23:0]opcode_EX_MEM,
 output [14:0]opcode_type_EX_MEM,
 output [ 2:0]opcode_funct3_EX_MEM,
 output [ 4:0]rd_EX_MEM,
@@ -79,7 +77,6 @@ input branch_flush
 reg       EX_reg_valid         ;
 reg [63:0]EX_reg_pc            ;
 reg [31:0]EX_reg_inst          ;
-//reg [23:0]EX_reg_opcode        ;
 reg [14:0]EX_reg_opcode_type     ;
 reg [ 2:0]EX_reg_opcode_funct3     ;
 reg [ 4:0]EX_reg_rd;
@@ -88,20 +85,17 @@ reg [ 4:0]EX_reg_rs2;
 reg [63:0]EX_reg_src_a;
 reg [63:0]EX_reg_src_b;
 reg [63:0]EX_reg_imm;
-//reg [ 7:0]EX_reg_alu_mode      ;
 
 always @(posedge clk) begin
 	if(rst || branch_flush) begin
 		EX_reg_valid          <=  1'b0;
 		EX_reg_pc             <= 64'b0;
 		EX_reg_inst           <= 32'b0;
-	//	EX_reg_opcode         <= 24'b0;
 		EX_reg_opcode_type         <= 15'b0;
 		EX_reg_opcode_funct3         <= 3'b0;
 		EX_reg_src_a          <= 64'b0;
 		EX_reg_src_b          <= 64'b0;
 		EX_reg_imm            <= 64'b0;
-	//	EX_reg_alu_mode       <=  8'b0;
 		EX_reg_rd             <=  5'b0;
 		EX_reg_rs1            <=  5'b0;
 		EX_reg_rs2            <=  5'b0;
@@ -110,13 +104,11 @@ always @(posedge clk) begin
 		EX_reg_valid          <= EX_reg_valid ;
 		EX_reg_pc             <= EX_reg_pc    ;
 		EX_reg_inst           <= EX_reg_inst  ;
-	//	EX_reg_opcode         <= EX_reg_opcode;
 		EX_reg_opcode_type         <= EX_reg_opcode_type;
 		EX_reg_opcode_funct3         <= EX_reg_opcode_funct3;
 		EX_reg_src_a          <= EX_reg_src_a ;
 		EX_reg_src_b          <= EX_reg_src_b ;
 		EX_reg_imm            <= EX_reg_imm   ;
-	//	EX_reg_alu_mode       <= ALU_mode     ;
 		EX_reg_rd             <= EX_reg_rd           ;
 		EX_reg_rs1            <= EX_reg_rs1;
 		EX_reg_rs2            <= EX_reg_rs2;
@@ -125,13 +117,11 @@ always @(posedge clk) begin
 		EX_reg_valid          <= valid_ID_EX;
 		EX_reg_pc             <= pc_ID_EX;
 		EX_reg_inst           <= inst_ID_EX;
-	//	EX_reg_opcode         <= opcode_in;
 		EX_reg_opcode_type         <= opcode_type_ID_EX;
 		EX_reg_opcode_funct3         <= opcode_funct3_ID_EX;
 		EX_reg_src_a          <= src_A;
 		EX_reg_src_b          <= src_B;
 		EX_reg_imm            <= imm_in;
-	//	EX_reg_alu_mode       <= ALU_mode      ;
 		EX_reg_rd             <= rd_ID_EX           ;
 		EX_reg_rs1            <= rs1_ID_EX;
 		EX_reg_rs2            <= rs2_ID_EX;
@@ -139,16 +129,12 @@ always @(posedge clk) begin
 end
 
 wire [63:0]pc;
-//wire [31:0]inst;
-//wire [23:0]opcode;
 wire [14:0]opcode_type;
 wire [ 2:0]opcode_funct3;
 wire [63:0]src1;
 wire [63:0]src2;
 wire [63:0]imm;
 assign pc   = EX_reg_valid ? EX_reg_pc   : 64'b0;
-//assign inst = EX_reg_valid ? EX_reg_inst : 32'b0;
-//assign opcode = EX_reg_valid ? EX_reg_opcode : 24'b0;
 assign opcode_type = EX_reg_valid ? EX_reg_opcode_type : 15'b0;
 assign opcode_funct3 = EX_reg_valid ?  EX_reg_opcode_funct3: 3'b0;
 assign imm  = EX_reg_valid ? EX_reg_imm  : 64'b0;
@@ -196,7 +182,6 @@ assign ex_loading = opcode_type[5];
 assign ex_rd      = EX_reg_valid ? EX_reg_rd : 5'b0;
 //used by idu for testing load interload
 
-//assign opcode_EX_MEM = EX_reg_opcode;
 assign opcode_type_EX_MEM = EX_reg_opcode_type;
 assign opcode_funct3_EX_MEM = EX_reg_opcode_funct3;
 assign rd_EX_MEM = EX_reg_rd;
@@ -278,9 +263,9 @@ end
 */
 
 
+/*
 //dnpc
 always @(*) begin
-/*
     case (opcode)
     24'd4   : dnpc=address_add_result           ;
     24'd5   : dnpc=(src1==src2&&EX_reg_inst[31]==0)?address_add_result:snpc;
@@ -293,8 +278,6 @@ always @(*) begin
     24'h500000: dnpc=EX_reg_src_b                             ;        
     default: dnpc=snpc;
     endcase
-    */
-/*
     case (opcode)
     24'd4    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? 1'b1 : 1'b0;
     24'd5    : pc_update= (EX_reg_valid&&ready_EX_MEM) ? ( ((src1==src2&&EX_reg_inst[31]==0)||(src1!=src2&&EX_reg_inst[31]==1))? 1'b1:1'b0 ) : 1'b0;
@@ -307,8 +290,9 @@ always @(*) begin
     24'h500000: pc_update=(EX_reg_valid&&ready_EX_MEM) ? 1'b1 : 1'b0;             
     default: pc_update=1'b0;
     endcase
-    */
 end
+    */
+
 
 wire src1_lessthan_src2;
 assign src1_lessthan_src2 = (~src1[63] & src2[63]) | (alu_result[63] & (src1[63]==src2[63]));
@@ -401,8 +385,7 @@ assign shamt = imm[5:0];
 
 assign alu_operator_a = opcode_type[0] ? 64'b0 :                                              //lui
 	           ((opcode_type[1]||opcode_type[2]||opcode_type[3]) ? EX_reg_pc :        //auipc   jal   jalr
-	           (word_right_shift ? {src1[31:0],32'b0} : src1 ) );
-			     //(opcode_funct3==3'b101&&(opcode_type[9]||opcode_type[10]) is the 32bits src1 right shift
+	           (word_right_shift ? {src1[31:0],32'b0} : src1 ) );                     //word right shift : default
 
 assign alu_operator_b = (opcode_type[2]||opcode_type[3]) ? 64'h4 :                            //jal  jalr
 	           ((opcode_type[8]&&(opcode_funct3==3'b1||opcode_funct3==3'b101)) ? {{58{1'b0}},src2[5:0]} :
