@@ -5,7 +5,7 @@
 
 #define KEYDOWN_MASK 0x8000
 
-#ifndef CONFIG_TARGET_AM
+
 #include <SDL2/SDL.h>
 
 // Note that this is not the standard
@@ -62,24 +62,14 @@ static uint32_t key_dequeue() {
 
 extern int end;
 void send_key(uint8_t scancode, bool is_keydown) {
-  //if (nemu_state.state == NEMU_RUNNING && keymap[scancode] != _KEY_NONE) {
   if (end == 0 && keymap[scancode] != _KEY_NONE) {
     uint32_t am_scancode = keymap[scancode] | (is_keydown ? KEYDOWN_MASK : 0);
     key_enqueue(am_scancode);
   }
 }
-#else // !CONFIG_TARGET_AM
-#define _KEY_NONE 0
 
-static uint32_t key_dequeue() {
-  AM_INPUT_KEYBRD_T ev = io_read(AM_INPUT_KEYBRD);
-  uint32_t am_scancode = ev.keycode | (ev.keydown ? KEYDOWN_MASK : 0);
-  return am_scancode;
-}
-#endif
 
  uint32_t i8042_data_port_base ;
-//static uint32_t *i8042_data_port_base = NULL;
 
 uint32_t i8042_data_io_handler() {
   i8042_data_port_base = key_dequeue();
@@ -87,13 +77,5 @@ uint32_t i8042_data_io_handler() {
 }
 
 void init_i8042() {
-//  i8042_data_port_base = (uint32_t *)new_space(4);
-//  i8042_data_port_base[0] = _KEY_NONE;
-//#ifdef CONFIG_HAS_PORT_IO
-//  add_pio_map ("keyboard", CONFIG_I8042_DATA_PORT, i8042_data_port_base, 4, i8042_data_io_handler);
-//#else
-//  add_mmio_map("keyboard", CONFIG_I8042_DATA_MMIO, i8042_data_port_base, 4, i8042_data_io_handler);
-//#endif
-  //IFNDEF(CONFIG_TARGET_AM, init_keymap());
 init_keymap();
 }
