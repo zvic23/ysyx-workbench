@@ -93,8 +93,7 @@ always @(posedge clk) begin
 			tag3[i] <= 22'b0;
 		end
 	end
-	else if( !wen && (rlast||wlast)  ) begin
-	    //if(not_device) begin   //暂时用来维持设备和dcache的一致性
+	else if( !wen && (rlast||wlast) &&not_device ) begin
 		case({!cen3,!cen2,!cen1,!cen0})
 			4'b0001: begin v0[index] <= 1'b1; tag0[index] <= addr[31:10]; end 
 			4'b0010: begin v1[index] <= 1'b1; tag1[index] <= addr[31:10]; end
@@ -102,7 +101,6 @@ always @(posedge clk) begin
 			4'b1000: begin v3[index] <= 1'b1; tag3[index] <= addr[31:10]; end
 			default: begin $display("dcache all misses!!!!!!!!!!!!!!!!!!!!!!!!\n\n");end
 		endcase
-	    //end
 	end
 end
 
@@ -115,7 +113,7 @@ assign way_hit[2] = v2[index] && (tag2[index] == addr[31:10]);
 assign way_hit[3] = v3[index] && (tag3[index] == addr[31:10]);
 
 wire not_device;
-assign not_device = (addr <= 64'h8fffffff);   
+assign not_device = (addr <= 64'h8fffffff); 
 
 wire [127:0]dout0, dout1, dout2, dout3;
 wire cen0, cen1, cen2, cen3;
@@ -310,6 +308,7 @@ always @(negedge clk) begin
 		pmem_read_dcache_high64(addr, line_mem[127:64]);
 		
 	if(valid && wren && dcache_current_state==idle &&!ready && !not_device)begin
+	//if(valid&&!ready)begin
 	        pmem_write(addr, din, {mask[56],mask[48],mask[40],mask[32],mask[24],mask[16],mask[8],mask[0]});
 		//pmem_write_dcache_low64 (addr, wren, din, mask, line_mem_wr[63:0],line_mem_wr[127:64]);
 		//pmem_write_dcache_high64(addr, {7'b0,wren}, din, mask, line_mem_wr[127:64]);
