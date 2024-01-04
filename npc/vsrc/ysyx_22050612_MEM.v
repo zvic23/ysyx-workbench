@@ -163,6 +163,7 @@ assign valid_MEM_WB = (MEM_block==1'b0) ? MEM_reg_valid :  1'b0;
 assign pc_MEM_WB    = (MEM_block==1'b0) ? MEM_reg_pc    : 64'b0;
 assign inst_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_inst  : 32'b0;
 assign opcode_type_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_opcode_type : 15'b0;
+assign rd_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_rd : 5'b0;
 
 wire MEM_block;
 assign MEM_block = dcache_valid && !dcache_ready;

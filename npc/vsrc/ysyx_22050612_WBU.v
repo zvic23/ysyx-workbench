@@ -18,7 +18,7 @@ input       reg_wr_wen,
 input [ 4:0]reg_wr_ID,
 input [63:0]reg_wr_value,
 
-output [63:0] gpr[31:0],
+//output [63:0] gpr[31:0],
 
 
 
