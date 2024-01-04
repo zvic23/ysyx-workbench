@@ -93,8 +93,6 @@ end
 wire [31:0]inst;
 assign inst = WB_reg_valid ? WB_reg_inst : 32'b0;
 
-//wire [23:0]opcode;
-//assign opcode = WB_reg_valid ? WB_reg_opcode : 24'b0;
 
 assign ready_MEM_WB = 1'b1;
 

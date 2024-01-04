@@ -22,7 +22,6 @@ output [63:0]src_B,
 output [63:0]  imm,
 
 
-//output [23:0]opcode,
 output [14:0]opcode_type,
 output [2:0]opcode_funct3,
 output     valid_ID_EX,
@@ -43,6 +42,11 @@ assign ready_IF_ID = ~idu_fifo_alm_full;
 //It is the alm-full set ready_if_id, so that it can reserve some space for
 //the inst comes from icache. Because icache can't hold on inst if fifo is
 //full.
+
+assign valid_ID_EX = (ID_block==1'b0) ? ID_reg_valid :  1'b0;
+assign pc_ID_EX    = (ID_block==1'b0) ? ID_reg_pc    : 64'b0;
+assign inst_ID_EX  = (ID_block==1'b0) ? ID_reg_inst  : 32'b0;
+
 
 
 //*************************   FIFO    ********************************
@@ -88,14 +92,7 @@ always @(posedge clk) begin
 		ID_reg_pc    <= ID_reg_pc;
 		ID_reg_inst  <= ID_reg_inst ;
 	end
-	/*
-	else if(idu_fifo_empty && ~valid_IF_ID)begin
-		ID_reg_valid <= 1'b0;
-		ID_reg_pc    <= 64'b0;
-		ID_reg_inst  <= 32'b0;
-	end
-	*/
-	else if(idu_fifo_empty/* && valid_IF_ID*/)begin
+	else if(idu_fifo_empty)begin
 		ID_reg_valid <= valid_IF_ID;
 		ID_reg_pc    <= pc_IF_ID;
 		ID_reg_inst  <= inst_IF_ID;
@@ -106,13 +103,6 @@ always @(posedge clk) begin
 		ID_reg_inst  <= idu_fifo_rdata_inst;
 	end
 end
-
-assign valid_ID_EX = (ID_block==1'b0) ? ID_reg_valid :  1'b0;
-assign pc_ID_EX    = (ID_block==1'b0) ? ID_reg_pc    : 64'b0;
-assign inst_ID_EX  = (ID_block==1'b0) ? ID_reg_inst  : 32'b0;
-
-
-
 
 
 wire [31:0]inst;
@@ -256,7 +246,7 @@ assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
 //	if(inst==32'h00100073) ebreak(1);
 //end
 */
-
+//01257891011
 wire opcode_wen;
 wire [63:0]opcode_imm   ;
 //wire [2:0]opcode_funct3 ;

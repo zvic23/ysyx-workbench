@@ -58,7 +58,7 @@ always @(*) begin
 		pc_next = pc_prev+imm_J;
 		pc_en   = 1'b1;
 	end
-	else if(!ready_IF_ID || !way_hit)begin      //pc should hold on if IDU is not ready and icache is not hit to ready memory.
+	else if(!ready_IF_ID || !way_hit)begin      //pc should hold on if IDU is not ready and icache is not hit to read memory.
 		pc_next = pc;
 		pc_en   = 1'b0;
 	end
