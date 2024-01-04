@@ -40,7 +40,46 @@ module ysyx_22050612_Arbiter(
    input        rready_mem,
    output       rready,
 
+//write address channel
+   input  [31:0]awaddr_mem,
+   output [31:0]awaddr,
+   input  [ 7:0]awlen_mem,
+   output [ 7:0]awlen,
+   input  [ 2:0]awsize_mem,
+   output [ 2:0]awsize,
+   input  [ 1:0]awburst_mem,
+   output [ 1:0]awburst,
+   input        awvalid_mem,
+   output       awvalid,
+   input        awready,
+   output       awready_mem,
 
+
+
+//write data channel
+   input  [63:0]wdata_mem,
+   output [63:0]wdata,
+   input  [ 7:0]wstrb_mem,
+   output [ 7:0]wstrb,
+   input        wlast_mem,
+   output       wlast,
+   input        wvalid_mem,
+   output       wvalid,
+   input        wready,
+   output       wready_mem,
+
+
+
+//write respond channel
+   input  [ 1:0]bresp,
+   output [ 1:0]bresp_mem,
+   input        bvalid,
+   output       bvalid_mem,
+   input        bready_mem,
+   output       bready
+
+
+/*
 //write address channel
    input  [31:0]awaddr_ifu,
    input  [31:0]awaddr_mem,
@@ -92,7 +131,7 @@ module ysyx_22050612_Arbiter(
    input        bready_ifu,
    input        bready_mem,
    output       bready
-
+*/
 
 );
 
@@ -162,19 +201,19 @@ assign awlen       = awlen_mem    ;
 assign awsize      = awsize_mem   ;
 assign awburst     = awburst_mem  ;
 assign awvalid     = awvalid_mem  ;
-assign awready_ifu = 1'b0       ;
+//assign awready_ifu = 1'b0       ;
 assign awready_mem = awready    ;
 
 assign wdata       = wdata_mem    ;
 assign wstrb       = wstrb_mem    ;
 assign wlast       = wlast_mem    ;
 assign wvalid      = wvalid_mem   ;
-assign wready_ifu  = 1'b0       ;
+//assign wready_ifu  = 1'b0       ;
 assign wready_mem  = wready     ;
 
-assign bresp_ifu   = 2'b0       ;
+//assign bresp_ifu   = 2'b0       ;
 assign bresp_mem   = bresp      ;
-assign bvalid_ifu  = 1'b0       ;
+//assign bvalid_ifu  = 1'b0       ;
 assign bvalid_mem  = bvalid     ;
 assign bready      = bready_mem   ;
 

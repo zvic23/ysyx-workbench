@@ -38,7 +38,6 @@ ysyx_22050612_RegisterFile #(5,64) cpu_gpr_group (clk, gpr_wdata, gpr_rd, gpr_we
 wire [63:0]wdata_mtvec,wdata_mepc,wdata_mcause,wdata_mstatus;
 wire [63:0]mtvec,mepc,mcause,mstatus;
 wire wen_mtvec,wen_mepc,wen_mcause,wen_mstatus;
-wire [63:0]src_csr;
 
 //control and status register
 ysyx_22050612_Reg #(64,64'h0)         mtvec_csr   (clk, rst, wdata_mtvec  , mtvec  , wen_mtvec  );
@@ -175,9 +174,9 @@ wire bready_mem;
 ysyx_22050612_Arbiter arbiter0 (clk, rst, 
 araddr_ifu,araddr_mem,araddr,arlen_ifu,arlen_mem,arlen,arsize_ifu,arsize_mem,arsize,arburst_ifu,arburst_mem,arburst,arvalid_ifu,arvalid_mem,arvalid,arready,arready_ifu,arready_mem,
 rdata,rdata_ifu,rdata_mem,rresp,rresp_ifu,rresp_mem,rlast,rlast_ifu,rlast_mem,rvalid,rvalid_ifu,rvalid_mem,rready_ifu,rready_mem,rready,
-32'b0,awaddr_mem,awaddr,8'b0,awlen_mem,awlen,3'b0,awsize_mem,awsize,2'b0,awburst_mem,awburst,1'b0,awvalid_mem,awvalid,awready,,awready_mem,
-64'b0,wdata_mem,wdata,8'b0,wstrb_mem,wstrb,1'b0,wlast_mem,wlast,1'b0,wvalid_mem,wvalid,wready,,wready_mem,
-bresp,,bresp_mem,bvalid,,bvalid_mem,1'b0,bready_mem,bready);
+awaddr_mem,awaddr,awlen_mem,awlen,awsize_mem,awsize,awburst_mem,awburst,awvalid_mem,awvalid,awready,awready_mem,
+wdata_mem,wdata,wstrb_mem,wstrb,wlast_mem,wlast,wvalid_mem,wvalid,wready,wready_mem,
+bresp,bresp_mem,bvalid,bvalid_mem,bready_mem,bready);
 //awaddr_ifu,awaddr_mem,awaddr,awlen_ifu,awlen_mem,awlen,awsize_ifu,awsize_mem,awsize,awburst_ifu,awburst_mem,awburst,awvalid_ifu,awvalid_mem,awvalid,awready,awready_ifu,awready_mem,
 //wdata_ifu,wdata_mem,wdata,wstrb_ifu,wstrb_mem,wstrb,wlast_ifu,wlast_mem,wlast,wvalid_ifu,wvalid_mem,wvalid,wready,wready_ifu,wready_mem,
 //bresp,bresp_ifu,bresp_mem,bvalid,bvalid_ifu,bvalid_mem,bready_ifu,bready_mem,bready)
