@@ -68,7 +68,7 @@ reg [1:0]read_current_state, read_next_state;
 
 localparam read_idle       = 2'b00;        //waiting for arvalid
 localparam read_send_rdata = 2'b01;        //sending read data after read address handshake
-localparam read_last_send  = 2'b11;        //sending the last data and 'rlast'
+//localparam read_last_send  = 2'b11;        //sending the last data and 'rlast'
 
 reg [31:0]r_addr;
 reg  [7:0]r_len;

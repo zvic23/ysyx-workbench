@@ -142,7 +142,6 @@ end
 */
 //*********************    read    ********************
 reg [1:0]arbi_r_state, arbi_r_next_state;
-wire ifu_r_wen, mem_r_wen;
 
 localparam r_idle        = 2'b00;
 localparam r_ifu_trans   = 2'b01;

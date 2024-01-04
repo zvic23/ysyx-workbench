@@ -166,8 +166,7 @@ assign rs2_ex_rd_mem_match = ( mem_rd == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
 assign rs1_ex_rd_wb_match  = ( wbu_rd == EX_reg_rs1)&&(EX_reg_rs1!=5'b0);
 assign rs2_ex_rd_wb_match  = ( wbu_rd == EX_reg_rs2)&&(EX_reg_rs2!=5'b0);
 
-wire [3:0]MEM_inst_hit;
-wire [3:0]WB_inst_hit;
+
 wire exu_using_rs2;
 assign exu_using_rs2 = opcode_type[4] || opcode_type[6] || opcode_type[8] || opcode_type[10];
                       
