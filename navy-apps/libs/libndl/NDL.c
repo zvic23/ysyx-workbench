@@ -7,12 +7,13 @@
 static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
+static uint32_t time_init;
 
 uint32_t NDL_GetTicks() {
   struct timeval tv;
   //struct timezone tz;
   gettimeofday(&tv, NULL);
-  return tv.tv_usec/1000+tv.tv_sec*1000;
+  return (tv.tv_usec/1000+tv.tv_sec*1000)-time_init;
   //return 0;
 }
 
@@ -92,6 +93,11 @@ int NDL_Init(uint32_t flags) {
   if (getenv("NWM_APP")) {
     evtdev = 3;
   }
+
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  time_init = tv.tv_usec/1000+tv.tv_sec*1000;
+
 
   char buf[40];
   int fp = open("/proc/dispinfo", "r+");
