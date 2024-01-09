@@ -120,10 +120,10 @@ wire [31:0]ftrace_rs1;
 assign ftrace_rs1 = {{27'b0},inst[19:15]};
 wire [63:0]ftrace_immI;
 assign ftrace_immI = (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]};
-wire [63:0]ftrace_dnpc;
-assign ftrace_dnpc = WB_reg_pc + immI;
-wire [63:0]ftrace_dnpc;
-assign ftrace_dnpc = gpr[1] + immI;
+wire [63:0]ftrace_dnpc_jal;
+assign ftrace_dnpc_jal = WB_reg_pc + ftrace_immI;
+wire [63:0]ftrace_dnpc_jalr;
+assign ftrace_dnpc_jalr = (gpr[1] + ftrace_immI) & 64'hfffffffffffffffe;
 
 
 always @(negedge clk) begin     
@@ -144,8 +144,8 @@ always @(negedge clk) begin
 		    default: npc_loadstore(0, 0, 0);
 		endcase
 
-		if (WB_reg_opcode_type[2]) ftrace_check(1, WB_reg_pc[63:0],pc_MEM_WB[63:0], 1, 0, 1);
-		else if (WB_reg_opcode_type[3]) ftrace_check(2, WB_reg_pc[63:0],pc_MEM_WB[63:0],  ftrace_rd, ftrace_rs1, ftrace_immI);
+		if (WB_reg_opcode_type[2]) ftrace_check(1, WB_reg_pc[63:0],ftrace_dnpc_jal, 1, 0, 1);
+		else if (WB_reg_opcode_type[3]) ftrace_check(2, WB_reg_pc[63:0],ftrace_dnpc_jalr,  ftrace_rd, ftrace_rs1, ftrace_immI);
 
 
 	end
