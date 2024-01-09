@@ -2,7 +2,7 @@ import "DPI-C" function void npc_complete_one_inst ();
 import "DPI-C" function void npc_loadstore(int getinst, longint raddr, longint waddr);
 import "DPI-C" function void WBU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
 import "DPI-C" function void read_inst(int npc_inst);
-import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
+import "DPI-C" function void ftrace_check(int jtype, longint pc, longint dnpc,int dest_register,int src_register,longint imm);
 
 
 module ysyx_22050612_WBU(
@@ -139,8 +139,8 @@ always @(negedge clk) begin
 		    default: npc_loadstore(0, 0, 0);
 		endcase
 
-		if (WB_reg_opcode_type[2]) ftrace_check(WB_reg_pc[63:0],pc_MEM_WB[63:0], 1, 0, 1);
-		else if (WB_reg_opcode_type[3]) ftrace_check(WB_reg_pc[63:0],pc_MEM_WB[63:0],  ftrace_rd, ftrace_rs1, ftrace_immI);
+		if (WB_reg_opcode_type[2]) ftrace_check(1, WB_reg_pc[63:0],pc_MEM_WB[63:0], 1, 0, 1);
+		else if (WB_reg_opcode_type[3]) ftrace_check(2, WB_reg_pc[63:0],pc_MEM_WB[63:0],  ftrace_rd, ftrace_rs1, ftrace_immI);
 
 
 	end

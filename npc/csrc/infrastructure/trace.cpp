@@ -184,7 +184,7 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){
 }
 
 int blanknum=1;
-void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register,long long imm){
+void ftrace_check(int jtype, long long pc,long long dnpc,int dest_register,int src_register,long long imm){
 	char src_func[20];
 	char dest_func[20];
 
@@ -197,13 +197,13 @@ void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register
 		if(i==499)return;
 	}
 	//printf("checking.....pc=%lx,pc_up=%x,pc_lo=%x\n",pc,pc_up,pc_lo);
-	if(dest_register == 0 && src_register == 1 && imm == 0){
+	if(jtype == 2 && dest_register == 0 && src_register == 1 && imm == 0){
 		blanknum--;
 		printf("0x%llx:",pc);
 		for(int i=0;i<blanknum;i++)printf(" ");
 		printf("ret [%s]\n",dest_func);
 	}
-	else{
+	else if(jtype == 1){
 		for(int i=0;i<500;i++){
 			if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
 				strcpy(src_func,functab[i].name);
