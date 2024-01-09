@@ -196,14 +196,6 @@ void ftrace_check(int jtype, long long pc,long long dnpc,int dest_register,int s
 		}
 		if(i==499)return;
 	}
-	//printf("checking.....pc=%lx,pc_up=%x,pc_lo=%x\n",pc,pc_up,pc_lo);
-	if(jtype == 2 && dest_register == 0 && src_register == 1 && imm == 0){
-		blanknum--;
-		printf("0x%llx:",pc);
-		for(int i=0;i<blanknum;i++)printf(" ");
-		printf("ret [%s]\n",dest_func);
-	}
-	else if(jtype == 1){
 		for(int i=0;i<500;i++){
 			if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
 				strcpy(src_func,functab[i].name);
@@ -212,6 +204,16 @@ void ftrace_check(int jtype, long long pc,long long dnpc,int dest_register,int s
 			}
 			if(i==499 && strcmp(dest_func,"_trm_init"))return;
 		}
+	//printf("checking.....pc=%lx,pc_up=%x,pc_lo=%x\n",pc,pc_up,pc_lo);
+	if(jtype == 2 && dest_register == 0 && src_register == 1 && imm == 0){
+		blanknum--;
+		printf("0x%llx:",pc);
+		for(int i=0;i<blanknum;i++)printf(" ");
+		printf("ret [%s@%llx]  from  %s\n",dest_func,dnpc,src_func);
+		//printf("ret [%s]\n",dest_func);
+	}
+	else if(jtype == 1){
+
 		int i = strcmp(src_func,dest_func);
 		if(i){
 			printf("0x%llx:",pc);
