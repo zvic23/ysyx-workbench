@@ -19,6 +19,7 @@ input       reg_wr_wen,
 input [ 4:0]reg_wr_ID,
 input [63:0]reg_wr_value,
 
+input [63:0] gpr[31:0],     //only for ftrace
 
 output wbu_writing_gpr,
 output [4:0]wbu_rd,
@@ -119,6 +120,10 @@ wire [31:0]ftrace_rs1;
 assign ftrace_rs1 = {{27'b0},inst[19:15]};
 wire [63:0]ftrace_immI;
 assign ftrace_immI = (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]};
+wire [63:0]ftrace_dnpc;
+assign ftrace_dnpc = WB_reg_pc + immI;
+wire [63:0]ftrace_dnpc;
+assign ftrace_dnpc = gpr[1] + immI;
 
 
 always @(negedge clk) begin     
