@@ -192,7 +192,7 @@ void ftrace_check(int jtype, long long pc,long long dnpc,int dest_register,int s
 		if(functab[i].addr_start<=dnpc && dnpc<=functab[i].addr_end){
 			strcpy(dest_func,functab[i].name);
 			printf("i=%d\n",i);
-			//printf("now at %s\n",functab[i].name);
+			printf("now at %s\n",functab[i].name);
 			break;
 		}
 		if(i==499)return;
