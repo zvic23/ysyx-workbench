@@ -196,6 +196,7 @@ void ftrace_check(int jtype, long long pc,long long dnpc,int dest_register,int s
 		}
 		if(i==499)return;
 	}
+			printf("now at %s\n",dest_func);
 	//printf("checking.....pc=%lx,pc_up=%x,pc_lo=%x\n",pc,pc_up,pc_lo);
 	if(jtype == 2 && dest_register == 0 && src_register == 1 && imm == 0){
 		blanknum--;
@@ -223,7 +224,7 @@ void ftrace_check(int jtype, long long pc,long long dnpc,int dest_register,int s
 }
 #else
 void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){}
-void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register,long long imm){}
+void ftrace_check(int jtype, long long pc,long long dnpc,int dest_register,int src_register,long long imm){}
 #endif
 
 
