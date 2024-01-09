@@ -1,5 +1,5 @@
 import "DPI-C" function void ebreak (int r);
-import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
+//import "DPI-C" function void ftrace_check(longint pc, longint dnpc,int dest_register,int src_register,longint imm);
 import "DPI-C" function void EXU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
 import "DPI-C" function void branch_predict(int r);
 

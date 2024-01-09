@@ -197,7 +197,7 @@ void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register
 		if(i==499)return;
 	}
 	//printf("checking.....pc=%lx,pc_up=%x,pc_lo=%x\n",pc,pc_up,pc_lo);
-	if(dest_register == 0 && imm == 0 && src_register == 1){
+	if(dest_register == 0 && src_register == 1 && imm == 0){
 		blanknum--;
 		printf("0x%llx:",pc);
 		for(int i=0;i<blanknum;i++)printf(" ");
