@@ -191,12 +191,12 @@ void ftrace_check(int jtype, long long pc,long long dnpc,int dest_register,int s
 	for(int i=0;i<500;i++){
 		if(functab[i].addr_start<=dnpc && dnpc<=functab[i].addr_end){
 			strcpy(dest_func,functab[i].name);
+			printf("i=%d\n",i);
 			//printf("now at %s\n",functab[i].name);
 			break;
 		}
 		if(i==499)return;
 	}
-			printf("now at %s\n",dest_func);
 	//printf("checking.....pc=%lx,pc_up=%x,pc_lo=%x\n",pc,pc_up,pc_lo);
 	if(jtype == 2 && dest_register == 0 && src_register == 1 && imm == 0){
 		blanknum--;
