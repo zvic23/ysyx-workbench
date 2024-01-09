@@ -216,7 +216,7 @@ void ftrace_check(int jtype, long long pc,long long dnpc,int dest_register,int s
 		if(i){
 			printf("0x%llx:",pc);
 			for(int i=0;i<blanknum;i++)printf(" ");
-			printf("call [%s@%llx]\n",dest_func,dnpc);
+			printf("call [%s@%llx]  from  %s\n",dest_func,dnpc,src_func);
 			blanknum++;
 		}
 	}
