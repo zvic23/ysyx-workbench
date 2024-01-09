@@ -29,7 +29,7 @@ exe:    sim
 wave:  
 	gtkwave dump.vcd
 
-clear:
+clean:
 	rm build/ -r  obj_dir/ -r  dump.vcd
 
 
@@ -88,7 +88,7 @@ all: default
 run: $(BIN)
 	@$^
 
-clean:
-	rm -rf $(BUILD_DIR)
+#clean:
+#	rm -rf $(BUILD_DIR)
 
 .PHONY: default all clean run
