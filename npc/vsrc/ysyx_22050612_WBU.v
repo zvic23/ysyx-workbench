@@ -112,6 +112,15 @@ end
 //********************************************************************
 
 
+
+wire [31:0]ftrace_rd;
+assign ftrace_rd = {{27'b0},inst[11:7]};
+wire [31:0]ftrace_rs1;
+assign ftrace_rs1 = {{27'b0},inst[19:15]};
+wire [63:0]ftrace_immI;
+assign ftrace_immI = (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]};
+
+
 always @(negedge clk) begin     
 	if(WB_reg_valid&& ready_EX_MEM) begin   
         //support mtrace, to give the csrc a signal that a memory operation is coming
@@ -131,7 +140,7 @@ always @(negedge clk) begin
 		endcase
 
 		if (WB_reg_opcode_type[2]) ftrace_check(WB_reg_pc[63:0],pc_MEM_WB[63:0], 1, 0, 1);
-		else if (WB_reg_opcode_type[3]) ftrace_check(WB_reg_pc[63:0],pc_MEM_WB[63:0],  0, 1, 0);
+		else if (WB_reg_opcode_type[3]) ftrace_check(WB_reg_pc[63:0],pc_MEM_WB[63:0],  ftrace_rd, ftrace_rs1, ftrace_immI);
 
 
 	end
