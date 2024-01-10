@@ -30,7 +30,17 @@ static int skip_dut_nr_inst = 0;
 extern uint64_t wb_pc;
 
 void init_difftest(long img_size, int port) {
-  char ref_so_file[100]="/home/zsl/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so";
+  const char *basePath = getenv("NEMU_HOME");
+  if (basePath == NULL) {
+      printf("init_difftest:  Environment variable NEMU_HOME is not set.\n");
+      return;
+  }
+
+  char ref_so_file[256];
+  snprintf(ref_so_file, sizeof(ref_so_file), "%s/build/riscv64-nemu-interpreter-so", basePath);
+  
+  //char ref_so_file[100]="/home/zsl/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so";
+  //printf("Path to ref_so_file: %s\n", ref_so_file);
 
   void *handle;
   handle = dlopen(ref_so_file, RTLD_LAZY);
