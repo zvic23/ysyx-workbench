@@ -61,7 +61,7 @@ void init_difftest(long img_size, int port) {
   ref_difftest_init= (void(*)(int))dlsym(handle, "difftest_init");
   assert(ref_difftest_init);
 
-  printf("difftest is on , so_file is %s\n",ref_so_file);
+  printf("difftest is ""\33[1;32m""on""\33[0m"" , so_file is %s\n",ref_so_file);
 
   ref_difftest_init(port);
 
