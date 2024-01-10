@@ -606,14 +606,14 @@ wire [63:0]quotient;
 wire [63:0]remainder;
 
 wire div_valid;
-assign div_valid = dividing  ;
+assign div_valid = dividing && ready_EX_MEM  ;
 wire divw;
 assign divw = opcode_type[10];
 wire div_signed;
 assign div_signed = ~opcode_funct3[0];
 
 wire dividing;
-assign dividing = (opcode_type[8]||opcode_type[10])&&imm[5]&&opcode_funct3[2];
+assign dividing = (opcode_type[8]||opcode_type[10]);
 wire [63:0]dividend;
 wire [63:0]divisor ;
 assign dividend  = dividing ? src1 : 64'b0;
