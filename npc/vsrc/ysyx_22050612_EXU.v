@@ -606,7 +606,7 @@ wire [63:0]quotient;
 wire [63:0]remainder;
 
 wire div_valid;
-assign div_valid = dividing && ready_EX_MEM  ;
+assign div_valid = dividing  ;
 wire divw;
 assign divw = opcode_type[10];
 wire div_signed;
