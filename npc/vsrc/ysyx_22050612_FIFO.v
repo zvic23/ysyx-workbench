@@ -1,22 +1,22 @@
 module ysyx_22050612_FIFO #(
-parameter DATA_W           = 4      ,        // Data width
-parameter DEPTH            = 8      ,        // Depth of FIFO                   
-parameter UPP_TH           = 4      ,        // Upper threshold to generate Almost-full
-parameter LOW_TH           = 2               // Lower threshold to generate Almost-empty
+parameter DATA_W = 4  ,        // Data width
+parameter DEPTH  = 8  ,        // Depth of FIFO                   
+parameter UPP_TH = 4  ,        // Upper threshold to generate Almost-full
+parameter LOW_TH = 2           // Lower threshold to generate Almost-empty
 )
 (
-input                   clk         ,        // Clock
-input                   rst        ,         // Active-low Synchronous Reset
-
-input                   wren_in      ,        // Write Enable
-input  [DATA_W - 1 : 0] wrdata_in    ,        // Write-data
-output                  almost_full  ,        // Almost-full signal
-output                  full      ,           // Full signal
-
-input                   rden_in      ,        // Read Enable
-output [DATA_W - 1 : 0] rddata_out    ,        // Read-data
-output                  almost_empty ,        // Almost-empty signal
-output                  empty                 // Empty signal
+input                   clk         ,        
+input                   rst        ,         
+//write
+input                   wren_in      ,        
+input  [DATA_W - 1 : 0] wrdata_in    ,        
+output                  almost_full  ,       
+output                  full      ,           
+//read
+input                   rden_in      ,     
+output [DATA_W - 1 : 0] rddata_out    ,    
+output                  almost_empty ,    
+output                  empty              
 );
 
 
@@ -25,8 +25,21 @@ reg [$clog2(DEPTH) - 1 : 0] wrptr_rg        ;        // Write pointer
 reg [$clog2(DEPTH) - 1 : 0] rdptr_rg        ;        // Read pointer
 reg [$clog2(DEPTH)     : 0] dcount_rg       ;        // Data counter
       
-wire wren; // Write Enable signal generated iff FIFO is not full
-wire rden; // Read Enable signal generated iff FIFO is not empty
+wire wren; // Write Enable signal generated if FIFO is not full
+wire rden; // Read  Enable signal generated if FIFO is not empty
+
+
+assign full      = (dcount_rg == DEPTH) ? 1'b1 : 0 ;
+assign empty     = (dcount_rg == 0    ) ? 1'b1 : 0 ;
+
+assign wren      = wren_in & !full                ;  
+assign rden      = rden_in & !empty               ;
+
+
+assign almost_full  = (dcount_rg > UPP_TH) ? 1'b1 : 0 ;
+assign almost_empty = (dcount_rg < LOW_TH) ? 1'b1 : 0 ;
+
+assign rddata_out    = data_rg [rdptr_rg]              ; 
 
 
 always @ (posedge clk) begin
@@ -64,10 +77,10 @@ always @ (posedge clk) begin
 
       end
 
-      if (wren && !rden) begin               // Write operation
+      if (wren && !rden) begin               // Write
          dcount_rg <= dcount_rg + 1 ;
       end                    
-      else if (!wren && rden) begin          // Read operation
+      else if (!wren && rden) begin          // Read 
          dcount_rg <= dcount_rg - 1 ;         
       end
 
@@ -76,17 +89,7 @@ always @ (posedge clk) begin
 end
 
 
-assign full      = (dcount_rg == DEPTH) ? 1'b1 : 0 ;
-assign empty     = (dcount_rg == 0    ) ? 1'b1 : 0 ;
-
-assign wren      = wren_in & !full                ;  
-assign rden      = rden_in & !empty               ;
-
-
-assign almost_full  = (dcount_rg > UPP_TH) ? 1'b1 : 0 ;
-assign almost_empty = (dcount_rg < LOW_TH) ? 1'b1 : 0 ;
-
-assign rddata_out    = data_rg [rdptr_rg]              ;   
+  
 
 
 endmodule
