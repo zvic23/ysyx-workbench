@@ -1,6 +1,6 @@
 import "DPI-C" function void npc_complete_one_inst ();
 import "DPI-C" function void npc_loadstore(int getinst, longint raddr, longint waddr);
-import "DPI-C" function void WBU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
+import "DPI-C" function void WBU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f,longint g,longint h,longint i,longint j,longint k,longint l,longint m,longint n,longint o,longint p);
 import "DPI-C" function void read_inst(int npc_inst);
 import "DPI-C" function void ftrace_check(int jtype, longint pc, longint dnpc,int dest_register,int src_register,longint imm);
 
@@ -98,7 +98,7 @@ assign ready_MEM_WB = 1'b1;
 
 
 always @(negedge clk) begin
-	WBU_state_trace(WB_reg_pc, {32'b0,WB_reg_inst}, {63'b0,WB_reg_valid}, 64'b0,64'b0,64'b0 );
+	WBU_state_trace(WB_reg_pc, {32'b0,WB_reg_inst}, {63'b0,WB_reg_valid}, 64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0 );
 	//$display("WB   pc:%x   inst:%x   valid:%d  wen:%d  wdata:%x rd:%x",WB_reg_pc,WB_reg_inst,WB_reg_valid,WB_reg_wen,WB_reg_wdata,WB_reg_id);
 	//$display("WB   pc:%x   inst:%x   valid:%d  wen:%d  wdata:%x rd:%x\n",WB_reg_pc,WB_reg_inst,WB_reg_valid,reg_wr_wen,reg_wr_value,reg_wr_ID);
 	

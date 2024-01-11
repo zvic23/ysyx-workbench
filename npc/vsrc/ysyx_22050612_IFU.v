@@ -1,4 +1,4 @@
-import "DPI-C" function void IFU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
+import "DPI-C" function void IFU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f,longint g,longint h,longint i,longint j,longint k,longint l,longint m,longint n,longint o,longint p);
 //import "DPI-C" function void read_inst(int npc_inst);
 import "DPI-C" function void pmem_read_pc(
   input longint raddr, output longint rdata);
@@ -89,7 +89,7 @@ ysyx_22050612_Reg #(64,64'h80000000) pc_rg (clk, rst, pc_next, pc, pc_en);
 
 //************************  pipeline trace  ******************************
 always @(negedge clk) begin
-	IFU_state_trace(pc, {32'b0,inst}, {63'b0,valid_IF_ID}, {63'b0,ready_IF_ID},64'b0,64'b0 );
+	IFU_state_trace(pc, {32'b0,inst}, {63'b0,valid_IF_ID}, {63'b0,ready_IF_ID},64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0 );
 	//$display("IF   pc:%x   inst:%x   valid:%d   ready:%d   pc_next:%x   dnpc:%x",pc,inst,valid_IF_ID,ready_IF_ID,pc_next,dnpc);
 end
 

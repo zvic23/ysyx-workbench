@@ -1,4 +1,4 @@
-import "DPI-C" function void IDU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
+import "DPI-C" function void IDU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f,longint g,longint h,longint i,longint j,longint k,longint l,longint m,longint n,longint o,longint p);
 
 module ysyx_22050612_IDU(
 input clk,
@@ -116,7 +116,7 @@ assign inst = ID_reg_valid ? ID_reg_inst : 32'b0;
 
 always @(negedge clk) begin
 	//$display("ID   pc:%x   inst:%x   valid:%x",ID_reg_pc,ID_reg_inst,ID_reg_valid);
-	IDU_state_trace(ID_reg_pc, {32'b0,ID_reg_inst}, {63'b0,ID_reg_valid}, 64'b0,64'b0,64'b0 );
+	IDU_state_trace(ID_reg_pc, {32'b0,ID_reg_inst}, {63'b0,ID_reg_valid}, 64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0 );
 
 end
 
