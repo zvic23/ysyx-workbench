@@ -613,7 +613,7 @@ wire div_signed;
 assign div_signed = ~opcode_funct3[0];
 
 wire dividing;
-assign dividing = (opcode_type[8]||opcode_type[10]);
+assign dividing = (opcode_type[8]||opcode_type[10])&&imm[5]&&opcode_funct3[2];
 wire [63:0]dividend;
 wire [63:0]divisor ;
 assign dividend  = dividing ? src1 : 64'b0;
