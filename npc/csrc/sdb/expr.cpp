@@ -22,11 +22,6 @@ uint64_t isa_reg_str2val(const char *s, bool *success) {
 	extern uint64_t cpu_gpr_set[33];
 	uint64_t value = 0;
 	int j =0;
-	//if((s[0] == 'p') && (s[1] == 'c')){
-	//	*success = true;
-	//	value = cpu.pc;
-	//	return value;
-	//}
 	for(j=0;j<33;j++){
 		if((s[0] == regs[j][0])&&(s[1] == regs[j][1])){
 			*success = true;
@@ -104,7 +99,6 @@ typedef struct token {
 } Token;
 
 static Token tokens[640] __attribute__((used)) = {};
-//static Token tokens[32] __attribute__((used)) = {};
 
 static int nr_token __attribute__((used))  = 0;
 
@@ -170,7 +164,7 @@ static bool make_token(char *e) {
 			int length = strlen(val);
 			//printf("%d\n",length);
 
-			//tokens[j].str[0]='0'; tokens[j].str[1]='x';
+			//printf:tokens[j].str[0]='0'; tokens[j].str[1]='x';
 			for(int k=0;k<length;k++){
 				tokens[j].str[k]=val[k];
 			}
@@ -380,13 +374,8 @@ struct figure eval(int p, int q){
 	else if((tokens[p].type==DEREF)&&((p+1==q)||(check_parentheses(p+1,q)))){   //zsl:dereference gets the value of an address
 		struct figure address = eval(p+1,q);
 		uint64_t addr = address.value;
-	        //uint64_t addrhex=0;
-	       	//for (int i=0;i<64;i++){
-	       	//  	addrhex = addrhex+(addr%10)*pow(16,i);
-	       	//  	addr = addr/10;
-	       	//}
+		//past did : trans to hex
 		uint32_t value = host_read(addr,4);
-		//uint8_t value = host_read(addrhex,1);
 		//printf("aaa %lx\n", value);
 		struct figure number;
 	        number.sign=0;

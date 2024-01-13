@@ -24,7 +24,7 @@ input [63:0]din,
 input [63:0]mask,
 
 
-
+//AXI-full signals
 output [31:0]araddr,
 output [7:0]arlen,
 output [2:0]arsize,
@@ -93,8 +93,7 @@ always @(posedge clk) begin
 			tag3[i] <= 22'b0;
 		end
 	end
-	else if( !wen && (rlast||wlast)  ) begin
-	    //if(not_device) begin   //暂时用来维持设备和dcache的一致性
+	else if( !wen && (rlast||wlast) && not_device ) begin
 		case({!cen3,!cen2,!cen1,!cen0})
 			4'b0001: begin v0[index] <= 1'b1; tag0[index] <= addr[31:10]; end 
 			4'b0010: begin v1[index] <= 1'b1; tag1[index] <= addr[31:10]; end
@@ -102,7 +101,6 @@ always @(posedge clk) begin
 			4'b1000: begin v3[index] <= 1'b1; tag3[index] <= addr[31:10]; end
 			default: begin $display("dcache all misses!!!!!!!!!!!!!!!!!!!!!!!!\n\n");end
 		endcase
-	    //end
 	end
 end
 
@@ -115,7 +113,7 @@ assign way_hit[2] = v2[index] && (tag2[index] == addr[31:10]);
 assign way_hit[3] = v3[index] && (tag3[index] == addr[31:10]);
 
 wire not_device;
-assign not_device = (addr <= 64'h8fffffff);    //暂时用来调整一致性
+assign not_device = (addr <= 64'h8fffffff); 
 
 wire [127:0]dout0, dout1, dout2, dout3;
 wire cen0, cen1, cen2, cen3;
@@ -156,14 +154,7 @@ assign cen1 = ~(  (dcache_current_state==idle) ? (valid&&way_hit[1]) : (random_c
 assign cen2 = ~(  (dcache_current_state==idle) ? (valid&&way_hit[2]) : (random_cnt[2]&&rvalid&&rready)      ) ;
 assign cen3 = ~(  (dcache_current_state==idle) ? (valid&&way_hit[3]) : (random_cnt[3]&&rvalid&&rready)      ) ;
 assign  wen = ~(  (dcache_current_state==readmemory && rvalid && rready) || (dcache_current_state==idle && wren && way_hit!=4'b0)        ) ;
-//assign addr_sram = index;
-//assign cen0 = ~( (valid&&!ready && not_device) ? (way_hit[0] ? 1'b1 : (way_hit==4'b0&&random_cnt[0] ? 1'b1 : 1'b0)) : 1'b0) ;
-//assign cen1 = ~( (valid&&!ready && not_device) ? (way_hit[1] ? 1'b1 : (way_hit==4'b0&&random_cnt[1] ? 1'b1 : 1'b0)) : 1'b0) ;
-//assign cen2 = ~( (valid&&!ready && not_device) ? (way_hit[2] ? 1'b1 : (way_hit==4'b0&&random_cnt[2] ? 1'b1 : 1'b0)) : 1'b0) ;
-//assign cen3 = ~( (valid&&!ready && not_device) ? (way_hit[3] ? 1'b1 : (way_hit==4'b0&&random_cnt[3] ? 1'b1 : 1'b0)) : 1'b0) ;
-//assign  wen = ~( (valid&&!ready && not_device) && (wren || ((!wren)&&(way_hit == 4'b0))) )  ;
-//assign  din_sram = wren ? (way_hit==4'b0 ? line_mem_wr:(addr[3] ? {din,64'b0}:{64'b0,din})) : line_mem;
-//assign bwen = wren ? (way_hit==4'b0 ? 128'b0 : (addr[3] ? (~{mask,64'b0}):(~{64'b0,mask}))) : 128'b0;
+
 S011HD1P_X32Y2D128_BW sram_d0(dout0, clk, cen0, wen, bwen, addr_sram, din_sram);
 S011HD1P_X32Y2D128_BW sram_d1(dout1, clk, cen1, wen, bwen, addr_sram, din_sram);
 S011HD1P_X32Y2D128_BW sram_d2(dout2, clk, cen2, wen, bwen, addr_sram, din_sram);
@@ -183,17 +174,17 @@ always @(posedge clk) begin
 		line_mem_prev   <= line_mem;
 		ready           <= 1'b1;
 	end
-	else if(valid && wren && dcache_current_state==writeresp&& !ready && way_hit!=4'b0)begin
+	else if(valid && wren && dcache_current_state==writeresp&& !ready && way_hit!=4'b0)begin  //write hit
 	     	way_hit_prev    <= 4'b0;
 		line_mem_prev   <= line_mem;
 		ready           <= 1'b1;
 	end
-	else if(valid && wren && dcache_current_state==readmemory&& !ready &&rlast)begin
+	else if(valid && wren && dcache_current_state==readmemory&& !ready &&rlast)begin          //write miss
 	     	way_hit_prev    <= 4'b0;
 		line_mem_prev   <= line_mem;
 		ready           <= 1'b1;
 	end
-	else if(valid && way_hit!=4'b0 && !wren && dcache_current_state==idle && !ready)begin
+	else if(valid && way_hit!=4'b0 && !wren && dcache_current_state==idle && !ready)begin     //read
 	     	way_hit_prev    <= way_hit;
 		line_mem_prev   <= line_mem;
 		ready           <= 1'b1;
@@ -213,7 +204,6 @@ always @(*) begin
 		4'b0010: line_read = dout1;
 		4'b0100: line_read = dout2;
 		4'b1000: line_read = dout3;
-		//default: line_read = 128'b0;
 		default: line_read = line_mem_prev;
 	endcase
 end
@@ -244,7 +234,7 @@ assign rready  = 1'b1;
 
 
 assign awaddr  = addr[31:0];
-assign awlen   = 8'b0;                                    //The real length is arlen + 1
+assign awlen   = 8'b0;                                    //The real length is awlen + 1
 assign awsize  = 3'b110;
 assign awburst = 2'b01;
 
@@ -317,7 +307,6 @@ always @(negedge clk) begin
 		pmem_read_dcache_high64(addr, line_mem[127:64]);
 		
 	if(valid && wren && dcache_current_state==idle &&!ready && !not_device)begin
-	//if(valid&&!ready)begin
 	        pmem_write(addr, din, {mask[56],mask[48],mask[40],mask[32],mask[24],mask[16],mask[8],mask[0]});
 		//pmem_write_dcache_low64 (addr, wren, din, mask, line_mem_wr[63:0],line_mem_wr[127:64]);
 		//pmem_write_dcache_high64(addr, {7'b0,wren}, din, mask, line_mem_wr[127:64]);

@@ -27,6 +27,12 @@ int printf(const char *fmt, ...) {
 		  }
 		  i=i+2;
 	  }
+	  else if(fmt[i]=='%' && fmt[i+1]=='c'){
+		  char c  = (int)va_arg(ap, int);
+			  out[j] = c;
+			  j++;
+		  i=i+2;
+	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
 		  uint64_t number = va_arg(ap, int);
 		  int base = 10;
@@ -42,7 +48,6 @@ int printf(const char *fmt, ...) {
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -61,7 +66,6 @@ int printf(const char *fmt, ...) {
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -71,7 +75,7 @@ int printf(const char *fmt, ...) {
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='x'){
-		  uint32_t number = va_arg(ap, int);
+		  uint64_t number = va_arg(ap, int);
 		  int base = 16;
 		  char buff[30];
 		  char *a=buff;
@@ -80,7 +84,6 @@ int printf(const char *fmt, ...) {
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -99,7 +102,6 @@ int printf(const char *fmt, ...) {
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -118,7 +120,6 @@ int printf(const char *fmt, ...) {
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -137,7 +138,6 @@ int printf(const char *fmt, ...) {
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -168,7 +168,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   panic("Not implemented");
 }
 
-int sprintf(char *out, const char *fmt, ...) {     //to be completed    the integer of %d is nagetive haven't been concerned.   the value of return is nagetive when meet wrong 
+int sprintf(char *out, const char *fmt, ...) { 
   uint64_t i = 0;
   uint64_t j = 0;
   va_list ap;
@@ -181,6 +181,12 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
 			  out[j] = s[k];
 			  j++;
 		  }
+		  i=i+2;
+	  }
+	  else if(fmt[i]=='%' && fmt[i+1]=='c'){
+		  char c  = (int)va_arg(ap, int);
+			  out[j] = c;
+			  j++;
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
@@ -198,7 +204,6 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -217,7 +222,6 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -227,7 +231,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='x'){
-		  uint32_t number = va_arg(ap, int);
+		  uint64_t number = va_arg(ap, int);
 		  int base = 16;
 		  char buff[30];
 		  char *a=buff;
@@ -236,7 +240,6 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -255,7 +258,6 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -274,7 +276,6 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -293,7 +294,6 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -314,7 +314,7 @@ int sprintf(char *out, const char *fmt, ...) {     //to be completed    the inte
   //panic("Not implemented");
 }
 
-int snprintf(char *out, size_t n, const char *fmt, ...) {  //the check of size(n) is not fully completed
+int snprintf(char *out, size_t n, const char *fmt, ...) {  
   uint64_t i = 0;
   uint64_t j = 0;
   va_list ap;
@@ -327,6 +327,12 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {  //the check of size(n
 			  out[j] = s[k];
 			  j++;
 		  }
+		  i=i+2;
+	  }
+	  else if(fmt[i]=='%' && fmt[i+1]=='c'){
+		  char c  = (int)va_arg(ap, int);
+			  out[j] = c;
+			  j++;
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='d'){
@@ -344,7 +350,6 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {  //the check of size(n
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -363,7 +368,6 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {  //the check of size(n
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -373,7 +377,7 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {  //the check of size(n
 		  i=i+2;
 	  }
 	  else if(fmt[i]=='%' && fmt[i+1]=='x'){
-		  uint32_t number = va_arg(ap, int);
+		  uint64_t number = va_arg(ap, int);
 		  int base = 16;
 		  char buff[30];
 		  char *a=buff;
@@ -382,7 +386,6 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {  //the check of size(n
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -401,7 +404,6 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {  //the check of size(n
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -420,7 +422,6 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {  //the check of size(n
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){
@@ -439,7 +440,6 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {  //the check of size(n
                           *a++ = digits[number % base];
                           number /= base;
                   } while (number);
-                  //if (!*result) *buff++ = '0';
                   *a = '\0';
 		  int length = strlen(buff);
 		  for(int k=0;k<length;k++){

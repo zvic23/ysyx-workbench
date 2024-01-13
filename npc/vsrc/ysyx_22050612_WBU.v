@@ -1,7 +1,8 @@
 import "DPI-C" function void npc_complete_one_inst ();
 import "DPI-C" function void npc_loadstore(int getinst, longint raddr, longint waddr);
-import "DPI-C" function void WBU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
-
+import "DPI-C" function void WBU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f,longint g,longint h,longint i,longint j,longint k,longint l,longint m,longint n,longint o,longint p);
+import "DPI-C" function void read_inst(int npc_inst);
+import "DPI-C" function void ftrace_check(int jtype, longint pc, longint dnpc,int dest_register,int src_register,longint imm);
 
 
 module ysyx_22050612_WBU(
@@ -18,11 +19,8 @@ input       reg_wr_wen,
 input [ 4:0]reg_wr_ID,
 input [63:0]reg_wr_value,
 
-output [63:0] gpr[31:0],
+input [63:0] gpr[31:0],     //only for ftrace
 
-
-//output reg WB_reg_valid,
-//output reg [31:0]WB_reg_inst,
 output wbu_writing_gpr,
 output [4:0]wbu_rd,
 output reg [63:0]WB_reg_wdata,
@@ -46,7 +44,6 @@ reg [31:0]WB_reg_inst ;
 reg       WB_reg_wen ;
 reg [ 4:0]WB_reg_id ;
 //reg [63:0]WB_reg_wdata ;
-//reg [23:0]WB_reg_opcode;
 reg [14:0]WB_reg_opcode_type;
 
 
@@ -58,7 +55,6 @@ always @(posedge clk) begin
 		WB_reg_valid <= 1'b0;
 		WB_reg_pc    <= 64'b0;
 		WB_reg_inst  <= 32'b0;
-//		WB_reg_opcode<= 24'b0;
 		WB_reg_opcode_type <= 15'b0;
 		WB_reg_wen  <=  1'b0;
 		WB_reg_id   <=  5'b0;
@@ -84,7 +80,6 @@ always @(posedge clk) begin
 		WB_reg_pc    <= pc_MEM_WB;
 		WB_reg_inst  <= inst_MEM_WB;
 		WB_reg_opcode_type <= opcode_type_MEM_WB;
-//		WB_reg_opcode<= opcode_in;
 		WB_reg_wen  <= reg_wr_wen   ;
 		WB_reg_id   <= reg_wr_ID    ;
 		WB_reg_wdata<= reg_wr_value ;
@@ -94,44 +89,69 @@ always @(posedge clk) begin
 	end
 end
 
-//wire [31:0]inst;
-//assign inst = WB_reg_valid ? WB_reg_inst : 32'b0;
+wire [31:0]inst;
+assign inst = WB_reg_valid ? WB_reg_inst : 32'b0;
 
-//wire [23:0]opcode;
-//assign opcode = WB_reg_valid ? WB_reg_opcode : 24'b0;
 
 assign ready_MEM_WB = 1'b1;
 
 
 
 always @(negedge clk) begin
-	WBU_state_trace(WB_reg_pc, {32'b0,WB_reg_inst}, {63'b0,WB_reg_valid}, 64'b0,64'b0,64'b0 );
+	WBU_state_trace(WB_reg_pc, {32'b0,WB_reg_inst}, {63'b0,WB_reg_valid}, 64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0 );
 	//$display("WB   pc:%x   inst:%x   valid:%d  wen:%d  wdata:%x rd:%x",WB_reg_pc,WB_reg_inst,WB_reg_valid,WB_reg_wen,WB_reg_wdata,WB_reg_id);
 	//$display("WB   pc:%x   inst:%x   valid:%d  wen:%d  wdata:%x rd:%x\n",WB_reg_pc,WB_reg_inst,WB_reg_valid,reg_wr_wen,reg_wr_value,reg_wr_ID);
+	
 	if(WB_reg_valid && ready_EX_MEM) begin 
 		npc_complete_one_inst();
+		read_inst(inst);
+	end
+	else begin
+		read_inst(32'b0);
 	end
 end
 //********************************************************************
 
 
-always @(negedge clk) begin            //support mtrace, to give the csrc a signal that a memory operation is coming
-	if(WB_reg_valid&& ready_EX_MEM)begin
-	case({WB_reg_inst[14:12],WB_reg_inst[6:0]})
-    10'b000_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
-    10'b001_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
-    10'b010_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
-    10'b100_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
-    10'b101_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
-    10'b000_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
-    10'b001_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
-    10'b010_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
-    10'b110_0000011:  npc_loadstore(1, reg_raddr, reg_waddr);
-    10'b011_0000011:  npc_loadstore(1, reg_raddr, reg_waddr);
-    10'b011_0100011:  npc_loadstore(2, reg_raddr, reg_waddr);
-    default: npc_loadstore(0, 0, 0);
-	endcase
-end
+
+wire [31:0]ftrace_rd;
+assign ftrace_rd = {{27'b0},inst[11:7]};
+wire [31:0]ftrace_rs1;
+assign ftrace_rs1 = {{27'b0},inst[19:15]};
+wire [63:0]ftrace_immI;
+assign ftrace_immI = (inst[31]==1'b1)?{{52{1'b1}},inst[31:20]}:{{52{1'b0}},inst[31:20]};
+wire [63:0]ftrace_dnpc_jal;
+assign ftrace_dnpc_jal = WB_reg_pc + ftrace_immI;
+wire [63:0]ftrace_dnpc_jalr;
+assign ftrace_dnpc_jalr = (gpr[1] + ftrace_immI) & 64'hfffffffffffffffe;
+
+
+always @(negedge clk) begin     
+	if(WB_reg_valid&& ready_EX_MEM) begin   
+        //support mtrace, to give the csrc a signal that a memory operation is coming
+		case({WB_reg_inst[14:12],WB_reg_inst[6:0]})
+		    10'b000_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+		    10'b001_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+		    10'b010_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+		    10'b100_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+		    10'b101_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+		    10'b000_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
+		    10'b001_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
+		    10'b010_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
+		    10'b110_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+		    10'b011_0000011:   npc_loadstore(1, reg_raddr, reg_waddr);
+		    10'b011_0100011:   npc_loadstore(2, reg_raddr, reg_waddr);
+		    default: npc_loadstore(0, 0, 0);
+		endcase
+
+		if (WB_reg_opcode_type[2]) ftrace_check(1, WB_reg_pc[63:0],ftrace_dnpc_jal, 1, 0, 1);
+		else if (WB_reg_opcode_type[3]) ftrace_check(2, WB_reg_pc[63:0],ftrace_dnpc_jalr,  ftrace_rd, ftrace_rs1, ftrace_immI);
+
+
+	end
+
+
+
 end
 
 

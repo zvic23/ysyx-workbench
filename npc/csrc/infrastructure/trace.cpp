@@ -162,7 +162,6 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){
   		fseek(fp_ftrace, i*24, SEEK_CUR);
 	  	a= fread(&k, 4, 1, fp_ftrace);
   		assert(a == 1);
-		//functab[j].name = &str[k];
 		strcpy(functab[j].name , &str[k]);
   		fseek(fp_ftrace, 4, SEEK_CUR);
 	  	a= fread(&k, 8, 1, fp_ftrace);
@@ -185,48 +184,48 @@ void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){
 }
 
 int blanknum=1;
-void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register,long long imm){
+void ftrace_check(int jtype, long long pc,long long dnpc,int dest_register,int src_register,long long imm){
 	char src_func[20];
 	char dest_func[20];
 
 	for(int i=0;i<500;i++){
 		if(functab[i].addr_start<=dnpc && dnpc<=functab[i].addr_end){
-			//dest_func = functab[i].name;
 			strcpy(dest_func,functab[i].name);
 			//printf("now at %s\n",functab[i].name);
 			break;
 		}
 		if(i==499)return;
 	}
-	//printf("checking.....pc=%lx,pc_up=%x,pc_lo=%x\n",pc,pc_up,pc_lo);
-	if(dest_register == 0 && imm == 0 && src_register == 1){
-		blanknum--;
-		printf("0x%llx:",pc);
-		for(int i=0;i<blanknum;i++)printf(" ");
-		printf("ret [%s]\n",dest_func);
-	}
-	else{
 		for(int i=0;i<500;i++){
 			if(functab[i].addr_start<=pc && pc<=functab[i].addr_end){
-			//	src_func = functab[i].name;
 				strcpy(src_func,functab[i].name);
 				//printf("now at %s\n",functab[i].name);
 				break;
 			}
 			if(i==499 && strcmp(dest_func,"_trm_init"))return;
 		}
+	//printf("checking.....pc=%lx,pc_up=%x,pc_lo=%x\n",pc,pc_up,pc_lo);
+	if(jtype == 2 && dest_register == 0 && src_register == 1 && imm == 0){
+		blanknum--;
+		printf("0x%llx:",pc);
+		for(int i=0;i<blanknum;i++)printf(" ");
+		printf("ret [%s@%llx]  from  %s\n",dest_func,dnpc,src_func);
+		//printf("ret [%s]\n",dest_func);
+	}
+	else if(jtype == 1){
+
 		int i = strcmp(src_func,dest_func);
 		if(i){
 			printf("0x%llx:",pc);
 			for(int i=0;i<blanknum;i++)printf(" ");
-			printf("call [%s@%llx]\n",dest_func,dnpc);
+			printf("call [%s@%llx]  from  %s\n",dest_func,dnpc,src_func);
 			blanknum++;
 		}
 	}
 }
 #else
 void  __attribute__((optimize("O1")))   ftrace_elf_analysis(){}
-void ftrace_check(long long pc,long long dnpc,int dest_register,int src_register,long long imm){}
+void ftrace_check(int jtype, long long pc,long long dnpc,int dest_register,int src_register,long long imm){}
 #endif
 
 

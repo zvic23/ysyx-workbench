@@ -64,12 +64,11 @@ end
 */
 
 //************** read  *******************
-//assign arready = (read_current_state == read_send_rdata) ? 1'b0 : 1'b1;
 reg [1:0]read_current_state, read_next_state;
 
 localparam read_idle       = 2'b00;        //waiting for arvalid
 localparam read_send_rdata = 2'b01;        //sending read data after read address handshake
-localparam read_last_send  = 2'b11;        //sending the last data and 'rlast'
+//localparam read_last_send  = 2'b11;        //sending the last data and 'rlast'
 
 reg [31:0]r_addr;
 reg  [7:0]r_len;
@@ -110,8 +109,7 @@ always @(*) begin
 		end
 		read_send_rdata: begin
   			pmem_read({{32{1'b0}},(r_addr[31:0]+r_count*8)}, r_data);	
-  			//pmem_read({{32{1'b0}},r_addr[31:6],r_count[3:0],{2{1'b0}}}, r_data);	
-  			//if(clk)pmem_read({{32{1'b0}},r_addr+r_count*(a_size-1)}, r_data);	
+  			//if(clk)pmem_read({{32{1'b0}},r_addr[31:0]+r_count*(a_size+1)}, r_data);	
 			rvalid = 1'b1;
 			rresp  = 2'b0;
 			read_next_state = (r_count == r_len) ? read_idle : read_send_rdata;

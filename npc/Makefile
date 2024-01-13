@@ -2,8 +2,11 @@ CXXSRC += csrc/sdb/sdb.cpp csrc/sdb/expr.cpp csrc/sdb/watchpoint.cpp csrc/infras
 
 
 CXXSRC += csrc/utils/disasm.cc
-CXXFLAGS += -I/usr/lib/llvm-14/include -std=c++14   -fno-exceptions -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS  -D__STDC_LIMIT_MACROS -fPIE  
+#CXXFLAGS += -I/usr/lib/llvm-14/include -std=c++14   -fno-exceptions -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS  -D__STDC_LIMIT_MACROS -fPIE  
 #CXXFLAGS += $(shell llvm-config --cxxflags) -fPIE  
+ORIGINAL_CXXFLAGS := $(shell llvm-config --cxxflags)
+MODIFIED_CXXFLAGS := $(filter-out -D__STDC_FORMAT_MACROS, $(ORIGINAL_CXXFLAGS))
+CXXFLAGS += $(MODIFIED_CXXFLAGS) -fPIE
 LIBS += $(shell llvm-config --libs)
 LIBS += -lreadline  -lSDL2main -lSDL2
 
@@ -13,8 +16,8 @@ all:
 	@echo "Write this Makefile by your self."
 
 sim:
-	verilator --cc --exe --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp  $(CXXSRC) -CFLAGS "$(CXXFLAGS)" -LDFLAGS "$(LIBS)"  -Ivsrc/ #add -Wall later      and --trace if want to make wave
-	#verilator --cc --exe --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp --trace -Ivsrc/ #add -Wall later 
+	verilator -Wall -Wno-UNUSED --cc --exe --build vsrc/ysyx_22050612_npc.v  csrc/main.cpp  $(CXXSRC) -CFLAGS "$(CXXFLAGS)" -LDFLAGS "$(LIBS)"  -Ivsrc/ 
+	#add -Wall later      --trace if want to make wave   -Wno-UNUSED ignore unused warning
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
 
@@ -26,7 +29,7 @@ exe:    sim
 wave:  
 	gtkwave dump.vcd
 
-clear:
+clean:
 	rm build/ -r  obj_dir/ -r  dump.vcd
 
 
@@ -38,7 +41,7 @@ clear:
 
 
 
-#************zsl: about nvboard
+#************  zsl: about nvboard   **********************
 TOPNAME = top
 NXDC_FILES = constr/pinset.nxdc
 INC_PATH ?=
@@ -85,7 +88,7 @@ all: default
 run: $(BIN)
 	@$^
 
-clean:
-	rm -rf $(BUILD_DIR)
+#clean:
+#	rm -rf $(BUILD_DIR)
 
 .PHONY: default all clean run

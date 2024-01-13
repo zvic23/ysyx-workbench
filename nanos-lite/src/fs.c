@@ -56,32 +56,27 @@ int fs_open(const char *pathname, int flags, int mode){
 	for(i=0;i<table_length;i++){
 		if(strcmp(pathname, file_table[i].name)==0)return i;
 	}
+	printf("nanos-lite(fs_open): this file doesn't exit in ramdisk");
 	assert(i!=table_length);
 	return -1;
 }
 
 static uint64_t position[1000];
-//enum {SEEK_SET=1,SEEK_CUR,SEEK_END};
 size_t fs_lseek(int fd, size_t offset, int whence){
 	size_t f_size = file_table[fd].size;
-	//size_t f_offset = file_table[fd].disk_offset;
 	if(whence == SEEK_SET){
 		position[fd] = 0 + offset;
 	}else if(whence == SEEK_CUR){
 		position[fd] = position[fd] + offset;
 	}else if(whence == SEEK_END){
 		position[fd] = f_size + offset;
-		//position[fd] = f_size + f_offset + offset;
 	}else assert(0);
 	return position[fd];
 }
 
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t fs_read(int fd, void *buf, size_t len){
-        if(fd==0 || fd==1 || fd==2){
-                return 0;
-        }
-	else if(file_table[fd].read != NULL) return file_table[fd].read(buf, 0, len);
+	if(file_table[fd].read != NULL) return file_table[fd].read(buf, 0, len);
 	else {
 		size_t f_offset = file_table[fd].disk_offset;
 		size_t f_size = file_table[fd].size;

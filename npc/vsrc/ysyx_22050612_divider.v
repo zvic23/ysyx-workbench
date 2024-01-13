@@ -10,9 +10,7 @@ module ysyx_22050612_divider(
 	output div_ready,
 	output out_valid,
 	output [63:0]quotient,
-	output [63:0]remainder,
-
-	output reg [8:0]shift_times
+	output [63:0]remainder
 );
 
 
@@ -41,45 +39,16 @@ always @(posedge clk) begin
 end
 
 
-/*
-//reg [63:0]dividend_reg;
-//reg [63:0]divisor_reg;
-//reg divw_reg;
-//reg div_signed_reg;
 
-
-always @(posedge clk) begin
-	if(rst || flush) begin
-		dividend_reg <= 64'b0;
-		divisor_reg  <= 64'b0;
-		divw_reg     <= 1'b0;
-		div_signed_reg <= 1'b0;
-	end
-	else if(div_valid && div_ready) begin
-		dividend_reg <= dividend;
-		divisor_reg  <= divisor;
-		divw_reg     <= divw;
-		div_signed_reg <= div_signed;
-	end
-	else if(out_valid) begin
-		dividend_reg <= 64'b0;
-		divisor_reg  <= 64'b0;
-		divw_reg     <= 1'b0;
-		div_signed_reg <= 1'b0;
-	end
-end
-*/
 
 wire [63:0]dividend_amend;
 wire [63:0]divisor_amend;
-//assign dividend_amend = (div_signed&&dividend[63]) ? -dividend : dividend;
-//assign divisor_amend  = (div_signed&& divisor[63]) ? -divisor  : divisor ;
 assign dividend_amend = divw ? ((div_signed&&dividend[31]) ? {-dividend[31:0],32'b0} : {dividend[31:0],32'b0}) : ((div_signed&&dividend[63]) ? -dividend : dividend);
 assign divisor_amend  = divw ? ((div_signed&& divisor[31]) ? {32'b0,-divisor[31:0]} : {32'b0,divisor[31:0]}) : ((div_signed&& divisor[63]) ? -divisor  : divisor );
 
 reg [127:0] dividend_s;
 reg [63:0]  divisor_s;
-//reg [8:0]   shift_times;
+reg [8:0]   shift_times;
 reg divider_working;
 reg [63:0] s;
 

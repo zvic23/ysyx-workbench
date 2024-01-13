@@ -8,27 +8,17 @@
 extern void naive_uload(PCB *pcb, const char *filename);
 void do_exit(Context *c) {
   naive_uload(NULL, "/bin/nterm");
+  //halt(c->GPR2);
   //halt(0);
 }
 
 void do_write(Context *c) {
- // uint8_t *buf=(uint8_t*)c->GPR3;
- // if(c->GPR2==1 || c->GPR2==2){
- //         for(int i=0;i<c->GPR4;i++){
- //       	  putch(buf[i]);
- //         }
- // }
- // else if(c->GPR2!=0){
- //         fs_write(c->GPR2, (void*)c->GPR3, c->GPR4);
- // }
   fs_write(c->GPR2, (void*)c->GPR3, c->GPR4);
   c->GPRx = c->GPR4;
-  //asm volatile("mv a0, %0" : :"r"(c));
 }
 
 void do_brk(Context *c) {
   c->GPRx = 0;
-  //asm volatile("li a0, 0");
 }
 
 void do_open(Context *c) {
@@ -48,7 +38,6 @@ void do_lseek(Context *c) {
   c->GPRx = fs_lseek(c->GPR2, c->GPR3, c->GPR4);
 }
 
-//extern void naive_uload(PCB *pcb, const char *filename);
 void do_execve(Context *c) {
   naive_uload(NULL, (const char*)c->GPR2);
 }
@@ -60,7 +49,6 @@ void do_gettimeofday(Context *c) {
   else if(c->GPR2 == 1) {
 	  c->GPRx = io_read(AM_TIMER_UPTIME).us / 1000000;
   }
-  //c->GPRx = gettimeofday((timeval*)c->GPR2, (timezone*)c->GPR3);
 }
 
 void do_syscall(Context *c) {

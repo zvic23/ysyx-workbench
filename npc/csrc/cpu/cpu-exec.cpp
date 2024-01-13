@@ -76,7 +76,6 @@ void update_csr(long long mtvec_npc, long long mcause_npc, long long mepc_npc, l
 
 
 
-//int end = 0;
 void ebreak(int r){
 	if(r==0) printf(GREEN "HIT GOOD TRAP\n" NONE);
 
@@ -84,7 +83,6 @@ void ebreak(int r){
 		iringbuf_output();
 		printf(RED "HIT BAD TRAP\n" NONE);
 	}
-	//end = 1;
 	npc_state = END;
 
 }
@@ -113,35 +111,13 @@ void npc_loadstore(int getinst, long long raddr, long long waddr){
 	}else load_store = 0;
 
 }
-/*
-void npc_loadstore(int getinst, long long base, long long imm_I, long long imm_S){
-	if(getinst == 1){
-		switch(base + imm_I){
-		case 0xa0000048:
-		case 0xa0000060:{load_store = 1;break;}
-		default:   {load_store = 0;break;}
-		}
-	}else if(getinst == 2){
-		if(base+imm_S==0xa00003f8 || base+imm_S==0xa0000104 ||
-		(base+imm_S>=0xa1000000&&base+imm_S<0xa1000000+400*300*4))
-			load_store = 1;
-		else load_store = 0;
-	}else load_store = 0;
 
-	if(getinst == 2){
-		//if((base+imm_S>=0x830695c0 && base+imm_S<=0x830695cc)){
-		if((base+imm_S>=0x81d58ea8 && base+imm_S<0x81d58eb0)){
-			//printf("mem (%lx)  write  at %lx\n",base+imm_S,top->pc);
-		}
-	}
-}
-*/
 
 
 uint64_t g_nr_guest_inst = 0;
-int to_check = 0;
+int difftest_check = 0;
 void npc_complete_one_inst(){
-	to_check = 1;
+	difftest_check = 1;
     	  g_nr_guest_inst ++;
 }
 
@@ -150,12 +126,7 @@ void npc_complete_one_inst(){
 int itrace_si = 0;
 uint64_t skip_old = 0;
 void one_cycle(){
-  itrace(top->pc, inst);
-//  top->eval();//step_and_dump_wave();
-
-
-  int skip_difftest_now = skip_difftest;
-  skip_difftest = 0;
+  //itrace(top->pc, inst);
 
   top->clk = 1;
   top->eval();//step_and_dump_wave();
@@ -165,43 +136,18 @@ void one_cycle(){
 
   update_gpr_pc();
 
+  if(inst)itrace(top->wb_pc, inst);
 #ifdef CONFIG_DIFFTEST
-/*
-  if( load_store == 1){
-	  syn_gpr();
-  }
-  else {
-  	  difftest_step();
-  }
-  */
-  if(to_check){
-  if( load_store == 1){
-	  syn_gpr();
-  }
-  else {
-  	  difftest_step();
-  }
-	 // difftest_step();
-	  to_check = 0;
+  if(difftest_check){
+	  if( load_store == 1){
+		  syn_gpr();
+	  }
+	  else {
+		  difftest_step();
+	  }
+	  difftest_check = 0;
   }
 #endif
-
-
-
-
-//  update_gpr_pc();
-//  if(skip_difftest == 1){
-//	  printf("skip = 1  !\n");
-//	  skip_difftest = 2;
-//	  difftest_step();
-//  }
-//  else if(skip_difftest==2){
-//	  printf("skip = 2  !!\n");
-//	  syn_gpr();
-//	  skip_difftest=0;
-//  }else {
-//  	difftest_step();
-//  }
 
   device_update();
 }
@@ -284,7 +230,6 @@ extern void pipeline_state_printf();
 void execute(int n){
   for(uint64_t i=0;i<n;i++){
 	  if(npc_state == END || npc_state == QUIT){
-	  //if(end == 1){
 		  program_exec_statistics();
 	          pipeline_state_printf();
 		  return;
@@ -295,7 +240,6 @@ void execute(int n){
 		  return;
           }
   	  else if(npc_state == ABORT){
-  	  //else if(end == 2){
 	          pipeline_state_printf();
 		  printf(RED "ABORT\n" NONE);
 		  program_exec_statistics();

@@ -1,4 +1,4 @@
-import "DPI-C" function void IDU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
+import "DPI-C" function void IDU_state_trace(longint a,longint b,longint c,longint d,longint e,longint f,longint g,longint h,longint i,longint j,longint k,longint l,longint m,longint n,longint o,longint p);
 
 module ysyx_22050612_IDU(
 input clk,
@@ -13,10 +13,7 @@ input [63:0]mepc,
 input [63:0]mcause,
 input [63:0]mstatus,
 
-/*
 
-output [ 5:0]shamt,
-*/
 output [ 4:0]opcode_rd,
 output [ 4:0]opcode_rs1,
 output [ 4:0]opcode_rs2,
@@ -25,7 +22,6 @@ output [63:0]src_B,
 output [63:0]  imm,
 
 
-output [23:0]opcode,
 output [14:0]opcode_type,
 output [2:0]opcode_funct3,
 output     valid_ID_EX,
@@ -33,17 +29,24 @@ input      ready_ID_EX,
 output [63:0]pc_ID_EX,
 output [31:0]inst_ID_EX,
 
+input ex_loading,
+input [4:0]ex_rd,
 
 
-input EX_reg_valid,
-input [31:0]EX_reg_inst,
 
 input branch_flush
 );
 
 
-assign ready_IF_ID = ~idu_fifo_alm_full;
-//assign ready_IF_ID = ID_block ? 1'b0 : ready_ID_EX;
+assign ready_IF_ID = ~idu_fifo_inst_alm_full;
+//It is the alm-full set ready_if_id, so that it can reserve some space for
+//the inst comes from icache. Because icache can't hold on inst if fifo is
+//full.
+
+assign valid_ID_EX = (ID_block==1'b0) ? ID_reg_valid :  1'b0;
+assign pc_ID_EX    = (ID_block==1'b0) ? ID_reg_pc    : 64'b0;
+assign inst_ID_EX  = (ID_block==1'b0) ? ID_reg_inst  : 32'b0;
+
 
 
 //*************************   FIFO    ********************************
@@ -51,23 +54,30 @@ wire id_ready;
 assign id_ready = ID_block ? 1'b0 : ready_ID_EX;
 
 wire idu_fifo_wen;
-assign idu_fifo_wen = (idu_fifo_empty && id_ready) ? 1'b0 : valid_IF_ID;
+assign idu_fifo_wen = ((idu_fifo_inst_empty && id_ready) || idu_fifo_inst_full) ? 1'b0 : valid_IF_ID;  
+//If fifo emtpy and idu ready, the inst go straight in idu instead of fifo.
 
 wire idu_fifo_ren;
 assign idu_fifo_ren = id_ready;
 
 wire idu_fifo_rst;
-assign idu_fifo_rst = ~(rst || branch_flush);
+assign idu_fifo_rst = rst || branch_flush;
 
-wire idu_fifo_alm_full;
-wire idu_fifo_full;
-wire idu_fifo_alm_empty;
-wire idu_fifo_empty;
+wire idu_fifo_inst_alm_full;
+wire idu_fifo_inst_full;
+wire idu_fifo_inst_alm_empty;
+wire idu_fifo_inst_empty;
+wire idu_fifo_pc_alm_full;
+wire idu_fifo_pc_full;
+wire idu_fifo_pc_alm_empty;
+wire idu_fifo_pc_empty;
 wire [31:0]idu_fifo_rdata_inst;
 wire [63:0]idu_fifo_rdata_pc;
 
-ysyx_22050612_FIFO #(32,16,12,2) idu_inst_fifo (clk, idu_fifo_rst, idu_fifo_wen, inst_IF_ID, idu_fifo_alm_full, idu_fifo_full, idu_fifo_ren, idu_fifo_rdata_inst, idu_fifo_alm_empty, idu_fifo_empty);
-ysyx_22050612_FIFO #(64,16,12,2) idu_pc_fifo (clk, idu_fifo_rst, idu_fifo_wen, pc_IF_ID, idu_fifo_alm_full, idu_fifo_full, idu_fifo_ren, idu_fifo_rdata_pc, idu_fifo_alm_empty, idu_fifo_empty);
+ysyx_22050612_FIFO #(32,16,12,2) idu_inst_fifo (clk, idu_fifo_rst, idu_fifo_wen, inst_IF_ID, idu_fifo_inst_alm_full, idu_fifo_inst_full, 
+	                                                           idu_fifo_ren, idu_fifo_rdata_inst, idu_fifo_inst_alm_empty, idu_fifo_inst_empty);
+ysyx_22050612_FIFO #(64,16,12,2) idu_pc_fifo (clk, idu_fifo_rst, idu_fifo_wen, pc_IF_ID, idu_fifo_pc_alm_full, idu_fifo_pc_full, 
+	                                                         idu_fifo_ren, idu_fifo_rdata_pc, idu_fifo_pc_alm_empty, idu_fifo_pc_empty);
 
 
 
@@ -88,12 +98,7 @@ always @(posedge clk) begin
 		ID_reg_pc    <= ID_reg_pc;
 		ID_reg_inst  <= ID_reg_inst ;
 	end
-	else if(idu_fifo_empty && ~valid_IF_ID)begin
-		ID_reg_valid <= 1'b0;
-		ID_reg_pc    <= 64'b0;
-		ID_reg_inst  <= 32'b0;
-	end
-	else if(idu_fifo_empty && valid_IF_ID)begin
+	else if(idu_fifo_inst_empty)begin
 		ID_reg_valid <= valid_IF_ID;
 		ID_reg_pc    <= pc_IF_ID;
 		ID_reg_inst  <= inst_IF_ID;
@@ -105,38 +110,30 @@ always @(posedge clk) begin
 	end
 end
 
-assign valid_ID_EX = (ID_block==1'b0) ? ID_reg_valid :  1'b0;
-assign pc_ID_EX    = (ID_block==1'b0) ? ID_reg_pc    : 64'b0;
-assign inst_ID_EX  = (ID_block==1'b0) ? ID_reg_inst  : 32'b0;
-
-
-
-
 
 wire [31:0]inst;
 assign inst = ID_reg_valid ? ID_reg_inst : 32'b0;
 
 always @(negedge clk) begin
 	//$display("ID   pc:%x   inst:%x   valid:%x",ID_reg_pc,ID_reg_inst,ID_reg_valid);
-	IDU_state_trace(ID_reg_pc, {32'b0,ID_reg_inst}, {63'b0,ID_reg_valid}, 64'b0,64'b0,64'b0 );
+	IDU_state_trace(ID_reg_pc, {32'b0,ID_reg_inst}, {63'b0,ID_reg_valid}, 64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0,64'b0 );
 
 end
 
 
-//load interlock
+//*************************    load interlock    ********************************
 
-wire EX_loading;
-assign EX_loading = EX_reg_inst[6:0] == 7'b0000011;   //load inst
-wire rs1_waiting;
-wire rs2_waiting;
-wire rs2_block_checking;
-assign rs2_block_checking = opcode_jal || opcode_jalr || opcode_branch || opcode_cpt_r || opcode_cpt_rw;  //include jal, jalr, branch, +-*/ and shift.
+wire rs1_id_rd_ex_match;
+wire rs2_id_rd_ex_match;
+wire idu_using_rs2;
+assign idu_using_rs2 = opcode_jal || opcode_jalr || opcode_branch || opcode_cpt_r || opcode_cpt_rw;  
+//include jal, jalr, branch, cpt_r(w).
 
-assign rs1_waiting = EX_reg_inst[11:7] == ID_reg_inst[19:15];
-assign rs2_waiting = EX_reg_inst[11:7] == ID_reg_inst[24:20];
+assign rs1_id_rd_ex_match = ex_rd == opcode_rs1;
+assign rs2_id_rd_ex_match = ex_rd == opcode_rs2;
 
 wire ID_block;
-assign ID_block = ID_reg_valid && EX_reg_valid && EX_loading && (rs1_waiting ||(rs2_waiting && (rs2_block_checking)));
+assign ID_block = ID_reg_valid && ex_loading && (rs1_id_rd_ex_match ||(rs2_id_rd_ex_match && idu_using_rs2));
 
 //********************************************************************
 
@@ -156,9 +153,11 @@ end
  
 
 assign src_A = gpr[opcode_rs1];
-assign src_B = opcode_csr ? src_csr : (opcode_ecall ? mtvec : (opcode_mret ? mepc : gpr[opcode_rs2]));
+assign src_B = opcode_csr   ? src_csr : 
+	      (opcode_ecall ? mtvec   : 
+	      (opcode_mret  ? mepc    : gpr[opcode_rs2]));
 
-
+/*
   always @(inst) begin
 	  case ({inst[14:12],inst[6:0]})
     10'b000_1100111:  opcode[6:0]= 7'd4   ;    //jalr
@@ -252,8 +251,8 @@ assign opcode[7]=(inst==32'h00100073)? 1'b1:1'b0;   //ebreak
 //always @(posedge clk) begin
 //	if(inst==32'h00100073) ebreak(1);
 //end
-
-
+*/
+//01257891011
 wire opcode_wen;
 wire [63:0]opcode_imm   ;
 //wire [2:0]opcode_funct3 ;

@@ -3,7 +3,7 @@
 //  input longint raddr, output longint rdata);
 //import "DPI-C" function void pmem_write(
 //  input longint waddr, input longint wdata, input byte wmask);
-import "DPI-C" function void MEM_state_trace(longint a,longint b,longint c,longint d,longint e,longint f);
+import "DPI-C" function void MEM_state_trace(longint a,longint b,longint c,longint d,longint e,longint f,longint g,longint h,longint i,longint j,longint k,longint l,longint m,longint n,longint o,longint p);
 
 
 
@@ -14,7 +14,6 @@ input       valid_EX_MEM,
 output      ready_EX_MEM,
 input [63:0]pc_EX_MEM,
 input [31:0]inst_EX_MEM,
-input [23:0]opcode_in,
 input [14:0]opcode_type_EX_MEM,
 input [ 2:0]opcode_funct3_EX_MEM,
 input [ 4:0]rd_EX_MEM,
@@ -31,19 +30,17 @@ output [31:0]inst_MEM_WB,
 output [14:0]opcode_type_MEM_WB,
 output [ 4:0]rd_MEM_WB,
 
-output       reg_wr_wen   ,
-output [ 4:0]reg_wr_ID    ,
-output [63:0]reg_wr_value ,
+output       gpr_wr_wen   ,
+output [ 4:0]gpr_wr_rd    ,
+output [63:0]gpr_wr_value ,
 
 
-//output reg MEM_reg_valid,
-//output reg [31:0]MEM_reg_inst,
+//interlock
 output mem_writing_gpr,
 output [4:0]mem_rd,
 output reg [63:0]MEM_reg_aluoutput,
 
-//input WB_reg_valid,
-//input [31:0]WB_reg_inst,
+
 input wbu_writing_gpr,
 input [4:0]wbu_rd,
 input [63:0]WB_reg_wdata,
@@ -51,11 +48,11 @@ input [63:0]WB_reg_wdata,
 
 
 output [63:0]raddr_out,
-output [63:0]waddr_out,
+output [63:0]waddr_out,  //used by cpp file for difftest to overlook the clock operating memory
 
 
 
-//AXI-full
+//AXI-full signals from dcache
 output [31:0]araddr_dcache_axi,
 output [7:0]arlen_dcache_axi,
 output [2:0]arsize_dcache_axi,
@@ -99,7 +96,6 @@ assign mem_rd = MEM_reg_rd;
 reg       MEM_reg_valid         ;
 reg [31:0]MEM_reg_inst          ;
 reg [63:0]MEM_reg_pc            ;
-reg [23:0]MEM_reg_opcode        ;
 reg [14:0]MEM_reg_opcode_type        ;
 reg [ 2:0]MEM_reg_opcode_funct3        ;
 //reg [63:0]MEM_reg_aluoutput     ;
@@ -112,7 +108,6 @@ always @(posedge clk) begin
 		MEM_reg_valid          <=  1'b0;
 		MEM_reg_pc             <= 64'b0;
 		MEM_reg_inst           <= 32'b0;
-		MEM_reg_opcode         <= 24'b0;
 		MEM_reg_opcode_type         <= 15'b0;
 		MEM_reg_opcode_funct3         <= 3'b0;
 		MEM_reg_aluoutput      <= 64'b0;
@@ -124,7 +119,6 @@ always @(posedge clk) begin
 		MEM_reg_valid          <= MEM_reg_valid      ; 
 		MEM_reg_pc             <= MEM_reg_pc         ; 
 		MEM_reg_inst           <= MEM_reg_inst       ; 
-		MEM_reg_opcode         <= MEM_reg_opcode     ; 
 		MEM_reg_opcode_type         <= MEM_reg_opcode_type     ; 
 		MEM_reg_opcode_funct3         <= MEM_reg_opcode_funct3;
 		MEM_reg_aluoutput      <= MEM_reg_aluoutput  ; 
@@ -136,7 +130,6 @@ always @(posedge clk) begin
 		MEM_reg_valid          <= valid_EX_MEM;
 		MEM_reg_pc             <= pc_EX_MEM;
 		MEM_reg_inst           <= inst_EX_MEM;
-		MEM_reg_opcode         <= opcode_in;
 		MEM_reg_opcode_type         <= opcode_type_EX_MEM;
 		MEM_reg_opcode_funct3         <= opcode_funct3_EX_MEM;
 		MEM_reg_aluoutput      <= ALUoutput_in;
@@ -149,9 +142,6 @@ end
 wire [31:0]inst;
 assign inst = MEM_reg_valid ? MEM_reg_inst : 32'b0;
 
-wire [23:0]opcode;
-assign opcode = MEM_reg_valid ? MEM_reg_opcode : 24'b0;
-
 wire [63:0]aluoutput;
 assign aluoutput = MEM_reg_valid ? MEM_reg_aluoutput : 64'b0;
 
@@ -163,9 +153,9 @@ assign opcode_funct3 = MEM_reg_valid ? MEM_reg_opcode_funct3 : 3'b0;
 
 wire [63:0]src2;
 
-assign reg_wr_wen   = (MEM_reg_valid&&!MEM_block) ? wen       : 1'b0;
-assign reg_wr_ID    = (MEM_reg_valid&&!MEM_block) ? MEM_reg_rd : 5'b0;
-assign reg_wr_value = (MEM_reg_valid&&!MEM_block) ? wdata_reg : 64'b0;
+assign gpr_wr_wen   = (MEM_reg_valid&&!MEM_block) ? wen       : 1'b0;
+assign gpr_wr_rd    = (MEM_reg_valid&&!MEM_block) ? MEM_reg_rd : 5'b0;
+assign gpr_wr_value = (MEM_reg_valid&&!MEM_block) ? wdata_reg : 64'b0;
 
 
 //output
@@ -173,9 +163,10 @@ assign valid_MEM_WB = (MEM_block==1'b0) ? MEM_reg_valid :  1'b0;
 assign pc_MEM_WB    = (MEM_block==1'b0) ? MEM_reg_pc    : 64'b0;
 assign inst_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_inst  : 32'b0;
 assign opcode_type_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_opcode_type : 15'b0;
+assign rd_MEM_WB  = (MEM_block==1'b0) ? MEM_reg_rd : 5'b0;
 
 wire MEM_block;
-assign MEM_block = (opcode_type[5]||opcode_type[6]) && !dcache_ready;
+assign MEM_block = dcache_valid && !dcache_ready;
 assign ready_EX_MEM = MEM_block ? 1'b0 : ready_MEM_WB;
 
 
@@ -203,18 +194,18 @@ araddr_dcache_axi, arlen_dcache_axi, arsize_dcache_axi, arburst_dcache_axi, arva
 
 
 //**************    load interlock    ************************
-assign src2 = MEM_reg_valid ? ((mem_storing &&wbu_writing_gpr&&rs2_MEM_WB_match) ? WB_reg_wdata : MEM_reg_src2 ) : 64'b0;
+assign src2 = MEM_reg_valid ? ((mem_storing &&wbu_writing_gpr&&rs2_mem_rd_wb_match) ? WB_reg_wdata : MEM_reg_src2 ) : 64'b0;
 
 
-wire rs2_MEM_WB_match;
-assign rs2_MEM_WB_match  =  (wbu_rd == MEM_reg_rs2)&&(MEM_reg_rs2!=5'b0);
+wire rs2_mem_rd_wb_match;
+assign rs2_mem_rd_wb_match  =  (wbu_rd == MEM_reg_rs2)&&(MEM_reg_rs2 != 5'b0);
 wire mem_storing;
 assign mem_storing = opcode_type[6];
 
 
 
 always @(negedge clk) begin
-	MEM_state_trace(MEM_reg_pc, {32'b0,MEM_reg_inst}, {63'b0,MEM_reg_valid}, rdata,reg_wr_value,64'b0 );
+	MEM_state_trace(MEM_reg_pc, {32'b0,MEM_reg_inst}, {63'b0,MEM_reg_valid}, dcache_dout,gpr_wr_value, 64'b0, 64'b0, 64'b0, 64'b0, 64'b0, 64'b0, 64'b0, 64'b0, 64'b0, 64'b0, 64'b0 );
 	//$display("MEM  pc:%x   inst:%x   valid:%x   aluout:%x   op_b:%x  wen:%x  wdata:%x  opcode:%x",MEM_reg_pc,MEM_reg_inst,MEM_reg_valid,MEM_reg_aluoutput,MEM_reg_src2   ,wen,wdata_reg,opcode);
 end
 //********************************************************************
@@ -225,7 +216,8 @@ end
 wire wen;
 assign wen = opcode_type[0]||opcode_type[1]||opcode_type[2]||opcode_type[3]||opcode_type[5]||opcode_type[7]||opcode_type[8]||opcode_type[9]||opcode_type[10]||opcode_type[11];
 wire [63:0]wdata_reg;
-assign wdata_reg = opcode_type[5] ? rdata_fix : (opcode_type[11] ? MEM_reg_src2 : aluoutput);
+assign wdata_reg = opcode_type[5]  ? rdata_fix : 
+	          (opcode_type[11] ? MEM_reg_src2 : aluoutput);
 
 
 
