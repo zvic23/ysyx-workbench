@@ -25,7 +25,7 @@ image: $(IMAGE).elf
 	@$(OBJCOPY) -S --set-section-flags .bss=alloc,contents -O binary $(IMAGE).elf $(IMAGE).bin
 
 #zsl:add the "run" rule
-NPC_HOME = ~/ysyx-workbench/npc
+#NPC_HOME = ~/ysyx-workbench/npc
 
 run: image
 	#@echo "1"
