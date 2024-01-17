@@ -9,4 +9,8 @@
 !*.cpp
 !.gitignore
 !README.md
+!Kconfig
+
 /obj_dir
+!csrc/utils/fixdep/**
+!csrc/utils/kconfig/**

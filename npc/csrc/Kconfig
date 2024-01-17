@@ -1,0 +1,85 @@
+mainmenu "NPC Configuration Menu"
+
+
+
+menu "Testing and Debugging"
+
+
+config TRACE
+  bool "Enable tracer"
+  default n
+
+config ITRACE
+  depends on TRACE 
+  bool "Enable instruction tracer"
+  default y
+
+config TRACE_START
+  depends on TRACE
+  int "When tracing is enabled (unit: number of instructions)"
+  default 0
+
+config TRACE_END
+  depends on TRACE
+  int "When tracing is disabled (unit: number of instructions)"
+  default 10000
+
+
+
+
+
+config MTRACE                            #zsl: I add these,  enable memery trace
+  depends on TRACE 
+  bool "Enable memory trace(mtrace)"
+  default n
+
+config MTRACE_START                         
+  depends on MTRACE 
+  hex "The start of the adress range to be mtrace"
+  default 0x80000000
+
+config MTRACE_END                         
+  depends on MTRACE 
+  hex "The end of the adress range to be mtrace"
+  default 0x80000010
+
+
+config FTRACE                            #zsl: I add these,  enable function trace
+  depends on TRACE 
+  bool "Enable function trace(ftrace)"
+  default n
+
+
+
+ config DIFFTEST
+  ##depends on TARGET_NATIVE_ELF
+  bool "Enable differential testing"
+  default n
+  help
+    Enable differential testing with a reference design.
+    Note that this will significantly reduce the performance of NEMU.
+
+
+
+
+
+
+
+
+config PIPELINETRACE                      #zsl: I add these,  enable watchpoint function
+  bool "Enable pipeline-trace(zsl)"
+  default n
+
+config SDB                      #zsl: I add these,  enable watchpoint function
+  bool "Enable SDB(zsl)"
+  default n
+
+
+
+config WATCHPOINT                        #zsl: I add these,  enable watchpoint function
+  bool "Enable watchpoint(zsl)"
+  default n
+
+
+
+endmenu

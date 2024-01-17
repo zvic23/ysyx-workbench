@@ -163,7 +163,7 @@ config DIFFTEST
 
 config WATCHPOINT                        #zsl: I add these,  enable watchpoint function
   bool "Enable watchpoint(zsl)"
-  default y
+  default n
 
 
 config MTRACE                            #zsl: I add these,  enable memery trace

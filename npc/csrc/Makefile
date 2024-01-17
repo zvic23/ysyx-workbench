@@ -1,4 +1,4 @@
-NPC_HOME_CSRC = ~/ysyx-workbench/npc/csrc
+NPC_HOME_CSRC = $(shell pwd)
 
 
 Q            := @
